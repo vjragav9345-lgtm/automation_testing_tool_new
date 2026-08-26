@@ -1,0 +1,1969 @@
+{
+    "name": "session_20260826_104728",
+    "session_id": "b9d5ac16e1f7487db70ab855079d81bb",
+    "start_url": "https://sportzia-preprod.kovaionplay.com/feed",
+    "recorded_at": "2026-08-26T10:47:28.596829",
+    "stop_reason": "browser_closed",
+    "total_actions": 73,
+    "page_count": 2,
+    "actions": [
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Accept",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div:nth-of-type(3) > div > div:nth-of-type(2) > div",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[2]/div[1]",
+                "text": "Accept",
+                "element_text": "Accept",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 1165.550048828125,
+                "y": 677.2000122070312,
+                "width": 48.900001525878906,
+                "height": 16.80000114440918
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/feed",
+            "timestamp": "2026-08-26T05:15:16.180Z",
+            "page_id": 0,
+            "delay_before_ms": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Home\nEvents\nPricing\nNotification\nSign in",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div > div > div",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]",
+                "text": "Home\nEvents\nPricing\nNotification\nSign in",
+                "element_text": "Home\nEvents\nPricing\nNotification\nSign in",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 0,
+                "y": 0.10000000149011612,
+                "width": 1280,
+                "height": 79
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/feed",
+            "timestamp": "2026-08-26T05:15:17.225Z",
+            "page_id": 0,
+            "delay_before_ms": 1045
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "User profile picture",
+                "placeholder": null,
+                "title": "User profile picture",
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div > div > div > div:nth-of-type(3) > div > div > div > div > div > img",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/img[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "img",
+                "attributes": {
+                    "title": "User profile picture"
+                }
+            },
+            "bounding_box": {
+                "x": 1234.5625,
+                "y": 18.5,
+                "width": 22,
+                "height": 22
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/feed",
+            "timestamp": "2026-08-26T05:15:17.730Z",
+            "page_id": 0,
+            "delay_before_ms": 505
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/login",
+            "timestamp": "2026-08-26T05:15:18.123Z",
+            "page_id": 0,
+            "delay_before_ms": 393
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Enter your email or phone number",
+                "placeholder": "Enter your email or phone number",
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(3) > div > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[3]/div[1]/input[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Enter your email or phone number",
+                    "type": "email"
+                }
+            },
+            "bounding_box": {
+                "x": 442.8000183105469,
+                "y": 346.8000183105469,
+                "width": 426.3999938964844,
+                "height": 43.20000076293945
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/login",
+            "timestamp": "2026-08-26T05:15:19.021Z",
+            "page_id": 0,
+            "delay_before_ms": 898
+        },
+        {
+            "action_type": "fill",
+            "value": "8807836261",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Enter your email or phone number",
+                "placeholder": "Enter your email or phone number",
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(3) > div > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[3]/div[1]/input[1]",
+                "text": "8807836261",
+                "element_text": "8807836261",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Enter your email or phone number",
+                    "type": "tel"
+                }
+            },
+            "bounding_box": {
+                "x": 442.8000183105469,
+                "y": 346.8000183105469,
+                "width": 426.3999938964844,
+                "height": 43.20000076293945
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/login",
+            "timestamp": "2026-08-26T05:15:23.039Z",
+            "page_id": 0,
+            "delay_before_ms": 4018
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Sign in",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(4)",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[4]",
+                "text": "Sign in",
+                "element_text": "Sign in",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 410,
+                "y": 410.8000183105469,
+                "width": 460,
+                "height": 49.20000076293945
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/login",
+            "timestamp": "2026-08-26T05:15:23.262Z",
+            "page_id": 0,
+            "delay_before_ms": 223
+        },
+        {
+            "action_type": "fill",
+            "value": "1",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "1",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(3) > div:nth-of-type(2) > div > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[3]/div[2]/div[1]/input[1]",
+                "text": "1",
+                "element_text": "1",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": ""
+                }
+            },
+            "bounding_box": {
+                "x": 410.8000183105469,
+                "y": 389,
+                "width": 105.9000015258789,
+                "height": 48.400001525878906
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/otp?userId=8807836261&loginType=phoneNumber",
+            "timestamp": "2026-08-26T05:15:25.149Z",
+            "page_id": 0,
+            "delay_before_ms": 1887
+        },
+        {
+            "action_type": "fill",
+            "value": "2",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "2",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(2) > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[3]/div[2]/div[2]/input[1]",
+                "text": "2",
+                "element_text": "2",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": ""
+                }
+            },
+            "bounding_box": {
+                "x": 528.2999877929688,
+                "y": 389,
+                "width": 105.9000015258789,
+                "height": 48.400001525878906
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/otp?userId=8807836261&loginType=phoneNumber",
+            "timestamp": "2026-08-26T05:15:25.311Z",
+            "page_id": 0,
+            "delay_before_ms": 162
+        },
+        {
+            "action_type": "fill",
+            "value": "3",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "3",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(3) > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[3]/div[2]/div[3]/input[1]",
+                "text": "3",
+                "element_text": "3",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": ""
+                }
+            },
+            "bounding_box": {
+                "x": 645.7999877929688,
+                "y": 389,
+                "width": 105.9000015258789,
+                "height": 48.400001525878906
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/otp?userId=8807836261&loginType=phoneNumber",
+            "timestamp": "2026-08-26T05:15:25.546Z",
+            "page_id": 0,
+            "delay_before_ms": 235
+        },
+        {
+            "action_type": "fill",
+            "value": "4",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "4",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(4) > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[3]/div[2]/div[4]/input[1]",
+                "text": "4",
+                "element_text": "4",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": ""
+                }
+            },
+            "bounding_box": {
+                "x": 763.2999877929688,
+                "y": 389,
+                "width": 105.9000015258789,
+                "height": 48.400001525878906
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/otp?userId=8807836261&loginType=phoneNumber",
+            "timestamp": "2026-08-26T05:15:27.378Z",
+            "page_id": 0,
+            "delay_before_ms": 1832
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Verify",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(4) > div",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[4]/div[1]",
+                "text": "Verify",
+                "element_text": "Verify",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 616.9874877929688,
+                "y": 473.20001220703125,
+                "width": 46.01250076293945,
+                "height": 19.200000762939453
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/otp?userId=8807836261&loginType=phoneNumber",
+            "timestamp": "2026-08-26T05:15:27.604Z",
+            "page_id": 0,
+            "delay_before_ms": 226
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Events",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2)",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[2]/div[2]",
+                "text": "Events",
+                "element_text": "Events",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 885.2125244140625,
+                "y": 44.5,
+                "width": 38.61249923706055,
+                "height": 15.199999809265137
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/feed",
+            "timestamp": "2026-08-26T05:15:31.326Z",
+            "page_id": 0,
+            "delay_before_ms": 3722
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events",
+            "timestamp": "2026-08-26T05:15:31.557Z",
+            "page_id": 0,
+            "delay_before_ms": 231
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Banner for LARSEN MEMORIAL RUN 13th EDITION",
+                "placeholder": null,
+                "title": "Banner for LARSEN MEMORIAL RUN 13th EDITION",
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div:nth-of-type(2) > div > div:nth-of-type(2) > div > div > div > div > div:nth-of-type(4) > div > div > div > div > img",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[1]/img[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "img",
+                "attributes": {
+                    "title": "Banner for LARSEN MEMORIAL RUN 13th EDITION"
+                }
+            },
+            "bounding_box": {
+                "x": 1043,
+                "y": 154,
+                "width": 219,
+                "height": 120.45000457763672
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events",
+            "timestamp": "2026-08-26T05:15:38.581Z",
+            "page_id": 0,
+            "delay_before_ms": 7024
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178?from=eventslist",
+            "timestamp": "2026-08-26T05:15:38.740Z",
+            "page_id": 0,
+            "delay_before_ms": 159
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Register Now",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div:nth-of-type(2) > div > div:nth-of-type(3) > div",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div[3]/div[1]",
+                "text": "Register Now",
+                "element_text": "Register Now",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 1070.6624755859375,
+                "y": 189.60000610351562,
+                "width": 102.4124984741211,
+                "height": 19.200000762939453
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178?from=eventslist",
+            "timestamp": "2026-08-26T05:15:44.175Z",
+            "page_id": 0,
+            "delay_before_ms": 5435
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/register",
+            "timestamp": "2026-08-26T05:15:44.409Z",
+            "page_id": 0,
+            "delay_before_ms": 234
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div:nth-of-type(2) > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2)",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]/div[2]/div[2]",
+                "text": "",
+                "element_text": "",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 826,
+                "y": 142.40000915527344,
+                "width": 36,
+                "height": 36
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/register",
+            "timestamp": "2026-08-26T05:15:46.537Z",
+            "page_id": 0,
+            "delay_before_ms": 2128
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div:nth-of-type(2) > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2) > div",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 835.2000122070312,
+                "y": 152,
+                "width": 16,
+                "height": 18.399999618530273
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/register",
+            "timestamp": "2026-08-26T05:15:48.754Z",
+            "page_id": 0,
+            "delay_before_ms": 2217
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Continue",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div:nth-of-type(3) > div > div > div > div:nth-of-type(6) > div",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[6]/div[1]",
+                "text": "Continue",
+                "element_text": "Continue",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 1052.1875,
+                "y": 346.3999938964844,
+                "width": 65.61250305175781,
+                "height": 18.399999618530273
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/register",
+            "timestamp": "2026-08-26T05:15:50.561Z",
+            "page_id": 0,
+            "delay_before_ms": 1807
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/participants?from=eventslist",
+            "timestamp": "2026-08-26T05:15:51.613Z",
+            "page_id": 0,
+            "delay_before_ms": 1052
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": -39,
+            "delta_y": 79,
+            "scroll_y_before": 0,
+            "scroll_y_after": 63.20000076293945,
+            "viewport_height": 640,
+            "document_height": 1156,
+            "locator_profile": {
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div",
+                "tag": "div"
+            },
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/participants?from=eventslist",
+            "timestamp": "2026-08-26T05:15:53.173Z",
+            "page_id": 0,
+            "delay_before_ms": 1560
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "\nPick from your saved people",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(3) > div:nth-of-type(2) > div",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[1]",
+                "text": "\nPick from your saved people",
+                "element_text": "\nPick from your saved people",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 265.6000061035156,
+                "y": 222.8000030517578,
+                "width": 208.03750610351562,
+                "height": 30.399999618530273
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/participants?from=eventslist",
+            "timestamp": "2026-08-26T05:15:54.904Z",
+            "page_id": 0,
+            "delay_before_ms": 1731
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "M\nMohan Kumar M\nMale · 10 Oct 1996 · T-shirt M",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "body > div:nth-of-type(7) > div > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(4) > div > div:nth-of-type(2)",
+                "xpath": "/html[1]/body[1]/div[7]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[2]",
+                "text": "M\nMohan Kumar M\nMale · 10 Oct 1996 · T-shirt M",
+                "element_text": "M\nMohan Kumar M\nMale · 10 Oct 1996 · T-shirt M",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 424,
+                "y": 279.3999938964844,
+                "width": 432,
+                "height": 69.5999984741211
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/participants?from=eventslist",
+            "timestamp": "2026-08-26T05:15:55.848Z",
+            "page_id": 0,
+            "delay_before_ms": 944
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Continue with Mohan Kumar M",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "body > div:nth-of-type(7) > div > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(5) > div",
+                "xpath": "/html[1]/body[1]/div[7]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[5]/div[1]",
+                "text": "Continue with Mohan Kumar M",
+                "element_text": "Continue with Mohan Kumar M",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 517.0250244140625,
+                "y": 575.2000122070312,
+                "width": 245.9375,
+                "height": 19.200000762939453
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/participants?from=eventslist",
+            "timestamp": "2026-08-26T05:15:57.004Z",
+            "page_id": 0,
+            "delay_before_ms": 1156
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(6) > div > div > select",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[6]/div[1]/div[1]/select[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "select",
+                "attributes": {
+                    "data-testid": "undefined-picker"
+                }
+            },
+            "bounding_box": {
+                "x": 266.3999938964844,
+                "y": 484.5625,
+                "width": 715.4000244140625,
+                "height": 43.400001525878906
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/participants?from=eventslist",
+            "timestamp": "2026-08-26T05:15:58.487Z",
+            "page_id": 0,
+            "delay_before_ms": 1483
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > img",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/img[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "img",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 894.5125122070312,
+                "y": 19.5,
+                "width": 20,
+                "height": 20
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/participants?from=eventslist",
+            "timestamp": "2026-08-26T05:16:00.871Z",
+            "page_id": 0,
+            "delay_before_ms": 2384
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Banner for SRV The Winning Edge Marathon 2026",
+                "placeholder": null,
+                "title": "Banner for SRV The Winning Edge Marathon 2026",
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div:nth-of-type(2) > div > div:nth-of-type(2) > div > div > div > div > div:nth-of-type(3) > div > div > div > div > img",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/img[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "img",
+                "attributes": {
+                    "title": "Banner for SRV The Winning Edge Marathon 2026"
+                }
+            },
+            "bounding_box": {
+                "x": 808,
+                "y": 154,
+                "width": 219,
+                "height": 120.45000457763672
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events",
+            "timestamp": "2026-08-26T05:16:03.589Z",
+            "page_id": 0,
+            "delay_before_ms": 2718
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Register Now",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div:nth-of-type(2) > div > div:nth-of-type(3)",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div[3]",
+                "text": "Register Now",
+                "element_text": "Register Now",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 1030.6624755859375,
+                "y": 181.60000610351562,
+                "width": 182.41250610351562,
+                "height": 35.20000076293945
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170?from=eventslist",
+            "timestamp": "2026-08-26T05:16:05.013Z",
+            "page_id": 0,
+            "delay_before_ms": 1424
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/register",
+            "timestamp": "2026-08-26T05:16:05.244Z",
+            "page_id": 0,
+            "delay_before_ms": 231
+        },
+        {
+            "action_type": "dblclick",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div:nth-of-type(2) > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2)",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]/div[2]/div[2]",
+                "text": "",
+                "element_text": "",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 825.2000122070312,
+                "y": 143.1999969482422,
+                "width": 36,
+                "height": 36
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/register",
+            "timestamp": "2026-08-26T05:16:07.888Z",
+            "page_id": 0,
+            "delay_before_ms": 2644
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Continue",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div:nth-of-type(3) > div > div > div > div:nth-of-type(6) > div",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[6]/div[1]",
+                "text": "Continue",
+                "element_text": "Continue",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 1052.1875,
+                "y": 370.3999938964844,
+                "width": 65.61250305175781,
+                "height": 18.399999618530273
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/register",
+            "timestamp": "2026-08-26T05:16:09.025Z",
+            "page_id": 0,
+            "delay_before_ms": 1137
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/participants?from=eventslist",
+            "timestamp": "2026-08-26T05:16:09.857Z",
+            "page_id": 0,
+            "delay_before_ms": 832
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Pick from your saved people",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(3) > div:nth-of-type(2) > div > div:nth-of-type(2)",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[1]/div[2]",
+                "text": "Pick from your saved people",
+                "element_text": "Pick from your saved people",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 297.6000061035156,
+                "y": 293.6000061035156,
+                "width": 166.03750610351562,
+                "height": 15.199999809265137
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/participants?from=eventslist",
+            "timestamp": "2026-08-26T05:16:11.410Z",
+            "page_id": 0,
+            "delay_before_ms": 1553
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Mohan Kumar M",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "body > div:nth-of-type(8) > div > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(4) > div > div:nth-of-type(3) > div:nth-of-type(2) > div",
+                "xpath": "/html[1]/body[1]/div[8]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[3]/div[2]/div[1]",
+                "text": "Mohan Kumar M",
+                "element_text": "Mohan Kumar M",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 494.8000183105469,
+                "y": 373.8999938964844,
+                "width": 314.3999938964844,
+                "height": 16.80000114440918
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/participants?from=eventslist",
+            "timestamp": "2026-08-26T05:16:12.320Z",
+            "page_id": 0,
+            "delay_before_ms": 910
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Continue with Mohan Kumar M",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "body > div:nth-of-type(8) > div > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(5) > div",
+                "xpath": "/html[1]/body[1]/div[8]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[5]/div[1]",
+                "text": "Continue with Mohan Kumar M",
+                "element_text": "Continue with Mohan Kumar M",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 517.0250244140625,
+                "y": 575.2000122070312,
+                "width": 245.9375,
+                "height": 19.200000762939453
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/participants?from=eventslist",
+            "timestamp": "2026-08-26T05:16:13.053Z",
+            "page_id": 0,
+            "delay_before_ms": 733
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": -100,
+            "delta_y": 155,
+            "scroll_y_before": 20.799999237060547,
+            "scroll_y_after": 124,
+            "viewport_height": 640,
+            "document_height": 1181,
+            "locator_profile": {
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div",
+                "tag": "div"
+            },
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/participants?from=eventslist",
+            "timestamp": "2026-08-26T05:16:14.123Z",
+            "page_id": 0,
+            "delay_before_ms": 1070
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "5-90 yrs · Male/Female/Others",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(4) > div > div > div > span",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/span[1]",
+                "text": "5-90 yrs · Male/Female/Others",
+                "element_text": "5-90 yrs · Male/Female/Others",
+                "tag": "span",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 427.8125,
+                "y": 529.6625366210938,
+                "width": 180.5124969482422,
+                "height": 15.199999809265137
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/participants?from=eventslist",
+            "timestamp": "2026-08-26T05:16:14.652Z",
+            "page_id": 0,
+            "delay_before_ms": 529
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": -100,
+            "delta_y": 177,
+            "scroll_y_before": 124,
+            "scroll_y_after": 266.3999938964844,
+            "viewport_height": 640,
+            "document_height": 1512,
+            "locator_profile": {
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div",
+                "tag": "div"
+            },
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/participants?from=eventslist",
+            "timestamp": "2026-08-26T05:16:15.706Z",
+            "page_id": 0,
+            "delay_before_ms": 1054
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Pick from your saved people",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(4) > div:nth-of-type(2) > div > div:nth-of-type(2)",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[2]/div[1]/div[2]",
+                "text": "Pick from your saved people",
+                "element_text": "Pick from your saved people",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 297.6000061035156,
+                "y": 446.1625061035156,
+                "width": 166.03750610351562,
+                "height": 15.199999809265137
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/participants?from=eventslist",
+            "timestamp": "2026-08-26T05:16:16.682Z",
+            "page_id": 0,
+            "delay_before_ms": 976
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Male · 10 Oct 1996 · T-shirt XXS",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "body > div:nth-of-type(8) > div > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(4) > div > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(2)",
+                "xpath": "/html[1]/body[1]/div[8]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[3]/div[2]/div[2]",
+                "text": "Male · 10 Oct 1996 · T-shirt XXS",
+                "element_text": "Male · 10 Oct 1996 · T-shirt XXS",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 494.8000183105469,
+                "y": 392.70001220703125,
+                "width": 314.3999938964844,
+                "height": 17
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/participants?from=eventslist",
+            "timestamp": "2026-08-26T05:16:17.728Z",
+            "page_id": 0,
+            "delay_before_ms": 1046
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Continue with Mohammed",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "body > div:nth-of-type(8) > div > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(5) > div",
+                "xpath": "/html[1]/body[1]/div[8]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[5]/div[1]",
+                "text": "Continue with Mohammed",
+                "element_text": "Continue with Mohammed",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 536.8624877929688,
+                "y": 575.2000122070312,
+                "width": 206.27500915527344,
+                "height": 19.200000762939453
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/participants?from=eventslist",
+            "timestamp": "2026-08-26T05:16:18.795Z",
+            "page_id": 0,
+            "delay_before_ms": 1067
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 435,
+            "scroll_y_before": 266.3999938964844,
+            "scroll_y_after": 614.4000244140625,
+            "viewport_height": 640,
+            "document_height": 1512,
+            "locator_profile": {
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div",
+                "tag": "div"
+            },
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/participants?from=eventslist",
+            "timestamp": "2026-08-26T05:16:20.098Z",
+            "page_id": 0,
+            "delay_before_ms": 1303
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": -65,
+            "scroll_y_before": 614.4000244140625,
+            "scroll_y_after": 562.4000244140625,
+            "viewport_height": 640,
+            "document_height": 1512,
+            "locator_profile": {
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div",
+                "tag": "div"
+            },
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/participants?from=eventslist",
+            "timestamp": "2026-08-26T05:16:21.089Z",
+            "page_id": 0,
+            "delay_before_ms": 991
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": "Choose date, selected date is Oct 10, 1996",
+                "accessible_name": "Choose date, selected date is Oct 10, 1996",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(4) > div:nth-of-type(2) > div:nth-of-type(3) > div > div > div > div > button",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[2]/div[3]/div[1]/div[1]/div[1]/div[1]/button[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "button",
+                "attributes": {
+                    "type": "button",
+                    "aria-label": "Choose date, selected date is Oct 10, 1996"
+                }
+            },
+            "bounding_box": {
+                "x": 947.6000366210938,
+                "y": 240.7375030517578,
+                "width": 40,
+                "height": 40
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/participants?from=eventslist",
+            "timestamp": "2026-08-26T05:16:22.094Z",
+            "page_id": 0,
+            "delay_before_ms": 1005
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#«r2q»-grid-label",
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "October 1996",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#«r2q»-grid-label",
+                "xpath": "//*[@id='«r2q»-grid-label']",
+                "text": "October 1996",
+                "element_text": "October 1996",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 290,
+                "y": 303,
+                "width": 98.9749984741211,
+                "height": 24
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/participants?from=eventslist",
+            "timestamp": "2026-08-26T05:16:23.255Z",
+            "page_id": 0,
+            "delay_before_ms": 1161
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": -65,
+            "delta_y": 197,
+            "scroll_y_before": 639.2000122070312,
+            "scroll_y_after": 762.4000244140625,
+            "viewport_height": 280,
+            "document_height": 1056,
+            "locator_profile": {
+                "css_path": "body > div:nth-of-type(10) > div:nth-of-type(2) > div > div > div > div:nth-of-type(2) > div > div",
+                "tag": "div"
+            },
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/participants?from=eventslist",
+            "timestamp": "2026-08-26T05:16:24.573Z",
+            "page_id": 0,
+            "delay_before_ms": 1318
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "radio",
+                "aria_label": null,
+                "accessible_name": "2013",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "body > div:nth-of-type(10) > div:nth-of-type(2) > div > div > div > div:nth-of-type(2) > div > div > div:nth-of-type(79) > button",
+                "xpath": "/html[1]/body[1]/div[10]/div[2]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[79]/button[1]",
+                "text": "2013",
+                "element_text": "2013",
+                "tag": "button",
+                "attributes": {
+                    "type": "button",
+                    "role": "radio"
+                }
+            },
+            "bounding_box": {
+                "x": 418.5,
+                "y": 493.6000061035156,
+                "width": 72,
+                "height": 36
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/participants?from=eventslist",
+            "timestamp": "2026-08-26T05:16:25.619Z",
+            "page_id": 0,
+            "delay_before_ms": 1046
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "gridcell",
+                "aria_label": null,
+                "accessible_name": "10",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "body > div:nth-of-type(10) > div:nth-of-type(2) > div > div > div > div:nth-of-type(2) > div > div > div:nth-of-type(2) > div > div:nth-of-type(2) > button:nth-of-type(5)",
+                "xpath": "/html[1]/body[1]/div[10]/div[2]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[2]/button[5]",
+                "text": "10",
+                "element_text": "10",
+                "tag": "button",
+                "attributes": {
+                    "type": "button",
+                    "role": "gridcell"
+                }
+            },
+            "bounding_box": {
+                "x": 448,
+                "y": 418,
+                "width": 36,
+                "height": 36
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/participants?from=eventslist",
+            "timestamp": "2026-08-26T05:16:28.238Z",
+            "page_id": 0,
+            "delay_before_ms": 2619
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Guardian's full name*",
+                "placeholder": "Guardian's full name*",
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(4) > div:nth-of-type(2) > div:nth-of-type(6) > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[2]/div[6]/input[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Guardian's full name*"
+                }
+            },
+            "bounding_box": {
+                "x": 265.6000061035156,
+                "y": 394.5249938964844,
+                "width": 732,
+                "height": 45
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/participants?from=eventslist",
+            "timestamp": "2026-08-26T05:16:31.783Z",
+            "page_id": 0,
+            "delay_before_ms": 3545
+        },
+        {
+            "action_type": "fill",
+            "value": "guru",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Guardian's full name*",
+                "placeholder": "Guardian's full name*",
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(4) > div:nth-of-type(2) > div:nth-of-type(6) > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[2]/div[6]/input[1]",
+                "text": "guru",
+                "element_text": "guru",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Guardian's full name*"
+                }
+            },
+            "bounding_box": {
+                "x": 265.6000061035156,
+                "y": 394.5249938964844,
+                "width": 732,
+                "height": 45
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/participants?from=eventslist",
+            "timestamp": "2026-08-26T05:16:37.818Z",
+            "page_id": 0,
+            "delay_before_ms": 6035
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Guardian's mobile or email*",
+                "placeholder": "Guardian's mobile or email*",
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(4) > div:nth-of-type(2) > div:nth-of-type(7) > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[2]/div[7]/input[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Guardian's mobile or email*"
+                }
+            },
+            "bounding_box": {
+                "x": 265.6000061035156,
+                "y": 449.5249938964844,
+                "width": 732,
+                "height": 45
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/participants?from=eventslist",
+            "timestamp": "2026-08-26T05:16:38.033Z",
+            "page_id": 0,
+            "delay_before_ms": 215
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 245,
+            "scroll_y_before": 562.4000244140625,
+            "scroll_y_after": 758.4000244140625,
+            "viewport_height": 640,
+            "document_height": 1613,
+            "locator_profile": {
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div",
+                "tag": "div"
+            },
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/participants?from=eventslist",
+            "timestamp": "2026-08-26T05:16:46.321Z",
+            "page_id": 0,
+            "delay_before_ms": 8288
+        },
+        {
+            "action_type": "fill",
+            "value": "guru22@gmail.com",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Guardian's mobile or email*",
+                "placeholder": "Guardian's mobile or email*",
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(4) > div:nth-of-type(2) > div:nth-of-type(7) > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[2]/div[7]/input[1]",
+                "text": "guru22@gmail.com",
+                "element_text": "guru22@gmail.com",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Guardian's mobile or email*"
+                }
+            },
+            "bounding_box": {
+                "x": 265.6000061035156,
+                "y": 253.52500915527344,
+                "width": 732,
+                "height": 45
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/participants?from=eventslist",
+            "timestamp": "2026-08-26T05:16:46.737Z",
+            "page_id": 0,
+            "delay_before_ms": 416
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(5) > div > div:nth-of-type(2) > div > div",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[5]/div[1]/div[2]/div[1]/div[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 265.6000061035156,
+                "y": 491.32501220703125,
+                "width": 24,
+                "height": 26.399999618530273
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/participants?from=eventslist",
+            "timestamp": "2026-08-26T05:16:46.958Z",
+            "page_id": 0,
+            "delay_before_ms": 221
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 781,
+            "scroll_y_before": 758.4000244140625,
+            "scroll_y_after": 972.7999877929688,
+            "viewport_height": 640,
+            "document_height": 1613,
+            "locator_profile": {
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div",
+                "tag": "div"
+            },
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/participants?from=eventslist",
+            "timestamp": "2026-08-26T05:16:47.962Z",
+            "page_id": 0,
+            "delay_before_ms": 1004
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Pay Securely ₹619.17",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(6)",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[6]",
+                "text": "Pay Securely ₹619.17",
+                "element_text": "Pay Securely ₹619.17",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 249.60000610351562,
+                "y": 616.5250244140625,
+                "width": 764,
+                "height": 53.20000076293945
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/participants?from=eventslist",
+            "timestamp": "2026-08-26T05:16:48.657Z",
+            "page_id": 0,
+            "delay_before_ms": 695
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events",
+            "timestamp": "2026-08-26T05:16:51.097Z",
+            "page_id": 0,
+            "delay_before_ms": 2440
+        },
+        {
+            "action_type": "tab_open",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://pgpayuat.icici.bank.in/tsp/pg/api/v2/authRedirect?tranCtx=R01a03c7f-e846-7243-8f59-60f6cdc18b91",
+            "timestamp": "2026-08-26T05:16:52.173Z",
+            "new_tab": true,
+            "page_id": 1,
+            "from_page_id": 0,
+            "delay_before_ms": 1076
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#nbAccordionBtn",
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Net Banking",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "button#nbAccordionBtn",
+                "xpath": "//*[@id='nbAccordionBtn']",
+                "text": "Net Banking",
+                "element_text": "Net Banking",
+                "tag": "button",
+                "attributes": {
+                    "type": "button"
+                }
+            },
+            "bounding_box": {
+                "x": 432.6000061035156,
+                "y": 305,
+                "width": 409.20001220703125,
+                "height": 47
+            },
+            "page_url": "https://pgpayuat.icici.bank.in/tsp/pg/api/v2/authRedirect?tranCtx=R01a03c7f-e846-7243-8f59-60f6cdc18b91",
+            "timestamp": "2026-08-26T05:17:05.035Z",
+            "page_id": 1,
+            "delay_before_ms": 12862
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#radioAvenues Test for New TC",
+                "name": "bankMobile",
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Avenues Test for New TC",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "input#radioAvenues Test for New TC",
+                "xpath": "//*[@id='radioAvenues Test for New TC']",
+                "text": "Avenues Test for New TC",
+                "element_text": "Avenues Test for New TC",
+                "tag": "input",
+                "attributes": {
+                    "type": "radio",
+                    "name": "bankMobile"
+                }
+            },
+            "bounding_box": {
+                "x": -9999,
+                "y": 402.20001220703125,
+                "width": 13,
+                "height": 13
+            },
+            "page_url": "https://pgpayuat.icici.bank.in/tsp/pg/api/v2/authRedirect?tranCtx=R01a03c7f-e846-7243-8f59-60f6cdc18b91",
+            "timestamp": "2026-08-26T05:17:06.936Z",
+            "page_id": 1,
+            "delay_before_ms": 1901
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#radioAvenues Test for New TC",
+                "name": "bankMobile",
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Avenues Test for New TC",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "input#radioAvenues Test for New TC",
+                "xpath": "//*[@id='radioAvenues Test for New TC']",
+                "text": "Avenues Test for New TC",
+                "element_text": "Avenues Test for New TC",
+                "tag": "input",
+                "attributes": {
+                    "type": "radio",
+                    "name": "bankMobile"
+                }
+            },
+            "bounding_box": {
+                "x": -9999,
+                "y": 402.20001220703125,
+                "width": 13,
+                "height": 13
+            },
+            "page_url": "https://pgpayuat.icici.bank.in/tsp/pg/api/v2/authRedirect?tranCtx=R01a03c7f-e846-7243-8f59-60f6cdc18b91",
+            "timestamp": "2026-08-26T05:17:08.043Z",
+            "page_id": 1,
+            "delay_before_ms": 1107
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#radioAvenues Test for New TC",
+                "name": "bankMobile",
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Avenues Test for New TC",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "input#radioAvenues Test for New TC",
+                "xpath": "//*[@id='radioAvenues Test for New TC']",
+                "text": "Avenues Test for New TC",
+                "element_text": "Avenues Test for New TC",
+                "tag": "input",
+                "attributes": {
+                    "type": "radio",
+                    "name": "bankMobile"
+                }
+            },
+            "bounding_box": {
+                "x": -9999,
+                "y": 402.20001220703125,
+                "width": 13,
+                "height": 13
+            },
+            "page_url": "https://pgpayuat.icici.bank.in/tsp/pg/api/v2/authRedirect?tranCtx=R01a03c7f-e846-7243-8f59-60f6cdc18b91",
+            "timestamp": "2026-08-26T05:17:09.336Z",
+            "page_id": 1,
+            "delay_before_ms": 1293
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#radioAvenues Test for New TC",
+                "name": "bankMobile",
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Avenues Test for New TC",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "input#radioAvenues Test for New TC",
+                "xpath": "//*[@id='radioAvenues Test for New TC']",
+                "text": "Avenues Test for New TC",
+                "element_text": "Avenues Test for New TC",
+                "tag": "input",
+                "attributes": {
+                    "type": "radio",
+                    "name": "bankMobile"
+                }
+            },
+            "bounding_box": {
+                "x": -9999,
+                "y": 402.20001220703125,
+                "width": 13,
+                "height": 13
+            },
+            "page_url": "https://pgpayuat.icici.bank.in/tsp/pg/api/v2/authRedirect?tranCtx=R01a03c7f-e846-7243-8f59-60f6cdc18b91",
+            "timestamp": "2026-08-26T05:17:10.626Z",
+            "page_id": 1,
+            "delay_before_ms": 1290
+        },
+        {
+            "action_type": "right_click",
+            "value": null,
+            "locator_profile": {
+                "id": "#radioAvenues Test for New TC",
+                "name": "bankMobile",
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Avenues Test for New TC",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "input#radioAvenues Test for New TC",
+                "xpath": "//*[@id='radioAvenues Test for New TC']",
+                "text": "Avenues Test for New TC",
+                "element_text": "Avenues Test for New TC",
+                "tag": "input",
+                "attributes": {
+                    "type": "radio",
+                    "name": "bankMobile"
+                }
+            },
+            "bounding_box": {
+                "x": -9999,
+                "y": 402.20001220703125,
+                "width": 13,
+                "height": 13
+            },
+            "page_url": "https://pgpayuat.icici.bank.in/tsp/pg/api/v2/authRedirect?tranCtx=R01a03c7f-e846-7243-8f59-60f6cdc18b91",
+            "timestamp": "2026-08-26T05:17:12.615Z",
+            "page_id": 1,
+            "delay_before_ms": 1989
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#radioAvenues Test for New TC",
+                "name": "bankMobile",
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Avenues Test for New TC",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "input#radioAvenues Test for New TC",
+                "xpath": "//*[@id='radioAvenues Test for New TC']",
+                "text": "Avenues Test for New TC",
+                "element_text": "Avenues Test for New TC",
+                "tag": "input",
+                "attributes": {
+                    "type": "radio",
+                    "name": "bankMobile"
+                }
+            },
+            "bounding_box": {
+                "x": -9999,
+                "y": 402.20001220703125,
+                "width": 13,
+                "height": 13
+            },
+            "page_url": "https://pgpayuat.icici.bank.in/tsp/pg/api/v2/authRedirect?tranCtx=R01a03c7f-e846-7243-8f59-60f6cdc18b91",
+            "timestamp": "2026-08-26T05:17:13.660Z",
+            "page_id": 1,
+            "delay_before_ms": 1045
+        },
+        {
+            "action_type": "dblclick",
+            "value": null,
+            "locator_profile": {
+                "id": "#radioAvenues Test for New TC",
+                "name": "bankMobile",
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Avenues Test for New TC",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "input#radioAvenues Test for New TC",
+                "xpath": "//*[@id='radioAvenues Test for New TC']",
+                "text": "Avenues Test for New TC",
+                "element_text": "Avenues Test for New TC",
+                "tag": "input",
+                "attributes": {
+                    "type": "radio",
+                    "name": "bankMobile"
+                }
+            },
+            "bounding_box": {
+                "x": -9999,
+                "y": 402.20001220703125,
+                "width": 13,
+                "height": 13
+            },
+            "page_url": "https://pgpayuat.icici.bank.in/tsp/pg/api/v2/authRedirect?tranCtx=R01a03c7f-e846-7243-8f59-60f6cdc18b91",
+            "timestamp": "2026-08-26T05:17:14.016Z",
+            "page_id": 1,
+            "delay_before_ms": 356
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#radioICICI",
+                "name": "bankMobile",
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "ICICI",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "input#radioICICI",
+                "xpath": "//*[@id='radioICICI']",
+                "text": "ICICI",
+                "element_text": "ICICI",
+                "tag": "input",
+                "attributes": {
+                    "type": "radio",
+                    "name": "bankMobile"
+                }
+            },
+            "bounding_box": {
+                "x": -9999,
+                "y": 442.20001220703125,
+                "width": 13,
+                "height": 13
+            },
+            "page_url": "https://pgpayuat.icici.bank.in/tsp/pg/api/v2/authRedirect?tranCtx=R01a03c7f-e846-7243-8f59-60f6cdc18b91",
+            "timestamp": "2026-08-26T05:17:15.581Z",
+            "page_id": 1,
+            "delay_before_ms": 1565
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#radioAvenues Test for New TC",
+                "name": "bankMobile",
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Avenues Test for New TC",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "input#radioAvenues Test for New TC",
+                "xpath": "//*[@id='radioAvenues Test for New TC']",
+                "text": "Avenues Test for New TC",
+                "element_text": "Avenues Test for New TC",
+                "tag": "input",
+                "attributes": {
+                    "type": "radio",
+                    "name": "bankMobile"
+                }
+            },
+            "bounding_box": {
+                "x": -9999,
+                "y": 402.20001220703125,
+                "width": 13,
+                "height": 13
+            },
+            "page_url": "https://pgpayuat.icici.bank.in/tsp/pg/api/v2/authRedirect?tranCtx=R01a03c7f-e846-7243-8f59-60f6cdc18b91",
+            "timestamp": "2026-08-26T05:17:21.857Z",
+            "page_id": 1,
+            "delay_before_ms": 6276
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#radioAvenues Test for New TC",
+                "name": "bankMobile",
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Avenues Test for New TC",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "input#radioAvenues Test for New TC",
+                "xpath": "//*[@id='radioAvenues Test for New TC']",
+                "text": "Avenues Test for New TC",
+                "element_text": "Avenues Test for New TC",
+                "tag": "input",
+                "attributes": {
+                    "type": "radio",
+                    "name": "bankMobile"
+                }
+            },
+            "bounding_box": {
+                "x": -9999,
+                "y": 402.20001220703125,
+                "width": 13,
+                "height": 13
+            },
+            "page_url": "https://pgpayuat.icici.bank.in/tsp/pg/api/v2/authRedirect?tranCtx=R01a03c7f-e846-7243-8f59-60f6cdc18b91",
+            "timestamp": "2026-08-26T05:17:22.427Z",
+            "page_id": 1,
+            "delay_before_ms": 570
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 1,
+            "page_url": "https://pgpayuat.icici.bank.in/tsp/pg/api/v2/authRedirect?tranCtx=R01a03c7f-e846-7243-8f59-60f6cdc18b91",
+            "remaining_page_id": 0,
+            "timestamp": "2026-08-26T05:17:28.589Z",
+            "delay_before_ms": 6162
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 0,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events",
+            "remaining_page_id": null,
+            "timestamp": "2026-08-26T05:17:28.589Z",
+            "delay_before_ms": 0
+        }
+    ],
+    "saved_at": "2026-08-26T10:47:28.596829"
+}

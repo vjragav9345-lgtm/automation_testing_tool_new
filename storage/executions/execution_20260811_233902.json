@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "message": "all steps resolved and validations passed",
+  "qa_url": "https://books.toscrape.com/",
+  "steps": [],
+  "content_check": true,
+  "screenshot_diff": {
+    "match": null,
+    "diff_ratio": null,
+    "note": "baseline screenshot not found at screenshots/baseline/does_not_exist.png, skipped"
+  },
+  "final_screenshot": "screenshots/execution_runs/20260811_233858/final.png",
+  "run_id": "20260811_233858"
+}

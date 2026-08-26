@@ -1,0 +1,315 @@
+{
+    "name": "session_20260818_170759",
+    "session_id": "0351d53a8ecf45a1a87fba8c00cce5cd",
+    "start_url": "https://www.nykaa.com/",
+    "recorded_at": "2026-08-18T17:07:59.936900",
+    "stop_reason": "browser_closed",
+    "total_actions": 20,
+    "page_count": 2,
+    "actions": [
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "css_path": "div#headerMenu > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2) > ul > li:nth-of-type(2) > span:nth-of-type(2)",
+                "xpath": "/html[1]/body[1]/div[1]/header[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[2]/div[2]/ul[1]/li[2]/span[2]",
+                "text": "Face Masks",
+                "tag": "span",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 834.0499877929688,
+                "y": 198.5,
+                "width": 267.0500183105469,
+                "height": 20
+            },
+            "page_url": "https://www.nykaa.com/",
+            "timestamp": "2026-08-18T11:37:24.596Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 539,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.nykaa.com/skin/masks/c/8399?search_redirection=True",
+            "timestamp": "2026-08-18T11:37:28.090Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 415,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.nykaa.com/skin/masks/c/8399?search_redirection=True",
+            "timestamp": "2026-08-18T11:37:29.628Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 67,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.nykaa.com/skin/masks/c/8399?search_redirection=True",
+            "timestamp": "2026-08-18T11:37:30.241Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.nykaa.com/skin/masks/c/8399?search_redirection=True",
+            "timestamp": "2026-08-18T11:37:30.517Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 267,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.nykaa.com/skin/masks/c/8399?search_redirection=True",
+            "timestamp": "2026-08-18T11:37:30.878Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 391,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.nykaa.com/skin/masks/c/8399?search_redirection=True",
+            "timestamp": "2026-08-18T11:37:31.284Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "css_path": "div#product-list-wrap > div:nth-of-type(7) > div > div:nth-of-type(2) > div > button:nth-of-type(2)",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[2]/div[1]/div[7]/div[1]/div[2]/div[1]/button[2]",
+                "text": "Add to Bag",
+                "tag": "button",
+                "attributes": {
+                    "type": "button",
+                    "aria-label": "Add to bag Biodance Bio-Collagen Real Deep Mask"
+                }
+            },
+            "bounding_box": {
+                "x": 410.95001220703125,
+                "y": 603.7999877929688,
+                "width": 206.8625030517578,
+                "height": 50
+            },
+            "page_url": "https://www.nykaa.com/skin/masks/c/8399?search_redirection=True",
+            "timestamp": "2026-08-18T11:37:33.721Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "css_path": "div#product-list-wrap > div:nth-of-type(7) > div > div > a > div > div > img",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[2]/div[1]/div[7]/div[1]/div[1]/a[1]/div[1]/div[1]/img[1]",
+                "text": "",
+                "tag": "img",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 370.07501220703125,
+                "y": 211.8000030517578,
+                "width": 219.6750030517578,
+                "height": 215
+            },
+            "page_url": "https://www.nykaa.com/skin/masks/c/8399?search_redirection=True",
+            "timestamp": "2026-08-18T11:37:35.802Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.nykaa.com/biodance-bio-collagen-real-deep-mask/p/19474859?productId=19474859&pps=7",
+            "timestamp": "2026-08-18T11:37:39.283Z",
+            "new_tab": true,
+            "page_id": 1
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 311,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.nykaa.com/biodance-bio-collagen-real-deep-mask/p/19474859?productId=19474859&pps=7",
+            "timestamp": "2026-08-18T11:37:39.774Z",
+            "page_id": 1
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 575,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.nykaa.com/biodance-bio-collagen-real-deep-mask/p/19474859?productId=19474859&pps=7",
+            "timestamp": "2026-08-18T11:37:40.751Z",
+            "page_id": 1
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 62,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.nykaa.com/biodance-bio-collagen-real-deep-mask/p/19474859?productId=19474859&pps=7",
+            "timestamp": "2026-08-18T11:37:41.565Z",
+            "page_id": 1
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": -7,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.nykaa.com/biodance-bio-collagen-real-deep-mask/p/19474859?productId=19474859&pps=7",
+            "timestamp": "2026-08-18T11:37:42.367Z",
+            "page_id": 1
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "css_path": "div#app > div > div:nth-of-type(2) > div > div:nth-of-type(2) > div > div > div:nth-of-type(6) > div > div > button",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[6]/div[1]/div[1]/button[1]",
+                "text": "Add to Bag",
+                "tag": "button",
+                "attributes": {
+                    "type": "button",
+                    "aria-label": "Add to bag undefined"
+                }
+            },
+            "bounding_box": {
+                "x": 547.0625,
+                "y": 257.0375061035156,
+                "width": 222,
+                "height": 48
+            },
+            "page_url": "https://www.nykaa.com/biodance-bio-collagen-real-deep-mask/p/19474859?productId=19474859&pps=7",
+            "timestamp": "2026-08-18T11:37:43.285Z",
+            "page_id": 1
+        },
+        {
+            "action_type": "right_click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "css_path": "div#cab-products-section > div:nth-of-type(3) > div > div",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]",
+                "text": "Biodance Radiant Vita Niacinamide Real Deep Mask\nPrice ₹400.\n₹400\n( 113 )",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 662.1625366210938,
+                "y": -103.5625,
+                "width": 257,
+                "height": 472
+            },
+            "page_url": "https://www.nykaa.com/biodance-bio-collagen-real-deep-mask/p/19474859?productId=19474859&pps=7",
+            "timestamp": "2026-08-18T11:37:45.168Z",
+            "page_id": 1
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": -1565,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.nykaa.com/biodance-bio-collagen-real-deep-mask/p/19474859?productId=19474859&pps=7",
+            "timestamp": "2026-08-18T11:37:48.556Z",
+            "page_id": 1
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "css_path": "button#header-bag-icon > svg",
+                "xpath": "/html[1]/body[1]/div[1]/header[1]/div[1]/div[2]/div[1]/div[2]/div[2]/button[1]/svg[1]",
+                "text": "",
+                "tag": "svg",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 1174.5250244140625,
+                "y": 61.35000228881836,
+                "width": 24,
+                "height": 24
+            },
+            "page_url": "https://www.nykaa.com/biodance-bio-collagen-real-deep-mask/p/19474859?productId=19474859&pps=7",
+            "timestamp": "2026-08-18T11:37:50.154Z",
+            "page_id": 1
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "css_path": "li#19474859 > div > button > svg",
+                "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/div[1]/div[3]/ul[1]/li[1]/div[1]/button[1]/svg[1]",
+                "text": "",
+                "tag": "svg",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 1226.4000244140625,
+                "y": 162.8000030517578,
+                "width": 30,
+                "height": 30
+            },
+            "page_url": "https://www.nykaa.com/biodance-bio-collagen-real-deep-mask/p/19474859?productId=19474859&pps=7",
+            "timestamp": "2026-08-18T11:37:54.075Z",
+            "page_id": 1
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "css_path": "li#19474859 > div > div > div:nth-of-type(2) > div > button",
+                "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/div[1]/div[3]/ul[1]/li[1]/div[1]/div[1]/div[2]/div[1]/button[1]",
+                "text": "Yes",
+                "tag": "button",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 931.6000366210938,
+                "y": 220.8000030517578,
+                "width": 148.40000915527344,
+                "height": 41.60000228881836
+            },
+            "page_url": "https://www.nykaa.com/biodance-bio-collagen-real-deep-mask/p/19474859?productId=19474859&pps=7",
+            "timestamp": "2026-08-18T11:37:56.155Z",
+            "page_id": 1
+        }
+    ],
+    "saved_at": "2026-08-18T17:07:59.936900"
+}

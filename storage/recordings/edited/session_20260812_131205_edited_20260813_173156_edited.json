@@ -1,0 +1,47 @@
+{
+    "name": "session_20260812_131205_edited_20260813_173156_edited",
+    "start_url": "https://the-internet.herokuapp.com/",
+    "actions": [
+        {
+            "action_type": "navigate",
+            "bounding_box": null,
+            "locator_profile": null,
+            "page_url": "https://the-internet.herokuapp.com/",
+            "timestamp": "2026-08-12T07:41:53.031Z",
+            "value": ""
+        },
+        {
+            "action_type": "scroll",
+            "bounding_box": null,
+            "delta_x": 0,
+            "delta_y": -216,
+            "locator_profile": null,
+            "page_url": "https://the-internet.herokuapp.com/",
+            "timestamp": "2026-08-12T07:41:55.431Z",
+            "value": null
+        },
+        {
+            "action_type": "click",
+            "bounding_box": {
+                "height": 30,
+                "width": 69.45000457763672,
+                "x": 338.45001220703125,
+                "y": 128.60000610351562
+            },
+            "locator_profile": {
+                "attributes": {
+                    "type": "submit"
+                },
+                "css_path": "div#nav-flyout-iss-anchor > div:nth-of-type(2) > div > div:nth-of-type(3) > span > span > input",
+                "id": null,
+                "tag": "input",
+                "text": "",
+                "xpath": "/html[1]/body[1]/div[1]/header[1]/div[1]/div[2]/div[2]/div[1]/div[3]/span[1]/span[1]/input[1]"
+            },
+            "page_url": "https://the-internet.herokuapp.com/",
+            "timestamp": "2026-08-12T07:41:56.859Z",
+            "value": "Context Menu"
+        }
+    ],
+    "saved_at": "2026-08-18T10:37:09.946710"
+}

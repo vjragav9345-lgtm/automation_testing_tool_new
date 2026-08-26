@@ -1,0 +1,15 @@
+{
+    "name": "session_20260812_131205_edited_20260813_173156_edited_20260817_100832",
+    "start_url": "https://www.amazon.com/",
+    "actions": [
+        {
+            "action_type": "navigate",
+            "bounding_box": null,
+            "locator_profile": null,
+            "page_url": "https://the-internet.herokuapp.com/",
+            "timestamp": "2026-08-12T07:41:53.031Z",
+            "value": ""
+        }
+    ],
+    "saved_at": "2026-08-17T10:08:32.416108"
+}

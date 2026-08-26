@@ -1,0 +1,123 @@
+{
+    "name": "session_20260812_130411",
+    "session_id": "8a51bb4f9d1c45fcb433abb98d13bbd2",
+    "start_url": "https://www.ebay.com/",
+    "recorded_at": "2026-08-12T13:04:11.572552",
+    "stop_reason": "terminal_enter",
+    "total_actions": 5,
+    "actions": [
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#gh-ac",
+                "css_path": "input#gh-ac",
+                "xpath": "//*[@id='gh-ac']",
+                "text": "",
+                "tag": "input",
+                "attributes": {
+                    "title": "Search",
+                    "type": "text",
+                    "placeholder": "Search for anything",
+                    "aria-label": "Search for anything",
+                    "name": "_nkw",
+                    "role": "combobox"
+                }
+            },
+            "bounding_box": {
+                "x": 271.3999938964844,
+                "y": 51.29999923706055,
+                "width": 536.625,
+                "height": 39.20000076293945
+            },
+            "page_url": "https://www.ebay.com/",
+            "timestamp": "2026-08-12T07:34:07.326Z"
+        },
+        {
+            "action_type": "fill",
+            "value": "wireless mouse",
+            "locator_profile": {
+                "id": "#gh-ac",
+                "css_path": "input#gh-ac",
+                "xpath": "//*[@id='gh-ac']",
+                "text": "wireless mouse",
+                "tag": "input",
+                "attributes": {
+                    "title": "Search",
+                    "type": "text",
+                    "placeholder": "Search for anything",
+                    "aria-label": "Search for anything",
+                    "name": "_nkw",
+                    "role": "combobox"
+                }
+            },
+            "bounding_box": {
+                "x": 271.3999938964844,
+                "y": 51.29999923706055,
+                "width": 536.625,
+                "height": 39.20000076293945
+            },
+            "page_url": "https://www.ebay.com/",
+            "timestamp": "2026-08-12T07:34:07.458Z"
+        },
+        {
+            "action_type": "press",
+            "value": "Enter",
+            "locator_profile": {
+                "id": "#gh-ac",
+                "css_path": "input#gh-ac",
+                "xpath": "//*[@id='gh-ac']",
+                "text": "wireless mouse",
+                "tag": "input",
+                "attributes": {
+                    "title": "Search",
+                    "type": "text",
+                    "placeholder": "Search for anything",
+                    "aria-label": "Search for anything",
+                    "name": "_nkw",
+                    "role": "combobox"
+                }
+            },
+            "bounding_box": {
+                "x": 271.3999938964844,
+                "y": 51.29999923706055,
+                "width": 536.625,
+                "height": 39.20000076293945
+            },
+            "page_url": "https://www.ebay.com/",
+            "timestamp": "2026-08-12T07:34:07.459Z"
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#gh-search-btn",
+                "css_path": "button#gh-search-btn",
+                "xpath": "//*[@id='gh-search-btn']",
+                "text": "Search",
+                "tag": "button",
+                "attributes": {
+                    "type": "submit",
+                    "role": "button"
+                }
+            },
+            "bounding_box": {
+                "x": 985.2250366210938,
+                "y": 48.900001525878906,
+                "width": 168,
+                "height": 44
+            },
+            "page_url": "https://www.ebay.com/",
+            "timestamp": "2026-08-12T07:34:07.681Z"
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.ebay.com/sch/i.html?_nkw=wireless+mouse&_sacat=0&_from=R40&_trksid=m570.l1313",
+            "timestamp": "2026-08-12T07:34:11.572Z"
+        }
+    ],
+    "saved_at": "2026-08-12T13:04:11.573494"
+}

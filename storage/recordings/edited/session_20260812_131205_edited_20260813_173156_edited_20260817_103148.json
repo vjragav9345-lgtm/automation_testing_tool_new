@@ -1,0 +1,75 @@
+{
+    "name": "session_20260812_131205_edited_20260813_173156_edited_20260817_103148",
+    "start_url": "https://www.amazon.com/",
+    "actions": [
+        {
+            "action_type": "click_MODIFIED",
+            "bounding_box": null,
+            "locator_profile": null,
+            "page_url": "https://www.amazon.com/s?k=HP+Z3700+Wireless+Optical+Mouse&crid=IYNF1PIWNLTO&sprefix=hp+z3700+wireless+optical+mouse%2Caps%2C326&ref=nb_sb_noss",
+            "timestamp": "2026-08-12T07:41:53.031Z",
+            "value": "click"
+        },
+        {
+            "action_type": "scroll",
+            "bounding_box": null,
+            "delta_x": 0,
+            "delta_y": -216,
+            "locator_profile": null,
+            "page_url": "https://www.amazon.com/s?k=HP+Z3700+Wireless+Optical+Mouse&crid=IYNF1PIWNLTO&sprefix=hp+z3700+wireless+optical+mouse%2Caps%2C326&ref=nb_sb_noss",
+            "timestamp": "2026-08-12T07:41:55.431Z",
+            "value": null
+        },
+        {
+            "action_type": "click",
+            "bounding_box": {
+                "height": 30,
+                "width": 69.45000457763672,
+                "x": 338.45001220703125,
+                "y": 128.60000610351562
+            },
+            "locator_profile": {
+                "attributes": {
+                    "type": "submit"
+                },
+                "css_path": "div#nav-flyout-iss-anchor > div:nth-of-type(2) > div > div:nth-of-type(3) > span > span > input",
+                "id": null,
+                "tag": "input",
+                "text": "",
+                "xpath": "/html[1]/body[1]/div[1]/header[1]/div[1]/div[2]/div[2]/div[1]/div[3]/span[1]/span[1]/input[1]"
+            },
+            "page_url": "https://www.amazon.com/s?k=HP+Z3700+Wireless+Optical+Mouse&crid=IYNF1PIWNLTO&sprefix=hp+z3700+wireless+optical+mouse%2Caps%2C326&ref=nb_sb_noss",
+            "timestamp": "2026-08-12T07:41:56.859Z",
+            "value": null
+        },
+        {
+            "action_type": "scroll",
+            "bounding_box": null,
+            "delta_x": 0,
+            "delta_y": 310,
+            "locator_profile": null,
+            "page_url": "https://www.amazon.com/s?k=HP+Z3700+Wireless+Optical+Mouse&crid=IYNF1PIWNLTO&sprefix=hp+z3700+wireless+optical+mouse%2Caps%2C326&ref=nb_sb_noss",
+            "timestamp": "2026-08-12T07:41:58.543Z",
+            "value": null
+        },
+        {
+            "action_type": "scroll",
+            "bounding_box": null,
+            "delta_x": 0,
+            "delta_y": -760,
+            "locator_profile": null,
+            "page_url": "https://www.amazon.com/s?k=HP+Z3700+Wireless+Optical+Mouse&crid=IYNF1PIWNLTO&sprefix=hp+z3700+wireless+optical+mouse%2Caps%2C326&ref=nb_sb_noss",
+            "timestamp": "2026-08-12T07:42:03.235Z",
+            "value": null
+        },
+        {
+            "action_type": "scroll",
+            "bounding_box": null,
+            "locator_profile": null,
+            "page_url": "https://www.amazon.com/s?k=HP+Z3700+Wireless+Optical+Mouse&crid=IYNF1PIWNLTO&sprefix=hp+z3700+wireless+optical+mouse%2Caps%2C326&ref=nb_sb_noss",
+            "timestamp": "2026-08-13T12:01:21.893Z",
+            "value": ""
+        }
+    ],
+    "saved_at": "2026-08-17T10:31:48.835577"
+}

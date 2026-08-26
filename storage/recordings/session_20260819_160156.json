@@ -1,0 +1,530 @@
+{
+    "name": "session_20260819_160156",
+    "session_id": "9f03186c6524451a987fe078b2d17cfa",
+    "start_url": "https://www.flipkart.com/",
+    "recorded_at": "2026-08-19T16:01:56.940611",
+    "stop_reason": "browser_closed",
+    "total_actions": 25,
+    "page_count": 3,
+    "actions": [
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "button",
+                "aria_label": null,
+                "accessible_name": "✕",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "body > div:nth-of-type(5) > div > span",
+                "xpath": "/html[1]/body[1]/div[5]/div[1]/span[1]",
+                "text": "✕",
+                "element_text": "✕",
+                "tag": "span",
+                "attributes": {
+                    "role": "button"
+                }
+            },
+            "bounding_box": {
+                "x": 988.8500366210938,
+                "y": 96,
+                "width": 26.149999618530273,
+                "height": 32
+            },
+            "page_url": "https://www.flipkart.com/",
+            "timestamp": "2026-08-19T10:30:47.157Z",
+            "page_id": 0,
+            "delay_before_ms": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": "q",
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Search for Products, Brands and More",
+                "placeholder": "Search for Products, Brands and More",
+                "title": "Search for Products, Brands and More",
+                "href": null,
+                "css_path": "div#container > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div:nth-of-type(2) > div > div > div > div > div > header > div > div > form > div > div > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/header[1]/div[1]/div[1]/form[1]/div[1]/div[1]/input[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "input",
+                "attributes": {
+                    "type": "text",
+                    "title": "Search for Products, Brands and More",
+                    "placeholder": "Search for Products, Brands and More",
+                    "name": "q"
+                }
+            },
+            "bounding_box": {
+                "x": 105.5999984741211,
+                "y": 78,
+                "width": 821.9625244140625,
+                "height": 40
+            },
+            "page_url": "https://www.flipkart.com/",
+            "timestamp": "2026-08-19T10:30:48.265Z",
+            "page_id": 0,
+            "delay_before_ms": 1108
+        },
+        {
+            "action_type": "fill",
+            "value": "samsung",
+            "locator_profile": {
+                "id": null,
+                "name": "q",
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Search for Products, Brands and More",
+                "placeholder": "Search for Products, Brands and More",
+                "title": "Search for Products, Brands and More",
+                "href": null,
+                "css_path": "div#container > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div:nth-of-type(2) > div > div > div > div > div > header > div > div > form > div > div > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/header[1]/div[1]/div[1]/form[1]/div[1]/div[1]/input[1]",
+                "text": "samsung",
+                "element_text": "samsung",
+                "tag": "input",
+                "attributes": {
+                    "type": "text",
+                    "title": "Search for Products, Brands and More",
+                    "placeholder": "Search for Products, Brands and More",
+                    "name": "q"
+                }
+            },
+            "bounding_box": {
+                "x": 105.5999984741211,
+                "y": 78,
+                "width": 821.9625244140625,
+                "height": 40
+            },
+            "page_url": "https://www.flipkart.com/",
+            "timestamp": "2026-08-19T10:30:52.706Z",
+            "page_id": 0,
+            "delay_before_ms": 4441
+        },
+        {
+            "action_type": "press",
+            "value": "Enter",
+            "locator_profile": {
+                "id": null,
+                "name": "q",
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Search for Products, Brands and More",
+                "placeholder": "Search for Products, Brands and More",
+                "title": "Search for Products, Brands and More",
+                "href": null,
+                "css_path": "div#container > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div:nth-of-type(2) > div > div > div > div > div > header > div > div > form > div > div > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/header[1]/div[1]/div[1]/form[1]/div[1]/div[1]/input[1]",
+                "text": "samsung",
+                "element_text": "samsung",
+                "tag": "input",
+                "attributes": {
+                    "type": "text",
+                    "title": "Search for Products, Brands and More",
+                    "placeholder": "Search for Products, Brands and More",
+                    "name": "q"
+                }
+            },
+            "bounding_box": {
+                "x": 105.5999984741211,
+                "y": 78,
+                "width": 821.9625244140625,
+                "height": 40
+            },
+            "page_url": "https://www.flipkart.com/",
+            "timestamp": "2026-08-19T10:30:52.706Z",
+            "page_id": 0,
+            "delay_before_ms": 0
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.flipkart.com/search?q=samsung&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off",
+            "timestamp": "2026-08-19T10:30:58.973Z",
+            "page_id": 0,
+            "delay_before_ms": 6267
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 2277,
+            "scroll_y_before": 0,
+            "scroll_y_after": 1822.4000244140625,
+            "viewport_height": 720,
+            "document_height": 9119,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.flipkart.com/search?q=samsung&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off",
+            "timestamp": "2026-08-19T10:30:59.463Z",
+            "page_id": 0,
+            "delay_before_ms": 490
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 932,
+            "scroll_y_before": 1822.4000244140625,
+            "scroll_y_after": 2568,
+            "viewport_height": 720,
+            "document_height": 9119,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.flipkart.com/search?q=samsung&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off",
+            "timestamp": "2026-08-19T10:31:01.579Z",
+            "page_id": 0,
+            "delay_before_ms": 2116
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Not deliverable\nAdd to Compare\nSamsung Galaxy S24 Exynos 5G (Amber Yellow, 128 G",
+                "placeholder": null,
+                "title": null,
+                "href": "/samsung-galaxy-s24-exynos-5g-amber-yellow-128-gb/p/itm62889e2615d7c?pid=MOBHYJ6QMSGJG28G&lid=LSTMOBHYJ6QMSGJG28GKEE5UE&marketplace=FLIPKART&q=samsung&store=search.flipkart.com&srno=s_1_10&otracker=search&otracker1=search&fm=organic&iid=a1a1edf4-6212-4b94-88de-53cf348ec500.MOBHYJ6QMSGJG28G.SEARCH&ppt=None&ppn=None&ssid=d6r5h0pjnk0000001787135454792&qH=fe546279a62683de&ov_redirect=true",
+                "css_path": "div#container > div > div:nth-of-type(3) > div > div:nth-of-type(2) > div:nth-of-type(11) > div > div > div > a",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[3]/div[1]/div[2]/div[11]/div[1]/div[1]/div[1]/a[1]",
+                "text": "Not deliverable\nAdd to Compare\nSamsung Galaxy S24 Exynos 5G (Amber Yellow, 128 G",
+                "element_text": "Not deliverable\nAdd to Compare\nSamsung Galaxy S24 Exynos 5G (Amber Yellow, 128 G",
+                "tag": "a",
+                "attributes": {
+                    "href": "/samsung-galaxy-s24-exynos-5g-amber-yellow-128-gb/p/itm62889e2615d7c?pid=MOBHYJ6QMSGJG28G&lid=LSTMOBHYJ6QMSGJG28GKEE5UE&marketplace=FLIPKART&q=samsung&store=search.flipkart.com&srno=s_1_10&otracker=search&otracker1=search&fm=organic&iid=a1a1edf4-6212-4b94-88de-53cf348ec500.MOBHYJ6QMSGJG28G.SEARCH&ppt=None&ppn=None&ssid=d6r5h0pjnk0000001787135454792&qH=fe546279a62683de&ov_redirect=true"
+                }
+            },
+            "bounding_box": {
+                "x": 312,
+                "y": 307.4750061035156,
+                "width": 943.2000122070312,
+                "height": 230.5749969482422
+            },
+            "page_url": "https://www.flipkart.com/search?q=samsung&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off",
+            "timestamp": "2026-08-19T10:31:02.115Z",
+            "page_id": 0,
+            "delay_before_ms": 536
+        },
+        {
+            "action_type": "tab_open",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.flipkart.com/samsung-galaxy-s24-exynos-5g-amber-yellow-128-gb/p/itm62889e2615d7c?pid=MOBHYJ6QMSGJG28G&lid=LSTMOBHYJ6QMSGJG28GKEE5UE&marketplace=FLIPKART&q=samsung&store=search.flipkart.com&srno=s_1_10&otracker=search&otracker1=search&fm=organic&iid=a1a1edf4-6212-4b94-88de-53cf348ec500.MOBHYJ6QMSGJG28G.SEARCH&ppt=None&ppn=None&ssid=d6r5h0pjnk0000001787135454792&qH=fe546279a62683de&ov_redirect=true",
+            "timestamp": "2026-08-19T10:31:06.021Z",
+            "new_tab": true,
+            "page_id": 1,
+            "from_page_id": 0,
+            "delay_before_ms": 3906
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 496,
+            "scroll_y_before": 0,
+            "scroll_y_after": 0,
+            "viewport_height": 720,
+            "document_height": 720,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.flipkart.com/samsung-galaxy-s24-exynos-5g-amber-yellow-128-gb/p/itm62889e2615d7c?pid=MOBHYJ6QMSGJG28G&lid=LSTMOBHYJ6QMSGJG28GKEE5UE&marketplace=FLIPKART&q=samsung&store=search.flipkart.com&srno=s_1_10&otracker=search&otracker1=search&fm=organic&iid=a1a1edf4-6212-4b94-88de-53cf348ec500.MOBHYJ6QMSGJG28G.SEARCH&ppt=None&ppn=None&ssid=d6r5h0pjnk0000001787135454792&qH=fe546279a62683de&ov_redirect=true",
+            "timestamp": "2026-08-19T10:31:07.114Z",
+            "page_id": 1,
+            "delay_before_ms": 1093
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 389,
+            "scroll_y_before": 0,
+            "scroll_y_after": 0,
+            "viewport_height": 720,
+            "document_height": 720,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.flipkart.com/samsung-galaxy-s24-exynos-5g-amber-yellow-128-gb/p/itm62889e2615d7c?pid=MOBHYJ6QMSGJG28G&lid=LSTMOBHYJ6QMSGJG28GKEE5UE&marketplace=FLIPKART&q=samsung&store=search.flipkart.com&srno=s_1_10&otracker=search&otracker1=search&fm=organic&iid=a1a1edf4-6212-4b94-88de-53cf348ec500.MOBHYJ6QMSGJG28G.SEARCH&ppt=None&ppn=None&ssid=d6r5h0pjnk0000001787135454792&qH=fe546279a62683de&ov_redirect=true",
+            "timestamp": "2026-08-19T10:31:08.028Z",
+            "page_id": 1,
+            "delay_before_ms": 914
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 2139,
+            "scroll_y_before": 0,
+            "scroll_y_after": 0,
+            "viewport_height": 720,
+            "document_height": 720,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.flipkart.com/samsung-galaxy-s24-exynos-5g-amber-yellow-128-gb/p/itm62889e2615d7c?pid=MOBHYJ6QMSGJG28G&lid=LSTMOBHYJ6QMSGJG28GKEE5UE&marketplace=FLIPKART&q=samsung&store=search.flipkart.com&srno=s_1_10&otracker=search&otracker1=search&fm=organic&iid=a1a1edf4-6212-4b94-88de-53cf348ec500.MOBHYJ6QMSGJG28G.SEARCH&ppt=None&ppn=None&ssid=d6r5h0pjnk0000001787135454792&qH=fe546279a62683de&ov_redirect=true",
+            "timestamp": "2026-08-19T10:31:10.728Z",
+            "page_id": 1,
+            "delay_before_ms": 2700
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#slot-list-container > div > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(2) > div > div:nth-of-type(20) > div > div > div > div > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div:nth-of-type(2)",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[20]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[2]",
+                "text": "",
+                "element_text": "",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 1016,
+                "y": 667.7999877929688,
+                "width": 208,
+                "height": 44
+            },
+            "page_url": "https://www.flipkart.com/samsung-galaxy-s24-exynos-5g-amber-yellow-128-gb/p/itm62889e2615d7c?pid=MOBHYJ6QMSGJG28G&lid=LSTMOBHYJ6QMSGJG28GKEE5UE&marketplace=FLIPKART&q=samsung&store=search.flipkart.com&srno=s_1_10&otracker=search&otracker1=search&fm=organic&iid=a1a1edf4-6212-4b94-88de-53cf348ec500.MOBHYJ6QMSGJG28G.SEARCH&ppt=None&ppn=None&ssid=d6r5h0pjnk0000001787135454792&qH=fe546279a62683de&ov_redirect=true",
+            "timestamp": "2026-08-19T10:31:11.529Z",
+            "page_id": 1,
+            "delay_before_ms": 801
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Cart",
+                "placeholder": null,
+                "title": "Cart",
+                "href": "/viewcart?marketplace=FLIPKART",
+                "css_path": "div#container > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > header > div:nth-of-type(3) > div:nth-of-type(4) > div > a",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/header[1]/div[3]/div[4]/div[1]/a[1]",
+                "text": "Cart",
+                "element_text": "Cart",
+                "tag": "a",
+                "attributes": {
+                    "href": "/viewcart?marketplace=FLIPKART",
+                    "title": "Cart"
+                }
+            },
+            "bounding_box": {
+                "x": 1155.612548828125,
+                "y": 20,
+                "width": 68.38750457763672,
+                "height": 24
+            },
+            "page_url": "https://www.flipkart.com/samsung-galaxy-s24-exynos-5g-amber-yellow-128-gb/p/itm62889e2615d7c?pid=MOBHYJ6QMSGJG28G&lid=LSTMOBHYJ6QMSGJG28GKEE5UE&marketplace=FLIPKART&q=samsung&store=search.flipkart.com&srno=s_1_10&otracker=search&otracker1=search&fm=organic&iid=a1a1edf4-6212-4b94-88de-53cf348ec500.MOBHYJ6QMSGJG28G.SEARCH&ppt=None&ppn=None&ssid=d6r5h0pjnk0000001787135454792&qH=fe546279a62683de&ov_redirect=true",
+            "timestamp": "2026-08-19T10:31:17.730Z",
+            "page_id": 1,
+            "delay_before_ms": 6201
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": -665,
+            "scroll_y_before": 0,
+            "scroll_y_after": 0,
+            "viewport_height": 720,
+            "document_height": 720,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.flipkart.com/viewcart?exploreMode=TRUE&preference=FLIPKART&pageUID=1787135477741",
+            "timestamp": "2026-08-19T10:31:21.694Z",
+            "page_id": 1,
+            "delay_before_ms": 3964
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.flipkart.com/viewcart?exploreMode=TRUE&preference=FLIPKART&pageUID=1787135477741",
+            "timestamp": "2026-08-19T10:31:22.370Z",
+            "page_id": 1,
+            "delay_before_ms": 676
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 1,
+            "page_url": "https://www.flipkart.com/viewcart?exploreMode=TRUE&preference=FLIPKART&pageUID=1787135477741",
+            "remaining_page_id": 0,
+            "timestamp": "2026-08-19T10:31:26.655Z",
+            "delay_before_ms": 4285
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 4295,
+            "scroll_y_before": 2568,
+            "scroll_y_after": 6004,
+            "viewport_height": 720,
+            "document_height": 9119,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.flipkart.com/search?q=samsung&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off",
+            "timestamp": "2026-08-19T10:31:30.327Z",
+            "page_id": 0,
+            "delay_before_ms": 3672
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Add to Compare\nSamsung Galaxy Fit3\n4.427,826 Ratings & 2,178 Reviews\nTouchscreen",
+                "placeholder": null,
+                "title": null,
+                "href": "/samsung-galaxy-fit3/p/itm8640ae60ee8da?pid=SMWGY6YRFDZ39HGV&lid=LSTSMWGY6YRFDZ39HGVW2PTWH&marketplace=FLIPKART&q=samsung&store=search.flipkart.com&srno=s_1_22&otracker=search&otracker1=search&fm=organic&iid=a1a1edf4-6212-4b94-88de-53cf348ec500.SMWGY6YRFDZ39HGV.SEARCH&ppt=None&ppn=None&ssid=d6r5h0pjnk0000001787135454792&qH=fe546279a62683de&ov_redirect=true",
+                "css_path": "div#container > div > div:nth-of-type(3) > div > div:nth-of-type(2) > div:nth-of-type(23) > div > div > div > a",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[3]/div[1]/div[2]/div[23]/div[1]/div[1]/div[1]/a[1]",
+                "text": "Add to Compare\nSamsung Galaxy Fit3\n4.427,826 Ratings & 2,178 Reviews\nTouchscreen",
+                "element_text": "Add to Compare\nSamsung Galaxy Fit3\n4.427,826 Ratings & 2,178 Reviews\nTouchscreen",
+                "tag": "a",
+                "attributes": {
+                    "href": "/samsung-galaxy-fit3/p/itm8640ae60ee8da?pid=SMWGY6YRFDZ39HGV&lid=LSTSMWGY6YRFDZ39HGVW2PTWH&marketplace=FLIPKART&q=samsung&store=search.flipkart.com&srno=s_1_22&otracker=search&otracker1=search&fm=organic&iid=a1a1edf4-6212-4b94-88de-53cf348ec500.SMWGY6YRFDZ39HGV.SEARCH&ppt=None&ppn=None&ssid=d6r5h0pjnk0000001787135454792&qH=fe546279a62683de&ov_redirect=true"
+                }
+            },
+            "bounding_box": {
+                "x": 312,
+                "y": 435.625,
+                "width": 943.2000122070312,
+                "height": 230.5749969482422
+            },
+            "page_url": "https://www.flipkart.com/search?q=samsung&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off",
+            "timestamp": "2026-08-19T10:31:31.722Z",
+            "page_id": 0,
+            "delay_before_ms": 1395
+        },
+        {
+            "action_type": "tab_open",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.flipkart.com/samsung-galaxy-fit3/p/itm8640ae60ee8da?pid=SMWGY6YRFDZ39HGV&lid=LSTSMWGY6YRFDZ39HGVW2PTWH&marketplace=FLIPKART&q=samsung&store=search.flipkart.com&srno=s_1_22&otracker=search&otracker1=search&fm=organic&iid=a1a1edf4-6212-4b94-88de-53cf348ec500.SMWGY6YRFDZ39HGV.SEARCH&ppt=None&ppn=None&ssid=d6r5h0pjnk0000001787135454792&qH=fe546279a62683de&ov_redirect=true",
+            "timestamp": "2026-08-19T10:31:35.395Z",
+            "new_tab": true,
+            "page_id": 2,
+            "from_page_id": 0,
+            "delay_before_ms": 3673
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": -1141,
+            "scroll_y_before": 0,
+            "scroll_y_after": 0,
+            "viewport_height": 720,
+            "document_height": 720,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.flipkart.com/samsung-galaxy-fit3/p/itm8640ae60ee8da?pid=SMWGY6YRFDZ39HGV&lid=LSTSMWGY6YRFDZ39HGVW2PTWH&marketplace=FLIPKART&q=samsung&store=search.flipkart.com&srno=s_1_22&otracker=search&otracker1=search&fm=organic&iid=a1a1edf4-6212-4b94-88de-53cf348ec500.SMWGY6YRFDZ39HGV.SEARCH&ppt=None&ppn=None&ssid=d6r5h0pjnk0000001787135454792&qH=fe546279a62683de&ov_redirect=true",
+            "timestamp": "2026-08-19T10:31:42.996Z",
+            "page_id": 2,
+            "delay_before_ms": 7601
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Cart",
+                "placeholder": null,
+                "title": "Cart",
+                "href": "/viewcart?marketplace=FLIPKART",
+                "css_path": "div#container > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > header > div:nth-of-type(3) > div:nth-of-type(4) > div > a",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/header[1]/div[3]/div[4]/div[1]/a[1]",
+                "text": "Cart",
+                "element_text": "Cart",
+                "tag": "a",
+                "attributes": {
+                    "href": "/viewcart?marketplace=FLIPKART",
+                    "title": "Cart"
+                }
+            },
+            "bounding_box": {
+                "x": 1155.612548828125,
+                "y": 20,
+                "width": 68.38750457763672,
+                "height": 24
+            },
+            "page_url": "https://www.flipkart.com/samsung-galaxy-fit3/p/itm8640ae60ee8da?pid=SMWGY6YRFDZ39HGV&lid=LSTSMWGY6YRFDZ39HGVW2PTWH&marketplace=FLIPKART&q=samsung&store=search.flipkart.com&srno=s_1_22&otracker=search&otracker1=search&fm=organic&iid=a1a1edf4-6212-4b94-88de-53cf348ec500.SMWGY6YRFDZ39HGV.SEARCH&ppt=None&ppn=None&ssid=d6r5h0pjnk0000001787135454792&qH=fe546279a62683de&ov_redirect=true",
+            "timestamp": "2026-08-19T10:31:44.688Z",
+            "page_id": 2,
+            "delay_before_ms": 1692
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 2,
+            "page_url": "https://www.flipkart.com/samsung-galaxy-fit3/p/itm8640ae60ee8da?pid=SMWGY6YRFDZ39HGV&lid=LSTSMWGY6YRFDZ39HGVW2PTWH&marketplace=FLIPKART&q=samsung&store=search.flipkart.com&srno=s_1_22&otracker=search&otracker1=search&fm=organic&iid=a1a1edf4-6212-4b94-88de-53cf348ec500.SMWGY6YRFDZ39HGV.SEARCH&ppt=None&ppn=None&ssid=d6r5h0pjnk0000001787135454792&qH=fe546279a62683de&ov_redirect=true",
+            "remaining_page_id": 0,
+            "timestamp": "2026-08-19T10:31:52.315Z",
+            "delay_before_ms": 7627
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": -7125,
+            "scroll_y_before": 6004,
+            "scroll_y_after": 304,
+            "viewport_height": 720,
+            "document_height": 9119,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.flipkart.com/search?q=samsung&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off",
+            "timestamp": "2026-08-19T10:31:54.926Z",
+            "page_id": 0,
+            "delay_before_ms": 2611
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 0,
+            "page_url": "https://www.flipkart.com/search?q=samsung&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off",
+            "remaining_page_id": null,
+            "timestamp": "2026-08-19T10:31:56.940Z",
+            "delay_before_ms": 2014
+        }
+    ],
+    "saved_at": "2026-08-19T16:01:56.940611"
+}

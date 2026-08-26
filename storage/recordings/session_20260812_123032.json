@@ -1,0 +1,91 @@
+{
+    "name": "session_20260812_123032",
+    "session_id": "0dda13d1baa44b33873999513db434d8",
+    "start_url": "https://www.amazon.com/s?k=HP+Z3700+Wireless+Optical+Mouse&crid=1FZ2R20QM37US&sprefix=hp+z3700+wireless+optical+mouse%2Caps%2C408&ref=nb_sb_noss",
+    "recorded_at": "2026-08-12T12:30:32.740652",
+    "stop_reason": "browser_closed",
+    "total_actions": 5,
+    "actions": [
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "css_path": "span#a-autoid-1 > span > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/span[1]/div[1]/div[2]/div[1]/div[1]/span[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[3]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[2]/div[1]/form[1]/div[1]/div[1]/span[1]/div[1]/div[1]/span[1]/span[1]/input[1]",
+                "text": "",
+                "tag": "input",
+                "attributes": {
+                    "name": "submit.addToCart",
+                    "aria-label": "Add to cart",
+                    "type": "submit"
+                }
+            },
+            "bounding_box": {
+                "x": 518,
+                "y": 376.3999938964844,
+                "width": 240.8000030517578,
+                "height": 30
+            },
+            "page_url": "https://www.amazon.com/s?k=HP+Z3700+Wireless+Optical+Mouse&crid=1FZ2R20QM37US&sprefix=hp+z3700+wireless+optical+mouse%2Caps%2C408&ref=nb_sb_noss",
+            "timestamp": "2026-08-12T07:00:15.375Z"
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "css_path": "div#nav-cart-count-container > span:nth-of-type(2)",
+                "xpath": "/html[1]/body[1]/div[1]/header[1]/div[1]/div[1]/div[3]/div[1]/a[2]/div[1]/span[2]",
+                "text": "",
+                "tag": "span",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 1047,
+                "y": 17,
+                "width": 38,
+                "height": 26
+            },
+            "page_url": "https://www.amazon.com/s?k=HP+Z3700+Wireless+Optical+Mouse&crid=1FZ2R20QM37US&sprefix=hp+z3700+wireless+optical+mouse%2Caps%2C408&ref=nb_sb_noss",
+            "timestamp": "2026-08-12T07:00:19.124Z"
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "css_path": "div#sc-active-701a4c41-3d4d-468b-8d5d-11db879ad8bc > div:nth-of-type(4) > div > div:nth-of-type(2) > div > span > span > fieldset > div:nth-of-type(2) > div > button > span",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[3]/div[4]/div[1]/div[2]/div[1]/div[1]/form[1]/ul[1]/div[3]/div[4]/div[1]/div[2]/div[1]/span[1]/span[1]/fieldset[1]/div[2]/div[1]/button[1]/span[1]",
+                "text": "",
+                "tag": "span",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 258.3999938964844,
+                "y": 349.6000061035156,
+                "width": 16,
+                "height": 16
+            },
+            "page_url": "https://www.amazon.com/gp/cart/view.html?ref_=nav_cart",
+            "timestamp": "2026-08-12T07:00:22.798Z"
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.amazon.com/gp/cart/view.html?ref_=nav_cart",
+            "timestamp": "2026-08-12T07:00:24.495Z"
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.amazon.com/s?k=HP+Z3700+Wireless+Optical+Mouse&crid=1FZ2R20QM37US&sprefix=hp+z3700+wireless+optical+mouse%2Caps%2C408&ref=nb_sb_noss",
+            "timestamp": "2026-08-12T07:00:32.719Z"
+        }
+    ],
+    "saved_at": "2026-08-12T12:30:32.740652"
+}

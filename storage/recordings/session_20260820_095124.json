@@ -1,0 +1,481 @@
+{
+    "name": "session_20260820_095124",
+    "session_id": "be707511717a466f979c5509e7cc1e3c",
+    "start_url": "https://www.myntra.com/",
+    "recorded_at": "2026-08-20T09:51:24.509129",
+    "stop_reason": "browser_closed",
+    "total_actions": 22,
+    "page_count": 3,
+    "actions": [
+        {
+            "action_type": "fill",
+            "value": "shoes",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Search for products, brands and more",
+                "placeholder": "Search for products, brands and more",
+                "title": null,
+                "href": null,
+                "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > div:nth-of-type(3) > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/header[1]/div[2]/div[3]/input[1]",
+                "text": "shoes",
+                "element_text": "shoes",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Search for products, brands and more"
+                }
+            },
+            "bounding_box": {
+                "x": 731.2000122070312,
+                "y": 20,
+                "width": 324.8000183105469,
+                "height": 39.60000228881836
+            },
+            "page_url": "https://www.myntra.com/",
+            "timestamp": "2026-08-20T04:20:19.563Z",
+            "page_id": 0,
+            "delay_before_ms": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Shoes For Men",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > div:nth-of-type(3) > div > ul > li:nth-of-type(2)",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/header[1]/div[2]/div[3]/div[1]/ul[1]/li[2]",
+                "text": "Shoes For Men",
+                "element_text": "Shoes For Men",
+                "tag": "li",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 691.2000122070312,
+                "y": 90,
+                "width": 375,
+                "height": 30
+            },
+            "page_url": "https://www.myntra.com/",
+            "timestamp": "2026-08-20T04:20:19.762Z",
+            "page_id": 0,
+            "delay_before_ms": 199
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/shoes-for-men?extra_search_param=isautosuggestentry%3atrue%3a%3aid%3a2297-shoes-for-men&rawQuery=Shoes%20For%20Men",
+            "timestamp": "2026-08-20T04:20:25.255Z",
+            "page_id": 0,
+            "delay_before_ms": 5493
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 4811,
+            "scroll_y_before": 0,
+            "scroll_y_after": 3848.800048828125,
+            "viewport_height": 720,
+            "document_height": 6355,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/shoes-for-men?extra_search_param=isautosuggestentry%3atrue%3a%3aid%3a2297-shoes-for-men&rawQuery=Shoes%20For%20Men",
+            "timestamp": "2026-08-20T04:20:25.792Z",
+            "page_id": 0,
+            "delay_before_ms": 537
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "ZENG\nSizes: UK9\nRs. 1699",
+                "placeholder": null,
+                "title": null,
+                "href": "sports-shoes/zeng/zeng-men-mesh-running-shoes/45293951/buy",
+                "css_path": "li#45293951 > a",
+                "xpath": "/html[1]/body[1]/div[2]/div[1]/main[1]/div[3]/div[2]/div[1]/div[2]/section[1]/ul[1]/li[43]/a[1]",
+                "text": "ZENG\nSizes: UK9\nRs. 1699",
+                "element_text": "ZENG\nSizes: UK9\nRs. 1699",
+                "tag": "a",
+                "attributes": {
+                    "href": "sports-shoes/zeng/zeng-men-mesh-running-shoes/45293951/buy"
+                }
+            },
+            "bounding_box": {
+                "x": 777.4500122070312,
+                "y": 357.8000183105469,
+                "width": 210,
+                "height": 359
+            },
+            "page_url": "https://www.myntra.com/shoes-for-men?extra_search_param=isautosuggestentry%3atrue%3a%3aid%3a2297-shoes-for-men&rawQuery=Shoes%20For%20Men",
+            "timestamp": "2026-08-20T04:20:26.774Z",
+            "page_id": 0,
+            "delay_before_ms": 982
+        },
+        {
+            "action_type": "tab_open",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/sports-shoes/zeng/zeng-men-mesh-running-shoes/45293951/buy",
+            "timestamp": "2026-08-20T04:20:29.829Z",
+            "new_tab": true,
+            "page_id": 1,
+            "from_page_id": 0,
+            "delay_before_ms": 3055
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "8",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#sizeButtonsContainer > div:nth-of-type(2) > div:nth-of-type(3) > div > button",
+                "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/main[1]/div[2]/div[2]/div[2]/div[1]/div[2]/div[3]/div[1]/button[1]",
+                "text": "8",
+                "element_text": "8",
+                "tag": "button",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 878.1749877929688,
+                "y": 355.8000183105469,
+                "width": 50,
+                "height": 50
+            },
+            "page_url": "https://www.myntra.com/sports-shoes/zeng/zeng-men-mesh-running-shoes/45293951/buy",
+            "timestamp": "2026-08-20T04:20:30.961Z",
+            "page_id": 1,
+            "delay_before_ms": 1132
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "ADD TO BAG",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#mountRoot > div > div > main > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2) > div > div",
+                "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/main[1]/div[2]/div[2]/div[2]/div[2]/div[1]/div[1]",
+                "text": "ADD TO BAG",
+                "element_text": "ADD TO BAG",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 758.1749877929688,
+                "y": 439.8000183105469,
+                "width": 232.8874969482422,
+                "height": 53.60000228881836
+            },
+            "page_url": "https://www.myntra.com/sports-shoes/zeng/zeng-men-mesh-running-shoes/45293951/buy",
+            "timestamp": "2026-08-20T04:20:32.784Z",
+            "page_id": 1,
+            "delay_before_ms": 1823
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 5845,
+            "scroll_y_before": 0,
+            "scroll_y_after": 4676,
+            "viewport_height": 720,
+            "document_height": 6616,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/sports-shoes/zeng/zeng-men-mesh-running-shoes/45293951/buy",
+            "timestamp": "2026-08-20T04:20:37.376Z",
+            "page_id": 1,
+            "delay_before_ms": 4592
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Sparx\n\nSM 1145\n\nRs. 1549",
+                "placeholder": null,
+                "title": null,
+                "href": "/sports-shoes/sparx/sparx-men-mesh-running-shoes/45350683/buy",
+                "css_path": "div#mountRoot > div > div > main > div:nth-of-type(2) > div:nth-of-type(3) > div > ul > li:nth-of-type(34) > a",
+                "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/main[1]/div[2]/div[3]/div[1]/ul[1]/li[34]/a[1]",
+                "text": "Sparx\n\nSM 1145\n\nRs. 1549",
+                "element_text": "Sparx\n\nSM 1145\n\nRs. 1549",
+                "tag": "a",
+                "attributes": {
+                    "href": "/sports-shoes/sparx/sparx-men-mesh-running-shoes/45350683/buy"
+                }
+            },
+            "bounding_box": {
+                "x": 775.9125366210938,
+                "y": 217.0500030517578,
+                "width": 208.6374969482422,
+                "height": 356.1750183105469
+            },
+            "page_url": "https://www.myntra.com/sports-shoes/zeng/zeng-men-mesh-running-shoes/45293951/buy",
+            "timestamp": "2026-08-20T04:20:38.065Z",
+            "page_id": 1,
+            "delay_before_ms": 689
+        },
+        {
+            "action_type": "tab_open",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/sports-shoes/sparx/sparx-men-mesh-running-shoes/45350683/buy",
+            "timestamp": "2026-08-20T04:20:41.323Z",
+            "new_tab": true,
+            "page_id": 2,
+            "from_page_id": 1,
+            "delay_before_ms": 3258
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "8",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#sizeButtonsContainer > div:nth-of-type(2) > div:nth-of-type(3) > div > button",
+                "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/main[1]/div[2]/div[2]/div[2]/div[2]/div[2]/div[3]/div[1]/button[1]",
+                "text": "8",
+                "element_text": "8",
+                "tag": "button",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 878.1749877929688,
+                "y": 479.6499938964844,
+                "width": 50,
+                "height": 50
+            },
+            "page_url": "https://www.myntra.com/sports-shoes/sparx/sparx-men-mesh-running-shoes/45350683/buy",
+            "timestamp": "2026-08-20T04:20:41.454Z",
+            "page_id": 2,
+            "delay_before_ms": 131
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "ADD TO BAG",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#mountRoot > div > div > main > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > div",
+                "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/main[1]/div[2]/div[2]/div[2]/div[3]/div[1]/div[1]",
+                "text": "ADD TO BAG",
+                "element_text": "ADD TO BAG",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 758.1749877929688,
+                "y": 563.6500244140625,
+                "width": 232.8874969482422,
+                "height": 53.60000228881836
+            },
+            "page_url": "https://www.myntra.com/sports-shoes/sparx/sparx-men-mesh-running-shoes/45350683/buy",
+            "timestamp": "2026-08-20T04:20:42.902Z",
+            "page_id": 2,
+            "delay_before_ms": 1448
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": -124,
+            "scroll_y_before": 0,
+            "scroll_y_after": 0,
+            "viewport_height": 720,
+            "document_height": 6950,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/sports-shoes/sparx/sparx-men-mesh-running-shoes/45350683/buy",
+            "timestamp": "2026-08-20T04:20:50.017Z",
+            "page_id": 2,
+            "delay_before_ms": 7115
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 1,
+            "page_url": "https://www.myntra.com/sports-shoes/zeng/zeng-men-mesh-running-shoes/45293951/buy",
+            "remaining_page_id": 2,
+            "timestamp": "2026-08-20T04:20:53.777Z",
+            "delay_before_ms": 3760
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 2,
+            "page_url": "https://www.myntra.com/sports-shoes/sparx/sparx-men-mesh-running-shoes/45350683/buy",
+            "remaining_page_id": 0,
+            "timestamp": "2026-08-20T04:20:54.806Z",
+            "delay_before_ms": 1029
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": -5772,
+            "scroll_y_before": 3848.800048828125,
+            "scroll_y_after": 0,
+            "viewport_height": 720,
+            "document_height": 6355,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/shoes-for-men?extra_search_param=isautosuggestentry%3atrue%3a%3aid%3a2297-shoes-for-men&rawQuery=Shoes%20For%20Men",
+            "timestamp": "2026-08-20T04:20:58.258Z",
+            "page_id": 0,
+            "delay_before_ms": 3452
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#cartItemsList > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(3) > svg",
+                "xpath": "/html[1]/body[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[3]/svg[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "svg",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 717.4000244140625,
+                "y": 284.9375,
+                "width": 14,
+                "height": 14
+            },
+            "page_url": "https://www.myntra.com/checkout/cart",
+            "timestamp": "2026-08-20T04:21:04.175Z",
+            "page_id": 0,
+            "delay_before_ms": 5917
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "REMOVE",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#cartItemsList > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(4) > div > div > div:nth-of-type(2) > div",
+                "xpath": "/html[1]/body[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[4]/div[1]/div[1]/div[2]/div[1]",
+                "text": "REMOVE",
+                "element_text": "REMOVE",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 468.3999938964844,
+                "y": 343.20001220703125,
+                "width": 162.8000030517578,
+                "height": 20
+            },
+            "page_url": "https://www.myntra.com/checkout/cart#modal",
+            "timestamp": "2026-08-20T04:21:07.609Z",
+            "page_id": 0,
+            "delay_before_ms": 3434
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 396,
+            "scroll_y_before": 0,
+            "scroll_y_after": 220.8000030517578,
+            "viewport_height": 720,
+            "document_height": 6355,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/shoes-for-men?extra_search_param=isautosuggestentry%3atrue%3a%3aid%3a2297-shoes-for-men&rawQuery=Shoes%20For%20Men",
+            "timestamp": "2026-08-20T04:21:20.442Z",
+            "page_id": 0,
+            "delay_before_ms": 12833
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": -304,
+            "scroll_y_before": 220.8000030517578,
+            "scroll_y_after": 74.4000015258789,
+            "viewport_height": 720,
+            "document_height": 6355,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/shoes-for-men?extra_search_param=isautosuggestentry%3atrue%3a%3aid%3a2297-shoes-for-men&rawQuery=Shoes%20For%20Men",
+            "timestamp": "2026-08-20T04:21:22.244Z",
+            "page_id": 0,
+            "delay_before_ms": 1802
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 0,
+            "page_url": "https://www.myntra.com/shoes-for-men?extra_search_param=isautosuggestentry%3atrue%3a%3aid%3a2297-shoes-for-men&rawQuery=Shoes%20For%20Men",
+            "remaining_page_id": null,
+            "timestamp": "2026-08-20T04:21:24.509Z",
+            "delay_before_ms": 2265
+        }
+    ],
+    "saved_at": "2026-08-20T09:51:24.509129"
+}

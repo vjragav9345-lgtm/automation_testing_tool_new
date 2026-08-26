@@ -1,0 +1,28 @@
+{
+  "name": "session_20260812_092636",
+  "start_url": "https://www.amazon.com/s?k=mouse&crid=2ICI5KFZZIZ9C&sprefix=mouse%2Caps%2C335&ref=nb_sb_noss_1",
+  "recorded_at": "2026-08-12T09:26:36.005757",
+  "actions": [
+    {
+      "action_type": "click",
+      "value": null,
+      "locator_profile": {
+        "id": null,
+        "css_path": "div#2b3548bb-0343-43c5-a290-7415ac9ba857 > div > div > span > div > div > div > div > div > div:nth-of-type(2) > div > span > a > div > img",
+        "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/span[1]/div[1]/div[8]/div[1]/div[1]/span[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/span[1]/a[1]/div[1]/img[1]",
+        "text": "",
+        "tag": "img",
+        "attributes": {}
+      },
+      "bounding_box": {
+        "x": 308,
+        "y": -44.79999923706055,
+        "width": 152,
+        "height": 218
+      },
+      "page_url": "https://www.amazon.com/s?k=mouse&crid=2ICI5KFZZIZ9C&sprefix=mouse%2Caps%2C335&ref=nb_sb_noss_1",
+      "timestamp": "2026-08-12T03:56:35.542Z"
+    }
+  ],
+  "saved_at": "2026-08-12T09:26:36.005757"
+}

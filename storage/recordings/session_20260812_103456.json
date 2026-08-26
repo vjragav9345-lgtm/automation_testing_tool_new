@@ -1,0 +1,226 @@
+{
+    "name": "session_20260812_103456",
+    "session_id": "f992b991a2e14eff994a390cb84b4716",
+    "start_url": "https://the-internet.herokuapp.com/login",
+    "recorded_at": "2026-08-12T10:34:56.652788",
+    "stop_reason": "terminal_enter",
+    "total_actions": 11,
+    "actions": [
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#username",
+                "css_path": "input#username",
+                "xpath": "//*[@id='username']",
+                "text": "",
+                "tag": "input",
+                "attributes": {
+                    "type": "text",
+                    "name": "username"
+                }
+            },
+            "bounding_box": {
+                "x": 155,
+                "y": 234.4250030517578,
+                "width": 470,
+                "height": 32.375
+            },
+            "page_url": "https://the-internet.herokuapp.com/login",
+            "timestamp": "2026-08-12T05:04:51.139Z"
+        },
+        {
+            "action_type": "fill",
+            "value": "tomsmith",
+            "locator_profile": {
+                "id": "#username",
+                "css_path": "input#username",
+                "xpath": "//*[@id='username']",
+                "text": "tomsmith",
+                "tag": "input",
+                "attributes": {
+                    "type": "text",
+                    "name": "username"
+                }
+            },
+            "bounding_box": {
+                "x": 155,
+                "y": 234.4250030517578,
+                "width": 470,
+                "height": 32.375
+            },
+            "page_url": "https://the-internet.herokuapp.com/login",
+            "timestamp": "2026-08-12T05:04:51.225Z"
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#password",
+                "css_path": "input#password",
+                "xpath": "//*[@id='password']",
+                "text": "",
+                "tag": "input",
+                "attributes": {
+                    "type": "password",
+                    "name": "password"
+                }
+            },
+            "bounding_box": {
+                "x": 155,
+                "y": 297.4250183105469,
+                "width": 470,
+                "height": 32.375
+            },
+            "page_url": "https://the-internet.herokuapp.com/login",
+            "timestamp": "2026-08-12T05:04:51.232Z"
+        },
+        {
+            "action_type": "press",
+            "value": "Enter",
+            "locator_profile": {
+                "id": "#password",
+                "css_path": "input#password",
+                "xpath": "//*[@id='password']",
+                "text": "SuperSecretPassword!",
+                "tag": "input",
+                "attributes": {
+                    "type": "password",
+                    "name": "password"
+                }
+            },
+            "bounding_box": {
+                "x": 155,
+                "y": 297.4250183105469,
+                "width": 470,
+                "height": 32.375
+            },
+            "page_url": "https://the-internet.herokuapp.com/login",
+            "timestamp": "2026-08-12T05:04:51.275Z"
+        },
+        {
+            "action_type": "fill",
+            "value": "SuperSecretPassword!",
+            "locator_profile": {
+                "id": "#password",
+                "css_path": "input#password",
+                "xpath": "//*[@id='password']",
+                "text": "SuperSecretPassword!",
+                "tag": "input",
+                "attributes": {
+                    "type": "password",
+                    "name": "password"
+                }
+            },
+            "bounding_box": {
+                "x": 155,
+                "y": 297.4250183105469,
+                "width": 470,
+                "height": 32.375
+            },
+            "page_url": "https://the-internet.herokuapp.com/login",
+            "timestamp": "2026-08-12T05:04:51.275Z"
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "css_path": "form#login > button",
+                "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/form[1]/button[1]",
+                "text": "Login",
+                "tag": "button",
+                "attributes": {
+                    "type": "submit"
+                }
+            },
+            "bounding_box": {
+                "x": 155,
+                "y": 343.8000183105469,
+                "width": 161.47500610351562,
+                "height": 58.60000228881836
+            },
+            "page_url": "https://the-internet.herokuapp.com/login",
+            "timestamp": "2026-08-12T05:04:51.276Z"
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 500,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://the-internet.herokuapp.com/secure",
+            "timestamp": "2026-08-12T05:04:53.745Z"
+        },
+        {
+            "action_type": "dblclick",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "css_path": "div#content > div > h2",
+                "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/h2[1]",
+                "text": "Secure Area",
+                "tag": "h2",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 155,
+                "y": 92.625,
+                "width": 970,
+                "height": 51.79999923706055
+            },
+            "page_url": "https://the-internet.herokuapp.com/secure",
+            "timestamp": "2026-08-12T05:04:53.894Z"
+        },
+        {
+            "action_type": "right_click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "css_path": "div#content > div > a > i",
+                "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/a[1]/i[1]",
+                "text": "Logout",
+                "tag": "i",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 179.8000030517578,
+                "y": 220.4250030517578,
+                "width": 54.20000076293945,
+                "height": 17.600000381469727
+            },
+            "page_url": "https://the-internet.herokuapp.com/secure",
+            "timestamp": "2026-08-12T05:04:54.251Z"
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://the-internet.herokuapp.com/dropdown",
+            "timestamp": "2026-08-12T05:04:56.538Z"
+        },
+        {
+            "action_type": "select",
+            "value": "2",
+            "locator_profile": {
+                "id": "#dropdown",
+                "css_path": "select#dropdown",
+                "xpath": "//*[@id='dropdown']",
+                "text": "Please select an option\nOption 1\nOption 2",
+                "tag": "select",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 155,
+                "y": 88.70000457763672,
+                "width": 970,
+                "height": 20.80000114440918
+            },
+            "page_url": "https://the-internet.herokuapp.com/dropdown",
+            "timestamp": "2026-08-12T05:04:56.639Z"
+        }
+    ],
+    "saved_at": "2026-08-12T10:34:56.652788"
+}

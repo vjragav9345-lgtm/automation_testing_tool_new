@@ -1,0 +1,1017 @@
+{
+    "name": "session_20260825_105951",
+    "session_id": "dabc65c6bde5427c88d344baeeddfd3c",
+    "start_url": "https://sportzia-preprod.kovaionplay.com/login",
+    "recorded_at": "2026-08-25T10:59:51.785279",
+    "stop_reason": "browser_closed",
+    "total_actions": 34,
+    "page_count": 1,
+    "actions": [
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Enter your email or phone number",
+                "placeholder": "Enter your email or phone number",
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(3) > div > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[3]/div[1]/input[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Enter your email or phone number",
+                    "type": "email"
+                }
+            },
+            "bounding_box": {
+                "x": 442.8000183105469,
+                "y": 346.8000183105469,
+                "width": 426.3999938964844,
+                "height": 43.20000076293945
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/login",
+            "timestamp": "2026-08-25T05:29:01.074Z",
+            "page_id": 0,
+            "delay_before_ms": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Sign in",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(4) > div",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[4]/div[1]",
+                "text": "Sign in",
+                "element_text": "Sign in",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 613.9874877929688,
+                "y": 425.8000183105469,
+                "width": 52.025001525878906,
+                "height": 19.200000762939453
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/login",
+            "timestamp": "2026-08-25T05:29:03.238Z",
+            "page_id": 0,
+            "delay_before_ms": 2164
+        },
+        {
+            "action_type": "fill",
+            "value": "1",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "1",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(3) > div:nth-of-type(2) > div > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[3]/div[2]/div[1]/input[1]",
+                "text": "1",
+                "element_text": "1",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": ""
+                }
+            },
+            "bounding_box": {
+                "x": 410.8000183105469,
+                "y": 389,
+                "width": 105.9000015258789,
+                "height": 48.400001525878906
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/otp?userId=8807836261&loginType=phoneNumber",
+            "timestamp": "2026-08-25T05:29:05.952Z",
+            "page_id": 0,
+            "delay_before_ms": 2714
+        },
+        {
+            "action_type": "fill",
+            "value": "2",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "2",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(2) > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[3]/div[2]/div[2]/input[1]",
+                "text": "2",
+                "element_text": "2",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": ""
+                }
+            },
+            "bounding_box": {
+                "x": 528.2999877929688,
+                "y": 389,
+                "width": 105.9000015258789,
+                "height": 48.400001525878906
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/otp?userId=8807836261&loginType=phoneNumber",
+            "timestamp": "2026-08-25T05:29:06.208Z",
+            "page_id": 0,
+            "delay_before_ms": 256
+        },
+        {
+            "action_type": "fill",
+            "value": "3",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "3",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(3) > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[3]/div[2]/div[3]/input[1]",
+                "text": "3",
+                "element_text": "3",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": ""
+                }
+            },
+            "bounding_box": {
+                "x": 645.7999877929688,
+                "y": 389,
+                "width": 105.9000015258789,
+                "height": 48.400001525878906
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/otp?userId=8807836261&loginType=phoneNumber",
+            "timestamp": "2026-08-25T05:29:06.491Z",
+            "page_id": 0,
+            "delay_before_ms": 283
+        },
+        {
+            "action_type": "fill",
+            "value": "4",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "4",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(4) > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[3]/div[2]/div[4]/input[1]",
+                "text": "4",
+                "element_text": "4",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": ""
+                }
+            },
+            "bounding_box": {
+                "x": 763.2999877929688,
+                "y": 389,
+                "width": 105.9000015258789,
+                "height": 48.400001525878906
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/otp?userId=8807836261&loginType=phoneNumber",
+            "timestamp": "2026-08-25T05:29:08.045Z",
+            "page_id": 0,
+            "delay_before_ms": 1554
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Verify",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(4)",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[4]",
+                "text": "Verify",
+                "element_text": "Verify",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 410,
+                "y": 458.20001220703125,
+                "width": 460,
+                "height": 49.20000076293945
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/otp?userId=8807836261&loginType=phoneNumber",
+            "timestamp": "2026-08-25T05:29:08.262Z",
+            "page_id": 0,
+            "delay_before_ms": 217
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Events",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2)",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[2]/div[2]",
+                "text": "Events",
+                "element_text": "Events",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 885.2125244140625,
+                "y": 44.5,
+                "width": 38.61249923706055,
+                "height": 15.199999809265137
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/feed",
+            "timestamp": "2026-08-25T05:29:11.507Z",
+            "page_id": 0,
+            "delay_before_ms": 3245
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Register Now",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div:nth-of-type(2) > div > div:nth-of-type(2) > div > div > div > div > div:nth-of-type(2) > div > div:nth-of-type(2) > div:nth-of-type(3) > div > div",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[3]/div[1]/div[1]",
+                "text": "Register Now",
+                "element_text": "Register Now",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 603,
+                "y": 380.8500061035156,
+                "width": 82.88750457763672,
+                "height": 16
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events",
+            "timestamp": "2026-08-25T05:29:14.026Z",
+            "page_id": 0,
+            "delay_before_ms": 2519
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Register Now",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div:nth-of-type(2) > div > div:nth-of-type(3) > div",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div[3]/div[1]",
+                "text": "Register Now",
+                "element_text": "Register Now",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 1070.6624755859375,
+                "y": 189.60000610351562,
+                "width": 102.4124984741211,
+                "height": 19.200000762939453
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/test-E1196?from=eventslist",
+            "timestamp": "2026-08-25T05:29:16.988Z",
+            "page_id": 0,
+            "delay_before_ms": 2962
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div:nth-of-type(2) > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2) > div",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 836,
+                "y": 151.1999969482422,
+                "width": 16,
+                "height": 18.399999618530273
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/test-E1196/register",
+            "timestamp": "2026-08-25T05:29:18.924Z",
+            "page_id": 0,
+            "delay_before_ms": 1936
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Continue",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div:nth-of-type(3) > div > div > div > div:nth-of-type(6)",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[6]",
+                "text": "Continue",
+                "element_text": "Continue",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 915,
+                "y": 356.3999938964844,
+                "width": 340,
+                "height": 46.400001525878906
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/test-E1196/register",
+            "timestamp": "2026-08-25T05:29:20.171Z",
+            "page_id": 0,
+            "delay_before_ms": 1247
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/test-E1196/participants?from=eventslist",
+            "timestamp": "2026-08-25T05:29:20.745Z",
+            "page_id": 0,
+            "delay_before_ms": 574
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Enter full name*",
+                "placeholder": "Enter full name*",
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(2) > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[2]/input[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Enter full name*"
+                }
+            },
+            "bounding_box": {
+                "x": 265.6000061035156,
+                "y": 326.3999938964844,
+                "width": 732,
+                "height": 45
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/test-E1196/participants?from=eventslist",
+            "timestamp": "2026-08-25T05:29:22.505Z",
+            "page_id": 0,
+            "delay_before_ms": 1760
+        },
+        {
+            "action_type": "fill",
+            "value": "harish",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Enter full name*",
+                "placeholder": "Enter full name*",
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(2) > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[2]/input[1]",
+                "text": "harish",
+                "element_text": "harish",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Enter full name*"
+                }
+            },
+            "bounding_box": {
+                "x": 265.6000061035156,
+                "y": 326.3999938964844,
+                "width": 732,
+                "height": 45
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/test-E1196/participants?from=eventslist",
+            "timestamp": "2026-08-25T05:29:25.663Z",
+            "page_id": 0,
+            "delay_before_ms": 3158
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#«r1m»",
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Date of Birth*",
+                "placeholder": "Date of Birth*",
+                "title": null,
+                "href": null,
+                "css_path": "input#«r1m»",
+                "xpath": "//*[@id='«r1m»']",
+                "text": "DD/MM/YYYY",
+                "element_text": "DD/MM/YYYY",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Date of Birth*",
+                    "type": "text"
+                }
+            },
+            "bounding_box": {
+                "x": 265.6000061035156,
+                "y": 381.3999938964844,
+                "width": 674,
+                "height": 45.5625
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/test-E1196/participants?from=eventslist",
+            "timestamp": "2026-08-25T05:29:25.888Z",
+            "page_id": 0,
+            "delay_before_ms": 225
+        },
+        {
+            "action_type": "fill",
+            "value": "02/02/2001",
+            "locator_profile": {
+                "id": "#«r1m»",
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Date of Birth*",
+                "placeholder": "Date of Birth*",
+                "title": null,
+                "href": null,
+                "css_path": "input#«r1m»",
+                "xpath": "//*[@id='«r1m»']",
+                "text": "02/02/2001",
+                "element_text": "02/02/2001",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Date of Birth*",
+                    "type": "text"
+                }
+            },
+            "bounding_box": {
+                "x": 265.6000061035156,
+                "y": 381.3999938964844,
+                "width": 674,
+                "height": 45.5625
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/test-E1196/participants?from=eventslist",
+            "timestamp": "2026-08-25T05:29:30.836Z",
+            "page_id": 0,
+            "delay_before_ms": 4948
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Select gender*\nMale\nFemale\nOthers",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(4) > div > div > select",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[4]/div[1]/div[1]/select[1]",
+                "text": "Select gender*\nMale\nFemale\nOthers",
+                "element_text": "Select gender*\nMale\nFemale\nOthers",
+                "tag": "select",
+                "attributes": {
+                    "data-testid": "undefined-picker"
+                }
+            },
+            "bounding_box": {
+                "x": 266.3999938964844,
+                "y": 437.76251220703125,
+                "width": 715.4000244140625,
+                "height": 43.400001525878906
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/test-E1196/participants?from=eventslist",
+            "timestamp": "2026-08-25T05:29:31.056Z",
+            "page_id": 0,
+            "delay_before_ms": 220
+        },
+        {
+            "action_type": "select",
+            "value": "Male",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Select gender*\nMale\nFemale\nOthers",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(4) > div > div > select",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[4]/div[1]/div[1]/select[1]",
+                "text": "Select gender*\nMale\nFemale\nOthers",
+                "element_text": "Select gender*\nMale\nFemale\nOthers",
+                "tag": "select",
+                "attributes": {
+                    "data-testid": "undefined-picker"
+                }
+            },
+            "bounding_box": {
+                "x": 266.3999938964844,
+                "y": 437.76251220703125,
+                "width": 715.4000244140625,
+                "height": 43.400001525878906
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/test-E1196/participants?from=eventslist",
+            "timestamp": "2026-08-25T05:29:32.691Z",
+            "page_id": 0,
+            "delay_before_ms": 1635
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Male\nFemale\nOthers",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(4) > div > div > select",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[4]/div[1]/div[1]/select[1]",
+                "text": "Male\nFemale\nOthers",
+                "element_text": "Male\nFemale\nOthers",
+                "tag": "select",
+                "attributes": {
+                    "data-testid": "undefined-picker"
+                }
+            },
+            "bounding_box": {
+                "x": 266.3999938964844,
+                "y": 437.76251220703125,
+                "width": 715.4000244140625,
+                "height": 43.400001525878906
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/test-E1196/participants?from=eventslist",
+            "timestamp": "2026-08-25T05:29:32.711Z",
+            "page_id": 0,
+            "delay_before_ms": 20
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Enter mobile number or email*",
+                "placeholder": "Enter mobile number or email*",
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(5) > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[5]/input[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Enter mobile number or email*"
+                }
+            },
+            "bounding_box": {
+                "x": 265.6000061035156,
+                "y": 491.9624938964844,
+                "width": 732,
+                "height": 45
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/test-E1196/participants?from=eventslist",
+            "timestamp": "2026-08-25T05:29:33.154Z",
+            "page_id": 0,
+            "delay_before_ms": 443
+        },
+        {
+            "action_type": "fill",
+            "value": "8807836261",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Enter mobile number or email*",
+                "placeholder": "Enter mobile number or email*",
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(5) > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[5]/input[1]",
+                "text": "8807836261",
+                "element_text": "8807836261",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Enter mobile number or email*"
+                }
+            },
+            "bounding_box": {
+                "x": 265.6000061035156,
+                "y": 491.9624938964844,
+                "width": 732,
+                "height": 45
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/test-E1196/participants?from=eventslist",
+            "timestamp": "2026-08-25T05:29:34.971Z",
+            "page_id": 0,
+            "delay_before_ms": 1817
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Select a T-shirt size*\nXXS (KIDS) (24-16.5)\nXS (KIDS) (26-17.5)\nS (KIDS) (28-19.",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(6) > div > div > select",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[6]/div[1]/div[1]/select[1]",
+                "text": "Select a T-shirt size*\nXXS (KIDS) (24-16.5)\nXS (KIDS) (26-17.5)\nS (KIDS) (28-19.",
+                "element_text": "Select a T-shirt size*\nXXS (KIDS) (24-16.5)\nXS (KIDS) (26-17.5)\nS (KIDS) (28-19.",
+                "tag": "select",
+                "attributes": {
+                    "data-testid": "undefined-picker"
+                }
+            },
+            "bounding_box": {
+                "x": 266.3999938964844,
+                "y": 547.7625122070312,
+                "width": 715.4000244140625,
+                "height": 43.400001525878906
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/test-E1196/participants?from=eventslist",
+            "timestamp": "2026-08-25T05:29:35.187Z",
+            "page_id": 0,
+            "delay_before_ms": 216
+        },
+        {
+            "action_type": "select",
+            "value": "XL",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Select a T-shirt size*\nXXS (KIDS) (24-16.5)\nXS (KIDS) (26-17.5)\nS (KIDS) (28-19.",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(6) > div > div > select",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[6]/div[1]/div[1]/select[1]",
+                "text": "Select a T-shirt size*\nXXS (KIDS) (24-16.5)\nXS (KIDS) (26-17.5)\nS (KIDS) (28-19.",
+                "element_text": "Select a T-shirt size*\nXXS (KIDS) (24-16.5)\nXS (KIDS) (26-17.5)\nS (KIDS) (28-19.",
+                "tag": "select",
+                "attributes": {
+                    "data-testid": "undefined-picker"
+                }
+            },
+            "bounding_box": {
+                "x": 266.3999938964844,
+                "y": 547.7625122070312,
+                "width": 715.4000244140625,
+                "height": 43.400001525878906
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/test-E1196/participants?from=eventslist",
+            "timestamp": "2026-08-25T05:29:35.924Z",
+            "page_id": 0,
+            "delay_before_ms": 737
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "XXS (KIDS) (24-16.5)\nXS (KIDS) (26-17.5)\nS (KIDS) (28-19.5)\nXXS (34-24.5)\nXS (36",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(6) > div > div > select",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[6]/div[1]/div[1]/select[1]",
+                "text": "XXS (KIDS) (24-16.5)\nXS (KIDS) (26-17.5)\nS (KIDS) (28-19.5)\nXXS (34-24.5)\nXS (36",
+                "element_text": "XXS (KIDS) (24-16.5)\nXS (KIDS) (26-17.5)\nS (KIDS) (28-19.5)\nXXS (34-24.5)\nXS (36",
+                "tag": "select",
+                "attributes": {
+                    "data-testid": "undefined-picker"
+                }
+            },
+            "bounding_box": {
+                "x": 266.3999938964844,
+                "y": 547.7625122070312,
+                "width": 715.4000244140625,
+                "height": 43.400001525878906
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/test-E1196/participants?from=eventslist",
+            "timestamp": "2026-08-25T05:29:35.946Z",
+            "page_id": 0,
+            "delay_before_ms": 22
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 605,
+            "scroll_y_before": 28.799999237060547,
+            "scroll_y_after": 427.20001220703125,
+            "viewport_height": 640,
+            "document_height": 1068,
+            "locator_profile": {
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div",
+                "tag": "div"
+            },
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/test-E1196/participants?from=eventslist",
+            "timestamp": "2026-08-25T05:29:37.002Z",
+            "page_id": 0,
+            "delay_before_ms": 1056
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(4) > div > div:nth-of-type(2) > div > div",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[2]/div[1]/div[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 265.6000061035156,
+                "y": 302.5625,
+                "width": 24,
+                "height": 26.399999618530273
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/test-E1196/participants?from=eventslist",
+            "timestamp": "2026-08-25T05:29:37.689Z",
+            "page_id": 0,
+            "delay_before_ms": 687
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 109,
+            "scroll_y_before": 427.20001220703125,
+            "scroll_y_after": 427.20001220703125,
+            "viewport_height": 640,
+            "document_height": 1068,
+            "locator_profile": {
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div",
+                "tag": "div"
+            },
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/test-E1196/participants?from=eventslist",
+            "timestamp": "2026-08-25T05:29:38.455Z",
+            "page_id": 0,
+            "delay_before_ms": 766
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Pay Securely ₹117896.16",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(5)",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[5]",
+                "text": "Pay Securely ₹117896.16",
+                "element_text": "Pay Securely ₹117896.16",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 249.60000610351562,
+                "y": 617.1625366210938,
+                "width": 764,
+                "height": 53.20000076293945
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/test-E1196/participants?from=eventslist",
+            "timestamp": "2026-08-25T05:29:39.525Z",
+            "page_id": 0,
+            "delay_before_ms": 1070
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": "Close Checkout",
+                "href": null,
+                "css_path": "div#main-container > div > div:nth-of-type(2) > button:nth-of-type(2)",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[2]/button[2]",
+                "text": "",
+                "element_text": "",
+                "tag": "button",
+                "attributes": {
+                    "type": "button",
+                    "title": "Close Checkout",
+                    "data-testid": "checkout-close"
+                }
+            },
+            "bounding_box": {
+                "x": 1096,
+                "y": 84,
+                "width": 28,
+                "height": 28
+            },
+            "page_url": "https://api.razorpay.com/v1/checkout/public?traffic_env=production&build=9fd0f924eb65542a282e1aaa8a85cbb60e5a436c&build_v1=755bf4b2e2419bf0ffc2bac7c1fd6e126753d61d&checkout_v2=1&new_session=1&unified_session_id=TTt5GYPV4orvjJ&session_token=49BE752274155CC39C8C8209CE726A2DA6300FF882CCBBC07370A74D8A99BA16CD36FAD7DF7B239FE7054DBD0D01EEFDD4070A74BFFA79AE95E086BA46DED4AB6EDC66CA36ACC7FF1A58F706EC963800DD42B29CBC9FC5C0B6186A86EFA1F1C1B429D9F7B0A77271",
+            "timestamp": "2026-08-25T05:29:44.124Z",
+            "page_id": 0,
+            "delay_before_ms": 4599
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": "button",
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Yes, exit",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#overlay-backdrop > div > div > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > button:nth-of-type(2)",
+                "xpath": "/html[1]/body[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/button[2]",
+                "text": "Yes, exit",
+                "element_text": "Yes, exit",
+                "tag": "button",
+                "attributes": {
+                    "data-testid": "confirm-positive",
+                    "name": "button"
+                }
+            },
+            "bounding_box": {
+                "x": 616.4000244140625,
+                "y": 580,
+                "width": 343.20001220703125,
+                "height": 44
+            },
+            "page_url": "https://api.razorpay.com/v1/checkout/public?traffic_env=production&build=9fd0f924eb65542a282e1aaa8a85cbb60e5a436c&build_v1=755bf4b2e2419bf0ffc2bac7c1fd6e126753d61d&checkout_v2=1&new_session=1&unified_session_id=TTt5GYPV4orvjJ&session_token=49BE752274155CC39C8C8209CE726A2DA6300FF882CCBBC07370A74D8A99BA16CD36FAD7DF7B239FE7054DBD0D01EEFDD4070A74BFFA79AE95E086BA46DED4AB6EDC66CA36ACC7FF1A58F706EC963800DD42B29CBC9FC5C0B6186A86EFA1F1C1B429D9F7B0A77271",
+            "timestamp": "2026-08-25T05:29:45.607Z",
+            "page_id": 0,
+            "delay_before_ms": 1483
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "User profile picture",
+                "placeholder": null,
+                "title": "User profile picture",
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div > div > div > div:nth-of-type(3) > div > div > div > div > div > div > img",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/img[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "img",
+                "attributes": {
+                    "title": "User profile picture"
+                }
+            },
+            "bounding_box": {
+                "x": 1235.800048828125,
+                "y": 17.5,
+                "width": 24,
+                "height": 24
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/test-E1196/participants?from=eventslist",
+            "timestamp": "2026-08-25T05:29:47.539Z",
+            "page_id": 0,
+            "delay_before_ms": 1932
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Sign out",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "body > div:nth-of-type(5) > div > div:nth-of-type(2) > div > div > div > div > div:nth-of-type(4) > div",
+                "xpath": "/html[1]/body[1]/div[5]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]",
+                "text": "Sign out",
+                "element_text": "Sign out",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 1016.7999877929688,
+                "y": 409.8999938964844,
+                "width": 236.40000915527344,
+                "height": 16.80000114440918
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/test-E1196/participants?from=eventslist",
+            "timestamp": "2026-08-25T05:29:49.325Z",
+            "page_id": 0,
+            "delay_before_ms": 1786
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 0,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/test-E1196/participants?from=eventslist",
+            "remaining_page_id": null,
+            "timestamp": "2026-08-25T05:29:51.781Z",
+            "delay_before_ms": 2456
+        }
+    ],
+    "saved_at": "2026-08-25T10:59:51.785279"
+}

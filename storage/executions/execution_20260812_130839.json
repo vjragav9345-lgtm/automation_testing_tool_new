@@ -1,0 +1,110 @@
+{
+    "status": "PASS",
+    "message": "all steps resolved and validations passed",
+    "qa_url": "https://www.flipkart.com/",
+    "steps": [
+        {
+            "index": 1,
+            "action_type": "click",
+            "strategy_used": "role",
+            "element_found": true,
+            "success": true,
+            "error": null,
+            "screenshot": "screenshots/execution_runs/20260812_130826/step1.png",
+            "fragile": false
+        },
+        {
+            "index": 2,
+            "action_type": "click",
+            "strategy_used": "name",
+            "element_found": true,
+            "success": true,
+            "error": null,
+            "screenshot": "screenshots/execution_runs/20260812_130826/step2.png",
+            "fragile": false
+        },
+        {
+            "index": 3,
+            "action_type": "fill",
+            "strategy_used": "name",
+            "element_found": true,
+            "success": true,
+            "error": null,
+            "screenshot": "screenshots/execution_runs/20260812_130826/step3.png",
+            "fragile": false
+        },
+        {
+            "index": 4,
+            "action_type": "press",
+            "strategy_used": "name",
+            "element_found": true,
+            "success": true,
+            "error": null,
+            "screenshot": "screenshots/execution_runs/20260812_130826/step4.png",
+            "fragile": false
+        },
+        {
+            "index": 5,
+            "action_type": "navigate",
+            "strategy_used": null,
+            "element_found": true,
+            "success": true,
+            "error": null,
+            "screenshot": "screenshots/execution_runs/20260812_130826/step5.png",
+            "fragile": false
+        }
+    ],
+    "ui_elements": [
+        {
+            "index": 1,
+            "action_type": "click",
+            "element_found": true,
+            "locator_used": "role",
+            "status": "PASS",
+            "message": null
+        },
+        {
+            "index": 2,
+            "action_type": "click",
+            "element_found": true,
+            "locator_used": "name",
+            "status": "PASS",
+            "message": null
+        },
+        {
+            "index": 3,
+            "action_type": "fill",
+            "element_found": true,
+            "locator_used": "name",
+            "status": "PASS",
+            "message": null
+        },
+        {
+            "index": 4,
+            "action_type": "press",
+            "element_found": true,
+            "locator_used": "name",
+            "status": "PASS",
+            "message": null
+        }
+    ],
+    "ui_elements_status": "PASS",
+    "content_check": null,
+    "screenshot_diff": null,
+    "product_validation": {
+        "status": "PASS",
+        "product": "AMKETTE Hush Pro Epic M Ambidextrous Optical Mouse Rech...",
+        "found": true,
+        "match_type": "exact",
+        "position": 7,
+        "page": 1,
+        "title": "AMKETTE Hush Pro Epic M Ambidextrous Optical Mouse Rech...",
+        "url": "/amkette-hush-pro-epic-m-ambidextrous-optical-mouse-rechargeable-multi-device/p/itm48d8f17457d14?pid=ACCHA4ZJPQHXAHJS&lid=LSTACCHA4ZJPQHXAHJSUJLSEU&marketplace=FLIPKART&q=wireless+mouse&store=search.flipkart.com&srno=s_1_1&otracker=search&otracker1=search&fm=organic&iid=en_r8h1oD861qcGs4CsD80Sden3N-jaX3jkioDI2RdqOfYg7Hz-qpKhediGQhoDM5DZCcoc_xM2xuHCCLdkoaMivwsxiEaC-Jy_G2NMgF6HwQX1dLb5ByJYR_pItlxuIXbH&ppt=None&ppn=None&ssid=n74v4wuoyo0000001786520316030&qH=624bdd4fb5bd6e8e&ov_redirect=true&ov_redirect=true",
+        "screenshot": "screenshots/execution_runs/20260812_130826/product_validation.png",
+        "reason": null,
+        "checked_count": 7,
+        "search_url": "https://www.flipkart.com/search?q=wireless%20mouse&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=off&as=off"
+    },
+    "final_screenshot": "screenshots/execution_runs/20260812_130826/final.png",
+    "run_id": "20260812_130826"
+}

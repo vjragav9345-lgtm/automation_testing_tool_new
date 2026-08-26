@@ -1,0 +1,154 @@
+{
+    "name": "session_20260812_095420",
+    "session_id": "f349435aa79f48e7b5790b49eaca2345",
+    "start_url": "https://the-internet.herokuapp.com/login",
+    "recorded_at": "2026-08-12T09:54:20.636078",
+    "stop_reason": "terminal_enter",
+    "total_actions": 7,
+    "actions": [
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#username",
+                "css_path": "input#username",
+                "xpath": "//*[@id='username']",
+                "text": "",
+                "tag": "input",
+                "attributes": {
+                    "type": "text",
+                    "name": "username"
+                }
+            },
+            "bounding_box": {
+                "x": 155,
+                "y": 234.4250030517578,
+                "width": 470,
+                "height": 32.375
+            },
+            "page_url": "https://the-internet.herokuapp.com/login",
+            "timestamp": "2026-08-12T04:24:17.892Z"
+        },
+        {
+            "action_type": "press",
+            "value": "Tab",
+            "locator_profile": {
+                "id": "#username",
+                "css_path": "input#username",
+                "xpath": "//*[@id='username']",
+                "text": "tomsmith",
+                "tag": "input",
+                "attributes": {
+                    "type": "text",
+                    "name": "username"
+                }
+            },
+            "bounding_box": {
+                "x": 155,
+                "y": 234.4250030517578,
+                "width": 470,
+                "height": 32.375
+            },
+            "page_url": "https://the-internet.herokuapp.com/login",
+            "timestamp": "2026-08-12T04:24:17.942Z"
+        },
+        {
+            "action_type": "fill",
+            "value": "tomsmith",
+            "locator_profile": {
+                "id": "#username",
+                "css_path": "input#username",
+                "xpath": "//*[@id='username']",
+                "text": "tomsmith",
+                "tag": "input",
+                "attributes": {
+                    "type": "text",
+                    "name": "username"
+                }
+            },
+            "bounding_box": {
+                "x": 155,
+                "y": 234.4250030517578,
+                "width": 470,
+                "height": 32.375
+            },
+            "page_url": "https://the-internet.herokuapp.com/login",
+            "timestamp": "2026-08-12T04:24:17.943Z"
+        },
+        {
+            "action_type": "press",
+            "value": "Tab",
+            "locator_profile": {
+                "id": "#password",
+                "css_path": "input#password",
+                "xpath": "//*[@id='password']",
+                "text": "SuperSecretPassword!",
+                "tag": "input",
+                "attributes": {
+                    "type": "password",
+                    "name": "password"
+                }
+            },
+            "bounding_box": {
+                "x": 155,
+                "y": 297.4250183105469,
+                "width": 470,
+                "height": 32.375
+            },
+            "page_url": "https://the-internet.herokuapp.com/login",
+            "timestamp": "2026-08-12T04:24:17.987Z"
+        },
+        {
+            "action_type": "fill",
+            "value": "SuperSecretPassword!",
+            "locator_profile": {
+                "id": "#password",
+                "css_path": "input#password",
+                "xpath": "//*[@id='password']",
+                "text": "SuperSecretPassword!",
+                "tag": "input",
+                "attributes": {
+                    "type": "password",
+                    "name": "password"
+                }
+            },
+            "bounding_box": {
+                "x": 155,
+                "y": 297.4250183105469,
+                "width": 470,
+                "height": 32.375
+            },
+            "page_url": "https://the-internet.herokuapp.com/login",
+            "timestamp": "2026-08-12T04:24:17.988Z"
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://the-internet.herokuapp.com/dropdown",
+            "timestamp": "2026-08-12T09:54:20.336699"
+        },
+        {
+            "action_type": "select",
+            "value": "2",
+            "locator_profile": {
+                "id": "#dropdown",
+                "css_path": "select#dropdown",
+                "xpath": "//*[@id='dropdown']",
+                "text": "Please select an option\nOption 1\nOption 2",
+                "tag": "select",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 155,
+                "y": 88.70000457763672,
+                "width": 970,
+                "height": 20.80000114440918
+            },
+            "page_url": "https://the-internet.herokuapp.com/dropdown",
+            "timestamp": "2026-08-12T04:24:20.438Z"
+        }
+    ],
+    "saved_at": "2026-08-12T09:54:20.636078"
+}

@@ -1,0 +1,10 @@
+{
+  "found": false,
+  "matched_text": null,
+  "match_type": null,
+  "selector": null,
+  "screenshot": "screenshots/product_search/search_20260811_233320_117016.png",
+  "page_settled": true,
+  "timestamp": "2026-08-11T23:33:20.268603",
+  "note": "only the content already loaded/visible on the page was checked - try the scroll option if the site lazy-loads more results"
+}

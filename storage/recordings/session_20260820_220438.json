@@ -1,0 +1,1387 @@
+{
+    "name": "session_20260820_220438",
+    "session_id": "61293eda0c494690a193d91b33537cd4",
+    "start_url": "https://sportzia-preprod.kovaionplay.com/",
+    "recorded_at": "2026-08-20T22:04:38.562218",
+    "stop_reason": "browser_closed",
+    "total_actions": 50,
+    "page_count": 1,
+    "actions": [
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Accept",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div:nth-of-type(3) > div > div:nth-of-type(2) > div",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[2]/div[1]",
+                "text": "Accept",
+                "element_text": "Accept",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 1165.550048828125,
+                "y": 677.2000122070312,
+                "width": 48.900001525878906,
+                "height": 16.80000114440918
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/feed",
+            "timestamp": "2026-08-20T16:33:02.157Z",
+            "page_id": 0,
+            "delay_before_ms": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Sign in",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div > div > div > div:nth-of-type(3) > div > div > div:nth-of-type(2)",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[2]",
+                "text": "Sign in",
+                "element_text": "Sign in",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 1226.125,
+                "y": 45.5,
+                "width": 38.875,
+                "height": 15.199999809265137
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/feed",
+            "timestamp": "2026-08-20T16:33:03.942Z",
+            "page_id": 0,
+            "delay_before_ms": 1785
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Enter your email or phone number",
+                "placeholder": "Enter your email or phone number",
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(3) > div > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[3]/div[1]/input[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Enter your email or phone number",
+                    "type": "email"
+                }
+            },
+            "bounding_box": {
+                "x": 442.8000183105469,
+                "y": 346.8000183105469,
+                "width": 426.3999938964844,
+                "height": 43.20000076293945
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/login",
+            "timestamp": "2026-08-20T16:33:05.676Z",
+            "page_id": 0,
+            "delay_before_ms": 1734
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/login",
+            "timestamp": "2026-08-20T16:33:08.916Z",
+            "page_id": 0,
+            "delay_before_ms": 3240
+        },
+        {
+            "action_type": "fill",
+            "value": "test@kovaion.co",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Enter your email or phone number",
+                "placeholder": "Enter your email or phone number",
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(3) > div > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[3]/div[1]/input[1]",
+                "text": "test@kovaion.co",
+                "element_text": "test@kovaion.co",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Enter your email or phone number",
+                    "type": "email"
+                }
+            },
+            "bounding_box": {
+                "x": 442.8000183105469,
+                "y": 346.8000183105469,
+                "width": 426.3999938964844,
+                "height": 43.20000076293945
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/login",
+            "timestamp": "2026-08-20T16:33:14.507Z",
+            "page_id": 0,
+            "delay_before_ms": 5591
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Sign in",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(4)",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[4]",
+                "text": "Sign in",
+                "element_text": "Sign in",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 410,
+                "y": 410.8000183105469,
+                "width": 460,
+                "height": 49.20000076293945
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/login",
+            "timestamp": "2026-08-20T16:33:14.730Z",
+            "page_id": 0,
+            "delay_before_ms": 223
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(3) > div:nth-of-type(2) > div",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[3]/div[2]/div[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 410,
+                "y": 388.20001220703125,
+                "width": 107.5,
+                "height": 50
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/otp?userId=test%40kovaion.co&loginType=email",
+            "timestamp": "2026-08-20T16:33:18.777Z",
+            "page_id": 0,
+            "delay_before_ms": 4047
+        },
+        {
+            "action_type": "dblclick",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(3) > div:nth-of-type(2) > div",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[3]/div[2]/div[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 410,
+                "y": 388.20001220703125,
+                "width": 107.5,
+                "height": 50
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/otp?userId=test%40kovaion.co&loginType=email",
+            "timestamp": "2026-08-20T16:33:21.720Z",
+            "page_id": 0,
+            "delay_before_ms": 2943
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/otp?userId=test%40kovaion.co&loginType=email",
+            "timestamp": "2026-08-20T16:33:21.829Z",
+            "page_id": 0,
+            "delay_before_ms": 109
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(3) > div:nth-of-type(2) > div > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[3]/div[2]/div[1]/input[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": ""
+                }
+            },
+            "bounding_box": {
+                "x": 410.8000183105469,
+                "y": 389,
+                "width": 105.9000015258789,
+                "height": 48.400001525878906
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/otp?userId=test%40kovaion.co&loginType=email",
+            "timestamp": "2026-08-20T16:33:22.438Z",
+            "page_id": 0,
+            "delay_before_ms": 609
+        },
+        {
+            "action_type": "fill",
+            "value": "1",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "1",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(3) > div:nth-of-type(2) > div > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[3]/div[2]/div[1]/input[1]",
+                "text": "1",
+                "element_text": "1",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": ""
+                }
+            },
+            "bounding_box": {
+                "x": 410.8000183105469,
+                "y": 389,
+                "width": 105.9000015258789,
+                "height": 48.400001525878906
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/otp?userId=test%40kovaion.co&loginType=email",
+            "timestamp": "2026-08-20T16:33:23.096Z",
+            "page_id": 0,
+            "delay_before_ms": 658
+        },
+        {
+            "action_type": "fill",
+            "value": "2",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "2",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(2) > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[3]/div[2]/div[2]/input[1]",
+                "text": "2",
+                "element_text": "2",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": ""
+                }
+            },
+            "bounding_box": {
+                "x": 528.2999877929688,
+                "y": 389,
+                "width": 105.9000015258789,
+                "height": 48.400001525878906
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/otp?userId=test%40kovaion.co&loginType=email",
+            "timestamp": "2026-08-20T16:33:23.335Z",
+            "page_id": 0,
+            "delay_before_ms": 239
+        },
+        {
+            "action_type": "fill",
+            "value": "3",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "3",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(3) > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[3]/div[2]/div[3]/input[1]",
+                "text": "3",
+                "element_text": "3",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": ""
+                }
+            },
+            "bounding_box": {
+                "x": 645.7999877929688,
+                "y": 389,
+                "width": 105.9000015258789,
+                "height": 48.400001525878906
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/otp?userId=test%40kovaion.co&loginType=email",
+            "timestamp": "2026-08-20T16:33:23.588Z",
+            "page_id": 0,
+            "delay_before_ms": 253
+        },
+        {
+            "action_type": "fill",
+            "value": "4",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "4",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(4) > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[3]/div[2]/div[4]/input[1]",
+                "text": "4",
+                "element_text": "4",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": ""
+                }
+            },
+            "bounding_box": {
+                "x": 763.2999877929688,
+                "y": 389,
+                "width": 105.9000015258789,
+                "height": 48.400001525878906
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/otp?userId=test%40kovaion.co&loginType=email",
+            "timestamp": "2026-08-20T16:33:25.201Z",
+            "page_id": 0,
+            "delay_before_ms": 1613
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Verify",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(4)",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[4]",
+                "text": "Verify",
+                "element_text": "Verify",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 410,
+                "y": 458.20001220703125,
+                "width": 460,
+                "height": 49.20000076293945
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/otp?userId=test%40kovaion.co&loginType=email",
+            "timestamp": "2026-08-20T16:33:25.414Z",
+            "page_id": 0,
+            "delay_before_ms": 213
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Events",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div > div > div > div:nth-of-type(2) > div:nth-of-type(2)",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[2]",
+                "text": "Events",
+                "element_text": "Events",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 955.6375122070312,
+                "y": 0.10000000149011612,
+                "width": 38.61249923706055,
+                "height": 79
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/feed",
+            "timestamp": "2026-08-20T16:33:29.361Z",
+            "page_id": 0,
+            "delay_before_ms": 3947
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 255,
+            "scroll_y_before": 0,
+            "scroll_y_after": 180.8000030517578,
+            "viewport_height": 720,
+            "document_height": 902,
+            "locator_profile": {
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div:nth-of-type(2) > div > div:nth-of-type(2) > div",
+                "tag": "div"
+            },
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events",
+            "timestamp": "2026-08-20T16:33:32.721Z",
+            "page_id": 0,
+            "delay_before_ms": 3360
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 241,
+            "scroll_y_before": 180.8000030517578,
+            "scroll_y_after": 180.8000030517578,
+            "viewport_height": 720,
+            "document_height": 1383,
+            "locator_profile": {
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div:nth-of-type(2) > div > div:nth-of-type(2) > div",
+                "tag": "div"
+            },
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events",
+            "timestamp": "2026-08-20T16:33:33.352Z",
+            "page_id": 0,
+            "delay_before_ms": 631
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events",
+            "timestamp": "2026-08-20T16:33:34.293Z",
+            "page_id": 0,
+            "delay_before_ms": 941
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Banner for Chennai Kidathon Marathon 2026",
+                "placeholder": null,
+                "title": "Banner for Chennai Kidathon Marathon 2026",
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div:nth-of-type(2) > div > div:nth-of-type(2) > div > div > div:nth-of-type(3) > div > div:nth-of-type(3) > div > div > div > div > img",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[3]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/img[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "img",
+                "attributes": {
+                    "title": "Banner for Chennai Kidathon Marathon 2026"
+                }
+            },
+            "bounding_box": {
+                "x": 808,
+                "y": 376.8999938964844,
+                "width": 219,
+                "height": 120.45000457763672
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events",
+            "timestamp": "2026-08-20T16:33:35.743Z",
+            "page_id": 0,
+            "delay_before_ms": 1450
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Register For Free",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div:nth-of-type(2) > div > div:nth-of-type(3)",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div[3]",
+                "text": "Register For Free",
+                "element_text": "Register For Free",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 1016.7750244140625,
+                "y": 181.60000610351562,
+                "width": 210.1875,
+                "height": 35.20000076293945
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/chennai-kidathon-marathon-2026-E0960?from=eventslist",
+            "timestamp": "2026-08-20T16:33:38.348Z",
+            "page_id": 0,
+            "delay_before_ms": 2605
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 2290,
+            "scroll_y_before": 72.80000305175781,
+            "scroll_y_after": 1353.5999755859375,
+            "viewport_height": 608,
+            "document_height": 1961,
+            "locator_profile": {
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div:nth-of-type(2)",
+                "tag": "div"
+            },
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/chennai-kidathon-marathon-2026-E0960/register",
+            "timestamp": "2026-08-20T16:33:40.764Z",
+            "page_id": 0,
+            "delay_before_ms": 2416
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div:nth-of-type(2) > div > div:nth-of-type(12) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2)",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div[12]/div[2]/div[2]/div[2]",
+                "text": "",
+                "element_text": "",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 826,
+                "y": 544.4000244140625,
+                "width": 36,
+                "height": 36
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/chennai-kidathon-marathon-2026-E0960/register",
+            "timestamp": "2026-08-20T16:33:41.516Z",
+            "page_id": 0,
+            "delay_before_ms": 752
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/chennai-kidathon-marathon-2026-E0960/register",
+            "timestamp": "2026-08-20T16:33:43.032Z",
+            "page_id": 0,
+            "delay_before_ms": 1516
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Continue",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div:nth-of-type(3) > div > div > div > div:nth-of-type(5) > div",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[5]/div[1]",
+                "text": "Continue",
+                "element_text": "Continue",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 1052.1875,
+                "y": 264.6000061035156,
+                "width": 65.61250305175781,
+                "height": 18.399999618530273
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/chennai-kidathon-marathon-2026-E0960/register",
+            "timestamp": "2026-08-20T16:33:43.050Z",
+            "page_id": 0,
+            "delay_before_ms": 18
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Enter full name*",
+                "placeholder": "Enter full name*",
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(2) > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[2]/input[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Enter full name*"
+                }
+            },
+            "bounding_box": {
+                "x": 265.6000061035156,
+                "y": 326.3999938964844,
+                "width": 732,
+                "height": 45
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/chennai-kidathon-marathon-2026-E0960/participants?from=eventslist",
+            "timestamp": "2026-08-20T16:33:45.587Z",
+            "page_id": 0,
+            "delay_before_ms": 2537
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/chennai-kidathon-marathon-2026-E0960/participants?from=eventslist",
+            "timestamp": "2026-08-20T16:33:48.178Z",
+            "page_id": 0,
+            "delay_before_ms": 2591
+        },
+        {
+            "action_type": "fill",
+            "value": "arun",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Enter full name*",
+                "placeholder": "Enter full name*",
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(2) > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[2]/input[1]",
+                "text": "arun",
+                "element_text": "arun",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Enter full name*"
+                }
+            },
+            "bounding_box": {
+                "x": 265.6000061035156,
+                "y": 326.3999938964844,
+                "width": 732,
+                "height": 45
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/chennai-kidathon-marathon-2026-E0960/participants?from=eventslist",
+            "timestamp": "2026-08-20T16:33:48.434Z",
+            "page_id": 0,
+            "delay_before_ms": 256
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#«r2f»",
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Date of Birth*",
+                "placeholder": "Date of Birth*",
+                "title": null,
+                "href": null,
+                "css_path": "input#«r2f»",
+                "xpath": "//*[@id='«r2f»']",
+                "text": "DD/MM/YYYY",
+                "element_text": "DD/MM/YYYY",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Date of Birth*",
+                    "type": "text"
+                }
+            },
+            "bounding_box": {
+                "x": 265.6000061035156,
+                "y": 381.3999938964844,
+                "width": 674,
+                "height": 45.5625
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/chennai-kidathon-marathon-2026-E0960/participants?from=eventslist",
+            "timestamp": "2026-08-20T16:33:48.648Z",
+            "page_id": 0,
+            "delay_before_ms": 214
+        },
+        {
+            "action_type": "fill",
+            "value": "22/02/2017",
+            "locator_profile": {
+                "id": "#«r2f»",
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Date of Birth*",
+                "placeholder": "Date of Birth*",
+                "title": null,
+                "href": null,
+                "css_path": "input#«r2f»",
+                "xpath": "//*[@id='«r2f»']",
+                "text": "22/02/2017",
+                "element_text": "22/02/2017",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Date of Birth*",
+                    "type": "text"
+                }
+            },
+            "bounding_box": {
+                "x": 265.6000061035156,
+                "y": 381.3999938964844,
+                "width": 674,
+                "height": 45.5625
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/chennai-kidathon-marathon-2026-E0960/participants?from=eventslist",
+            "timestamp": "2026-08-20T16:33:53.533Z",
+            "page_id": 0,
+            "delay_before_ms": 4885
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Select gender*\nMale\nFemale\nOthers",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(4) > div > div > select",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[4]/div[1]/div[1]/select[1]",
+                "text": "Select gender*\nMale\nFemale\nOthers",
+                "element_text": "Select gender*\nMale\nFemale\nOthers",
+                "tag": "select",
+                "attributes": {
+                    "data-testid": "undefined-picker"
+                }
+            },
+            "bounding_box": {
+                "x": 266.3999938964844,
+                "y": 437.76251220703125,
+                "width": 715.4000244140625,
+                "height": 43.400001525878906
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/chennai-kidathon-marathon-2026-E0960/participants?from=eventslist",
+            "timestamp": "2026-08-20T16:33:53.759Z",
+            "page_id": 0,
+            "delay_before_ms": 226
+        },
+        {
+            "action_type": "select",
+            "value": "Male",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Select gender*\nMale\nFemale\nOthers",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(4) > div > div > select",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[4]/div[1]/div[1]/select[1]",
+                "text": "Select gender*\nMale\nFemale\nOthers",
+                "element_text": "Select gender*\nMale\nFemale\nOthers",
+                "tag": "select",
+                "attributes": {
+                    "data-testid": "undefined-picker"
+                }
+            },
+            "bounding_box": {
+                "x": 266.3999938964844,
+                "y": 437.76251220703125,
+                "width": 715.4000244140625,
+                "height": 43.400001525878906
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/chennai-kidathon-marathon-2026-E0960/participants?from=eventslist",
+            "timestamp": "2026-08-20T16:33:54.700Z",
+            "page_id": 0,
+            "delay_before_ms": 941
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Male\nFemale\nOthers",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(4) > div > div > select",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[4]/div[1]/div[1]/select[1]",
+                "text": "Male\nFemale\nOthers",
+                "element_text": "Male\nFemale\nOthers",
+                "tag": "select",
+                "attributes": {
+                    "data-testid": "undefined-picker"
+                }
+            },
+            "bounding_box": {
+                "x": 266.3999938964844,
+                "y": 437.76251220703125,
+                "width": 715.4000244140625,
+                "height": 43.400001525878906
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/chennai-kidathon-marathon-2026-E0960/participants?from=eventslist",
+            "timestamp": "2026-08-20T16:33:54.720Z",
+            "page_id": 0,
+            "delay_before_ms": 20
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Enter mobile number or email*",
+                "placeholder": "Enter mobile number or email*",
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(5) > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[5]/input[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Enter mobile number or email*"
+                }
+            },
+            "bounding_box": {
+                "x": 265.6000061035156,
+                "y": 491.9624938964844,
+                "width": 732,
+                "height": 45
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/chennai-kidathon-marathon-2026-E0960/participants?from=eventslist",
+            "timestamp": "2026-08-20T16:33:55.299Z",
+            "page_id": 0,
+            "delay_before_ms": 579
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#«r2f»",
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Date of Birth*",
+                "placeholder": "Date of Birth*",
+                "title": null,
+                "href": null,
+                "css_path": "input#«r2f»",
+                "xpath": "//*[@id='«r2f»']",
+                "text": "22/02/2017",
+                "element_text": "22/02/2017",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Date of Birth*",
+                    "type": "text"
+                }
+            },
+            "bounding_box": {
+                "x": 265.6000061035156,
+                "y": 381.3999938964844,
+                "width": 674,
+                "height": 45.5625
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/chennai-kidathon-marathon-2026-E0960/participants?from=eventslist",
+            "timestamp": "2026-08-20T16:34:01.674Z",
+            "page_id": 0,
+            "delay_before_ms": 6375
+        },
+        {
+            "action_type": "fill",
+            "value": "22/02/2018",
+            "locator_profile": {
+                "id": "#«r2f»",
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Date of Birth*",
+                "placeholder": "Date of Birth*",
+                "title": null,
+                "href": null,
+                "css_path": "input#«r2f»",
+                "xpath": "//*[@id='«r2f»']",
+                "text": "22/02/2018",
+                "element_text": "22/02/2018",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Date of Birth*",
+                    "type": "text"
+                }
+            },
+            "bounding_box": {
+                "x": 265.6000061035156,
+                "y": 381.3999938964844,
+                "width": 674,
+                "height": 45.5625
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/chennai-kidathon-marathon-2026-E0960/participants?from=eventslist",
+            "timestamp": "2026-08-20T16:34:07.154Z",
+            "page_id": 0,
+            "delay_before_ms": 5480
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Guardian's full name*",
+                "placeholder": "Guardian's full name*",
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(6) > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[6]/input[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Guardian's full name*"
+                }
+            },
+            "bounding_box": {
+                "x": 265.6000061035156,
+                "y": 537.9625244140625,
+                "width": 732,
+                "height": 45
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/chennai-kidathon-marathon-2026-E0960/participants?from=eventslist",
+            "timestamp": "2026-08-20T16:34:07.376Z",
+            "page_id": 0,
+            "delay_before_ms": 222
+        },
+        {
+            "action_type": "fill",
+            "value": "vijay",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Guardian's full name*",
+                "placeholder": "Guardian's full name*",
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(6) > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[6]/input[1]",
+                "text": "vijay",
+                "element_text": "vijay",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Guardian's full name*"
+                }
+            },
+            "bounding_box": {
+                "x": 265.6000061035156,
+                "y": 537.9625244140625,
+                "width": 732,
+                "height": 45
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/chennai-kidathon-marathon-2026-E0960/participants?from=eventslist",
+            "timestamp": "2026-08-20T16:34:11.707Z",
+            "page_id": 0,
+            "delay_before_ms": 4331
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Guardian's mobile or email*",
+                "placeholder": "Guardian's mobile or email*",
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(7) > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[7]/input[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Guardian's mobile or email*"
+                }
+            },
+            "bounding_box": {
+                "x": 265.6000061035156,
+                "y": 592.9625244140625,
+                "width": 732,
+                "height": 45
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/chennai-kidathon-marathon-2026-E0960/participants?from=eventslist",
+            "timestamp": "2026-08-20T16:34:11.927Z",
+            "page_id": 0,
+            "delay_before_ms": 220
+        },
+        {
+            "action_type": "fill",
+            "value": "vijay@gmail.com",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Guardian's mobile or email*",
+                "placeholder": "Guardian's mobile or email*",
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(7) > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[7]/input[1]",
+                "text": "vijay@gmail.com",
+                "element_text": "vijay@gmail.com",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Guardian's mobile or email*"
+                }
+            },
+            "bounding_box": {
+                "x": 265.6000061035156,
+                "y": 592.9625244140625,
+                "width": 732,
+                "height": 45
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/chennai-kidathon-marathon-2026-E0960/participants?from=eventslist",
+            "timestamp": "2026-08-20T16:34:23.175Z",
+            "page_id": 0,
+            "delay_before_ms": 11248
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Select a T-shirt size*\nXXXS (32-23.5)\nXXS (34-24.5)\nXS (36-25.5)\nS (38-26.5)\nM (",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(8) > div > div > select",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[8]/div[1]/div[1]/select[1]",
+                "text": "Select a T-shirt size*\nXXXS (32-23.5)\nXXS (34-24.5)\nXS (36-25.5)\nS (38-26.5)\nM (",
+                "element_text": "Select a T-shirt size*\nXXXS (32-23.5)\nXXS (34-24.5)\nXS (36-25.5)\nS (38-26.5)\nM (",
+                "tag": "select",
+                "attributes": {
+                    "data-testid": "undefined-picker"
+                }
+            },
+            "bounding_box": {
+                "x": 266.3999938964844,
+                "y": 648.7625122070312,
+                "width": 715.4000244140625,
+                "height": 43.400001525878906
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/chennai-kidathon-marathon-2026-E0960/participants?from=eventslist",
+            "timestamp": "2026-08-20T16:34:23.391Z",
+            "page_id": 0,
+            "delay_before_ms": 216
+        },
+        {
+            "action_type": "select",
+            "value": "L",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Select a T-shirt size*\nXXXS (32-23.5)\nXXS (34-24.5)\nXS (36-25.5)\nS (38-26.5)\nM (",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(8) > div > div > select",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[8]/div[1]/div[1]/select[1]",
+                "text": "Select a T-shirt size*\nXXXS (32-23.5)\nXXS (34-24.5)\nXS (36-25.5)\nS (38-26.5)\nM (",
+                "element_text": "Select a T-shirt size*\nXXXS (32-23.5)\nXXS (34-24.5)\nXS (36-25.5)\nS (38-26.5)\nM (",
+                "tag": "select",
+                "attributes": {
+                    "data-testid": "undefined-picker"
+                }
+            },
+            "bounding_box": {
+                "x": 266.3999938964844,
+                "y": 648.7625122070312,
+                "width": 715.4000244140625,
+                "height": 43.400001525878906
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/chennai-kidathon-marathon-2026-E0960/participants?from=eventslist",
+            "timestamp": "2026-08-20T16:34:24.687Z",
+            "page_id": 0,
+            "delay_before_ms": 1296
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "XXXS (32-23.5)\nXXS (34-24.5)\nXS (36-25.5)\nS (38-26.5)\nM (40-27.5)\nL (42-28.5)\nXL",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(8) > div > div > select",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[8]/div[1]/div[1]/select[1]",
+                "text": "XXXS (32-23.5)\nXXS (34-24.5)\nXS (36-25.5)\nS (38-26.5)\nM (40-27.5)\nL (42-28.5)\nXL",
+                "element_text": "XXXS (32-23.5)\nXXS (34-24.5)\nXS (36-25.5)\nS (38-26.5)\nM (40-27.5)\nL (42-28.5)\nXL",
+                "tag": "select",
+                "attributes": {
+                    "data-testid": "undefined-picker"
+                }
+            },
+            "bounding_box": {
+                "x": 266.3999938964844,
+                "y": 648.7625122070312,
+                "width": 715.4000244140625,
+                "height": 43.400001525878906
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/chennai-kidathon-marathon-2026-E0960/participants?from=eventslist",
+            "timestamp": "2026-08-20T16:34:24.707Z",
+            "page_id": 0,
+            "delay_before_ms": 20
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 245,
+            "scroll_y_before": 8,
+            "scroll_y_after": 196,
+            "viewport_height": 640,
+            "document_height": 873,
+            "locator_profile": {
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div",
+                "tag": "div"
+            },
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/chennai-kidathon-marathon-2026-E0960/participants?from=eventslist",
+            "timestamp": "2026-08-20T16:34:25.797Z",
+            "page_id": 0,
+            "delay_before_ms": 1090
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(4) > div > div > div > div",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 265.6000061035156,
+                "y": 562.9625244140625,
+                "width": 24,
+                "height": 26.399999618530273
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/chennai-kidathon-marathon-2026-E0960/participants?from=eventslist",
+            "timestamp": "2026-08-20T16:34:26.684Z",
+            "page_id": 0,
+            "delay_before_ms": 887
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Register for Free",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(5)",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[5]",
+                "text": "Register for Free",
+                "element_text": "Register for Free",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 249.60000610351562,
+                "y": 657.9625244140625,
+                "width": 764,
+                "height": 49.20000076293945
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/chennai-kidathon-marathon-2026-E0960/participants?from=eventslist",
+            "timestamp": "2026-08-20T16:34:27.736Z",
+            "page_id": 0,
+            "delay_before_ms": 1052
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "User profile picture",
+                "placeholder": null,
+                "title": "User profile picture",
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div > div > div > div:nth-of-type(3) > div > div > div > div > div > div > img",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/img[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "img",
+                "attributes": {
+                    "title": "User profile picture"
+                }
+            },
+            "bounding_box": {
+                "x": 1235.800048828125,
+                "y": 17.5,
+                "width": 24,
+                "height": 24
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/success?data=U2FsdGVkX1%2FeVS9bWdFr4XExR9R6MaFsLG4kT4zXvvvoTD9oe7VzbQ%2B4RIOLhnnMax%2FYZ6DHNbHui5NtWNXs3A%3D%3D",
+            "timestamp": "2026-08-20T16:34:33.001Z",
+            "page_id": 0,
+            "delay_before_ms": 5265
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/success?data=U2FsdGVkX1%2FeVS9bWdFr4XExR9R6MaFsLG4kT4zXvvvoTD9oe7VzbQ%2B4RIOLhnnMax%2FYZ6DHNbHui5NtWNXs3A%3D%3D",
+            "timestamp": "2026-08-20T16:34:34.746Z",
+            "page_id": 0,
+            "delay_before_ms": 1745
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Sign out",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "body > div:nth-of-type(5) > div > div:nth-of-type(2) > div > div > div > div > div:nth-of-type(3) > div",
+                "xpath": "/html[1]/body[1]/div[5]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]",
+                "text": "Sign out",
+                "element_text": "Sign out",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 1016.7999877929688,
+                "y": 321.8999938964844,
+                "width": 236.40000915527344,
+                "height": 16.80000114440918
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/success?data=U2FsdGVkX1%2FeVS9bWdFr4XExR9R6MaFsLG4kT4zXvvvoTD9oe7VzbQ%2B4RIOLhnnMax%2FYZ6DHNbHui5NtWNXs3A%3D%3D",
+            "timestamp": "2026-08-20T16:34:35.465Z",
+            "page_id": 0,
+            "delay_before_ms": 719
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 0,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/success?data=U2FsdGVkX1%2FeVS9bWdFr4XExR9R6MaFsLG4kT4zXvvvoTD9oe7VzbQ%2B4RIOLhnnMax%2FYZ6DHNbHui5NtWNXs3A%3D%3D",
+            "remaining_page_id": null,
+            "timestamp": "2026-08-20T16:34:38.560Z",
+            "delay_before_ms": 3095
+        }
+    ],
+    "saved_at": "2026-08-20T22:04:38.562218"
+}

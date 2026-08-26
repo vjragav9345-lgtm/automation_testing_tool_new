@@ -1,0 +1,801 @@
+{
+    "name": "session_20260825_182036",
+    "session_id": "8d18b6a0257b43e48bf4a9c1bdc2df39",
+    "start_url": "https://sportzia-preprod.kovaionplay.com/events",
+    "recorded_at": "2026-08-25T18:20:36.682376",
+    "stop_reason": "browser_closed",
+    "total_actions": 31,
+    "page_count": 2,
+    "actions": [
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Banner for SRV The Winning Edge Marathon 2026",
+                "placeholder": null,
+                "title": "Banner for SRV The Winning Edge Marathon 2026",
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div:nth-of-type(2) > div > div:nth-of-type(2) > div > div > div > div > div:nth-of-type(3) > div > div > div > div > img",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/img[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "img",
+                "attributes": {
+                    "title": "Banner for SRV The Winning Edge Marathon 2026"
+                }
+            },
+            "bounding_box": {
+                "x": 808,
+                "y": 154,
+                "width": 219,
+                "height": 120.45000457763672
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events",
+            "timestamp": "2026-08-25T12:49:51.720Z",
+            "page_id": 0,
+            "delay_before_ms": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Register Now",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div:nth-of-type(2) > div > div:nth-of-type(3) > div",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div[3]/div[1]",
+                "text": "Register Now",
+                "element_text": "Register Now",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 1070.6624755859375,
+                "y": 189.60000610351562,
+                "width": 102.4124984741211,
+                "height": 19.200000762939453
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170?from=eventslist",
+            "timestamp": "2026-08-25T12:49:53.599Z",
+            "page_id": 0,
+            "delay_before_ms": 1879
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/register",
+            "timestamp": "2026-08-25T12:49:53.917Z",
+            "page_id": 0,
+            "delay_before_ms": 318
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div:nth-of-type(2) > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2)",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]/div[2]/div[2]",
+                "text": "",
+                "element_text": "",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 826,
+                "y": 142.40000915527344,
+                "width": 36,
+                "height": 36
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/register",
+            "timestamp": "2026-08-25T12:49:55.544Z",
+            "page_id": 0,
+            "delay_before_ms": 1627
+        },
+        {
+            "action_type": "dblclick",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div:nth-of-type(2) > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2)",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]/div[2]/div[2]",
+                "text": "",
+                "element_text": "",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 825.2000122070312,
+                "y": 143.1999969482422,
+                "width": 36,
+                "height": 36
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/register",
+            "timestamp": "2026-08-25T12:49:56.001Z",
+            "page_id": 0,
+            "delay_before_ms": 457
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Continue",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div:nth-of-type(3) > div > div > div > div:nth-of-type(6) > div",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[6]/div[1]",
+                "text": "Continue",
+                "element_text": "Continue",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 1052.1875,
+                "y": 370.3999938964844,
+                "width": 65.61250305175781,
+                "height": 18.399999618530273
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/register",
+            "timestamp": "2026-08-25T12:49:57.224Z",
+            "page_id": 0,
+            "delay_before_ms": 1223
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "e.g. john@email.com or 9XXXXXXXXX",
+                "placeholder": "e.g. john@email.com or 9XXXXXXXXX",
+                "title": null,
+                "href": null,
+                "css_path": "body > div:nth-of-type(5) > div > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(4) > input",
+                "xpath": "/html[1]/body[1]/div[5]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/input[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "e.g. john@email.com or 9XXXXXXXXX",
+                    "type": "text"
+                }
+            },
+            "bounding_box": {
+                "x": 448,
+                "y": 371,
+                "width": 384,
+                "height": 50
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/register",
+            "timestamp": "2026-08-25T12:49:58.567Z",
+            "page_id": 0,
+            "delay_before_ms": 1343
+        },
+        {
+            "action_type": "fill",
+            "value": "8807836261",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "e.g. john@email.com or 9XXXXXXXXX",
+                "placeholder": "e.g. john@email.com or 9XXXXXXXXX",
+                "title": null,
+                "href": null,
+                "css_path": "body > div:nth-of-type(5) > div > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(4) > input",
+                "xpath": "/html[1]/body[1]/div[5]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/input[1]",
+                "text": "8807836261",
+                "element_text": "8807836261",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "e.g. john@email.com or 9XXXXXXXXX",
+                    "type": "text"
+                }
+            },
+            "bounding_box": {
+                "x": 448,
+                "y": 371,
+                "width": 384,
+                "height": 50
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/register",
+            "timestamp": "2026-08-25T12:50:03.520Z",
+            "page_id": 0,
+            "delay_before_ms": 4953
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Send OTP",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "body > div:nth-of-type(5) > div > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(5) > div",
+                "xpath": "/html[1]/body[1]/div[5]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[5]/div[1]",
+                "text": "Send OTP",
+                "element_text": "Send OTP",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 601.2250366210938,
+                "y": 461.3999938964844,
+                "width": 77.55000305175781,
+                "height": 19.200000762939453
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/register",
+            "timestamp": "2026-08-25T12:50:03.740Z",
+            "page_id": 0,
+            "delay_before_ms": 220
+        },
+        {
+            "action_type": "fill",
+            "value": "1234",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "1234",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "body > div:nth-of-type(5) > div > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(4) > div:nth-of-type(2) > input",
+                "xpath": "/html[1]/body[1]/div[5]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[2]/input[1]",
+                "text": "1234",
+                "element_text": "1234",
+                "tag": "input",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 448,
+                "y": 323.20001220703125,
+                "width": 384,
+                "height": 56
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/register",
+            "timestamp": "2026-08-25T12:50:07.725Z",
+            "page_id": 0,
+            "delay_before_ms": 3985
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Verify & Continue",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "body > div:nth-of-type(5) > div > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(5) > div",
+                "xpath": "/html[1]/body[1]/div[5]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[5]/div[1]",
+                "text": "Verify & Continue",
+                "element_text": "Verify & Continue",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 571.1375122070312,
+                "y": 487.20001220703125,
+                "width": 137.71250915527344,
+                "height": 19.200000762939453
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/register",
+            "timestamp": "2026-08-25T12:50:07.941Z",
+            "page_id": 0,
+            "delay_before_ms": 216
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:50:09.861Z",
+            "page_id": 0,
+            "delay_before_ms": 1920
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Enter full name*",
+                "placeholder": "Enter full name*",
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(2) > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[2]/input[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Enter full name*"
+                }
+            },
+            "bounding_box": {
+                "x": 265.6000061035156,
+                "y": 326.3999938964844,
+                "width": 732,
+                "height": 45
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:50:13.782Z",
+            "page_id": 0,
+            "delay_before_ms": 3921
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Pick from your saved people",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(3) > div:nth-of-type(2) > div > div:nth-of-type(2)",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[1]/div[2]",
+                "text": "Pick from your saved people",
+                "element_text": "Pick from your saved people",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 297.6000061035156,
+                "y": 293.6000061035156,
+                "width": 166.03750610351562,
+                "height": 15.199999809265137
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:50:14.924Z",
+            "page_id": 0,
+            "delay_before_ms": 1142
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Mohan Kumar M",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "body > div:nth-of-type(7) > div > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(4) > div > div:nth-of-type(2) > div:nth-of-type(2) > div",
+                "xpath": "/html[1]/body[1]/div[7]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[2]/div[2]/div[1]",
+                "text": "Mohan Kumar M",
+                "element_text": "Mohan Kumar M",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 494.8000183105469,
+                "y": 296.3000183105469,
+                "width": 314.3999938964844,
+                "height": 16.80000114440918
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:50:15.916Z",
+            "page_id": 0,
+            "delay_before_ms": 992
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Continue with Mohan Kumar M",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "body > div:nth-of-type(7) > div > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(5) > div",
+                "xpath": "/html[1]/body[1]/div[7]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[5]/div[1]",
+                "text": "Continue with Mohan Kumar M",
+                "element_text": "Continue with Mohan Kumar M",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 517.0250244140625,
+                "y": 575.2000122070312,
+                "width": 245.9375,
+                "height": 19.200000762939453
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:50:16.934Z",
+            "page_id": 0,
+            "delay_before_ms": 1018
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 190,
+            "scroll_y_before": 20,
+            "scroll_y_after": 152,
+            "viewport_height": 640,
+            "document_height": 1181,
+            "locator_profile": {
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div",
+                "tag": "div"
+            },
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:50:17.944Z",
+            "page_id": 0,
+            "delay_before_ms": 1010
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 234,
+            "scroll_y_before": 152,
+            "scroll_y_after": 339.20001220703125,
+            "viewport_height": 640,
+            "document_height": 1181,
+            "locator_profile": {
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div",
+                "tag": "div"
+            },
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:50:19.092Z",
+            "page_id": 0,
+            "delay_before_ms": 1148
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "3 KM – Open Category  5-90 yrs · Male/Female/Others\nParticipant  - Add details\n",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(4)",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]",
+                "text": "3 KM – Open Category  5-90 yrs · Male/Female/Others\nParticipant  - Add details\n",
+                "element_text": "3 KM – Open Category  5-90 yrs · Male/Female/Others\nParticipant  - Add details\n",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 249.60000610351562,
+                "y": 294.76251220703125,
+                "width": 764,
+                "height": 72
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:50:19.338Z",
+            "page_id": 0,
+            "delay_before_ms": 246
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "5-90 yrs · Male/Female/Others",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(4) > div > div > div > span",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/span[1]",
+                "text": "5-90 yrs · Male/Female/Others",
+                "element_text": "5-90 yrs · Male/Female/Others",
+                "tag": "span",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 427.8125,
+                "y": 314.4624938964844,
+                "width": 180.5124969482422,
+                "height": 15.199999809265137
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:50:20.031Z",
+            "page_id": 0,
+            "delay_before_ms": 693
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Pick from your saved people",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(4) > div:nth-of-type(2) > div > div:nth-of-type(2)",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[2]/div[1]/div[2]",
+                "text": "Pick from your saved people",
+                "element_text": "Pick from your saved people",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 297.6000061035156,
+                "y": 373.3625183105469,
+                "width": 166.03750610351562,
+                "height": 15.199999809265137
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:50:21.339Z",
+            "page_id": 0,
+            "delay_before_ms": 1308
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "M\nMohammed\nMale · 10 Oct 1996 · T-shirt XXS",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "body > div:nth-of-type(7) > div > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(4) > div > div:nth-of-type(3)",
+                "xpath": "/html[1]/body[1]/div[7]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[3]",
+                "text": "M\nMohammed\nMale · 10 Oct 1996 · T-shirt XXS",
+                "element_text": "M\nMohammed\nMale · 10 Oct 1996 · T-shirt XXS",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 424,
+                "y": 357,
+                "width": 432,
+                "height": 69.5999984741211
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:50:22.589Z",
+            "page_id": 0,
+            "delay_before_ms": 1250
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Continue with Mohammed",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "body > div:nth-of-type(7) > div > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(5) > div",
+                "xpath": "/html[1]/body[1]/div[7]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[5]/div[1]",
+                "text": "Continue with Mohammed",
+                "element_text": "Continue with Mohammed",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 536.8624877929688,
+                "y": 575.2000122070312,
+                "width": 206.27500915527344,
+                "height": 19.200000762939453
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:50:23.698Z",
+            "page_id": 0,
+            "delay_before_ms": 1109
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 412,
+            "scroll_y_before": 339.20001220703125,
+            "scroll_y_after": 668.7999877929688,
+            "viewport_height": 640,
+            "document_height": 1512,
+            "locator_profile": {
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div",
+                "tag": "div"
+            },
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:50:26.143Z",
+            "page_id": 0,
+            "delay_before_ms": 2445
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": -240,
+            "scroll_y_before": 668.7999877929688,
+            "scroll_y_after": 476.79998779296875,
+            "viewport_height": 640,
+            "document_height": 1512,
+            "locator_profile": {
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div",
+                "tag": "div"
+            },
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:50:27.156Z",
+            "page_id": 0,
+            "delay_before_ms": 1013
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 687,
+            "scroll_y_before": 476.79998779296875,
+            "scroll_y_after": 871.2000122070312,
+            "viewport_height": 640,
+            "document_height": 1512,
+            "locator_profile": {
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div",
+                "tag": "div"
+            },
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:50:27.918Z",
+            "page_id": 0,
+            "delay_before_ms": 762
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(5) > div > div:nth-of-type(2) > div > div",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[5]/div[1]/div[2]/div[1]/div[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 265.6000061035156,
+                "y": 277.5249938964844,
+                "width": 24,
+                "height": 26.399999618530273
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:50:28.587Z",
+            "page_id": 0,
+            "delay_before_ms": 669
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Pay Securely ₹619.17",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(6) > div",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[6]/div[1]",
+                "text": "Pay Securely ₹619.17",
+                "element_text": "Pay Securely ₹619.17",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 550.1500244140625,
+                "y": 634.125,
+                "width": 162.90000915527344,
+                "height": 19.200000762939453
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:50:29.696Z",
+            "page_id": 0,
+            "delay_before_ms": 1109
+        },
+        {
+            "action_type": "tab_open",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://pgpayuat.icici.bank.in/tsp/pg/api/v2/authRedirect?tranCtx=R01a038f8-eac3-7f1e-b61b-8066efcb058a",
+            "timestamp": "2026-08-25T12:50:36.167Z",
+            "new_tab": true,
+            "page_id": 1,
+            "from_page_id": 0,
+            "delay_before_ms": 6471
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 1,
+            "page_url": "https://pgpayuat.icici.bank.in/tsp/pg/api/v2/authRedirect?tranCtx=R01a038f8-eac3-7f1e-b61b-8066efcb058a",
+            "remaining_page_id": 0,
+            "timestamp": "2026-08-25T12:50:36.678Z",
+            "delay_before_ms": 511
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 0,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/srv-the-winning-edge-marathon-2026-E1170/participants?from=eventslist",
+            "remaining_page_id": null,
+            "timestamp": "2026-08-25T12:50:36.680Z",
+            "delay_before_ms": 2
+        }
+    ],
+    "saved_at": "2026-08-25T18:20:36.682376"
+}

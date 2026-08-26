@@ -1,0 +1,118 @@
+{
+    "status": "PASS",
+    "message": "all steps resolved and validations passed",
+    "qa_url": "https://www.amazon.com/",
+    "steps": [
+        {
+            "index": 1,
+            "action_type": "click",
+            "strategy_used": "id",
+            "element_found": true,
+            "success": true,
+            "error": null,
+            "screenshot": "screenshots/execution_runs/20260812_121920/step1.png",
+            "fragile": false
+        },
+        {
+            "index": 2,
+            "action_type": "fill",
+            "strategy_used": "id",
+            "element_found": true,
+            "success": true,
+            "error": null,
+            "screenshot": "screenshots/execution_runs/20260812_121920/step2.png",
+            "fragile": false
+        },
+        {
+            "index": 3,
+            "action_type": "press",
+            "strategy_used": "id",
+            "element_found": true,
+            "success": true,
+            "error": null,
+            "screenshot": "screenshots/execution_runs/20260812_121920/step3.png",
+            "fragile": false
+        },
+        {
+            "index": 4,
+            "action_type": "navigate",
+            "strategy_used": null,
+            "element_found": true,
+            "success": true,
+            "error": null,
+            "screenshot": "screenshots/execution_runs/20260812_121920/step4.png",
+            "fragile": false
+        },
+        {
+            "index": 5,
+            "action_type": "scroll",
+            "strategy_used": null,
+            "element_found": true,
+            "success": true,
+            "error": null,
+            "screenshot": "screenshots/execution_runs/20260812_121920/step5.png",
+            "fragile": false
+        },
+        {
+            "index": 6,
+            "action_type": "navigate",
+            "strategy_used": null,
+            "element_found": true,
+            "success": true,
+            "error": null,
+            "screenshot": "screenshots/execution_runs/20260812_121920/step6.png",
+            "fragile": false
+        }
+    ],
+    "ui_elements": [
+        {
+            "index": 1,
+            "action_type": "click",
+            "element_found": true,
+            "locator_used": "id",
+            "status": "PASS",
+            "message": null
+        },
+        {
+            "index": 2,
+            "action_type": "fill",
+            "element_found": true,
+            "locator_used": "id",
+            "status": "PASS",
+            "message": null
+        },
+        {
+            "index": 3,
+            "action_type": "press",
+            "element_found": true,
+            "locator_used": "id",
+            "status": "PASS",
+            "message": null
+        }
+    ],
+    "ui_elements_status": "PASS",
+    "content_check": null,
+    "screenshot_diff": null,
+    "product_validation": {
+        "status": "PASS",
+        "product": "Wireless Mouse, 2026 New Model, Silent Click Ergonomic Design, Portable, 4 Buttons, Adjustable DPI (800/1200/1600), for Laptop/PC/Office (Pink)",
+        "found": true,
+        "match_type": "exact",
+        "position": 18,
+        "page": 1,
+        "title": "Wireless Mouse, 2026 New Model, Silent Click Ergonomic Design, Portable, 4 Buttons, Adjustable DPI (800/1200/1600), for Laptop/PC/Office (Pink)",
+        "url": "/TvvTvvT-Wireless-Ergonomic-Portable-Adjustable/dp/B0GCJYJVG2/ref=sr_1_1?dib=eyJ2IjoiMSJ9.G144JJ3fmICVzCCNnNslTzcSoGwISnkaO_2jg4zXDmFsdk1fXHOaS9334HwAlensO1i84tWXKdKfHN84MT_wWQkdrDofHzsW2lV5hlSMF8ubqT7jSybgWxGPnveGkAWY3olAFKc1qX-mnvjaoUlLThIjXD5KfPSi75_37DVR-kGPui4UEjEzPCHqQDONZYhZ8AAiLep9TFR9O1XQxM-f14ea_dx6vvGvw2hmd0JmsIk.ndg7JaGjpXT5xfMeEdJx-C5H1R3GKQ3Wh_tZitzsT2w&dib_tag=se&keywords=Wireless+Mouse%2C+2026+New+Model%2C+Silent+Click+Ergonomic+Design%2C+Portable%2C+4+Buttons%2C+Adjustable+DPI+%28800%2F1200%2F1600%29%2C+for+Laptop%2FPC%2FOffice+%28Pink%29&nsdOptOutParam=true&qid=1786517393&sr=8-1",
+        "locator": "a:has-text(\"Wireless Mouse, 2026 New Model, Silent Click Ergonomic Desig\")",
+        "bounding_box": {
+            "x": 525.796875,
+            "y": 240,
+            "width": 731.1875,
+            "height": 48
+        },
+        "screenshot": "screenshots/product_search/search_20260812_122010_706810.png",
+        "reason": null,
+        "search_url": "https://www.amazon.com/s?k=Wireless+Mouse%2C+2026+New+Model%2C+Silent+Click+Ergonomic+Design%2C+Portable%2C+4+Buttons%2C+Adjustable+DPI+%28800%2F1200%2F1600%29%2C+for+Laptop%2FPC%2FOffice+%28Pink%29&ref=nb_sb_noss"
+    },
+    "final_screenshot": "screenshots/execution_runs/20260812_121920/final.png",
+    "run_id": "20260812_121920"
+}

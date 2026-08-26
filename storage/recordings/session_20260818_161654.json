@@ -1,0 +1,122 @@
+{
+    "name": "session_20260818_161654",
+    "session_id": "450efe69974c4a798d2c2d3819a1c99b",
+    "start_url": "https://www.myntra.com/",
+    "recorded_at": "2026-08-18T16:16:54.132553",
+    "stop_reason": "browser_closed",
+    "total_actions": 8,
+    "actions": [
+        {
+            "action_type": "fill",
+            "value": "shirts",
+            "locator_profile": {
+                "id": null,
+                "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > div:nth-of-type(3) > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/header[1]/div[2]/div[3]/input[1]",
+                "text": "shirts",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Search for products, brands and more"
+                }
+            },
+            "bounding_box": {
+                "x": 731.2000122070312,
+                "y": 20,
+                "width": 324.8000183105469,
+                "height": 39.60000228881836
+            },
+            "page_url": "https://www.myntra.com/",
+            "timestamp": "2026-08-18T10:46:06.755Z"
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > div:nth-of-type(3) > div > ul > li:nth-of-type(2)",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/header[1]/div[2]/div[3]/div[1]/ul[1]/li[2]",
+                "text": "Shirts For Men",
+                "tag": "li",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 691.2000122070312,
+                "y": 90,
+                "width": 375,
+                "height": 30
+            },
+            "page_url": "https://www.myntra.com/",
+            "timestamp": "2026-08-18T10:46:06.992Z"
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 2954,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/shirts-for-men?extra_search_param=isautosuggestentry%3atrue%3a%3aid%3a2297-shirts-for-men&rawQuery=Shirts%20For%20Men",
+            "timestamp": "2026-08-18T10:46:12.651Z"
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/shirts-for-men?extra_search_param=isautosuggestentry%3atrue%3a%3aid%3a2297-shirts-for-men&rawQuery=Shirts%20For%20Men",
+            "timestamp": "2026-08-18T10:46:12.719Z"
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "css_path": "li#28400716 > a > div > div > div > div > div > div:nth-of-type(2) > div > picture > img",
+                "xpath": "/html[1]/body[1]/div[2]/div[1]/main[1]/div[3]/div[2]/div[1]/div[2]/section[1]/ul[1]/li[27]/a[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/picture[1]/img[1]",
+                "text": "",
+                "tag": "img",
+                "attributes": {
+                    "title": "HIGHLANDER White Regular Fit Vertical Striped Casual Shirt"
+                }
+            },
+            "bounding_box": {
+                "x": 777.4500122070312,
+                "y": 266.8000183105469,
+                "width": 210,
+                "height": 280
+            },
+            "page_url": "https://www.myntra.com/shirts-for-men?extra_search_param=isautosuggestentry%3atrue%3a%3aid%3a2297-shirts-for-men&rawQuery=Shirts%20For%20Men",
+            "timestamp": "2026-08-18T10:46:13.503Z"
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/shirts/highlander/highlander-white-regular-fit-vertical-striped-casual-shirt/28400716/buy",
+            "timestamp": "2026-08-18T10:46:14.985Z",
+            "new_tab": true
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 2766,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/shirts-for-men?extra_search_param=isautosuggestentry%3atrue%3a%3aid%3a2297-shirts-for-men&rawQuery=Shirts%20For%20Men",
+            "timestamp": "2026-08-18T10:46:50.741Z"
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": -2572,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/shirts-for-men?extra_search_param=isautosuggestentry%3atrue%3a%3aid%3a2297-shirts-for-men&rawQuery=Shirts%20For%20Men",
+            "timestamp": "2026-08-18T10:46:52.308Z"
+        }
+    ],
+    "saved_at": "2026-08-18T16:16:54.134783"
+}

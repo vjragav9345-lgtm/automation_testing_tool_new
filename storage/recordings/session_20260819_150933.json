@@ -1,0 +1,546 @@
+{
+    "name": "session_20260819_150933",
+    "session_id": "29312cbcfeef410c8bf2aeb82b741ce7",
+    "start_url": "https://www.flipkart.com/",
+    "recorded_at": "2026-08-19T15:09:33.602398",
+    "stop_reason": "browser_closed",
+    "total_actions": 24,
+    "page_count": 3,
+    "actions": [
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "button",
+                "aria_label": null,
+                "accessible_name": "✕",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "body > div:nth-of-type(5) > div > span",
+                "xpath": "/html[1]/body[1]/div[5]/div[1]/span[1]",
+                "text": "✕",
+                "element_text": "✕",
+                "tag": "span",
+                "attributes": {
+                    "role": "button"
+                }
+            },
+            "bounding_box": {
+                "x": 988.8500366210938,
+                "y": 96,
+                "width": 26.149999618530273,
+                "height": 32
+            },
+            "page_url": "https://www.flipkart.com/",
+            "timestamp": "2026-08-19T09:38:38.197Z",
+            "page_id": 0,
+            "delay_before_ms": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": "q",
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Search for Products, Brands and More",
+                "placeholder": "Search for Products, Brands and More",
+                "title": "Search for Products, Brands and More",
+                "href": null,
+                "css_path": "div#container > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div:nth-of-type(2) > div > div > div > div > div > header > div > div > form > div > div > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/header[1]/div[1]/div[1]/form[1]/div[1]/div[1]/input[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "input",
+                "attributes": {
+                    "type": "text",
+                    "title": "Search for Products, Brands and More",
+                    "placeholder": "Search for Products, Brands and More",
+                    "name": "q"
+                }
+            },
+            "bounding_box": {
+                "x": 105.5999984741211,
+                "y": 78,
+                "width": 821.9625244140625,
+                "height": 40
+            },
+            "page_url": "https://www.flipkart.com/",
+            "timestamp": "2026-08-19T09:38:39.569Z",
+            "page_id": 0,
+            "delay_before_ms": 1372
+        },
+        {
+            "action_type": "fill",
+            "value": "iphone",
+            "locator_profile": {
+                "id": null,
+                "name": "q",
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Search for Products, Brands and More",
+                "placeholder": "Search for Products, Brands and More",
+                "title": "Search for Products, Brands and More",
+                "href": null,
+                "css_path": "div#container > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div:nth-of-type(2) > div > div > div > div > div > header > div > div > form > div > div > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/header[1]/div[1]/div[1]/form[1]/div[1]/div[1]/input[1]",
+                "text": "iphone",
+                "element_text": "iphone",
+                "tag": "input",
+                "attributes": {
+                    "type": "text",
+                    "title": "Search for Products, Brands and More",
+                    "placeholder": "Search for Products, Brands and More",
+                    "name": "q"
+                }
+            },
+            "bounding_box": {
+                "x": 105.5999984741211,
+                "y": 78,
+                "width": 821.9625244140625,
+                "height": 40
+            },
+            "page_url": "https://www.flipkart.com/",
+            "timestamp": "2026-08-19T09:38:42.913Z",
+            "page_id": 0,
+            "delay_before_ms": 3344
+        },
+        {
+            "action_type": "press",
+            "value": "Enter",
+            "locator_profile": {
+                "id": null,
+                "name": "q",
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Search for Products, Brands and More",
+                "placeholder": "Search for Products, Brands and More",
+                "title": "Search for Products, Brands and More",
+                "href": null,
+                "css_path": "div#container > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div:nth-of-type(2) > div > div > div > div > div > header > div > div > form > div > div > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/header[1]/div[1]/div[1]/form[1]/div[1]/div[1]/input[1]",
+                "text": "iphone",
+                "element_text": "iphone",
+                "tag": "input",
+                "attributes": {
+                    "type": "text",
+                    "title": "Search for Products, Brands and More",
+                    "placeholder": "Search for Products, Brands and More",
+                    "name": "q"
+                }
+            },
+            "bounding_box": {
+                "x": 105.5999984741211,
+                "y": 78,
+                "width": 821.9625244140625,
+                "height": 40
+            },
+            "page_url": "https://www.flipkart.com/",
+            "timestamp": "2026-08-19T09:38:42.914Z",
+            "page_id": 0,
+            "delay_before_ms": 1
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 1972,
+            "scroll_y_before": 0,
+            "scroll_y_after": 1578.4000244140625,
+            "viewport_height": 720,
+            "document_height": 8727,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.flipkart.com/search?q=iphone&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off",
+            "timestamp": "2026-08-19T09:38:46.887Z",
+            "page_id": 0,
+            "delay_before_ms": 3973
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Add to Compare\nApple iPhone 17 (Lavender, 256 GB)\n4.622,985 Ratings & 1,682 Revi",
+                "placeholder": null,
+                "title": null,
+                "href": "/apple-iphone-17-lavender-256-gb/p/itmf37c8dffa4165?pid=MOBHFN6YKGBPYJZD&lid=LSTMOBHFN6YKGBPYJZDEZPBYP&marketplace=FLIPKART&q=iphone&store=tyy%2F4io&srno=s_1_7&otracker=search&otracker1=search&fm=organic&iid=99041e31-6b30-4067-b235-958499996dde.MOBHFN6YKGBPYJZD.SEARCH&ppt=None&ppn=None&ssid=a03p08k5xc0000001787132324305&qH=0b3f45b266a97d70&ov_redirect=true",
+                "css_path": "div#container > div > div:nth-of-type(3) > div > div:nth-of-type(2) > div:nth-of-type(8) > div > div > div > a",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[3]/div[1]/div[2]/div[8]/div[1]/div[1]/div[1]/a[1]",
+                "text": "Add to Compare\nApple iPhone 17 (Lavender, 256 GB)\n4.622,985 Ratings & 1,682 Revi",
+                "element_text": "Add to Compare\nApple iPhone 17 (Lavender, 256 GB)\n4.622,985 Ratings & 1,682 Revi",
+                "tag": "a",
+                "attributes": {
+                    "href": "/apple-iphone-17-lavender-256-gb/p/itmf37c8dffa4165?pid=MOBHFN6YKGBPYJZD&lid=LSTMOBHFN6YKGBPYJZDEZPBYP&marketplace=FLIPKART&q=iphone&store=tyy%2F4io&srno=s_1_7&otracker=search&otracker1=search&fm=organic&iid=99041e31-6b30-4067-b235-958499996dde.MOBHFN6YKGBPYJZD.SEARCH&ppt=None&ppn=None&ssid=a03p08k5xc0000001787132324305&qH=0b3f45b266a97d70&ov_redirect=true"
+                }
+            },
+            "bounding_box": {
+                "x": 312,
+                "y": 357.9375,
+                "width": 943.2000122070312,
+                "height": 230.5749969482422
+            },
+            "page_url": "https://www.flipkart.com/search?q=iphone&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off",
+            "timestamp": "2026-08-19T09:38:48.062Z",
+            "page_id": 0,
+            "delay_before_ms": 1175
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.flipkart.com/search?q=iphone&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off",
+            "timestamp": "2026-08-19T09:38:48.465Z",
+            "page_id": 0,
+            "delay_before_ms": 403
+        },
+        {
+            "action_type": "tab_open",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.flipkart.com/apple-iphone-17-lavender-256-gb/p/itmf37c8dffa4165?pid=MOBHFN6YKGBPYJZD&lid=LSTMOBHFN6YKGBPYJZDEZPBYP&marketplace=FLIPKART&q=iphone&store=tyy%2F4io&srno=s_1_7&otracker=search&otracker1=search&fm=organic&iid=99041e31-6b30-4067-b235-958499996dde.MOBHFN6YKGBPYJZD.SEARCH&ppt=None&ppn=None&ssid=a03p08k5xc0000001787132324305&qH=0b3f45b266a97d70&ov_redirect=true",
+            "timestamp": "2026-08-19T09:38:51.430Z",
+            "new_tab": true,
+            "page_id": 1,
+            "from_page_id": 0,
+            "delay_before_ms": 2965
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 765,
+            "scroll_y_before": 0,
+            "scroll_y_after": 0,
+            "viewport_height": 720,
+            "document_height": 720,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.flipkart.com/apple-iphone-17-lavender-256-gb/p/itmf37c8dffa4165?pid=MOBHFN6YKGBPYJZD&lid=LSTMOBHFN6YKGBPYJZDEZPBYP&marketplace=FLIPKART&q=iphone&store=tyy%2F4io&srno=s_1_7&otracker=search&otracker1=search&fm=organic&iid=99041e31-6b30-4067-b235-958499996dde.MOBHFN6YKGBPYJZD.SEARCH&ppt=None&ppn=None&ssid=a03p08k5xc0000001787132324305&qH=0b3f45b266a97d70&ov_redirect=true",
+            "timestamp": "2026-08-19T09:38:52.582Z",
+            "page_id": 1,
+            "delay_before_ms": 1152
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 4489,
+            "scroll_y_before": 0,
+            "scroll_y_after": 0,
+            "viewport_height": 720,
+            "document_height": 720,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.flipkart.com/apple-iphone-17-lavender-256-gb/p/itmf37c8dffa4165?pid=MOBHFN6YKGBPYJZD&lid=LSTMOBHFN6YKGBPYJZDEZPBYP&marketplace=FLIPKART&q=iphone&store=tyy%2F4io&srno=s_1_7&otracker=search&otracker1=search&fm=organic&iid=99041e31-6b30-4067-b235-958499996dde.MOBHFN6YKGBPYJZD.SEARCH&ppt=None&ppn=None&ssid=a03p08k5xc0000001787132324305&qH=0b3f45b266a97d70&ov_redirect=true",
+            "timestamp": "2026-08-19T09:38:58.395Z",
+            "page_id": 1,
+            "delay_before_ms": 5813
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": -272,
+            "delta_y": -5750,
+            "scroll_y_before": 0,
+            "scroll_y_after": 0,
+            "viewport_height": 720,
+            "document_height": 720,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.flipkart.com/apple-iphone-17-lavender-256-gb/p/itmf37c8dffa4165?pid=MOBHFN6YKGBPYJZD&lid=LSTMOBHFN6YKGBPYJZDEZPBYP&marketplace=FLIPKART&q=iphone&store=tyy%2F4io&srno=s_1_7&otracker=search&otracker1=search&fm=organic&iid=99041e31-6b30-4067-b235-958499996dde.MOBHFN6YKGBPYJZD.SEARCH&ppt=None&ppn=None&ssid=a03p08k5xc0000001787132324305&qH=0b3f45b266a97d70&ov_redirect=true",
+            "timestamp": "2026-08-19T09:39:01.436Z",
+            "page_id": 1,
+            "delay_before_ms": 3041
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Cart",
+                "placeholder": null,
+                "title": "Cart",
+                "href": "/viewcart?marketplace=FLIPKART",
+                "css_path": "div#container > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > header > div:nth-of-type(3) > div:nth-of-type(4) > div > a",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/header[1]/div[3]/div[4]/div[1]/a[1]",
+                "text": "Cart",
+                "element_text": "Cart",
+                "tag": "a",
+                "attributes": {
+                    "href": "/viewcart?marketplace=FLIPKART",
+                    "title": "Cart"
+                }
+            },
+            "bounding_box": {
+                "x": 1155.612548828125,
+                "y": 20,
+                "width": 68.38750457763672,
+                "height": 24
+            },
+            "page_url": "https://www.flipkart.com/apple-iphone-17-lavender-256-gb/p/itmf37c8dffa4165?pid=MOBHFN6YKGBPYJZD&lid=LSTMOBHFN6YKGBPYJZDEZPBYP&marketplace=FLIPKART&q=iphone&store=tyy%2F4io&srno=s_1_7&otracker=search&otracker1=search&fm=organic&iid=99041e31-6b30-4067-b235-958499996dde.MOBHFN6YKGBPYJZD.SEARCH&ppt=None&ppn=None&ssid=a03p08k5xc0000001787132324305&qH=0b3f45b266a97d70&ov_redirect=true",
+            "timestamp": "2026-08-19T09:39:02.906Z",
+            "page_id": 1,
+            "delay_before_ms": 1470
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.flipkart.com/viewcart?exploreMode=TRUE&preference=FLIPKART&pageUID=1787132342923",
+            "timestamp": "2026-08-19T09:39:07.748Z",
+            "page_id": 1,
+            "delay_before_ms": 4842
+        },
+        {
+            "action_type": "fill",
+            "value": "https://www.flipkart.com/viewcart?marketplace=FLIPKART",
+            "locator_profile": {
+                "id": null,
+                "name": "q",
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Search for Products, Brands and More",
+                "placeholder": "Search for Products, Brands and More",
+                "title": "Search for Products, Brands and More",
+                "href": null,
+                "css_path": "div#container > div > div > div > div > div > div > div > div > div > div > div > div > div > div > header > div:nth-of-type(2) > div > form > div > div > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/header[1]/div[2]/div[1]/form[1]/div[1]/div[1]/input[1]",
+                "text": "https://www.flipkart.com/viewcart?marketplace=FLIPKART",
+                "element_text": "https://www.flipkart.com/viewcart?marketplace=FLIPKART",
+                "tag": "input",
+                "attributes": {
+                    "title": "Search for Products, Brands and More",
+                    "placeholder": "Search for Products, Brands and More",
+                    "type": "text",
+                    "name": "q"
+                }
+            },
+            "bounding_box": {
+                "x": 304.3125,
+                "y": 12,
+                "width": 623.25,
+                "height": 40
+            },
+            "page_url": "https://www.flipkart.com/apple-iphone-17-lavender-256-gb/p/itmf37c8dffa4165?pid=MOBHFN6YKGBPYJZD&lid=LSTMOBHFN6YKGBPYJZDEZPBYP&marketplace=FLIPKART&q=iphone&store=tyy%2F4io&srno=s_1_7&otracker=search&otracker1=search&fm=organic&iid=99041e31-6b30-4067-b235-958499996dde.MOBHFN6YKGBPYJZD.SEARCH&ppt=None&ppn=None&ssid=a03p08k5xc0000001787132324305&qH=0b3f45b266a97d70&ov_redirect=true",
+            "timestamp": "2026-08-19T09:39:07.976Z",
+            "page_id": 1,
+            "delay_before_ms": 228
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 1,
+            "page_url": "https://www.flipkart.com/viewcart?exploreMode=TRUE&preference=FLIPKART&pageUID=1787132342923",
+            "remaining_page_id": 0,
+            "timestamp": "2026-08-19T09:39:10.965Z",
+            "delay_before_ms": 2989
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 1507,
+            "scroll_y_before": 1578.4000244140625,
+            "scroll_y_after": 2784,
+            "viewport_height": 720,
+            "document_height": 8727,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.flipkart.com/search?q=iphone&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off",
+            "timestamp": "2026-08-19T09:39:13.823Z",
+            "page_id": 0,
+            "delay_before_ms": 2858
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Bestseller\nAdd to Compare\nApple iPhone 17 (White, 256 GB)\n4.622,985 Ratings & 1,",
+                "placeholder": null,
+                "title": null,
+                "href": "/apple-iphone-17-white-256-gb/p/itmf98e89534d806?pid=MOBHFN6YTSH3QRCZ&lid=LSTMOBHFN6YTSH3QRCZYMRV03&marketplace=FLIPKART&q=iphone&store=tyy%2F4io&spotlightTagId=default_BestsellerId_tyy%2F4io&srno=s_1_12&otracker=search&otracker1=search&fm=Search&iid=99041e31-6b30-4067-b235-958499996dde.MOBHFN6YTSH3QRCZ.SEARCH&ppt=sp&ppn=sp&qH=0b3f45b266a97d70&ov_redirect=true",
+                "css_path": "div#container > div > div:nth-of-type(3) > div > div:nth-of-type(2) > div:nth-of-type(13) > div > div > div > a",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[3]/div[1]/div[2]/div[13]/div[1]/div[1]/div[1]/a[1]",
+                "text": "Bestseller\nAdd to Compare\nApple iPhone 17 (White, 256 GB)\n4.622,985 Ratings & 1,",
+                "element_text": "Bestseller\nAdd to Compare\nApple iPhone 17 (White, 256 GB)\n4.622,985 Ratings & 1,",
+                "tag": "a",
+                "attributes": {
+                    "href": "/apple-iphone-17-white-256-gb/p/itmf98e89534d806?pid=MOBHFN6YTSH3QRCZ&lid=LSTMOBHFN6YTSH3QRCZYMRV03&marketplace=FLIPKART&q=iphone&store=tyy%2F4io&spotlightTagId=default_BestsellerId_tyy%2F4io&srno=s_1_12&otracker=search&otracker1=search&fm=Search&iid=99041e31-6b30-4067-b235-958499996dde.MOBHFN6YTSH3QRCZ.SEARCH&ppt=sp&ppn=sp&qH=0b3f45b266a97d70&ov_redirect=true"
+                }
+            },
+            "bounding_box": {
+                "x": 312,
+                "y": 579.2125244140625,
+                "width": 943.2000122070312,
+                "height": 230.5749969482422
+            },
+            "page_url": "https://www.flipkart.com/search?q=iphone&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off",
+            "timestamp": "2026-08-19T09:39:14.890Z",
+            "page_id": 0,
+            "delay_before_ms": 1067
+        },
+        {
+            "action_type": "tab_open",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.flipkart.com/apple-iphone-17-white-256-gb/p/itmf98e89534d806?pid=MOBHFN6YTSH3QRCZ&lid=LSTMOBHFN6YTSH3QRCZYMRV03&marketplace=FLIPKART&q=iphone&store=tyy%2F4io&spotlightTagId=default_BestsellerId_tyy%2F4io&srno=s_1_12&otracker=search&otracker1=search&fm=Search&iid=99041e31-6b30-4067-b235-958499996dde.MOBHFN6YTSH3QRCZ.SEARCH&ppt=sp&ppn=sp&qH=0b3f45b266a97d70&ov_redirect=true",
+            "timestamp": "2026-08-19T09:39:18.211Z",
+            "new_tab": true,
+            "page_id": 2,
+            "from_page_id": 0,
+            "delay_before_ms": 3321
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 2,
+            "page_url": "https://www.flipkart.com/apple-iphone-17-white-256-gb/p/itmf98e89534d806?pid=MOBHFN6YTSH3QRCZ&lid=LSTMOBHFN6YTSH3QRCZYMRV03&marketplace=FLIPKART&q=iphone&store=tyy%2F4io&spotlightTagId=default_BestsellerId_tyy%2F4io&srno=s_1_12&otracker=search&otracker1=search&fm=Search&iid=99041e31-6b30-4067-b235-958499996dde.MOBHFN6YTSH3QRCZ.SEARCH&ppt=sp&ppn=sp&qH=0b3f45b266a97d70&ov_redirect=true",
+            "remaining_page_id": 0,
+            "timestamp": "2026-08-19T09:39:19.246Z",
+            "delay_before_ms": 1035
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 4419,
+            "scroll_y_before": 2784,
+            "scroll_y_after": 6319.2001953125,
+            "viewport_height": 720,
+            "document_height": 8727,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.flipkart.com/search?q=iphone&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off",
+            "timestamp": "2026-08-19T09:39:22.751Z",
+            "page_id": 0,
+            "delay_before_ms": 3505
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "More",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#container > div > div > div > div:nth-of-type(2) > div:nth-of-type(5) > div > div > div > div",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[5]/div[1]/div[1]/div[1]/div[1]",
+                "text": "More",
+                "element_text": "More",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 964.1124877929688,
+                "y": 18,
+                "width": 38.375,
+                "height": 20
+            },
+            "page_url": "https://www.flipkart.com/search?q=iphone&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off",
+            "timestamp": "2026-08-19T09:39:25.685Z",
+            "page_id": 0,
+            "delay_before_ms": 2934
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "More",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#container > div > div > div > div:nth-of-type(2) > div:nth-of-type(5) > div > div > div > div",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[5]/div[1]/div[1]/div[1]/div[1]",
+                "text": "More",
+                "element_text": "More",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 964.1124877929688,
+                "y": 18,
+                "width": 38.375,
+                "height": 20
+            },
+            "page_url": "https://www.flipkart.com/search?q=iphone&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off",
+            "timestamp": "2026-08-19T09:39:26.368Z",
+            "page_id": 0,
+            "delay_before_ms": 683
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Notification Preferences",
+                "placeholder": null,
+                "title": null,
+                "href": "/communication-preferences/push?t=all",
+                "css_path": "div#container > div > div > div > div:nth-of-type(2) > div:nth-of-type(5) > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > ul > li > a",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[5]/div[1]/div[1]/div[2]/div[2]/div[1]/ul[1]/li[1]/a[1]",
+                "text": "Notification Preferences",
+                "element_text": "Notification Preferences",
+                "tag": "a",
+                "attributes": {
+                    "href": "/communication-preferences/push?t=all"
+                }
+            },
+            "bounding_box": {
+                "x": 863.2999877929688,
+                "y": 56,
+                "width": 240,
+                "height": 50
+            },
+            "page_url": "https://www.flipkart.com/search?q=iphone&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off",
+            "timestamp": "2026-08-19T09:39:27.555Z",
+            "page_id": 0,
+            "delay_before_ms": 1187
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 0,
+            "page_url": "https://www.flipkart.com/search?q=iphone&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off",
+            "remaining_page_id": null,
+            "timestamp": "2026-08-19T09:39:33.602Z",
+            "delay_before_ms": 6047
+        }
+    ],
+    "saved_at": "2026-08-19T15:09:33.602398"
+}

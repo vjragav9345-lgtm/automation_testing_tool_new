@@ -1,0 +1,405 @@
+{
+    "name": "session_20260819_115856",
+    "session_id": "1675790fb72746f3ae2676f8407cc106",
+    "start_url": "https://www.flipkart.com/",
+    "recorded_at": "2026-08-19T11:58:56.479890",
+    "stop_reason": "browser_closed",
+    "total_actions": 19,
+    "page_count": 2,
+    "actions": [
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "button",
+                "aria_label": null,
+                "accessible_name": "✕",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "body > div:nth-of-type(5) > div > span",
+                "xpath": "/html[1]/body[1]/div[5]/div[1]/span[1]",
+                "text": "✕",
+                "element_text": "✕",
+                "tag": "span",
+                "attributes": {
+                    "role": "button"
+                }
+            },
+            "bounding_box": {
+                "x": 988.8500366210938,
+                "y": 96,
+                "width": 26.149999618530273,
+                "height": 32
+            },
+            "page_url": "https://www.flipkart.com/",
+            "timestamp": "2026-08-19T06:27:51.257Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": "q",
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Search for Products, Brands and More",
+                "placeholder": "Search for Products, Brands and More",
+                "title": "Search for Products, Brands and More",
+                "href": null,
+                "css_path": "div#container > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div:nth-of-type(2) > div > div > div > div > div > header > div > div > form > div > div > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/header[1]/div[1]/div[1]/form[1]/div[1]/div[1]/input[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "input",
+                "attributes": {
+                    "type": "text",
+                    "title": "Search for Products, Brands and More",
+                    "placeholder": "Search for Products, Brands and More",
+                    "name": "q"
+                }
+            },
+            "bounding_box": {
+                "x": 105.5999984741211,
+                "y": 78,
+                "width": 821.9625244140625,
+                "height": 40
+            },
+            "page_url": "https://www.flipkart.com/",
+            "timestamp": "2026-08-19T06:27:52.684Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "fill",
+            "value": "iphone",
+            "locator_profile": {
+                "id": null,
+                "name": "q",
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Search for Products, Brands and More",
+                "placeholder": "Search for Products, Brands and More",
+                "title": "Search for Products, Brands and More",
+                "href": null,
+                "css_path": "div#container > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div:nth-of-type(2) > div > div > div > div > div > header > div > div > form > div > div > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/header[1]/div[1]/div[1]/form[1]/div[1]/div[1]/input[1]",
+                "text": "iphone",
+                "element_text": "iphone",
+                "tag": "input",
+                "attributes": {
+                    "type": "text",
+                    "title": "Search for Products, Brands and More",
+                    "placeholder": "Search for Products, Brands and More",
+                    "name": "q"
+                }
+            },
+            "bounding_box": {
+                "x": 105.5999984741211,
+                "y": 78,
+                "width": 821.9625244140625,
+                "height": 40
+            },
+            "page_url": "https://www.flipkart.com/",
+            "timestamp": "2026-08-19T06:27:56.989Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "iphone 15\nin Mobiles",
+                "placeholder": null,
+                "title": null,
+                "href": "/search?q=iphone+15&sid=tyy%2C4io&as=on&as-show=on&otracker=AS_QueryStore_OrganicAutoSuggest_1_6_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_6_na_na_na&as-pos=1&as-type=RECENT&suggestionId=iphone+15%7CMobiles&requestId=47e23fc9-f2fd-470e-a685-7b705e73e739&as-searchtext=iphone",
+                "css_path": "div#container > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div:nth-of-type(2) > div > div > div > div > div > header > div > div > form > ul > li > div > a",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/header[1]/div[1]/div[1]/form[1]/ul[1]/li[1]/div[1]/a[1]",
+                "text": "iphone 15\nin Mobiles",
+                "element_text": "iphone 15\nin Mobiles",
+                "tag": "a",
+                "attributes": {
+                    "href": "/search?q=iphone+15&sid=tyy%2C4io&as=on&as-show=on&otracker=AS_QueryStore_OrganicAutoSuggest_1_6_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_6_na_na_na&as-pos=1&as-type=RECENT&suggestionId=iphone+15%7CMobiles&requestId=47e23fc9-f2fd-470e-a685-7b705e73e739&as-searchtext=iphone"
+                }
+            },
+            "bounding_box": {
+                "x": 69.5999984741211,
+                "y": 128,
+                "width": 849.9625244140625,
+                "height": 60.79999923706055
+            },
+            "page_url": "https://www.flipkart.com/",
+            "timestamp": "2026-08-19T06:27:57.210Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 437,
+            "scroll_y_before": 0,
+            "scroll_y_after": 350.3999938964844,
+            "viewport_height": 720,
+            "document_height": 8301,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.flipkart.com/search?q=iphone+15&sid=tyy%2C4io&as=on&as-show=on&otracker=AS_QueryStore_OrganicAutoSuggest_1_6_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_6_na_na_na&as-pos=1&as-type=RECENT&suggestionId=iphone+15%7CMobiles&requestId=47e23fc9-f2fd-470e-a685-7b705e73e739&as-searchtext=iphone%2015",
+            "timestamp": "2026-08-19T06:28:00.709Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.flipkart.com/search?q=iphone+15&sid=tyy%2C4io&as=on&as-show=on&otracker=AS_QueryStore_OrganicAutoSuggest_1_6_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_6_na_na_na&as-pos=1&as-type=RECENT&suggestionId=iphone+15%7CMobiles&requestId=47e23fc9-f2fd-470e-a685-7b705e73e739&as-searchtext=iphone%2015",
+            "timestamp": "2026-08-19T06:28:02.656Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 7069,
+            "scroll_y_before": 356,
+            "scroll_y_after": 6004.7998046875,
+            "viewport_height": 720,
+            "document_height": 8301,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.flipkart.com/search?q=iphone+15&sid=tyy%2C4io&as=on&as-show=on&otracker=AS_QueryStore_OrganicAutoSuggest_1_6_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_6_na_na_na&as-pos=1&as-type=RECENT&suggestionId=iphone+15%7CMobiles&requestId=47e23fc9-f2fd-470e-a685-7b705e73e739&as-searchtext=iphone%2015",
+            "timestamp": "2026-08-19T06:28:10.196Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": -6406,
+            "scroll_y_before": 6006.39990234375,
+            "scroll_y_after": 880,
+            "viewport_height": 720,
+            "document_height": 8301,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.flipkart.com/search?q=iphone+15&sid=tyy%2C4io&as=on&as-show=on&otracker=AS_QueryStore_OrganicAutoSuggest_1_6_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_6_na_na_na&as-pos=1&as-type=RECENT&suggestionId=iphone+15%7CMobiles&requestId=47e23fc9-f2fd-470e-a685-7b705e73e739&as-searchtext=iphone%2015",
+            "timestamp": "2026-08-19T06:28:15.642Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Add to Compare\nApple iPhone 15 (Black, 256 GB)\n4.62,47,304 Ratings & 9,640 Revie",
+                "placeholder": null,
+                "title": null,
+                "href": "/apple-iphone-15-black-256-gb/p/itm6f0727e3e3b52?pid=MOBGTAGPSMHFKHT5&lid=LSTMOBGTAGPSMHFKHT5PIEVPX&marketplace=FLIPKART&q=iphone+15&store=tyy%2F4io&srno=s_1_4&otracker=AS_QueryStore_OrganicAutoSuggest_1_6_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_6_na_na_na&fm=organic&iid=4e5fe473-7f2a-4dbc-a6a3-3a0b576b3770.MOBGTAGPSMHFKHT5.SEARCH&ppt=None&ppn=None&ssid=r4n0eohgrk0000001787120878489&qH=2f54b45b321e3ae5&ov_redirect=true",
+                "css_path": "div#container > div > div:nth-of-type(3) > div > div:nth-of-type(2) > div:nth-of-type(5) > div > div > div > a",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[3]/div[1]/div[2]/div[5]/div[1]/div[1]/div[1]/a[1]",
+                "text": "Add to Compare\nApple iPhone 15 (Black, 256 GB)\n4.62,47,304 Ratings & 9,640 Revie",
+                "element_text": "Add to Compare\nApple iPhone 15 (Black, 256 GB)\n4.62,47,304 Ratings & 9,640 Revie",
+                "tag": "a",
+                "attributes": {
+                    "href": "/apple-iphone-15-black-256-gb/p/itm6f0727e3e3b52?pid=MOBGTAGPSMHFKHT5&lid=LSTMOBGTAGPSMHFKHT5PIEVPX&marketplace=FLIPKART&q=iphone+15&store=tyy%2F4io&srno=s_1_4&otracker=AS_QueryStore_OrganicAutoSuggest_1_6_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_6_na_na_na&fm=organic&iid=4e5fe473-7f2a-4dbc-a6a3-3a0b576b3770.MOBGTAGPSMHFKHT5.SEARCH&ppt=None&ppn=None&ssid=r4n0eohgrk0000001787120878489&qH=2f54b45b321e3ae5&ov_redirect=true"
+                }
+            },
+            "bounding_box": {
+                "x": 312,
+                "y": 200.21250915527344,
+                "width": 943.2000122070312,
+                "height": 230.5749969482422
+            },
+            "page_url": "https://www.flipkart.com/search?q=iphone+15&sid=tyy%2C4io&as=on&as-show=on&otracker=AS_QueryStore_OrganicAutoSuggest_1_6_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_6_na_na_na&as-pos=1&as-type=RECENT&suggestionId=iphone+15%7CMobiles&requestId=47e23fc9-f2fd-470e-a685-7b705e73e739&as-searchtext=iphone%2015",
+            "timestamp": "2026-08-19T06:28:16.471Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.flipkart.com/apple-iphone-15-black-256-gb/p/itm6f0727e3e3b52?pid=MOBGTAGPSMHFKHT5&lid=LSTMOBGTAGPSMHFKHT5PIEVPX&marketplace=FLIPKART&q=iphone+15&store=tyy%2F4io&srno=s_1_4&otracker=AS_QueryStore_OrganicAutoSuggest_1_6_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_6_na_na_na&fm=organic&iid=4e5fe473-7f2a-4dbc-a6a3-3a0b576b3770.MOBGTAGPSMHFKHT5.SEARCH&ppt=None&ppn=None&ssid=r4n0eohgrk0000001787120878489&qH=2f54b45b321e3ae5&ov_redirect=true",
+            "timestamp": "2026-08-19T06:28:19.530Z",
+            "new_tab": true,
+            "page_id": 1
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 205,
+            "scroll_y_before": 0,
+            "scroll_y_after": 0,
+            "viewport_height": 720,
+            "document_height": 720,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.flipkart.com/apple-iphone-15-black-256-gb/p/itm6f0727e3e3b52?pid=MOBGTAGPSMHFKHT5&lid=LSTMOBGTAGPSMHFKHT5PIEVPX&marketplace=FLIPKART&q=iphone+15&store=tyy%2F4io&srno=s_1_4&otracker=AS_QueryStore_OrganicAutoSuggest_1_6_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_6_na_na_na&fm=organic&iid=4e5fe473-7f2a-4dbc-a6a3-3a0b576b3770.MOBGTAGPSMHFKHT5.SEARCH&ppt=None&ppn=None&ssid=r4n0eohgrk0000001787120878489&qH=2f54b45b321e3ae5&ov_redirect=true",
+            "timestamp": "2026-08-19T06:28:20.347Z",
+            "page_id": 1
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#slot-list-container > div > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(2) > div > div:nth-of-type(20) > div > div > div > div > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div:nth-of-type(2)",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[20]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[2]",
+                "text": "",
+                "element_text": "",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 1016,
+                "y": 667.7999877929688,
+                "width": 208,
+                "height": 44
+            },
+            "page_url": "https://www.flipkart.com/apple-iphone-15-black-256-gb/p/itm6f0727e3e3b52?pid=MOBGTAGPSMHFKHT5&lid=LSTMOBGTAGPSMHFKHT5PIEVPX&marketplace=FLIPKART&q=iphone+15&store=tyy%2F4io&srno=s_1_4&otracker=AS_QueryStore_OrganicAutoSuggest_1_6_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_6_na_na_na&fm=organic&iid=4e5fe473-7f2a-4dbc-a6a3-3a0b576b3770.MOBGTAGPSMHFKHT5.SEARCH&ppt=None&ppn=None&ssid=r4n0eohgrk0000001787120878489&qH=2f54b45b321e3ae5&ov_redirect=true",
+            "timestamp": "2026-08-19T06:28:21.194Z",
+            "page_id": 1
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 2300,
+            "scroll_y_before": 0,
+            "scroll_y_after": 0,
+            "viewport_height": 720,
+            "document_height": 720,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.flipkart.com/apple-iphone-15-black-256-gb/p/itm6f0727e3e3b52?pid=MOBGTAGPSMHFKHT5&lid=LSTMOBGTAGPSMHFKHT5PIEVPX&marketplace=FLIPKART&q=iphone+15&store=tyy%2F4io&srno=s_1_4&otracker=AS_QueryStore_OrganicAutoSuggest_1_6_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_6_na_na_na&fm=organic&iid=4e5fe473-7f2a-4dbc-a6a3-3a0b576b3770.MOBGTAGPSMHFKHT5.SEARCH&ppt=None&ppn=None&ssid=r4n0eohgrk0000001787120878489&qH=2f54b45b321e3ae5&ov_redirect=true",
+            "timestamp": "2026-08-19T06:28:29.622Z",
+            "page_id": 1
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": -1425,
+            "scroll_y_before": 0,
+            "scroll_y_after": 0,
+            "viewport_height": 720,
+            "document_height": 720,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.flipkart.com/apple-iphone-15-black-256-gb/p/itm6f0727e3e3b52?pid=MOBGTAGPSMHFKHT5&lid=LSTMOBGTAGPSMHFKHT5PIEVPX&marketplace=FLIPKART&q=iphone+15&store=tyy%2F4io&srno=s_1_4&otracker=AS_QueryStore_OrganicAutoSuggest_1_6_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_6_na_na_na&fm=organic&iid=4e5fe473-7f2a-4dbc-a6a3-3a0b576b3770.MOBGTAGPSMHFKHT5.SEARCH&ppt=None&ppn=None&ssid=r4n0eohgrk0000001787120878489&qH=2f54b45b321e3ae5&ov_redirect=true",
+            "timestamp": "2026-08-19T06:28:31.877Z",
+            "page_id": 1
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Cart",
+                "placeholder": null,
+                "title": "Cart",
+                "href": "/viewcart?marketplace=FLIPKART",
+                "css_path": "div#container > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > header > div:nth-of-type(3) > div:nth-of-type(4) > div > a",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/header[1]/div[3]/div[4]/div[1]/a[1]",
+                "text": "Cart",
+                "element_text": "Cart",
+                "tag": "a",
+                "attributes": {
+                    "href": "/viewcart?marketplace=FLIPKART",
+                    "title": "Cart"
+                }
+            },
+            "bounding_box": {
+                "x": 1155.612548828125,
+                "y": 20,
+                "width": 68.38750457763672,
+                "height": 24
+            },
+            "page_url": "https://www.flipkart.com/apple-iphone-15-black-256-gb/p/itm6f0727e3e3b52?pid=MOBGTAGPSMHFKHT5&lid=LSTMOBGTAGPSMHFKHT5PIEVPX&marketplace=FLIPKART&q=iphone+15&store=tyy%2F4io&srno=s_1_4&otracker=AS_QueryStore_OrganicAutoSuggest_1_6_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_6_na_na_na&fm=organic&iid=4e5fe473-7f2a-4dbc-a6a3-3a0b576b3770.MOBGTAGPSMHFKHT5.SEARCH&ppt=None&ppn=None&ssid=r4n0eohgrk0000001787120878489&qH=2f54b45b321e3ae5&ov_redirect=true",
+            "timestamp": "2026-08-19T06:28:32.721Z",
+            "page_id": 1
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Login",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#container > div > div > div > div > div > div > div > div > div > div > div > div > div > div > header > div:nth-of-type(3) > div:nth-of-type(2) > div > div > div > div",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/header[1]/div[3]/div[2]/div[1]/div[1]/div[1]/div[1]",
+                "text": "Login",
+                "element_text": "Login",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 965.1625366210938,
+                "y": 8,
+                "width": 112.2750015258789,
+                "height": 48
+            },
+            "page_url": "https://www.flipkart.com/viewcart?exploreMode=TRUE&preference=FLIPKART&pageUID=1787120912734",
+            "timestamp": "2026-08-19T06:28:36.316Z",
+            "page_id": 1
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.flipkart.com/viewcart?exploreMode=TRUE&preference=FLIPKART&pageUID=1787120912734",
+            "timestamp": "2026-08-19T06:28:37.353Z",
+            "page_id": 1
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.flipkart.com/apple-iphone-15-black-256-gb/p/itm6f0727e3e3b52?pid=MOBGTAGPSMHFKHT5&lid=LSTMOBGTAGPSMHFKHT5PIEVPX&marketplace=FLIPKART&q=iphone+15&store=tyy%2F4io&srno=s_1_4&otracker=AS_QueryStore_OrganicAutoSuggest_1_6_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_6_na_na_na&fm=organic&iid=4e5fe473-7f2a-4dbc-a6a3-3a0b576b3770.MOBGTAGPSMHFKHT5.SEARCH&ppt=None&ppn=None&ssid=r4n0eohgrk0000001787120878489&qH=2f54b45b321e3ae5&ov_redirect=true",
+            "timestamp": "2026-08-19T06:28:48.129Z",
+            "page_id": 1
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 5094,
+            "scroll_y_before": 880,
+            "scroll_y_after": 4955.2001953125,
+            "viewport_height": 720,
+            "document_height": 8301,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.flipkart.com/search?q=iphone+15&sid=tyy%2C4io&as=on&as-show=on&otracker=AS_QueryStore_OrganicAutoSuggest_1_6_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_6_na_na_na&as-pos=1&as-type=RECENT&suggestionId=iphone+15%7CMobiles&requestId=47e23fc9-f2fd-470e-a685-7b705e73e739&as-searchtext=iphone%2015",
+            "timestamp": "2026-08-19T06:28:54.190Z",
+            "page_id": 0
+        }
+    ],
+    "saved_at": "2026-08-19T11:58:56.479890"
+}

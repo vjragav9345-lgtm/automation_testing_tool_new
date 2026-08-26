@@ -1,0 +1,115 @@
+{
+    "name": "session_20260812_121227",
+    "session_id": "9a7b2806cdf14636abcc6c7177260df8",
+    "start_url": "https://www.amazon.com/",
+    "recorded_at": "2026-08-12T12:12:27.526836",
+    "stop_reason": "terminal_enter",
+    "total_actions": 6,
+    "actions": [
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#twotabsearchtextbox",
+                "css_path": "input#twotabsearchtextbox",
+                "xpath": "//*[@id='twotabsearchtextbox']",
+                "text": "",
+                "tag": "input",
+                "attributes": {
+                    "type": "text",
+                    "name": "field-keywords",
+                    "placeholder": "Search Amazon",
+                    "aria-label": "Search Amazon",
+                    "role": "searchbox"
+                }
+            },
+            "bounding_box": {
+                "x": 276.2875061035156,
+                "y": 10.800000190734863,
+                "width": 541.9625244140625,
+                "height": 38
+            },
+            "page_url": "https://www.amazon.com/",
+            "timestamp": "2026-08-12T06:42:18.895Z"
+        },
+        {
+            "action_type": "fill",
+            "value": "wireless mouse",
+            "locator_profile": {
+                "id": "#twotabsearchtextbox",
+                "css_path": "input#twotabsearchtextbox",
+                "xpath": "//*[@id='twotabsearchtextbox']",
+                "text": "wireless mouse",
+                "tag": "input",
+                "attributes": {
+                    "type": "text",
+                    "name": "field-keywords",
+                    "placeholder": "Search Amazon",
+                    "aria-label": "Search Amazon",
+                    "role": "searchbox"
+                }
+            },
+            "bounding_box": {
+                "x": 276.2875061035156,
+                "y": 10.800000190734863,
+                "width": 541.9625244140625,
+                "height": 38
+            },
+            "page_url": "https://www.amazon.com/",
+            "timestamp": "2026-08-12T06:42:18.995Z"
+        },
+        {
+            "action_type": "press",
+            "value": "Enter",
+            "locator_profile": {
+                "id": "#twotabsearchtextbox",
+                "css_path": "input#twotabsearchtextbox",
+                "xpath": "//*[@id='twotabsearchtextbox']",
+                "text": "wireless mouse",
+                "tag": "input",
+                "attributes": {
+                    "type": "text",
+                    "name": "field-keywords",
+                    "placeholder": "Search Amazon",
+                    "aria-label": "Search Amazon",
+                    "role": "searchbox"
+                }
+            },
+            "bounding_box": {
+                "x": 276.2875061035156,
+                "y": 10.800000190734863,
+                "width": 541.9625244140625,
+                "height": 38
+            },
+            "page_url": "https://www.amazon.com/",
+            "timestamp": "2026-08-12T06:42:18.997Z"
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Daps&field-keywords=wireless+mouse",
+            "timestamp": "2026-08-12T06:42:23.953Z"
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 1500,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.amazon.com/s?k=wireless+mouse&ref=nb_sb_noss",
+            "timestamp": "2026-08-12T06:42:25.730Z"
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.amazon.com/s?k=wireless+mouse&ref=nb_sb_noss",
+            "timestamp": "2026-08-12T06:42:27.526Z"
+        }
+    ],
+    "saved_at": "2026-08-12T12:12:27.529337"
+}

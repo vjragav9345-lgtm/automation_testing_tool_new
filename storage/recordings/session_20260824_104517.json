@@ -1,0 +1,1082 @@
+{
+    "name": "session_20260824_104517",
+    "session_id": "d322e61f1b704646b2ca638d6d5be402",
+    "start_url": "https://ticket360.sninfoserv.com/login",
+    "recorded_at": "2026-08-24T10:45:17.096176",
+    "stop_reason": "browser_closed",
+    "total_actions": 39,
+    "page_count": 1,
+    "actions": [
+        {
+            "action_type": "fill",
+            "value": "vijayaragavanv18@gmail.com",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "you@example.com",
+                "placeholder": "you@example.com",
+                "title": null,
+                "href": null,
+                "css_path": "div#root > div:nth-of-type(2) > div:nth-of-type(2) > div > div:nth-of-type(2) > div > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[2]/div[2]/div[1]/div[2]/div[1]/input[1]",
+                "text": "vijayaragavanv18@gmail.com",
+                "element_text": "vijayaragavanv18@gmail.com",
+                "tag": "input",
+                "attributes": {
+                    "type": "email",
+                    "placeholder": "you@example.com"
+                }
+            },
+            "bounding_box": {
+                "x": 750,
+                "y": 359.3999938964844,
+                "width": 420,
+                "height": 46.400001525878906
+            },
+            "page_url": "https://ticket360.sninfoserv.com/login",
+            "timestamp": "2026-08-24T05:13:44.584Z",
+            "page_id": 0,
+            "delay_before_ms": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Password *",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#root > div:nth-of-type(2) > div:nth-of-type(2) > div > div:nth-of-type(3)",
+                "xpath": "/html[1]/body[1]/div[1]/div[2]/div[2]/div[1]/div[3]",
+                "text": "Password *",
+                "element_text": "Password *",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 750,
+                "y": 421.8000183105469,
+                "width": 420,
+                "height": 71.80000305175781
+            },
+            "page_url": "https://ticket360.sninfoserv.com/login",
+            "timestamp": "2026-08-24T05:13:44.786Z",
+            "page_id": 0,
+            "delay_before_ms": 202
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "••••••••",
+                "placeholder": "••••••••",
+                "title": null,
+                "href": null,
+                "css_path": "div#root > div:nth-of-type(2) > div:nth-of-type(2) > div > div:nth-of-type(3) > div > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[2]/div[2]/div[1]/div[3]/div[1]/input[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "input",
+                "attributes": {
+                    "type": "password",
+                    "placeholder": "••••••••"
+                }
+            },
+            "bounding_box": {
+                "x": 750,
+                "y": 447.20001220703125,
+                "width": 420,
+                "height": 46.400001525878906
+            },
+            "page_url": "https://ticket360.sninfoserv.com/login",
+            "timestamp": "2026-08-24T05:13:45.967Z",
+            "page_id": 0,
+            "delay_before_ms": 1181
+        },
+        {
+            "action_type": "fill",
+            "value": "Anjjusree@002",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "••••••••",
+                "placeholder": "••••••••",
+                "title": null,
+                "href": null,
+                "css_path": "div#root > div:nth-of-type(2) > div:nth-of-type(2) > div > div:nth-of-type(3) > div > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[2]/div[2]/div[1]/div[3]/div[1]/input[1]",
+                "text": "Anjjusree@002",
+                "element_text": "Anjjusree@002",
+                "tag": "input",
+                "attributes": {
+                    "type": "password",
+                    "placeholder": "••••••••"
+                }
+            },
+            "bounding_box": {
+                "x": 750,
+                "y": 447.20001220703125,
+                "width": 420,
+                "height": 46.400001525878906
+            },
+            "page_url": "https://ticket360.sninfoserv.com/login",
+            "timestamp": "2026-08-24T05:13:52.293Z",
+            "page_id": 0,
+            "delay_before_ms": 6326
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Sign In",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#root > div:nth-of-type(2) > div:nth-of-type(2) > div > button",
+                "xpath": "/html[1]/body[1]/div[1]/div[2]/div[2]/div[1]/button[1]",
+                "text": "Sign In",
+                "element_text": "Sign In",
+                "tag": "button",
+                "attributes": {
+                    "type": "button"
+                }
+            },
+            "bounding_box": {
+                "x": 750,
+                "y": 507.6000061035156,
+                "width": 420,
+                "height": 51.20000076293945
+            },
+            "page_url": "https://ticket360.sninfoserv.com/login",
+            "timestamp": "2026-08-24T05:13:52.516Z",
+            "page_id": 0,
+            "delay_before_ms": 223
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 939,
+            "scroll_y_before": 2.4000000953674316,
+            "scroll_y_after": 751.2000122070312,
+            "viewport_height": 720,
+            "document_height": 2247,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://ticket360.sninfoserv.com/",
+            "timestamp": "2026-08-24T05:13:55.919Z",
+            "page_id": 0,
+            "delay_before_ms": 3403
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Book Tickets",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#root > main > div:nth-of-type(2) > div > div:nth-of-type(2) > div:nth-of-type(3) > button",
+                "xpath": "/html[1]/body[1]/div[1]/main[1]/div[2]/div[1]/div[2]/div[3]/button[1]",
+                "text": "Book Tickets",
+                "element_text": "Book Tickets",
+                "tag": "button",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 88.80000305175781,
+                "y": 381.20001220703125,
+                "width": 160.5124969482422,
+                "height": 49.60000228881836
+            },
+            "page_url": "https://ticket360.sninfoserv.com/",
+            "timestamp": "2026-08-24T05:13:56.997Z",
+            "page_id": 0,
+            "delay_before_ms": 1078
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://ticket360.sninfoserv.com/",
+            "timestamp": "2026-08-24T05:13:57.953Z",
+            "page_id": 0,
+            "delay_before_ms": 956
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 955,
+            "scroll_y_before": 751.2000122070312,
+            "scroll_y_after": 1515.199951171875,
+            "viewport_height": 720,
+            "document_height": 2247,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://ticket360.sninfoserv.com/",
+            "timestamp": "2026-08-24T05:14:00.444Z",
+            "page_id": 0,
+            "delay_before_ms": 2491
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "MARATHON\n2026-09-27\nSHIFA MARATHON 2026\nBOOKING ENDS: 2026-09-21\nBook Now",
+                "placeholder": null,
+                "title": null,
+                "href": "/events/shifa-marathon-2026",
+                "css_path": "div#root > main > section:nth-of-type(2) > div:nth-of-type(2) > a",
+                "xpath": "/html[1]/body[1]/div[1]/main[1]/section[2]/div[2]/a[1]",
+                "text": "MARATHON\n2026-09-27\nSHIFA MARATHON 2026\nBOOKING ENDS: 2026-09-21\nBook Now",
+                "element_text": "MARATHON\n2026-09-27\nSHIFA MARATHON 2026\nBOOKING ENDS: 2026-09-21\nBook Now",
+                "tag": "a",
+                "attributes": {
+                    "href": "/events/shifa-marathon-2026"
+                }
+            },
+            "bounding_box": {
+                "x": 40,
+                "y": -49.125,
+                "width": 281,
+                "height": 351.3999938964844
+            },
+            "page_url": "https://ticket360.sninfoserv.com/",
+            "timestamp": "2026-08-24T05:14:00.961Z",
+            "page_id": 0,
+            "delay_before_ms": 517
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 881,
+            "scroll_y_before": 1515.199951171875,
+            "scroll_y_after": 704.7999877929688,
+            "viewport_height": 720,
+            "document_height": 2166,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://ticket360.sninfoserv.com/events/shifa-marathon-2026",
+            "timestamp": "2026-08-24T05:14:03.536Z",
+            "page_id": 0,
+            "delay_before_ms": 2575
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#booking-form > div:nth-of-type(2) > div:nth-of-type(3) > div > div:nth-of-type(2) > div:nth-of-type(2) > button:nth-of-type(2)",
+                "xpath": "/html[1]/body[1]/div[1]/main[1]/div[2]/div[2]/div[2]/div[1]/div[2]/div[3]/div[1]/div[2]/div[2]/button[2]",
+                "text": "",
+                "element_text": "",
+                "tag": "button",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 1167,
+                "y": 448.20001220703125,
+                "width": 30.80000114440918,
+                "height": 30.80000114440918
+            },
+            "page_url": "https://ticket360.sninfoserv.com/events/shifa-marathon-2026",
+            "timestamp": "2026-08-24T05:14:04.615Z",
+            "page_id": 0,
+            "delay_before_ms": 1079
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://ticket360.sninfoserv.com/events/shifa-marathon-2026",
+            "timestamp": "2026-08-24T05:14:05.677Z",
+            "page_id": 0,
+            "delay_before_ms": 1062
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Enter participants full name",
+                "placeholder": "Enter participants full name",
+                "title": null,
+                "href": null,
+                "css_path": "div#booking-form > div:nth-of-type(2) > div:nth-of-type(3) > div:nth-of-type(2) > div > div:nth-of-type(2) > input",
+                "xpath": "/html[1]/body[1]/div[1]/main[1]/div[2]/div[2]/div[2]/div[1]/div[2]/div[3]/div[2]/div[1]/div[2]/input[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "input",
+                "attributes": {
+                    "type": "text",
+                    "placeholder": "Enter participants full name"
+                }
+            },
+            "bounding_box": {
+                "x": 886.4000244140625,
+                "y": 584.7999877929688,
+                "width": 299.20001220703125,
+                "height": 42.400001525878906
+            },
+            "page_url": "https://ticket360.sninfoserv.com/events/shifa-marathon-2026",
+            "timestamp": "2026-08-24T05:14:05.933Z",
+            "page_id": 0,
+            "delay_before_ms": 256
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 120,
+            "scroll_y_before": 704.7999877929688,
+            "scroll_y_after": 800.7999877929688,
+            "viewport_height": 720,
+            "document_height": 2224,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://ticket360.sninfoserv.com/events/shifa-marathon-2026",
+            "timestamp": "2026-08-24T05:14:08.762Z",
+            "page_id": 0,
+            "delay_before_ms": 2829
+        },
+        {
+            "action_type": "fill",
+            "value": "vijay",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Enter participants full name",
+                "placeholder": "Enter participants full name",
+                "title": null,
+                "href": null,
+                "css_path": "div#booking-form > div:nth-of-type(2) > div:nth-of-type(3) > div:nth-of-type(2) > div > div:nth-of-type(2) > input",
+                "xpath": "/html[1]/body[1]/div[1]/main[1]/div[2]/div[2]/div[2]/div[1]/div[2]/div[3]/div[2]/div[1]/div[2]/input[1]",
+                "text": "vijay",
+                "element_text": "vijay",
+                "tag": "input",
+                "attributes": {
+                    "type": "text",
+                    "placeholder": "Enter participants full name"
+                }
+            },
+            "bounding_box": {
+                "x": 886.4000244140625,
+                "y": 488.8000183105469,
+                "width": 299.20001220703125,
+                "height": 42.400001525878906
+            },
+            "page_url": "https://ticket360.sninfoserv.com/events/shifa-marathon-2026",
+            "timestamp": "2026-08-24T05:14:09.623Z",
+            "page_id": 0,
+            "delay_before_ms": 861
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#booking-form > div:nth-of-type(2) > div:nth-of-type(3) > div:nth-of-type(2) > div > div:nth-of-type(3) > input",
+                "xpath": "/html[1]/body[1]/div[1]/main[1]/div[2]/div[2]/div[2]/div[1]/div[2]/div[3]/div[2]/div[1]/div[3]/input[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "input",
+                "attributes": {
+                    "type": "date"
+                }
+            },
+            "bounding_box": {
+                "x": 886.4000244140625,
+                "y": 565.6000366210938,
+                "width": 299.20001220703125,
+                "height": 44.400001525878906
+            },
+            "page_url": "https://ticket360.sninfoserv.com/events/shifa-marathon-2026",
+            "timestamp": "2026-08-24T05:14:09.836Z",
+            "page_id": 0,
+            "delay_before_ms": 213
+        },
+        {
+            "action_type": "fill",
+            "value": "2004-05-02",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "2004-05-02",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#booking-form > div:nth-of-type(2) > div:nth-of-type(3) > div:nth-of-type(2) > div > div:nth-of-type(3) > input",
+                "xpath": "/html[1]/body[1]/div[1]/main[1]/div[2]/div[2]/div[2]/div[1]/div[2]/div[3]/div[2]/div[1]/div[3]/input[1]",
+                "text": "2004-05-02",
+                "element_text": "2004-05-02",
+                "tag": "input",
+                "attributes": {
+                    "type": "date"
+                }
+            },
+            "bounding_box": {
+                "x": 886.4000244140625,
+                "y": 565.6000366210938,
+                "width": 299.20001220703125,
+                "height": 44.400001525878906
+            },
+            "page_url": "https://ticket360.sninfoserv.com/events/shifa-marathon-2026",
+            "timestamp": "2026-08-24T05:14:19.552Z",
+            "page_id": 0,
+            "delay_before_ms": 9716
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 355,
+            "scroll_y_before": 800.7999877929688,
+            "scroll_y_after": 1084.800048828125,
+            "viewport_height": 720,
+            "document_height": 2277,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://ticket360.sninfoserv.com/events/shifa-marathon-2026",
+            "timestamp": "2026-08-24T05:14:21.037Z",
+            "page_id": 0,
+            "delay_before_ms": 1485
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Select Gender\nMale\nFemale",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#booking-form > div:nth-of-type(2) > div:nth-of-type(3) > div:nth-of-type(2) > div > div:nth-of-type(4) > select",
+                "xpath": "/html[1]/body[1]/div[1]/main[1]/div[2]/div[2]/div[2]/div[1]/div[2]/div[3]/div[2]/div[1]/div[4]/select[1]",
+                "text": "Select Gender\nMale\nFemale",
+                "element_text": "Select Gender\nMale\nFemale",
+                "tag": "select",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 886.4000244140625,
+                "y": 418.3999938964844,
+                "width": 299.20001220703125,
+                "height": 46.400001525878906
+            },
+            "page_url": "https://ticket360.sninfoserv.com/events/shifa-marathon-2026",
+            "timestamp": "2026-08-24T05:14:22.020Z",
+            "page_id": 0,
+            "delay_before_ms": 983
+        },
+        {
+            "action_type": "select",
+            "value": "Male",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Select Gender\nMale\nFemale",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#booking-form > div:nth-of-type(2) > div:nth-of-type(3) > div:nth-of-type(2) > div > div:nth-of-type(4) > select",
+                "xpath": "/html[1]/body[1]/div[1]/main[1]/div[2]/div[2]/div[2]/div[1]/div[2]/div[3]/div[2]/div[1]/div[4]/select[1]",
+                "text": "Select Gender\nMale\nFemale",
+                "element_text": "Select Gender\nMale\nFemale",
+                "tag": "select",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 886.4000244140625,
+                "y": 418.3999938964844,
+                "width": 299.20001220703125,
+                "height": 46.400001525878906
+            },
+            "page_url": "https://ticket360.sninfoserv.com/events/shifa-marathon-2026",
+            "timestamp": "2026-08-24T05:14:23.067Z",
+            "page_id": 0,
+            "delay_before_ms": 1047
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Select Gender\nMale\nFemale",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#booking-form > div:nth-of-type(2) > div:nth-of-type(3) > div:nth-of-type(2) > div > div:nth-of-type(4) > select",
+                "xpath": "/html[1]/body[1]/div[1]/main[1]/div[2]/div[2]/div[2]/div[1]/div[2]/div[3]/div[2]/div[1]/div[4]/select[1]",
+                "text": "Select Gender\nMale\nFemale",
+                "element_text": "Select Gender\nMale\nFemale",
+                "tag": "select",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 886.4000244140625,
+                "y": 418.3999938964844,
+                "width": 299.20001220703125,
+                "height": 46.400001525878906
+            },
+            "page_url": "https://ticket360.sninfoserv.com/events/shifa-marathon-2026",
+            "timestamp": "2026-08-24T05:14:23.069Z",
+            "page_id": 0,
+            "delay_before_ms": 2
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Select TShirt Size\nA\nB\nC\nD\nE\nF",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#booking-form > div:nth-of-type(2) > div:nth-of-type(3) > div:nth-of-type(2) > div > div:nth-of-type(5) > select",
+                "xpath": "/html[1]/body[1]/div[1]/main[1]/div[2]/div[2]/div[2]/div[1]/div[2]/div[3]/div[2]/div[1]/div[5]/select[1]",
+                "text": "Select TShirt Size\nA\nB\nC\nD\nE\nF",
+                "element_text": "Select TShirt Size\nA\nB\nC\nD\nE\nF",
+                "tag": "select",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 886.4000244140625,
+                "y": 499.20001220703125,
+                "width": 299.20001220703125,
+                "height": 46.400001525878906
+            },
+            "page_url": "https://ticket360.sninfoserv.com/events/shifa-marathon-2026",
+            "timestamp": "2026-08-24T05:14:24.057Z",
+            "page_id": 0,
+            "delay_before_ms": 988
+        },
+        {
+            "action_type": "select",
+            "value": "B",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Select TShirt Size\nA\nB\nC\nD\nE\nF",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#booking-form > div:nth-of-type(2) > div:nth-of-type(3) > div:nth-of-type(2) > div > div:nth-of-type(5) > select",
+                "xpath": "/html[1]/body[1]/div[1]/main[1]/div[2]/div[2]/div[2]/div[1]/div[2]/div[3]/div[2]/div[1]/div[5]/select[1]",
+                "text": "Select TShirt Size\nA\nB\nC\nD\nE\nF",
+                "element_text": "Select TShirt Size\nA\nB\nC\nD\nE\nF",
+                "tag": "select",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 886.4000244140625,
+                "y": 499.20001220703125,
+                "width": 299.20001220703125,
+                "height": 46.400001525878906
+            },
+            "page_url": "https://ticket360.sninfoserv.com/events/shifa-marathon-2026",
+            "timestamp": "2026-08-24T05:14:27.407Z",
+            "page_id": 0,
+            "delay_before_ms": 3350
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Select TShirt Size\nA\nB\nC\nD\nE\nF",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#booking-form > div:nth-of-type(2) > div:nth-of-type(3) > div:nth-of-type(2) > div > div:nth-of-type(5) > select",
+                "xpath": "/html[1]/body[1]/div[1]/main[1]/div[2]/div[2]/div[2]/div[1]/div[2]/div[3]/div[2]/div[1]/div[5]/select[1]",
+                "text": "Select TShirt Size\nA\nB\nC\nD\nE\nF",
+                "element_text": "Select TShirt Size\nA\nB\nC\nD\nE\nF",
+                "tag": "select",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 886.4000244140625,
+                "y": 499.20001220703125,
+                "width": 299.20001220703125,
+                "height": 46.400001525878906
+            },
+            "page_url": "https://ticket360.sninfoserv.com/events/shifa-marathon-2026",
+            "timestamp": "2026-08-24T05:14:27.412Z",
+            "page_id": 0,
+            "delay_before_ms": 5
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Enter parent name",
+                "placeholder": "Enter parent name",
+                "title": null,
+                "href": null,
+                "css_path": "div#booking-form > div:nth-of-type(2) > div:nth-of-type(3) > div:nth-of-type(2) > div > div:nth-of-type(6) > input",
+                "xpath": "/html[1]/body[1]/div[1]/main[1]/div[2]/div[2]/div[2]/div[1]/div[2]/div[3]/div[2]/div[1]/div[6]/input[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "input",
+                "attributes": {
+                    "type": "text",
+                    "placeholder": "Enter parent name"
+                }
+            },
+            "bounding_box": {
+                "x": 886.4000244140625,
+                "y": 580,
+                "width": 299.20001220703125,
+                "height": 42.400001525878906
+            },
+            "page_url": "https://ticket360.sninfoserv.com/events/shifa-marathon-2026",
+            "timestamp": "2026-08-24T05:14:29.086Z",
+            "page_id": 0,
+            "delay_before_ms": 1674
+        },
+        {
+            "action_type": "fill",
+            "value": "vasu",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Enter parent name",
+                "placeholder": "Enter parent name",
+                "title": null,
+                "href": null,
+                "css_path": "div#booking-form > div:nth-of-type(2) > div:nth-of-type(3) > div:nth-of-type(2) > div > div:nth-of-type(6) > input",
+                "xpath": "/html[1]/body[1]/div[1]/main[1]/div[2]/div[2]/div[2]/div[1]/div[2]/div[3]/div[2]/div[1]/div[6]/input[1]",
+                "text": "vasu",
+                "element_text": "vasu",
+                "tag": "input",
+                "attributes": {
+                    "type": "text",
+                    "placeholder": "Enter parent name"
+                }
+            },
+            "bounding_box": {
+                "x": 886.4000244140625,
+                "y": 580,
+                "width": 299.20001220703125,
+                "height": 42.400001525878906
+            },
+            "page_url": "https://ticket360.sninfoserv.com/events/shifa-marathon-2026",
+            "timestamp": "2026-08-24T05:14:33.863Z",
+            "page_id": 0,
+            "delay_before_ms": 4777
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Proceed to Billing",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#booking-form > div:nth-of-type(2) > div:nth-of-type(4) > button",
+                "xpath": "/html[1]/body[1]/div[1]/main[1]/div[2]/div[2]/div[2]/div[1]/div[2]/div[4]/button[1]",
+                "text": "Proceed to Billing",
+                "element_text": "Proceed to Billing",
+                "tag": "button",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 860.7999877929688,
+                "y": 656,
+                "width": 350.3999938964844,
+                "height": 51.20000076293945
+            },
+            "page_url": "https://ticket360.sninfoserv.com/events/shifa-marathon-2026",
+            "timestamp": "2026-08-24T05:14:34.072Z",
+            "page_id": 0,
+            "delay_before_ms": 209
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Enter your email address",
+                "placeholder": "Enter your email address",
+                "title": null,
+                "href": null,
+                "css_path": "div#booking-form > div:nth-of-type(2) > div:nth-of-type(3) > div > div:nth-of-type(2) > input",
+                "xpath": "/html[1]/body[1]/div[1]/main[1]/div[2]/div[2]/div[2]/div[1]/div[2]/div[3]/div[1]/div[2]/input[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "input",
+                "attributes": {
+                    "type": "email",
+                    "placeholder": "Enter your email address"
+                }
+            },
+            "bounding_box": {
+                "x": 860.7999877929688,
+                "y": 291.3999938964844,
+                "width": 350.3999938964844,
+                "height": 42.400001525878906
+            },
+            "page_url": "https://ticket360.sninfoserv.com/events/shifa-marathon-2026",
+            "timestamp": "2026-08-24T05:14:37.032Z",
+            "page_id": 0,
+            "delay_before_ms": 2960
+        },
+        {
+            "action_type": "fill",
+            "value": "vijayaragavanv18@gmail.com",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Enter your email address",
+                "placeholder": "Enter your email address",
+                "title": null,
+                "href": null,
+                "css_path": "div#booking-form > div:nth-of-type(2) > div:nth-of-type(3) > div > div:nth-of-type(2) > input",
+                "xpath": "/html[1]/body[1]/div[1]/main[1]/div[2]/div[2]/div[2]/div[1]/div[2]/div[3]/div[1]/div[2]/input[1]",
+                "text": "vijayaragavanv18@gmail.com",
+                "element_text": "vijayaragavanv18@gmail.com",
+                "tag": "input",
+                "attributes": {
+                    "type": "email",
+                    "placeholder": "Enter your email address"
+                }
+            },
+            "bounding_box": {
+                "x": 860.7999877929688,
+                "y": 291.3999938964844,
+                "width": 350.3999938964844,
+                "height": 42.400001525878906
+            },
+            "page_url": "https://ticket360.sninfoserv.com/events/shifa-marathon-2026",
+            "timestamp": "2026-08-24T05:14:50.241Z",
+            "page_id": 0,
+            "delay_before_ms": 13209
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Enter your mobile number",
+                "placeholder": "Enter your mobile number",
+                "title": null,
+                "href": null,
+                "css_path": "div#booking-form > div:nth-of-type(2) > div:nth-of-type(4) > div > div:nth-of-type(2) > input",
+                "xpath": "/html[1]/body[1]/div[1]/main[1]/div[2]/div[2]/div[2]/div[1]/div[2]/div[4]/div[1]/div[2]/input[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "input",
+                "attributes": {
+                    "type": "tel",
+                    "placeholder": "Enter your mobile number"
+                }
+            },
+            "bounding_box": {
+                "x": 860.7999877929688,
+                "y": 372.20001220703125,
+                "width": 350.3999938964844,
+                "height": 42.400001525878906
+            },
+            "page_url": "https://ticket360.sninfoserv.com/events/shifa-marathon-2026",
+            "timestamp": "2026-08-24T05:14:50.449Z",
+            "page_id": 0,
+            "delay_before_ms": 208
+        },
+        {
+            "action_type": "fill",
+            "value": "9345691852",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Enter your mobile number",
+                "placeholder": "Enter your mobile number",
+                "title": null,
+                "href": null,
+                "css_path": "div#booking-form > div:nth-of-type(2) > div:nth-of-type(4) > div > div:nth-of-type(2) > input",
+                "xpath": "/html[1]/body[1]/div[1]/main[1]/div[2]/div[2]/div[2]/div[1]/div[2]/div[4]/div[1]/div[2]/input[1]",
+                "text": "9345691852",
+                "element_text": "9345691852",
+                "tag": "input",
+                "attributes": {
+                    "type": "tel",
+                    "placeholder": "Enter your mobile number"
+                }
+            },
+            "bounding_box": {
+                "x": 860.7999877929688,
+                "y": 372.20001220703125,
+                "width": 350.3999938964844,
+                "height": 42.400001525878906
+            },
+            "page_url": "https://ticket360.sninfoserv.com/events/shifa-marathon-2026",
+            "timestamp": "2026-08-24T05:14:55.553Z",
+            "page_id": 0,
+            "delay_before_ms": 5104
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "on",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#booking-form > div:nth-of-type(2) > div:nth-of-type(5) > div > div > label > input",
+                "xpath": "/html[1]/body[1]/div[1]/main[1]/div[2]/div[2]/div[2]/div[1]/div[2]/div[5]/div[1]/div[1]/label[1]/input[1]",
+                "text": "on",
+                "element_text": "on",
+                "tag": "input",
+                "attributes": {
+                    "type": "checkbox"
+                }
+            },
+            "bounding_box": {
+                "x": 872.5250244140625,
+                "y": 436.6000061035156,
+                "width": 20,
+                "height": 20
+            },
+            "page_url": "https://ticket360.sninfoserv.com/events/shifa-marathon-2026",
+            "timestamp": "2026-08-24T05:14:55.767Z",
+            "page_id": 0,
+            "delay_before_ms": 214
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Pincode",
+                "placeholder": "Pincode",
+                "title": null,
+                "href": null,
+                "css_path": "div#booking-form > div:nth-of-type(2) > div:nth-of-type(6) > input",
+                "xpath": "/html[1]/body[1]/div[1]/main[1]/div[2]/div[2]/div[2]/div[1]/div[2]/div[6]/input[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "input",
+                "attributes": {
+                    "type": "tel",
+                    "placeholder": "Pincode"
+                }
+            },
+            "bounding_box": {
+                "x": 860.7999877929688,
+                "y": 509.3999938964844,
+                "width": 350.3999938964844,
+                "height": 42.400001525878906
+            },
+            "page_url": "https://ticket360.sninfoserv.com/events/shifa-marathon-2026",
+            "timestamp": "2026-08-24T05:14:57.034Z",
+            "page_id": 0,
+            "delay_before_ms": 1267
+        },
+        {
+            "action_type": "fill",
+            "value": "641004",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Pincode",
+                "placeholder": "Pincode",
+                "title": null,
+                "href": null,
+                "css_path": "div#booking-form > div:nth-of-type(2) > div:nth-of-type(6) > input",
+                "xpath": "/html[1]/body[1]/div[1]/main[1]/div[2]/div[2]/div[2]/div[1]/div[2]/div[6]/input[1]",
+                "text": "641004",
+                "element_text": "641004",
+                "tag": "input",
+                "attributes": {
+                    "type": "tel",
+                    "placeholder": "Pincode"
+                }
+            },
+            "bounding_box": {
+                "x": 860.7999877929688,
+                "y": 509.3999938964844,
+                "width": 350.3999938964844,
+                "height": 42.400001525878906
+            },
+            "page_url": "https://ticket360.sninfoserv.com/events/shifa-marathon-2026",
+            "timestamp": "2026-08-24T05:15:06.733Z",
+            "page_id": 0,
+            "delay_before_ms": 9699
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Proceed to Summary",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#booking-form > div:nth-of-type(2) > div:nth-of-type(8) > button:nth-of-type(2)",
+                "xpath": "/html[1]/body[1]/div[1]/main[1]/div[2]/div[2]/div[2]/div[1]/div[2]/div[8]/button[2]",
+                "text": "Proceed to Summary",
+                "element_text": "Proceed to Summary",
+                "tag": "button",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 931.625,
+                "y": 620.2000122070312,
+                "width": 279.57501220703125,
+                "height": 51.20000076293945
+            },
+            "page_url": "https://ticket360.sninfoserv.com/events/shifa-marathon-2026",
+            "timestamp": "2026-08-24T05:15:06.949Z",
+            "page_id": 0,
+            "delay_before_ms": 216
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Pay Now",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#root > div:nth-of-type(4) > div > div:nth-of-type(3) > div:nth-of-type(2) > div > div:nth-of-type(3) > button",
+                "xpath": "/html[1]/body[1]/div[1]/div[4]/div[1]/div[3]/div[2]/div[1]/div[3]/button[1]",
+                "text": "Pay Now",
+                "element_text": "Pay Now",
+                "tag": "button",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 690.7999877929688,
+                "y": 610.7999877929688,
+                "width": 374.3999938964844,
+                "height": 51.20000076293945
+            },
+            "page_url": "https://ticket360.sninfoserv.com/booking-summary",
+            "timestamp": "2026-08-24T05:15:10.381Z",
+            "page_id": 0,
+            "delay_before_ms": 3432
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://ticket360.sninfoserv.com/booking-summary",
+            "timestamp": "2026-08-24T05:15:12.193Z",
+            "page_id": 0,
+            "delay_before_ms": 1812
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 0,
+            "page_url": "https://ticket360.sninfoserv.com/booking-summary",
+            "remaining_page_id": null,
+            "timestamp": "2026-08-24T05:15:17.067Z",
+            "delay_before_ms": 4874
+        }
+    ],
+    "saved_at": "2026-08-24T10:45:17.097176"
+}

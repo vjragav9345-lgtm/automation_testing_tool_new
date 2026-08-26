@@ -1,0 +1,623 @@
+{
+    "name": "session_20260819_115440",
+    "session_id": "ba1584dd3319475da11fbb571af8f9ed",
+    "start_url": "https://www.amazon.com/",
+    "recorded_at": "2026-08-19T11:54:40.692854",
+    "stop_reason": "browser_closed",
+    "total_actions": 32,
+    "page_count": 1,
+    "actions": [
+        {
+            "action_type": "fill",
+            "value": "iphone",
+            "locator_profile": {
+                "id": "#twotabsearchtextbox",
+                "name": "field-keywords",
+                "role": "searchbox",
+                "aria_label": "Search Amazon",
+                "accessible_name": "Search Amazon",
+                "placeholder": "Search Amazon",
+                "title": null,
+                "href": null,
+                "css_path": "input#twotabsearchtextbox",
+                "xpath": "//*[@id='twotabsearchtextbox']",
+                "text": "iphone",
+                "element_text": "iphone",
+                "tag": "input",
+                "attributes": {
+                    "type": "text",
+                    "name": "field-keywords",
+                    "placeholder": "Search Amazon",
+                    "aria-label": "Search Amazon",
+                    "role": "searchbox"
+                }
+            },
+            "bounding_box": {
+                "x": 276.2875061035156,
+                "y": 10.800000190734863,
+                "width": 531.9625244140625,
+                "height": 38
+            },
+            "page_url": "https://www.amazon.com/",
+            "timestamp": "2026-08-19T06:23:23.018Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 215,
+            "scroll_y_before": 6.400000095367432,
+            "scroll_y_after": 172,
+            "viewport_height": 720,
+            "document_height": 6275,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.amazon.com/s?k=iphone+17&crid=11N9LKEFT8LH6&sprefix=iphone%2Caps%2C333&ref=nb_sb_ss_p13n-expert-pd-ops-ranker_ci_hl-bn-left_4_6",
+            "timestamp": "2026-08-19T06:23:26.397Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.amazon.com/s?k=iphone+17&crid=11N9LKEFT8LH6&sprefix=iphone%2Caps%2C333&ref=nb_sb_ss_p13n-expert-pd-ops-ranker_ci_hl-bn-left_4_6",
+            "timestamp": "2026-08-19T06:23:28.567Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 829,
+            "scroll_y_before": 172,
+            "scroll_y_after": 835.2000122070312,
+            "viewport_height": 720,
+            "document_height": 6275,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.amazon.com/s?k=iphone+17&crid=11N9LKEFT8LH6&sprefix=iphone%2Caps%2C333&ref=nb_sb_ss_p13n-expert-pd-ops-ranker_ci_hl-bn-left_4_6",
+            "timestamp": "2026-08-19T06:23:28.760Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 1950,
+            "scroll_y_before": 848,
+            "scroll_y_after": 2395.199951171875,
+            "viewport_height": 720,
+            "document_height": 6275,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.amazon.com/s?k=iphone+17&crid=11N9LKEFT8LH6&sprefix=iphone%2Caps%2C333&ref=nb_sb_ss_p13n-expert-pd-ops-ranker_ci_hl-bn-left_4_6",
+            "timestamp": "2026-08-19T06:23:31.865Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 552,
+            "scroll_y_before": 2395.199951171875,
+            "scroll_y_after": 2836.800048828125,
+            "viewport_height": 720,
+            "document_height": 6275,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.amazon.com/s?k=iphone+17&crid=11N9LKEFT8LH6&sprefix=iphone%2Caps%2C333&ref=nb_sb_ss_p13n-expert-pd-ops-ranker_ci_hl-bn-left_4_6",
+            "timestamp": "2026-08-19T06:23:32.714Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": -160,
+            "scroll_y_before": 2836.800048828125,
+            "scroll_y_after": 2708.800048828125,
+            "viewport_height": 720,
+            "document_height": 6275,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.amazon.com/s?k=iphone+17&crid=11N9LKEFT8LH6&sprefix=iphone%2Caps%2C333&ref=nb_sb_ss_p13n-expert-pd-ops-ranker_ci_hl-bn-left_4_6",
+            "timestamp": "2026-08-19T06:23:33.854Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 230,
+            "scroll_y_before": 2708.800048828125,
+            "scroll_y_after": 2892.800048828125,
+            "viewport_height": 720,
+            "document_height": 6275,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.amazon.com/s?k=iphone+17&crid=11N9LKEFT8LH6&sprefix=iphone%2Caps%2C333&ref=nb_sb_ss_p13n-expert-pd-ops-ranker_ci_hl-bn-left_4_6",
+            "timestamp": "2026-08-19T06:23:34.793Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 1504,
+            "scroll_y_before": 2892.800048828125,
+            "scroll_y_after": 4096,
+            "viewport_height": 720,
+            "document_height": 6275,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.amazon.com/s?k=iphone+17&crid=11N9LKEFT8LH6&sprefix=iphone%2Caps%2C333&ref=nb_sb_ss_p13n-expert-pd-ops-ranker_ci_hl-bn-left_4_6",
+            "timestamp": "2026-08-19T06:23:36.944Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": -6456,
+            "scroll_y_before": 4102.39990234375,
+            "scroll_y_after": 0,
+            "viewport_height": 720,
+            "document_height": 6523,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.amazon.com/s?k=iphone+17&crid=11N9LKEFT8LH6&sprefix=iphone%2Caps%2C333&ref=nb_sb_ss_p13n-expert-pd-ops-ranker_ci_hl-bn-left_4_6",
+            "timestamp": "2026-08-19T06:23:41.527Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": "/Apple-Version-Unlocked-Renewed-Premium/dp/B0G45X8NCK/ref=sr_1_1?crid=11N9LKEFT8LH6&dib=eyJ2IjoiMSJ9.qk7mtoixPkqn8jwI-BLukTOS34a-M3Pd0s48aNP-cB5bjw6CDhZRrhgP_bpX3LESRl1v7NhPc6dpjI00AUqnFHU9AobuyBULl7E829aDTb_RB7zR6-KAymNKY6yVkEEL4EeSwxfrgRcI_T3Fv3N6plRKjBNAOFc4WfM1IBa5C1GewJs_2mEePP1p7LV5VLZgLxLPBWWA_v7KXak9spVkLyi0LCJ-be_wMchTPBFr2jg.AoOnnUrOQaR0bFapXjAro1VH5OB2G1S4KCH9xTEtGmA&dib_tag=se&keywords=iphone+17&qid=1787120604&sprefix=iphone%2Caps%2C333&sr=8-1",
+                "css_path": "div#242d0842-6824-446d-a94d-ab1e860e0d9d > div > div > span > div > div > div > div > div > div:nth-of-type(2) > div > span > a",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/span[1]/div[1]/div[2]/div[1]/div[1]/span[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/span[1]/a[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "a",
+                "attributes": {
+                    "href": "/Apple-Version-Unlocked-Renewed-Premium/dp/B0G45X8NCK/ref=sr_1_1?crid=11N9LKEFT8LH6&dib=eyJ2IjoiMSJ9.qk7mtoixPkqn8jwI-BLukTOS34a-M3Pd0s48aNP-cB5bjw6CDhZRrhgP_bpX3LESRl1v7NhPc6dpjI00AUqnFHU9AobuyBULl7E829aDTb_RB7zR6-KAymNKY6yVkEEL4EeSwxfrgRcI_T3Fv3N6plRKjBNAOFc4WfM1IBa5C1GewJs_2mEePP1p7LV5VLZgLxLPBWWA_v7KXak9spVkLyi0LCJ-be_wMchTPBFr2jg.AoOnnUrOQaR0bFapXjAro1VH5OB2G1S4KCH9xTEtGmA&dib_tag=se&keywords=iphone+17&qid=1787120604&sprefix=iphone%2Caps%2C333&sr=8-1"
+                }
+            },
+            "bounding_box": {
+                "x": 270.8000183105469,
+                "y": 215.40000915527344,
+                "width": 226.40000915527344,
+                "height": 218
+            },
+            "page_url": "https://www.amazon.com/s?k=iphone+17&crid=11N9LKEFT8LH6&sprefix=iphone%2Caps%2C333&ref=nb_sb_ss_p13n-expert-pd-ops-ranker_ci_hl-bn-left_4_6",
+            "timestamp": "2026-08-19T06:23:42.214Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 155,
+            "scroll_y_before": 0,
+            "scroll_y_after": 108.80000305175781,
+            "viewport_height": 720,
+            "document_height": 11002,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.amazon.com/Apple-Version-Unlocked-Renewed-Premium/dp/B0G45X8NCK/ref=sr_1_1?crid=11N9LKEFT8LH6&dib=eyJ2IjoiMSJ9.qk7mtoixPkqn8jwI-BLukTOS34a-M3Pd0s48aNP-cB5bjw6CDhZRrhgP_bpX3LESRl1v7NhPc6dpjI00AUqnFHU9AobuyBULl7E829aDTb_RB7zR6-KAymNKY6yVkEEL4EeSwxfrgRcI_T3Fv3N6plRKjBNAOFc4WfM1IBa5C1GewJs_2mEePP1p7LV5VLZgLxLPBWWA_v7KXak9spVkLyi0LCJ-be_wMchTPBFr2jg.AoOnnUrOQaR0bFapXjAro1VH5OB2G1S4KCH9xTEtGmA&dib_tag=se&keywords=iphone%2B17&qid=1787120604&sprefix=iphone%2Caps%2C333&sr=8-1&th=1",
+            "timestamp": "2026-08-19T06:23:44.997Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 295,
+            "scroll_y_before": 136,
+            "scroll_y_after": 360,
+            "viewport_height": 720,
+            "document_height": 11027,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.amazon.com/Apple-Version-Unlocked-Renewed-Premium/dp/B0G45X8NCK/ref=sr_1_1?crid=11N9LKEFT8LH6&dib=eyJ2IjoiMSJ9.qk7mtoixPkqn8jwI-BLukTOS34a-M3Pd0s48aNP-cB5bjw6CDhZRrhgP_bpX3LESRl1v7NhPc6dpjI00AUqnFHU9AobuyBULl7E829aDTb_RB7zR6-KAymNKY6yVkEEL4EeSwxfrgRcI_T3Fv3N6plRKjBNAOFc4WfM1IBa5C1GewJs_2mEePP1p7LV5VLZgLxLPBWWA_v7KXak9spVkLyi0LCJ-be_wMchTPBFr2jg.AoOnnUrOQaR0bFapXjAro1VH5OB2G1S4KCH9xTEtGmA&dib_tag=se&keywords=iphone%2B17&qid=1787120604&sprefix=iphone%2Caps%2C333&sr=8-1&th=1",
+            "timestamp": "2026-08-19T06:23:45.570Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 57,
+            "scroll_y_before": 360,
+            "scroll_y_after": 386.3999938964844,
+            "viewport_height": 720,
+            "document_height": 11032,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.amazon.com/Apple-Version-Unlocked-Renewed-Premium/dp/B0G45X8NCK/ref=sr_1_1?crid=11N9LKEFT8LH6&dib=eyJ2IjoiMSJ9.qk7mtoixPkqn8jwI-BLukTOS34a-M3Pd0s48aNP-cB5bjw6CDhZRrhgP_bpX3LESRl1v7NhPc6dpjI00AUqnFHU9AobuyBULl7E829aDTb_RB7zR6-KAymNKY6yVkEEL4EeSwxfrgRcI_T3Fv3N6plRKjBNAOFc4WfM1IBa5C1GewJs_2mEePP1p7LV5VLZgLxLPBWWA_v7KXak9spVkLyi0LCJ-be_wMchTPBFr2jg.AoOnnUrOQaR0bFapXjAro1VH5OB2G1S4KCH9xTEtGmA&dib_tag=se&keywords=iphone%2B17&qid=1787120604&sprefix=iphone%2Caps%2C333&sr=8-1&th=1",
+            "timestamp": "2026-08-19T06:23:46.038Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 161,
+            "scroll_y_before": 466.3999938964844,
+            "scroll_y_after": 535.2000122070312,
+            "viewport_height": 720,
+            "document_height": 11032,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.amazon.com/Apple-Version-Unlocked-Renewed-Premium/dp/B0G45X8NCK/ref=sr_1_1?crid=11N9LKEFT8LH6&dib=eyJ2IjoiMSJ9.qk7mtoixPkqn8jwI-BLukTOS34a-M3Pd0s48aNP-cB5bjw6CDhZRrhgP_bpX3LESRl1v7NhPc6dpjI00AUqnFHU9AobuyBULl7E829aDTb_RB7zR6-KAymNKY6yVkEEL4EeSwxfrgRcI_T3Fv3N6plRKjBNAOFc4WfM1IBa5C1GewJs_2mEePP1p7LV5VLZgLxLPBWWA_v7KXak9spVkLyi0LCJ-be_wMchTPBFr2jg.AoOnnUrOQaR0bFapXjAro1VH5OB2G1S4KCH9xTEtGmA&dib_tag=se&keywords=iphone%2B17&qid=1787120604&sprefix=iphone%2Caps%2C333&sr=8-1&th=1",
+            "timestamp": "2026-08-19T06:23:46.542Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.amazon.com/Apple-Version-Unlocked-Renewed-Premium/dp/B0G45X8NCK/ref=sr_1_1?crid=11N9LKEFT8LH6&dib=eyJ2IjoiMSJ9.qk7mtoixPkqn8jwI-BLukTOS34a-M3Pd0s48aNP-cB5bjw6CDhZRrhgP_bpX3LESRl1v7NhPc6dpjI00AUqnFHU9AobuyBULl7E829aDTb_RB7zR6-KAymNKY6yVkEEL4EeSwxfrgRcI_T3Fv3N6plRKjBNAOFc4WfM1IBa5C1GewJs_2mEePP1p7LV5VLZgLxLPBWWA_v7KXak9spVkLyi0LCJ-be_wMchTPBFr2jg.AoOnnUrOQaR0bFapXjAro1VH5OB2G1S4KCH9xTEtGmA&dib_tag=se&keywords=iphone%2B17&qid=1787120604&sprefix=iphone%2Caps%2C333&sr=8-1&th=1",
+            "timestamp": "2026-08-19T06:23:50.435Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": -1980,
+            "scroll_y_before": 543.2000122070312,
+            "scroll_y_after": 0,
+            "viewport_height": 720,
+            "document_height": 12058,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.amazon.com/Apple-Version-Unlocked-Renewed-Premium/dp/B0G45X8NCK/ref=sr_1_1?crid=11N9LKEFT8LH6&dib=eyJ2IjoiMSJ9.qk7mtoixPkqn8jwI-BLukTOS34a-M3Pd0s48aNP-cB5bjw6CDhZRrhgP_bpX3LESRl1v7NhPc6dpjI00AUqnFHU9AobuyBULl7E829aDTb_RB7zR6-KAymNKY6yVkEEL4EeSwxfrgRcI_T3Fv3N6plRKjBNAOFc4WfM1IBa5C1GewJs_2mEePP1p7LV5VLZgLxLPBWWA_v7KXak9spVkLyi0LCJ-be_wMchTPBFr2jg.AoOnnUrOQaR0bFapXjAro1VH5OB2G1S4KCH9xTEtGmA&dib_tag=se&keywords=iphone%2B17&qid=1787120604&sprefix=iphone%2Caps%2C333&sr=8-1&th=1",
+            "timestamp": "2026-08-19T06:23:52.530Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 2890,
+            "scroll_y_before": 3.200000047683716,
+            "scroll_y_after": 2312,
+            "viewport_height": 720,
+            "document_height": 5798,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.amazon.com/s?k=iphone+17&crid=11N9LKEFT8LH6&sprefix=iphone%2Caps%2C333&ref=nb_sb_ss_p13n-expert-pd-ops-ranker_ci_hl-bn-left_4_6",
+            "timestamp": "2026-08-19T06:23:58.312Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.amazon.com/s?k=iphone+17&crid=11N9LKEFT8LH6&sprefix=iphone%2Caps%2C333&ref=nb_sb_ss_p13n-expert-pd-ops-ranker_ci_hl-bn-left_4_6",
+            "timestamp": "2026-08-19T06:23:58.973Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": "submit.addToCart",
+                "role": null,
+                "aria_label": "Add to cart",
+                "accessible_name": "Add to cart",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "span#a-autoid-2 > span > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/span[1]/div[1]/div[11]/div[1]/div[1]/span[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[4]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[2]/div[1]/form[1]/div[1]/div[1]/span[1]/div[1]/div[1]/span[1]/span[1]/input[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "input",
+                "attributes": {
+                    "name": "submit.addToCart",
+                    "aria-label": "Add to cart",
+                    "type": "submit"
+                }
+            },
+            "bounding_box": {
+                "x": 518,
+                "y": 242.8000030517578,
+                "width": 240.8000030517578,
+                "height": 30
+            },
+            "page_url": "https://www.amazon.com/s?k=iphone+17&crid=11N9LKEFT8LH6&sprefix=iphone%2Caps%2C333&ref=nb_sb_ss_p13n-expert-pd-ops-ranker_ci_hl-bn-left_4_6",
+            "timestamp": "2026-08-19T06:23:59.347Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": "/Samsung-Unlocked-Smartphone-Charging-Warranty/dp/B0G4SW3XXP/ref=sr_1_10?crid=11N9LKEFT8LH6&dib=eyJ2IjoiMSJ9.qk7mtoixPkqn8jwI-BLukTOS34a-M3Pd0s48aNP-cB5bjw6CDhZRrhgP_bpX3LESRl1v7NhPc6dpjI00AUqnFHU9AobuyBULl7E829aDTb_RB7zR6-KAymNKY6yVkEEL4EeSwxfrgRcI_T3Fv3N6plRKjBNAOFc4WfM1IBa5C1GewJs_2mEePP1p7LV5VLZgLxLPBWWA_v7KXak9spVkLyi0LCJ-be_wMchTPBFr2jg.AoOnnUrOQaR0bFapXjAro1VH5OB2G1S4KCH9xTEtGmA&dib_tag=se&keywords=iphone+17&qid=1787120635&sprefix=iphone%2Caps%2C333&sr=8-10",
+                "css_path": "div#1f963ec2-ea78-4d81-a828-29d90f5189de > div > div > span > div > div > div > div > div > div:nth-of-type(2) > div > span > a",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/span[1]/div[1]/div[11]/div[1]/div[1]/span[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/span[1]/a[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "a",
+                "attributes": {
+                    "href": "/Samsung-Unlocked-Smartphone-Charging-Warranty/dp/B0G4SW3XXP/ref=sr_1_10?crid=11N9LKEFT8LH6&dib=eyJ2IjoiMSJ9.qk7mtoixPkqn8jwI-BLukTOS34a-M3Pd0s48aNP-cB5bjw6CDhZRrhgP_bpX3LESRl1v7NhPc6dpjI00AUqnFHU9AobuyBULl7E829aDTb_RB7zR6-KAymNKY6yVkEEL4EeSwxfrgRcI_T3Fv3N6plRKjBNAOFc4WfM1IBa5C1GewJs_2mEePP1p7LV5VLZgLxLPBWWA_v7KXak9spVkLyi0LCJ-be_wMchTPBFr2jg.AoOnnUrOQaR0bFapXjAro1VH5OB2G1S4KCH9xTEtGmA&dib_tag=se&keywords=iphone+17&qid=1787120635&sprefix=iphone%2Caps%2C333&sr=8-10"
+                }
+            },
+            "bounding_box": {
+                "x": 300.8999938964844,
+                "y": 89.4000015258789,
+                "width": 256.5,
+                "height": 218
+            },
+            "page_url": "https://www.amazon.com/s?k=iphone+17&crid=11N9LKEFT8LH6&sprefix=iphone%2Caps%2C333&ref=nb_sb_ss_p13n-expert-pd-ops-ranker_ci_hl-bn-left_4_6",
+            "timestamp": "2026-08-19T06:24:01.554Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#add-to-cart-button",
+                "name": "submit.add-to-cart",
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Add to cart",
+                "placeholder": null,
+                "title": "Add to Shopping Cart",
+                "href": null,
+                "css_path": "input#add-to-cart-button",
+                "xpath": "//*[@id='add-to-cart-button']",
+                "text": "Add to cart",
+                "element_text": "Add to cart",
+                "tag": "input",
+                "attributes": {
+                    "name": "submit.add-to-cart",
+                    "title": "Add to Shopping Cart",
+                    "type": "submit"
+                }
+            },
+            "bounding_box": {
+                "x": 890.7999877929688,
+                "y": 510,
+                "width": 204.8000030517578,
+                "height": 30
+            },
+            "page_url": "https://www.amazon.com/Samsung-Unlocked-Smartphone-Charging-Warranty/dp/B0G4SW3XXP/ref=sr_1_10?crid=11N9LKEFT8LH6&dib=eyJ2IjoiMSJ9.qk7mtoixPkqn8jwI-BLukTOS34a-M3Pd0s48aNP-cB5bjw6CDhZRrhgP_bpX3LESRl1v7NhPc6dpjI00AUqnFHU9AobuyBULl7E829aDTb_RB7zR6-KAymNKY6yVkEEL4EeSwxfrgRcI_T3Fv3N6plRKjBNAOFc4WfM1IBa5C1GewJs_2mEePP1p7LV5VLZgLxLPBWWA_v7KXak9spVkLyi0LCJ-be_wMchTPBFr2jg.AoOnnUrOQaR0bFapXjAro1VH5OB2G1S4KCH9xTEtGmA&dib_tag=se&keywords=iphone%2B17&qid=1787120635&sprefix=iphone%2Caps%2C333&sr=8-10&th=1",
+            "timestamp": "2026-08-19T06:24:04.486Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "submit",
+            "value": null,
+            "locator_profile": {
+                "id": "#addToCart",
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "INR127,942.57\nINR127,942\n.\n57\nINR 53,663.93 Shipping & Import Charges to India D",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "form#addToCart",
+                "xpath": "//*[@id='addToCart']",
+                "text": "INR127,942.57\nINR127,942\n.\n57\nINR 53,663.93 Shipping & Import Charges to India D",
+                "element_text": "INR127,942.57\nINR127,942\n.\n57\nINR 53,663.93 Shipping & Import Charges to India D",
+                "tag": "form",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 871.2000122070312,
+                "y": 236,
+                "width": 244,
+                "height": 573.7999877929688
+            },
+            "page_url": "https://www.amazon.com/Samsung-Unlocked-Smartphone-Charging-Warranty/dp/B0G4SW3XXP/ref=sr_1_10?crid=11N9LKEFT8LH6&dib=eyJ2IjoiMSJ9.qk7mtoixPkqn8jwI-BLukTOS34a-M3Pd0s48aNP-cB5bjw6CDhZRrhgP_bpX3LESRl1v7NhPc6dpjI00AUqnFHU9AobuyBULl7E829aDTb_RB7zR6-KAymNKY6yVkEEL4EeSwxfrgRcI_T3Fv3N6plRKjBNAOFc4WfM1IBa5C1GewJs_2mEePP1p7LV5VLZgLxLPBWWA_v7KXak9spVkLyi0LCJ-be_wMchTPBFr2jg.AoOnnUrOQaR0bFapXjAro1VH5OB2G1S4KCH9xTEtGmA&dib_tag=se&keywords=iphone%2B17&qid=1787120635&sprefix=iphone%2Caps%2C333&sr=8-10&th=1",
+            "timestamp": "2026-08-19T06:24:04.496Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#nav-cart",
+                "name": null,
+                "role": null,
+                "aria_label": "2 items in cart",
+                "accessible_name": "2 items in cart",
+                "placeholder": null,
+                "title": null,
+                "href": "/gp/cart/view.html?ref_=nav_cart",
+                "css_path": "a#nav-cart",
+                "xpath": "//*[@id='nav-cart']",
+                "text": "2\nCart",
+                "element_text": "2\nCart",
+                "tag": "a",
+                "attributes": {
+                    "href": "/gp/cart/view.html?ref_=nav_cart",
+                    "aria-label": "2 items in cart"
+                }
+            },
+            "bounding_box": {
+                "x": 1038.2000732421875,
+                "y": 5,
+                "width": 84,
+                "height": 50
+            },
+            "page_url": "https://www.amazon.com/cart/smart-wagon?newItems=3efb3d11-aa23-4374-b872-31d19559ec5e,2&ref_=sw_refresh",
+            "timestamp": "2026-08-19T06:24:07.263Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": "Decrease quantity by one, Quantity is 2, Samsung Galaxy S26 Ultra, Unlocked Android Smartphone, 512GB, Black | Privacy Display, Galaxy AI, AI Camera, Super Fast Charging 3.0, Durable Battery, 2026, US 1 Year Warranty",
+                "accessible_name": "Decrease quantity by one, Quantity is 2, Samsung Galaxy S26 Ultra, Unlocked Android Smartphone, 512GB, Black | Privacy Display, Galaxy AI, AI Camera, Super Fast Charging 3.0, Durable Battery, 2026, US 1 Year Warranty",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#sc-active-3efb3d11-aa23-4374-b872-31d19559ec5e > div:nth-of-type(4) > div > div:nth-of-type(2) > div > span > span > fieldset > div:nth-of-type(2) > div > button",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[3]/div[4]/div[1]/div[2]/div[1]/div[1]/form[1]/ul[1]/div[3]/div[4]/div[1]/div[2]/div[1]/span[1]/span[1]/fieldset[1]/div[2]/div[1]/button[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "button",
+                "attributes": {
+                    "aria-label": "Decrease quantity by one, Quantity is 2, Samsung Galaxy S26 Ultra, Unlocked Android Smartphone, 512GB, Black | Privacy Display, Galaxy AI, AI Camera, Super Fast Charging 3.0, Durable Battery, 2026, US 1 Year Warranty"
+                }
+            },
+            "bounding_box": {
+                "x": 250.40000915527344,
+                "y": 384.6000061035156,
+                "width": 32,
+                "height": 26
+            },
+            "page_url": "https://www.amazon.com/gp/cart/view.html?ref_=nav_cart",
+            "timestamp": "2026-08-19T06:24:11.157Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.amazon.com/gp/cart/view.html?ref_=nav_cart",
+            "timestamp": "2026-08-19T06:24:12.251Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": "Delete Samsung Galaxy S26 Ultra, Unlocked Android Smartphone, 512GB, Black | Privacy Display, Galaxy AI, AI Camera, Super Fast Charging 3.0, Durable Battery, 2026, US 1 Year Warranty",
+                "accessible_name": "Delete Samsung Galaxy S26 Ultra, Unlocked Android Smartphone, 512GB, Black | Privacy Display, Galaxy AI, AI Camera, Super Fast Charging 3.0, Durable Battery, 2026, US 1 Year Warranty",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#sc-active-3efb3d11-aa23-4374-b872-31d19559ec5e > div:nth-of-type(4) > div > div:nth-of-type(2) > div > span > span > fieldset > div:nth-of-type(2) > div > button",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[3]/div[4]/div[1]/div[2]/div[1]/div[1]/form[1]/ul[1]/div[3]/div[4]/div[1]/div[2]/div[1]/span[1]/span[1]/fieldset[1]/div[2]/div[1]/button[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "button",
+                "attributes": {
+                    "aria-label": "Delete Samsung Galaxy S26 Ultra, Unlocked Android Smartphone, 512GB, Black | Privacy Display, Galaxy AI, AI Camera, Super Fast Charging 3.0, Durable Battery, 2026, US 1 Year Warranty"
+                }
+            },
+            "bounding_box": {
+                "x": 250.40000915527344,
+                "y": 384.6000061035156,
+                "width": 32,
+                "height": 26
+            },
+            "page_url": "https://www.amazon.com/gp/cart/view.html?ref_=nav_cart",
+            "timestamp": "2026-08-19T06:24:12.586Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": -2215,
+            "scroll_y_before": 0,
+            "scroll_y_after": 0,
+            "viewport_height": 720,
+            "document_height": 2912,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.amazon.com/gp/cart/view.html?ref_=nav_cart",
+            "timestamp": "2026-08-19T06:24:14.827Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": -3574,
+            "scroll_y_before": 2348,
+            "scroll_y_after": 0,
+            "viewport_height": 720,
+            "document_height": 5858,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.amazon.com/s?k=iphone+17&crid=11N9LKEFT8LH6&sprefix=iphone%2Caps%2C333&ref=nb_sb_ss_p13n-expert-pd-ops-ranker_ci_hl-bn-left_4_6",
+            "timestamp": "2026-08-19T06:24:26.827Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.amazon.com/s?k=iphone+17&crid=11N9LKEFT8LH6&sprefix=iphone%2Caps%2C333&ref=nb_sb_ss_p13n-expert-pd-ops-ranker_ci_hl-bn-left_4_6",
+            "timestamp": "2026-08-19T06:24:27.551Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#nav-orders",
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Returns\n& Orders",
+                "placeholder": null,
+                "title": null,
+                "href": "/gp/css/order-history?ref_=nav_orders_first",
+                "css_path": "a#nav-orders",
+                "xpath": "//*[@id='nav-orders']",
+                "text": "Returns\n& Orders",
+                "element_text": "Returns\n& Orders",
+                "tag": "a",
+                "attributes": {
+                    "href": "/gp/css/order-history?ref_=nav_orders_first"
+                }
+            },
+            "bounding_box": {
+                "x": 1089.6500244140625,
+                "y": 5,
+                "width": 76.55000305175781,
+                "height": 50
+            },
+            "page_url": "https://www.amazon.com/s?k=iphone+17&crid=11N9LKEFT8LH6&sprefix=iphone%2Caps%2C333&ref=nb_sb_ss_p13n-expert-pd-ops-ranker_ci_hl-bn-left_4_6",
+            "timestamp": "2026-08-19T06:24:36.286Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.amazon.com/ap/signin?openid.pape.max_auth_age=0&openid.return_to=https%3A%2F%2Fwww.amazon.com%2Fyour-orders%2Forders%3Fref_%3Dnav_orders_first&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.assoc_handle=amzn_retail_yourorders_us&openid.mode=checkid_setup&language=en_US&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0",
+            "timestamp": "2026-08-19T06:24:40.692Z",
+            "page_id": 0
+        }
+    ],
+    "saved_at": "2026-08-19T11:54:40.692854"
+}

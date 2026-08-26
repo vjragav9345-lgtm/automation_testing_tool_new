@@ -1,0 +1,28 @@
+{
+  "name": "session_20260811_234251",
+  "start_url": "https://the-internet.herokuapp.com/",
+  "recorded_at": "2026-08-11T23:42:51.317616",
+  "actions": [
+    {
+      "action_type": "click",
+      "value": null,
+      "locator_profile": {
+        "id": null,
+        "css_path": "div#content > ul > li > a",
+        "xpath": "/html[1]/body[1]/div[2]/div[1]/ul[1]/li[1]/a[1]",
+        "text": "A/B Testing",
+        "tag": "a",
+        "attributes": {}
+      },
+      "bounding_box": {
+        "x": 146.60000610351562,
+        "y": 198.6999969482422,
+        "width": 80.6500015258789,
+        "height": 17.600000381469727
+      },
+      "page_url": "https://the-internet.herokuapp.com/",
+      "timestamp": "2026-08-11T18:12:50.994Z"
+    }
+  ],
+  "saved_at": "2026-08-11T23:42:51.318625"
+}

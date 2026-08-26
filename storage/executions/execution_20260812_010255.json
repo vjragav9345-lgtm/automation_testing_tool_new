@@ -1,0 +1,86 @@
+{
+  "status": "PASS",
+  "message": "all steps resolved and validations passed",
+  "qa_url": "https://the-internet.herokuapp.com/login",
+  "steps": [
+    {
+      "index": 1,
+      "action_type": "click",
+      "strategy_used": "id",
+      "element_found": true,
+      "success": true,
+      "error": null,
+      "screenshot": "screenshots/execution_runs/20260812_010249/step1.png",
+      "fragile": false
+    },
+    {
+      "index": 2,
+      "action_type": "fill",
+      "strategy_used": "id",
+      "element_found": true,
+      "success": true,
+      "error": null,
+      "screenshot": "screenshots/execution_runs/20260812_010249/step2.png",
+      "fragile": false
+    },
+    {
+      "index": 3,
+      "action_type": "fill",
+      "strategy_used": "id",
+      "element_found": true,
+      "success": true,
+      "error": null,
+      "screenshot": "screenshots/execution_runs/20260812_010249/step3.png",
+      "fragile": false
+    },
+    {
+      "index": 4,
+      "action_type": "click",
+      "strategy_used": "css_path",
+      "element_found": true,
+      "success": true,
+      "error": null,
+      "screenshot": "screenshots/execution_runs/20260812_010249/step4.png",
+      "fragile": false
+    }
+  ],
+  "ui_elements": [
+    {
+      "index": 1,
+      "action_type": "click",
+      "element_found": true,
+      "locator_used": "id",
+      "status": "PASS",
+      "message": null
+    },
+    {
+      "index": 2,
+      "action_type": "fill",
+      "element_found": true,
+      "locator_used": "id",
+      "status": "PASS",
+      "message": null
+    },
+    {
+      "index": 3,
+      "action_type": "fill",
+      "element_found": true,
+      "locator_used": "id",
+      "status": "PASS",
+      "message": null
+    },
+    {
+      "index": 4,
+      "action_type": "click",
+      "element_found": true,
+      "locator_used": "css_path",
+      "status": "PASS",
+      "message": null
+    }
+  ],
+  "ui_elements_status": "PASS",
+  "content_check": true,
+  "screenshot_diff": null,
+  "final_screenshot": "screenshots/execution_runs/20260812_010249/final.png",
+  "run_id": "20260812_010249"
+}

@@ -1,0 +1,124 @@
+{
+    "name": "session_20260812_095857",
+    "session_id": "9f4421decba14c618b51a2001de6231e",
+    "start_url": "https://www.amazon.com/s/ref=nb_sb_noss_1?url=search-alias%3Daps&field-keywords=mouse&crid=1HK0D8I787F4D&sprefix=mouse%2Caps%2C378",
+    "recorded_at": "2026-08-12T09:58:57.325252",
+    "stop_reason": "browser_closed",
+    "total_actions": 7,
+    "actions": [
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.amazon.com/s?k=mouse&crid=1HK0D8I787F4D&sprefix=mouse%2Caps%2C378&ref=nb_sb_noss_1",
+            "timestamp": "2026-08-12T09:57:57.300711"
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "css_path": "div#04ca3c1a-2671-4df7-a652-a996a03a7388 > div > div > div > div > span > div > div > div > div > div > div:nth-of-type(2)",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/span[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/span[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]",
+                "text": "",
+                "tag": "div",
+                "attributes": {
+                    "data-cy": "image-container"
+                }
+            },
+            "bounding_box": {
+                "x": 262.8000183105469,
+                "y": 215.40000915527344,
+                "width": 242.40000915527344,
+                "height": 218
+            },
+            "page_url": "https://www.amazon.com/s?k=mouse&crid=1HK0D8I787F4D&sprefix=mouse%2Caps%2C378&ref=nb_sb_noss_1",
+            "timestamp": "2026-08-12T04:28:05.502Z"
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "css_path": "div#04ca3c1a-2671-4df7-a652-a996a03a7388 > div > div > div > div > span > div > div > div > div > div > div:nth-of-type(2) > div > span > a > div > img",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/span[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/span[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/span[1]/a[1]/div[1]/img[1]",
+                "text": "",
+                "tag": "img",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 270.8000183105469,
+                "y": 239.8874969482422,
+                "width": 226.40000915527344,
+                "height": 169.0124969482422
+            },
+            "page_url": "https://www.amazon.com/s?k=mouse&crid=1HK0D8I787F4D&sprefix=mouse%2Caps%2C378&ref=nb_sb_noss_1",
+            "timestamp": "2026-08-12T04:28:08.542Z"
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.amazon.com/YUNZII-C1-Wireless-Tri-Mode-Optical/dp/B0H1M2WJ14/ref=sr_1_1_sspa?crid=1HK0D8I787F4D&dib=eyJ2IjoiMSJ9.UlhdkS_Xw4N4wR9qPv2lOq_F1GEGp2tqEt0bn0voLLDHESMaNNRr8iaR4Zpwi36bZnT1lwh-KLsZqx7XJUQzIe4WZDzgCKigFD77ZDxeQuQtGmbgB6H7KlbyoOC01hciZUf6khxS55O7M0qQJAoVP1TeMpoU7v-bR0w4FrZbewIn0M8sL7nZy7rzOIYQM_kci55Eq3FkOlfV6oSTtMuvHN-6WRXzwbGn51ewK1UB5ZU.N5plZWaMdrz1gb9Ph1BCjE8P8wFi1cTNasAT78RV3nA&dib_tag=se&keywords=mouse&qid=1786508876&sprefix=mouse%2Caps%2C378&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&th=1",
+            "timestamp": "2026-08-12T09:58:10.997878"
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.amazon.com/s?k=mouse&crid=1HK0D8I787F4D&sprefix=mouse%2Caps%2C378&ref=nb_sb_noss_1",
+            "timestamp": "2026-08-12T09:58:17.269344"
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "css_path": "span#a-autoid-10 > span > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/span[1]/div[1]/div[12]/div[1]/div[1]/span[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[3]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[2]/div[1]/form[1]/div[1]/div[1]/span[1]/div[1]/div[1]/span[1]/span[1]/input[1]",
+                "text": "",
+                "tag": "input",
+                "attributes": {
+                    "name": "submit.addToCart",
+                    "aria-label": "Add to cart",
+                    "type": "submit"
+                }
+            },
+            "bounding_box": {
+                "x": 518,
+                "y": 281.9375,
+                "width": 240.8000030517578,
+                "height": 30
+            },
+            "page_url": "https://www.amazon.com/s?k=mouse&crid=1HK0D8I787F4D&sprefix=mouse%2Caps%2C378&ref=nb_sb_noss_1",
+            "timestamp": "2026-08-12T04:28:23.531Z"
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#nav-cart",
+                "css_path": "a#nav-cart",
+                "xpath": "//*[@id='nav-cart']",
+                "text": "0\nCart",
+                "tag": "a",
+                "attributes": {
+                    "href": "/gp/cart/view.html?ref_=nav_cart",
+                    "aria-label": "0 items in cart"
+                }
+            },
+            "bounding_box": {
+                "x": 1168.5999755859375,
+                "y": 5,
+                "width": 83.5999984741211,
+                "height": 50
+            },
+            "page_url": "https://www.amazon.com/cart",
+            "timestamp": "2026-08-12T04:28:27.521Z"
+        }
+    ],
+    "saved_at": "2026-08-12T09:58:57.325252"
+}

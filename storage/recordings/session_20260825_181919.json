@@ -1,0 +1,1821 @@
+{
+    "name": "session_20260825_181919",
+    "session_id": "737f1f57233444c7a1b3330dc783d025",
+    "start_url": "https://sportzia-preprod.kovaionplay.com/feed",
+    "recorded_at": "2026-08-25T18:19:19.765737",
+    "stop_reason": "browser_closed",
+    "total_actions": 65,
+    "page_count": 1,
+    "actions": [
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Accept",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div:nth-of-type(3) > div > div:nth-of-type(2) > div",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[2]/div[1]",
+                "text": "Accept",
+                "element_text": "Accept",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 1165.550048828125,
+                "y": 677.2000122070312,
+                "width": 48.900001525878906,
+                "height": 16.80000114440918
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/feed",
+            "timestamp": "2026-08-25T12:47:23.041Z",
+            "page_id": 0,
+            "delay_before_ms": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > img",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/img[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "img",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 955.2625122070312,
+                "y": 19.5,
+                "width": 20,
+                "height": 20
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/feed",
+            "timestamp": "2026-08-25T12:47:25.625Z",
+            "page_id": 0,
+            "delay_before_ms": 2584
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Banner for LARSEN MEMORIAL RUN 13th EDITION",
+                "placeholder": null,
+                "title": "Banner for LARSEN MEMORIAL RUN 13th EDITION",
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div:nth-of-type(2) > div > div:nth-of-type(2) > div > div > div > div > div:nth-of-type(4) > div > div > div > div > img",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[1]/img[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "img",
+                "attributes": {
+                    "title": "Banner for LARSEN MEMORIAL RUN 13th EDITION"
+                }
+            },
+            "bounding_box": {
+                "x": 1043,
+                "y": 154,
+                "width": 219,
+                "height": 120.45000457763672
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events",
+            "timestamp": "2026-08-25T12:47:28.832Z",
+            "page_id": 0,
+            "delay_before_ms": 3207
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Register Now",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div:nth-of-type(2) > div > div:nth-of-type(3) > div",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div[3]/div[1]",
+                "text": "Register Now",
+                "element_text": "Register Now",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 1070.6624755859375,
+                "y": 189.60000610351562,
+                "width": 102.4124984741211,
+                "height": 19.200000762939453
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178?from=eventslist",
+            "timestamp": "2026-08-25T12:47:30.550Z",
+            "page_id": 0,
+            "delay_before_ms": 1718
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/register",
+            "timestamp": "2026-08-25T12:47:30.679Z",
+            "page_id": 0,
+            "delay_before_ms": 129
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div:nth-of-type(2) > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2)",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]/div[2]/div[2]",
+                "text": "",
+                "element_text": "",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 826,
+                "y": 142.40000915527344,
+                "width": 36,
+                "height": 36
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/register",
+            "timestamp": "2026-08-25T12:47:32.599Z",
+            "page_id": 0,
+            "delay_before_ms": 1920
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div:nth-of-type(2) > div > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2)",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div[2]/div[2]/div[2]/div[2]",
+                "text": "",
+                "element_text": "",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 826,
+                "y": 303.6000061035156,
+                "width": 36,
+                "height": 36
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/register",
+            "timestamp": "2026-08-25T12:47:34.137Z",
+            "page_id": 0,
+            "delay_before_ms": 1538
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Continue",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div:nth-of-type(3) > div > div > div > div:nth-of-type(7) > div",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[7]/div[1]",
+                "text": "Continue",
+                "element_text": "Continue",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 1052.1875,
+                "y": 413.6000061035156,
+                "width": 65.61250305175781,
+                "height": 18.399999618530273
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/register",
+            "timestamp": "2026-08-25T12:47:36.124Z",
+            "page_id": 0,
+            "delay_before_ms": 1987
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "e.g. john@email.com or 9XXXXXXXXX",
+                "placeholder": "e.g. john@email.com or 9XXXXXXXXX",
+                "title": null,
+                "href": null,
+                "css_path": "body > div:nth-of-type(5) > div > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(4) > input",
+                "xpath": "/html[1]/body[1]/div[5]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/input[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "e.g. john@email.com or 9XXXXXXXXX",
+                    "type": "text"
+                }
+            },
+            "bounding_box": {
+                "x": 448,
+                "y": 371,
+                "width": 384,
+                "height": 50
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/register",
+            "timestamp": "2026-08-25T12:47:37.327Z",
+            "page_id": 0,
+            "delay_before_ms": 1203
+        },
+        {
+            "action_type": "fill",
+            "value": "8807836261",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "e.g. john@email.com or 9XXXXXXXXX",
+                "placeholder": "e.g. john@email.com or 9XXXXXXXXX",
+                "title": null,
+                "href": null,
+                "css_path": "body > div:nth-of-type(5) > div > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(4) > input",
+                "xpath": "/html[1]/body[1]/div[5]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/input[1]",
+                "text": "8807836261",
+                "element_text": "8807836261",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "e.g. john@email.com or 9XXXXXXXXX",
+                    "type": "text"
+                }
+            },
+            "bounding_box": {
+                "x": 448,
+                "y": 371,
+                "width": 384,
+                "height": 50
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/register",
+            "timestamp": "2026-08-25T12:47:41.006Z",
+            "page_id": 0,
+            "delay_before_ms": 3679
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Send OTP",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "body > div:nth-of-type(5) > div > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(5)",
+                "xpath": "/html[1]/body[1]/div[5]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[5]",
+                "text": "Send OTP",
+                "element_text": "Send OTP",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 448,
+                "y": 445,
+                "width": 384,
+                "height": 52
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/register",
+            "timestamp": "2026-08-25T12:47:41.223Z",
+            "page_id": 0,
+            "delay_before_ms": 217
+        },
+        {
+            "action_type": "fill",
+            "value": "1234",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "1234",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "body > div:nth-of-type(5) > div > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(4) > div:nth-of-type(2) > input",
+                "xpath": "/html[1]/body[1]/div[5]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[2]/input[1]",
+                "text": "1234",
+                "element_text": "1234",
+                "tag": "input",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 448,
+                "y": 323.20001220703125,
+                "width": 384,
+                "height": 56
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/register",
+            "timestamp": "2026-08-25T12:47:45.455Z",
+            "page_id": 0,
+            "delay_before_ms": 4232
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Verify & Continue",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "body > div:nth-of-type(5) > div > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(5)",
+                "xpath": "/html[1]/body[1]/div[5]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[5]",
+                "text": "Verify & Continue",
+                "element_text": "Verify & Continue",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 448,
+                "y": 470.8000183105469,
+                "width": 384,
+                "height": 52
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/register",
+            "timestamp": "2026-08-25T12:47:45.676Z",
+            "page_id": 0,
+            "delay_before_ms": 221
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:47:47.620Z",
+            "page_id": 0,
+            "delay_before_ms": 1944
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 125,
+            "scroll_y_before": 0.800000011920929,
+            "scroll_y_after": 100,
+            "viewport_height": 640,
+            "document_height": 1156,
+            "locator_profile": {
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div",
+                "tag": "div"
+            },
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:47:49.822Z",
+            "page_id": 0,
+            "delay_before_ms": 2202
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Pick from your saved people",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(3) > div:nth-of-type(2) > div > div:nth-of-type(2)",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[1]/div[2]",
+                "text": "Pick from your saved people",
+                "element_text": "Pick from your saved people",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 297.6000061035156,
+                "y": 193.60000610351562,
+                "width": 166.03750610351562,
+                "height": 15.199999809265137
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:47:51.568Z",
+            "page_id": 0,
+            "delay_before_ms": 1746
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Mohan Kumar M",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "body > div:nth-of-type(7) > div > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(4) > div > div:nth-of-type(2) > div:nth-of-type(2) > div",
+                "xpath": "/html[1]/body[1]/div[7]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[2]/div[2]/div[1]",
+                "text": "Mohan Kumar M",
+                "element_text": "Mohan Kumar M",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 494.8000183105469,
+                "y": 296.3000183105469,
+                "width": 314.3999938964844,
+                "height": 16.80000114440918
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:47:54.692Z",
+            "page_id": 0,
+            "delay_before_ms": 3124
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Continue with Mohan Kumar M",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "body > div:nth-of-type(7) > div > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(5) > div",
+                "xpath": "/html[1]/body[1]/div[7]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[5]/div[1]",
+                "text": "Continue with Mohan Kumar M",
+                "element_text": "Continue with Mohan Kumar M",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 517.0250244140625,
+                "y": 575.2000122070312,
+                "width": 245.9375,
+                "height": 19.200000762939453
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:47:55.727Z",
+            "page_id": 0,
+            "delay_before_ms": 1035
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(6) > div > div > select",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[6]/div[1]/div[1]/select[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "select",
+                "attributes": {
+                    "data-testid": "undefined-picker"
+                }
+            },
+            "bounding_box": {
+                "x": 266.3999938964844,
+                "y": 447.76251220703125,
+                "width": 715.4000244140625,
+                "height": 43.400001525878906
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:47:57.916Z",
+            "page_id": 0,
+            "delay_before_ms": 2189
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 136,
+            "scroll_y_before": 100,
+            "scroll_y_after": 208.8000030517578,
+            "viewport_height": 640,
+            "document_height": 1156,
+            "locator_profile": {
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div",
+                "tag": "div"
+            },
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:47:59.644Z",
+            "page_id": 0,
+            "delay_before_ms": 1728
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(6) > div > div > select",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[6]/div[1]/div[1]/select[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "select",
+                "attributes": {
+                    "data-testid": "undefined-picker"
+                }
+            },
+            "bounding_box": {
+                "x": 266.3999938964844,
+                "y": 338.9624938964844,
+                "width": 715.4000244140625,
+                "height": 43.400001525878906
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:48:00.003Z",
+            "page_id": 0,
+            "delay_before_ms": 359
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(6) > div > div > select",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[6]/div[1]/div[1]/select[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "select",
+                "attributes": {
+                    "data-testid": "undefined-picker"
+                }
+            },
+            "bounding_box": {
+                "x": 266.3999938964844,
+                "y": 338.9624938964844,
+                "width": 715.4000244140625,
+                "height": 43.400001525878906
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:48:02.131Z",
+            "page_id": 0,
+            "delay_before_ms": 2128
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": -17,
+            "scroll_y_before": 208.8000030517578,
+            "scroll_y_after": 203.1999969482422,
+            "viewport_height": 640,
+            "document_height": 1156,
+            "locator_profile": {
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div",
+                "tag": "div"
+            },
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:48:03.852Z",
+            "page_id": 0,
+            "delay_before_ms": 1721
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(6) > div > div > select",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[6]/div[1]/div[1]/select[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "select",
+                "attributes": {
+                    "data-testid": "undefined-picker"
+                }
+            },
+            "bounding_box": {
+                "x": 266.3999938964844,
+                "y": 344.5625,
+                "width": 715.4000244140625,
+                "height": 43.400001525878906
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:48:04.255Z",
+            "page_id": 0,
+            "delay_before_ms": 403
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "5K Timed Run  12-99 yrs · Male/Female/Others\nMohan Kumar M  - Participant\n\n\nCh",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(3)",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]",
+                "text": "5K Timed Run  12-99 yrs · Male/Female/Others\nMohan Kumar M  - Participant\n\n\nCh",
+                "element_text": "5K Timed Run  12-99 yrs · Male/Female/Others\nMohan Kumar M  - Participant\n\n\nCh",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 249.60000610351562,
+                "y": 11.800000190734863,
+                "width": 764,
+                "height": 402.9624938964844
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:48:07.963Z",
+            "page_id": 0,
+            "delay_before_ms": 3708
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(6) > div > div > select",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[6]/div[1]/div[1]/select[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "select",
+                "attributes": {
+                    "data-testid": "undefined-picker"
+                }
+            },
+            "bounding_box": {
+                "x": 266.3999938964844,
+                "y": 344.5625,
+                "width": 715.4000244140625,
+                "height": 43.400001525878906
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:48:08.759Z",
+            "page_id": 0,
+            "delay_before_ms": 796
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(6) > div > div > select",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[6]/div[1]/div[1]/select[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "select",
+                "attributes": {
+                    "data-testid": "undefined-picker"
+                }
+            },
+            "bounding_box": {
+                "x": 266.3999938964844,
+                "y": 344.5625,
+                "width": 715.4000244140625,
+                "height": 43.400001525878906
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:48:09.505Z",
+            "page_id": 0,
+            "delay_before_ms": 746
+        },
+        {
+            "action_type": "press",
+            "value": "Enter",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(6) > div > div > select",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[6]/div[1]/div[1]/select[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "select",
+                "attributes": {
+                    "data-testid": "undefined-picker"
+                }
+            },
+            "bounding_box": {
+                "x": 266.3999938964844,
+                "y": 344.5625,
+                "width": 715.4000244140625,
+                "height": 43.400001525878906
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:48:11.771Z",
+            "page_id": 0,
+            "delay_before_ms": 2266
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(6) > div > div > select",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[6]/div[1]/div[1]/select[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "select",
+                "attributes": {
+                    "data-testid": "undefined-picker"
+                }
+            },
+            "bounding_box": {
+                "x": 266.3999938964844,
+                "y": 344.5625,
+                "width": 715.4000244140625,
+                "height": 43.400001525878906
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:48:13.094Z",
+            "page_id": 0,
+            "delay_before_ms": 1323
+        },
+        {
+            "action_type": "press",
+            "value": "Enter",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(6) > div > div > select",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[6]/div[1]/div[1]/select[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "select",
+                "attributes": {
+                    "data-testid": "undefined-picker"
+                }
+            },
+            "bounding_box": {
+                "x": 266.3999938964844,
+                "y": 344.5625,
+                "width": 715.4000244140625,
+                "height": 43.400001525878906
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:48:14.718Z",
+            "page_id": 0,
+            "delay_before_ms": 1624
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(6) > div > div > select",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[6]/div[1]/div[1]/select[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "select",
+                "attributes": {
+                    "data-testid": "undefined-picker"
+                }
+            },
+            "bounding_box": {
+                "x": 266.3999938964844,
+                "y": 344.5625,
+                "width": 715.4000244140625,
+                "height": 43.400001525878906
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:48:16.203Z",
+            "page_id": 0,
+            "delay_before_ms": 1485
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(6) > div > div > select",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[6]/div[1]/div[1]/select[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "select",
+                "attributes": {
+                    "data-testid": "undefined-picker"
+                }
+            },
+            "bounding_box": {
+                "x": 266.3999938964844,
+                "y": 344.5625,
+                "width": 715.4000244140625,
+                "height": 43.400001525878906
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:48:21.081Z",
+            "page_id": 0,
+            "delay_before_ms": 4878
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "5K Timed Run  12-99 yrs · Male/Female/Others\nMohan Kumar M  - Participant\n\n\nCh",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(3)",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]",
+                "text": "5K Timed Run  12-99 yrs · Male/Female/Others\nMohan Kumar M  - Participant\n\n\nCh",
+                "element_text": "5K Timed Run  12-99 yrs · Male/Female/Others\nMohan Kumar M  - Participant\n\n\nCh",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 249.60000610351562,
+                "y": 11.800000190734863,
+                "width": 764,
+                "height": 402.9624938964844
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:48:23.048Z",
+            "page_id": 0,
+            "delay_before_ms": 1967
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 47,
+            "scroll_y_before": 203.1999969482422,
+            "scroll_y_after": 240.8000030517578,
+            "viewport_height": 640,
+            "document_height": 1156,
+            "locator_profile": {
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div",
+                "tag": "div"
+            },
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:48:23.725Z",
+            "page_id": 0,
+            "delay_before_ms": 677
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "16-99 yrs · Male/Female/Others",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(4) > div > div > div > span",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/span[1]",
+                "text": "16-99 yrs · Male/Female/Others",
+                "element_text": "16-99 yrs · Male/Female/Others",
+                "tag": "span",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 373.32501220703125,
+                "y": 412.8625183105469,
+                "width": 185.58750915527344,
+                "height": 15.199999809265137
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:48:24.172Z",
+            "page_id": 0,
+            "delay_before_ms": 447
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 152,
+            "scroll_y_before": 240.8000030517578,
+            "scroll_y_after": 363.20001220703125,
+            "viewport_height": 640,
+            "document_height": 1487,
+            "locator_profile": {
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div",
+                "tag": "div"
+            },
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:48:25.570Z",
+            "page_id": 0,
+            "delay_before_ms": 1398
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Enter full name*",
+                "placeholder": "Enter full name*",
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(4) > div:nth-of-type(2) > div:nth-of-type(2) > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[2]/div[2]/input[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Enter full name*"
+                }
+            },
+            "bounding_box": {
+                "x": 265.6000061035156,
+                "y": 382.1625061035156,
+                "width": 732,
+                "height": 45
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:48:26.839Z",
+            "page_id": 0,
+            "delay_before_ms": 1269
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "\nPick from your saved people\nFull name is required.\n​\nSelect gender*\nMale\nFemal",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(4) > div:nth-of-type(2)",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[2]",
+                "text": "\nPick from your saved people\nFull name is required.\n​\nSelect gender*\nMale\nFemal",
+                "element_text": "\nPick from your saved people\nFull name is required.\n​\nSelect gender*\nMale\nFemal",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 265.6000061035156,
+                "y": 341.76251220703125,
+                "width": 732,
+                "height": 336.9624938964844
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:48:27.623Z",
+            "page_id": 0,
+            "delay_before_ms": 784
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Pick from your saved people",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(4) > div:nth-of-type(2) > div > div:nth-of-type(2)",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[2]/div[1]/div[2]",
+                "text": "Pick from your saved people",
+                "element_text": "Pick from your saved people",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 297.6000061035156,
+                "y": 349.3625183105469,
+                "width": 166.03750610351562,
+                "height": 15.199999809265137
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:48:28.608Z",
+            "page_id": 0,
+            "delay_before_ms": 985
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Male · 10 Oct 1996 · T-shirt XXS",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "body > div:nth-of-type(7) > div > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(4) > div > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(2)",
+                "xpath": "/html[1]/body[1]/div[7]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[3]/div[2]/div[2]",
+                "text": "Male · 10 Oct 1996 · T-shirt XXS",
+                "element_text": "Male · 10 Oct 1996 · T-shirt XXS",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 494.8000183105469,
+                "y": 392.70001220703125,
+                "width": 314.3999938964844,
+                "height": 17
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:48:29.909Z",
+            "page_id": 0,
+            "delay_before_ms": 1301
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Existing Participants\n\nSelect a saved participant to fill in their details auto",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "body > div:nth-of-type(7) > div > div:nth-of-type(2) > div > div > div > div > div",
+                "xpath": "/html[1]/body[1]/div[7]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]",
+                "text": "Existing Participants\n\nSelect a saved participant to fill in their details auto",
+                "element_text": "Existing Participants\n\nSelect a saved participant to fill in their details auto",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 400,
+                "y": 81.20000457763672,
+                "width": 480,
+                "height": 557.6000366210938
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:48:30.902Z",
+            "page_id": 0,
+            "delay_before_ms": 993
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Continue with Mohammed",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "body > div:nth-of-type(7) > div > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(5) > div",
+                "xpath": "/html[1]/body[1]/div[7]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[5]/div[1]",
+                "text": "Continue with Mohammed",
+                "element_text": "Continue with Mohammed",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 536.8624877929688,
+                "y": 575.2000122070312,
+                "width": 206.27500915527344,
+                "height": 19.200000762939453
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:48:31.307Z",
+            "page_id": 0,
+            "delay_before_ms": 405
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 187,
+            "scroll_y_before": 363.20001220703125,
+            "scroll_y_after": 512.7999877929688,
+            "viewport_height": 640,
+            "document_height": 1487,
+            "locator_profile": {
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div",
+                "tag": "div"
+            },
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:48:32.529Z",
+            "page_id": 0,
+            "delay_before_ms": 1222
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(4) > div:nth-of-type(2) > div:nth-of-type(6) > div > div > select",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[2]/div[6]/div[1]/div[1]/select[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "select",
+                "attributes": {
+                    "data-testid": "undefined-picker"
+                }
+            },
+            "bounding_box": {
+                "x": 266.3999938964844,
+                "y": 453.9250183105469,
+                "width": 715.4000244140625,
+                "height": 43.400001525878906
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:48:33.270Z",
+            "page_id": 0,
+            "delay_before_ms": 741
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "10K Timed Run  16-99 yrs · Male/Female/Others\nMohammed - Participant\n\n\nChange ",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(4)",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]",
+                "text": "10K Timed Run  16-99 yrs · Male/Female/Others\nMohammed - Participant\n\n\nChange ",
+                "element_text": "10K Timed Run  16-99 yrs · Male/Female/Others\nMohammed - Participant\n\n\nChange ",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 249.60000610351562,
+                "y": 121.1624984741211,
+                "width": 764,
+                "height": 402.9624938964844
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:48:34.450Z",
+            "page_id": 0,
+            "delay_before_ms": 1180
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(4) > div:nth-of-type(2) > div:nth-of-type(6) > div > div > select",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[2]/div[6]/div[1]/div[1]/select[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "select",
+                "attributes": {
+                    "data-testid": "undefined-picker"
+                }
+            },
+            "bounding_box": {
+                "x": 266.3999938964844,
+                "y": 453.9250183105469,
+                "width": 715.4000244140625,
+                "height": 43.400001525878906
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:48:35.284Z",
+            "page_id": 0,
+            "delay_before_ms": 834
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(4) > div:nth-of-type(2) > div:nth-of-type(6) > div > div > select",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[2]/div[6]/div[1]/div[1]/select[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "select",
+                "attributes": {
+                    "data-testid": "undefined-picker"
+                }
+            },
+            "bounding_box": {
+                "x": 266.3999938964844,
+                "y": 453.9250183105469,
+                "width": 715.4000244140625,
+                "height": 43.400001525878906
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:48:35.680Z",
+            "page_id": 0,
+            "delay_before_ms": 396
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "\nChange saved person\n​\nMale\nFemale\nOthers",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(4) > div:nth-of-type(2)",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[2]",
+                "text": "\nChange saved person\n​\nMale\nFemale\nOthers",
+                "element_text": "\nChange saved person\n​\nMale\nFemale\nOthers",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 265.6000061035156,
+                "y": 192.16250610351562,
+                "width": 732,
+                "height": 315.9624938964844
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:48:36.418Z",
+            "page_id": 0,
+            "delay_before_ms": 738
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(4) > div:nth-of-type(2) > div:nth-of-type(6) > div > div > select",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[2]/div[6]/div[1]/div[1]/select[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "select",
+                "attributes": {
+                    "data-testid": "undefined-picker"
+                }
+            },
+            "bounding_box": {
+                "x": 424.5,
+                "y": 451.125,
+                "width": 715,
+                "height": 43
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:48:44.655Z",
+            "page_id": 0,
+            "delay_before_ms": 8237
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": -495,
+            "scroll_y_before": 512.7999877929688,
+            "scroll_y_after": 116,
+            "viewport_height": 820,
+            "document_height": 1484,
+            "locator_profile": {
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div",
+                "tag": "div"
+            },
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:48:46.905Z",
+            "page_id": 0,
+            "delay_before_ms": 2250
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(6) > div > div > select",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[6]/div[1]/div[1]/select[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "select",
+                "attributes": {
+                    "data-testid": "undefined-picker"
+                }
+            },
+            "bounding_box": {
+                "x": 424.5,
+                "y": 429.5625,
+                "width": 715,
+                "height": 43
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:48:47.411Z",
+            "page_id": 0,
+            "delay_before_ms": 506
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Events",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div > div > div > div:nth-of-type(2) > div:nth-of-type(2)",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[2]",
+                "text": "Events",
+                "element_text": "Events",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 1070.1875,
+                "y": 0,
+                "width": 38.625,
+                "height": 79
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:48:51.092Z",
+            "page_id": 0,
+            "delay_before_ms": 3681
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Banner for LARSEN MEMORIAL RUN 13th EDITION",
+                "placeholder": null,
+                "title": "Banner for LARSEN MEMORIAL RUN 13th EDITION",
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div:nth-of-type(2) > div > div:nth-of-type(2) > div > div > div > div > div:nth-of-type(4) > div > div > div > div > img",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[1]/img[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "img",
+                "attributes": {
+                    "title": "Banner for LARSEN MEMORIAL RUN 13th EDITION"
+                }
+            },
+            "bounding_box": {
+                "x": 1283,
+                "y": 156,
+                "width": 299,
+                "height": 164.4375
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events",
+            "timestamp": "2026-08-25T12:48:54.220Z",
+            "page_id": 0,
+            "delay_before_ms": 3128
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Register Now",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div:nth-of-type(2) > div > div:nth-of-type(3)",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div[3]",
+                "text": "Register Now",
+                "element_text": "Register Now",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 1198.15625,
+                "y": 182,
+                "width": 182.421875,
+                "height": 36
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178?from=eventslist",
+            "timestamp": "2026-08-25T12:48:55.899Z",
+            "page_id": 0,
+            "delay_before_ms": 1679
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div:nth-of-type(2) > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2)",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]/div[2]/div[2]",
+                "text": "",
+                "element_text": "",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 1011,
+                "y": 143,
+                "width": 36,
+                "height": 36
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/register",
+            "timestamp": "2026-08-25T12:48:57.183Z",
+            "page_id": 0,
+            "delay_before_ms": 1284
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Continue",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div:nth-of-type(3) > div > div > div > div:nth-of-type(6)",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[6]",
+                "text": "Continue",
+                "element_text": "Continue",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 1100,
+                "y": 333,
+                "width": 340,
+                "height": 47
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/register",
+            "timestamp": "2026-08-25T12:48:58.200Z",
+            "page_id": 0,
+            "delay_before_ms": 1017
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Select a T-shirt size*",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(6) > div > div > select",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[6]/div[1]/div[1]/select[1]",
+                "text": "Select a T-shirt size*",
+                "element_text": "Select a T-shirt size*",
+                "tag": "select",
+                "attributes": {
+                    "data-testid": "undefined-picker"
+                }
+            },
+            "bounding_box": {
+                "x": 424.5,
+                "y": 545.5625,
+                "width": 715,
+                "height": 43
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:49:01.352Z",
+            "page_id": 0,
+            "delay_before_ms": 3152
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > img",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/img[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "img",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 1079.5,
+                "y": 19.5,
+                "width": 20,
+                "height": 20
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/larsen-memorial-run-13th-edition-E1178/participants?from=eventslist",
+            "timestamp": "2026-08-25T12:49:07.377Z",
+            "page_id": 0,
+            "delay_before_ms": 6025
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events",
+            "timestamp": "2026-08-25T12:49:07.816Z",
+            "page_id": 0,
+            "delay_before_ms": 439
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 308,
+            "scroll_y_before": 0,
+            "scroll_y_after": 135,
+            "viewport_height": 900,
+            "document_height": 1605,
+            "locator_profile": {
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div:nth-of-type(2) > div > div:nth-of-type(2) > div",
+                "tag": "div"
+            },
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events",
+            "timestamp": "2026-08-25T12:49:10.043Z",
+            "page_id": 0,
+            "delay_before_ms": 2227
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": -164,
+            "scroll_y_before": 135,
+            "scroll_y_after": 4,
+            "viewport_height": 900,
+            "document_height": 2021,
+            "locator_profile": {
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div:nth-of-type(2) > div > div:nth-of-type(2) > div",
+                "tag": "div"
+            },
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events",
+            "timestamp": "2026-08-25T12:49:11.396Z",
+            "page_id": 0,
+            "delay_before_ms": 1353
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": -87,
+            "scroll_y_before": 4,
+            "scroll_y_after": 0,
+            "viewport_height": 900,
+            "document_height": 2021,
+            "locator_profile": {
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div:nth-of-type(2) > div > div:nth-of-type(2) > div",
+                "tag": "div"
+            },
+            "bounding_box": null,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events",
+            "timestamp": "2026-08-25T12:49:14.310Z",
+            "page_id": 0,
+            "delay_before_ms": 2914
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Banner for Sports and Cultural Festival 2026",
+                "placeholder": null,
+                "title": "Banner for Sports and Cultural Festival 2026",
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div:nth-of-type(2) > div > div:nth-of-type(2) > div > div > div > div > div:nth-of-type(2) > div > div > div > div > img",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/img[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "img",
+                "attributes": {
+                    "title": "Banner for Sports and Cultural Festival 2026"
+                }
+            },
+            "bounding_box": {
+                "x": 653,
+                "y": 156,
+                "width": 299,
+                "height": 164.4375
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events",
+            "timestamp": "2026-08-25T12:49:16.334Z",
+            "page_id": 0,
+            "delay_before_ms": 2024
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Register Now",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div > div:nth-of-type(2) > div > div:nth-of-type(3) > div",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div[3]/div[1]",
+                "text": "Register Now",
+                "element_text": "Register Now",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 1238.15625,
+                "y": 190,
+                "width": 102.421875,
+                "height": 20
+            },
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events/sports-and-cultural-festival-2026-E1172?from=eventslist",
+            "timestamp": "2026-08-25T12:49:17.607Z",
+            "page_id": 0,
+            "delay_before_ms": 1273
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 0,
+            "page_url": "https://sportzia-preprod.kovaionplay.com/events",
+            "remaining_page_id": null,
+            "timestamp": "2026-08-25T12:49:19.765Z",
+            "delay_before_ms": 2158
+        }
+    ],
+    "saved_at": "2026-08-25T18:19:19.765737"
+}

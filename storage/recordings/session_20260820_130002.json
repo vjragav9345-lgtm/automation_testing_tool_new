@@ -1,0 +1,680 @@
+{
+    "name": "session_20260820_130002",
+    "session_id": "9f6387204f9043e085db9671ccc4ad7f",
+    "start_url": "https://www.flipkart.com/",
+    "recorded_at": "2026-08-20T13:00:02.331463",
+    "stop_reason": "browser_closed",
+    "total_actions": 31,
+    "page_count": 3,
+    "actions": [
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "button",
+                "aria_label": null,
+                "accessible_name": "✕",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "body > div:nth-of-type(5) > div > span",
+                "xpath": "/html[1]/body[1]/div[5]/div[1]/span[1]",
+                "text": "✕",
+                "element_text": "✕",
+                "tag": "span",
+                "attributes": {
+                    "role": "button"
+                }
+            },
+            "bounding_box": {
+                "x": 988.8500366210938,
+                "y": 96,
+                "width": 26.149999618530273,
+                "height": 32
+            },
+            "page_url": "https://www.flipkart.com/",
+            "timestamp": "2026-08-20T07:28:53.340Z",
+            "page_id": 0,
+            "delay_before_ms": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": "q",
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Search for Products, Brands and More",
+                "placeholder": "Search for Products, Brands and More",
+                "title": "Search for Products, Brands and More",
+                "href": null,
+                "css_path": "div#container > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div:nth-of-type(2) > div > div > div > div > div > header > div > div > form > div > div > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/header[1]/div[1]/div[1]/form[1]/div[1]/div[1]/input[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "input",
+                "attributes": {
+                    "type": "text",
+                    "title": "Search for Products, Brands and More",
+                    "placeholder": "Search for Products, Brands and More",
+                    "name": "q"
+                }
+            },
+            "bounding_box": {
+                "x": 105.5999984741211,
+                "y": 78,
+                "width": 821.9625244140625,
+                "height": 40
+            },
+            "page_url": "https://www.flipkart.com/",
+            "timestamp": "2026-08-20T07:28:54.757Z",
+            "page_id": 0,
+            "delay_before_ms": 1417
+        },
+        {
+            "action_type": "fill",
+            "value": "mouse",
+            "locator_profile": {
+                "id": null,
+                "name": "q",
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Search for Products, Brands and More",
+                "placeholder": "Search for Products, Brands and More",
+                "title": "Search for Products, Brands and More",
+                "href": null,
+                "css_path": "div#container > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div:nth-of-type(2) > div > div > div > div > div > header > div > div > form > div > div > input",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/header[1]/div[1]/div[1]/form[1]/div[1]/div[1]/input[1]",
+                "text": "mouse",
+                "element_text": "mouse",
+                "tag": "input",
+                "attributes": {
+                    "type": "text",
+                    "title": "Search for Products, Brands and More",
+                    "placeholder": "Search for Products, Brands and More",
+                    "name": "q"
+                }
+            },
+            "bounding_box": {
+                "x": 105.5999984741211,
+                "y": 78,
+                "width": 821.9625244140625,
+                "height": 40
+            },
+            "page_url": "https://www.flipkart.com/",
+            "timestamp": "2026-08-20T07:28:59.373Z",
+            "page_id": 0,
+            "delay_before_ms": 4616
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "mouse wireless\nin Mouse",
+                "placeholder": null,
+                "title": null,
+                "href": "/search?q=mouse+wireless&sid=6bo%2Ctia%2C8pp%2Cp0w&as=on&as-show=on&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&as-pos=1&as-type=RECENT&suggestionId=mouse+wireless%7CMouse&requestId=0adb2f9f-ebb4-4f20-bc7c-70ce8ec2ef5e&as-searchtext=mouse",
+                "css_path": "div#container > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div:nth-of-type(2) > div > div > div > div > div > header > div > div > form > ul > li > div > a",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/header[1]/div[1]/div[1]/form[1]/ul[1]/li[1]/div[1]/a[1]",
+                "text": "mouse wireless\nin Mouse",
+                "element_text": "mouse wireless\nin Mouse",
+                "tag": "a",
+                "attributes": {
+                    "href": "/search?q=mouse+wireless&sid=6bo%2Ctia%2C8pp%2Cp0w&as=on&as-show=on&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&as-pos=1&as-type=RECENT&suggestionId=mouse+wireless%7CMouse&requestId=0adb2f9f-ebb4-4f20-bc7c-70ce8ec2ef5e&as-searchtext=mouse"
+                }
+            },
+            "bounding_box": {
+                "x": 69.5999984741211,
+                "y": 128,
+                "width": 849.9625244140625,
+                "height": 60.79999923706055
+            },
+            "page_url": "https://www.flipkart.com/",
+            "timestamp": "2026-08-20T07:28:59.591Z",
+            "page_id": 0,
+            "delay_before_ms": 218
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 1211,
+            "scroll_y_before": 0,
+            "scroll_y_after": 968.7999877929688,
+            "viewport_height": 720,
+            "document_height": 6575,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.flipkart.com/search?q=mouse+wireless&sid=6bo%2Ctia%2C8pp%2Cp0w&as=on&as-show=on&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&as-pos=1&as-type=RECENT&suggestionId=mouse+wireless%7CMouse&requestId=0adb2f9f-ebb4-4f20-bc7c-70ce8ec2ef5e&as-searchtext=mouse%20wireless",
+            "timestamp": "2026-08-20T07:29:05.007Z",
+            "page_id": 0,
+            "delay_before_ms": 5416
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.flipkart.com/search?q=mouse+wireless&sid=6bo%2Ctia%2C8pp%2Cp0w&as=on&as-show=on&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&as-pos=1&as-type=RECENT&suggestionId=mouse+wireless%7CMouse&requestId=0adb2f9f-ebb4-4f20-bc7c-70ce8ec2ef5e&as-searchtext=mouse%20wireless",
+            "timestamp": "2026-08-20T07:29:05.333Z",
+            "page_id": 0,
+            "delay_before_ms": 326
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Bestseller",
+                "placeholder": null,
+                "title": null,
+                "href": "/zebronics-pulse-ambidextrous-optical-mouse-1200dpi-dual-bt-multi-connect-lightweight-comfort/p/itm95ea8032bd846?pid=ACCGXZE9KMRQAYFY&lid=LSTACCGXZE9KMRQAYFYGJSFHP&marketplace=FLIPKART&q=mouse+wireless&store=6bo%2Ftia%2F8pp%2Fp0w&spotlightTagId=default_BestsellerId_6bo%2Ftia%2F8pp%2Fp0w&srno=s_1_10&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&fm=search-autosuggest&iid=3df3b334-bd08-47d5-a580-be84abb62594.ACCGXZE9KMRQAYFY.SEARCH&ppt=sp&ppn=sp&ssid=fwszm4rcr40000001787210941206&qH=802ebb943bb41273&ov_redirect=true&ov_redirect=true",
+                "css_path": "div#container > div > div:nth-of-type(3) > div > div:nth-of-type(2) > div:nth-of-type(4) > div > div:nth-of-type(2) > div > a",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[3]/div[1]/div[2]/div[4]/div[1]/div[2]/div[1]/a[1]",
+                "text": "Bestseller",
+                "element_text": "Bestseller",
+                "tag": "a",
+                "attributes": {
+                    "href": "/zebronics-pulse-ambidextrous-optical-mouse-1200dpi-dual-bt-multi-connect-lightweight-comfort/p/itm95ea8032bd846?pid=ACCGXZE9KMRQAYFY&lid=LSTACCGXZE9KMRQAYFYGJSFHP&marketplace=FLIPKART&q=mouse+wireless&store=6bo%2Ftia%2F8pp%2Fp0w&spotlightTagId=default_BestsellerId_6bo%2Ftia%2F8pp%2Fp0w&srno=s_1_10&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&fm=search-autosuggest&iid=3df3b334-bd08-47d5-a580-be84abb62594.ACCGXZE9KMRQAYFY.SEARCH&ppt=sp&ppn=sp&ssid=fwszm4rcr40000001787210941206&qH=802ebb943bb41273&ov_redirect=true&ov_redirect=true"
+                }
+            },
+            "bounding_box": {
+                "x": 545.7999877929688,
+                "y": 158.9875030517578,
+                "width": 209.8000030517578,
+                "height": 280
+            },
+            "page_url": "https://www.flipkart.com/search?q=mouse+wireless&sid=6bo%2Ctia%2C8pp%2Cp0w&as=on&as-show=on&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&as-pos=1&as-type=RECENT&suggestionId=mouse+wireless%7CMouse&requestId=0adb2f9f-ebb4-4f20-bc7c-70ce8ec2ef5e&as-searchtext=mouse%20wireless",
+            "timestamp": "2026-08-20T07:29:06.010Z",
+            "page_id": 0,
+            "delay_before_ms": 677
+        },
+        {
+            "action_type": "tab_open",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.flipkart.com/zebronics-pulse-ambidextrous-optical-mouse-1200dpi-dual-bt-multi-connect-lightweight-comfort/p/itm95ea8032bd846?pid=ACCGXZE9KMRQAYFY&lid=LSTACCGXZE9KMRQAYFYGJSFHP&marketplace=FLIPKART&q=mouse+wireless&store=6bo%2Ftia%2F8pp%2Fp0w&spotlightTagId=default_BestsellerId_6bo%2Ftia%2F8pp%2Fp0w&srno=s_1_10&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&fm=search-autosuggest&iid=3df3b334-bd08-47d5-a580-be84abb62594.ACCGXZE9KMRQAYFY.SEARCH&ppt=sp&ppn=sp&ssid=fwszm4rcr40000001787210941206&qH=802ebb943bb41273&ov_redirect=true&ov_redirect=true",
+            "timestamp": "2026-08-20T07:29:09.361Z",
+            "new_tab": true,
+            "page_id": 1,
+            "from_page_id": 0,
+            "delay_before_ms": 3351
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 225,
+            "scroll_y_before": 0,
+            "scroll_y_after": 0,
+            "viewport_height": 720,
+            "document_height": 720,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.flipkart.com/zebronics-pulse-ambidextrous-optical-mouse-1200dpi-dual-bt-multi-connect-lightweight-comfort/p/itm95ea8032bd846?pid=ACCGXZE9KMRQAYFY&lid=LSTACCGXZE9KMRQAYFYGJSFHP&marketplace=FLIPKART&q=mouse+wireless&store=6bo%2Ftia%2F8pp%2Fp0w&spotlightTagId=default_BestsellerId_6bo%2Ftia%2F8pp%2Fp0w&srno=s_1_10&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&fm=search-autosuggest&iid=3df3b334-bd08-47d5-a580-be84abb62594.ACCGXZE9KMRQAYFY.SEARCH&ppt=sp&ppn=sp&ssid=fwszm4rcr40000001787210941206&qH=802ebb943bb41273&ov_redirect=true&ov_redirect=true",
+            "timestamp": "2026-08-20T07:29:10.168Z",
+            "page_id": 1,
+            "delay_before_ms": 807
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 1055,
+            "scroll_y_before": 0,
+            "scroll_y_after": 0,
+            "viewport_height": 720,
+            "document_height": 720,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.flipkart.com/zebronics-pulse-ambidextrous-optical-mouse-1200dpi-dual-bt-multi-connect-lightweight-comfort/p/itm95ea8032bd846?pid=ACCGXZE9KMRQAYFY&lid=LSTACCGXZE9KMRQAYFYGJSFHP&marketplace=FLIPKART&q=mouse+wireless&store=6bo%2Ftia%2F8pp%2Fp0w&spotlightTagId=default_BestsellerId_6bo%2Ftia%2F8pp%2Fp0w&srno=s_1_10&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&fm=search-autosuggest&iid=3df3b334-bd08-47d5-a580-be84abb62594.ACCGXZE9KMRQAYFY.SEARCH&ppt=sp&ppn=sp&ssid=fwszm4rcr40000001787210941206&qH=802ebb943bb41273&ov_redirect=true&ov_redirect=true",
+            "timestamp": "2026-08-20T07:29:12.767Z",
+            "page_id": 1,
+            "delay_before_ms": 2599
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#slot-list-container > div > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(2) > div > div:nth-of-type(17) > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div:nth-of-type(2)",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[17]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]",
+                "text": "",
+                "element_text": "",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 756.7999877929688,
+                "y": 668.6000366210938,
+                "width": 228.40000915527344,
+                "height": 42.400001525878906
+            },
+            "page_url": "https://www.flipkart.com/zebronics-pulse-ambidextrous-optical-mouse-1200dpi-dual-bt-multi-connect-lightweight-comfort/p/itm95ea8032bd846?pid=ACCGXZE9KMRQAYFY&lid=LSTACCGXZE9KMRQAYFYGJSFHP&marketplace=FLIPKART&q=mouse+wireless&store=6bo%2Ftia%2F8pp%2Fp0w&spotlightTagId=default_BestsellerId_6bo%2Ftia%2F8pp%2Fp0w&srno=s_1_10&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&fm=search-autosuggest&iid=3df3b334-bd08-47d5-a580-be84abb62594.ACCGXZE9KMRQAYFY.SEARCH&ppt=sp&ppn=sp&ssid=fwszm4rcr40000001787210941206&qH=802ebb943bb41273&ov_redirect=true&ov_redirect=true",
+            "timestamp": "2026-08-20T07:29:13.617Z",
+            "page_id": 1,
+            "delay_before_ms": 850
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": -1182,
+            "scroll_y_before": 0,
+            "scroll_y_after": 0,
+            "viewport_height": 720,
+            "document_height": 720,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.flipkart.com/zebronics-pulse-ambidextrous-optical-mouse-1200dpi-dual-bt-multi-connect-lightweight-comfort/p/itm95ea8032bd846?pid=ACCGXZE9KMRQAYFY&lid=LSTACCGXZE9KMRQAYFYGJSFHP&marketplace=FLIPKART&q=mouse+wireless&store=6bo%2Ftia%2F8pp%2Fp0w&spotlightTagId=default_BestsellerId_6bo%2Ftia%2F8pp%2Fp0w&srno=s_1_10&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&fm=search-autosuggest&iid=3df3b334-bd08-47d5-a580-be84abb62594.ACCGXZE9KMRQAYFY.SEARCH&ppt=sp&ppn=sp&ssid=fwszm4rcr40000001787210941206&qH=802ebb943bb41273&ov_redirect=true&ov_redirect=true",
+            "timestamp": "2026-08-20T07:29:16.764Z",
+            "page_id": 1,
+            "delay_before_ms": 3147
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "1\nCart",
+                "placeholder": null,
+                "title": "Cart",
+                "href": "/viewcart?marketplace=FLIPKART",
+                "css_path": "div#container > div > div > div > div > div > div > div > div > div > div > div > div > div > div > div > header > div:nth-of-type(3) > div:nth-of-type(4) > div > a",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/header[1]/div[3]/div[4]/div[1]/a[1]",
+                "text": "1\nCart",
+                "element_text": "1\nCart",
+                "tag": "a",
+                "attributes": {
+                    "href": "/viewcart?marketplace=FLIPKART",
+                    "title": "Cart"
+                }
+            },
+            "bounding_box": {
+                "x": 1131.612548828125,
+                "y": 6.400000095367432,
+                "width": 92.38750457763672,
+                "height": 51.20000076293945
+            },
+            "page_url": "https://www.flipkart.com/zebronics-pulse-ambidextrous-optical-mouse-1200dpi-dual-bt-multi-connect-lightweight-comfort/p/itm95ea8032bd846?pid=ACCGXZE9KMRQAYFY&lid=LSTACCGXZE9KMRQAYFYGJSFHP&marketplace=FLIPKART&q=mouse+wireless&store=6bo%2Ftia%2F8pp%2Fp0w&spotlightTagId=default_BestsellerId_6bo%2Ftia%2F8pp%2Fp0w&srno=s_1_10&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&fm=search-autosuggest&iid=3df3b334-bd08-47d5-a580-be84abb62594.ACCGXZE9KMRQAYFY.SEARCH&ppt=sp&ppn=sp&ssid=fwszm4rcr40000001787210941206&qH=802ebb943bb41273&ov_redirect=true&ov_redirect=true",
+            "timestamp": "2026-08-20T07:29:17.714Z",
+            "page_id": 1,
+            "delay_before_ms": 950
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Remove",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#slot-list-container > div > div > div > div > div > div > div > div > div > div:nth-of-type(4) > div > div > div > div > div > div > div:nth-of-type(3) > div > div:nth-of-type(2) > div > div",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[2]/div[1]/div[1]",
+                "text": "Remove",
+                "element_text": "Remove",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 320.5375061035156,
+                "y": 501.20001220703125,
+                "width": 254.9375,
+                "height": 46
+            },
+            "page_url": "https://www.flipkart.com/viewcart?exploreMode=TRUE&preference=FLIPKART&pageUID=1787210957727",
+            "timestamp": "2026-08-20T07:29:21.967Z",
+            "page_id": 1,
+            "delay_before_ms": 4253
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.flipkart.com/viewcart?exploreMode=TRUE&preference=FLIPKART&pageUID=1787210957727",
+            "timestamp": "2026-08-20T07:29:22.585Z",
+            "page_id": 1,
+            "delay_before_ms": 618
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.flipkart.com/zebronics-pulse-ambidextrous-optical-mouse-1200dpi-dual-bt-multi-connect-lightweight-comfort/p/itm95ea8032bd846?pid=ACCGXZE9KMRQAYFY&lid=LSTACCGXZE9KMRQAYFYGJSFHP&marketplace=FLIPKART&q=mouse+wireless&store=6bo%2Ftia%2F8pp%2Fp0w&spotlightTagId=default_BestsellerId_6bo%2Ftia%2F8pp%2Fp0w&srno=s_1_10&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&fm=search-autosuggest&iid=3df3b334-bd08-47d5-a580-be84abb62594.ACCGXZE9KMRQAYFY.SEARCH&ppt=sp&ppn=sp&ssid=fwszm4rcr40000001787210941206&qH=802ebb943bb41273&ov_redirect=true&ov_redirect=true",
+            "timestamp": "2026-08-20T07:29:29.284Z",
+            "page_id": 1,
+            "delay_before_ms": 6699
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 2189,
+            "scroll_y_before": 0,
+            "scroll_y_after": 0,
+            "viewport_height": 720,
+            "document_height": 720,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.flipkart.com/zebronics-pulse-ambidextrous-optical-mouse-1200dpi-dual-bt-multi-connect-lightweight-comfort/p/itm95ea8032bd846?pid=ACCGXZE9KMRQAYFY&lid=LSTACCGXZE9KMRQAYFYGJSFHP&marketplace=FLIPKART&q=mouse+wireless&store=6bo%2Ftia%2F8pp%2Fp0w&spotlightTagId=default_BestsellerId_6bo%2Ftia%2F8pp%2Fp0w&srno=s_1_10&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&fm=search-autosuggest&iid=3df3b334-bd08-47d5-a580-be84abb62594.ACCGXZE9KMRQAYFY.SEARCH&ppt=sp&ppn=sp&ssid=fwszm4rcr40000001787210941206&qH=802ebb943bb41273&ov_redirect=true&ov_redirect=true",
+            "timestamp": "2026-08-20T07:29:30.101Z",
+            "page_id": 1,
+            "delay_before_ms": 817
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 2351,
+            "scroll_y_before": 0,
+            "scroll_y_after": 0,
+            "viewport_height": 720,
+            "document_height": 720,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.flipkart.com/zebronics-pulse-ambidextrous-optical-mouse-1200dpi-dual-bt-multi-connect-lightweight-comfort/p/itm95ea8032bd846?pid=ACCGXZE9KMRQAYFY&lid=LSTACCGXZE9KMRQAYFYGJSFHP&marketplace=FLIPKART&q=mouse+wireless&store=6bo%2Ftia%2F8pp%2Fp0w&spotlightTagId=default_BestsellerId_6bo%2Ftia%2F8pp%2Fp0w&srno=s_1_10&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&fm=search-autosuggest&iid=3df3b334-bd08-47d5-a580-be84abb62594.ACCGXZE9KMRQAYFY.SEARCH&ppt=sp&ppn=sp&ssid=fwszm4rcr40000001787210941206&qH=802ebb943bb41273&ov_redirect=true&ov_redirect=true",
+            "timestamp": "2026-08-20T07:29:32.236Z",
+            "page_id": 1,
+            "delay_before_ms": 2135
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "4.2\nFrontech Dual Connectivity Wireless Mouse | RGB | 1600 DPI | 400mAh Recharge",
+                "placeholder": null,
+                "title": null,
+                "href": "/frontech-dual-connectivity-wireless-mouse-rgb-1600-dpi-400mah-rechargeable-battery-ambidextrous-optical/p/itm386fbd2134f00?pid=ACCHZZNFCHZ7QRNY&lid=LSTACCHZZNFCHZ7QRNYCCK5BC&hl_lid=&marketplace=FLIPKART&fm=eyJ3dHAiOiJyZWNvIiwicHJwdCI6InBwIiwibWlkIjoicHJvZHVjdFJlY29tbWVuZGF0aW9uL2FzcGVjdFNpbWlsYXIifQ%3D%3D",
+                "css_path": "div#slot-list-container > div > div:nth-of-type(2) > div > div > div > div:nth-of-type(3) > div > div > div > div > div > div > div > div:nth-of-type(2) > div > div > div > div:nth-of-type(4) > div > a",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[4]/div[1]/a[1]",
+                "text": "4.2\nFrontech Dual Connectivity Wireless Mouse | RGB | 1600 DPI | 400mAh Recharge",
+                "element_text": "4.2\nFrontech Dual Connectivity Wireless Mouse | RGB | 1600 DPI | 400mAh Recharge",
+                "tag": "a",
+                "attributes": {
+                    "href": "/frontech-dual-connectivity-wireless-mouse-rgb-1600-dpi-400mah-rechargeable-battery-ambidextrous-optical/p/itm386fbd2134f00?pid=ACCHZZNFCHZ7QRNY&lid=LSTACCHZZNFCHZ7QRNYCCK5BC&hl_lid=&marketplace=FLIPKART&fm=eyJ3dHAiOiJyZWNvIiwicHJwdCI6InBwIiwibWlkIjoicHJvZHVjdFJlY29tbWVuZGF0aW9uL2FzcGVjdFNpbWlsYXIifQ%3D%3D"
+                }
+            },
+            "bounding_box": {
+                "x": 743,
+                "y": 273.7250061035156,
+                "width": 205,
+                "height": 383.32501220703125
+            },
+            "page_url": "https://www.flipkart.com/zebronics-pulse-ambidextrous-optical-mouse-1200dpi-dual-bt-multi-connect-lightweight-comfort/p/itm95ea8032bd846?pid=ACCGXZE9KMRQAYFY&lid=LSTACCGXZE9KMRQAYFYGJSFHP&marketplace=FLIPKART&q=mouse+wireless&store=6bo%2Ftia%2F8pp%2Fp0w&spotlightTagId=default_BestsellerId_6bo%2Ftia%2F8pp%2Fp0w&srno=s_1_10&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&fm=search-autosuggest&iid=3df3b334-bd08-47d5-a580-be84abb62594.ACCGXZE9KMRQAYFY.SEARCH&ppt=sp&ppn=sp&ssid=fwszm4rcr40000001787210941206&qH=802ebb943bb41273&ov_redirect=true&ov_redirect=true",
+            "timestamp": "2026-08-20T07:29:32.950Z",
+            "page_id": 1,
+            "delay_before_ms": 714
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.flipkart.com/frontech-dual-connectivity-wireless-mouse-rgb-1600-dpi-400mah-rechargeable-battery-ambidextrous-optical/p/itm386fbd2134f00?pid=ACCHZZNFCHZ7QRNY&lid=LSTACCHZZNFCHZ7QRNYCCK5BC&hl_lid=&marketplace=FLIPKART&fm=eyJ3dHAiOiJyZWNvIiwicHJwdCI6InBwIiwibWlkIjoicHJvZHVjdFJlY29tbWVuZGF0aW9uL2FzcGVjdFNpbWlsYXIifQ%3D%3D&pageUID=1787210972975",
+            "timestamp": "2026-08-20T07:29:37.501Z",
+            "page_id": 1,
+            "delay_before_ms": 4551
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 1,
+            "page_url": "https://www.flipkart.com/frontech-dual-connectivity-wireless-mouse-rgb-1600-dpi-400mah-rechargeable-battery-ambidextrous-optical/p/itm386fbd2134f00?pid=ACCHZZNFCHZ7QRNY&lid=LSTACCHZZNFCHZ7QRNYCCK5BC&hl_lid=&marketplace=FLIPKART&fm=eyJ3dHAiOiJyZWNvIiwicHJwdCI6InBwIiwibWlkIjoicHJvZHVjdFJlY29tbWVuZGF0aW9uL2FzcGVjdFNpbWlsYXIifQ%3D%3D&pageUID=1787210972975",
+            "remaining_page_id": 0,
+            "timestamp": "2026-08-20T07:29:38.121Z",
+            "delay_before_ms": 620
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 5522,
+            "scroll_y_before": 968.7999877929688,
+            "scroll_y_after": 5387.2001953125,
+            "viewport_height": 720,
+            "document_height": 6575,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.flipkart.com/search?q=mouse+wireless&sid=6bo%2Ctia%2C8pp%2Cp0w&as=on&as-show=on&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&as-pos=1&as-type=RECENT&suggestionId=mouse+wireless%7CMouse&requestId=0adb2f9f-ebb4-4f20-bc7c-70ce8ec2ef5e&as-searchtext=mouse%20wireless",
+            "timestamp": "2026-08-20T07:29:43.458Z",
+            "page_id": 0,
+            "delay_before_ms": 5337
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Interface: 2.4GHz Wireless",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#container > div > div:nth-of-type(3) > div:nth-of-type(2) > div > div:nth-of-type(4) > div > div:nth-of-type(2) > ul > li:nth-of-type(2)",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[1]/div[4]/div[1]/div[2]/ul[1]/li[2]",
+                "text": "Interface: 2.4GHz Wireless",
+                "element_text": "Interface: 2.4GHz Wireless",
+                "tag": "li",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 219.9875030517578,
+                "y": 225.46250915527344,
+                "width": 286.88751220703125,
+                "height": 27.600000381469727
+            },
+            "page_url": "https://www.flipkart.com/search?q=mouse+wireless&sid=6bo%2Ctia%2C8pp%2Cp0w&as=on&as-show=on&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&as-pos=1&as-type=RECENT&suggestionId=mouse+wireless%7CMouse&requestId=0adb2f9f-ebb4-4f20-bc7c-70ce8ec2ef5e&as-searchtext=mouse%20wireless",
+            "timestamp": "2026-08-20T07:29:44.573Z",
+            "page_id": 0,
+            "delay_before_ms": 1115
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "EVM Classy Ambidextrous Optical Mouse 3600 DPI 6-Button RGB LED",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#container > div > div:nth-of-type(3) > div:nth-of-type(2) > div > div:nth-of-type(4) > div > div > div > img",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[1]/div[4]/div[1]/div[1]/div[1]/img[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "img",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 43.73749923706055,
+                "y": 91.86250305175781,
+                "width": 140.5,
+                "height": 150
+            },
+            "page_url": "https://www.flipkart.com/search?q=mouse+wireless&sid=6bo%2Ctia%2C8pp%2Cp0w&as=on&as-show=on&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&as-pos=1&as-type=RECENT&suggestionId=mouse+wireless%7CMouse&requestId=0adb2f9f-ebb4-4f20-bc7c-70ce8ec2ef5e&as-searchtext=mouse%20wireless",
+            "timestamp": "2026-08-20T07:29:45.813Z",
+            "page_id": 0,
+            "delay_before_ms": 1240
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "EVM Classy Ambidextrous Optical Mouse 3600 DPI 6-Button RGB LED",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#container > div > div:nth-of-type(3) > div:nth-of-type(2) > div > div:nth-of-type(4) > div > div > div > img",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[1]/div[4]/div[1]/div[1]/div[1]/img[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "img",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 43.73749923706055,
+                "y": 91.86250305175781,
+                "width": 140.5,
+                "height": 150
+            },
+            "page_url": "https://www.flipkart.com/search?q=mouse+wireless&sid=6bo%2Ctia%2C8pp%2Cp0w&as=on&as-show=on&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&as-pos=1&as-type=RECENT&suggestionId=mouse+wireless%7CMouse&requestId=0adb2f9f-ebb4-4f20-bc7c-70ce8ec2ef5e&as-searchtext=mouse%20wireless",
+            "timestamp": "2026-08-20T07:29:46.931Z",
+            "page_id": 0,
+            "delay_before_ms": 1118
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "3. EVM Classy Ambidextrous Opt...\n4.1227 Ratings&25 Reviews\n₹19667% off",
+                "placeholder": null,
+                "title": null,
+                "href": "/evm-classy-ambidextrous-optical-mouse-3600-dpi-6-button-rgb-led/p/itmbdcac8f6f77d0?pid=ACCGZTFTKYUZKJVY&marketplace=FLIPKART&ov_redirect=true",
+                "css_path": "div#container > div > div:nth-of-type(3) > div:nth-of-type(2) > div > div:nth-of-type(4) > div > div:nth-of-type(2) > a",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[1]/div[4]/div[1]/div[2]/a[1]",
+                "text": "3. EVM Classy Ambidextrous Opt...\n4.1227 Ratings&25 Reviews\n₹19667% off",
+                "element_text": "3. EVM Classy Ambidextrous Opt...\n4.1227 Ratings&25 Reviews\n₹19667% off",
+                "tag": "a",
+                "attributes": {
+                    "href": "/evm-classy-ambidextrous-optical-mouse-3600-dpi-6-button-rgb-led/p/itmbdcac8f6f77d0?pid=ACCGZTFTKYUZKJVY&marketplace=FLIPKART&ov_redirect=true"
+                }
+            },
+            "bounding_box": {
+                "x": 219.9875030517578,
+                "y": 91.86250305175781,
+                "width": 286.88751220703125,
+                "height": 101
+            },
+            "page_url": "https://www.flipkart.com/search?q=mouse+wireless&sid=6bo%2Ctia%2C8pp%2Cp0w&as=on&as-show=on&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&as-pos=1&as-type=RECENT&suggestionId=mouse+wireless%7CMouse&requestId=0adb2f9f-ebb4-4f20-bc7c-70ce8ec2ef5e&as-searchtext=mouse%20wireless",
+            "timestamp": "2026-08-20T07:29:48.766Z",
+            "page_id": 0,
+            "delay_before_ms": 1835
+        },
+        {
+            "action_type": "tab_open",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.flipkart.com/evm-classy-ambidextrous-optical-mouse-3600-dpi-6-button-rgb-led/p/itmbdcac8f6f77d0?pid=ACCGZTFTKYUZKJVY&marketplace=FLIPKART&ov_redirect=true",
+            "timestamp": "2026-08-20T07:29:52.044Z",
+            "new_tab": true,
+            "page_id": 2,
+            "from_page_id": 0,
+            "delay_before_ms": 3278
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 675,
+            "scroll_y_before": 0,
+            "scroll_y_after": 0,
+            "viewport_height": 720,
+            "document_height": 720,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.flipkart.com/evm-classy-ambidextrous-optical-mouse-3600-dpi-6-button-rgb-led/p/itmbdcac8f6f77d0?pid=ACCGZTFTKYUZKJVY&marketplace=FLIPKART&ov_redirect=true",
+            "timestamp": "2026-08-20T07:29:52.965Z",
+            "page_id": 2,
+            "delay_before_ms": 921
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#slot-list-container > div > div:nth-of-type(2) > div > div > div > div > div > div:nth-of-type(2) > div > div:nth-of-type(15) > div > div > div > div > div > div > div > div > div > div > div:nth-of-type(2) > div > div > div > div:nth-of-type(2)",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[15]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]",
+                "text": "",
+                "element_text": "",
+                "tag": "div",
+                "attributes": {}
+            },
+            "bounding_box": {
+                "x": 994,
+                "y": 667.7999877929688,
+                "width": 230,
+                "height": 44
+            },
+            "page_url": "https://www.flipkart.com/evm-classy-ambidextrous-optical-mouse-3600-dpi-6-button-rgb-led/p/itmbdcac8f6f77d0?pid=ACCGZTFTKYUZKJVY&marketplace=FLIPKART&ov_redirect=true",
+            "timestamp": "2026-08-20T07:29:54.029Z",
+            "page_id": 2,
+            "delay_before_ms": 1064
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 2,
+            "page_url": "https://www.flipkart.com/evm-classy-ambidextrous-optical-mouse-3600-dpi-6-button-rgb-led/p/itmbdcac8f6f77d0?pid=ACCGZTFTKYUZKJVY&marketplace=FLIPKART&ov_redirect=true",
+            "remaining_page_id": 0,
+            "timestamp": "2026-08-20T07:30:02.331Z",
+            "delay_before_ms": 8302
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 0,
+            "page_url": "https://www.flipkart.com/search?q=mouse+wireless&sid=6bo%2Ctia%2C8pp%2Cp0w&as=on&as-show=on&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&as-pos=1&as-type=RECENT&suggestionId=mouse+wireless%7CMouse&requestId=0adb2f9f-ebb4-4f20-bc7c-70ce8ec2ef5e&as-searchtext=mouse%20wireless",
+            "remaining_page_id": null,
+            "timestamp": "2026-08-20T07:30:02.331Z",
+            "delay_before_ms": 0
+        }
+    ],
+    "saved_at": "2026-08-20T13:00:02.331463"
+}

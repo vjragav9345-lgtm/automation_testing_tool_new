@@ -1,0 +1,97 @@
+{
+  "name": "session_20260812_010052",
+  "start_url": "https://the-internet.herokuapp.com/login",
+  "recorded_at": "2026-08-12T01:00:52.726055",
+  "actions": [
+    {
+      "action_type": "click",
+      "value": null,
+      "locator_profile": {
+        "id": "#username",
+        "css_path": "input#username",
+        "xpath": "//*[@id='username']",
+        "text": "",
+        "tag": "input",
+        "attributes": {
+          "type": "text",
+          "name": "username"
+        }
+      },
+      "bounding_box": {
+        "x": 155,
+        "y": 234.4250030517578,
+        "width": 470,
+        "height": 32.375
+      },
+      "page_url": "https://the-internet.herokuapp.com/login",
+      "timestamp": "2026-08-11T19:30:51.933Z"
+    },
+    {
+      "action_type": "fill",
+      "value": "tomsmith",
+      "locator_profile": {
+        "id": "#username",
+        "css_path": "input#username",
+        "xpath": "//*[@id='username']",
+        "text": "tomsmith",
+        "tag": "input",
+        "attributes": {
+          "type": "text",
+          "name": "username"
+        }
+      },
+      "bounding_box": {
+        "x": 155,
+        "y": 234.4250030517578,
+        "width": 470,
+        "height": 32.375
+      },
+      "page_url": "https://the-internet.herokuapp.com/login",
+      "timestamp": "2026-08-11T19:30:51.988Z"
+    },
+    {
+      "action_type": "fill",
+      "value": "SuperSecretPassword!",
+      "locator_profile": {
+        "id": "#password",
+        "css_path": "input#password",
+        "xpath": "//*[@id='password']",
+        "text": "SuperSecretPassword!",
+        "tag": "input",
+        "attributes": {
+          "type": "password",
+          "name": "password"
+        }
+      },
+      "bounding_box": {
+        "x": 155,
+        "y": 297.4250183105469,
+        "width": 470,
+        "height": 32.375
+      },
+      "page_url": "https://the-internet.herokuapp.com/login",
+      "timestamp": "2026-08-11T19:30:52.056Z"
+    },
+    {
+      "action_type": "click",
+      "value": null,
+      "locator_profile": {
+        "id": null,
+        "css_path": "form#login > button > i",
+        "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/form[1]/button[1]/i[1]",
+        "text": "Login",
+        "tag": "i",
+        "attributes": {}
+      },
+      "bounding_box": {
+        "x": 179.8000030517578,
+        "y": 357.6000061035156,
+        "width": 111.875,
+        "height": 32
+      },
+      "page_url": "https://the-internet.herokuapp.com/login",
+      "timestamp": "2026-08-11T19:30:52.059Z"
+    }
+  ],
+  "saved_at": "2026-08-12T01:00:52.726055"
+}

@@ -1,0 +1,29 @@
+{
+  "status": "FAIL",
+  "message": "expected content not found on final page",
+  "qa_url": "https://the-internet.herokuapp.com/",
+  "steps": [
+    {
+      "index": 1,
+      "action_type": "click",
+      "strategy_used": "css_path",
+      "success": true,
+      "fragile": false,
+      "error": null,
+      "screenshot": "screenshots/execution_runs/20260811_233629/step1.png"
+    },
+    {
+      "index": 2,
+      "action_type": "click",
+      "strategy_used": "bounding_box",
+      "success": true,
+      "fragile": true,
+      "error": null,
+      "screenshot": "screenshots/execution_runs/20260811_233629/step2.png"
+    }
+  ],
+  "content_check": false,
+  "screenshot_diff": null,
+  "final_screenshot": "screenshots/execution_runs/20260811_233629/final.png",
+  "run_id": "20260811_233629"
+}

@@ -1,0 +1,48 @@
+{
+  "name": "session_20260811_233827",
+  "start_url": "https://books.toscrape.com/",
+  "recorded_at": "2026-08-11T23:38:27.170682",
+  "actions": [
+    {
+      "action_type": "click",
+      "value": null,
+      "locator_profile": {
+        "id": null,
+        "css_path": "body#default > div > div > div > aside > div:nth-of-type(2) > ul > li > ul > li:nth-of-type(2) > a",
+        "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/aside[1]/div[2]/ul[1]/li[1]/ul[1]/li[2]/a[1]",
+        "text": "Mystery",
+        "tag": "a",
+        "attributes": {}
+      },
+      "bounding_box": {
+        "x": 89.80000305175781,
+        "y": 296.5249938964844,
+        "width": 49,
+        "height": 16
+      },
+      "page_url": "https://books.toscrape.com/",
+      "timestamp": "2026-08-11T18:08:19.943Z"
+    },
+    {
+      "action_type": "click",
+      "value": null,
+      "locator_profile": {
+        "id": null,
+        "css_path": "body#default > div > div > div > div > section > div:nth-of-type(2) > ol > li > article > h3 > a",
+        "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/section[1]/div[2]/ol[1]/li[1]/article[1]/h3[1]/a[1]",
+        "text": "Sharp Objects",
+        "tag": "a",
+        "attributes": {}
+      },
+      "bounding_box": {
+        "x": 412.3625183105469,
+        "y": 643.125,
+        "width": 88.7125015258789,
+        "height": 16
+      },
+      "page_url": "https://books.toscrape.com/catalogue/category/books/mystery_3/index.html",
+      "timestamp": "2026-08-11T18:08:26.790Z"
+    }
+  ],
+  "saved_at": "2026-08-11T23:38:27.170682"
+}

@@ -1,0 +1,28 @@
+{
+  "name": "session_20260812_010931",
+  "start_url": "https://example.com/",
+  "recorded_at": "2026-08-12T01:09:31.958724",
+  "actions": [
+    {
+      "action_type": "click",
+      "value": null,
+      "locator_profile": {
+        "id": null,
+        "css_path": "body > div > h1",
+        "xpath": "/html[1]/body[1]/div[1]/h1[1]",
+        "text": "Example Domain",
+        "tag": "h1",
+        "attributes": {}
+      },
+      "bounding_box": {
+        "x": 256,
+        "y": 108,
+        "width": 768,
+        "height": 32
+      },
+      "page_url": "https://example.com/",
+      "timestamp": "2026-08-11T19:39:30.414Z"
+    }
+  ],
+  "saved_at": "2026-08-12T01:09:31.958724"
+}
