@@ -21,6 +21,18 @@ REPORTS_DIR.mkdir(exist_ok=True)
 
 _env = Environment(loader=FileSystemLoader(str(TEMPLATES_DIR)))
 
+# same set the dashboard's own script.js (VALIDATION_ACTION_TYPES) uses to
+# tell an assertion-style step (validate_*/check_checked/compare_*/...)
+# apart from an interaction or a passive data capture - kept in sync with
+# it by hand, since the two live in different files with no shared config
+VALIDATION_ACTION_TYPES = {
+    "validate", "validate_element", "validate_text", "validate_attribute",
+    "validate_visible", "validate_url", "validate_value", "validate_enabled",
+    "check_checked", "validate_value_range", "compare_value",
+    "compare_counts", "count_summary", "detect_duplicates",
+    "compare_list_overlap",
+}
+
 
 def _to_data_uri(rel_path):
     if not rel_path:
@@ -61,12 +73,30 @@ def generate_report(execution_result: dict, output_dir: Path = None) -> Path:
     if product_validation:
         product_validation = {**product_validation, "screenshot_data": _to_data_uri(product_validation.get("screenshot"))}
 
+    # step-level validation breakdown for the report's own "Step
+    # Validations" section - same distinction (and same numbers) the
+    # dashboard's live validation panel already shows (see
+    # VALIDATION_ACTION_TYPES in static/js/script.js), so the downloadable
+    # report never disagrees with what was shown live.
+    validation_steps = [s for s in steps if s.get("action_type") in VALIDATION_ACTION_TYPES]
+    action_steps = [s for s in steps if s.get("action_type") not in VALIDATION_ACTION_TYPES]
+    validation_summary = {
+        "actions_passed": sum(1 for s in action_steps if s.get("success")),
+        "actions_total": len(action_steps),
+        "validations_passed": sum(1 for s in validation_steps if s.get("success")),
+        "validations_total": len(validation_steps),
+        "failed_total": sum(1 for s in steps if not s.get("success")),
+        "locator_warnings": sum(1 for s in steps if (s.get("locator_report") or {}).get("weak")),
+    }
+
     html = template.render(
         result=execution_result,
         steps=steps,
         ui_elements=ui_elements,
         ui_summary=ui_summary,
         execution_summary=execution_summary,
+        validation_steps=validation_steps,
+        validation_summary=validation_summary,
         product_validation=product_validation,
         final_screenshot_data=_to_data_uri(execution_result.get("final_screenshot")),
         generated_at=datetime.now().isoformat(),

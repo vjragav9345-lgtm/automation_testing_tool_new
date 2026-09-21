@@ -1,25 +1,21 @@
-"""Small helpers shared across app.py, executor, and search."""
-import logging
+"""Utility helpers for URL normalization and Playwright dialog handling."""
 
-logger = logging.getLogger(__name__)
+from urllib.parse import urlsplit, urlunsplit
 
 
-def normalize_url(raw: str) -> str:
-    raw = (raw or "").strip()
-    if not raw:
-        return raw
-    if not raw.startswith(("http://", "https://")):
-        raw = "https://" + raw
-    return raw
+def normalize_url(url: str) -> str:
+    """Ensures a URL string has a valid http:// or https:// scheme."""
+    if not url:
+        return ""
+    url = url.strip()
+    if not url.startswith(("http://", "https://")):
+        return f"https://{url}"
+    return url
 
 
 def attach_dialog_handler(page):
-    """Auto-dismiss cookie banners/alerts/confirms so they don't hang a run."""
-    def _on_dialog(dialog):
-        logger.info("dialog appeared (%s): %s - dismissing", dialog.type, dialog.message)
-        try:
-            dialog.dismiss()
-        except Exception as e:
-            logger.warning("couldn't dismiss dialog: %s", e)
-
-    page.on("dialog", _on_dialog)
+    """Automatically dismisses native browser alert/confirm/prompt dialogs."""
+    try:
+        page.on("dialog", lambda dialog: dialog.dismiss())
+    except Exception:
+        pass

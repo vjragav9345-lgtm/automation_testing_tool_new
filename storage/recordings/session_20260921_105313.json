@@ -1,0 +1,166 @@
+{
+    "name": "session_20260921_105313",
+    "session_id": "b56ecc8786094083b7cf82818eb89665",
+    "start_url": "https://www.myntra.com/sports-wear?f=Gender%3Amen%2Cmen%20women&rawQuery=sports%20wear&rf=Discount%20Range%3A30.0_100.0_30.0%20TO%20100.0",
+    "recorded_at": "2026-09-21T10:53:13.810711",
+    "stop_reason": "browser_closed",
+    "total_actions": 7,
+    "page_count": 2,
+    "viewport_width": 1280,
+    "viewport_height": 720,
+    "actions": [
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": -136,
+            "scroll_y_before": 227.1999969482422,
+            "scroll_y_after": 91.19999694824219,
+            "viewport_height": 720,
+            "document_height": 9037,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/sports-wear?f=Gender%3Amen%2Cmen%20women&rawQuery=sports%20wear&rf=Discount%20Range%3A30.0_100.0_30.0%20TO%20100.0",
+            "timestamp": "2026-09-21T05:23:04.845Z",
+            "page_id": 0,
+            "delay_before_ms": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "CULT\nSizes: Onesize\nRs. 299Rs. 449(Rs. 150 OFF)",
+                "placeholder": null,
+                "title": null,
+                "href": "duffel-bag/cult/cult-black-duffle-bag-unisex-adjustable-strap-mesh-pocket-gym--sport-bag-12-l/33248045/buy",
+                "css_path": "li#33248045 > a",
+                "xpath": "//li[.//h4[contains(text(), 'Small Sports or Gym Duffel Bag')]]/a",
+                "text": "CULT\nSizes: Onesize\nRs. 299Rs. 449(Rs. 150 OFF)",
+                "element_text": "CULT\nSizes: Onesize\nRs. 299Rs. 449(Rs. 150 OFF)",
+                "tag": "a",
+                "attributes": {
+                    "href": "duffel-bag/cult/cult-black-duffle-bag-unisex-adjustable-strap-mesh-pocket-gym--sport-bag-12-l/33248045/buy"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 777.4500122070312,
+                "y": 189.8000030517578,
+                "width": 210,
+                "height": 359.8000183105469
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/sports-wear?f=Gender%3Amen%2Cmen%20women&rawQuery=sports%20wear&rf=Discount%20Range%3A30.0_100.0_30.0%20TO%20100.0",
+            "timestamp": "2026-09-21T05:23:05.759Z",
+            "page_id": 0,
+            "delay_before_ms": 914
+        },
+        {
+            "action_type": "tab_open",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/duffel-bag/cult/cult-black-duffle-bag-unisex-adjustable-strap-mesh-pocket-gym--sport-bag-12-l/33248045/buy",
+            "timestamp": "2026-09-21T05:23:08.581Z",
+            "new_tab": true,
+            "page_id": 1,
+            "from_page_id": 0,
+            "delay_before_ms": 2822
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "ADD TO BAG",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#mountRoot > div > div > main > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > div",
+                "xpath": "//div[normalize-space(text())='ADD TO BAG']",
+                "text": "ADD TO BAG",
+                "element_text": "ADD TO BAG",
+                "tag": "div",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 758.1749877929688,
+                "y": 622.8500366210938,
+                "width": 232.8874969482422,
+                "height": 53.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/duffel-bag/cult/cult-black-duffle-bag-unisex-adjustable-strap-mesh-pocket-gym--sport-bag-12-l/33248045/buy",
+            "timestamp": "2026-09-21T05:23:09.509Z",
+            "page_id": 1,
+            "delay_before_ms": 928
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "GO TO BAG",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#mountRoot > div > div > main > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > a > span:nth-of-type(2)",
+                "xpath": "//a[normalize-space(.)='GO TO BAG']/span[2]",
+                "text": "GO TO BAG",
+                "element_text": "GO TO BAG",
+                "tag": "span",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 907.8875122070312,
+                "y": 640.25,
+                "width": 20,
+                "height": 16
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/duffel-bag/cult/cult-black-duffle-bag-unisex-adjustable-strap-mesh-pocket-gym--sport-bag-12-l/33248045/buy",
+            "timestamp": "2026-09-21T05:23:10.955Z",
+            "expected_state": false,
+            "page_id": 1,
+            "delay_before_ms": 1446
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 1,
+            "page_url": "https://www.myntra.com/duffel-bag/cult/cult-black-duffle-bag-unisex-adjustable-strap-mesh-pocket-gym--sport-bag-12-l/33248045/buy",
+            "remaining_page_id": 0,
+            "timestamp": "2026-09-21T05:23:13.808Z",
+            "delay_before_ms": 2853
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 0,
+            "page_url": "https://www.myntra.com/sports-wear?f=Gender%3Amen%2Cmen%20women&rawQuery=sports%20wear&rf=Discount%20Range%3A30.0_100.0_30.0%20TO%20100.0",
+            "remaining_page_id": null,
+            "timestamp": "2026-09-21T05:23:13.810Z",
+            "delay_before_ms": 2
+        }
+    ],
+    "saved_at": "2026-09-21T10:53:13.810711"
+}

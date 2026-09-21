@@ -1,0 +1,8 @@
+::ffff:127.0.0.1 - - [10/Sep/2026 22:42:34] "GET /diag_clean.html HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Sep/2026 22:42:43] "GET /diag_clean.html HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Sep/2026 22:43:05] "GET /checkbox_flush_test.html HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Sep/2026 22:44:20] "GET /checkbox_flush_test.html HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Sep/2026 22:49:01] "GET /checkbox_flush_test.html HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Sep/2026 22:49:15] "GET /checkbox_flush_test.html HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Sep/2026 22:49:37] "GET /legit_checkbox_widget.html HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Sep/2026 22:49:52] "GET /normal_login.html HTTP/1.1" 200 -

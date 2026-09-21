@@ -1,0 +1,2 @@
+::ffff:127.0.0.1 - - [10/Sep/2026 23:03:33] "GET /checkbox_flush_test.html HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Sep/2026 23:04:06] "GET /checkbox_flush_test.html HTTP/1.1" 200 -

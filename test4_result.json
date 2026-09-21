@@ -1,8 +1,8 @@
 {
   "name": "t4",
-  "session_id": "b9818a6eabb049f2b7005f28f124f676",
+  "session_id": "4aaf32c670bb45b587b6b7a2fedd77f7",
   "start_url": "http://127.0.0.1:8990/page1.html",
-  "recorded_at": "2026-08-25T18:01:59.515870",
+  "recorded_at": "2026-09-06T20:31:04.894436",
   "stop_reason": "test",
   "total_actions": 6,
   "page_count": 2,
@@ -35,7 +35,7 @@
         "height": 18
       },
       "page_url": "http://127.0.0.1:8990/page1.html",
-      "timestamp": "2026-08-25T12:31:56.710Z",
+      "timestamp": "2026-09-06T15:01:02.083Z",
       "page_id": 0,
       "delay_before_ms": 0
     },
@@ -45,11 +45,11 @@
       "locator_profile": null,
       "bounding_box": null,
       "page_url": "http://127.0.0.1:8990/page2.html",
-      "timestamp": "2026-08-25T12:31:56.879Z",
+      "timestamp": "2026-09-06T15:01:02.239Z",
       "new_tab": true,
       "page_id": 1,
       "from_page_id": 0,
-      "delay_before_ms": 169
+      "delay_before_ms": 156
     },
     {
       "action_type": "click",
@@ -77,9 +77,9 @@
         "height": 21
       },
       "page_url": "http://127.0.0.1:8990/page2.html",
-      "timestamp": "2026-08-25T12:31:57.520Z",
+      "timestamp": "2026-09-06T15:01:02.897Z",
       "page_id": 1,
-      "delay_before_ms": 641
+      "delay_before_ms": 658
     },
     {
       "action_type": "tab_close",
@@ -89,8 +89,8 @@
       "page_id": 1,
       "page_url": "http://127.0.0.1:8990/page2.html",
       "remaining_page_id": 0,
-      "timestamp": "2026-08-25T12:31:58.040Z",
-      "delay_before_ms": 520
+      "timestamp": "2026-09-06T15:01:03.422Z",
+      "delay_before_ms": 525
     },
     {
       "action_type": "click",
@@ -118,9 +118,9 @@
         "height": 18
       },
       "page_url": "http://127.0.0.1:8990/page1.html",
-      "timestamp": "2026-08-25T12:31:58.585Z",
+      "timestamp": "2026-09-06T15:01:03.960Z",
       "page_id": 0,
-      "delay_before_ms": 545
+      "delay_before_ms": 538
     },
     {
       "action_type": "scroll",
@@ -134,9 +134,9 @@
       "locator_profile": null,
       "bounding_box": null,
       "page_url": "http://127.0.0.1:8990/page1.html",
-      "timestamp": "2026-08-25T12:31:59.368Z",
+      "timestamp": "2026-09-06T15:01:04.742Z",
       "page_id": 0,
-      "delay_before_ms": 783
+      "delay_before_ms": 782
     }
   ]
 }

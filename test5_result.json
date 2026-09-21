@@ -1,8 +1,8 @@
 {
   "name": "t5",
-  "session_id": "f2e5a246ba734f648c8bac57e2bbd3c2",
+  "session_id": "022de437622045dc9416491c77fc12e5",
   "start_url": "http://127.0.0.1:8990/page1.html",
-  "recorded_at": "2026-08-25T18:02:01.917269",
+  "recorded_at": "2026-09-06T20:31:07.299584",
   "stop_reason": "test",
   "total_actions": 4,
   "page_count": 2,
@@ -35,7 +35,7 @@
         "height": 18
       },
       "page_url": "http://127.0.0.1:8990/page1.html",
-      "timestamp": "2026-08-25T12:32:00.062Z",
+      "timestamp": "2026-09-06T15:01:05.435Z",
       "page_id": 0,
       "delay_before_ms": 0
     },
@@ -45,11 +45,11 @@
       "locator_profile": null,
       "bounding_box": null,
       "page_url": "http://127.0.0.1:8990/page2.html",
-      "timestamp": "2026-08-25T12:32:00.202Z",
+      "timestamp": "2026-09-06T15:01:05.593Z",
       "new_tab": true,
       "page_id": 1,
       "from_page_id": 0,
-      "delay_before_ms": 140
+      "delay_before_ms": 158
     },
     {
       "action_type": "tab_close",
@@ -59,8 +59,8 @@
       "page_id": 0,
       "page_url": "http://127.0.0.1:8990/page1.html",
       "remaining_page_id": 1,
-      "timestamp": "2026-08-25T12:32:00.822Z",
-      "delay_before_ms": 620
+      "timestamp": "2026-09-06T15:01:06.193Z",
+      "delay_before_ms": 600
     },
     {
       "action_type": "click",
@@ -88,9 +88,9 @@
         "height": 21
       },
       "page_url": "http://127.0.0.1:8990/page2.html",
-      "timestamp": "2026-08-25T12:32:01.396Z",
+      "timestamp": "2026-09-06T15:01:06.783Z",
       "page_id": 1,
-      "delay_before_ms": 574
+      "delay_before_ms": 590
     }
   ]
 }

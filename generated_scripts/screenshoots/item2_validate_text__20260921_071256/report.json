@@ -1,0 +1,39 @@
+{
+  "status": "PASS",
+  "message": "all steps resolved",
+  "qa_url": "http://127.0.0.1:8899/page1.html",
+  "steps": [
+    {
+      "index": 1,
+      "action_type": "validate_text",
+      "strategy_used": "xpath",
+      "element_found": true,
+      "success": true,
+      "error": null,
+      "warning": null,
+      "effect_verified": null,
+      "large_bbox_flag": false,
+      "screenshot": "D:\\new_test\\generated_scripts\\screenshoots\\item2_validate_text__20260921_071256\\page1_html\\validation_Validate_Text_20260921_071258_144416.png",
+      "url_before": "http://127.0.0.1:8899/page1.html",
+      "url_after": "http://127.0.0.1:8899/page1.html",
+      "duration": 1.688,
+      "locator_report": {
+        "strategy": "xpath",
+        "strategy_label": "XPath",
+        "fallback_level": 14,
+        "resolved": true,
+        "weak": false,
+        "resolution_ms": 1688,
+        "message": "h1 found using XPath. (resolved in 1688ms)"
+      },
+      "expected": "Fixture",
+      "actual": "AutoFlow QA Fixture"
+    }
+  ],
+  "final_url": "http://127.0.0.1:8899/page1.html",
+  "final_screenshot": "D:\\new_test\\generated_scripts\\screenshoots\\item2_validate_text__20260921_071256\\page1_html\\img2.png",
+  "final_text": "AutoFlow QA Fixture\nroute: home\nMen\nScroll the WINDOW down to reach the form.\n\nSPA route area - content below changes via history.pushState, no full page load.\n\nGo to /route2 (pushState)\nItem 1\nItem 2\nItem 3\nItem 4\nItem 5\nItem 6\nItem 7\nItem 8\nItem 9\nItem 10\n I agree\n Basic  Pro\nCountry \n-- choose --\nUnited States\nIndia\nUnited Kingdom\nEmail (autofill-style) \nPromo code (React-style controlled, uppercases as you type) \nSearch (debounced suggestions dropdown) \nOpen Page 2 in new tab\n\nSame-origin iframe (target for Pick Element testing):\n\nShadow DOM host (target for Pick Element testing):\n\nGo to Page 2 (footer link)",
+  "product_validation": null,
+  "total_duration_s": 3.422,
+  "total_steps": 1
+}

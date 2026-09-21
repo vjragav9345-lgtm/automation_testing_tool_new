@@ -56,6 +56,13 @@
     .result-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e2e8f0; }
     .result-row:last-child { border-bottom: none; }
     .result-label { color: #64748b; font-weight: 600; font-size: 13px; }
+    .validation-stats { color: #475569; font-size: 13px; margin-bottom: 14px; }
+    .validation-cards { display: flex; flex-direction: column; gap: 8px; }
+    .validation-card { border-radius: 8px; padding: 10px 12px; border: 1px solid #e2e8f0; background: #f8fafc; }
+    .validation-card.pass { border-color: #bbf7d0; background: #f0fdf4; }
+    .validation-card.fail { border-color: #fecaca; background: #fef2f2; }
+    .validation-card-line { font-weight: 600; font-size: 14px; }
+    .validation-card-field { font-size: 12px; color: #64748b; margin-top: 2px; }
 </style>
 </head>
 <body>
@@ -67,6 +74,47 @@
         {{ result.status }}
         <span class="msg">{{ result.message }}</span>
     </div>
+
+    {% if steps %}
+    <section>
+        <h2>Step Validations</h2>
+        <p class="validation-stats">
+            {{ steps|length }} step{{ '' if steps|length == 1 else 's' }} executed ·
+            {{ validation_summary.actions_passed }}/{{ validation_summary.actions_total }} action{{ '' if validation_summary.actions_total == 1 else 's' }} passed
+            {% if validation_summary.validations_total %}
+            · {{ validation_summary.validations_passed }}/{{ validation_summary.validations_total }} validation{{ '' if validation_summary.validations_total == 1 else 's' }} passed
+            {% endif %}
+            · {{ validation_summary.failed_total }} failed
+            {% if validation_summary.locator_warnings %}
+            · {{ validation_summary.locator_warnings }} locator warning{{ '' if validation_summary.locator_warnings == 1 else 's' }}
+            {% endif %}
+        </p>
+        {% if validation_steps %}
+        <div class="validation-cards">
+            {% for s in validation_steps %}
+            <div class="validation-card {{ 'pass' if s.success else 'fail' }}">
+                <div class="validation-card-line">
+                    {{ '✓' if s.success else '✗' }}
+                    {% if s.expected %}
+                        {{ (s.locator_report.strategy_label if s.locator_report else s.action_type) }}
+                        {{ 'equals' if s.success else 'mismatch' }}
+                        {{ '"%s"' % s.expected if s.success else '' }}
+                    {% else %}
+                        {{ s.action_type }}
+                    {% endif %}
+                </div>
+                {% if not s.success %}
+                    {% if s.expected %}<div class="validation-card-field">Expected: {{ s.expected }}</div>{% endif %}
+                    {% if s.actual %}<div class="validation-card-field">Actual: {{ s.actual }}</div>{% endif %}
+                    <div class="validation-card-field">Step: {{ s.index }}</div>
+                    {% if s.locator_report and s.locator_report.strategy_label %}<div class="validation-card-field">Element: {{ s.locator_report.strategy_label }}</div>{% endif %}
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </section>
+    {% endif %}
 
     <section>
         <h2>Validations</h2>
@@ -198,6 +246,7 @@
                     <th>Action</th>
                     <th>Locator Strategy Used</th>
                     <th>Result</th>
+                    <th>Effect Verified</th>
                     <th>Notes</th>
                 </tr>
             </thead>
@@ -205,8 +254,20 @@
                 {% for s in steps %}
                 <tr class="{{ 'failed' if not s.success else ('fragile' if s.fragile else '') }}">
                     <td>{{ s.index }}</td>
-                    <td>{{ s.action_type }}</td>
-                    <td>{{ s.strategy_used or '-' }}</td>
+                    <td>{{ s.action_type }}{% if s.name %}<br><small>{{ s.name }}</small>{% endif %}</td>
+                    <td>
+                        {% if s.locator_report %}
+                            {{ s.locator_report.strategy_label or '-' }}
+                            {% if s.locator_report.weak %}<span class="pill unknown" title="A weak/fragile fallback was used - consider re-recording this step">weak</span>{% endif %}
+                            <details>
+                                <summary>Advanced</summary>
+                                <div>Raw strategy: {{ s.strategy_used or '-' }}</div>
+                                {% if s.locator_report.resolution_ms is not none %}<div>Resolved in {{ s.locator_report.resolution_ms }}ms</div>{% endif %}
+                            </details>
+                        {% else %}
+                            {{ s.strategy_used or '-' }}
+                        {% endif %}
+                    </td>
                     <td>
                         {% if s.success %}
                             <span class="pill ok">passed</span>
@@ -214,8 +275,18 @@
                             <span class="pill bad">failed</span>
                         {% endif %}
                         {% if s.fragile %}<span class="pill unknown">fragile</span>{% endif %}
+                        {% if s.large_bbox_flag %}<span class="pill unknown" title="Recorded click target has an unusually large bounding box - possible recording artifact, may need re-recording more precisely">large target</span>{% endif %}
                     </td>
-                    <td>{{ s.error or '' }}</td>
+                    <td>
+                        {% if s.effect_verified == True %}
+                            <span class="pill ok">Yes</span>
+                        {% elif s.effect_verified == False %}
+                            <span class="pill bad">No</span>
+                        {% else %}
+                            <span class="pill unknown">&mdash;</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ s.error or s.warning or '' }}</td>
                 </tr>
                 {% endfor %}
             </tbody>

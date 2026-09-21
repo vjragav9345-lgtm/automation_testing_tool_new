@@ -1,0 +1,5 @@
+{
+  "name": "pick_ui_test_fixture",
+  "start_url": "http://127.0.0.1:8899/page1.html",
+  "actions": []
+}

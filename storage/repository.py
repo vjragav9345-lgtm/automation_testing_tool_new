@@ -5,6 +5,7 @@ functions means if this ever moves to a real DB, only this file changes.
 """
 import json
 import logging
+import os
 from datetime import datetime
 from pathlib import Path
 
@@ -13,17 +14,20 @@ logger = logging.getLogger(__name__)
 BASE_DIR = Path(__file__).resolve().parent.parent
 RECORDINGS_DIR = BASE_DIR / "storage" / "recordings"
 EDITED_RECORDINGS_DIR = RECORDINGS_DIR / "edited"
+TRIMMED_RECORDINGS_DIR = RECORDINGS_DIR / "trimmed"
 EXECUTIONS_DIR = BASE_DIR / "storage" / "executions"
 SEARCHES_DIR = BASE_DIR / "storage" / "searches"
 
-for d in (RECORDINGS_DIR, EDITED_RECORDINGS_DIR, EXECUTIONS_DIR, SEARCHES_DIR):
+for d in (RECORDINGS_DIR, EDITED_RECORDINGS_DIR, TRIMMED_RECORDINGS_DIR, EXECUTIONS_DIR, SEARCHES_DIR):
     d.mkdir(parents=True, exist_ok=True)
 
 
 def _write_json(path: Path, data: dict):
     path.parent.mkdir(parents=True, exist_ok=True)
-    with open(path, "w", encoding="utf-8") as f:
+    tmp_path = path.with_suffix(path.suffix + f".tmp{os.getpid()}")
+    with open(tmp_path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=4, ensure_ascii=False, default=str)
+    os.replace(tmp_path, path)
 
 
 def _read_json(path: Path) -> dict:
@@ -56,6 +60,21 @@ def save_edited_recording(test_case: dict) -> Path:
     return path
 
 
+def save_trimmed_recording(test_case: dict) -> Path:
+    """Same as save_edited_recording(), but writes into
+    storage/recordings/trimmed/ - a trimmed recording is a NEW,
+    independent file kept only-selected-steps subset; the recording it
+    was trimmed from is never touched."""
+    ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+    name = test_case.get("name") or f"session_{ts}"
+    path = TRIMMED_RECORDINGS_DIR / f"{name}.json"
+    test_case["name"] = name
+    test_case["saved_at"] = datetime.now().isoformat()
+    _write_json(path, test_case)
+    logger.info("saved trimmed recording to %s", path)
+    return path
+
+
 def load_recording(path: str) -> dict:
     p = Path(path)
     if not p.is_absolute():
@@ -77,6 +96,7 @@ def list_recordings() -> list:
     for directory, rel_prefix in (
         (RECORDINGS_DIR, "storage/recordings"),
         (EDITED_RECORDINGS_DIR, "storage/recordings/edited"),
+        (TRIMMED_RECORDINGS_DIR, "storage/recordings/trimmed"),
     ):
         for f in directory.glob("*.json"):
             try:

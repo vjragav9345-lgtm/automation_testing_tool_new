@@ -1,0 +1,696 @@
+{
+    "name": "session_20260920_185527",
+    "session_id": "4ad9921dab64491790dd3f095b7bb0d0",
+    "start_url": "https://www.myntra.com/",
+    "recorded_at": "2026-09-20T18:55:27.414943",
+    "stop_reason": "browser_closed",
+    "total_actions": 27,
+    "page_count": 2,
+    "actions": [
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "T-Shirts",
+                "placeholder": null,
+                "title": null,
+                "href": "/men-tshirts",
+                "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > nav > div > div > div > div > div > div > li > ul > li:nth-of-type(2) > a",
+                "xpath": "//a[@href='/men-tshirts']",
+                "text": "T-Shirts",
+                "element_text": "T-Shirts",
+                "tag": "a",
+                "attributes": {
+                    "href": "/men-tshirts"
+                },
+                "cross_boundary": false
+            },
+            "bounding_box": {
+                "x": 101.5999984741211,
+                "y": 123,
+                "width": 191,
+                "height": 23
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/",
+            "timestamp": "2026-09-20T13:24:49.810Z",
+            "page_id": 0,
+            "delay_before_ms": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Search for products, brands and more",
+                "placeholder": "Search for products, brands and more",
+                "title": null,
+                "href": null,
+                "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > div:nth-of-type(3) > input",
+                "xpath": "//input[@placeholder='Search for products, brands and more']",
+                "text": "Search for products, brands and more",
+                "element_text": "Search for products, brands and more",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Search for products, brands and more"
+                },
+                "cross_boundary": false
+            },
+            "bounding_box": {
+                "x": 731.2000122070312,
+                "y": 20,
+                "width": 324.8000183105469,
+                "height": 39.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/men-tshirts",
+            "timestamp": "2026-09-20T13:24:53.308Z",
+            "page_id": 0,
+            "delay_before_ms": 3498
+        },
+        {
+            "action_type": "fill",
+            "value": "collar",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Search for products, brands and more",
+                "placeholder": "Search for products, brands and more",
+                "title": null,
+                "href": null,
+                "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > div:nth-of-type(3) > input",
+                "xpath": "//input[@placeholder='Search for products, brands and more']",
+                "text": "Search for products, brands and more",
+                "element_text": "collar",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Search for products, brands and more"
+                },
+                "cross_boundary": false
+            },
+            "bounding_box": {
+                "x": 731.2000122070312,
+                "y": 20,
+                "width": 324.8000183105469,
+                "height": 39.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/men-tshirts",
+            "timestamp": "2026-09-20T13:24:55.338Z",
+            "page_id": 0,
+            "delay_before_ms": 2030
+        },
+        {
+            "action_type": "press",
+            "value": "Enter",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Search for products, brands and more",
+                "placeholder": "Search for products, brands and more",
+                "title": null,
+                "href": null,
+                "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > div:nth-of-type(3) > input",
+                "xpath": "//input[@placeholder='Search for products, brands and more']",
+                "text": "Search for products, brands and more",
+                "element_text": "collar",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Search for products, brands and more"
+                },
+                "cross_boundary": false
+            },
+            "bounding_box": {
+                "x": 731.2000122070312,
+                "y": 20,
+                "width": 324.8000183105469,
+                "height": 39.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/men-tshirts",
+            "timestamp": "2026-09-20T13:24:55.340Z",
+            "page_id": 0,
+            "delay_before_ms": 2
+        },
+        {
+            "action_type": "validate",
+            "value": "collar",
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/men-tshirts",
+            "timestamp": "2026-09-20T13:24:55.589Z",
+            "page_id": 0,
+            "delay_before_ms": 249
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/collar?rawQuery=collar",
+            "timestamp": "2026-09-20T13:24:57.303Z",
+            "page_id": 0,
+            "delay_before_ms": 1714
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "VASTRADO\nSizes: L\nRs. 799Rs. 1999(60% OFF)",
+                "placeholder": null,
+                "title": null,
+                "href": "shackets/vastrado/vastrado-men-solid-super-soft-double-pocket-cotton-overshirt-shacket/36311897/buy",
+                "css_path": "li#36311897 > a",
+                "xpath": "//a[@href='shackets/vastrado/vastrado-men-solid-super-soft-double-pocket-cotton-overshirt-shacket/36311897/buy']",
+                "text": "VASTRADO\nSizes: L\nRs. 799Rs. 1999(60% OFF)",
+                "element_text": "VASTRADO\nSizes: L\nRs. 799Rs. 1999(60% OFF)",
+                "tag": "a",
+                "attributes": {
+                    "href": "shackets/vastrado/vastrado-men-solid-super-soft-double-pocket-cotton-overshirt-shacket/36311897/buy"
+                },
+                "cross_boundary": false
+            },
+            "bounding_box": {
+                "x": 777.4500122070312,
+                "y": 236.60000610351562,
+                "width": 210,
+                "height": 359.8000183105469
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/collar?rawQuery=collar",
+            "timestamp": "2026-09-20T13:25:00.140Z",
+            "page_id": 0,
+            "delay_before_ms": 2837
+        },
+        {
+            "action_type": "tab_open",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/shackets/vastrado/vastrado-men-solid-super-soft-double-pocket-cotton-overshirt-shacket/36311897/buy",
+            "timestamp": "2026-09-20T13:25:02.624Z",
+            "new_tab": true,
+            "page_id": 1,
+            "from_page_id": 0,
+            "delay_before_ms": 2484
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "S\nRs. 1078",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#sizeButtonsContainer > div:nth-of-type(2) > div:nth-of-type(2) > div > button",
+                "xpath": "/html[1]/body[1]/div[2]/div[1]/div[1]/main[1]/div[2]/div[2]/div[2]/div[1]/div[2]/div[2]/div[1]/button[1]",
+                "text": "S\nRs. 1078",
+                "element_text": "S\nRs. 1078",
+                "tag": "button",
+                "attributes": {},
+                "cross_boundary": false
+            },
+            "bounding_box": {
+                "x": 844.3875122070312,
+                "y": 421.6000061035156,
+                "width": 82.63750457763672,
+                "height": 48
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/shackets/vastrado/vastrado-men-solid-super-soft-double-pocket-cotton-overshirt-shacket/36311897/buy",
+            "timestamp": "2026-09-20T13:25:03.892Z",
+            "page_id": 1,
+            "delay_before_ms": 1268
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "ADD TO BAG",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#mountRoot > div > div > main > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2) > div > div",
+                "xpath": "//div[contains(text(), 'ADD TO BAG')]",
+                "text": "ADD TO BAG",
+                "element_text": "ADD TO BAG",
+                "tag": "div",
+                "attributes": {},
+                "cross_boundary": false
+            },
+            "bounding_box": {
+                "x": 758.1749877929688,
+                "y": 571.6000366210938,
+                "width": 232.8874969482422,
+                "height": 53.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/shackets/vastrado/vastrado-men-solid-super-soft-double-pocket-cotton-overshirt-shacket/36311897/buy",
+            "timestamp": "2026-09-20T13:25:05.089Z",
+            "page_id": 1,
+            "delay_before_ms": 1197
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "1\nBag",
+                "placeholder": null,
+                "title": null,
+                "href": "/checkout/cart",
+                "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > div:nth-of-type(2) > a:nth-of-type(2)",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]/header[1]/div[2]/div[2]/a[2]",
+                "text": "1\nBag",
+                "element_text": "1\nBag",
+                "tag": "a",
+                "attributes": {
+                    "href": "/checkout/cart"
+                },
+                "cross_boundary": false
+            },
+            "bounding_box": {
+                "x": 1213.2000732421875,
+                "y": 20,
+                "width": 0,
+                "height": 40
+            },
+            "click_strategy": "force_click",
+            "page_url": "https://www.myntra.com/shackets/vastrado/vastrado-men-solid-super-soft-double-pocket-cotton-overshirt-shacket/36311897/buy",
+            "timestamp": "2026-09-20T13:25:07.243Z",
+            "page_id": 1,
+            "delay_before_ms": 2154
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Size: S",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#cartItemsList > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div:nth-of-type(3) > div > div",
+                "xpath": "//*[@data-testid='cart-item-size']",
+                "text": "Size: S",
+                "element_text": "Size: S",
+                "tag": "div",
+                "attributes": {
+                    "data-testid": "cart-item-size"
+                },
+                "cross_boundary": false
+            },
+            "bounding_box": {
+                "x": 287.3999938964844,
+                "y": 347.07501220703125,
+                "width": 69.6500015258789,
+                "height": 20
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/checkout/cart",
+            "timestamp": "2026-09-20T13:25:11.074Z",
+            "page_id": 1,
+            "delay_before_ms": 3831
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/checkout/cart#modal",
+            "timestamp": "2026-09-20T13:25:11.437Z",
+            "page_id": 1,
+            "delay_before_ms": 363
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "XL\n₹799",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#116009189 > div",
+                "xpath": "//div[@data-testid='sizelabel-116009189']/div",
+                "text": "XL\n₹799",
+                "element_text": "XL\n₹799",
+                "tag": "div",
+                "attributes": {},
+                "cross_boundary": false
+            },
+            "bounding_box": {
+                "x": 448.70001220703125,
+                "y": 401.8000183105469,
+                "width": 59.400001525878906,
+                "height": 33.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/checkout/cart#modal",
+            "timestamp": "2026-09-20T13:25:12.515Z",
+            "page_id": 1,
+            "delay_before_ms": 1078
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "button",
+                "aria_label": null,
+                "accessible_name": "DONE",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#cartItemsList > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(4) > div > div > div:nth-of-type(2) > button",
+                "xpath": "//*[@role='dialog']//*[@role='button'][contains(., 'DONE')]",
+                "text": "DONE",
+                "element_text": "DONE",
+                "tag": "button",
+                "attributes": {
+                    "role": "button"
+                },
+                "cross_boundary": false
+            },
+            "bounding_box": {
+                "x": 447.8999938964844,
+                "y": 540.7000122070312,
+                "width": 367.3999938964844,
+                "height": 40
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/checkout/cart#modal",
+            "timestamp": "2026-09-20T13:25:13.507Z",
+            "page_id": 1,
+            "delay_before_ms": 992
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Qty: 1",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#cartItemsList > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div:nth-of-type(3) > div > div:nth-of-type(2) > span",
+                "xpath": "//*[@data-testid='cart-item-qty-value']",
+                "text": "Qty: 1",
+                "element_text": "Qty: 1",
+                "tag": "span",
+                "attributes": {
+                    "data-testid": "cart-item-qty-value"
+                },
+                "cross_boundary": false
+            },
+            "bounding_box": {
+                "x": 385.57501220703125,
+                "y": 348.2749938964844,
+                "width": 38.20000076293945,
+                "height": 16.80000114440918
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/checkout/cart",
+            "timestamp": "2026-09-20T13:25:15.438Z",
+            "page_id": 1,
+            "delay_before_ms": 1931
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/checkout/cart#modal",
+            "timestamp": "2026-09-20T13:25:15.568Z",
+            "page_id": 1,
+            "delay_before_ms": 130
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": "#7",
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "1",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#7",
+                "xpath": "//*[@id='7']",
+                "text": "1",
+                "element_text": "7",
+                "tag": "div",
+                "attributes": {},
+                "cross_boundary": false
+            },
+            "bounding_box": {
+                "x": 555,
+                "y": 525.4500122070312,
+                "width": 39.60000228881836,
+                "height": 40
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/checkout/cart#modal",
+            "timestamp": "2026-09-20T13:25:17.108Z",
+            "expected_state": false,
+            "page_id": 1,
+            "delay_before_ms": 1540
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "button",
+                "aria_label": null,
+                "accessible_name": "DONE",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#cartItemsList > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(4) > div > button",
+                "xpath": "//*[@role='dialog']//*[@role='button'][contains(., 'DONE')]",
+                "text": "DONE",
+                "element_text": "DONE",
+                "tag": "button",
+                "attributes": {
+                    "role": "button"
+                },
+                "cross_boundary": false
+            },
+            "bounding_box": {
+                "x": 495.3999938964844,
+                "y": 597.4500122070312,
+                "width": 272.3999938964844,
+                "height": 40
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/checkout/cart#modal",
+            "timestamp": "2026-09-20T13:25:17.990Z",
+            "page_id": 1,
+            "delay_before_ms": 882
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/checkout/cart",
+            "timestamp": "2026-09-20T13:25:18.152Z",
+            "page_id": 1,
+            "delay_before_ms": 162
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 248,
+            "scroll_y_before": 0,
+            "scroll_y_after": 248,
+            "viewport_height": 720,
+            "document_height": 8571,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/checkout/cart",
+            "timestamp": "2026-09-20T13:25:19.650Z",
+            "page_id": 1,
+            "delay_before_ms": 1498
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "Donate and make a difference",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#appContent > div > div > div > div > div:nth-of-type(2) > div > div > div:nth-of-type(4) > div > svg",
+                "xpath": "/html[1]/body[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[4]/div[1]/svg[1]",
+                "text": "Donate and make a difference",
+                "element_text": "Donate and make a difference",
+                "tag": "svg",
+                "attributes": {},
+                "cross_boundary": false
+            },
+            "bounding_box": {
+                "x": 782,
+                "y": 174.97500610351562,
+                "width": 16,
+                "height": 16
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/checkout/cart",
+            "timestamp": "2026-09-20T13:25:21.047Z",
+            "expected_state": true,
+            "page_id": 1,
+            "delay_before_ms": 1397
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Check delivery time & services\nENTER PIN CODE\n1/1 ITEMS SELECTED\nREMOVE\nMOVE TO ",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#appContent > div > div > div > div",
+                "xpath": "/html[1]/body[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]",
+                "text": "Check delivery time & services\nENTER PIN CODE\n1/1 ITEMS SELECTED\nREMOVE\nMOVE TO ",
+                "element_text": "Check delivery time & services\nENTER PIN CODE\n1/1 ITEMS SELECTED\nREMOVE\nMOVE TO ",
+                "tag": "div",
+                "attributes": {},
+                "cross_boundary": false
+            },
+            "bounding_box": {
+                "x": 141.60000610351562,
+                "y": -169.1999969482422,
+                "width": 980,
+                "height": 8462.9873046875
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/checkout/cart",
+            "timestamp": "2026-09-20T13:25:22.653Z",
+            "page_id": 1,
+            "delay_before_ms": 1606
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "button",
+                "aria_label": null,
+                "accessible_name": "PLACE ORDER",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#appContent > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(4) > button",
+                "xpath": "//*[@id='appContent']//*[@role='button'][contains(., 'PLACE ORDER')]",
+                "text": "PLACE ORDER",
+                "element_text": "PLACE ORDER",
+                "tag": "button",
+                "attributes": {
+                    "role": "button"
+                },
+                "cross_boundary": false
+            },
+            "bounding_box": {
+                "x": 782,
+                "y": 589.6875,
+                "width": 320,
+                "height": 40
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/checkout/cart",
+            "timestamp": "2026-09-20T13:25:23.024Z",
+            "page_id": 1,
+            "delay_before_ms": 371
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 1,
+            "scroll_y_before": 0,
+            "scroll_y_after": 0.800000011920929,
+            "viewport_height": 720,
+            "document_height": 780,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/login?referer=/checkout/cart",
+            "timestamp": "2026-09-20T13:25:23.762Z",
+            "page_id": 1,
+            "delay_before_ms": 738
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 1,
+            "page_url": "https://www.myntra.com/checkout/cart",
+            "remaining_page_id": 0,
+            "timestamp": "2026-09-20T13:25:27.402Z",
+            "delay_before_ms": 3640
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 0,
+            "page_url": "https://www.myntra.com/collar?rawQuery=collar",
+            "remaining_page_id": null,
+            "timestamp": "2026-09-20T13:25:27.414Z",
+            "delay_before_ms": 12
+        }
+    ],
+    "saved_at": "2026-09-20T18:55:27.414943"
+}

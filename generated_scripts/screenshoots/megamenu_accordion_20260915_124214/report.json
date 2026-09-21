@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "message": "all steps resolved",
+  "qa_url": "http://127.0.0.1:9090/megamenu_accordion.html",
+  "steps": [
+    {
+      "index": 1,
+      "action_type": "click",
+      "strategy_used": "id",
+      "element_found": true,
+      "success": true,
+      "error": null,
+      "warning": null,
+      "effect_verified": null,
+      "large_bbox_flag": false,
+      "screenshot": null,
+      "url_before": "http://127.0.0.1:9090/megamenu_accordion.html",
+      "url_after": "http://127.0.0.1:9090/men-tshirts.html",
+      "duration": 13.75
+    }
+  ],
+  "final_url": "http://127.0.0.1:9090/men-tshirts.html",
+  "final_screenshot": null,
+  "final_text": "Men T-Shirts Listing",
+  "product_validation": null,
+  "total_duration_s": 15.39
+}

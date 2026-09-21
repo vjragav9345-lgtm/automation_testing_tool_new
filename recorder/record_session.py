@@ -16,6 +16,7 @@ Playwright's framenavigated event instead.
 """
 import json
 import logging
+import os
 import threading
 import time
 import uuid
@@ -24,7 +25,29 @@ from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
-_CAPTURE_JS = (Path(__file__).parent / "action_capture.js").read_text(encoding="utf-8")
+# TEMPORARY diagnostic instrumentation switch - see the matching block in
+# action_capture.js (search RECORDER_DEBUG there) for what this actually
+# turns on: raw pointer/mouse/click event logging plus a log line at every
+# existing dedup/discard point, all gated behind this one flag so it's a
+# no-op (same behavior, same output) for every normal recording. Off by
+# default; set DEBUG_RECORDER=1 (or true/yes/on, case-insensitive) in the
+# environment to turn it on for one recording session. Accepts more than
+# a bare "1" - a strict "1"-only check (this file's own AUTOFLOW_DEBUG-
+# style precedent elsewhere in this project) silently stayed off for a
+# real user who reasonably set DEBUG_RECORDER=true instead, with no error
+# of any kind to indicate why - not a mistake worth letting happen twice.
+_RECORDER_DEBUG = os.environ.get("DEBUG_RECORDER", "").strip().lower() in ("1", "true", "yes", "on")
+
+# window.__RECORDER_DEBUG__ is how the flag actually reaches page JS - set
+# via a one-line prefix on the SAME script already injected on every page
+# load, rather than a second add_init_script call (expose_function/
+# add_init_script each raise if called twice on the same page - see
+# attach_page below - so this piggybacks on the existing single call
+# instead of needing its own guard).
+_CAPTURE_JS = (
+    f"window.__RECORDER_DEBUG__ = {'true' if _RECORDER_DEBUG else 'false'};\n"
+    + (Path(__file__).parent / "action_capture.js").read_text(encoding="utf-8")
+)
 
 
 def _utc_timestamp():
@@ -72,6 +95,80 @@ def _add_delays(ordered_actions):
 # navigate/submit record, since the click already represents the same step
 SUBMIT_DEDUP_WINDOW = 0.6
 NAV_DEDUP_WINDOW = 1.5
+
+# the one, generic, site-agnostic signal used to recognize a "search-type"
+# field automatically - no site/domain concepts, just the standard ways a
+# search input identifies itself (its own type, ARIA role, placeholder, or
+# accessible name mentioning search)
+_SEARCH_HINT = "search"
+
+
+def _looks_search_like(locator_profile):
+    """True if the recorded field looks like a search box, generically -
+    checked against the SAME attributes already captured for every action
+    (see buildProfile() in action_capture.js: placeholder/role/aria_label
+    at the top level, plus the raw STRONG_ATTRS dict) - no new capture
+    logic needed, just reading what's already there.
+    """
+    lp = locator_profile or {}
+    attrs = lp.get("attributes") or {}
+    candidates = (
+        lp.get("placeholder"), lp.get("role"), lp.get("aria_label"),
+        attrs.get("type"), attrs.get("role"),
+        attrs.get("aria-label"), attrs.get("placeholder"),
+    )
+    return any(c and _SEARCH_HINT in str(c).lower() for c in candidates)
+
+
+def _same_locator(lp_a, lp_b):
+    """True if two recorded locator_profiles clearly identify the SAME
+    element - id match first (strongest), then css_path/xpath. Used only
+    to recognize "this click landed on the same field a nearby fill just
+    targeted" (a focus click, not a separate submit action) - not a
+    general element-equality check, so a cheap field-by-field compare is
+    enough; no need to touch a live page for this.
+    """
+    a, b = lp_a or {}, lp_b or {}
+    if a.get("id") and a.get("id") == b.get("id"):
+        return True
+    if a.get("css_path") and a.get("css_path") == b.get("css_path"):
+        return True
+    if a.get("xpath") and a.get("xpath") == b.get("xpath"):
+        return True
+    return False
+
+
+# generic, site-agnostic hints for fields that must never be captured or
+# validated as plain-text form details - password inputs and the common
+# payment/identity autocomplete tokens (https://html.spec.whatwg.org/#autofill)
+# - no site-specific field names, just the same standard attributes
+# _looks_search_like already reads
+_SENSITIVE_FIELD_HINTS = (
+    "password", "passwd", "pwd",
+    "cc-number", "cc-csc", "cc-exp", "cc-name", "cc-type",
+    "credit-card", "creditcard", "card-number", "cardnumber",
+    "cvv", "cvc", "ssn", "social-security", "security-code",
+)
+
+
+def _is_sensitive_field(locator_profile):
+    """True if a field should be excluded entirely from the field-presence
+    validate feature (see Recorder._maybe_auto_insert_field_presence_validate)
+    - password fields (by type or autocomplete) and common payment/identity
+    fields, recognized generically by type/autocomplete/name/id/placeholder/
+    aria-label, the same attributes already captured for every action.
+    """
+    lp = locator_profile or {}
+    attrs = lp.get("attributes") or {}
+    if (attrs.get("type") or "").lower() == "password":
+        return True
+    candidates = (
+        attrs.get("autocomplete"), attrs.get("name"), attrs.get("id"),
+        lp.get("placeholder"), lp.get("aria_label"), lp.get("name"), lp.get("id"),
+    )
+    text = " ".join(str(c).lower() for c in candidates if c)
+    return any(hint in text for hint in _SENSITIVE_FIELD_HINTS)
+
 
 # real navigations are often a CHAIN of redirects (tracking/ref URLs,
 # consent interstitials, etc) that fire several framenavigated events in
@@ -167,6 +264,8 @@ def _print_action_line(action):
         print(f"\n[RECORDED] TAB OPEN\npage_id={action.get('page_id')} (from page {action.get('from_page_id')})\nURL: {action.get('page_url')}", flush=True)
     elif action_type == "tab_close":
         print(f"\n[RECORDED] TAB CLOSE\npage_id={action.get('page_id')} -> remaining page {action.get('remaining_page_id')}", flush=True)
+    elif action_type == "validate":
+        print(f"\n[RECORDED] VALIDATE (auto-added){page_tag}\nExpected text: {action.get('value')}", flush=True)
     else:
         print(f"\n[RECORDED] {str(action_type).upper()}{page_tag}", flush=True)
 
@@ -255,6 +354,20 @@ class Recorder:
             self._ensure_active(page_id, action.get("timestamp"))
             return
 
+        if action.get("action_type") == "__consistency_warning__":
+            # diagnostic-only signal from the recorder's own JS-side
+            # badge/counter consistency check (see checkForMissedClick in
+            # action_capture.js) - printed straight to the terminal so
+            # whoever is recording notices it live, never appended to
+            # self.actions (it isn't a user action, and never changes
+            # what actually gets recorded)
+            print(
+                f"\nWarning: {action.get('message')} (page_id={page_id})\n",
+                flush=True,
+            )
+            logger.warning("consistency check: %s (page_id=%s)", action.get("message"), page_id)
+            return
+
         # a real action arriving on a page we didn't think was active is
         # itself proof the user is now on it - a real action can only
         # happen on the page the user is actually looking at. This is a
@@ -279,6 +392,177 @@ class Recorder:
 
         if state is not None and action.get("action_type") in ("click", "dblclick", "right_click"):
             state.last_click_ts = time.time()
+
+        # the field-presence path (multi-field signup/details forms) is a
+        # deliberately separate, later check - it only runs when the
+        # single search-field path above found nothing to insert, so the
+        # two never fire for the same trigger
+        self._maybe_auto_insert_validate()
+
+    def _maybe_auto_insert_validate(self):
+        """Automatically appends a 'validate' action right after a
+        search-type action completes - no manual marking, inferred purely
+        from the pattern of what was already recorded. The general,
+        site-agnostic case: a fill on a field that looks like a search box
+        (see _looks_search_like), immediately followed by either an Enter
+        press or a click (the two ways a search actually gets submitted on
+        any site) - the exact text that was typed becomes the expected
+        text to confirm on whatever page that search produces. Purely
+        additive: only ever appends one more action after the fact, never
+        alters the fill or the press/click actions that triggered it.
+        """
+        if len(self.actions) < 2:
+            return
+        trigger = self.actions[-1]
+        prior = self.actions[-2]
+
+        if prior.get("action_type") == "fill":
+            search_fill = prior
+        elif (
+            prior.get("action_type") == "click"
+            and len(self.actions) >= 3
+            and self.actions[-3].get("action_type") == "fill"
+            and _same_locator(prior.get("locator_profile"), self.actions[-3].get("locator_profile"))
+        ):
+            # the double-click disambiguation hold in action_capture.js
+            # can briefly buffer a click before sending it, so the fill's
+            # own field getting (re-)clicked - the ordinary focus click
+            # that started the whole interaction - can arrive a step LATE
+            # and land between the fill and its real trigger. That's not
+            # a second, unrelated action - it's the same field being
+            # clicked again - so look one step further back to the fill
+            # it actually belongs beside.
+            search_fill = self.actions[-3]
+        else:
+            return
+
+        if not search_fill.get("value"):
+            return
+        if not _looks_search_like(search_fill.get("locator_profile")):
+            return
+
+        is_enter_press = (
+            trigger.get("action_type") == "press" and trigger.get("value") == "Enter"
+        )
+        is_submit_click = (
+            trigger.get("action_type") in ("click", "dblclick")
+            # a click on the SAME field the fill just targeted is that
+            # same buffered focus-click artifact, not a submit action -
+            # only a click on something ELSE counts as "submitting" it
+            and not _same_locator(trigger.get("locator_profile"), search_fill.get("locator_profile"))
+        )
+        # a submit-type click's OWN click action can genuinely arrive
+        # AFTER the browser's native 'submit' event does - every click
+        # goes through the double-click-disambiguation hold (up to
+        # DBLCLICK_WINDOW_MS) before it's sent, while 'submit' has no
+        # such hold and sends immediately, so on a real form (any site
+        # using an actual <form>, not just Amazon) the 'submit' action
+        # commonly lands at Python first even though the click that
+        # triggered it happened first in real life. The form's own
+        # submit event is just as solid a "this search was submitted"
+        # signal as the click that caused it - accepting it directly
+        # here means the LATER, out-of-order arrival of that same click
+        # (already handled by the "same field re-clicked" skip-back
+        # above, and harmless here since validate no longer being
+        # self.actions[-1] just makes it a no-op) never has to be waited
+        # for. stop()'s own timestamp-based re-sort (each action's
+        # timestamp is captured at the true moment it happened, not when
+        # it was actually sent) places this validate correctly relative
+        # to both, regardless of arrival order.
+        is_form_submit = trigger.get("action_type") == "submit"
+        if not (is_enter_press or is_submit_click or is_form_submit):
+            return
+
+        validate_action = {
+            "action_type": "validate",
+            "value": search_fill.get("value"),
+            "locator_profile": None,
+            "bounding_box": None,
+            "page_url": trigger.get("page_url"),
+            "timestamp": _utc_timestamp(),
+            "page_id": trigger.get("page_id", search_fill.get("page_id", 0)),
+        }
+        self.actions.append(validate_action)
+        _print_action_line(validate_action)
+
+    def _maybe_auto_insert_field_presence_validate(self):
+        """Additive sibling to _maybe_auto_insert_validate, for a
+        different pattern: a signup/details-style form with MULTIPLE
+        distinct fields filled before one submit - as opposed to the
+        single search-box case handled above (which returns before this
+        is ever reached, since _on_action only calls this when that path
+        didn't insert anything). One 'validate' action, tagged
+        check_mode: "field_presence", is appended per distinct,
+        non-sensitive field filled since the last navigation (or since
+        recording started) - each checked at replay time as plain text
+        presence on whatever page results, unlike the single search-box
+        case, which checks the fill's value against a repeating list of
+        results.
+        """
+        if not self.actions:
+            return
+        trigger = self.actions[-1]
+
+        is_enter_press = (
+            trigger.get("action_type") == "press" and trigger.get("value") == "Enter"
+        )
+        is_click_trigger = trigger.get("action_type") in ("click", "dblclick")
+        is_form_submit = trigger.get("action_type") == "submit"
+        if not (is_enter_press or is_click_trigger or is_form_submit):
+            return
+
+        # walk back to (but not past) the last navigation, collecting
+        # every distinct field filled since then - last fill per field
+        # wins, same as a user editing a field twice before submitting
+        fields = []
+        seen_locators = []
+        for action in reversed(self.actions[:-1]):
+            if action.get("action_type") == "navigate":
+                break
+            if action.get("action_type") != "fill":
+                continue
+            lp = action.get("locator_profile")
+            if any(_same_locator(lp, seen) for seen in seen_locators):
+                continue
+            seen_locators.append(lp)
+            fields.append(action)
+        fields.reverse()
+
+        if is_click_trigger and any(
+            _same_locator(trigger.get("locator_profile"), f.get("locator_profile"))
+            for f in fields
+        ):
+            # same buffered focus-click artifact _maybe_auto_insert_validate
+            # already accounts for above - a click back onto one of the
+            # fields itself, not a submit
+            return
+
+        # the "multiple distinct filled fields" entry condition is checked
+        # against ALL fields filled (this is what tells a signup-style
+        # form apart from the single search-box case) - sensitive fields
+        # are only filtered out afterward, from what actually gets a
+        # validate inserted, so a 2-field form (e.g. email + password)
+        # still qualifies and still validates the one non-sensitive field
+        if len(fields) < 2:
+            return
+
+        fields_to_validate = [
+            f for f in fields
+            if f.get("value") and not _is_sensitive_field(f.get("locator_profile"))
+        ]
+        for field in fields_to_validate:
+            validate_action = {
+                "action_type": "validate",
+                "value": field.get("value"),
+                "locator_profile": None,
+                "bounding_box": None,
+                "page_url": trigger.get("page_url"),
+                "timestamp": _utc_timestamp(),
+                "page_id": trigger.get("page_id", field.get("page_id", 0)),
+                "check_mode": "field_presence",
+            }
+            self.actions.append(validate_action)
+            _print_action_line(validate_action)
 
     def _ensure_active(self, page_id, ts):
         """Makes page_id the active page, recording a tab_switch action
@@ -408,15 +692,47 @@ class Recorder:
         ts = _utc_timestamp()
 
         if state.nav_timer is not None:
-            # already mid-chain (a redirect that followed an earlier one
-            # within the settle window) - just update which URL/timestamp
-            # we'll eventually commit (this later hop is the real moment
-            # the FINAL url below became current), don't snapshot the
-            # click time again
-            state.nav_timer.cancel()
-        else:
-            # first hop of a possible chain - remember whether a click/
-            # submit just happened, checked once the chain finally settles
+            # a hop arriving on the heels of the previous one (well within
+            # NAV_DEDUP_WINDOW - the same threshold already used elsewhere
+            # in this file to tell "just happened" apart from "unrelated")
+            # is a genuine technical redirect chain still unwinding -
+            # collapse it as before. A hop arriving after a REAL gap is
+            # different: the user actually did something on the page the
+            # previous hop landed on for a meaningful stretch of time (any
+            # site: scrolled a product page, read an article, filled part
+            # of a form) before navigating again - even if this new hop
+            # happens to land back on the exact same URL the chain started
+            # from, that intermediate page was a real, distinct state the
+            # user genuinely visited, not a transient redirect artifact.
+            # Committing the pending hop right now, instead of letting it
+            # keep getting silently overwritten, is what stops "went to a
+            # product page, looked at it, came back" from vanishing
+            # entirely just because the round trip ends up at its own
+            # starting URL - the exact same-URL check in
+            # _commit_pending_navigate below is only meant to catch a
+            # chain that never really went anywhere, not a real visit
+            # that happened to return.
+            prev_ts = _parse_ts(state.pending_nav_ts)
+            now_dt = _parse_ts(ts)
+            gap = (now_dt - prev_ts).total_seconds() if (prev_ts and now_dt) else 0.0
+            if gap > NAV_DEDUP_WINDOW:
+                state.nav_timer.cancel()
+                state.nav_timer = None
+                self._commit_pending_navigate(page_id)
+            else:
+                # already mid-chain (a redirect that followed an earlier
+                # one within the settle window) - just update which URL/
+                # timestamp we'll eventually commit (this later hop is the
+                # real moment the FINAL url below became current), don't
+                # snapshot the click time again
+                state.nav_timer.cancel()
+
+        if state.nav_timer is None:
+            # first hop of a possible chain (either genuinely the first
+            # navigation on this page, or the fresh start right after
+            # committing an earlier, genuinely-separate pending hop above)
+            # - remember whether a click/submit just happened, checked
+            # once THIS chain finally settles
             state.nav_chain_click_ts = state.last_click_ts
 
         state.pending_nav_url = url
@@ -441,7 +757,36 @@ class Recorder:
             return
         state.last_nav_url = url
 
-        if state.nav_chain_click_ts is not None and time.time() - state.nav_chain_click_ts < NAV_DEDUP_WINDOW:
+        # BUG: "was this navigate caused by the click" must be judged
+        # against the ACTUAL event-time gap between the click and the
+        # navigate (ts, captured synchronously in _on_navigate above) -
+        # not time.time() read fresh here, at COMMIT time. Commit is
+        # deliberately delayed (the NAV_SETTLE_WINDOW timer, so a redirect
+        # chain can unwind first - see _on_navigate's own docstring), and
+        # can also fire EARLY the moment a later, genuinely-separate hop
+        # arrives (the gap > NAV_DEDUP_WINDOW branch above). Either way,
+        # how much wall-clock time has passed by the moment this function
+        # happens to run is scheduling jitter, not a signal about the
+        # user's real actions - yet it was the ONLY thing this comparison
+        # looked at. A click that opens a fragment-only modal (".../cart"
+        # -> ".../cart#modal") 26-130ms later is exactly the kind of
+        # navigate downstream replay depends on seeing recorded (see
+        # generator/script_generator.py's whole click-then-navigate-to-
+        # modal verification path) - the SAME click-then-hash-navigate
+        # pattern was silently, non-deterministically dropped from a
+        # recording purely because this happened to run a bit sooner or
+        # later than another otherwise-unrelated recorded action, never
+        # because the navigate itself arrived any differently. Comparing
+        # against the navigate's own recorded timestamp instead makes the
+        # decision depend only on the real gap between the click and the
+        # navigate - deterministic, and independent of when Python
+        # happens to get around to committing it.
+        _nav_dt = _parse_ts(ts)
+        _elapsed_since_click = (
+            _nav_dt.timestamp() - state.nav_chain_click_ts if _nav_dt is not None
+            else time.time() - state.nav_chain_click_ts
+        )
+        if state.nav_chain_click_ts is not None and _elapsed_since_click < NAV_DEDUP_WINDOW:
             # the whole redirect chain was caused by the click/submit step
             # already recorded - nothing new to add
             return
@@ -484,6 +829,22 @@ class Recorder:
         page.add_init_script(_CAPTURE_JS)
         page.on("framenavigated", lambda frame, pid=page_id: self._on_navigate(pid, frame))
         page.on("close", lambda closed_page, pid=page_id: self._on_page_closed(pid))
+
+        # TEMPORARY diagnostic relay (see _RECORDER_DEBUG above) - the
+        # page-side instrumentation logs via console.log with a
+        # distinctive "[recorder-debug]" prefix specifically so this can
+        # forward ONLY those lines to the terminal, not a busy site's own
+        # unrelated console noise. A no-op registration when the flag is
+        # off, so this never affects a normal recording either way.
+        if _RECORDER_DEBUG:
+            def _relay_debug_console(msg, pid=page_id):
+                try:
+                    text = msg.text
+                except Exception:
+                    return
+                if text.startswith("[recorder-debug]"):
+                    print(text, flush=True)
+            page.on("console", _relay_debug_console)
 
         try:
             page.evaluate(_CAPTURE_JS)
@@ -575,6 +936,28 @@ class Recorder:
         ordered_actions = sorted(self.actions, key=lambda a: a.get("timestamp") or "")
         _add_delays(ordered_actions)
 
+        # CONFIRMED REAL BUG this fixes: replay used to force a hardcoded
+        # 900px-tall viewport regardless of what the recording actually
+        # used - a scroll action's own recorded target (scroll_y_after)
+        # is only ever reachable at replay time when the page's real
+        # scrollable range (document_height - viewport_height) matches
+        # what it was at record time. A live screen recording showed
+        # genuinely-working scrolls on Sportzia reported as FAILED
+        # ("scroll did not reach target position") purely because the
+        # recorded viewport (608-640px tall, this specific machine's own
+        # real browser window at record time) didn't match replay's
+        # fixed 900px one - verified directly via page.viewport_size/
+        # window.innerHeight on both a headed and a headless replay
+        # launch, both reading 900 regardless of what was recorded.
+        # Optional field - an old recording made before this existed
+        # simply doesn't have it, and replay falls back to Playwright's
+        # own default (1280x720) exactly as if this had never been
+        # added; nothing about the old JSON schema changes.
+        try:
+            viewport = self.page.viewport_size
+        except Exception:
+            viewport = None
+
         test_case = {
             "name": name,
             "session_id": self.session_id,
@@ -583,6 +966,8 @@ class Recorder:
             "stop_reason": stop_reason,
             "total_actions": len(ordered_actions),
             "page_count": len(self._page_states),
+            "viewport_width": (viewport or {}).get("width"),
+            "viewport_height": (viewport or {}).get("height"),
             "actions": ordered_actions,
         }
         logger.info(

@@ -19,6 +19,7 @@ import json
 import logging
 import subprocess
 import sys
+import threading
 from datetime import datetime
 from pathlib import Path
 
@@ -29,6 +30,51 @@ from validation import compare
 logger = logging.getLogger(__name__)
 
 SCRIPT_TIMEOUT_SEC = 120
+
+# Dynamic per-run timeout: a fixed ceiling only ever fits SOME session
+# lengths - a 10-action session wastes most of it as dead air if
+# something actually hangs, while a genuinely long, 50+ action session
+# can get killed mid-way through legitimate work. Both constants below
+# are pulled from timeouts this project ALREADY uses elsewhere, not
+# invented:
+#   - BASELINE_OVERHEAD_SEC mirrors the exact "page load timeout + 10s
+#     buffer" pattern app.py's own recording-launch readiness wait
+#     already uses (PAGE_LOAD_TIMEOUT/1000 + 10) - the same real-world
+#     cost this replay subprocess pays once, up front, for the browser
+#     to launch and its first page to load.
+#   - SECONDS_PER_STEP matches generator/script_generator.py's own
+#     page.goto(..., timeout=30000) - the single slowest per-operation
+#     timeout already used anywhere in the generated script, i.e. the
+#     worst-case cost a single recorded step (a navigation) can
+#     legitimately take. Most steps (a click, a fill) finish in a
+#     fraction of this; it's a ceiling per step, not an expected
+#     average, so real runs finish well under the total budget.
+BASELINE_OVERHEAD_SEC = 40
+SECONDS_PER_STEP = 30
+# Sane outer ceiling so a truly hung process still terminates instead
+# of blocking forever. 30 minutes comfortably covers a session of ~55
+# actions even if EVERY single one hit the worst-case per-step cost
+# above (55 * 30s + 40s overhead ~= 1750s) - realistically far more
+# steps than that finish inside this window, since most steps cost a
+# small fraction of the per-step ceiling.
+MAX_TIMEOUT_SEC = 1800
+
+
+def _compute_script_timeout(action_count):
+    """Derives the subprocess timeout from the session's own real
+    action count instead of sharing one fixed ceiling across every
+    session length. Never returns LESS than the original fixed
+    SCRIPT_TIMEOUT_SEC, so a short session's timeout budget can only
+    ever grow relative to before this change, never shrink - existing
+    short-session behavior/speed is unaffected, only long sessions get
+    the extra headroom they actually need. Falls back to the original
+    fixed constant entirely when no action count is available (an
+    unmodified/legacy call site), rather than guessing.
+    """
+    if not action_count or action_count <= 0:
+        return SCRIPT_TIMEOUT_SEC
+    scaled = BASELINE_OVERHEAD_SEC + SECONDS_PER_STEP * action_count
+    return min(MAX_TIMEOUT_SEC, max(SCRIPT_TIMEOUT_SEC, scaled))
 
 
 def _slug(text, max_len=40):
@@ -48,6 +94,7 @@ def _fail_result(qa_url, run_id, message, run_dir=None):
     return {
         "status": "FAIL",
         "message": message,
+        "diagnostic": None,
         "qa_url": qa_url,
         "steps": [],
         "ui_elements": [],
@@ -101,36 +148,49 @@ def _build_ui_elements(steps):
     return ui_elements
 
 
-def execute_test(qa_url, script_path, expected_content=None, expected_screenshot=None, product_to_verify=None, recording_name=None):
-    qa_url = normalize_url(qa_url)
-    script_path = Path(script_path)
-    # one dedicated folder for EVERYTHING this run produces - the
-    # sequential img1.png, img2.png, ... screenshots (including product-
-    # validation's own capture) and the report data below - instead of
-    # each kind of output picking its own top-level location. Single
-    # top-level screenshots/<name>_<timestamp>/ folder at the project
-    # root, same naming convention the generated script's own run() uses
-    # for its script-relative fallback when executed directly.
+def _prepare_run(script_path, recording_name):
+    """Shared by execute_test() and the async start_replay() below: picks
+    the one dedicated output folder for a run (see the docstring that used
+    to live here - still exactly the same generated_scripts/screenshoots/
+    <name>_<timestamp>/ convention, same parent the generated script's own
+    run() falls back to when executed directly) and the report.json path
+    inside it. No behavior here - just the naming/folder decision both
+    call sites need identically.
+    """
     run_id = f"{_slug(recording_name or script_path.stem) or 'run'}_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
-    run_dir = BASE_DIR / "screenshots" / run_id
+    run_dir = BASE_DIR / "generated_scripts" / "screenshoots" / run_id
     run_dir.mkdir(parents=True, exist_ok=True)
     output_json = run_dir / "report.json"
+    return run_id, run_dir, output_json
 
-    # "1" = headless - this is an unattended dashboard-triggered run, not
-    # someone watching a terminal, so no visible browser should pop up.
-    # (Running the generated script by hand defaults to headed instead -
-    # see the script's own __main__ block.) The optional 5th arg is the
+
+def _build_command(script_path, qa_url, output_json, run_dir, product_to_verify):
+    # "0" = headed (visible) - dashboard-triggered Replay should open a
+    # real browser window so the user can watch it run, matching how a
+    # manually-run script behaves by default. The optional 5th arg is the
     # product name - the script validates it on whatever page the recorded
     # actions ended on, in this SAME process, not a second session here.
-    cmd = [sys.executable, str(script_path), qa_url, str(output_json), str(run_dir), "1", product_to_verify or ""]
-    try:
-        proc = subprocess.run(cmd, capture_output=True, text=True, timeout=SCRIPT_TIMEOUT_SEC)
-    except subprocess.TimeoutExpired:
-        logger.error("generated script timed out after %ds", SCRIPT_TIMEOUT_SEC)
-        return _fail_result(qa_url, run_id, "test run took too long and was stopped", run_dir)
+    venv_python = BASE_DIR / "venv" / "Scripts" / "python.exe"
+    python_executable = str(venv_python) if venv_python.exists() else sys.executable
+    return [python_executable, str(script_path), qa_url, str(output_json), str(run_dir), "0", product_to_verify or ""]
 
+
+def _finalize_result(qa_url, run_id, run_dir, output_json, expected_content, expected_screenshot, product_to_verify, proc_returncode=None, proc_stderr="", screenshot_options=None):
+    """Everything execute_test() used to do AFTER the subprocess finished -
+    read back the generated script's raw report.json and layer content/
+    screenshot/UI-element/product validation on top of it. Shared as-is by
+    both execute_test() (blocking) and the async start_replay()/
+    poll_replay() pair below, so there is exactly one place that
+    interprets a finished run's report.json, same as there's exactly one
+    replay implementation.
+
+    screenshot_options is an optional dict forwarded as keyword args to
+    compare.compare_screenshots() - threshold/ignored_regions/strict (see
+    that module for what each does). None (the default) means "use that
+    module's own defaults", same behavior as before these existed.
+    """
     if not output_json.exists():
-        logger.error("generated script produced no result (exit %s): %s", proc.returncode, proc.stderr[-2000:])
+        logger.error("generated script produced no result (exit %s): %s", proc_returncode, (proc_stderr or "")[-2000:])
         return _fail_result(qa_url, run_id, "the test script didn't complete - couldn't reach the QA URL or it crashed", run_dir)
 
     try:
@@ -153,7 +213,7 @@ def execute_test(qa_url, script_path, expected_content=None, expected_screenshot
         content_ok = expected_content.strip().lower() in final_text.lower()
 
     final_screenshot_rel = _to_repo_relative(raw.get("final_screenshot"))
-    diff_result = compare.compare_screenshots(expected_screenshot, final_screenshot_rel)
+    diff_result = compare.compare_screenshots(expected_screenshot, final_screenshot_rel, **(screenshot_options or {}))
 
     # the script already validated the product (if one was requested) on
     # the same page its recorded actions left it on - just read that back
@@ -162,15 +222,35 @@ def execute_test(qa_url, script_path, expected_content=None, expected_screenshot
         product_result["screenshot"] = _to_repo_relative(product_result["screenshot"])
 
     steps_ok = all(s["success"] for s in steps) if steps else True
+
+    # A script that failed before ever attempting a step (couldn't launch
+    # the browser, or couldn't reach the QA URL) reports FAIL with an
+    # EMPTY steps list. Left alone, every check above trivially passes on
+    # an empty list ("nothing failed" reads as "nothing to report"),
+    # which would misreport a run that never even started as a full PASS
+    # - exactly backwards. A real recording with zero recorded actions
+    # also produces an empty steps list, but the script itself reports
+    # THAT as PASS (there was genuinely nothing to fail), so this only
+    # fires when the script's own raw status disagrees.
+    setup_failed = not steps and raw.get("status") == "FAIL"
+
     overall_pass = (
         steps_ok
         and ui_status == "PASS"
         and content_ok is not False
         and not (diff_result and diff_result.get("match") is False)
         and (product_result is None or product_result.get("found") is True)
+        and not setup_failed
     )
 
     message_parts = []
+    if setup_failed:
+        # already a clean, user-facing sentence (see run()'s own
+        # "Couldn't start the browser..."/"Couldn't reach {qa_url}..."
+        # messages) - the raw technical detail lives in raw["diagnostic"]
+        # instead, carried into final_result below for advanced
+        # diagnostics rather than shown here.
+        message_parts.append(raw.get("message") or "the test couldn't get started")
     if not steps_ok:
         failed = [s["index"] for s in steps if not s["success"]]
         message_parts.append(f"steps failed: {failed}")
@@ -189,6 +269,7 @@ def execute_test(qa_url, script_path, expected_content=None, expected_screenshot
     final_result = {
         "status": "PASS" if overall_pass else "FAIL",
         "message": "; ".join(message_parts),
+        "diagnostic": raw.get("diagnostic"),
         "qa_url": qa_url,
         "steps": steps,
         "ui_elements": ui_elements,
@@ -213,4 +294,159 @@ def execute_test(qa_url, script_path, expected_content=None, expected_screenshot
     except OSError as e:
         logger.warning("couldn't write consolidated report.json: %s", e)
 
+    try:
+        for child in sorted(run_dir.rglob("*"), key=lambda p: len(p.parts), reverse=True):
+            if child.is_dir() and not any(child.iterdir()):
+                try:
+                    child.rmdir()
+                except OSError:
+                    pass
+    except OSError:
+        pass
+
     return final_result
+
+
+def execute_test(qa_url, script_path, expected_content=None, expected_screenshot=None, product_to_verify=None, recording_name=None, action_count=None, screenshot_options=None):
+    qa_url = normalize_url(qa_url)
+    script_path = Path(script_path)
+    script_timeout_sec = _compute_script_timeout(action_count)
+    run_id, run_dir, output_json = _prepare_run(script_path, recording_name)
+    cmd = _build_command(script_path, qa_url, output_json, run_dir, product_to_verify)
+
+    try:
+        proc = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=script_timeout_sec)
+    except subprocess.TimeoutExpired:
+        logger.error("generated script timed out after %ds", script_timeout_sec)
+        return _fail_result(qa_url, run_id, "test run took too long and was stopped", run_dir)
+
+    return _finalize_result(
+        qa_url, run_id, run_dir, output_json,
+        expected_content, expected_screenshot, product_to_verify,
+        proc_returncode=proc.returncode, proc_stderr=proc.stderr,
+        screenshot_options=screenshot_options,
+    )
+
+
+# ============================================================
+# ASYNC REPLAY - same engine, same _finalize_result() as execute_test()
+# above; the only difference is HOW the subprocess is waited on. This
+# exists purely to power the dashboard's Live Replay Progress (see
+# app.py's /api/test/run/start and /api/test/run/progress): a blocking
+# call can't report "step 3 of 12" while it's still blocked. Popen here
+# instead of subprocess.run so the calling thread can return immediately;
+# a dedicated watcher thread per run then waits for it to exit and calls
+# the exact same _finalize_result() execute_test() already uses - no
+# second interpretation of a report.json, no second replay engine.
+#
+# The generated script itself already writes its own report.json
+# incrementally, once per completed step (see run()'s per-step
+# _write_result() calls in generator/script_generator.py) - this registry
+# doesn't need to track step-by-step progress itself, it only needs to
+# know WHERE that file is and whether the process has finished yet;
+# poll_replay() just reads whatever the script has written so far.
+# ============================================================
+
+_active_replays = {}
+_active_replays_lock = threading.Lock()
+
+
+def _watch_replay(run_id, proc, script_timeout_sec, qa_url, run_dir, output_json, expected_content, expected_screenshot, product_to_verify, screenshot_options=None):
+    try:
+        _, stderr = proc.communicate(timeout=script_timeout_sec)
+    except subprocess.TimeoutExpired:
+        try:
+            proc.kill()
+            proc.communicate()
+        except Exception:
+            pass
+        logger.error("generated script timed out after %ds", script_timeout_sec)
+        result = _fail_result(qa_url, run_id, "test run took too long and was stopped", run_dir)
+        with _active_replays_lock:
+            entry = _active_replays.get(run_id)
+            if entry is not None:
+                entry["done"] = True
+                entry["result"] = result
+        return
+
+    result = _finalize_result(
+        qa_url, run_id, run_dir, output_json,
+        expected_content, expected_screenshot, product_to_verify,
+        proc_returncode=proc.returncode, proc_stderr=stderr,
+        screenshot_options=screenshot_options,
+    )
+
+    with _active_replays_lock:
+        entry = _active_replays.get(run_id)
+        if entry is not None:
+            entry["done"] = True
+            entry["result"] = result
+
+
+def start_replay(qa_url, script_path, expected_content=None, expected_screenshot=None, product_to_verify=None, recording_name=None, action_count=None, screenshot_options=None):
+    """Starts a replay the same way execute_test() does, but returns as
+    soon as the subprocess is launched instead of blocking until it
+    finishes. Returns (run_id, run_dir_repo_relative, total_steps_hint)
+    - total_steps_hint is None until the script itself writes it into
+    report.json (see run()'s own `result["total_steps"] = total_steps`),
+    which poll_replay() picks up from there.
+    """
+    qa_url = normalize_url(qa_url)
+    script_path = Path(script_path)
+    script_timeout_sec = _compute_script_timeout(action_count)
+    run_id, run_dir, output_json = _prepare_run(script_path, recording_name)
+    cmd = _build_command(script_path, qa_url, output_json, run_dir, product_to_verify)
+
+    proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, encoding="utf-8", errors="replace")
+
+    with _active_replays_lock:
+        _active_replays[run_id] = {"done": False, "result": None, "run_dir": run_dir, "output_json": output_json}
+
+    watcher = threading.Thread(
+        target=_watch_replay,
+        args=(run_id, proc, script_timeout_sec, qa_url, run_dir, output_json, expected_content, expected_screenshot, product_to_verify),
+        kwargs={"screenshot_options": screenshot_options},
+        daemon=True,
+    )
+    watcher.start()
+
+    return run_id, _to_repo_relative(str(run_dir))
+
+
+def poll_replay(run_id):
+    """Read-only: reports how far a start_replay() run has gotten. While
+    still running, reads report.json directly (best-effort - the file may
+    not exist yet, or be mid-write) for the step list the script has
+    written so far; once the watcher thread has finalized the run, returns
+    the exact same enriched result execute_test() would have returned.
+
+    Returns None if run_id is unknown (never started, or this process
+    restarted since - in-memory only, same lifetime tradeoff the existing
+    recording-session state in app.py already accepts).
+    """
+    with _active_replays_lock:
+        entry = _active_replays.get(run_id)
+
+    if entry is None:
+        return None
+
+    if entry["done"]:
+        return {"done": True, "result": entry["result"]}
+
+    steps = []
+    total_steps = None
+    try:
+        raw = json.loads(entry["output_json"].read_text(encoding="utf-8"))
+        steps = raw.get("steps", [])
+        total_steps = raw.get("total_steps")
+    except (OSError, json.JSONDecodeError):
+        # not written yet, or caught mid-write (a partial JSON parse
+        # failure here just means "nothing new to report this poll" -
+        # the next poll a moment later reads the completed write)
+        pass
+
+    return {
+        "done": False,
+        "steps": steps,
+        "total_steps": total_steps,
+    }

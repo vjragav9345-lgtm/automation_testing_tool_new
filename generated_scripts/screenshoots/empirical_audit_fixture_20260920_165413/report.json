@@ -1,0 +1,15 @@
+{
+  "status": "FAIL",
+  "message": "Couldn't reach http://127.0.0.1:8899/page1.html - check the URL is correct and the site is reachable.",
+  "diagnostic": "could not open QA URL: Page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:8899/page1.html\nCall log:\nnavigating to \"http://127.0.0.1:8899/page1.html\", waiting until \"domcontentloaded\"\n",
+  "qa_url": "http://127.0.0.1:8899/page1.html",
+  "steps": [],
+  "ui_elements": [],
+  "ui_elements_status": "PASS",
+  "content_check": null,
+  "screenshot_diff": null,
+  "product_validation": null,
+  "final_screenshot": null,
+  "run_id": "empirical_audit_fixture_20260920_165413",
+  "run_dir": "generated_scripts/screenshoots/empirical_audit_fixture_20260920_165413"
+}
