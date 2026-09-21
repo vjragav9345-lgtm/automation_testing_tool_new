@@ -404,7 +404,20 @@
         }
     }
 
-    function xPath(el, labelText) {
+    function xPath(el, labelText, excludeText) {
+        // R2 (never anchor a locator on the value a fill action just
+        // typed) - excludeText, when given, is that exact typed value.
+        // CONFIRMED REAL BUG this fixes: session_20260921_081203's own
+        // OTP fill step recorded //div[normalize-space(.)='1234']/input
+        // - a wrapping div's rendered text happened to read "1234"
+        // (an OTP widget's own visible per-digit boxes, kept in sync
+        // with the real input) purely because that's what was just
+        // typed, so a real OTP run - always different digits - can
+        // never match it again. Declared once here, at the top of
+        // xPath's own scope, so every nested tier below (attrTextTiers'
+        // own text-candidate loop especially) sees it via closure
+        // without threading it through as an extra argument everywhere.
+        var _excludeText = (typeof excludeText === 'string') ? excludeText.trim() : '';
         // shape checks for an auto-generated/reused-per-render VALUE
         // (an id or a data-testid/data-test/data-cy alike) - moved
         // ahead of tier 0 so both it and tier 1 below can defer to
@@ -675,6 +688,7 @@
                     var txt = textCandidates[t].text;
                     var axis = textCandidates[t].axis;
                     if (txt.length === 0 || txt.length > MAX_TEXT_LEN) continue;
+                    if (_excludeText && txt === _excludeText) continue;
                     // EXACT match tried first, before contains() - a
                     // short value ("M", "2", "L") is a substring of all
                     // kinds of unrelated real text ("Men", "Home",
@@ -962,7 +976,7 @@
         // SEMANTIC_WALK_MAX_DEPTH bounds the interactive-ancestor
         // walk elsewhere in this file - real-world headroom, never an
         // unbounded walk to <body>.
-        if (typeof labelText === 'string' && labelText.trim() !== '') {
+        if (typeof labelText === 'string' && labelText.trim() !== '' && labelText.trim() !== _excludeText) {
             var TIER6B_MAX_DEPTH = 8;
             try {
                 var textLiteral = xpathLiteral(labelText.trim());
@@ -1296,22 +1310,68 @@
         return el;
     }
 
+    // strips private-use-area icon-font codepoints (U+E000-U+F8FF) - a
+    // FontAwesome/Material/etc icon font renders its glyphs at these
+    // codepoints, so an element's rendered "text" can be a meaningless
+    // PUA character (or, per a CONFIRMED real recording, a spinner glyph
+    // that transiently replaces a button's real label - see the
+    // _preClickSnapshot comment above) rather than anything a human or a
+    // future replay run could recognize. Mirrors
+    // generator/script_generator.py's own _strip_icon_font_text exactly,
+    // so recording-time and replay-time agree on what counts as "real"
+    // text. Never used to REJECT an element, only to keep its glyph out
+    // of locator/label text; icon_class_hint (see iconClassHint below)
+    // is the separate, additive fallback for icon-only elements.
+    var _ICON_FONT_PUA_RE = /[-]/g;
+    function _stripIconFontText(s) {
+        if (!s) return '';
+        return String(s).replace(_ICON_FONT_PUA_RE, '').trim();
+    }
+
+    // an <input>/<textarea>'s OWN .value is the right thing to read as
+    // its "text" only when that value is an author-set static label
+    // (type=submit/button/reset/image - the same handful of types where
+    // the DOM itself treats .value as display text, not user data);
+    // for every other type, .value is whatever the USER (or this very
+    // action) just typed, which must never be baked into a locator -
+    // CONFIRMED REAL: 081203's own OTP fill step recorded
+    // //div[normalize-space(.)='1234']/input, anchored on the digits
+    // just filled into that exact input, which cannot match any run
+    // that ever fills a different value into the same field.
+    function _isUserEditableValueField(el) {
+        if (!el || !el.tagName) return false;
+        if (el.tagName === 'TEXTAREA') return true;
+        if (el.tagName === 'INPUT') {
+            var t = (el.type || 'text').toLowerCase();
+            return ['button', 'submit', 'reset', 'image', 'checkbox', 'radio'].indexOf(t) === -1;
+        }
+        return false;
+    }
+
     // best-effort accessible name, checked in roughly the priority order
     // browsers/screen readers use - generic, no site knowledge required
     function accessibleName(el) {
-        var ariaLabel = el.getAttribute('aria-label');
-        if (ariaLabel && ariaLabel.trim()) return ariaLabel.trim();
+        var ariaLabel = _stripIconFontText(el.getAttribute('aria-label'));
+        if (ariaLabel) return ariaLabel;
         var labelledby = el.getAttribute('aria-labelledby');
         if (labelledby) {
             var txt = labelledby.split(/\s+/).map(function (id) {
                 var ref = document.getElementById(id);
                 return ref ? (ref.innerText || ref.textContent || '') : '';
             }).join(' ').trim();
+            txt = _stripIconFontText(txt);
             if (txt) return txt;
         }
-        if (el.tagName === 'IMG' && el.alt && el.alt.trim()) return el.alt.trim();
-        if ((el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') && el.placeholder) return el.placeholder.trim();
-        return (el.innerText || el.value || '').trim().slice(0, 80);
+        if (el.tagName === 'IMG') {
+            var alt = _stripIconFontText(el.alt);
+            if (alt) return alt;
+        }
+        if ((el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') && el.placeholder) {
+            var ph = _stripIconFontText(el.placeholder);
+            if (ph) return ph;
+        }
+        var ownText = el.innerText || (_isUserEditableValueField(el) ? '' : el.value) || '';
+        return _stripIconFontText(ownText.trim().slice(0, 80));
     }
 
     // used by findCheckboxTarget's ancestor search below - a genuine
@@ -1646,7 +1706,12 @@
     // own checkbox handling, see getCheckboxAccessibleName) supply it
     // directly instead of recomputing via accessibleName(el); omitted
     // (undefined) means "compute it normally for this element".
-    function buildLocatorProfile(el, accNameOverride) {
+    // valueToExclude (optional, R2): the exact value a fill action just
+    // typed into el - passed through to xPath() so no text tier can
+    // anchor a locator on it (see xPath's own comment on excludeText).
+    // Never set for click-family/checkbox callers, which have no typed
+    // value to exclude in the first place.
+    function buildLocatorProfile(el, accNameOverride, valueToExclude) {
         const attrs = {};
         for (const a of el.attributes || []) {
             if (STRONG_ATTRS.includes(a.name)) {
@@ -1654,7 +1719,9 @@
             }
         }
         const accName = (accNameOverride !== undefined) ? accNameOverride : accessibleName(el);
-        const elementText = (el.innerText || el.value || '').trim().slice(0, 80);
+        const elementText = _stripIconFontText(
+            (el.innerText || (_isUserEditableValueField(el) ? '' : el.value) || '').trim().slice(0, 80)
+        );
         const finalText = accName || elementText;
         // true for an element inside an open shadow root OR a same-
         // origin iframe (its ownerDocument differs from the top-level
@@ -1682,7 +1749,7 @@
             title: el.getAttribute ? (el.getAttribute('title') || null) : null,
             href: (el.tagName === 'A' && el.hasAttribute('href')) ? el.getAttribute('href') : null,
             css_path: cssPath(el),
-            xpath: xPath(el, finalText),
+            xpath: xPath(el, finalText, valueToExclude),
             text: finalText,
             element_text: elementText || accName,
             tag: el.tagName.toLowerCase(),
@@ -1726,7 +1793,16 @@
     }
 
     function buildProfile(rawEl, actionType, value) {
-        var checkboxTarget = (actionType === 'click') ? findCheckboxTarget(rawEl) : null;
+        // PRE-CLICK SNAPSHOT reuse (see its own comment above, next to
+        // the mousedown listener that builds it) - only ever applies to
+        // a real 'click' whose mousedown was captured on this EXACT raw
+        // element; anything else (fill/select/no snapshot/a different
+        // element) falls straight through to the original, unchanged
+        // logic below.
+        var _snap = (actionType === 'click' && _preClickSnapshot && _preClickSnapshot.rawTarget === rawEl)
+            ? _preClickSnapshot : null;
+
+        var checkboxTarget = _snap ? _snap.checkboxTarget : ((actionType === 'click') ? findCheckboxTarget(rawEl) : null);
         var effectiveActionType = checkboxTarget ? 'check' : actionType;
 
         // locator-only refinement (see resolveCheckboxLocatorElement) -
@@ -1751,7 +1827,14 @@
         // the same fact the slow way on every replay run)
         const clickStrategy = (rect.width === 0 || rect.height === 0) ? 'force_click' : 'standard';
         const accName = checkboxTarget ? getCheckboxAccessibleName(checkboxTarget, rawEl) : accessibleName(el);
-        const locatorProfile = buildLocatorProfile(el, accName);
+        // R2: a fill action's own just-typed value must never become its
+        // own locator's anchor text (see buildLocatorProfile's/xPath's
+        // own comments) - only ever passed for 'fill', never for
+        // click/check/select/etc, which have no typed value at all.
+        const valueToExclude = (effectiveActionType === 'fill' && typeof value === 'string') ? value : null;
+        const locatorProfile = (_snap && _snap.semanticEl === el)
+            ? _snap.locatorProfile
+            : buildLocatorProfile(el, accName, valueToExclude);
         // checkbox-specific role default - an implicit checkbox (a styled
         // <div>/<span> with no real role attribute) still needs role=
         // 'checkbox' recorded so replay's own check-vs-click handling
@@ -1776,6 +1859,14 @@
         }
 
         return payload;
+    }
+
+    // debug/test-only hook (RECORDER_DEBUG gated - see its own definition
+    // above; never set on a real recording session) so an automated test
+    // can call the exact same buildProfile() the real click listener
+    // uses, instead of re-implementing its logic against a live page.
+    if (RECORDER_DEBUG) {
+        window.__RECORDER_DEBUG_BUILD_PROFILE__ = buildProfile;
     }
 
     // recording-time consistency check: after each captured action, a
@@ -1950,6 +2041,50 @@
         if (!suppressAutoSubmitForm) return true;
         return formEl === suppressAutoSubmitForm;
     }
+
+    // PRE-CLICK SNAPSHOT (fixes a CONFIRMED REAL BUG, not hypothetical):
+    // an async button (Sportzia's own "Send OTP"/"Continue"/"Pick from
+    // your saved people") replaces its own label with a spinner glyph
+    // (a private-use icon-font codepoint) for roughly a second the
+    // instant it's pressed. The click listener below builds its
+    // locator profile from e.target at 'click' time - one native event
+    // LATER than 'mousedown' - and a real screen recording plus a live
+    // comparison against session_20260921_081203 (where this same
+    // button correctly recorded action_type=click, text='Send OTP')
+    // confirmed that on a real (human-paced, not synthetic-fast) click,
+    // the app's own re-render can land in that gap: the broken
+    // recording (session_20260921_095629) captured text='' (the
+    // spinner glyph) and role='checkbox' for the exact same button -
+    // findCheckboxTarget()'s own ancestor/descendant search picking up
+    // whatever transient structure the spinner state introduces nearby,
+    // something a live scan of the STABLE (non-spinner) DOM around this
+    // button confirmed has no checkbox-role anywhere in its ancestor
+    // chain at all. Capturing at 'mousedown', in the CAPTURE phase, on
+    // document - before the event even reaches the target, let alone
+    // before any bubble-phase app handler can react to it - means this
+    // always sees the same pre-interaction DOM a real user's eye saw
+    // right before pressing, regardless of how fast or slow the app's
+    // own reaction is. Only ever used as a fallback by buildProfile()
+    // below when it matches the SAME raw element the click ends up
+    // firing on; never changes anything for the (overwhelming majority)
+    // of clicks where mousedown-time and click-time DOM happen to
+    // already agree.
+    var _preClickSnapshot = null;
+
+    document.addEventListener('mousedown', function (e) {
+        try {
+            var rawTarget = e.target;
+            var semanticEl = resolveSemanticTarget(rawTarget);
+            _preClickSnapshot = {
+                rawTarget: rawTarget,
+                checkboxTarget: findCheckboxTarget(rawTarget),
+                semanticEl: semanticEl,
+                locatorProfile: buildLocatorProfile(semanticEl),
+            };
+        } catch (snapErr) {
+            _preClickSnapshot = null;
+        }
+    }, true);
 
     document.addEventListener('click', function (e) {
         // PICK ELEMENT MODE - a completely separate feature (Recording

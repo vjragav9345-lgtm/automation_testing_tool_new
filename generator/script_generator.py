@@ -5526,6 +5526,41 @@ def resolve_and_act(page, step, prev_action_type=None, fast_fail=False, turbo=Fa
                 el = None
             if el is None:
                 continue
+            # R4 safety net (position_fallback only): this tier resolves
+            # purely by structural position among same-tag siblings - the
+            # recorded item's own identity already failed to verify at
+            # every earlier tier (see the tier's own comment above) - so
+            # it's the one place in this loop capable of confidently
+            # landing on a completely unrelated element. CONFIRMED REAL
+            # BUG this fixes: a recording whose "Send OTP" button got
+            # mis-captured (see the pre-click-snapshot fix in
+            # action_capture.js) made every earlier tier fail, and
+            # position_fallback then resolved to a small, textless
+            # element that was really a dialog's own close control -
+            # clicking it silently closed the dialog instead of pressing
+            # "Send OTP". Reuses the exact same recorded-vs-live identity
+            # comparison the raw-coordinate bounding_box last resort
+            # further down already relies on (_identity_hit_matches) -
+            # never fires when the recording has no usable name/aria/
+            # href to compare against in the first place (that's the
+            # already-corrupted-at-record-time case, which this can't
+            # and shouldn't guess its way around), only when a real,
+            # meaningful recorded label contradicts what's actually
+            # there live.
+            if strategy == "position_fallback":
+                try:
+                    _pf_live = el.evaluate(
+                        "e => { const link = e.closest('a'); return { "
+                        "text: (e.innerText || e.textContent || '').trim().slice(0, 80), "
+                        "ariaLabel: e.getAttribute('aria-label'), "
+                        "href: link ? link.getAttribute('href') : null }; }"
+                    )
+                except Exception:
+                    _pf_live = {"text": "", "ariaLabel": None, "href": None}
+                _pf_ok, _pf_reason = _identity_hit_matches(lp, _pf_live, "position-fallback target")
+                if not _pf_ok:
+                    print(f"[position-fallback-check] REJECTED: {_pf_reason}")
+                    continue
             element_found = True
             if action_type in ("click", "dblclick", "right_click"):
                 _pre_action_dom_fp[0] = _capture_dom_change_fingerprint(el)
