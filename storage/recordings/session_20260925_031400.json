@@ -1,0 +1,100 @@
+{
+    "name": "session_20260925_031400",
+    "start_url": "http://127.0.0.1:65321/phase4_hidden_radio_sort.html",
+    "actions": [
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "http://127.0.0.1:65321/phase4_hidden_radio_sort.html",
+            "timestamp": "2026-09-24T21:44:00.009Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "Price: Low to High",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "body > ul > li > label",
+                "xpath": "//li[normalize-space(.)='Price: Low to High']/label",
+                "text": "Price: Low to High",
+                "element_text": "Price: Low to High",
+                "tag": "label",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "act_target": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "Price: Low to High",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "body > ul > li > label",
+                "xpath": "//li[normalize-space(.)='Price: Low to High']/label",
+                "text": "Price: Low to High",
+                "element_text": "Price: Low to High",
+                "tag": "label",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "state_target": {
+                "locator_profile": {
+                    "id": null,
+                    "name": "sort",
+                    "role": "checkbox",
+                    "aria_label": null,
+                    "accessible_name": "Price: Low to High",
+                    "placeholder": null,
+                    "title": null,
+                    "href": null,
+                    "product_id": null,
+                    "css_path": "body > ul > li > label > input",
+                    "xpath": "//label[contains(., 'Price: Low to High')]//input",
+                    "text": "Price: Low to High",
+                    "element_text": "price_asc",
+                    "tag": "input",
+                    "attributes": {
+                        "type": "radio",
+                        "name": "sort"
+                    },
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                },
+                "checked": true
+            },
+            "bounding_box": {
+                "x": 40,
+                "y": 44,
+                "width": 1200,
+                "height": 18
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "http://127.0.0.1:65321/phase4_hidden_radio_sort.html",
+            "timestamp": "2026-09-24T21:44:00.125Z",
+            "expected_state": true,
+            "classified_by": "label-control",
+            "expect": {
+                "type": "toggle",
+                "final_checked": true
+            },
+            "page_id": 0
+        }
+    ]
+}

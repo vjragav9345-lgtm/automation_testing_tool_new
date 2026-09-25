@@ -1,0 +1,317 @@
+{
+    "name": "session_20260924_130501",
+    "session_id": "32c2ecb6b1f04bf2bb063e5322c30ef7",
+    "start_url": "https://www.myntra.com",
+    "recorded_at": "2026-09-24T13:05:18.548481",
+    "stop_reason": "browser_closed",
+    "total_actions": 13,
+    "page_count": 2,
+    "viewport_width": 1280,
+    "viewport_height": 720,
+    "actions": [
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com",
+            "timestamp": "2026-09-24T07:35:01.885Z",
+            "page_id": 0,
+            "delay_before_ms": 0
+        },
+        {
+            "action_type": "press",
+            "value": "Backspace",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "MEN\nWOMEN\nKIDS\nHOME\nBEAUTY\nGENZ\nSTUDIO NEW\nProfile\nWishlist\nBag\n1\n2\n3\n4\n5\nSHOP B",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "body",
+                "xpath": "//html[.//h4[contains(text(), 'Shop By Category')]]/body",
+                "text": "MEN\nWOMEN\nKIDS\nHOME\nBEAUTY\nGENZ\nSTUDIO NEW\nProfile\nWishlist\nBag\n1\n2\n3\n4\n5\nSHOP B",
+                "element_text": "MEN\nWOMEN\nKIDS\nHOME\nBEAUTY\nGENZ\nSTUDIO NEW\nProfile\nWishlist\nBag\n1\n2\n3\n4\n5\nSHOP B",
+                "tag": "body",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 0,
+                "y": 0,
+                "width": 1263.2000732421875,
+                "height": 6395.58740234375
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/",
+            "timestamp": "2026-09-24T07:35:03.037Z",
+            "page_id": 0,
+            "delay_before_ms": 1152
+        },
+        {
+            "action_type": "press",
+            "value": "Backspace",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "MEN\nWOMEN\nKIDS\nHOME\nBEAUTY\nGENZ\nSTUDIO NEW\nProfile\nWishlist\nBag\n1\n2\n3\n4\n5\nSHOP B",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "body",
+                "xpath": "//html[.//h4[contains(text(), 'Shop By Category')]]/body",
+                "text": "MEN\nWOMEN\nKIDS\nHOME\nBEAUTY\nGENZ\nSTUDIO NEW\nProfile\nWishlist\nBag\n1\n2\n3\n4\n5\nSHOP B",
+                "element_text": "MEN\nWOMEN\nKIDS\nHOME\nBEAUTY\nGENZ\nSTUDIO NEW\nProfile\nWishlist\nBag\n1\n2\n3\n4\n5\nSHOP B",
+                "tag": "body",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 0,
+                "y": 0,
+                "width": 1263.2000732421875,
+                "height": 6395.58740234375
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/",
+            "timestamp": "2026-09-24T07:35:04.866Z",
+            "page_id": 0,
+            "delay_before_ms": 1829
+        },
+        {
+            "action_type": "press",
+            "value": "Backspace",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "MEN\nWOMEN\nKIDS\nHOME\nBEAUTY\nGENZ\nSTUDIO NEW\nProfile\nWishlist\nBag\n1\n2\n3\n4\n5\nSHOP B",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "body",
+                "xpath": "//html[.//h4[contains(text(), 'Shop By Category')]]/body",
+                "text": "MEN\nWOMEN\nKIDS\nHOME\nBEAUTY\nGENZ\nSTUDIO NEW\nProfile\nWishlist\nBag\n1\n2\n3\n4\n5\nSHOP B",
+                "element_text": "MEN\nWOMEN\nKIDS\nHOME\nBEAUTY\nGENZ\nSTUDIO NEW\nProfile\nWishlist\nBag\n1\n2\n3\n4\n5\nSHOP B",
+                "tag": "body",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 0,
+                "y": 0,
+                "width": 1263.2000732421875,
+                "height": 6395.58740234375
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/",
+            "timestamp": "2026-09-24T07:35:05.049Z",
+            "page_id": 0,
+            "delay_before_ms": 183
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Search for products, brands and more",
+                "placeholder": "Search for products, brands and more",
+                "title": null,
+                "href": null,
+                "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > div:nth-of-type(3) > input",
+                "xpath": "//input[@placeholder='Search for products, brands and more']",
+                "text": "Search for products, brands and more",
+                "element_text": "Search for products, brands and more",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Search for products, brands and more"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 731.2000122070312,
+                "y": 20,
+                "width": 324.8000183105469,
+                "height": 39.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/",
+            "timestamp": "2026-09-24T07:35:05.904Z",
+            "page_id": 0,
+            "delay_before_ms": 855
+        },
+        {
+            "action_type": "fill",
+            "value": "shirt",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Search for products, brands and more",
+                "placeholder": "Search for products, brands and more",
+                "title": null,
+                "href": null,
+                "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > div:nth-of-type(3) > input",
+                "xpath": "//input[@placeholder='Search for products, brands and more']",
+                "text": "Search for products, brands and more",
+                "element_text": "Search for products, brands and more",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Search for products, brands and more"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 731.2000122070312,
+                "y": 20,
+                "width": 324.8000183105469,
+                "height": 39.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/",
+            "timestamp": "2026-09-24T07:35:10.571Z",
+            "page_id": 0,
+            "delay_before_ms": 4667
+        },
+        {
+            "action_type": "press",
+            "value": "Enter",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Search for products, brands and more",
+                "placeholder": "Search for products, brands and more",
+                "title": null,
+                "href": null,
+                "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > div:nth-of-type(3) > input",
+                "xpath": "//input[@placeholder='Search for products, brands and more']",
+                "text": "Search for products, brands and more",
+                "element_text": "Search for products, brands and more",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Search for products, brands and more"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 731.2000122070312,
+                "y": 20,
+                "width": 324.8000183105469,
+                "height": 39.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/",
+            "timestamp": "2026-09-24T07:35:10.573Z",
+            "page_id": 0,
+            "delay_before_ms": 2
+        },
+        {
+            "action_type": "validate",
+            "value": "shirt",
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/",
+            "timestamp": "2026-09-24T07:35:10.758Z",
+            "page_id": 0,
+            "delay_before_ms": 185
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/shirt?rawQuery=shirt",
+            "timestamp": "2026-09-24T07:35:11.822Z",
+            "page_id": 0,
+            "delay_before_ms": 1064
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "United Colors of Benetton\nSizes: 8-9Y\nRs. 979Rs. 1999(51% OFF)",
+                "placeholder": null,
+                "title": null,
+                "href": "shirts/united+colors+of+benetton/united-colors-of-benetton-boys-tartan-checks-twill-weave-shirt/36388112/buy",
+                "css_path": "li#36388112 > a",
+                "xpath": "//a[@href='shirts/united+colors+of+benetton/united-colors-of-benetton-boys-tartan-checks-twill-weave-shirt/36388112/buy']",
+                "text": "United Colors of Benetton\nSizes: 8-9Y\nRs. 979Rs. 1999(51% OFF)",
+                "element_text": "United Colors of Benetton\nSizes: 8-9Y\nRs. 979Rs. 1999(51% OFF)",
+                "tag": "a",
+                "attributes": {
+                    "href": "shirts/united+colors+of+benetton/united-colors-of-benetton-boys-tartan-checks-twill-weave-shirt/36388112/buy"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 1026.175048828125,
+                "y": 262.3999938964844,
+                "width": 210,
+                "height": 359.8000183105469
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/shirt?rawQuery=shirt",
+            "timestamp": "2026-09-24T07:35:14.000Z",
+            "page_id": 0,
+            "delay_before_ms": 2178
+        },
+        {
+            "action_type": "tab_open",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/shirts/united+colors+of+benetton/united-colors-of-benetton-boys-tartan-checks-twill-weave-shirt/36388112/buy",
+            "timestamp": "2026-09-24T07:35:16.122Z",
+            "new_tab": true,
+            "page_id": 1,
+            "from_page_id": 0,
+            "delay_before_ms": 2122
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 1,
+            "page_url": "https://www.myntra.com/shirts/united+colors+of+benetton/united-colors-of-benetton-boys-tartan-checks-twill-weave-shirt/36388112/buy",
+            "remaining_page_id": 0,
+            "timestamp": "2026-09-24T07:35:18.505Z",
+            "delay_before_ms": 2383
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 0,
+            "page_url": "https://www.myntra.com/shirt?rawQuery=shirt",
+            "remaining_page_id": null,
+            "timestamp": "2026-09-24T07:35:18.534Z",
+            "delay_before_ms": 29
+        }
+    ],
+    "saved_at": "2026-09-24T13:05:18.549794"
+}

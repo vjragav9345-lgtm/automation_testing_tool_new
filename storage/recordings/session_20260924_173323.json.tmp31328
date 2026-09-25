@@ -1,0 +1,52 @@
+{
+    "name": "session_20260924_173323",
+    "start_url": "http://127.0.0.1:58261/phase4_product_card.html",
+    "actions": [
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "http://127.0.0.1:58261/phase4_product_card.html",
+            "timestamp": "2026-09-24T12:03:23.341Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#card-45954123",
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "NEW\nNEW\nNEW\nMonk Mode\nSizes: XXL\nRs. 744 Rs. 1699(56% OFF)",
+                "placeholder": null,
+                "title": null,
+                "href": "/tshirts/monk-mode/monk-mode-men-striped-polo-collar-t-shirt/45954123/buy",
+                "product_id": "45954123",
+                "css_path": "a#card-45954123",
+                "xpath": "//a[@href='/tshirts/monk-mode/monk-mode-men-striped-polo-collar-t-shirt/45954123/buy']",
+                "text": "NEW\nNEW\nNEW\nMonk Mode\nSizes: XXL\nRs. 744 Rs. 1699(56% OFF)",
+                "element_text": "NEW Monk Mode Rs. 744 Rs. 1699(56% OFF)",
+                "tag": "a",
+                "attributes": {
+                    "href": "/tshirts/monk-mode/monk-mode-men-striped-polo-collar-t-shirt/45954123/buy"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 20,
+                "y": 20,
+                "width": 282,
+                "height": 362
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "http://127.0.0.1:58261/phase4_product_card.html",
+            "timestamp": "2026-09-24T12:03:23.452Z",
+            "page_id": 0
+        }
+    ]
+}

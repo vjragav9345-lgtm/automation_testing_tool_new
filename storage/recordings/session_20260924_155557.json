@@ -1,0 +1,797 @@
+{
+    "name": "session_20260924_155557",
+    "session_id": "0ac7c79c9e0a4012b425aa98aaaac03f",
+    "start_url": "https://www.myntra.com",
+    "recorded_at": "2026-09-24T15:57:08.491319",
+    "stop_reason": "browser_closed",
+    "total_actions": 29,
+    "page_count": 2,
+    "viewport_width": 1280,
+    "viewport_height": 720,
+    "actions": [
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com",
+            "timestamp": "2026-09-24T10:25:57.601Z",
+            "page_id": 0,
+            "delay_before_ms": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "T-Shirts",
+                "placeholder": null,
+                "title": null,
+                "href": "/men-tshirts",
+                "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > nav > div > div > div > div > div > div > li > ul > li:nth-of-type(2) > a",
+                "xpath": "//a[@href='/men-tshirts']",
+                "text": "T-Shirts",
+                "element_text": "T-Shirts",
+                "tag": "a",
+                "attributes": {
+                    "href": "/men-tshirts"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 101.5999984741211,
+                "y": 123,
+                "width": 191,
+                "height": 23
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/",
+            "timestamp": "2026-09-24T10:25:59.664Z",
+            "page_id": 0,
+            "delay_before_ms": 2063
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Search for products, brands and more",
+                "placeholder": "Search for products, brands and more",
+                "title": null,
+                "href": null,
+                "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > div:nth-of-type(3) > input",
+                "xpath": "//input[@placeholder='Search for products, brands and more']",
+                "text": "Search for products, brands and more",
+                "element_text": "Search for products, brands and more",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Search for products, brands and more"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 731.2000122070312,
+                "y": 20,
+                "width": 324.8000183105469,
+                "height": 39.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/men-tshirts",
+            "timestamp": "2026-09-24T10:26:03.692Z",
+            "page_id": 0,
+            "delay_before_ms": 4028
+        },
+        {
+            "action_type": "fill",
+            "value": "collar",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Search for products, brands and more",
+                "placeholder": "Search for products, brands and more",
+                "title": null,
+                "href": null,
+                "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > div:nth-of-type(3) > input",
+                "xpath": "//input[@placeholder='Search for products, brands and more']",
+                "text": "Search for products, brands and more",
+                "element_text": "Search for products, brands and more",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Search for products, brands and more"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 731.2000122070312,
+                "y": 20,
+                "width": 324.8000183105469,
+                "height": 39.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/men-tshirts",
+            "timestamp": "2026-09-24T10:26:07.135Z",
+            "page_id": 0,
+            "delay_before_ms": 3443
+        },
+        {
+            "action_type": "press",
+            "value": "Enter",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Search for products, brands and more",
+                "placeholder": "Search for products, brands and more",
+                "title": null,
+                "href": null,
+                "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > div:nth-of-type(3) > input",
+                "xpath": "//input[@placeholder='Search for products, brands and more']",
+                "text": "Search for products, brands and more",
+                "element_text": "Search for products, brands and more",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Search for products, brands and more"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 731.2000122070312,
+                "y": 20,
+                "width": 324.8000183105469,
+                "height": 39.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/men-tshirts",
+            "timestamp": "2026-09-24T10:26:07.137Z",
+            "page_id": 0,
+            "delay_before_ms": 2
+        },
+        {
+            "action_type": "validate",
+            "value": "collar",
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/men-tshirts",
+            "timestamp": "2026-09-24T10:26:07.405Z",
+            "page_id": 0,
+            "delay_before_ms": 268
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/collar?rawQuery=collar",
+            "timestamp": "2026-09-24T10:26:08.919Z",
+            "page_id": 0,
+            "delay_before_ms": 1514
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 792,
+            "scroll_y_before": 0,
+            "scroll_y_after": 792,
+            "viewport_height": 720,
+            "document_height": 6269,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/collar?rawQuery=collar",
+            "timestamp": "2026-09-24T10:26:11.676Z",
+            "page_id": 0,
+            "delay_before_ms": 2757
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 31,
+            "scroll_y_before": 792,
+            "scroll_y_after": 823.2000122070312,
+            "viewport_height": 720,
+            "document_height": 6269,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/collar?rawQuery=collar",
+            "timestamp": "2026-09-24T10:26:12.123Z",
+            "page_id": 0,
+            "delay_before_ms": 447
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "NEW\nNEW\nNEW\nNEW\nNEW\nNEW\nNEW\nNEW\nNEW\nNEW\nMonk Mode\nSizes: XXL\nRs. 744Rs. 1699(56%",
+                "placeholder": null,
+                "title": null,
+                "href": "tshirts/monk+mode/monk-mode-men-striped-polo-collar-t-shirt/45954123/buy",
+                "css_path": "li#45954123 > a",
+                "xpath": "//a[@href='tshirts/monk+mode/monk-mode-men-striped-polo-collar-t-shirt/45954123/buy']",
+                "text": "NEW\nNEW\nNEW\nNEW\nNEW\nNEW\nNEW\nNEW\nNEW\nNEW\nMonk Mode\nSizes: XXL\nRs. 744Rs. 1699(56%",
+                "element_text": "NEW\nNEW\nNEW\nNEW\nNEW\nNEW\nNEW\nNEW\nNEW\nNEW\nMonk Mode\nSizes: XXL\nRs. 744Rs. 1699(56%",
+                "tag": "a",
+                "attributes": {
+                    "href": "tshirts/monk+mode/monk-mode-men-striped-polo-collar-t-shirt/45954123/buy"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 1026.175048828125,
+                "y": 193,
+                "width": 210,
+                "height": 359.8000183105469
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/collar?rawQuery=collar",
+            "timestamp": "2026-09-24T10:26:12.770Z",
+            "page_id": 0,
+            "delay_before_ms": 647
+        },
+        {
+            "action_type": "tab_open",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/tshirts/monk+mode/monk-mode-men-striped-polo-collar-t-shirt/45954123/buy",
+            "timestamp": "2026-09-24T10:26:14.467Z",
+            "new_tab": true,
+            "page_id": 1,
+            "from_page_id": 0,
+            "delay_before_ms": 1697
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "XXL",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#sizeButtonsContainer > div:nth-of-type(2) > div:nth-of-type(4) > div > button",
+                "xpath": "//button[normalize-space(.)='XXL']",
+                "text": "XXL",
+                "element_text": "XXL",
+                "tag": "button",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 938.1749877929688,
+                "y": 479.6499938964844,
+                "width": 50,
+                "height": 50
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/tshirts/monk+mode/monk-mode-men-striped-polo-collar-t-shirt/45954123/buy",
+            "timestamp": "2026-09-24T10:26:16.263Z",
+            "page_id": 1,
+            "delay_before_ms": 1796
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "ADD TO BAG",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#mountRoot > div > div > main > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > div",
+                "xpath": "//div[normalize-space(text())='ADD TO BAG']",
+                "text": "ADD TO BAG",
+                "element_text": "ADD TO BAG",
+                "tag": "div",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 758.1749877929688,
+                "y": 563.6500244140625,
+                "width": 232.8874969482422,
+                "height": 53.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/tshirts/monk+mode/monk-mode-men-striped-polo-collar-t-shirt/45954123/buy",
+            "timestamp": "2026-09-24T10:26:20.632Z",
+            "page_id": 1,
+            "delay_before_ms": 4369
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "GO TO BAG",
+                "placeholder": null,
+                "title": null,
+                "href": "/checkout/cart",
+                "css_path": "div#mountRoot > div > div > main > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > a",
+                "xpath": "//a[normalize-space(.)='GO TO BAG']",
+                "text": "GO TO BAG",
+                "element_text": "GO TO BAG",
+                "tag": "a",
+                "attributes": {
+                    "href": "/checkout/cart"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 758.1749877929688,
+                "y": 563.6500244140625,
+                "width": 232.8874969482422,
+                "height": 50.79999923706055
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/tshirts/monk+mode/monk-mode-men-striped-polo-collar-t-shirt/45954123/buy",
+            "timestamp": "2026-09-24T10:26:22.739Z",
+            "page_id": 1,
+            "delay_before_ms": 2107
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Size: XXL",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#cartItemsList > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div:nth-of-type(4) > div > div",
+                "xpath": "//*[@data-testid='cart-item-size']",
+                "text": "Size: XXL",
+                "element_text": "Size: XXL",
+                "tag": "div",
+                "attributes": {
+                    "data-testid": "cart-item-size"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 287.3999938964844,
+                "y": 362.07501220703125,
+                "width": 87.6875,
+                "height": 20
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/checkout/cart",
+            "timestamp": "2026-09-24T10:26:26.634Z",
+            "page_id": 1,
+            "delay_before_ms": 3895
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/checkout/cart#modal",
+            "timestamp": "2026-09-24T10:26:27.013Z",
+            "page_id": 1,
+            "delay_before_ms": 379
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#146768051",
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "XL",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#146768051",
+                "xpath": "//div[normalize-space(.)='MLXLXXL']/div[3]",
+                "text": "XL",
+                "element_text": "XL",
+                "tag": "div",
+                "attributes": {
+                    "data-testid": "sizelabel-146768051"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 567.1000366210938,
+                "y": 326.1499938964844,
+                "width": 45.0625,
+                "height": 44.45000076293945
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/checkout/cart#modal",
+            "timestamp": "2026-09-24T10:26:28.250Z",
+            "page_id": 1,
+            "delay_before_ms": 1237
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "button",
+                "aria_label": null,
+                "accessible_name": "DONE",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#cartItemsList > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(4) > div > div > div:nth-of-type(2) > button",
+                "xpath": "//button[normalize-space(.)='DONE']",
+                "text": "DONE",
+                "element_text": "DONE",
+                "tag": "button",
+                "attributes": {
+                    "role": "button"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 447.8999938964844,
+                "y": 429.45001220703125,
+                "width": 367.3999938964844,
+                "height": 40
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/checkout/cart#modal",
+            "timestamp": "2026-09-24T10:26:29.318Z",
+            "page_id": 1,
+            "delay_before_ms": 1068
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Qty: 1",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#cartItemsList > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div:nth-of-type(4) > div > div:nth-of-type(2)",
+                "xpath": "//*[@data-testid='cart-item-qty']",
+                "text": "Qty: 1",
+                "element_text": "Qty: 1",
+                "tag": "div",
+                "attributes": {
+                    "data-testid": "cart-item-qty"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 377.57501220703125,
+                "y": 362.07501220703125,
+                "width": 65.20000457763672,
+                "height": 20
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/checkout/cart",
+            "timestamp": "2026-09-24T10:26:30.735Z",
+            "page_id": 1,
+            "delay_before_ms": 1417
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#2",
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "2",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#2",
+                "xpath": "//*[@id='2']",
+                "text": "2",
+                "element_text": "2",
+                "tag": "div",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 555,
+                "y": 469.45001220703125,
+                "width": 39.60000228881836,
+                "height": 40
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/checkout/cart#modal",
+            "timestamp": "2026-09-24T10:26:32.114Z",
+            "page_id": 1,
+            "delay_before_ms": 1379
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "button",
+                "aria_label": null,
+                "accessible_name": "DONE",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#cartItemsList > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(4) > div > button",
+                "xpath": "//button[normalize-space(.)='DONE']",
+                "text": "DONE",
+                "element_text": "DONE",
+                "tag": "button",
+                "attributes": {
+                    "role": "button"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 495.3999938964844,
+                "y": 541.4500122070312,
+                "width": 272.3999938964844,
+                "height": 40
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/checkout/cart#modal",
+            "timestamp": "2026-09-24T10:26:33.562Z",
+            "page_id": 1,
+            "delay_before_ms": 1448
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "button",
+                "aria_label": null,
+                "accessible_name": "PLACE ORDER",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#appContent > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(4) > button",
+                "xpath": "//button[normalize-space(.)='PLACE ORDER']",
+                "text": "PLACE ORDER",
+                "element_text": "PLACE ORDER",
+                "tag": "button",
+                "attributes": {
+                    "role": "button"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 782,
+                "y": 646.75,
+                "width": 320,
+                "height": 40
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/checkout/cart",
+            "timestamp": "2026-09-24T10:26:35.292Z",
+            "page_id": 1,
+            "delay_before_ms": 1730
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 1,
+            "scroll_y_before": 0,
+            "scroll_y_after": 0.800000011920929,
+            "viewport_height": 720,
+            "document_height": 780,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/login?referer=/checkout/cart",
+            "timestamp": "2026-09-24T10:26:36.613Z",
+            "page_id": 1,
+            "delay_before_ms": 1321
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#reactPageContent > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > input",
+                "xpath": "//div[normalize-space(.)='+91|Mobile Number*']/input",
+                "text": "",
+                "element_text": "",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "",
+                    "type": "tel"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 467.6000061035156,
+                "y": 357.76251220703125,
+                "width": 328,
+                "height": 39.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/login?referer=/checkout/cart",
+            "timestamp": "2026-09-24T10:26:38.181Z",
+            "page_id": 1,
+            "delay_before_ms": 1568
+        },
+        {
+            "action_type": "fill",
+            "value": "9345691852",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#reactPageContent > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > input",
+                "xpath": "//div[normalize-space(.)='+91|Mobile Number*']/input",
+                "text": "",
+                "element_text": "",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "",
+                    "type": "tel"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 467.6000061035156,
+                "y": 357.76251220703125,
+                "width": 328,
+                "height": 39.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/login?referer=/checkout/cart",
+            "timestamp": "2026-09-24T10:26:46.290Z",
+            "page_id": 1,
+            "delay_before_ms": 8109
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "on",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#reactPageContent > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2) > input",
+                "xpath": "(//div[contains(., 'on')])[13]//input",
+                "text": "on",
+                "element_text": "on",
+                "tag": "input",
+                "attributes": {
+                    "type": "checkbox"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 467.6000061035156,
+                "y": 425.3625183105469,
+                "width": 13,
+                "height": 36
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/login?referer=/checkout/cart",
+            "timestamp": "2026-09-24T10:26:46.479Z",
+            "expected_state": true,
+            "classified_by": "native-input-direct",
+            "page_id": 1,
+            "delay_before_ms": 189
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "CONTINUE",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#reactPageContent > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3)",
+                "xpath": "//div[normalize-space(text())='CONTINUE']",
+                "text": "CONTINUE",
+                "element_text": "CONTINUE",
+                "tag": "div",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 467.6000061035156,
+                "y": 482.3625183105469,
+                "width": 328,
+                "height": 40
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/login?referer=/checkout/cart",
+            "timestamp": "2026-09-24T10:26:47.840Z",
+            "page_id": 1,
+            "delay_before_ms": 1361
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 1,
+            "page_url": "https://www.myntra.com/login?referer=/checkout/cart",
+            "remaining_page_id": 0,
+            "timestamp": "2026-09-24T10:27:08.473Z",
+            "delay_before_ms": 20633
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 0,
+            "page_url": "https://www.myntra.com/collar?rawQuery=collar",
+            "remaining_page_id": null,
+            "timestamp": "2026-09-24T10:27:08.482Z",
+            "delay_before_ms": 9
+        }
+    ],
+    "saved_at": "2026-09-24T15:57:08.491319"
+}

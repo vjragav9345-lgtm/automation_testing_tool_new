@@ -1,0 +1,200 @@
+{
+    "name": "session_20260922_120517",
+    "session_id": "438a95ac89b44946aaee2b8fc5a8835c",
+    "start_url": "https://www.myntra.com/",
+    "recorded_at": "2026-09-22T12:05:17.666100",
+    "stop_reason": "browser_closed",
+    "total_actions": 8,
+    "page_count": 2,
+    "viewport_width": 1280,
+    "viewport_height": 720,
+    "actions": [
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Sweatshirts",
+                "placeholder": null,
+                "title": null,
+                "href": "/men-sweatshirts",
+                "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > nav > div > div > div > div > div > div > li > ul > li:nth-of-type(5) > a",
+                "xpath": "//a[@href='/men-sweatshirts']",
+                "text": "Sweatshirts",
+                "element_text": "Sweatshirts",
+                "tag": "a",
+                "attributes": {
+                    "href": "/men-sweatshirts"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 101.5999984741211,
+                "y": 192,
+                "width": 191,
+                "height": 23
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/",
+            "timestamp": "2026-09-22T06:35:04.932Z",
+            "page_id": 0,
+            "delay_before_ms": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Mast & Harbour\nSizes: M\nRs. 781Rs. 2299(66% OFF)",
+                "placeholder": null,
+                "title": null,
+                "href": "sweatshirts/mast+%26+harbour/mast--harbour-typography-printed-mock-collar-raglan-sleeves-pullover-sweatshirt/33605396/buy",
+                "css_path": "li#33605396 > a",
+                "xpath": "//li[.//h4[contains(text(), 'Printed Mock Collar Pullover')]]/a",
+                "text": "Mast & Harbour\nSizes: M\nRs. 781Rs. 2299(66% OFF)",
+                "element_text": "Mast & Harbour\nSizes: M\nRs. 781Rs. 2299(66% OFF)",
+                "tag": "a",
+                "attributes": {
+                    "href": "sweatshirts/mast+%26+harbour/mast--harbour-typography-printed-mock-collar-raglan-sleeves-pullover-sweatshirt/33605396/buy"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 777.4500122070312,
+                "y": 262.3999938964844,
+                "width": 210,
+                "height": 359.8000183105469
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/men-sweatshirts",
+            "timestamp": "2026-09-22T06:35:08.420Z",
+            "page_id": 0,
+            "delay_before_ms": 3488
+        },
+        {
+            "action_type": "tab_open",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/sweatshirts/mast+%26+harbour/mast--harbour-typography-printed-mock-collar-raglan-sleeves-pullover-sweatshirt/33605396/buy",
+            "timestamp": "2026-09-22T06:35:11.759Z",
+            "new_tab": true,
+            "page_id": 1,
+            "from_page_id": 0,
+            "delay_before_ms": 3339
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": -1033,
+            "scroll_y_before": 1032.800048828125,
+            "scroll_y_after": 0,
+            "viewport_height": 720,
+            "document_height": 9671,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/sweatshirts/mast+%26+harbour/mast--harbour-typography-printed-mock-collar-raglan-sleeves-pullover-sweatshirt/33605396/buy",
+            "timestamp": "2026-09-22T06:35:12.312Z",
+            "page_id": 1,
+            "delay_before_ms": 553
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "M",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#sizeButtonsContainer > div:nth-of-type(2) > div:nth-of-type(2) > div > button",
+                "xpath": "//button[normalize-space(.)='M']",
+                "text": "M",
+                "element_text": "M",
+                "tag": "button",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 818.1749877929688,
+                "y": 545.4500122070312,
+                "width": 50,
+                "height": 50
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/sweatshirts/mast+%26+harbour/mast--harbour-typography-printed-mock-collar-raglan-sleeves-pullover-sweatshirt/33605396/buy",
+            "timestamp": "2026-09-22T06:35:13.380Z",
+            "page_id": 1,
+            "delay_before_ms": 1068
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "ADD TO BAG",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#mountRoot > div > div > main > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > div",
+                "xpath": "//div[normalize-space(text())='ADD TO BAG']",
+                "text": "ADD TO BAG",
+                "element_text": "ADD TO BAG",
+                "tag": "div",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 758.1749877929688,
+                "y": 629.4500122070312,
+                "width": 232.8874969482422,
+                "height": 53.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/sweatshirts/mast+%26+harbour/mast--harbour-typography-printed-mock-collar-raglan-sleeves-pullover-sweatshirt/33605396/buy",
+            "timestamp": "2026-09-22T06:35:14.519Z",
+            "page_id": 1,
+            "delay_before_ms": 1139
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 1,
+            "page_url": "https://www.myntra.com/sweatshirts/mast+%26+harbour/mast--harbour-typography-printed-mock-collar-raglan-sleeves-pullover-sweatshirt/33605396/buy",
+            "remaining_page_id": 0,
+            "timestamp": "2026-09-22T06:35:17.598Z",
+            "delay_before_ms": 3079
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 0,
+            "page_url": "https://www.myntra.com/men-sweatshirts",
+            "remaining_page_id": null,
+            "timestamp": "2026-09-22T06:35:17.627Z",
+            "delay_before_ms": 29
+        }
+    ],
+    "saved_at": "2026-09-22T12:05:17.666100"
+}

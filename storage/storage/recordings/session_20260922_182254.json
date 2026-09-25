@@ -1,0 +1,750 @@
+{
+    "name": "session_20260922_182254",
+    "session_id": "c63f6b11e2c44a8d8bab71144849680c",
+    "start_url": "https://www.myntra.com/",
+    "recorded_at": "2026-09-22T18:22:54.504234",
+    "stop_reason": "browser_closed",
+    "total_actions": 32,
+    "page_count": 2,
+    "viewport_width": 1280,
+    "viewport_height": 720,
+    "actions": [
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/",
+            "timestamp": "2026-09-22T12:52:12.498Z",
+            "page_id": 0,
+            "delay_before_ms": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Formal Shirts",
+                "placeholder": null,
+                "title": null,
+                "href": "/men-formal-shirts",
+                "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > nav > div > div > div > div > div > div > li > ul > li:nth-of-type(4) > a",
+                "xpath": "//a[@href='/men-formal-shirts']",
+                "text": "Formal Shirts",
+                "element_text": "Formal Shirts",
+                "tag": "a",
+                "attributes": {
+                    "href": "/men-formal-shirts"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 101.5999984741211,
+                "y": 169,
+                "width": 191,
+                "height": 23
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/",
+            "timestamp": "2026-09-22T12:52:16.086Z",
+            "page_id": 0,
+            "delay_before_ms": 3588
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "Peter England",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#mountRoot > div > main > div:nth-of-type(3) > div > section > div > div:nth-of-type(2) > ul > li:nth-of-type(8) > label > input",
+                "xpath": "//label[normalize-space(text())='Peter England']/input",
+                "text": "Peter England",
+                "element_text": "Peter England",
+                "tag": "input",
+                "attributes": {
+                    "type": "checkbox"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 25,
+                "y": 435.8000183105469,
+                "width": 13,
+                "height": 13
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/men-formal-shirts",
+            "timestamp": "2026-09-22T12:52:20.769Z",
+            "expected_state": true,
+            "page_id": 0,
+            "delay_before_ms": 4683
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/men-formal-shirts?f=Brand%3APeter%20England",
+            "timestamp": "2026-09-22T12:52:20.881Z",
+            "page_id": 0,
+            "delay_before_ms": 112
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 200,
+            "scroll_y_before": 0,
+            "scroll_y_after": 200,
+            "viewport_height": 720,
+            "document_height": 7919,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/men-formal-shirts?f=Brand%3APeter%20England",
+            "timestamp": "2026-09-22T12:52:23.424Z",
+            "page_id": 0,
+            "delay_before_ms": 2543
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "Navy Blue",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#mountRoot > div > main > div:nth-of-type(3) > div > section > div > div:nth-of-type(4) > ul > li:nth-of-type(3) > label > input",
+                "xpath": "//label[normalize-space(text())='Navy Blue']/input",
+                "text": "Navy Blue",
+                "element_text": "Navy Blue",
+                "tag": "input",
+                "attributes": {
+                    "type": "checkbox"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 166.78750610351562,
+                "y": 504.3999938964844,
+                "width": 13,
+                "height": 13
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/men-formal-shirts?f=Brand%3APeter%20England",
+            "timestamp": "2026-09-22T12:52:24.666Z",
+            "expected_state": true,
+            "page_id": 0,
+            "delay_before_ms": 1242
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/men-formal-shirts?f=Brand%3APeter%20England%3A%3AColor%3ANavy%20Blue_3c4477",
+            "timestamp": "2026-09-22T12:52:25.011Z",
+            "page_id": 0,
+            "delay_before_ms": 345
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": -200,
+            "scroll_y_before": 200,
+            "scroll_y_after": 0,
+            "viewport_height": 720,
+            "document_height": 7919,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/men-formal-shirts?f=Brand%3APeter%20England%3A%3AColor%3ANavy%20Blue_3c4477",
+            "timestamp": "2026-09-22T12:52:26.428Z",
+            "page_id": 0,
+            "delay_before_ms": 1417
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 287,
+            "scroll_y_before": 0,
+            "scroll_y_after": 287.20001220703125,
+            "viewport_height": 720,
+            "document_height": 7919,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/men-formal-shirts?f=Brand%3APeter%20England%3A%3AColor%3ANavy%20Blue_3c4477",
+            "timestamp": "2026-09-22T12:52:27.407Z",
+            "page_id": 0,
+            "delay_before_ms": 979
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": -174,
+            "scroll_y_before": 287.20001220703125,
+            "scroll_y_after": 112.80000305175781,
+            "viewport_height": 720,
+            "document_height": 7919,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/men-formal-shirts?f=Brand%3APeter%20England%3A%3AColor%3ANavy%20Blue_3c4477",
+            "timestamp": "2026-09-22T12:52:28.305Z",
+            "page_id": 0,
+            "delay_before_ms": 898
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": -1,
+            "scroll_y_before": 112.80000305175781,
+            "scroll_y_after": 112,
+            "viewport_height": 720,
+            "document_height": 7919,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/men-formal-shirts?f=Brand%3APeter%20England%3A%3AColor%3ANavy%20Blue_3c4477",
+            "timestamp": "2026-09-22T12:52:28.591Z",
+            "page_id": 0,
+            "delay_before_ms": 286
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Peter England\nSizes: 40\nRs. 1079Rs. 1799(40% OFF)",
+                "placeholder": null,
+                "title": null,
+                "href": "shirts/peter+england/peter-england-slim-fit-checked-formal-shirt/44488168/buy",
+                "css_path": "li#44488168 > a",
+                "xpath": "//a[@href='shirts/peter+england/peter-england-slim-fit-checked-formal-shirt/44488168/buy']",
+                "text": "Peter England\nSizes: 40\nRs. 1079Rs. 1799(40% OFF)",
+                "element_text": "Peter England\nSizes: 40\nRs. 1079Rs. 1799(40% OFF)",
+                "tag": "a",
+                "attributes": {
+                    "href": "shirts/peter+england/peter-england-slim-fit-checked-formal-shirt/44488168/buy"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 777.4500122070312,
+                "y": 195.8000030517578,
+                "width": 210,
+                "height": 359.8000183105469
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/men-formal-shirts?f=Brand%3APeter%20England%3A%3AColor%3ANavy%20Blue_3c4477",
+            "timestamp": "2026-09-22T12:52:29.106Z",
+            "page_id": 0,
+            "delay_before_ms": 515
+        },
+        {
+            "action_type": "tab_open",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/shirts/peter+england/peter-england-slim-fit-checked-formal-shirt/44488168/buy",
+            "timestamp": "2026-09-22T12:52:31.892Z",
+            "new_tab": true,
+            "page_id": 1,
+            "from_page_id": 0,
+            "delay_before_ms": 2786
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "38",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#sizeButtonsContainer > div:nth-of-type(2) > div > div > button",
+                "xpath": "//button[normalize-space(.)='38']",
+                "text": "38",
+                "element_text": "38",
+                "tag": "button",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 758.1749877929688,
+                "y": 397.6000061035156,
+                "width": 50,
+                "height": 50
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/shirts/peter+england/peter-england-slim-fit-checked-formal-shirt/44488168/buy",
+            "timestamp": "2026-09-22T12:52:32.219Z",
+            "page_id": 1,
+            "delay_before_ms": 327
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "ADD TO BAG",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#mountRoot > div > div > main > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2) > div > div",
+                "xpath": "//div[normalize-space(text())='ADD TO BAG']",
+                "text": "ADD TO BAG",
+                "element_text": "ADD TO BAG",
+                "tag": "div",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 758.1749877929688,
+                "y": 481.6000061035156,
+                "width": 232.8874969482422,
+                "height": 53.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/shirts/peter+england/peter-england-slim-fit-checked-formal-shirt/44488168/buy",
+            "timestamp": "2026-09-22T12:52:37.064Z",
+            "page_id": 1,
+            "delay_before_ms": 4845
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "GO TO BAG",
+                "placeholder": null,
+                "title": null,
+                "href": "/checkout/cart",
+                "css_path": "div#mountRoot > div > div > main > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2) > div > a",
+                "xpath": "//a[normalize-space(.)='GO TO BAG']",
+                "text": "GO TO BAG",
+                "element_text": "GO TO BAG",
+                "tag": "a",
+                "attributes": {
+                    "href": "/checkout/cart"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 758.1749877929688,
+                "y": 481.6000061035156,
+                "width": 232.8874969482422,
+                "height": 50.79999923706055
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/shirts/peter+england/peter-england-slim-fit-checked-formal-shirt/44488168/buy",
+            "timestamp": "2026-09-22T12:52:38.767Z",
+            "page_id": 1,
+            "delay_before_ms": 1703
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Size: 38",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#cartItemsList > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div:nth-of-type(3) > div > div",
+                "xpath": "//*[@data-testid='cart-item-size']",
+                "text": "Size: 38",
+                "element_text": "Size: 38",
+                "tag": "div",
+                "attributes": {
+                    "data-testid": "cart-item-size"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 287.3999938964844,
+                "y": 347.07501220703125,
+                "width": 77.51250457763672,
+                "height": 20
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/checkout/cart",
+            "timestamp": "2026-09-22T12:52:41.756Z",
+            "page_id": 1,
+            "delay_before_ms": 2989
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/checkout/cart#modal",
+            "timestamp": "2026-09-22T12:52:42.199Z",
+            "page_id": 1,
+            "delay_before_ms": 443
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "40",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#141767650 > div",
+                "xpath": "//*[@id='141767650']//div[contains(., '40')]",
+                "text": "40",
+                "element_text": "40",
+                "tag": "div",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 580.7875366210938,
+                "y": 336.95001220703125,
+                "width": 20.5,
+                "height": 22.850000381469727
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/checkout/cart#modal",
+            "timestamp": "2026-09-22T12:52:42.960Z",
+            "expected_state": false,
+            "page_id": 1,
+            "delay_before_ms": 761
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "button",
+                "aria_label": null,
+                "accessible_name": "DONE",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#cartItemsList > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(4) > div > div > div:nth-of-type(2) > button",
+                "xpath": "//button[normalize-space(.)='DONE']",
+                "text": "DONE",
+                "element_text": "DONE",
+                "tag": "button",
+                "attributes": {
+                    "role": "button"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 447.8999938964844,
+                "y": 429.45001220703125,
+                "width": 367.3999938964844,
+                "height": 40
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/checkout/cart#modal",
+            "timestamp": "2026-09-22T12:52:43.906Z",
+            "page_id": 1,
+            "delay_before_ms": 946
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/checkout/cart",
+            "timestamp": "2026-09-22T12:52:44.243Z",
+            "page_id": 1,
+            "delay_before_ms": 337
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Qty: 1",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#cartItemsList > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div:nth-of-type(3) > div > div:nth-of-type(2) > span",
+                "xpath": "//*[@data-testid='cart-item-qty-value']",
+                "text": "Qty: 1",
+                "element_text": "Qty: 1",
+                "tag": "span",
+                "attributes": {
+                    "data-testid": "cart-item-qty-value"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 386.4875183105469,
+                "y": 348.2749938964844,
+                "width": 38.20000076293945,
+                "height": 16.80000114440918
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/checkout/cart",
+            "timestamp": "2026-09-22T12:52:45.277Z",
+            "page_id": 1,
+            "delay_before_ms": 1034
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/checkout/cart#modal",
+            "timestamp": "2026-09-22T12:52:45.782Z",
+            "page_id": 1,
+            "delay_before_ms": 505
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "9",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#9 > div",
+                "xpath": "//div[normalize-space(text())='9']",
+                "text": "9",
+                "element_text": "9",
+                "tag": "div",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 671,
+                "y": 536.25,
+                "width": 14,
+                "height": 19.200000762939453
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/checkout/cart#modal",
+            "timestamp": "2026-09-22T12:52:47.171Z",
+            "expected_state": false,
+            "page_id": 1,
+            "delay_before_ms": 1389
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "button",
+                "aria_label": null,
+                "accessible_name": "DONE",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#cartItemsList > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(4) > div > button",
+                "xpath": "//button[normalize-space(.)='DONE']",
+                "text": "DONE",
+                "element_text": "DONE",
+                "tag": "button",
+                "attributes": {
+                    "role": "button"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 495.3999938964844,
+                "y": 597.4500122070312,
+                "width": 272.3999938964844,
+                "height": 40
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/checkout/cart#modal",
+            "timestamp": "2026-09-22T12:52:48.088Z",
+            "page_id": 1,
+            "delay_before_ms": 917
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/checkout/cart",
+            "timestamp": "2026-09-22T12:52:48.340Z",
+            "page_id": 1,
+            "delay_before_ms": 252
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#appContent > div > div > div > div > div:nth-of-type(2) > div > div > div:nth-of-type(4) > div > svg",
+                "xpath": "/html[1]/body[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[4]/div[1]/svg[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "svg",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 782,
+                "y": 422.9750061035156,
+                "width": 16,
+                "height": 16
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/checkout/cart",
+            "timestamp": "2026-09-22T12:52:49.959Z",
+            "expected_state": true,
+            "page_id": 1,
+            "delay_before_ms": 1619
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 180,
+            "scroll_y_before": 0,
+            "scroll_y_after": 180,
+            "viewport_height": 720,
+            "document_height": 8599,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/checkout/cart",
+            "timestamp": "2026-09-22T12:52:51.335Z",
+            "page_id": 1,
+            "delay_before_ms": 1376
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "button",
+                "aria_label": null,
+                "accessible_name": "PLACE ORDER",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#appContent > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(4) > button",
+                "xpath": "//button[normalize-space(.)='PLACE ORDER']",
+                "text": "PLACE ORDER",
+                "element_text": "PLACE ORDER",
+                "tag": "button",
+                "attributes": {
+                    "role": "button"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 782,
+                "y": 657.6875,
+                "width": 320,
+                "height": 40
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/checkout/cart",
+            "timestamp": "2026-09-22T12:52:51.965Z",
+            "page_id": 1,
+            "delay_before_ms": 630
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 1,
+            "scroll_y_before": 0,
+            "scroll_y_after": 0.800000011920929,
+            "viewport_height": 720,
+            "document_height": 780,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/login?referer=/checkout/cart",
+            "timestamp": "2026-09-22T12:52:53.047Z",
+            "page_id": 1,
+            "delay_before_ms": 1082
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 1,
+            "page_url": "https://www.myntra.com/checkout/cart",
+            "remaining_page_id": 0,
+            "timestamp": "2026-09-22T12:52:54.504Z",
+            "delay_before_ms": 1457
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 0,
+            "page_url": "https://www.myntra.com/men-formal-shirts?f=Brand%3APeter%20England%3A%3AColor%3ANavy%20Blue_3c4477",
+            "remaining_page_id": null,
+            "timestamp": "2026-09-22T12:52:54.504Z",
+            "delay_before_ms": 0
+        }
+    ],
+    "saved_at": "2026-09-22T18:22:54.504234"
+}

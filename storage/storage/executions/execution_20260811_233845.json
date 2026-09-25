@@ -1,0 +1,29 @@
+{
+  "status": "PASS",
+  "message": "all steps resolved and validations passed",
+  "qa_url": "https://books.toscrape.com/",
+  "steps": [
+    {
+      "index": 1,
+      "action_type": "click",
+      "strategy_used": "css_path",
+      "success": true,
+      "fragile": false,
+      "error": null,
+      "screenshot": "screenshots/execution_runs/20260811_233841/step1.png"
+    },
+    {
+      "index": 2,
+      "action_type": "click",
+      "strategy_used": "css_path",
+      "success": true,
+      "fragile": false,
+      "error": null,
+      "screenshot": "screenshots/execution_runs/20260811_233841/step2.png"
+    }
+  ],
+  "content_check": true,
+  "screenshot_diff": null,
+  "final_screenshot": "screenshots/execution_runs/20260811_233841/final.png",
+  "run_id": "20260811_233841"
+}

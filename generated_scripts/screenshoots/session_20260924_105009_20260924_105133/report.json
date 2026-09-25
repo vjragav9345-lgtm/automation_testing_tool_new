@@ -1,0 +1,16 @@
+{
+  "status": "FAIL",
+  "message": "Couldn't reach https://www.myntra.com/ - check the URL is correct and the site is reachable.",
+  "diagnostic": "could not open QA URL: Page.goto: Target page, context or browser has been closed\nCall log:\nnavigating to \"https://www.myntra.com/\", waiting until \"domcontentloaded\"\n",
+  "qa_url": "https://www.myntra.com/",
+  "steps": [],
+  "ui_elements": [],
+  "ui_elements_status": "PASS",
+  "content_check": null,
+  "screenshot_diff": null,
+  "product_validation": null,
+  "final_screenshot": null,
+  "run_id": "session_20260924_105009_20260924_105133",
+  "run_dir": "generated_scripts/screenshoots/session_20260924_105009_20260924_105133",
+  "live_log": null
+}

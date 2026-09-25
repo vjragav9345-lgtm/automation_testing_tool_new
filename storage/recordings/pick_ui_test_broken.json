@@ -1,5 +1,0 @@
-{
-  "name": "pick_ui_test_broken",
-  "start_url": "http://127.0.0.1:8898/does-not-exist.html",
-  "actions": []
-}

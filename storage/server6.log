@@ -1,0 +1,7 @@
+::ffff:127.0.0.1 - - [10/Sep/2026 21:42:32] "GET /atc_product.html HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Sep/2026 21:43:03] "GET /atc_product.html HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Sep/2026 21:43:05] "GET /atc_cart.html HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Sep/2026 21:43:37] "GET /atc_selector_variant.html HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Sep/2026 21:43:47] "GET /atc_selector_variant.html HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Sep/2026 21:44:03] "GET /normal_login.html HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [10/Sep/2026 21:44:15] "GET /normal_login.html HTTP/1.1" 200 -

@@ -1,0 +1,73 @@
+{
+  "status": "PASS",
+  "message": "all steps resolved and validations passed",
+  "diagnostic": null,
+  "qa_url": "http://127.0.0.1:8899/page1.html",
+  "steps": [
+    {
+      "index": 1,
+      "action_type": "navigate",
+      "name": "Page1 page",
+      "strategy_used": null,
+      "element_found": true,
+      "success": true,
+      "error": null,
+      "warning": null,
+      "effect_verified": null,
+      "large_bbox_flag": false,
+      "screenshot": "generated_scripts/screenshoots/verify_mismatch_a_script_20260922_180823/page1_html/step01_page1_page_2026-09-22_18-08-30.png",
+      "url_before": "http://127.0.0.1:8899/page1.html",
+      "url_after": "http://127.0.0.1:8899/page1.html",
+      "duration": 0.031,
+      "locator_report": null,
+      "expected": null,
+      "actual": null,
+      "fragile": false
+    },
+    {
+      "index": 2,
+      "action_type": "click",
+      "name": "\"Go to Page 2 (footer link)\" link",
+      "strategy_used": "role_text_refresh",
+      "element_found": true,
+      "success": true,
+      "error": "recorded click position was stale (or every other locator signal failed) - re-resolved the target live via role/accessible-name/text instead of the recorded coordinate",
+      "warning": null,
+      "effect_verified": null,
+      "large_bbox_flag": false,
+      "screenshot": null,
+      "url_before": "http://127.0.0.1:8899/page1.html",
+      "url_after": "http://127.0.0.1:8899/page2.html",
+      "duration": 7.375,
+      "locator_report": {
+        "strategy": "role_text_refresh",
+        "strategy_label": "role_text_refresh",
+        "fallback_level": null,
+        "resolved": true,
+        "weak": false,
+        "resolution_ms": 7375,
+        "message": "Go to Page 2 (footer link) found using role_text_refresh."
+      },
+      "expected": null,
+      "actual": null,
+      "fragile": false
+    }
+  ],
+  "ui_elements": [
+    {
+      "index": 2,
+      "action_type": "click",
+      "element_found": true,
+      "locator_used": "role_text_refresh",
+      "status": "PASS",
+      "message": null
+    }
+  ],
+  "ui_elements_status": "PASS",
+  "content_check": null,
+  "screenshot_diff": null,
+  "product_validation": null,
+  "final_screenshot": null,
+  "run_id": "verify_mismatch_a_script_20260922_180823",
+  "run_dir": "generated_scripts/screenshoots/verify_mismatch_a_script_20260922_180823"
+}

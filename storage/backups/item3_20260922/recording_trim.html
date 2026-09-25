@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8" />
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    />
+
+    <title>Trim Recording - AutoFlow QA</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}?v=25"
+    />
+
+</head>
+
+
+<body>
+
+<header class="app-header">
+
+    <h1>
+        Trim Recording
+    </h1>
+
+    <p class="tagline">
+        Keep only the steps you tick, save as a new recording
+    </p>
+
+</header>
+
+
+<main class="editor-container">
+
+    <section class="editor-header">
+
+        <div>
+
+            <h2>
+                Recording Details
+            </h2>
+
+            <p class="editor-path">
+
+                Selected Recording:
+
+                <strong id="selectedRecordingPath">
+                    {{ recording_path }}
+                </strong>
+
+            </p>
+
+        </div>
+
+
+        <button
+            type="button"
+            class="secondary-btn"
+            onclick="window.location.href='/'"
+        >
+            Close
+        </button>
+
+    </section>
+
+
+    <section
+        id="trimLoading"
+        class="editor-message"
+    >
+        Loading recording...
+    </section>
+
+
+    <section
+        id="trimError"
+        class="editor-error"
+        hidden
+    ></section>
+
+
+    <section
+        id="recordingInfo"
+        class="recording-info"
+        hidden
+    >
+
+        <div class="info-card">
+            <span class="info-label">Name</span>
+            <span id="recordingName" class="info-value">-</span>
+        </div>
+
+        <div class="info-card">
+            <span class="info-label">Total Steps</span>
+            <span id="recordingActionCount" class="info-value">0</span>
+        </div>
+
+        <div class="info-card">
+            <span class="info-label">Start URL</span>
+            <span id="recordingStartUrl" class="info-value">-</span>
+        </div>
+
+        <div class="info-card">
+            <span class="info-label">Selected</span>
+            <span id="selectedCount" class="info-value">0</span>
+        </div>
+
+    </section>
+
+
+    <section
+        id="stepsContainer"
+        class="actions-editor"
+        hidden
+    >
+
+        <h2>
+            Steps - tick the ones to KEEP
+        </h2>
+
+        <div class="editor-header" style="margin-bottom: 12px;">
+
+            <div></div>
+
+            <div>
+                <button
+                    type="button"
+                    id="selectAllBtn"
+                    class="secondary-btn"
+                >
+                    Select All
+                </button>
+
+                <button
+                    type="button"
+                    id="deselectAllBtn"
+                    class="secondary-btn"
+                >
+                    Deselect All
+                </button>
+            </div>
+
+        </div>
+
+        <div id="stepsList"></div>
+
+        <div
+            id="saveStatus"
+            class="editor-message"
+            hidden
+        ></div>
+
+        <button
+            type="button"
+            id="saveTrimmedBtn"
+            class="action-btn"
+        >
+            Save Trimmed Recording
+        </button>
+
+    </section>
+
+</main>
+
+
+<script>
+
+const recordingPath = {{ recording_path | tojson }};
+
+let recordingData = null;
+let stepSummaries = [];
+
+// index -> whether the user has ticked this step to KEEP it. Starts with
+// every step ticked (trimming is normally "remove a few", not "start
+// from nothing") - the user unticks the ones they don't want.
+const keepState = {};
+
+let _loadStarted = false;
+
+
+async function loadRecording() {
+
+    if (_loadStarted) {
+        return;
+    }
+    _loadStarted = true;
+
+    const loading = document.getElementById("trimLoading");
+    const error = document.getElementById("trimError");
+    const info = document.getElementById("recordingInfo");
+    const stepsContainer = document.getElementById("stepsContainer");
+
+    try {
+
+        loading.hidden = false;
+        error.hidden = true;
+        info.hidden = true;
+        stepsContainer.hidden = true;
+
+        const url = "/api/recordings/trim_view?path=" + encodeURIComponent(recordingPath);
+
+        const response = await fetch(url, {
+            headers: { "Accept": "application/json" }
+        });
+
+        const contentType = response.headers.get("content-type") || "";
+
+        if (!contentType.includes("application/json")) {
+            throw new Error("Server returned HTML instead of JSON.");
+        }
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+            throw new Error(data.message || "Failed to load recording.");
+        }
+
+        recordingData = data.recording;
+        stepSummaries = data.steps || [];
+
+        stepSummaries.forEach((s) => { keepState[s.index] = true; });
+
+        renderInfo();
+        renderSteps();
+
+        loading.hidden = true;
+        info.hidden = false;
+        stepsContainer.hidden = false;
+
+    } catch (err) {
+
+        console.error("Trim load failed:", err);
+        loading.hidden = true;
+        error.textContent = "Failed to load recording: " + err.message;
+        error.hidden = false;
+    }
+}
+
+
+function renderInfo() {
+
+    document.getElementById("recordingName").textContent = recordingData.name || "-";
+    document.getElementById("recordingActionCount").textContent = stepSummaries.length;
+    document.getElementById("recordingStartUrl").textContent = recordingData.start_url || "-";
+    updateSelectedCount();
+}
+
+
+function updateSelectedCount() {
+
+    const count = Object.values(keepState).filter(Boolean).length;
+    document.getElementById("selectedCount").textContent = count;
+}
+
+
+function renderSteps() {
+
+    const container = document.getElementById("stepsList");
+    container.innerHTML = "";
+
+    if (stepSummaries.length === 0) {
+        container.innerHTML =
+            '<div class="recordings-empty">No steps found in this recording.</div>';
+        return;
+    }
+
+    stepSummaries.forEach((step) => {
+
+        const card = document.createElement("div");
+        card.className = "action-card";
+
+        const row = document.createElement("div");
+        row.style.display = "flex";
+        row.style.alignItems = "flex-start";
+        row.style.gap = "10px";
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.checked = keepState[step.index];
+        checkbox.addEventListener("change", () => {
+            keepState[step.index] = checkbox.checked;
+            updateSelectedCount();
+        });
+
+        const textWrap = document.createElement("div");
+
+        const heading = document.createElement("h3");
+        heading.textContent =
+            `Step ${step.index + 1}: ${step.action_type || "unknown"} - ${step.label}`;
+
+        const locatorLine = document.createElement("p");
+        locatorLine.className = "editor-path";
+        locatorLine.textContent = "Locator: " + (step.locator_display || "-");
+
+        textWrap.appendChild(heading);
+        textWrap.appendChild(locatorLine);
+
+        row.appendChild(checkbox);
+        row.appendChild(textWrap);
+        card.appendChild(row);
+
+        container.appendChild(card);
+    });
+}
+
+
+document.getElementById("selectAllBtn").addEventListener("click", () => {
+    stepSummaries.forEach((s) => { keepState[s.index] = true; });
+    renderSteps();
+    updateSelectedCount();
+});
+
+document.getElementById("deselectAllBtn").addEventListener("click", () => {
+    stepSummaries.forEach((s) => { keepState[s.index] = false; });
+    renderSteps();
+    updateSelectedCount();
+});
+
+
+// basic internal-consistency check on the KEPT subset - a tab_close
+// whose matching tab_open wasn't kept (or vice versa) doesn't make the
+// trimmed recording unplayable, but it likely isn't what the user meant,
+// so this warns (and still lets them proceed) rather than silently
+// producing a maybe-broken sequence. page_id 0 is the original page
+// (never has its own tab_open), so it's excluded from the "close needs
+// an open" side of this check.
+function checkTabConsistency(selectedActions) {
+
+    const opened = new Set();
+    const closed = new Set();
+
+    selectedActions.forEach((a) => {
+        if (a.action_type === "tab_open") opened.add(a.page_id);
+        if (a.action_type === "tab_close") closed.add(a.page_id);
+    });
+
+    const warnings = [];
+
+    closed.forEach((pid) => {
+        if (pid !== 0 && !opened.has(pid)) {
+            warnings.push(`tab_close for page ${pid} is selected, but its tab_open is not.`);
+        }
+    });
+
+    opened.forEach((pid) => {
+        if (!closed.has(pid)) {
+            warnings.push(`tab_open for page ${pid} is selected, but its tab_close is not.`);
+        }
+    });
+
+    return warnings;
+}
+
+
+const saveTrimmedBtn = document.getElementById("saveTrimmedBtn");
+const saveStatus = document.getElementById("saveStatus");
+
+saveTrimmedBtn.addEventListener("click", async () => {
+
+    saveStatus.hidden = true;
+
+    const selectedActions = recordingData.actions.filter(
+        (_, index) => keepState[index]
+    );
+
+    if (selectedActions.length === 0) {
+        saveStatus.className = "editor-error";
+        saveStatus.textContent = "Select at least one step to save.";
+        saveStatus.hidden = false;
+        return;
+    }
+
+    const warnings = checkTabConsistency(selectedActions);
+
+    if (warnings.length > 0) {
+        const proceed = confirm(
+            "This selection looks internally inconsistent:\n\n" +
+            warnings.join("\n") +
+            "\n\nSave it anyway?"
+        );
+        if (!proceed) {
+            return;
+        }
+    }
+
+    saveTrimmedBtn.disabled = true;
+
+    try {
+
+        const response = await fetch("/api/recordings/trim_save", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                recording: {
+                    name: recordingData.name,
+                    start_url: recordingData.start_url,
+                    actions: selectedActions
+                }
+            })
+        });
+
+        const contentType = response.headers.get("content-type") || "";
+
+        if (!contentType.includes("application/json")) {
+            throw new Error("Server returned HTML instead of JSON.");
+        }
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+            throw new Error(data.message || "Failed to save trimmed recording.");
+        }
+
+        saveStatus.className = "editor-message";
+        saveStatus.textContent = "Saved as " + data.name + " (" + data.path + ")";
+        saveStatus.hidden = false;
+
+    } catch (error) {
+
+        console.error("Trim save failed:", error);
+        saveStatus.className = "editor-error";
+        saveStatus.textContent = "Save failed: " + error.message;
+        saveStatus.hidden = false;
+
+    } finally {
+        saveTrimmedBtn.disabled = false;
+    }
+});
+
+
+loadRecording();
+
+</script>
+
+</body>
+</html>

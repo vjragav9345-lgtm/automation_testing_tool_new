@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8" />
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    />
+
+    <title>Live Replay Log - AutoFlow QA</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}?v=25"
+    />
+
+    <style>
+
+        body {
+            background: #10141a;
+            color: #d7e0ea;
+            font-family: "Segoe UI", Consolas, monospace;
+            margin: 0;
+            padding: 0;
+        }
+
+        header.log-header {
+            padding: 10px 14px;
+            background: #171c24;
+            border-bottom: 1px solid #2a323d;
+            position: sticky;
+            top: 0;
+        }
+
+        header.log-header h1 {
+            font-size: 15px;
+            margin: 0 0 4px 0;
+        }
+
+        #currentStep {
+            font-size: 12px;
+            color: #9fb0c3;
+        }
+
+        #logLines {
+            padding: 8px 14px;
+            font-size: 12.5px;
+            line-height: 1.5;
+            overflow-y: auto;
+        }
+
+        .log-line {
+            padding: 3px 0;
+            border-bottom: 1px solid #1c222b;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .log-line .ts {
+            color: #66748a;
+            margin-right: 6px;
+        }
+
+        .status-pass { color: #4caf50; font-weight: 600; }
+        .status-fail { color: #f66; font-weight: 600; }
+        .status-skipped { color: #d9a441; font-weight: 600; }
+        .status-running { color: #6cf; font-weight: 600; }
+
+        .fail-detail {
+            margin: 4px 0 4px 18px;
+            padding: 6px 10px;
+            background: #241417;
+            border-left: 3px solid #a33;
+            font-size: 12px;
+            color: #f2c6c6;
+        }
+
+        .fail-detail div {
+            margin: 1px 0;
+        }
+
+        #summaryBanner {
+            margin: 10px 14px;
+            padding: 10px 12px;
+            border-radius: 4px;
+            font-size: 13px;
+            display: none;
+        }
+
+        #summaryBanner.pass {
+            background: #16321c;
+            border: 1px solid #2f6b3c;
+            color: #b7e6bf;
+        }
+
+        #summaryBanner.fail {
+            background: #341717;
+            border: 1px solid #7a2f2f;
+            color: #f2c6c6;
+        }
+
+        #summaryBanner a {
+            color: #8fd0ff;
+        }
+
+        #errorBanner {
+            margin: 10px 14px;
+            padding: 10px 12px;
+            border-radius: 4px;
+            background: #341717;
+            border: 1px solid #7a2f2f;
+            color: #f2c6c6;
+            font-size: 13px;
+            display: none;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<header class="log-header">
+    <h1>Live Replay Log</h1>
+    <div id="currentStep">Connecting...</div>
+</header>
+
+<div id="errorBanner"></div>
+<div id="summaryBanner"></div>
+<div id="logLines"></div>
+
+<script>
+
+// self-contained duplicate of static/js/script.js's ACTION_TYPE_LABELS -
+// this page is a standalone popup window with no shared JS module system
+// in this project, so it follows the SAME already-established pattern
+// the codebase uses elsewhere (recording_editor.html/report_generator.py
+// each keep their own copy too) rather than inventing a new shared-config
+// mechanism just for this one page.
+const ACTION_TYPE_LABELS = {
+    click: "Click", dblclick: "Double Click", right_click: "Right Click",
+    fill: "Fill", select: "Select", submit: "Submit", press: "Key Press",
+    scroll: "Scroll", navigate: "Navigate", tab_open: "Open Tab",
+    tab_switch: "Switch Tab", tab_close: "Close Tab", validate: "Validate",
+    click_if_exists: "Click If Exists", screenshot: "Screenshot",
+    check: "Checkbox Toggle", check_checked: "Checkbox Check",
+    capture_value: "Capture Value", compare_value: "Compare Value",
+    validate_element: "Validate Element", validate_text: "Validate Text",
+    validate_attribute: "Validate Attribute", validate_visible: "Validate Visible",
+    validate_value: "Validate Value", validate_enabled: "Validate Enabled",
+    count_elements: "Count Elements", compare_counts: "Compare Counts",
+    count_summary: "Count Summary", detect_duplicates: "Detect Duplicates",
+    capture_list: "Capture List", compare_list_overlap: "Compare List Overlap",
+    validate_value_range: "Validate Value Range",
+    // ITEM 7 FIX: both were missing from this copy (validate_url was
+    // already present in the other two ACTION_TYPE_LABELS copies this
+    // file's own top comment says it mirrors; validate_checked is a
+    // newer action type that was wired into replay/ACTION_FIELD_DEFS
+    // but never added to any of the three label copies) - without an
+    // explicit entry here, a step of either type fell back to the
+    // generic underscore-to-title-case name, which happens to read
+    // right for validate_checked by coincidence but not for validate_url.
+    validate_url: "Validate URL", validate_checked: "Validate Checkbox State",
+};
+
+function actionLabel(actionType, element) {
+    const base = ACTION_TYPE_LABELS[actionType] ||
+        (actionType || "step").replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+    if (!element) return base;
+    // a scroll/list-container target's own text can be its ENTIRE
+    // multi-line visible content (every item in a list, say) - collapsed
+    // to one line and capped here purely for this one-line log display;
+    // the full, real text is untouched everywhere else (recording JSON,
+    // report, etc.), this is a display-only trim
+    let oneLine = String(element).replace(/\s+/g, " ").trim();
+    if (oneLine.length > 60) oneLine = oneLine.slice(0, 57) + "...";
+    return oneLine ? `${base} - ${oneLine}` : base;
+}
+
+function timestamp() {
+    return new Date().toLocaleTimeString();
+}
+
+function appendLine(html) {
+    const container = document.getElementById("logLines");
+    const line = document.createElement("div");
+    line.className = "log-line";
+    line.innerHTML = html;
+    container.appendChild(line);
+    container.scrollTop = container.scrollHeight;
+}
+
+function escapeHtml(s) {
+    if (s === null || s === undefined) return "";
+    return String(s)
+        .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+}
+
+const params = new URLSearchParams(window.location.search);
+const runId = params.get("run_id");
+const currentStepEl = document.getElementById("currentStep");
+const errorBanner = document.getElementById("errorBanner");
+const summaryBanner = document.getElementById("summaryBanner");
+
+if (!runId) {
+    currentStepEl.textContent = "No run_id given.";
+} else {
+
+    currentStepEl.textContent = "Connecting to replay " + runId + "...";
+
+    const source = new EventSource("/api/test/run/stream?run_id=" + encodeURIComponent(runId));
+
+    source.addEventListener("running", (e) => {
+        const data = JSON.parse(e.data);
+        currentStepEl.innerHTML =
+            `<span class="status-running">RUNNING</span> Step ${data.index}: ` +
+            escapeHtml(actionLabel(data.action_type, data.element)) +
+            ` (${data.elapsed_s}s elapsed)`;
+    });
+
+    // a long-running replay's SSE connection can drop and reconnect for
+    // reasons that have nothing to do with the replay itself (a dev-
+    // server idle timeout, a network blip) - EventSource always
+    // transparently reconnects on its own, and the server-side stream
+    // (see api_test_run_stream in app.py) has no per-CLIENT resume
+    // cursor, so a fresh connection replays every step already recorded
+    // in report.json from the start. Deduping here, by step index,
+    // means a reconnect is a harmless no-op for what's on screen instead
+    // of every already-shown step appearing a second time - confirmed
+    // real (not hypothetical) against an actual ~90s, 23-step replay.
+    const renderedSteps = new Set();
+
+    source.addEventListener("step", (e) => {
+        const data = JSON.parse(e.data);
+        if (renderedSteps.has(data.index)) return;
+        renderedSteps.add(data.index);
+        const label = escapeHtml(actionLabel(data.action_type, data.element));
+        const statusText = { pass: "PASS", fail: "FAILED", skipped: "SKIPPED" }[data.status] || data.status.toUpperCase();
+        const statusClass = "status-" + data.status;
+
+        appendLine(
+            `<span class="ts">[${timestamp()}]</span>` +
+            `Step ${data.index}: ${label} - <span class="${statusClass}">${statusText}</span>`
+        );
+
+        if (data.status === "fail" && data.reason) {
+            const r = data.reason;
+            const parts = [];
+            if (r.error) parts.push(`<div><strong>Reason:</strong> ${escapeHtml(r.error)}</div>`);
+            if (r.selector) parts.push(`<div><strong>Locator strategy:</strong> ${escapeHtml(r.selector)}</div>`);
+            if (r.url) parts.push(`<div><strong>URL at failure:</strong> ${escapeHtml(r.url)}</div>`);
+            if (r.warning) parts.push(`<div><strong>Warning:</strong> ${escapeHtml(r.warning)}</div>`);
+            if (r.screenshot) {
+                parts.push(
+                    `<div><strong>Screenshot:</strong> ` +
+                    `<a href="/screenshots/raw?path=${encodeURIComponent(r.screenshot)}" target="_blank">${escapeHtml(r.screenshot)}</a></div>`
+                );
+            }
+            const detail = document.createElement("div");
+            detail.className = "fail-detail";
+            detail.innerHTML = parts.join("");
+            document.getElementById("logLines").appendChild(detail);
+        }
+    });
+
+    source.addEventListener("summary", (e) => {
+        const data = JSON.parse(e.data);
+        source.close();
+        currentStepEl.textContent = "Replay finished.";
+
+        summaryBanner.className = (data.status === "PASS") ? "pass" : "fail";
+        summaryBanner.style.display = "block";
+
+        let html =
+            `<strong>${escapeHtml(data.status || "DONE")}</strong> - ${escapeHtml(data.message || "")}<br>` +
+            `Total steps: ${data.total_steps} &nbsp; ` +
+            `Passed: ${data.passed} &nbsp; ` +
+            `Failed: ${data.failed} &nbsp; ` +
+            `Skipped: ${data.skipped} &nbsp; ` +
+            `Duration: ${data.duration_s}s`;
+
+        if (data.html_report) {
+            html += `<br><a href="/${data.html_report}" target="_blank">Open full HTML report</a>`;
+        }
+
+        summaryBanner.innerHTML = html;
+    });
+
+    // application-level errors the server sends deliberately (bad/unknown
+    // run_id) - named "stream_error", NOT "error", specifically so this
+    // never collides with EventSource's own native "error" event below
+    // (a real dropped/failed connection), which carries no usable
+    // message of its own at all
+    source.addEventListener("stream_error", (e) => {
+        const data = JSON.parse(e.data);
+        errorBanner.textContent = data.message || "Something went wrong reading this replay's log.";
+        errorBanner.style.display = "block";
+        source.close();
+    });
+
+    // genuine connection failure (server restarted, network dropped) -
+    // EventSource auto-retries on its own by default, so this is purely
+    // informational, not fatal
+    source.addEventListener("error", () => {
+        if (errorBanner.style.display !== "block") {
+            errorBanner.textContent = "Connection to the replay log was interrupted - retrying...";
+            errorBanner.style.display = "block";
+        }
+    });
+
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "found": true,
+  "matched_text": "Login Page",
+  "match_type": "exact",
+  "selector": "text=Login Page",
+  "screenshot": "screenshots/product_search/search_20260811_233305_174202.png",
+  "page_settled": true,
+  "timestamp": "2026-08-11T23:33:05.563160",
+  "note": "only the content already loaded/visible on the page was checked - try the scroll option if the site lazy-loads more results"
+}

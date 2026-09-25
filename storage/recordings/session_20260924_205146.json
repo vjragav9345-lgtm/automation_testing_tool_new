@@ -1,0 +1,15 @@
+{
+    "name": "session_20260924_205146",
+    "start_url": "http://127.0.0.1:52055/phase4_product_card.html",
+    "actions": [
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "http://127.0.0.1:52055/phase4_product_card.html",
+            "timestamp": "2026-09-24T15:21:46.517Z",
+            "page_id": 0
+        }
+    ]
+}

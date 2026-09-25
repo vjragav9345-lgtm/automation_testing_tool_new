@@ -14,6 +14,8 @@ Navigation itself isn't something page JS can reliably report (the page
 is usually about to unload), so that's watched from the Python side via
 Playwright's framenavigated event instead.
 """
+import gzip
+import hashlib
 import json
 import logging
 import os
@@ -22,6 +24,13 @@ import time
 import uuid
 from datetime import datetime, timezone
 from pathlib import Path
+
+# reuses the SAME atomic (temp-file + os.replace) write helper and target
+# directory the finished-recording save path already uses (storage/
+# repository.py) - FIX 1's incremental per-action flush writes through
+# the exact same primitive, rather than a second, separately-maintained
+# write routine.
+from storage.repository import RECORDINGS_DIR, SNAPSHOTS_DIR, _write_json, recover_orphaned_drafts
 
 logger = logging.getLogger(__name__)
 
@@ -69,6 +78,125 @@ def _parse_ts(ts):
         return datetime.fromisoformat(ts.replace("Z", "+00:00"))
     except ValueError:
         return None
+
+
+# FIX 5 (scale): caps for the RC4 DOM-snapshot mechanism below - a
+# recording with 200+ navigate-shaped actions must not turn into hundreds
+# of megabytes of near-duplicate full-page HTML. Per-snapshot cap keeps
+# one unusually large page from blowing the budget by itself; the session
+# cap is the actual backstop for a long recording overall.
+SNAPSHOT_MAX_BYTES_PER_FILE = 2 * 1024 * 1024
+SNAPSHOT_MAX_BYTES_PER_SESSION = 100 * 1024 * 1024
+
+
+def _is_hard_navigation(page):
+    """True only for a genuine full document load (new/reload/back-
+    forward), never a client-side pushState/replaceState URL change - the
+    PerformanceNavigationTiming entry list the browser itself maintains
+    only ever grows on a real navigation, so comparing its length across
+    calls is a reliable, purely-generic signal (no site-specific
+    detection of "is this an SPA filter change" needed). Best-effort: an
+    evaluate() failure (page mid-navigation, closing, cross-origin during
+    the check) is treated as "not a hard navigation" - the caller's own
+    existing hard-navigation-specific paths simply see one fewer snapshot
+    in the rare case this misfires, never a crash.
+    """
+    try:
+        return bool(page.evaluate(
+            "() => performance.getEntriesByType('navigation').length > (window.__afqaNavCount || 0)"
+        ))
+    except Exception:
+        return False
+
+
+def _mark_navigation_counted(page):
+    try:
+        page.evaluate(
+            "() => { window.__afqaNavCount = performance.getEntriesByType('navigation').length; }"
+        )
+    except Exception:
+        pass
+
+
+class _SnapshotBudget:
+    """Per-session state for the dedup/cap logic below - lives on the
+    Recorder instance (one per recording session), reset at start()."""
+
+    def __init__(self):
+        self.total_bytes = 0
+        self.last_content_hash = None
+        self.quota_warned = False
+
+
+def _capture_dom_snapshot(page, session_id, ts, budget):
+    """RC4 (real DOM evidence for the future): saves a full-page HTML
+    snapshot at the moment of a navigate, under
+    storage/snapshots/<session_id>/<sanitized_timestamp>.html.gz - later
+    consumed by tests/fixture_from_snapshot.py to rebuild a local fixture
+    from what the real site actually looked like, or by a human debugging
+    a stale-locator replay failure. Keyed by timestamp rather than a step
+    index: the final step numbering only exists after stop() sorts every
+    action chronologically, long after this navigate is captured, but the
+    timestamp recorded here is the same one _record() stores on the
+    navigate action itself, so any later consumer can still match this
+    file back to its exact step. page.content() (not CDP MHTML) is used
+    deliberately - it's a single Playwright call that works identically
+    on every browser engine this tool supports, not just Chromium.
+
+    FIX 5 (scale): gzip-compressed, capped per-file and per-session (see
+    the module constants above), and skipped outright when the content is
+    byte-identical to the immediately preceding snapshot in this same
+    session (a pushState-driven filter change that happens to leave the
+    markup unchanged, or two hard navigations landing on the same
+    template) - all to keep a long recording's snapshot footprint from
+    growing unbounded. Best-effort throughout: any failure here (page
+    already navigating away, closed, etc) must never break the recording
+    itself.
+    """
+    if not session_id:
+        return None
+    try:
+        html = page.content()
+    except Exception:
+        return None
+
+    raw_bytes = html.encode("utf-8", errors="replace")
+    content_hash = hashlib.sha1(raw_bytes).hexdigest()
+    if budget.last_content_hash == content_hash:
+        return None  # identical to the previous snapshot - nothing new to save
+    budget.last_content_hash = content_hash
+
+    if budget.total_bytes >= SNAPSHOT_MAX_BYTES_PER_SESSION:
+        if not budget.quota_warned:
+            logger.warning(
+                "session %s reached the %dMB DOM-snapshot budget - "
+                "further navigate steps still record normally, just "
+                "without a full-page snapshot", session_id,
+                SNAPSHOT_MAX_BYTES_PER_SESSION // (1024 * 1024),
+            )
+            budget.quota_warned = True
+        return None
+
+    safe_ts = (ts or "").replace(":", "-").replace(".", "-")
+    if not safe_ts:
+        return None
+    session_dir = SNAPSHOTS_DIR / session_id
+    try:
+        session_dir.mkdir(parents=True, exist_ok=True)
+        snapshot_path = session_dir / f"{safe_ts}.html.gz"
+        compressed = gzip.compress(raw_bytes, compresslevel=6)
+        if len(compressed) > SNAPSHOT_MAX_BYTES_PER_FILE:
+            # last-resort truncation for a genuinely huge page - still
+            # useful for locator/DOM-shape debugging even if incomplete;
+            # far better than either skipping it entirely or blowing the
+            # per-file cap
+            raw_bytes = raw_bytes[: SNAPSHOT_MAX_BYTES_PER_FILE * 4]
+            compressed = gzip.compress(raw_bytes, compresslevel=6)[:SNAPSHOT_MAX_BYTES_PER_FILE]
+        snapshot_path.write_bytes(compressed)
+        budget.total_bytes += len(compressed)
+    except Exception:
+        return None
+    return str(snapshot_path.relative_to(SNAPSHOTS_DIR.parent.parent))
 
 
 def _add_delays(ordered_actions):
@@ -275,16 +403,30 @@ class _PageState:
     own pending redirect chain independently - two tabs mid-navigation at
     the same moment must not be able to cancel or overwrite each other's
     timers."""
-    __slots__ = ("nav_timer", "pending_nav_url", "pending_nav_ts", "last_nav_url", "nav_chain_click_ts", "last_click_ts", "closed")
+    __slots__ = (
+        "nav_timer", "pending_nav_url", "pending_nav_ts", "last_nav_url", "nav_chain_click_ts",
+        "last_click_ts", "closed", "last_click_action_ts", "nav_chain_click_action_ts",
+        "pending_nav_snapshot_path",
+    )
 
     def __init__(self, initial_url):
         self.nav_timer = None
         self.pending_nav_url = None
         self.pending_nav_ts = None
+        self.pending_nav_snapshot_path = None
         self.last_nav_url = initial_url
         self.nav_chain_click_ts = None
         self.last_click_ts = 0.0
         self.closed = False
+        # RC3: the causing click's own RECORDED timestamp (a string, the
+        # same field _record() stores on every action) - not last_click_ts
+        # (a bare time.time() float, only ever used for the elapsed-time
+        # comparison). This is what lets a navigate step point back at
+        # the specific action that caused it (caused_by_timestamp) so
+        # replay can resolve it to a real step index later, after
+        # stop()'s own final chronological sort.
+        self.last_click_action_ts = None
+        self.nav_chain_click_action_ts = None
 
 
 class Recorder:
@@ -294,6 +436,38 @@ class Recorder:
         self.start_url = None
         self.session_id = None
         self.recording = False
+        # set by install_context_capture() (FIX 1 - recorder attaches too
+        # late): once a context-level expose_binding/add_init_script pair
+        # is installed, attach_page() must NOT also register a page-level
+        # one for the SAME name - Playwright raises if "recordAction" is
+        # registered twice on the same context. Callers that never call
+        # install_context_capture() (any existing caller) see no behavior
+        # change at all - attach_page() falls back to its original,
+        # unchanged per-page registration exactly as before.
+        self._context_capture_installed = False
+        # set fresh by start() - the stable filename this session's
+        # incremental draft is written to (see _flush_draft). Fixed once
+        # at start(), never recomputed per-flush, so every incremental
+        # write lands on the SAME file instead of a new one each time.
+        self._draft_path = None
+        # FIX 5 (scale): the append-only sidecar _flush_draft() writes
+        # every action to in O(1) time (see its own docstring for why the
+        # old "rewrite the whole JSON every action" approach doesn't scale
+        # to a long recording) - same stem as _draft_path, set alongside
+        # it in start().
+        self._draft_jsonl_path = None
+        self._draft_actions_since_consolidate = 0
+        self._draft_last_consolidate_at = 0.0
+        self._snapshot_budget = _SnapshotBudget()
+        # FIX 2 (locator stability) - keyed by target_timestamp; a patch
+        # that arrives before its own target action has been appended yet
+        # (CONFIRMED to actually happen: Playwright's expose_binding
+        # delivery order across two independent, differently-timed send()
+        # calls from the page is not guaranteed to match the order those
+        # calls were made in) is held here and applied the moment that
+        # action DOES get appended (see _record()), instead of being
+        # silently dropped.
+        self._pending_locator_patches = {}
         # id(page) -> sequential page_id, assigned in the order pages are
         # attached (0 = the original page, 1/2/... = tabs opened during
         # recording, in the order they appeared) - this is what lets the
@@ -332,13 +506,148 @@ class Recorder:
             self._next_page_id += 1
         return self._page_ids[key]
 
+    def _apply_locator_stability_patch(self, patch):
+        """FIX 2 (locator stability, additive only): merges an async
+        match_count/disambiguation report (see action_capture.js's
+        _scheduleLocatorStabilityCheck) into the action it belongs to,
+        found by matching timestamp - the same unique-per-action key
+        caused_by_timestamp already relies on elsewhere in this file.
+        Searched in reverse (most recent actions first) since the patch
+        always arrives shortly after its target action, never before an
+        equally-timestamped OLDER one could exist (timestamps come from
+        Date.now(), effectively unique in practice).
+
+        Deliberately does NOT touch the JSONL sidecar (_flush_draft) -
+        that would either require re-appending the whole patched action
+        (breaking the append-only, one-line-per-action invariant a crash-
+        recovery read depends on) or a second file format entirely, for a
+        signal that's purely an extra scoring hint, never load-bearing
+        for correctness. The periodic full-JSON consolidation naturally
+        picks up the patched value the next time it runs regardless, and
+        the FINAL save (stop() -> save_recording()) always reflects it
+        immediately since this mutates self.actions in place, in memory -
+        the only real exposure is a crash between the patch landing and
+        the next consolidation, which loses nothing but this one nice-to-
+        have hint on whichever action was mid-flight.
+
+        A target action that's already been trimmed/edited via some other
+        path is a genuine no-op (nothing left to patch). A target
+        timestamp that doesn't match anything YET is held in
+        self._pending_locator_patches and applied the moment a matching
+        action is recorded (see _record()) - CONFIRMED necessary, not
+        theoretical: this patch can and does arrive before its own target
+        action's expose_binding call is delivered/processed, even though
+        the target was sent to the page's own recordAction bridge first.
+        """
+        target_ts = patch.get("target_timestamp")
+        if not target_ts:
+            return
+        for action in reversed(self.actions):
+            if action.get("timestamp") == target_ts:
+                self._merge_locator_patch_into(action, patch)
+                return
+        self._pending_locator_patches[target_ts] = patch
+
+    @staticmethod
+    def _merge_locator_patch_into(action, patch):
+        # locator_profile and act_target are the SAME object by reference
+        # in the JS payload (see buildProfile's own "act_target:
+        # locatorProfile"), but JSON serialization over the recordAction
+        # bridge does not preserve that identity - they land here as two
+        # separate dict copies, so both need patching explicitly for
+        # generate_script()'s whitelist (which reads them as two distinct
+        # fields) to see this on either one.
+        for key in ("locator_profile", "act_target"):
+            lp = action.get(key)
+            if isinstance(lp, dict):
+                lp["match_count"] = patch.get("match_count")
+                if patch.get("disambiguation"):
+                    lp["disambiguation"] = patch.get("disambiguation")
+
     def _record(self, action):
         self.actions.append(action)
+        # FIX 2 (locator stability): a patch for THIS action's own
+        # timestamp may have already arrived and be waiting (see
+        # _apply_locator_stability_patch's own docstring for why this
+        # ordering genuinely happens) - apply it now rather than never.
+        pending_patch = self._pending_locator_patches.pop(action.get("timestamp"), None)
+        if pending_patch is not None:
+            self._merge_locator_patch_into(action, pending_patch)
         lp = action.get("locator_profile") or {}
         logger.info("captured %s on %s (page_id=%s)", action.get("action_type"), lp.get("tag"), action.get("page_id"))
         _print_action_line(action)
+        self._flush_draft()
 
-    def _on_action(self, page_id, raw):
+    # FIX 5 (scale): a full-JSON rewrite is only paid this often, not on
+    # every single action - CONFIRMED REAL COST this fixes: the old
+    # unconditional rewrite-the-whole-file-every-action approach made each
+    # action's own save cost proportional to EVERY action recorded so far
+    # (dom_context/html-chain data included), an O(N^2) total write cost
+    # across a long recording. 20 actions is small enough that a crash
+    # between consolidations only ever loses a short, recent stretch - the
+    # append-only JSONL sidecar below already has every action as it
+    # happens regardless, this cadence only controls how often the
+    # human-readable/recovery .json snapshot itself gets refreshed.
+    DRAFT_CONSOLIDATE_EVERY_N_ACTIONS = 20
+    DRAFT_CONSOLIDATE_MIN_INTERVAL_S = 10.0
+
+    def _flush_draft(self):
+        """Incremental per-action persistence (FIX 1, refined by FIX 5):
+        every action is appended to self._draft_jsonl_path (one JSON
+        object per line, opened in append mode) - O(1) per call,
+        regardless of how many actions came before it - so closing the
+        browser manually, or a genuine crash, loses nothing beyond
+        whatever hasn't happened yet. The full, human-readable/recovery
+        self._draft_path JSON is still refreshed periodically (see the
+        cadence constants above), never on every single action, so a long
+        recording's per-action save cost stays flat instead of growing
+        with everything recorded so far. Best-effort only throughout: a
+        write failure here must never interrupt recording itself, only
+        get logged.
+        """
+        if not self._draft_path:
+            return
+        action = self.actions[-1] if self.actions else None
+        if action is not None and self._draft_jsonl_path:
+            try:
+                with open(self._draft_jsonl_path, "a", encoding="utf-8") as f:
+                    f.write(json.dumps(action, ensure_ascii=False, default=str) + "\n")
+            except Exception as e:
+                logger.warning("incremental draft JSONL append failed (%s): %s", self._draft_jsonl_path, e)
+
+        self._draft_actions_since_consolidate += 1
+        now = time.monotonic()
+        due = (
+            self._draft_actions_since_consolidate >= self.DRAFT_CONSOLIDATE_EVERY_N_ACTIONS
+            or (now - self._draft_last_consolidate_at) >= self.DRAFT_CONSOLIDATE_MIN_INTERVAL_S
+        )
+        if not due:
+            return
+        self._consolidate_draft()
+
+    def _consolidate_draft(self):
+        """Full rewrite of self._draft_path from self.actions - same
+        primitive/shape _flush_draft always used before FIX 5, just no
+        longer called on every single action. Also called once, straight
+        away, whenever the JSONL append itself couldn't be used at all
+        (self._draft_jsonl_path unset - shouldn't happen for a normally-
+        started session, but keeps a session with no sidecar at all
+        exactly as safe as before this change instead of silently losing
+        crash-recovery coverage)."""
+        if not self._draft_path:
+            return
+        try:
+            _write_json(self._draft_path, {
+                "name": self._draft_path.stem,
+                "start_url": self.start_url,
+                "actions": self.actions,
+            })
+            self._draft_actions_since_consolidate = 0
+            self._draft_last_consolidate_at = time.monotonic()
+        except Exception as e:
+            logger.warning("incremental draft flush failed (%s): %s", self._draft_path, e)
+
+    def _on_action(self, page_id, raw, frame_info=None):
         if not self.recording:
             return
         try:
@@ -352,6 +661,19 @@ class Recorder:
             # self.actions directly, only used to decide whether a
             # tab_switch action should be recorded (see _ensure_active)
             self._ensure_active(page_id, action.get("timestamp"))
+            return
+
+        if action.get("action_type") == "__locator_stability__":
+            # FIX 2 (locator stability, additive only) - see
+            # action_capture.js's own _scheduleLocatorStabilityCheck: a
+            # ~300ms-delayed report of how many live elements the
+            # already-recorded action's primary locators actually match,
+            # arriving as its own message rather than folded into the
+            # original synchronous payload (counting DOM matches is real,
+            # if small, cost that must never add latency to the capture-
+            # click path). Patches the matching action in place; never a
+            # new action of its own.
+            self._apply_locator_stability_patch(action)
             return
 
         if action.get("action_type") == "__consistency_warning__":
@@ -388,10 +710,23 @@ class Recorder:
             return
 
         action["page_id"] = page_id
+        # FIX 6 (iframe/frame tracking - e.g. Razorpay's checkout, a
+        # cross-origin iframe): only ever set for an action that genuinely
+        # came from a non-main frame (see _describe_frame/_on_action_
+        # binding) - every existing caller of _on_action (attach_page's
+        # own per-page expose_function path) never passes frame_info at
+        # all, so this key is simply absent for every action exactly as
+        # before, on any recording made without context-level capture.
+        if frame_info is not None:
+            action["frame"] = frame_info
         self._record(action)
 
-        if state is not None and action.get("action_type") in ("click", "dblclick", "right_click"):
+        if state is not None and action.get("action_type") in ("click", "dblclick", "right_click", "check"):
             state.last_click_ts = time.time()
+            # RC3: this action's own recorded timestamp - see
+            # _PageState's own docstring for exactly what this is used
+            # for (a navigate's caused_by_timestamp).
+            state.last_click_action_ts = action.get("timestamp")
 
         # the field-presence path (multi-field signup/details forms) is a
         # deliberately separate, later check - it only runs when the
@@ -734,9 +1069,35 @@ class Recorder:
             # - remember whether a click/submit just happened, checked
             # once THIS chain finally settles
             state.nav_chain_click_ts = state.last_click_ts
+            state.nav_chain_click_action_ts = state.last_click_action_ts
 
         state.pending_nav_url = url
         state.pending_nav_ts = ts
+        # RC4: captured synchronously here, on the real framenavigated
+        # event, while `frame`'s page is guaranteed to be on this exact
+        # URL - waiting until _commit_pending_navigate (which runs on a
+        # background Timer thread, unsafe to touch the Playwright page
+        # from at all) would be both too late (a later hop in the same
+        # chain may have already navigated further) and unsafe.
+        #
+        # FIX 5 (scale): a full-page snapshot is only ever worth taking
+        # for a REAL document load - a client-side filter/sort/pagination
+        # change (pushState, no actual reload) fires this exact same
+        # framenavigated event but leaves the page's own markup almost
+        # entirely intact, so snapshotting it too is pure duplicate cost
+        # (CONFIRMED against a real Myntra recording: 16 full ~1.2MB
+        # snapshots for 57 actions, most of them near-identical filter-
+        # panel states). The navigate ACTION itself is still recorded
+        # exactly as before either way - only the snapshot capture is
+        # skipped for a soft/pushState hop.
+        _hard_nav = _is_hard_navigation(frame.page)
+        _mark_navigation_counted(frame.page)
+        if _hard_nav:
+            state.pending_nav_snapshot_path = _capture_dom_snapshot(
+                frame.page, self.session_id, ts, self._snapshot_budget,
+            )
+        else:
+            state.pending_nav_snapshot_path = None
         state.nav_timer = threading.Timer(NAV_SETTLE_WINDOW, self._commit_pending_navigate, args=(page_id,))
         state.nav_timer.daemon = True
         state.nav_timer.start()
@@ -751,8 +1112,10 @@ class Recorder:
         state.nav_timer = None
         url = state.pending_nav_url
         ts = state.pending_nav_ts
+        snapshot_path = state.pending_nav_snapshot_path
         state.pending_nav_url = None
         state.pending_nav_ts = None
+        state.pending_nav_snapshot_path = None
         if not self.recording or not url or url == state.last_nav_url:
             return
         state.last_nav_url = url
@@ -786,10 +1149,31 @@ class Recorder:
             _nav_dt.timestamp() - state.nav_chain_click_ts if _nav_dt is not None
             else time.time() - state.nav_chain_click_ts
         )
-        if state.nav_chain_click_ts is not None and _elapsed_since_click < NAV_DEDUP_WINDOW:
-            # the whole redirect chain was caused by the click/submit step
-            # already recorded - nothing new to add
-            return
+        # RC3 (inconsistent navigate recording - CONFIRMED REAL BUG via a
+        # live Myntra recording: a filter click's own resulting URL
+        # change was recorded as its own navigate step for SOME filter
+        # clicks but silently DROPPED for others, purely because of how
+        # fast the SPA's own route update happened to settle relative to
+        # this exact window, not because of anything different about the
+        # click itself). This used to return here instead of recording
+        # anything at all whenever the navigate followed a click/check
+        # within NAV_DEDUP_WINDOW, on the theory that "the click already
+        # represents this, nothing new to add" - but the resulting URL
+        # IS real, meaningful state a filter/sort click's own recorded
+        # page_url never otherwise captures, and replay depends on
+        # seeing it to verify the click's own effect. Every URL change
+        # is now recorded unconditionally (still deduped against the
+        # immediately preceding URL by the check above) - the ONLY thing
+        # this timing comparison still decides is whether to tag this
+        # navigate with caused_by_timestamp, so replay can tell "this
+        # was a direct effect of the preceding action" (verify-only, see
+        # generator/script_generator.py's own navigate handling) apart
+        # from a navigate with no specific preceding cause.
+        _caused_by_ts = (
+            state.nav_chain_click_action_ts
+            if (state.nav_chain_click_ts is not None and _elapsed_since_click < NAV_DEDUP_WINDOW)
+            else None
+        )
 
         self._record({
             "action_type": "navigate",
@@ -803,7 +1187,103 @@ class Recorder:
             # somehow wasn't set, which should never happen in practice.
             "timestamp": ts or _utc_timestamp(),
             "page_id": page_id,
+            "caused_by_timestamp": _caused_by_ts,
+            "dom_snapshot_path": snapshot_path,
         })
+
+    def install_context_capture(self, context):
+        """FIX 1 (recorder attaches too late): registers the recordAction
+        bridge and the capture script at the CONTEXT level, before any
+        page exists - call this immediately after browser.new_context(),
+        before context.new_page()/page.goto(). Playwright applies a
+        context-level add_init_script to every page the context ever
+        creates, including that page's very FIRST navigation (unlike a
+        per-page add_init_script registered after page.goto() has already
+        started, which only covers navigations AFTER it was registered) -
+        this is what actually closes the gap where an early cookie-accept
+        or nav-menu click during the initial load was previously never
+        observed at all (nothing was listening yet).
+
+        expose_binding (not expose_function) is used specifically so the
+        callback receives `source` (source.page / source.frame) - the
+        SAME mechanism FIX 6 (iframe/frame tracking) needs to know which
+        frame an action actually came from, without a second, separate
+        injection mechanism.
+
+        Must be called at most once per context (Playwright raises if
+        "recordAction" is registered twice) - attach_page() checks
+        self._context_capture_installed and skips its own, otherwise-
+        identical per-page registration once this has run, so the two
+        can never conflict.
+        """
+        context.expose_binding("recordAction", self._on_action_binding)
+        context.add_init_script(_CAPTURE_JS)
+        self._context_capture_installed = True
+
+    def _on_action_binding(self, source, raw):
+        """expose_binding callback (see install_context_capture) - source
+        is Playwright's own dict-like BindingCall source info (keys:
+        "context", "page", "frame" - NOT attribute access, unlike the
+        equivalent JS-side API), carrying which page/frame this call
+        actually came from. Resolves that to the same page_id scheme
+        _page_id_for/attach_page already use, then defers to the
+        existing _on_action(page_id, raw, frame_info) for every bit of
+        real handling - this is purely an adapter, not a second code path.
+        """
+        try:
+            page_id = self._page_id_for(source["page"])
+        except Exception:
+            logger.warning("recordAction binding fired with no resolvable page - dropped")
+            return
+        frame_info = None
+        try:
+            frame_info = self._describe_frame(source["frame"])
+        except Exception:
+            pass
+        self._on_action(page_id, raw, frame_info=frame_info)
+
+    def _describe_frame(self, frame):
+        """FIX 6 (iframe/frame tracking - Razorpay's checkout is a cross-
+        origin iframe, and page_url/page_id alone can never express "this
+        action happened inside a nested frame"). Returns None for the
+        main frame (nothing extra to record - the overwhelming majority
+        of actions), or a small dict describing a nested frame: its own
+        URL, and its owning <iframe> element's src/name/id as seen from
+        the PARENT frame - enough for replay to re-find the same frame
+        later via frame_locator (matched by iframe src host), without
+        needing a second, frame-scoped injection mechanism.
+
+        Wrapped in one outer try/except (on top of the inner, per-field
+        ones already here for partial-info cases): a detached/mid-
+        navigation frame, or anything else going wrong while describing
+        it, must never propagate - the caller (_on_action_binding) always
+        records the action itself regardless of what this returns, and
+        losing the frame annotation is far better than losing the action.
+        """
+        try:
+            try:
+                if frame == frame.page.main_frame:
+                    return None
+            except Exception:
+                pass
+            info = {"frame_url": None, "parent_iframe_src": None, "parent_iframe_name": None}
+            try:
+                info["frame_url"] = frame.url
+            except Exception:
+                pass
+            try:
+                iframe_el = frame.frame_element()
+                if iframe_el is not None:
+                    info["parent_iframe_src"] = iframe_el.get_attribute("src")
+                    info["parent_iframe_name"] = (
+                        iframe_el.get_attribute("name") or iframe_el.get_attribute("id")
+                    )
+            except Exception:
+                pass
+        except Exception:
+            logger.debug("_describe_frame failed entirely (detached frame?) - action still recorded")
+            return None
+        return info
 
     def attach_page(self, page, is_initial=False):
         """Wires the SAME action-capture mechanism (recordAction bridge,
@@ -824,9 +1304,17 @@ class Recorder:
         # expose_function/add_init_script each raise if called twice on the
         # SAME page object - the guard above (page_id in self._page_states)
         # already prevents that, since every distinct page object gets a
-        # distinct page_id exactly once
-        page.expose_function("recordAction", lambda raw, pid=page_id: self._on_action(pid, raw))
-        page.add_init_script(_CAPTURE_JS)
+        # distinct page_id exactly once. Skipped entirely when
+        # install_context_capture() already registered the SAME
+        # "recordAction" name at the context level (FIX 1) - registering
+        # it again here, per-page, would raise; every page created from
+        # that context is already covered by the context-level init
+        # script regardless. Callers that never call
+        # install_context_capture() are completely unaffected - this
+        # branch is unchanged from before.
+        if not self._context_capture_installed:
+            page.expose_function("recordAction", lambda raw, pid=page_id: self._on_action(pid, raw))
+            page.add_init_script(_CAPTURE_JS)
         page.on("framenavigated", lambda frame, pid=page_id: self._on_navigate(pid, frame))
         page.on("close", lambda closed_page, pid=page_id: self._on_page_closed(pid))
 
@@ -886,10 +1374,48 @@ class Recorder:
             "from_page_id": from_page_id,
         })
 
-    def start(self):
+    def start(self, launch_url=None):
+        """launch_url (FIX 1): when given, this is the literal URL the
+        caller passed to page.goto() - used verbatim as start_url / Step
+        1's own recorded navigate, instead of re-reading self.page.url
+        (which, by the time start() runs, may already reflect a
+        server-side or client-side redirect the user never asked for,
+        silently recording the WRONG starting point). Omitted (the
+        default, backward-compatible for any existing caller), this
+        behaves exactly as before: self.page.url is used as-is.
+        """
+        # FIX 6 (crash recovery): before this NEW session creates its own
+        # draft/sidecar, sweep up any leftover sidecar from a PREVIOUS
+        # session that never reached a successful save (killed process,
+        # crash, power loss) - safe here specifically because only one
+        # recording is ever active at a time (see session_state["active"]
+        # in app.py), so anything found at this exact point can only
+        # belong to an already-ended session, never this one. Best-effort:
+        # never lets a recovery hiccup block starting the new recording.
+        try:
+            recover_orphaned_drafts()
+        except Exception as e:
+            logger.warning("crash-recovery sweep failed (continuing to start recording anyway): %s", e)
+
         self.actions = []
-        self.start_url = self.page.url
+        self.start_url = launch_url if launch_url else self.page.url
         self.session_id = uuid.uuid4().hex
+        # stable for this whole session (see _flush_draft) - computed
+        # once, here, never recomputed per-flush. Uses the SAME
+        # "session_<timestamp>" shape save_recording() falls back to when
+        # no explicit name was given, so a recording finished normally
+        # and never explicitly renamed ends up at (effectively) this same
+        # path - _finish_recording's own cleanup (see app.py) removes
+        # this draft once the real, final save has succeeded.
+        self._draft_path = RECORDINGS_DIR / f"session_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+        # FIX 5: append-only sidecar - same cleanup as _draft_path itself
+        # (see _finish_recording in app.py), never left behind after a
+        # normal, successful save.
+        self._draft_jsonl_path = self._draft_path.with_suffix(".draft.jsonl")
+        self._draft_actions_since_consolidate = 0
+        self._draft_last_consolidate_at = time.monotonic()
+        self._snapshot_budget = _SnapshotBudget()
+        self._pending_locator_patches = {}
         self.recording = True
         self._page_ids = {}
         self._page_states = {}
@@ -898,9 +1424,44 @@ class Recorder:
         self._active_page_id = 0
         self._pages_ever_focused = {0}
 
+        # ITEM 1: every recording's own actions list must always begin
+        # with an explicit "navigate" action for the initial page load -
+        # previously this was only ever captured in start_url (a
+        # separate, top-level field), never as an action in its own
+        # right, so actions[0] was normally whatever the user did FIRST
+        # (a click, a fill, ...) with no explicit record of how replay
+        # even got to that starting page at all. Recorded the exact same
+        # shape _commit_pending_navigate already uses for every OTHER
+        # navigate action, so nothing downstream (replay, the editor,
+        # the report) needs to treat this one any differently from a
+        # normal recorded navigate.
+        self._record({
+            "action_type": "navigate",
+            "value": None,
+            "locator_profile": None,
+            "bounding_box": None,
+            "page_url": self.start_url,
+            "timestamp": _utc_timestamp(),
+            "page_id": 0,
+        })
+
         self.attach_page(self.page, is_initial=True)
 
-        logger.info("recording started at %s", self.start_url)
+        # log the final (possibly redirected) URL separately from the
+        # literal launch_url recorded as Step 1 above - visible in the
+        # recorder's own log/terminal for diagnosis, never written into
+        # the recording JSON (Step 1 must stay the literal requested URL)
+        try:
+            resolved_url = self.page.url
+        except Exception:
+            resolved_url = None
+        logger.info("recording started - launch_url=%s resolved_url=%s", self.start_url, resolved_url)
+        if resolved_url and resolved_url != self.start_url:
+            print(
+                f"[RECORDER] Note: page ended up at {resolved_url!r} "
+                f"(redirected from the requested {self.start_url!r})",
+                flush=True,
+            )
         print(
             "\n" + "=" * 50 +
             "\nRECORDING STARTED\n\nBrowser:\n" + self.start_url +
@@ -958,6 +1519,25 @@ class Recorder:
         except Exception:
             viewport = None
 
+        # FIX 1.5 (recording environment): device scale factor, user
+        # agent, locale, timezone and color scheme, alongside the
+        # viewport above - a replay whose browser context doesn't match
+        # any of these can render meaningfully different layouts (a
+        # responsive breakpoint, a date/number format a text-match
+        # depends on, a dark-mode-only control) than what was actually
+        # recorded. Every one of these is read directly from the live
+        # page (never guessed/hardcoded), so it reflects whatever this
+        # specific recording session's own browser actually used. Purely
+        # additive and optional throughout: a read that fails (or an
+        # older recording made before this existed) just leaves that one
+        # field None, and replay already falls back to its own current
+        # defaults for any missing field - see generate_script().
+        def _safe_env_eval(js, default=None):
+            try:
+                return self.page.evaluate(js)
+            except Exception:
+                return default
+
         test_case = {
             "name": name,
             "session_id": self.session_id,
@@ -968,6 +1548,17 @@ class Recorder:
             "page_count": len(self._page_states),
             "viewport_width": (viewport or {}).get("width"),
             "viewport_height": (viewport or {}).get("height"),
+            "device_scale_factor": _safe_env_eval("() => window.devicePixelRatio"),
+            "user_agent": _safe_env_eval("() => navigator.userAgent"),
+            "locale": _safe_env_eval("() => navigator.language"),
+            "timezone_id": _safe_env_eval(
+                "() => { try { return Intl.DateTimeFormat().resolvedOptions().timeZone; } "
+                "catch (e) { return null; } }"
+            ),
+            "color_scheme": _safe_env_eval(
+                "() => (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) "
+                "? 'dark' : 'light'"
+            ),
             "actions": ordered_actions,
         }
         logger.info(

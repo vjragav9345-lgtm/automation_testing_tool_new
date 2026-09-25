@@ -1,0 +1,239 @@
+{
+    "name": "session_20260922_192016",
+    "session_id": "9336b3c75571423a8774d492617a0e21",
+    "start_url": "https://www.myntra.com/",
+    "recorded_at": "2026-09-22T19:20:16.881692",
+    "stop_reason": "browser_closed",
+    "total_actions": 11,
+    "page_count": 2,
+    "viewport_width": 1280,
+    "viewport_height": 720,
+    "actions": [
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/",
+            "timestamp": "2026-09-22T13:49:59.588Z",
+            "page_id": 0,
+            "delay_before_ms": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Rain Jackets",
+                "placeholder": null,
+                "title": null,
+                "href": "/rain-jacket",
+                "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > nav > div > div > div > div > div > div > li > ul > li:nth-of-type(10) > a",
+                "xpath": "//a[@href='/rain-jacket']",
+                "text": "Rain Jackets",
+                "element_text": "Rain Jackets",
+                "tag": "a",
+                "attributes": {
+                    "href": "/rain-jacket"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 101.5999984741211,
+                "y": 307,
+                "width": 191,
+                "height": 23
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/",
+            "timestamp": "2026-09-22T13:50:02.294Z",
+            "page_id": 0,
+            "delay_before_ms": 2706
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 409,
+            "scroll_y_before": 0,
+            "scroll_y_after": 408.79998779296875,
+            "viewport_height": 720,
+            "document_height": 7932,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/rain-jacket",
+            "timestamp": "2026-09-22T13:50:08.521Z",
+            "page_id": 0,
+            "delay_before_ms": 6227
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "Green",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#mountRoot > div > main > div:nth-of-type(3) > div > section > div > div:nth-of-type(5) > ul > li:nth-of-type(3) > label > input",
+                "xpath": "//label[normalize-space(text())='Green']/input",
+                "text": "Green",
+                "element_text": "Green",
+                "tag": "input",
+                "attributes": {
+                    "type": "checkbox"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 141.4375,
+                "y": 426.3999938964844,
+                "width": 13,
+                "height": 13
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/rain-jacket",
+            "timestamp": "2026-09-22T13:50:09.638Z",
+            "expected_state": true,
+            "page_id": 0,
+            "delay_before_ms": 1117
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/rain-jacket?f=Color%3AGreen_5eb160",
+            "timestamp": "2026-09-22T13:50:10.021Z",
+            "page_id": 0,
+            "delay_before_ms": 383
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": -409,
+            "scroll_y_before": 408.79998779296875,
+            "scroll_y_after": 0,
+            "viewport_height": 720,
+            "document_height": 7978,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/rain-jacket?f=Color%3AGreen_5eb160",
+            "timestamp": "2026-09-22T13:50:11.503Z",
+            "page_id": 0,
+            "delay_before_ms": 1482
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Rocksport\nSizes: Onesize\nRs. 664Rs. 1199(45% OFF)",
+                "placeholder": null,
+                "title": null,
+                "href": "rain-jacket/rocksport/rocksport-hooded-rain-jacket/41387196/buy",
+                "css_path": "li#41387196 > a",
+                "xpath": "//a[@href='rain-jacket/rocksport/rocksport-hooded-rain-jacket/41387196/buy']",
+                "text": "Rocksport\nSizes: Onesize\nRs. 664Rs. 1199(45% OFF)",
+                "element_text": "Rocksport\nSizes: Onesize\nRs. 664Rs. 1199(45% OFF)",
+                "tag": "a",
+                "attributes": {
+                    "href": "rain-jacket/rocksport/rocksport-hooded-rain-jacket/41387196/buy"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 777.4500122070312,
+                "y": 308.6000061035156,
+                "width": 210,
+                "height": 359.8000183105469
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/rain-jacket?f=Color%3AGreen_5eb160",
+            "timestamp": "2026-09-22T13:50:11.760Z",
+            "page_id": 0,
+            "delay_before_ms": 257
+        },
+        {
+            "action_type": "tab_open",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/rain-jacket/rocksport/rocksport-hooded-rain-jacket/41387196/buy",
+            "timestamp": "2026-09-22T13:50:14.282Z",
+            "new_tab": true,
+            "page_id": 1,
+            "from_page_id": 0,
+            "delay_before_ms": 2522
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "ADD TO BAG",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#mountRoot > div > div > main > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > div",
+                "xpath": "//div[normalize-space(text())='ADD TO BAG']",
+                "text": "ADD TO BAG",
+                "element_text": "ADD TO BAG",
+                "tag": "div",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 758.1749877929688,
+                "y": 603.4500122070312,
+                "width": 232.8874969482422,
+                "height": 53.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/rain-jacket/rocksport/rocksport-hooded-rain-jacket/41387196/buy",
+            "timestamp": "2026-09-22T13:50:14.583Z",
+            "page_id": 1,
+            "delay_before_ms": 301
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 1,
+            "page_url": "https://www.myntra.com/rain-jacket/rocksport/rocksport-hooded-rain-jacket/41387196/buy",
+            "remaining_page_id": 0,
+            "timestamp": "2026-09-22T13:50:16.880Z",
+            "delay_before_ms": 2297
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 0,
+            "page_url": "https://www.myntra.com/rain-jacket?f=Color%3AGreen_5eb160",
+            "remaining_page_id": null,
+            "timestamp": "2026-09-22T13:50:16.880Z",
+            "delay_before_ms": 0
+        }
+    ],
+    "saved_at": "2026-09-22T19:20:16.881692"
+}

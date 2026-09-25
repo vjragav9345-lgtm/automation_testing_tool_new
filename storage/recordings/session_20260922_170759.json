@@ -1,0 +1,354 @@
+{
+    "name": "session_20260922_170759",
+    "session_id": "601091aa95d0413ab69d548a0cd04849",
+    "start_url": "https://www.myntra.com/",
+    "recorded_at": "2026-09-22T17:07:59.742992",
+    "stop_reason": "browser_closed",
+    "total_actions": 15,
+    "page_count": 2,
+    "viewport_width": 1280,
+    "viewport_height": 720,
+    "actions": [
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/",
+            "timestamp": "2026-09-22T11:37:34.662Z",
+            "page_id": 0,
+            "delay_before_ms": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Sweatshirts",
+                "placeholder": null,
+                "title": null,
+                "href": "/men-sweatshirts",
+                "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > nav > div > div > div > div > div > div > li > ul > li:nth-of-type(5) > a",
+                "xpath": "//a[@href='/men-sweatshirts']",
+                "text": "Sweatshirts",
+                "element_text": "Sweatshirts",
+                "tag": "a",
+                "attributes": {
+                    "href": "/men-sweatshirts"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 101.5999984741211,
+                "y": 192,
+                "width": 191,
+                "height": 23
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/",
+            "timestamp": "2026-09-22T11:37:37.795Z",
+            "page_id": 0,
+            "delay_before_ms": 3133
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "ADRO",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#mountRoot > div > main > div:nth-of-type(3) > div > section > div > div:nth-of-type(2) > ul > li:nth-of-type(8) > label > input",
+                "xpath": "//label[normalize-space(text())='ADRO']/input",
+                "text": "ADRO",
+                "element_text": "ADRO",
+                "tag": "input",
+                "attributes": {
+                    "type": "checkbox"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 25,
+                "y": 435.8000183105469,
+                "width": 13,
+                "height": 13
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/men-sweatshirts",
+            "timestamp": "2026-09-22T11:37:41.017Z",
+            "expected_state": true,
+            "page_id": 0,
+            "delay_before_ms": 3222
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/men-sweatshirts?f=Brand%3AADRO",
+            "timestamp": "2026-09-22T11:37:41.396Z",
+            "page_id": 0,
+            "delay_before_ms": 379
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "Grey",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#mountRoot > div > main > div:nth-of-type(3) > div > section > div > div:nth-of-type(4) > ul > li:nth-of-type(2) > label > input",
+                "xpath": "//label[normalize-space(text())='Grey']/input",
+                "text": "Grey",
+                "element_text": "Grey",
+                "tag": "input",
+                "attributes": {
+                    "type": "checkbox"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 132.97500610351562,
+                "y": 680.6000366210938,
+                "width": 13,
+                "height": 13
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/men-sweatshirts?f=Brand%3AADRO",
+            "timestamp": "2026-09-22T11:37:43.534Z",
+            "expected_state": true,
+            "page_id": 0,
+            "delay_before_ms": 2138
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/men-sweatshirts?f=Brand%3AADRO%3A%3AColor%3AGrey_808080",
+            "timestamp": "2026-09-22T11:37:43.550Z",
+            "page_id": 0,
+            "delay_before_ms": 16
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 284,
+            "scroll_y_before": 0,
+            "scroll_y_after": 284,
+            "viewport_height": 720,
+            "document_height": 7668,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/men-sweatshirts?f=Brand%3AADRO%3A%3AColor%3AGrey_808080",
+            "timestamp": "2026-09-22T11:37:45.850Z",
+            "page_id": 0,
+            "delay_before_ms": 2300
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "NEW\nNEW\nNEW\nNEW\nNEW\nNEW\nNEW\nNEW\nNEW\nNEW\nADRO\nSizes: M\nRs. 1299Rs. 2799(54% OFF)",
+                "placeholder": null,
+                "title": null,
+                "href": "sweatshirts/adro/adro-men-printed-hooded-sweatshirt/46015721/buy",
+                "css_path": "li#46015721 > a",
+                "xpath": "//a[@href='sweatshirts/adro/adro-men-printed-hooded-sweatshirt/46015721/buy']",
+                "text": "NEW\nNEW\nNEW\nNEW\nNEW\nNEW\nNEW\nNEW\nNEW\nNEW\nADRO\nSizes: M\nRs. 1299Rs. 2799(54% OFF)",
+                "element_text": "NEW\nNEW\nNEW\nNEW\nNEW\nNEW\nNEW\nNEW\nNEW\nNEW\nADRO\nSizes: M\nRs. 1299Rs. 2799(54% OFF)",
+                "tag": "a",
+                "attributes": {
+                    "href": "sweatshirts/adro/adro-men-printed-hooded-sweatshirt/46015721/buy"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 528.7250366210938,
+                "y": 413.6000061035156,
+                "width": 210,
+                "height": 359.8000183105469
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/men-sweatshirts?f=Brand%3AADRO%3A%3AColor%3AGrey_808080",
+            "timestamp": "2026-09-22T11:37:46.866Z",
+            "page_id": 0,
+            "delay_before_ms": 1016
+        },
+        {
+            "action_type": "tab_open",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/sweatshirts/adro/adro-men-printed-hooded-sweatshirt/46015721/buy",
+            "timestamp": "2026-09-22T11:37:49.591Z",
+            "new_tab": true,
+            "page_id": 1,
+            "from_page_id": 0,
+            "delay_before_ms": 2725
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": "Blue",
+                "href": "/sweatshirts/adro/adro-men-printed-hooded-sweatshirt/46015711/buy",
+                "css_path": "div#mountRoot > div > div > main > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2) > div > div > a:nth-of-type(11)",
+                "xpath": "//main[.//h1[contains(text(), 'ADRO')]]/div[2]/div[2]/div[2]/div/div/a[11]",
+                "text": "",
+                "element_text": "",
+                "tag": "a",
+                "attributes": {
+                    "title": "Blue",
+                    "href": "/sweatshirts/adro/adro-men-printed-hooded-sweatshirt/46015711/buy"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 953.1749877929688,
+                "y": 499.5,
+                "width": 65,
+                "height": 19.200000762939453
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/sweatshirts/adro/adro-men-printed-hooded-sweatshirt/46015721/buy",
+            "timestamp": "2026-09-22T11:37:50.286Z",
+            "page_id": 1,
+            "delay_before_ms": 695
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 262,
+            "scroll_y_before": 0,
+            "scroll_y_after": 262.3999938964844,
+            "viewport_height": 720,
+            "document_height": 6438,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/sweatshirts/adro/adro-men-printed-hooded-sweatshirt/46015711/buy",
+            "timestamp": "2026-09-22T11:37:54.201Z",
+            "page_id": 1,
+            "delay_before_ms": 3915
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "3XL",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#sizeButtonsContainer > div:nth-of-type(2) > div:nth-of-type(6) > div > button",
+                "xpath": "//button[normalize-space(.)='3XL']",
+                "text": "3XL",
+                "element_text": "3XL",
+                "tag": "button",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 1058.175048828125,
+                "y": 396.5500183105469,
+                "width": 50,
+                "height": 50
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/sweatshirts/adro/adro-men-printed-hooded-sweatshirt/46015711/buy",
+            "timestamp": "2026-09-22T11:37:55.187Z",
+            "page_id": 1,
+            "delay_before_ms": 986
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "ADD TO BAG",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#mountRoot > div > div > main > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > div",
+                "xpath": "//div[normalize-space(text())='ADD TO BAG']",
+                "text": "ADD TO BAG",
+                "element_text": "ADD TO BAG",
+                "tag": "div",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 758.1749877929688,
+                "y": 480.5500183105469,
+                "width": 232.8874969482422,
+                "height": 53.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/sweatshirts/adro/adro-men-printed-hooded-sweatshirt/46015711/buy",
+            "timestamp": "2026-09-22T11:37:56.386Z",
+            "page_id": 1,
+            "delay_before_ms": 1199
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 1,
+            "page_url": "https://www.myntra.com/sweatshirts/adro/adro-men-printed-hooded-sweatshirt/46015711/buy",
+            "remaining_page_id": 0,
+            "timestamp": "2026-09-22T11:37:59.742Z",
+            "delay_before_ms": 3356
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 0,
+            "page_url": "https://www.myntra.com/men-sweatshirts?f=Brand%3AADRO%3A%3AColor%3AGrey_808080",
+            "remaining_page_id": null,
+            "timestamp": "2026-09-22T11:37:59.742Z",
+            "delay_before_ms": 0
+        }
+    ],
+    "saved_at": "2026-09-22T17:07:59.742992"
+}

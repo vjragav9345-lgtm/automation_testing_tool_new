@@ -1039,6 +1039,19 @@ textarea.editor-input {
 }
 
 
+/* FIX 4 (report/live-log correctness): Not run / Manual-input are their
+   own distinct outcomes, never colored like a failure - see
+   _stepOutcome() in script.js for what feeds these. */
+.replay-progress-counts .count-not-run {
+    color: #94a3b8;
+}
+
+
+.replay-progress-counts .count-manual-input {
+    color: #2563eb;
+}
+
+
 .replay-progress-counts .count-elapsed {
     color: #64748b;
 }
@@ -1090,6 +1103,16 @@ textarea.editor-input {
 
 .replay-progress-step-icon.step-pending {
     color: #94a3b8;
+}
+
+
+.replay-progress-step-icon.step-not-run {
+    color: #94a3b8;
+}
+
+
+.replay-progress-step-icon.step-manual-input {
+    color: #2563eb;
 }
 
 
@@ -1151,6 +1174,20 @@ textarea.editor-input {
     border-color: #fecaca;
 
     background: #fef2f2;
+}
+
+.validation-card-not-run {
+    border-color: #e2e8f0;
+
+    background: #f8fafc;
+
+    opacity: 0.75;
+}
+
+.validation-card-manual-input {
+    border-color: #bfdbfe;
+
+    background: #eff6ff;
 }
 
 .validation-card-line {

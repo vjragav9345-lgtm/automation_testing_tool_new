@@ -1,0 +1,1279 @@
+{
+    "name": "session_20260924_174915",
+    "session_id": "41ac72b958ea4bea9bebbfff1f90211a",
+    "start_url": "https://www.myntra.com",
+    "recorded_at": "2026-09-24T17:50:19.260012",
+    "stop_reason": "browser_closed",
+    "total_actions": 44,
+    "page_count": 2,
+    "viewport_width": 1280,
+    "viewport_height": 720,
+    "actions": [
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com",
+            "timestamp": "2026-09-24T12:19:15.523Z",
+            "page_id": 0,
+            "delay_before_ms": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Caps Under ₹899",
+                "placeholder": null,
+                "title": null,
+                "href": "/myntra?f=Categories%3ACaps%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0&storeContext=fwd",
+                "product_id": "20900",
+                "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > nav > div > div:nth-of-type(6) > div > div > div > div > li:nth-of-type(5) > ul > li:nth-of-type(16) > a",
+                "xpath": "//a[@href='/myntra?f=Categories%3ACaps%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0&storeContext=fwd']",
+                "text": "Caps Under ₹899",
+                "element_text": "Caps Under ₹899",
+                "tag": "a",
+                "attributes": {
+                    "href": "/myntra?f=Categories%3ACaps%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0&storeContext=fwd"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 965.6000366210938,
+                "y": 474,
+                "width": 191,
+                "height": 23
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/",
+            "timestamp": "2026-09-24T12:19:19.254Z",
+            "page_id": 0,
+            "delay_before_ms": 3731
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "popularity",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div > div > div > div > ul > li:nth-of-type(3) > label > input",
+                "xpath": "//label[normalize-space(text())='Popularity']/input",
+                "text": "popularity",
+                "element_text": "popularity",
+                "tag": "input",
+                "attributes": {
+                    "type": "radio"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 0,
+                "y": 0,
+                "width": 0,
+                "height": 0
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "force_click",
+            "page_url": "https://www.myntra.com/myntra?f=Categories%3ACaps%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0&storeContext=fwd",
+            "timestamp": "2026-09-24T12:19:25.129Z",
+            "page_id": 0,
+            "delay_before_ms": 5875
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/myntra?sort=popularity&f=Categories%3ACaps%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0",
+            "timestamp": "2026-09-24T12:19:25.173Z",
+            "page_id": 0,
+            "delay_before_ms": 44
+        },
+        {
+            "action_type": "hover",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Bundles\nCountry of Origin\nMaterials\nNet Quantity Unit\nOccasions\nPatterns\nRating",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > ul",
+                "xpath": "//section[.//h4[contains(text(), 'Bundles')]]/div/div[2]/ul",
+                "text": "Bundles\nCountry of Origin\nMaterials\nNet Quantity Unit\nOccasions\nPatterns\nRating",
+                "element_text": "Bundles\nCountry of Origin\nMaterials\nNet Quantity Unit\nOccasions\nPatterns\nRating",
+                "tag": "ul",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 268,
+                "y": 167.40000915527344,
+                "width": 710.2000122070312,
+                "height": 55.20000076293945
+            },
+            "page_url": "https://www.myntra.com/myntra?sort=popularity&f=Categories%3ACaps%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0",
+            "timestamp": "2026-09-24T12:19:29.646Z",
+            "page_id": 0,
+            "delay_before_ms": 4473
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Patterns",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > ul > li:nth-of-type(6) > label > input",
+                "xpath": "//label[normalize-space(.)='Patterns']/input",
+                "text": "Patterns",
+                "element_text": "Patterns",
+                "tag": "input",
+                "attributes": {
+                    "type": "radio"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 0,
+                "y": 0,
+                "width": 0,
+                "height": 0
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "force_click",
+            "page_url": "https://www.myntra.com/myntra?sort=popularity&f=Categories%3ACaps%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0",
+            "timestamp": "2026-09-24T12:19:29.647Z",
+            "page_id": 0,
+            "delay_before_ms": 1
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "Patterns",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > ul > li:nth-of-type(6) > label > input",
+                "xpath": "//label[normalize-space(.)='Patterns']/input",
+                "text": "Patterns",
+                "element_text": "Patterns",
+                "tag": "input",
+                "attributes": {
+                    "type": "radio"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 0,
+                "y": 0,
+                "width": 0,
+                "height": 0
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "force_click",
+            "page_url": "https://www.myntra.com/myntra?sort=popularity&f=Categories%3ACaps%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0",
+            "timestamp": "2026-09-24T12:19:29.685Z",
+            "expected_state": false,
+            "classified_by": "native-input-direct",
+            "page_id": 0,
+            "delay_before_ms": 38
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "Printed",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > div > ul > li:nth-of-type(3) > label > input",
+                "xpath": "//label[normalize-space(text())='Printed']/input",
+                "text": "Printed",
+                "element_text": "Printed",
+                "tag": "input",
+                "attributes": {
+                    "type": "checkbox"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 559,
+                "y": 241.1999969482422,
+                "width": 13,
+                "height": 13
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/myntra?sort=popularity&f=Categories%3ACaps%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0",
+            "timestamp": "2026-09-24T12:19:32.872Z",
+            "expected_state": true,
+            "classified_by": "ancestor-classname-self",
+            "page_id": 0,
+            "delay_before_ms": 3187
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/myntra?sort=popularity&f=Categories%3ACaps%3A%3APatterns%3APrinted%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0",
+            "timestamp": "2026-09-24T12:19:32.998Z",
+            "page_id": 0,
+            "delay_before_ms": 126
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Occasions",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > ul > li:nth-of-type(5) > label > input",
+                "xpath": "//label[normalize-space(.)='Occasions']/input",
+                "text": "Occasions",
+                "element_text": "Occasions",
+                "tag": "input",
+                "attributes": {
+                    "type": "radio"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 0,
+                "y": 0,
+                "width": 0,
+                "height": 0
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "force_click",
+            "page_url": "https://www.myntra.com/myntra?sort=popularity&f=Categories%3ACaps%3A%3APatterns%3APrinted%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0",
+            "timestamp": "2026-09-24T12:19:35.520Z",
+            "page_id": 0,
+            "delay_before_ms": 2522
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "Sports",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > div > ul > li:nth-of-type(2) > label > input",
+                "xpath": "//label[normalize-space(text())='Sports']/input",
+                "text": "Sports",
+                "element_text": "Sports",
+                "tag": "input",
+                "attributes": {
+                    "type": "checkbox"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 419,
+                "y": 241.1999969482422,
+                "width": 13,
+                "height": 13
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/myntra?sort=popularity&f=Categories%3ACaps%3A%3APatterns%3APrinted%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0",
+            "timestamp": "2026-09-24T12:19:37.584Z",
+            "expected_state": true,
+            "classified_by": "ancestor-classname-self",
+            "page_id": 0,
+            "delay_before_ms": 2064
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/myntra?sort=popularity&f=Categories%3ACaps%3A%3AOccasions%3ASports%3A%3APatterns%3APrinted%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0",
+            "timestamp": "2026-09-24T12:19:37.870Z",
+            "page_id": 0,
+            "delay_before_ms": 286
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Net Quantity Unit",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > ul > li:nth-of-type(4) > label > input",
+                "xpath": "//label[normalize-space(.)='Net Quantity Unit']/input",
+                "text": "Net Quantity Unit",
+                "element_text": "Net Quantity Unit",
+                "tag": "input",
+                "attributes": {
+                    "type": "radio"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 0,
+                "y": 0,
+                "width": 0,
+                "height": 0
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "force_click",
+            "page_url": "https://www.myntra.com/myntra?sort=popularity&f=Categories%3ACaps%3A%3AOccasions%3ASports%3A%3APatterns%3APrinted%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0",
+            "timestamp": "2026-09-24T12:19:39.622Z",
+            "page_id": 0,
+            "delay_before_ms": 1752
+        },
+        {
+            "action_type": "hover",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Caps\nRs. 0 To Rs. 900\nPrinted\nSports",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div:nth-of-type(2)",
+                "xpath": "//div[normalize-space(.)='CapsRs. 0 To Rs. 900PrintedSports']",
+                "text": "Caps\nRs. 0 To Rs. 900\nPrinted\nSports",
+                "element_text": "Caps\nRs. 0 To Rs. 900\nPrinted\nSports",
+                "tag": "div",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 252,
+                "y": 267.3999938964844,
+                "width": 1011.2000122070312,
+                "height": 47
+            },
+            "page_url": "https://www.myntra.com/myntra?sort=popularity&f=Categories%3ACaps%3A%3AOccasions%3ASports%3A%3APatterns%3APrinted%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0",
+            "timestamp": "2026-09-24T12:19:41.397Z",
+            "page_id": 0,
+            "delay_before_ms": 1775
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "Piece",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > div > ul > li > label > input",
+                "xpath": "//label[normalize-space(text())='Piece']/input",
+                "text": "Piece",
+                "element_text": "Piece",
+                "tag": "input",
+                "attributes": {
+                    "type": "checkbox"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 279,
+                "y": 241.1999969482422,
+                "width": 13,
+                "height": 13
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/myntra?sort=popularity&f=Categories%3ACaps%3A%3AOccasions%3ASports%3A%3APatterns%3APrinted%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0",
+            "timestamp": "2026-09-24T12:19:41.398Z",
+            "expected_state": true,
+            "classified_by": "ancestor-classname-self",
+            "page_id": 0,
+            "delay_before_ms": 1
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/myntra?sort=popularity&f=Categories%3ACaps%3A%3ANet%20Quantity%20Unit%3APiece%3A%3AOccasions%3ASports%3A%3APatterns%3APrinted%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0",
+            "timestamp": "2026-09-24T12:19:41.830Z",
+            "page_id": 0,
+            "delay_before_ms": 432
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Materials",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > ul > li:nth-of-type(3) > label > input",
+                "xpath": "//label[normalize-space(.)='Materials']/input",
+                "text": "Materials",
+                "element_text": "Materials",
+                "tag": "input",
+                "attributes": {
+                    "type": "radio"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 0,
+                "y": 0,
+                "width": 0,
+                "height": 0
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "force_click",
+            "page_url": "https://www.myntra.com/myntra?sort=popularity&f=Categories%3ACaps%3A%3ANet%20Quantity%20Unit%3APiece%3A%3AOccasions%3ASports%3A%3APatterns%3APrinted%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0",
+            "timestamp": "2026-09-24T12:19:43.693Z",
+            "page_id": 0,
+            "delay_before_ms": 1863
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "Polyester",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > div > ul > li:nth-of-type(3) > label > input",
+                "xpath": "//label[normalize-space(text())='Polyester']/input",
+                "text": "Polyester",
+                "element_text": "Polyester",
+                "tag": "input",
+                "attributes": {
+                    "type": "checkbox"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 559,
+                "y": 241.1999969482422,
+                "width": 13,
+                "height": 13
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/myntra?sort=popularity&f=Categories%3ACaps%3A%3ANet%20Quantity%20Unit%3APiece%3A%3AOccasions%3ASports%3A%3APatterns%3APrinted%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0",
+            "timestamp": "2026-09-24T12:19:46.280Z",
+            "expected_state": true,
+            "classified_by": "ancestor-classname-self",
+            "page_id": 0,
+            "delay_before_ms": 2587
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/myntra?sort=popularity&f=Categories%3ACaps%3A%3AMaterials%3APolyester%3A%3ANet%20Quantity%20Unit%3APiece%3A%3AOccasions%3ASports%3A%3APatterns%3APrinted%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0",
+            "timestamp": "2026-09-24T12:19:46.805Z",
+            "page_id": 0,
+            "delay_before_ms": 525
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Country of Origin",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > ul > li:nth-of-type(2) > label > input",
+                "xpath": "//label[normalize-space(.)='Country of Origin']/input",
+                "text": "Country of Origin",
+                "element_text": "Country of Origin",
+                "tag": "input",
+                "attributes": {
+                    "type": "radio"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 0,
+                "y": 0,
+                "width": 0,
+                "height": 0
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "force_click",
+            "page_url": "https://www.myntra.com/myntra?sort=popularity&f=Categories%3ACaps%3A%3AMaterials%3APolyester%3A%3ANet%20Quantity%20Unit%3APiece%3A%3AOccasions%3ASports%3A%3APatterns%3APrinted%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0",
+            "timestamp": "2026-09-24T12:19:48.952Z",
+            "page_id": 0,
+            "delay_before_ms": 2147
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "India",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > div > ul > li > label > input",
+                "xpath": "//label[normalize-space(text())='India']/input",
+                "text": "India",
+                "element_text": "India",
+                "tag": "input",
+                "attributes": {
+                    "type": "checkbox"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 279,
+                "y": 241.1999969482422,
+                "width": 13,
+                "height": 13
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/myntra?sort=popularity&f=Categories%3ACaps%3A%3AMaterials%3APolyester%3A%3ANet%20Quantity%20Unit%3APiece%3A%3AOccasions%3ASports%3A%3APatterns%3APrinted%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0",
+            "timestamp": "2026-09-24T12:19:50.571Z",
+            "expected_state": true,
+            "classified_by": "ancestor-classname-self",
+            "page_id": 0,
+            "delay_before_ms": 1619
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 97,
+            "scroll_y_before": 0,
+            "scroll_y_after": 96.80000305175781,
+            "viewport_height": 720,
+            "document_height": 2307,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/myntra?sort=popularity&f=Categories%3ACaps%3A%3ACountry%20of%20Origin%3AIndia%3A%3AMaterials%3APolyester%3A%3ANet%20Quantity%20Unit%3APiece%3A%3AOccasions%3ASports%3A%3APatterns%3APrinted%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0",
+            "timestamp": "2026-09-24T12:19:55.029Z",
+            "page_id": 0,
+            "delay_before_ms": 4458
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 158,
+            "scroll_y_before": 96.80000305175781,
+            "scroll_y_after": 254.39999389648438,
+            "viewport_height": 720,
+            "document_height": 2307,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/myntra?sort=popularity&f=Categories%3ACaps%3A%3ACountry%20of%20Origin%3AIndia%3A%3AMaterials%3APolyester%3A%3ANet%20Quantity%20Unit%3APiece%3A%3AOccasions%3ASports%3A%3APatterns%3APrinted%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0",
+            "timestamp": "2026-09-24T12:19:56.739Z",
+            "page_id": 0,
+            "delay_before_ms": 1710
+        },
+        {
+            "action_type": "hover",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "ALAMOS Men Printed Baseball Cap",
+                "placeholder": null,
+                "title": "ALAMOS Men Printed Baseball Cap",
+                "href": "caps/alamos/alamos-men-printed-baseball-cap/32855464/buy",
+                "product_id": "32855464",
+                "css_path": "li#32855464 > a > div > div:nth-of-type(2) > div > div > picture > img",
+                "xpath": "//a[.//h3[contains(text(), 'ALAMOS')]]/div/div[2]/div/div/picture/img",
+                "text": "ALAMOS Men Printed Baseball Cap",
+                "element_text": "ALAMOS Men Printed Baseball Cap",
+                "tag": "img",
+                "attributes": {
+                    "title": "ALAMOS Men Printed Baseball Cap"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 0,
+                "y": 0,
+                "width": 0,
+                "height": 0
+            },
+            "page_url": "https://www.myntra.com/myntra?sort=popularity&f=Categories%3ACaps%3A%3ACountry%20of%20Origin%3AIndia%3A%3AMaterials%3APolyester%3A%3ANet%20Quantity%20Unit%3APiece%3A%3AOccasions%3ASports%3A%3APatterns%3APrinted%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0",
+            "timestamp": "2026-09-24T12:19:57.497Z",
+            "page_id": 0,
+            "delay_before_ms": 758
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "ALAMOS\nSizes: Onesize\nRs. 197Rs. 699(72% OFF)",
+                "placeholder": null,
+                "title": null,
+                "href": "caps/alamos/alamos-men-printed-baseball-cap/32855464/buy",
+                "product_id": "32855464",
+                "css_path": "li#32855464 > a",
+                "xpath": "//a[@href='caps/alamos/alamos-men-printed-baseball-cap/32855464/buy']",
+                "text": "ALAMOS\nSizes: Onesize\nRs. 197Rs. 699(72% OFF)",
+                "element_text": "ALAMOS Rs. 197Rs. 699(72% OFF)",
+                "tag": "a",
+                "attributes": {
+                    "href": "caps/alamos/alamos-men-printed-baseball-cap/32855464/buy"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 280,
+                "y": 488.8000183105469,
+                "width": 210,
+                "height": 359.8000183105469
+            },
+            "scroll_x": 0,
+            "scroll_y": 254.39999389648438,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/myntra?sort=popularity&f=Categories%3ACaps%3A%3ACountry%20of%20Origin%3AIndia%3A%3AMaterials%3APolyester%3A%3ANet%20Quantity%20Unit%3APiece%3A%3AOccasions%3ASports%3A%3APatterns%3APrinted%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0",
+            "timestamp": "2026-09-24T12:19:57.499Z",
+            "page_id": 0,
+            "delay_before_ms": 2
+        },
+        {
+            "action_type": "tab_open",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/caps/alamos/alamos-men-printed-baseball-cap/32855464/buy",
+            "timestamp": "2026-09-24T12:19:59.669Z",
+            "new_tab": true,
+            "page_id": 1,
+            "from_page_id": 0,
+            "delay_before_ms": 2170
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 14,
+            "scroll_y_before": 0,
+            "scroll_y_after": 14.399999618530273,
+            "viewport_height": 720,
+            "document_height": 8055,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/caps/alamos/alamos-men-printed-baseball-cap/32855464/buy",
+            "timestamp": "2026-09-24T12:20:00.343Z",
+            "page_id": 1,
+            "delay_before_ms": 674
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": -14,
+            "scroll_y_before": 14.399999618530273,
+            "scroll_y_after": 0,
+            "viewport_height": 720,
+            "document_height": 8055,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/caps/alamos/alamos-men-printed-baseball-cap/32855464/buy",
+            "timestamp": "2026-09-24T12:20:01.214Z",
+            "page_id": 1,
+            "delay_before_ms": 871
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "ADD TO BAG",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#mountRoot > div > div > main > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2) > div > div",
+                "xpath": "//div[normalize-space(text())='ADD TO BAG']",
+                "text": "ADD TO BAG",
+                "element_text": "ADD TO BAG",
+                "tag": "div",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 758.1749877929688,
+                "y": 479.6000061035156,
+                "width": 232.8874969482422,
+                "height": 53.60000228881836
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/caps/alamos/alamos-men-printed-baseball-cap/32855464/buy",
+            "timestamp": "2026-09-24T12:20:02.044Z",
+            "page_id": 1,
+            "delay_before_ms": 830
+        },
+        {
+            "action_type": "hover",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "ADD TO BAG",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div",
+                "xpath": "/div[1]",
+                "text": "ADD TO BAG",
+                "element_text": "ADD TO BAG",
+                "tag": "div",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 0,
+                "y": 0,
+                "width": 0,
+                "height": 0
+            },
+            "page_url": "https://www.myntra.com/caps/alamos/alamos-men-printed-baseball-cap/32855464/buy",
+            "timestamp": "2026-09-24T12:20:03.801Z",
+            "page_id": 1,
+            "delay_before_ms": 1757
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "GO TO BAG",
+                "placeholder": null,
+                "title": null,
+                "href": "/checkout/cart",
+                "product_id": null,
+                "css_path": "div#mountRoot > div > div > main > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2) > div > a",
+                "xpath": "//a[normalize-space(.)='GO TO BAG']",
+                "text": "GO TO BAG",
+                "element_text": "GO TO BAG",
+                "tag": "a",
+                "attributes": {
+                    "href": "/checkout/cart"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 758.1749877929688,
+                "y": 479.6000061035156,
+                "width": 232.8874969482422,
+                "height": 50.79999923706055
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/caps/alamos/alamos-men-printed-baseball-cap/32855464/buy",
+            "timestamp": "2026-09-24T12:20:03.802Z",
+            "page_id": 1,
+            "delay_before_ms": 1
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Size: Onesize",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#cartItemsList > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div:nth-of-type(3) > div > div > span",
+                "xpath": "//*[@data-testid='cart-item-size-value']",
+                "text": "Size: Onesize",
+                "element_text": "Size: Onesize",
+                "tag": "span",
+                "attributes": {
+                    "data-testid": "cart-item-size-value"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 295.3999938964844,
+                "y": 348.2749938964844,
+                "width": 85.51250457763672,
+                "height": 16.80000114440918
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/checkout/cart",
+            "timestamp": "2026-09-24T12:20:07.423Z",
+            "page_id": 1,
+            "delay_before_ms": 3621
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/checkout/cart#modal",
+            "timestamp": "2026-09-24T12:20:07.500Z",
+            "page_id": 1,
+            "delay_before_ms": 77
+        },
+        {
+            "action_type": "hover",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Size: Onesize",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#cartItemsList > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div:nth-of-type(3) > div > div > span",
+                "xpath": "//*[@data-testid='cart-item-size-value']",
+                "text": "Size: Onesize",
+                "element_text": "Size: Onesize",
+                "tag": "span",
+                "attributes": {
+                    "data-testid": "cart-item-size-value"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 295.3999938964844,
+                "y": 348.2749938964844,
+                "width": 85.51250457763672,
+                "height": 16.80000114440918
+            },
+            "page_url": "https://www.myntra.com/checkout/cart#modal",
+            "timestamp": "2026-09-24T12:20:08.888Z",
+            "page_id": 1,
+            "delay_before_ms": 1388
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "button",
+                "aria_label": null,
+                "accessible_name": "DONE",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#cartItemsList > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(4) > div > div > div:nth-of-type(2) > button",
+                "xpath": "//button[normalize-space(.)='DONE']",
+                "text": "DONE",
+                "element_text": "DONE",
+                "tag": "button",
+                "attributes": {
+                    "role": "button"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 447.8999938964844,
+                "y": 429.45001220703125,
+                "width": 367.3999938964844,
+                "height": 40
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/checkout/cart#modal",
+            "timestamp": "2026-09-24T12:20:08.892Z",
+            "page_id": 1,
+            "delay_before_ms": 4
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Qty: 1",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#cartItemsList > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div:nth-of-type(3) > div > div:nth-of-type(2)",
+                "xpath": "//*[@data-testid='cart-item-qty']",
+                "text": "Qty: 1",
+                "element_text": "Qty: 1",
+                "tag": "div",
+                "attributes": {
+                    "data-testid": "cart-item-qty"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 411.9125061035156,
+                "y": 347.07501220703125,
+                "width": 65.20000457763672,
+                "height": 20
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/checkout/cart",
+            "timestamp": "2026-09-24T12:20:10.359Z",
+            "page_id": 1,
+            "delay_before_ms": 1467
+        },
+        {
+            "action_type": "hover",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Qty: 1",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#cartItemsList > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div:nth-of-type(3) > div > div:nth-of-type(2)",
+                "xpath": "//*[@data-testid='cart-item-qty']",
+                "text": "Qty: 1",
+                "element_text": "Qty: 1",
+                "tag": "div",
+                "attributes": {
+                    "data-testid": "cart-item-qty"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 411.9125061035156,
+                "y": 347.07501220703125,
+                "width": 65.20000457763672,
+                "height": 20
+            },
+            "page_url": "https://www.myntra.com/checkout/cart#modal",
+            "timestamp": "2026-09-24T12:20:11.936Z",
+            "page_id": 1,
+            "delay_before_ms": 1577
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "9",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#9 > div",
+                "xpath": "//div[normalize-space(text())='9']",
+                "text": "9",
+                "element_text": "9",
+                "tag": "div",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 671,
+                "y": 536.25,
+                "width": 14,
+                "height": 19.200000762939453
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/checkout/cart#modal",
+            "timestamp": "2026-09-24T12:20:11.939Z",
+            "page_id": 1,
+            "delay_before_ms": 3
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "button",
+                "aria_label": null,
+                "accessible_name": "DONE",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#cartItemsList > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(4) > div > button",
+                "xpath": "//button[normalize-space(.)='DONE']",
+                "text": "DONE",
+                "element_text": "DONE",
+                "tag": "button",
+                "attributes": {
+                    "role": "button"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 495.3999938964844,
+                "y": 597.4500122070312,
+                "width": 272.3999938964844,
+                "height": 40
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/checkout/cart#modal",
+            "timestamp": "2026-09-24T12:20:13.782Z",
+            "page_id": 1,
+            "delay_before_ms": 1843
+        },
+        {
+            "action_type": "hover",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "DONE",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div > div > button > div",
+                "xpath": "/div[1]/div[1]/button[1]/div[1]",
+                "text": "DONE",
+                "element_text": "DONE",
+                "tag": "div",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 0,
+                "y": 0,
+                "width": 0,
+                "height": 0
+            },
+            "page_url": "https://www.myntra.com/checkout/cart",
+            "timestamp": "2026-09-24T12:20:15.122Z",
+            "page_id": 1,
+            "delay_before_ms": 1340
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "button",
+                "aria_label": null,
+                "accessible_name": "PLACE ORDER",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#appContent > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(4) > button",
+                "xpath": "//button[normalize-space(.)='PLACE ORDER']",
+                "text": "PLACE ORDER",
+                "element_text": "PLACE ORDER",
+                "tag": "button",
+                "attributes": {
+                    "role": "button"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 782,
+                "y": 646.75,
+                "width": 320,
+                "height": 40
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/checkout/cart",
+            "timestamp": "2026-09-24T12:20:15.126Z",
+            "page_id": 1,
+            "delay_before_ms": 4
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 1,
+            "scroll_y_before": 0,
+            "scroll_y_after": 0.800000011920929,
+            "viewport_height": 720,
+            "document_height": 780,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/login?referer=/checkout/cart",
+            "timestamp": "2026-09-24T12:20:16.360Z",
+            "page_id": 1,
+            "delay_before_ms": 1234
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 1,
+            "page_url": "https://www.myntra.com/checkout/cart#modal",
+            "remaining_page_id": 0,
+            "timestamp": "2026-09-24T12:20:19.222Z",
+            "delay_before_ms": 2862
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 0,
+            "page_url": "https://www.myntra.com/myntra?sort=popularity&f=Categories%3ACaps%3A%3ACountry%20of%20Origin%3AIndia%3A%3AMaterials%3APolyester%3A%3ANet%20Quantity%20Unit%3APiece%3A%3AOccasions%3ASports%3A%3APatterns%3APrinted%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0",
+            "remaining_page_id": null,
+            "timestamp": "2026-09-24T12:20:19.239Z",
+            "delay_before_ms": 17
+        }
+    ],
+    "saved_at": "2026-09-24T17:50:19.260012"
+}

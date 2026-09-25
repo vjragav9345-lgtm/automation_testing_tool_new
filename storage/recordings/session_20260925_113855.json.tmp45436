@@ -1,0 +1,89 @@
+{
+    "name": "session_20260925_113855",
+    "start_url": "http://127.0.0.1:64234/phase4_product_card.html",
+    "actions": [
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "http://127.0.0.1:64234/phase4_product_card.html",
+            "timestamp": "2026-09-25T06:08:55.478Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#card-45954123",
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "NEW\nNEW\nNEW\nMonk Mode\nSizes: XXL\nRs. 744 Rs. 1699(56% OFF)",
+                "placeholder": null,
+                "title": null,
+                "href": "/tshirts/monk-mode/monk-mode-men-striped-polo-collar-t-shirt/45954123/buy",
+                "product_id": "45954123",
+                "css_path": "a#card-45954123",
+                "xpath": "//a[@href='/tshirts/monk-mode/monk-mode-men-striped-polo-collar-t-shirt/45954123/buy']",
+                "text": "NEW Monk Mode Rs. 744 Rs. 1699(56% OFF)",
+                "element_text": "NEW Monk Mode Rs. 744 Rs. 1699(56% OFF)",
+                "tag": "a",
+                "attributes": {
+                    "href": "/tshirts/monk-mode/monk-mode-men-striped-polo-collar-t-shirt/45954123/buy"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "act_target": {
+                "id": "#card-45954123",
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "NEW\nNEW\nNEW\nMonk Mode\nSizes: XXL\nRs. 744 Rs. 1699(56% OFF)",
+                "placeholder": null,
+                "title": null,
+                "href": "/tshirts/monk-mode/monk-mode-men-striped-polo-collar-t-shirt/45954123/buy",
+                "product_id": "45954123",
+                "css_path": "a#card-45954123",
+                "xpath": "//a[@href='/tshirts/monk-mode/monk-mode-men-striped-polo-collar-t-shirt/45954123/buy']",
+                "text": "NEW Monk Mode Rs. 744 Rs. 1699(56% OFF)",
+                "element_text": "NEW Monk Mode Rs. 744 Rs. 1699(56% OFF)",
+                "tag": "a",
+                "attributes": {
+                    "href": "/tshirts/monk-mode/monk-mode-men-striped-polo-collar-t-shirt/45954123/buy"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "state_target": null,
+            "bounding_box": {
+                "x": 20,
+                "y": 20,
+                "width": 282,
+                "height": 362
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "http://127.0.0.1:64234/phase4_product_card.html",
+            "timestamp": "2026-09-25T06:08:55.575Z",
+            "dom_context": {
+                "act_target_html_chain": [
+                    "<a href=\"/tshirts/monk-mode/monk-mode-men-striped-polo-collar-t-shirt/45954123/buy\" class=\"card\" id=\"card-45954123\">\n      <span class=\"badge\">NEW</span>\n      <span class=\"badge\">NEW</span>\n      <span class=\"badge\">NEW</span>\n      <div>Monk Mode</div>\n      <div class=\"overlay-sizes\">Sizes: XXL</div>\n      <div class=\"price\">Rs. 744 Rs. 1699(56% OFF)</div>\n    </a>",
+                    "<div class=\"grid\">\n    <a href=\"/tshirts/monk-mode/monk-mode-men-striped-polo-collar-t-shirt/45954123/buy\" class=\"card\" id=\"card-45954123\">\n      <span class=\"badge\">NEW</span>\n      <span class=\"badge\">NEW</span>\n      <span class=\"badge\">NEW</span>\n      <div>Monk Mode</div>\n      <div class=\"overlay-sizes\">Sizes: XXL</div>\n      <div class=\"price\">Rs. 744 Rs. 1699(56% OFF)</div>\n    </a>\n    <a href=\"/other/product/99999/buy\" class=\"card\" id=\"card-99999\">\n      <span class=\"badge\">NEW</span>\n      <div>Some Other Shirt</div>\n      <div class=\"overlay-sizes\">Sizes: M</div>\n      <div class=\"price\">Rs. 500</div>\n    </a>\n  </div>",
+                    "<body>\n  <div class=\"grid\">\n    <a href=\"/tshirts/monk-mode/monk-mode-men-striped-polo-collar-t-shirt/45954123/buy\" class=\"card\" id=\"card-45954123\">\n      <span class=\"badge\">NEW</span>\n      <span class=\"badge\">NEW</span>\n      <span class=\"badge\">NEW</span>\n      <div>Monk Mode</div>\n      <div class=\"overlay-sizes\">Sizes: XXL</div>\n      <div class=\"price\">Rs. 744 Rs. 1699(56% OFF)</div>\n    </a>\n    <a href=\"/other/product/99999/buy\" class=\"card\" id=\"card-99999\">\n      <span class=\"badge\">NEW</span>\n      <div>Some Other Shirt</div>\n      <div class=\"overlay-sizes\">Sizes: M</div>\n      <div class=\"price\">Rs. 500</div>\n    </a>\n  </div>\n  <script>\n    document.getElementById('card-45954123').addEventListener('click', function (e) {\n      e.preventDefault();\n      document.title = 'CARD_CLICKED_45954123';\n    });\n    document.getElementById('card-99999').addEventListener('click', function (e) {\n      e.preventDefault();\n      document.title = 'CARD_CLICKED_99999';\n    });\n  </script>\n\n\n</body>",
+                    "<html><head>\n<meta charset=\"utf-8\">\n<title>Product Card Fixture</title>\n<style>\n  body { margin: 0; font-family: sans-serif; padding: 20px; }\n  .grid { display: flex; gap: 16px; }\n  .card { display: inline-block; width: 260px; height: 340px; border: 1px solid #ddd;\n          padding: 10px; position: relative; text-decoration: none; color: #000; }\n  .badge { display: block; color: red; font-weight: bold; }\n  .overlay-sizes { display: none; background: #fafafa; padding: 4px; }\n  .card:hover .overlay-sizes { display: block; }\n  .price { color: green; }\n</style>\n</head>\n<body>\n  <div class=\"grid\">\n    <a href=\"/tshirts/monk-mode/monk-mode-men-striped-polo-collar-t-shirt/45954123/buy\" class=\"card\" id=\"card-45954123\">\n      <span class=\"badge\">NEW</span>\n      <span class=\"badge\">NEW</span>\n      <span class=\"badge\">NEW</span>\n      <div>Monk Mode</div>\n      <div class=\"overlay-sizes\">Sizes: XXL</div>\n      <div class=\"price\">Rs. 744 Rs. 1699(56% OFF)</div>\n    </a>\n    <a href=\"/other/product/99999/buy\" class=\"card\" id=\"card-99999\">\n      <span class=\"badge\">NEW</span>\n      <div>Some Other Shirt</div>\n      <div class=\"overlay-sizes\">Sizes: M</div>\n      <div class=\"price\">Rs. 500</div>\n    </a>\n  </div>\n  <script>\n    document.getElementById('card-45954123').addEventListener('click', function (e) {\n      e.preventDefault();\n      document.title = 'CARD_CLICKED_45954123';\n    });\n    document.getElementById('card-99999').addEventListener('click', function (e) {\n      e.preventDefault();\n      document.title = 'CARD_CLICKED_99999';\n    });\n  </script>\n\n\n</body></html>"
+                ],
+                "act_target_style": {
+                    "display": "block",
+                    "visibility": "visible",
+                    "opacity": "1"
+                },
+                "state_target_html_chain": null,
+                "state_target_style": null
+            },
+            "page_id": 0
+        }
+    ]
+}

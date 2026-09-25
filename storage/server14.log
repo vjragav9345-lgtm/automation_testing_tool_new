@@ -1,0 +1,21 @@
+::ffff:127.0.0.1 - - [11/Sep/2026 09:23:41] "GET /megamenu.html HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [11/Sep/2026 09:23:46] code 404, message File not found
+::ffff:127.0.0.1 - - [11/Sep/2026 09:23:46] "GET /men-tshirts HTTP/1.1" 404 -
+::ffff:127.0.0.1 - - [11/Sep/2026 09:24:10] "GET /megamenu.html HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [11/Sep/2026 09:24:49] "GET /megamenu.html HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [11/Sep/2026 09:26:22] "GET /megamenu.html HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [11/Sep/2026 09:26:22] code 404, message File not found
+::ffff:127.0.0.1 - - [11/Sep/2026 09:26:22] "GET /men-tshirts HTTP/1.1" 404 -
+::ffff:127.0.0.1 - - [11/Sep/2026 09:27:01] "GET /megamenu.html HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [11/Sep/2026 09:27:02] code 404, message File not found
+::ffff:127.0.0.1 - - [11/Sep/2026 09:27:02] "GET /men-tshirts HTTP/1.1" 404 -
+::ffff:127.0.0.1 - - [11/Sep/2026 09:27:23] "GET /megamenu.html HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [11/Sep/2026 09:28:16] "GET /megamenu.html HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [11/Sep/2026 09:28:25] "GET /megamenu.html HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [11/Sep/2026 09:28:27] code 404, message File not found
+::ffff:127.0.0.1 - - [11/Sep/2026 09:28:27] "GET /men-tshirts HTTP/1.1" 404 -
+::ffff:127.0.0.1 - - [11/Sep/2026 09:29:08] "GET /decoy_href.html HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [11/Sep/2026 09:29:09] code 404, message File not found
+::ffff:127.0.0.1 - - [11/Sep/2026 09:29:09] "GET /men-tshirts HTTP/1.1" 404 -
+::ffff:127.0.0.1 - - [11/Sep/2026 09:29:26] "GET /normal_login.html HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [11/Sep/2026 09:29:34] "GET /normal_login.html HTTP/1.1" 200 -

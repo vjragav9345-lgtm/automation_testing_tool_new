@@ -1,0 +1,864 @@
+{
+    "name": "session_20260925_102127",
+    "session_id": "60cb381ca86341f389cf8e869d033867",
+    "start_url": "https://www.myntra.com",
+    "recorded_at": "2026-09-25T10:21:55.541221",
+    "stop_reason": "browser_closed",
+    "total_actions": 15,
+    "page_count": 1,
+    "viewport_width": 1280,
+    "viewport_height": 720,
+    "device_scale_factor": null,
+    "user_agent": null,
+    "locale": null,
+    "timezone_id": null,
+    "color_scheme": null,
+    "actions": [
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com",
+            "timestamp": "2026-09-25T04:51:27.605Z",
+            "page_id": 0,
+            "delay_before_ms": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Speakers",
+                "placeholder": null,
+                "title": null,
+                "href": "/speakers",
+                "product_id": null,
+                "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > nav > div > div > div > div > div > div > li:nth-of-type(4) > ul > li:nth-of-type(14) > a",
+                "xpath": "(//li[contains(., 'Speakers')])[2]//a",
+                "text": "Speakers",
+                "element_text": "Speakers",
+                "tag": "a",
+                "attributes": {
+                    "href": "/speakers"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "act_target": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Speakers",
+                "placeholder": null,
+                "title": null,
+                "href": "/speakers",
+                "product_id": null,
+                "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > nav > div > div > div > div > div > div > li:nth-of-type(4) > ul > li:nth-of-type(14) > a",
+                "xpath": "(//li[contains(., 'Speakers')])[2]//a",
+                "text": "Speakers",
+                "element_text": "Speakers",
+                "tag": "a",
+                "attributes": {
+                    "href": "/speakers"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "state_target": null,
+            "bounding_box": {
+                "x": 749.6000366210938,
+                "y": 428,
+                "width": 191,
+                "height": 23
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/",
+            "timestamp": "2026-09-25T04:51:27.725Z",
+            "dom_context": {
+                "act_target_html_chain": [
+                    "<a href=\"/speakers\" style=\"color:;\" class=\"desktop-categoryLink\" data-reactid=\"144\">Speakers</a>",
+                    "<li data-reactid=\"143\"><a href=\"/speakers\" style=\"color:;\" class=\"desktop-categoryLink\" data-reactid=\"144\">Speakers</a></li>",
+                    "<ul class=\"desktop-navBlock\" data-reactid=\"115\"><li data-reactid=\"116\"><a href=\"/men-sports-wear\" style=\"color:#ee5f73;\" class=\"desktop-categoryName\" data-reactid=\"117\">Sports &amp; Active Wear</a></li><li data-reactid=\"118\"><a href=\"/men-sports-shoes\" style=\"color:;\" class=\"desktop-categoryLink\" data-reactid=\"119\">Sports Shoes</a></li><li data-reactid=\"120\"><a href=\"/men-sports-sandals\" style=\"color:;\" class=\"desktop-categoryLink\" data-reactid=\"121\">Sports Sandals</a></li><li data-reactid=\"122\"><a href=\"/men-sports-wear-tshirts\" style=\"color:;\" class=\"desktop-categoryLink\" data-reactid=\"123\">Active T-Shirts</a></li><li data-reactid=\"124\"><a href=\"/men-trackpants-shorts\" style=\"color:;\" class=\"desktop-categoryLink\" data-reactid=\"125\">Track Pants &amp; Shorts</a></li><li data-reactid=\"126\"><a href=\"/men-tracksuits\" style=\"color:;\" class=\"desktop-categoryLink\" data-reactid=\"127\">Tracksuits</a></li><li data-reactid=\"128\"><a href=\"/men-sports-jackets\" style=\"color:;\" class=\"desktop-categoryLink\" data-reactid=\"129\">Jackets &amp; Sweatshirts</a></li><li data-reactid=\"130\"><a href=\"/men-sports-accessories\" style=\"color:;\" class=\"desktop-categoryLink\" data-rea...[truncated]",
+                    "<li class=\"desktop-evenColumnContent desktop-oddColumnContent\" data-reactid=\"114\"><ul class=\"desktop-navBlock\" data-reactid=\"115\"><li data-reactid=\"116\"><a href=\"/men-sports-wear\" style=\"color:#ee5f73;\" class=\"desktop-categoryName\" data-reactid=\"117\">Sports &amp; Active Wear</a></li><li data-reactid=\"118\"><a href=\"/men-sports-shoes\" style=\"color:;\" class=\"desktop-categoryLink\" data-reactid=\"119\">Sports Shoes</a></li><li data-reactid=\"120\"><a href=\"/men-sports-sandals\" style=\"color:;\" class=\"desktop-categoryLink\" data-reactid=\"121\">Sports Sandals</a></li><li data-reactid=\"122\"><a href=\"/men-sports-wear-tshirts\" style=\"color:;\" class=\"desktop-categoryLink\" data-reactid=\"123\">Active T-Shirts</a></li><li data-reactid=\"124\"><a href=\"/men-trackpants-shorts\" style=\"color:;\" class=\"desktop-categoryLink\" data-reactid=\"125\">Track Pants &amp; Shorts</a></li><li data-reactid=\"126\"><a href=\"/men-tracksuits\" style=\"color:;\" class=\"desktop-categoryLink\" data-reactid=\"127\">Tracksuits</a></li><li data-reactid=\"128\"><a href=\"/men-sports-jackets\" style=\"color:;\" class=\"desktop-categoryLink\" data-reactid=\"129\">Jackets &amp; Sweatshirts</a></li><li data-reactid=\"130\"><a hr...[truncated]",
+                    "<div class=\"desktop-categoryContainer\" data-index=\"0\" data-group=\"men\" data-color=\"#ee5f73\" data-reactid=\"25\"><li class=\"desktop-oddColumnContent\" data-reactid=\"26\"><ul class=\"desktop-navBlock\" data-reactid=\"27\"><li data-reactid=\"28\"><a href=\"/men-topwear\" style=\"color:#ee5f73;\" class=\"desktop-categoryName\" data-reactid=\"29\">Topwear</a></li><li data-reactid=\"30\"><a href=\"/men-tshirts\" style=\"color:;\" class=\"desktop-categoryLink\" data-reactid=\"31\">T-Shirts</a></li><li data-reactid=\"32\"><a href=\"/men-casual-shirts\" style=\"color:;\" class=\"desktop-categoryLink\" data-reactid=\"33\">Casual Shirts</a></li><li data-reactid=\"34\"><a href=\"/men-formal-shirts\" style=\"color:;\" class=\"desktop-categoryLink\" data-reactid=\"35\">Formal Shirts</a></li><li data-reactid=\"36\"><a href=\"/men-sweatshirts\" style=\"color:;\" class=\"desktop-categoryLink\" data-reactid=\"37\">Sweatshirts</a></li><li data-reactid=\"38\"><a href=\"/men-sweaters\" style=\"color:;\" class=\"desktop-categoryLink\" data-reactid=\"39\">Sweaters</a></li><li data-reactid=\"40\"><a href=\"/men-jackets\" style=\"color:;\" class=\"desktop-categoryLink\" data-reactid=\"41\">Jackets</a></li><li data-reactid=\"42\"><a href=\"/men-blazers\" sty...[truncated]",
+                    "<div class=\"desktop-paneContent\" data-reactid=\"24\"><div class=\"desktop-categoryContainer\" data-index=\"0\" data-group=\"men\" data-color=\"#ee5f73\" data-reactid=\"25\"><li class=\"desktop-oddColumnContent\" data-reactid=\"26\"><ul class=\"desktop-navBlock\" data-reactid=\"27\"><li data-reactid=\"28\"><a href=\"/men-topwear\" style=\"color:#ee5f73;\" class=\"desktop-categoryName\" data-reactid=\"29\">Topwear</a></li><li data-reactid=\"30\"><a href=\"/men-tshirts\" style=\"color:;\" class=\"desktop-categoryLink\" data-reactid=\"31\">T-Shirts</a></li><li data-reactid=\"32\"><a href=\"/men-casual-shirts\" style=\"color:;\" class=\"desktop-categoryLink\" data-reactid=\"33\">Casual Shirts</a></li><li data-reactid=\"34\"><a href=\"/men-formal-shirts\" style=\"color:;\" class=\"desktop-categoryLink\" data-reactid=\"35\">Formal Shirts</a></li><li data-reactid=\"36\"><a href=\"/men-sweatshirts\" style=\"color:;\" class=\"desktop-categoryLink\" data-reactid=\"37\">Sweatshirts</a></li><li data-reactid=\"38\"><a href=\"/men-sweaters\" style=\"color:;\" class=\"desktop-categoryLink\" data-reactid=\"39\">Sweaters</a></li><li data-reactid=\"40\"><a href=\"/men-jackets\" style=\"color:;\" class=\"desktop-categoryLink\" data-reactid=\"41\">Jackets</a></...[truncated]",
+                    "<div class=\"desktop-backdropStyle\" data-reactid=\"23\"><div class=\"desktop-paneContent\" data-reactid=\"24\"><div class=\"desktop-categoryContainer\" data-index=\"0\" data-group=\"men\" data-color=\"#ee5f73\" data-reactid=\"25\"><li class=\"desktop-oddColumnContent\" data-reactid=\"26\"><ul class=\"desktop-navBlock\" data-reactid=\"27\"><li data-reactid=\"28\"><a href=\"/men-topwear\" style=\"color:#ee5f73;\" class=\"desktop-categoryName\" data-reactid=\"29\">Topwear</a></li><li data-reactid=\"30\"><a href=\"/men-tshirts\" style=\"color:;\" class=\"desktop-categoryLink\" data-reactid=\"31\">T-Shirts</a></li><li data-reactid=\"32\"><a href=\"/men-casual-shirts\" style=\"color:;\" class=\"desktop-categoryLink\" data-reactid=\"33\">Casual Shirts</a></li><li data-reactid=\"34\"><a href=\"/men-formal-shirts\" style=\"color:;\" class=\"desktop-categoryLink\" data-reactid=\"35\">Formal Shirts</a></li><li data-reactid=\"36\"><a href=\"/men-sweatshirts\" style=\"color:;\" class=\"desktop-categoryLink\" data-reactid=\"37\">Sweatshirts</a></li><li data-reactid=\"38\"><a href=\"/men-sweaters\" style=\"color:;\" class=\"desktop-categoryLink\" data-reactid=\"39\">Sweaters</a></li><li data-reactid=\"40\"><a href=\"/men-jackets\" style=\"color:;\" class=\"...[truncated]"
+                ],
+                "act_target_style": {
+                    "display": "block",
+                    "visibility": "visible",
+                    "opacity": "1"
+                },
+                "state_target_html_chain": null,
+                "state_target_style": null
+            },
+            "page_id": 0,
+            "delay_before_ms": 120
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/speakers",
+            "timestamp": "2026-09-25T04:51:29.099Z",
+            "page_id": 0,
+            "caused_by_timestamp": "2026-09-25T04:51:27.725Z",
+            "dom_snapshot_path": "storage\\snapshots\\60cb381ca86341f389cf8e869d033867\\2026-09-25T04-51-29-099Z.html",
+            "delay_before_ms": 1374
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "MZ(176)",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#mountRoot > div > main > div:nth-of-type(3) > div > section > div > div:nth-of-type(3) > ul > li > label",
+                "xpath": "//label[normalize-space(text())='MZ']",
+                "text": "MZ(176)",
+                "element_text": "MZ(176)",
+                "tag": "label",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "act_target": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "MZ(176)",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#mountRoot > div > main > div:nth-of-type(3) > div > section > div > div:nth-of-type(3) > ul > li > label",
+                "xpath": "//label[normalize-space(text())='MZ']",
+                "text": "MZ(176)",
+                "element_text": "MZ(176)",
+                "tag": "label",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "state_target": {
+                "locator_profile": {
+                    "id": null,
+                    "name": null,
+                    "role": "checkbox",
+                    "aria_label": null,
+                    "accessible_name": "MZ(176)",
+                    "placeholder": null,
+                    "title": null,
+                    "href": null,
+                    "product_id": null,
+                    "css_path": "div#mountRoot > div > main > div:nth-of-type(3) > div > section > div > div:nth-of-type(3) > ul > li > label > input",
+                    "xpath": "//label[normalize-space(text())='MZ']/input",
+                    "text": "MZ(176)",
+                    "element_text": "MZ",
+                    "tag": "input",
+                    "attributes": {
+                        "type": "checkbox"
+                    },
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                },
+                "checked": true
+            },
+            "bounding_box": {
+                "x": 25,
+                "y": 398,
+                "width": 214.8874969482422,
+                "height": 17
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/speakers",
+            "timestamp": "2026-09-25T04:51:33.074Z",
+            "dom_context": {
+                "act_target_html_chain": [
+                    "<label class=\"vertical-filters-label common-customCheckbox\"><input type=\"checkbox\" value=\"MZ\"><!-- react-text: 66 -->MZ<!-- /react-text --><span class=\"brand-num\"><!-- react-text: 68 -->(<!-- /react-text --><!-- react-text: 69 -->176<!-- /react-text --><!-- react-text: 70 -->)<!-- /react-text --></span><div class=\"common-checkboxIndicator\"></div></label>",
+                    "<li><label class=\"vertical-filters-label common-customCheckbox\"><input type=\"checkbox\" value=\"MZ\"><!-- react-text: 66 -->MZ<!-- /react-text --><span class=\"brand-num\"><!-- react-text: 68 -->(<!-- /react-text --><!-- react-text: 69 -->176<!-- /react-text --><!-- react-text: 70 -->)<!-- /react-text --></span><div class=\"common-checkboxIndicator\"></div></label></li>",
+                    "<ul class=\"brand-list\"><li><label class=\"vertical-filters-label common-customCheckbox\"><input type=\"checkbox\" value=\"MZ\"><!-- react-text: 66 -->MZ<!-- /react-text --><span class=\"brand-num\"><!-- react-text: 68 -->(<!-- /react-text --><!-- react-text: 69 -->176<!-- /react-text --><!-- react-text: 70 -->)<!-- /react-text --></span><div class=\"common-checkboxIndicator\"></div></label></li><li><label class=\"vertical-filters-label common-customCheckbox\"><input type=\"checkbox\" value=\"boAt\"><!-- react-text: 75 -->boAt<!-- /react-text --><span class=\"brand-num\"><!-- react-text: 77 -->(<!-- /react-text --><!-- react-text: 78 -->41<!-- /react-text --><!-- react-text: 79 -->)<!-- /react-text --></span><di...[truncated]",
+                    "<div class=\"vertical-filters-filters brand-container\"><span class=\"vertical-filters-header\">Brand</span><div class=\"filter-search-filterSearchBox\"><input type=\"text\" class=\"filter-search-inputBox filter-search-hidden\" placeholder=\"Search for Brand\"><span class=\"myntraweb-sprite filter-search-iconSearch sprites-search\"></span></div><ul class=\"brand-list\"><li><label class=\"vertical-filters-label common-customCheckbox\"><input type=\"checkbox\" value=\"MZ\"><!-- react-text: 66 -->MZ<!-- /react-text --><span class=\"brand-num\"><!-- react-text: 68 -->(<!-- /react-text --><!-- react-text: 69 -->176<!-- /react-text --><!-- react-text: 70 -->)<!-- /react-text --></span><div class=\"common-checkboxIndicator\">...[truncated]",
+                    "<div class=\"condition-render-verticalFilters condition-render-boundary-top\"><div class=\"vertical-filters-filters header-container\"><span class=\"header-title\">FILTERS</span></div><div class=\"vertical-filters-filters\"><ul class=\"gender-list\"><li><label class=\"common-customRadio gender-label\"><input type=\"radio\" value=\"men,men women\"><!-- react-text: 40 -->Men<!-- /react-text --><div class=\"common-radioIndicator\"></div></label></li><li><label class=\"common-customRadio gender-label\"><input type=\"radio\" value=\"women,men women\"><!-- react-text: 45 -->Women<!-- /react-text --><div class=\"common-radioIndicator\"></div></label></li><li><label class=\"common-customRadio gender-label\"><input type=\"radio\" v...[truncated]",
+                    "<section><div class=\"condition-render-verticalFilters condition-render-boundary-top\"><div class=\"vertical-filters-filters header-container\"><span class=\"header-title\">FILTERS</span></div><div class=\"vertical-filters-filters\"><ul class=\"gender-list\"><li><label class=\"common-customRadio gender-label\"><input type=\"radio\" value=\"men,men women\"><!-- react-text: 40 -->Men<!-- /react-text --><div class=\"common-radioIndicator\"></div></label></li><li><label class=\"common-customRadio gender-label\"><input type=\"radio\" value=\"women,men women\"><!-- react-text: 45 -->Women<!-- /react-text --><div class=\"common-radioIndicator\"></div></label></li><li><label class=\"common-customRadio gender-label\"><input type=...[truncated]",
+                    "<div class=\"search-leftContainer column-base\" style=\"-webkit-box-flex: 1; flex: 1 1 0%;\"><section><div class=\"condition-render-verticalFilters condition-render-boundary-top\"><div class=\"vertical-filters-filters header-container\"><span class=\"header-title\">FILTERS</span></div><div class=\"vertical-filters-filters\"><ul class=\"gender-list\"><li><label class=\"common-customRadio gender-label\"><input type=\"radio\" value=\"men,men women\"><!-- react-text: 40 -->Men<!-- /react-text --><div class=\"common-radioIndicator\"></div></label></li><li><label class=\"common-customRadio gender-label\"><input type=\"radio\" value=\"women,men women\"><!-- react-text: 45 -->Women<!-- /react-text --><div class=\"common-radioIndi...[truncated]"
+                ],
+                "act_target_style": {
+                    "display": "block",
+                    "visibility": "visible",
+                    "opacity": "1"
+                },
+                "state_target_html_chain": [
+                    "<input type=\"checkbox\" value=\"MZ\">",
+                    "<label class=\"vertical-filters-label common-customCheckbox\"><input type=\"checkbox\" value=\"MZ\"><!-- react-text: 66 -->MZ<!-- /react-text --><span class=\"brand-num\"><!-- react-text: 68 -->(<!-- /react-text --><!-- react-text: 69 -->176<!-- /react-text --><!-- react-text: 70 -->)<!-- /react-text --></span><div class=\"common-checkboxIndicator\"></div></label>",
+                    "<li><label class=\"vertical-filters-label common-customCheckbox\"><input type=\"checkbox\" value=\"MZ\"><!-- react-text: 66 -->MZ<!-- /react-text --><span class=\"brand-num\"><!-- react-text: 68 -->(<!-- /react-text --><!-- react-text: 69 -->176<!-- /react-text --><!-- react-text: 70 -->)<!-- /react-text --></span><div class=\"common-checkboxIndicator\"></div></label></li>",
+                    "<ul class=\"brand-list\"><li><label class=\"vertical-filters-label common-customCheckbox\"><input type=\"checkbox\" value=\"MZ\"><!-- react-text: 66 -->MZ<!-- /react-text --><span class=\"brand-num\"><!-- react-text: 68 -->(<!-- /react-text --><!-- react-text: 69 -->176<!-- /react-text --><!-- react-text: 70 -->)<!-- /react-text --></span><div class=\"common-checkboxIndicator\"></div></label></li><li><label class=\"vertical-filters-label common-customCheckbox\"><input type=\"che...[truncated]",
+                    "<div class=\"vertical-filters-filters brand-container\"><span class=\"vertical-filters-header\">Brand</span><div class=\"filter-search-filterSearchBox\"><input type=\"text\" class=\"filter-search-inputBox filter-search-hidden\" placeholder=\"Search for Brand\"><span class=\"myntraweb-sprite filter-search-iconSearch sprites-search\"></span></div><ul class=\"brand-list\"><li><label class=\"vertical-filters-label common-customCheckbox\"><input type=\"checkbox\" value=\"MZ\"><!-- react-tex...[truncated]",
+                    "<div class=\"condition-render-verticalFilters condition-render-boundary-top\"><div class=\"vertical-filters-filters header-container\"><span class=\"header-title\">FILTERS</span></div><div class=\"vertical-filters-filters\"><ul class=\"gender-list\"><li><label class=\"common-customRadio gender-label\"><input type=\"radio\" value=\"men,men women\"><!-- react-text: 40 -->Men<!-- /react-text --><div class=\"common-radioIndicator\"></div></label></li><li><label class=\"common-customRadi...[truncated]",
+                    "<section><div class=\"condition-render-verticalFilters condition-render-boundary-top\"><div class=\"vertical-filters-filters header-container\"><span class=\"header-title\">FILTERS</span></div><div class=\"vertical-filters-filters\"><ul class=\"gender-list\"><li><label class=\"common-customRadio gender-label\"><input type=\"radio\" value=\"men,men women\"><!-- react-text: 40 -->Men<!-- /react-text --><div class=\"common-radioIndicator\"></div></label></li><li><label class=\"common-c...[truncated]"
+                ],
+                "state_target_style": {
+                    "display": "inline-block",
+                    "visibility": "hidden",
+                    "opacity": "1"
+                }
+            },
+            "expected_state": true,
+            "classified_by": "ancestor-classname-self",
+            "expect": {
+                "type": "toggle",
+                "final_checked": true
+            },
+            "page_id": 0,
+            "delay_before_ms": 3975
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/speakers?f=Brand%3AMZ",
+            "timestamp": "2026-09-25T04:51:33.396Z",
+            "page_id": 0,
+            "caused_by_timestamp": null,
+            "dom_snapshot_path": "storage\\snapshots\\60cb381ca86341f389cf8e869d033867\\2026-09-25T04-51-33-396Z.html",
+            "delay_before_ms": 322
+        },
+        {
+            "action_type": "hover",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "COLOR\nBlue (43)\nRed (32)\nBlack (28)\nWhite (13)\nYellow (11)\nGreen (11)\nPink (10)",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#mountRoot > div > main > div:nth-of-type(3) > div > section > div > div:nth-of-type(4)",
+                "xpath": "//main[.//h1[contains(text(), 'Speakers')]]/div[3]/div/section/div/div[4]",
+                "text": "COLOR\nBlue (43)\nRed (32)\nBlack (28)\nWhite (13)\nYellow (11)\nGreen (11)\nPink (10)",
+                "element_text": "COLOR\nBlue (43)\nRed (32)\nBlack (28)\nWhite (13)\nYellow (11)\nGreen (11)\nPink (10)",
+                "tag": "div",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 0,
+                "y": 601.4000244140625,
+                "width": 252,
+                "height": 258.6000061035156
+            },
+            "page_url": "https://www.myntra.com/speakers?f=Brand%3AMZ",
+            "timestamp": "2026-09-25T04:51:38.301Z",
+            "expect": {
+                "type": "reveal",
+                "revealed_locator_profile": {
+                    "id": null,
+                    "name": null,
+                    "role": null,
+                    "aria_label": null,
+                    "accessible_name": "",
+                    "placeholder": null,
+                    "title": null,
+                    "href": null,
+                    "product_id": null,
+                    "css_path": "div#mountRoot > div > main > div:nth-of-type(3) > div > section > div > div:nth-of-type(4) > ul > li > label > div",
+                    "xpath": "//label[normalize-space(text())='Blue']/div",
+                    "text": "",
+                    "element_text": "",
+                    "tag": "div",
+                    "attributes": {},
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                }
+            },
+            "page_id": 0,
+            "delay_before_ms": 4905
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "Blue (43)",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#mountRoot > div > main > div:nth-of-type(3) > div > section > div > div:nth-of-type(4) > ul > li > label",
+                "xpath": "//label[normalize-space(text())='Blue']",
+                "text": "Blue (43)",
+                "element_text": "Blue (43)",
+                "tag": "label",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "act_target": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "Blue (43)",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#mountRoot > div > main > div:nth-of-type(3) > div > section > div > div:nth-of-type(4) > ul > li > label",
+                "xpath": "//label[normalize-space(text())='Blue']",
+                "text": "Blue (43)",
+                "element_text": "Blue (43)",
+                "tag": "label",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "state_target": {
+                "locator_profile": {
+                    "id": null,
+                    "name": null,
+                    "role": "checkbox",
+                    "aria_label": null,
+                    "accessible_name": "Blue (43)",
+                    "placeholder": null,
+                    "title": null,
+                    "href": null,
+                    "product_id": null,
+                    "css_path": "div#mountRoot > div > main > div:nth-of-type(3) > div > section > div > div:nth-of-type(4) > ul > li > label > input",
+                    "xpath": "//label[normalize-space(text())='Blue']/input",
+                    "text": "Blue (43)",
+                    "element_text": "Blue",
+                    "tag": "input",
+                    "attributes": {
+                        "type": "checkbox"
+                    },
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                },
+                "checked": true
+            },
+            "bounding_box": {
+                "x": 25,
+                "y": 656.2000122070312,
+                "width": 134.1374969482422,
+                "height": 16.80000114440918
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/speakers?f=Brand%3AMZ",
+            "timestamp": "2026-09-25T04:51:38.303Z",
+            "dom_context": {
+                "act_target_html_chain": [
+                    "<label class=\"common-customCheckbox\" data-count=\"43\"><span data-colorhex=\"blue\" class=\"colour-label colour-colorDisplay\" style=\"background-color: rgb(0, 116, 217);\"></span><!-- react-text: 161 -->Blue<!-- /react-text --><!-- react-text: 162 --> <!-- /react-text --><span class=\"colour-num\"><!-- react-text: 164 -->(<!-- /react-text --><!-- react-text: 165 -->43<!-- /react-text --><!-- react-text: 166 -->)<!-- /react-text --></span><input type=\"checkbox\" value=\"Blue\"><div class=\"common-checkboxIndicator\"></div></label>",
+                    "<li class=\"colour-listItem\"><label class=\"common-customCheckbox\" data-count=\"43\"><span data-colorhex=\"blue\" class=\"colour-label colour-colorDisplay\" style=\"background-color: rgb(0, 116, 217);\"></span><!-- react-text: 161 -->Blue<!-- /react-text --><!-- react-text: 162 --> <!-- /react-text --><span class=\"colour-num\"><!-- react-text: 164 -->(<!-- /react-text --><!-- react-text: 165 -->43<!-- /react-text --><!-- react-text: 166 -->)<!-- /react-text --></span><input type=\"checkbox\" value=\"Blue\"><div class=\"common-checkboxIndicator\"></div></label></li>",
+                    "<ul><li class=\"colour-listItem\"><label class=\"common-customCheckbox\" data-count=\"43\"><span data-colorhex=\"blue\" class=\"colour-label colour-colorDisplay\" style=\"background-color: rgb(0, 116, 217);\"></span><!-- react-text: 161 -->Blue<!-- /react-text --><!-- react-text: 162 --> <!-- /react-text --><span class=\"colour-num\"><!-- react-text: 164 -->(<!-- /react-text --><!-- react-text: 165 -->43<!-- /react-text --><!-- react-text: 166 -->)<!-- /react-text --></span><input type=\"checkbox\" value=\"Blue\"><div class=\"common-checkboxIndicator\"></div></label></li><li class=\"colour-listItem\"><label class=\"common-customCheckbox\" data-count=\"32\"><span data-colorhex=\"red\" class=\"colour-label colour-colorDispl...[truncated]",
+                    "<div class=\"vertical-filters-filters\"><span class=\"vertical-filters-header\">Color</span><div class=\"filter-search-filterSearchBox\"><input type=\"text\" class=\"filter-search-inputBox filter-search-hidden\" placeholder=\"Search for Color\"><span class=\"myntraweb-sprite filter-search-iconSearch sprites-search\"></span></div><ul><li class=\"colour-listItem\"><label class=\"common-customCheckbox\" data-count=\"43\"><span data-colorhex=\"blue\" class=\"colour-label colour-colorDisplay\" style=\"background-color: rgb(0, 116, 217);\"></span><!-- react-text: 161 -->Blue<!-- /react-text --><!-- react-text: 162 --> <!-- /react-text --><span class=\"colour-num\"><!-- react-text: 164 -->(<!-- /react-text --><!-- react-text: 1...[truncated]",
+                    "<div class=\"condition-render-verticalFilters condition-render-boundary-top\"><div class=\"vertical-filters-filters header-container\"><span class=\"header-title\">FILTERS</span><span class=\"header-clearAllBtn\">CLEAR ALL</span></div><div class=\"vertical-filters-filters brand-container\"><span class=\"vertical-filters-header\">Brand</span><div class=\"filter-search-filterSearchBox\"><input type=\"text\" class=\"filter-search-inputBox filter-search-hidden\" placeholder=\"Search for Brand\"><span class=\"myntraweb-sprite filter-search-iconSearch sprites-search\"></span></div><ul class=\"brand-list\"><li><label class=\"vertical-filters-label common-customCheckbox\"><input type=\"checkbox\" value=\"MZ\"><!-- react-text: 66 -...[truncated]",
+                    "<section><div class=\"condition-render-verticalFilters condition-render-boundary-top\"><div class=\"vertical-filters-filters header-container\"><span class=\"header-title\">FILTERS</span><span class=\"header-clearAllBtn\">CLEAR ALL</span></div><div class=\"vertical-filters-filters brand-container\"><span class=\"vertical-filters-header\">Brand</span><div class=\"filter-search-filterSearchBox\"><input type=\"text\" class=\"filter-search-inputBox filter-search-hidden\" placeholder=\"Search for Brand\"><span class=\"myntraweb-sprite filter-search-iconSearch sprites-search\"></span></div><ul class=\"brand-list\"><li><label class=\"vertical-filters-label common-customCheckbox\"><input type=\"checkbox\" value=\"MZ\"><!-- react-t...[truncated]",
+                    "<div class=\"search-leftContainer column-base\" style=\"-webkit-box-flex: 1; flex: 1 1 0%;\"><section><div class=\"condition-render-verticalFilters condition-render-boundary-top\"><div class=\"vertical-filters-filters header-container\"><span class=\"header-title\">FILTERS</span><span class=\"header-clearAllBtn\">CLEAR ALL</span></div><div class=\"vertical-filters-filters brand-container\"><span class=\"vertical-filters-header\">Brand</span><div class=\"filter-search-filterSearchBox\"><input type=\"text\" class=\"filter-search-inputBox filter-search-hidden\" placeholder=\"Search for Brand\"><span class=\"myntraweb-sprite filter-search-iconSearch sprites-search\"></span></div><ul class=\"brand-list\"><li><label class=\"ver...[truncated]"
+                ],
+                "act_target_style": {
+                    "display": "inline",
+                    "visibility": "visible",
+                    "opacity": "1"
+                },
+                "state_target_html_chain": [
+                    "<input type=\"checkbox\" value=\"Blue\">",
+                    "<label class=\"common-customCheckbox\" data-count=\"43\"><span data-colorhex=\"blue\" class=\"colour-label colour-colorDisplay\" style=\"background-color: rgb(0, 116, 217);\"></span><!-- react-text: 161 -->Blue<!-- /react-text --><!-- react-text: 162 --> <!-- /react-text --><span class=\"colour-num\"><!-- react-text: 164 -->(<!-- /react-text --><!-- react-text: 165 -->43<!-- /react-text --><!-- react-text: 166 -->)<!-- /react-text --></span><input type=\"checkbox\" value=\"Blue\"...[truncated]",
+                    "<li class=\"colour-listItem\"><label class=\"common-customCheckbox\" data-count=\"43\"><span data-colorhex=\"blue\" class=\"colour-label colour-colorDisplay\" style=\"background-color: rgb(0, 116, 217);\"></span><!-- react-text: 161 -->Blue<!-- /react-text --><!-- react-text: 162 --> <!-- /react-text --><span class=\"colour-num\"><!-- react-text: 164 -->(<!-- /react-text --><!-- react-text: 165 -->43<!-- /react-text --><!-- react-text: 166 -->)<!-- /react-text --></span><input ...[truncated]",
+                    "<ul><li class=\"colour-listItem\"><label class=\"common-customCheckbox\" data-count=\"43\"><span data-colorhex=\"blue\" class=\"colour-label colour-colorDisplay\" style=\"background-color: rgb(0, 116, 217);\"></span><!-- react-text: 161 -->Blue<!-- /react-text --><!-- react-text: 162 --> <!-- /react-text --><span class=\"colour-num\"><!-- react-text: 164 -->(<!-- /react-text --><!-- react-text: 165 -->43<!-- /react-text --><!-- react-text: 166 -->)<!-- /react-text --></span><in...[truncated]",
+                    "<div class=\"vertical-filters-filters\"><span class=\"vertical-filters-header\">Color</span><div class=\"filter-search-filterSearchBox\"><input type=\"text\" class=\"filter-search-inputBox filter-search-hidden\" placeholder=\"Search for Color\"><span class=\"myntraweb-sprite filter-search-iconSearch sprites-search\"></span></div><ul><li class=\"colour-listItem\"><label class=\"common-customCheckbox\" data-count=\"43\"><span data-colorhex=\"blue\" class=\"colour-label colour-colorDisplay...[truncated]",
+                    "<div class=\"condition-render-verticalFilters condition-render-boundary-top\"><div class=\"vertical-filters-filters header-container\"><span class=\"header-title\">FILTERS</span><span class=\"header-clearAllBtn\">CLEAR ALL</span></div><div class=\"vertical-filters-filters brand-container\"><span class=\"vertical-filters-header\">Brand</span><div class=\"filter-search-filterSearchBox\"><input type=\"text\" class=\"filter-search-inputBox filter-search-hidden\" placeholder=\"Search for...[truncated]",
+                    "<section><div class=\"condition-render-verticalFilters condition-render-boundary-top\"><div class=\"vertical-filters-filters header-container\"><span class=\"header-title\">FILTERS</span><span class=\"header-clearAllBtn\">CLEAR ALL</span></div><div class=\"vertical-filters-filters brand-container\"><span class=\"vertical-filters-header\">Brand</span><div class=\"filter-search-filterSearchBox\"><input type=\"text\" class=\"filter-search-inputBox filter-search-hidden\" placeholder=\"S...[truncated]"
+                ],
+                "state_target_style": {
+                    "display": "inline-block",
+                    "visibility": "hidden",
+                    "opacity": "1"
+                }
+            },
+            "expected_state": true,
+            "classified_by": "ancestor-classname-self",
+            "expect": {
+                "type": "toggle",
+                "final_checked": true
+            },
+            "hover_chain": [
+                {
+                    "id": null,
+                    "name": null,
+                    "role": null,
+                    "aria_label": null,
+                    "accessible_name": "COLOR\nBlue (43)\nRed (32)\nBlack (28)\nWhite (13)\nYellow (11)\nGreen (11)\nPink (10)",
+                    "placeholder": null,
+                    "title": null,
+                    "href": null,
+                    "product_id": null,
+                    "css_path": "div#mountRoot > div > main > div:nth-of-type(3) > div > section > div > div:nth-of-type(4)",
+                    "xpath": "//main[.//h1[contains(text(), 'Speakers')]]/div[3]/div/section/div/div[4]",
+                    "text": "COLOR\nBlue (43)\nRed (32)\nBlack (28)\nWhite (13)\nYellow (11)\nGreen (11)\nPink (10)",
+                    "element_text": "COLOR\nBlue (43)\nRed (32)\nBlack (28)\nWhite (13)\nYellow (11)\nGreen (11)\nPink (10)",
+                    "tag": "div",
+                    "attributes": {},
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                }
+            ],
+            "page_id": 0,
+            "delay_before_ms": 2
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/speakers?f=Brand%3AMZ%3A%3AColor%3ABlue_0074D9",
+            "timestamp": "2026-09-25T04:51:38.562Z",
+            "page_id": 0,
+            "caused_by_timestamp": null,
+            "dom_snapshot_path": "storage\\snapshots\\60cb381ca86341f389cf8e869d033867\\2026-09-25T04-51-38-562Z.html",
+            "delay_before_ms": 259
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Net Quantity Unit",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > ul > li:nth-of-type(5) > label",
+                "xpath": "//label[normalize-space(.)='Net Quantity Unit']",
+                "text": "Net Quantity Unit",
+                "element_text": "Net Quantity Unit",
+                "tag": "label",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "act_target": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Net Quantity Unit",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > ul > li:nth-of-type(5) > label",
+                "xpath": "//label[normalize-space(.)='Net Quantity Unit']",
+                "text": "Net Quantity Unit",
+                "element_text": "Net Quantity Unit",
+                "tag": "label",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "state_target": null,
+            "bounding_box": {
+                "x": 747.1625366210938,
+                "y": 172.40000915527344,
+                "width": 148.8249969482422,
+                "height": 26.80000114440918
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/speakers?f=Brand%3AMZ%3A%3AColor%3ABlue_0074D9",
+            "timestamp": "2026-09-25T04:51:43.869Z",
+            "dom_context": {
+                "act_target_html_chain": [
+                    "<label class=\"\"><input type=\"radio\" value=\"Net Quantity Unit\"><h4 class=\"atsa-title\"><!-- react-text: 358 -->Net Quantity Unit<!-- /react-text --><!-- react-text: 359 --> <!-- /react-text --></h4><span class=\"atsa-downArrow sprites-arrowDownBold myntraweb-sprite\"></span></label>",
+                    "<li><label class=\"\"><input type=\"radio\" value=\"Net Quantity Unit\"><h4 class=\"atsa-title\"><!-- react-text: 358 -->Net Quantity Unit<!-- /react-text --><!-- react-text: 359 --> <!-- /react-text --></h4><span class=\"atsa-downArrow sprites-arrowDownBold myntraweb-sprite\"></span></label></li>",
+                    "<ul class=\"atsa-filters\"><li><label class=\"\"><input type=\"radio\" value=\"Bundles\"><h4 class=\"atsa-title\"><!-- react-text: 330 -->Bundles<!-- /react-text --><!-- react-text: 331 --> <!-- /react-text --></h4><span class=\"atsa-downArrow sprites-arrowDownBold myntraweb-sprite\"></span></label></li><li><label class=\"\"><input type=\"radio\" value=\"Connectivity\"><h4 class=\"atsa-title\"><!-- react-text: 337 -->Connectivity<!-- /react-text --><!-- react-text: 338 --> <!-- /react-text --></h4><span class=\"atsa-downArrow sprites-arrowDownBold myntraweb-sprite\"></span></label></li><li><label class=\"\"><input type=\"radio\" value=\"Country of Origin\"><h4 class=\"atsa-title\"><!-- react-text: 344 -->Country of Origin<!-- /react-text --><!-- react-text: 345 --> <!-- /react-text --></h4><span class=\"atsa-downArrow sprites-arrowDownBold myntraweb-sprite\"></span></label></li><li><label class=\"\"><input type=\"radio\" value=\"Microphone\"><h4 class=\"atsa-title\"><!-- react-text: 351 -->Microphone<!-- /react-text --><!-- react-text: 352 --> <!-- /react-text --></h4><span class=\"atsa-downArrow sprites-arrowDownBold myntraweb-sprite\"></span></label></li><li><label class=\"\"><input type=\"radi...[truncated]",
+                    "<div class=\"atsa-base\"><ul class=\"atsa-filters\"><li><label class=\"\"><input type=\"radio\" value=\"Bundles\"><h4 class=\"atsa-title\"><!-- react-text: 330 -->Bundles<!-- /react-text --><!-- react-text: 331 --> <!-- /react-text --></h4><span class=\"atsa-downArrow sprites-arrowDownBold myntraweb-sprite\"></span></label></li><li><label class=\"\"><input type=\"radio\" value=\"Connectivity\"><h4 class=\"atsa-title\"><!-- react-text: 337 -->Connectivity<!-- /react-text --><!-- react-text: 338 --> <!-- /react-text --></h4><span class=\"atsa-downArrow sprites-arrowDownBold myntraweb-sprite\"></span></label></li><li><label class=\"\"><input type=\"radio\" value=\"Country of Origin\"><h4 class=\"atsa-title\"><!-- react-text: 344 -->Country of Origin<!-- /react-text --><!-- react-text: 345 --> <!-- /react-text --></h4><span class=\"atsa-downArrow sprites-arrowDownBold myntraweb-sprite\"></span></label></li><li><label class=\"\"><input type=\"radio\" value=\"Microphone\"><h4 class=\"atsa-title\"><!-- react-text: 351 -->Microphone<!-- /react-text --><!-- react-text: 352 --> <!-- /react-text --></h4><span class=\"atsa-downArrow sprites-arrowDownBold myntraweb-sprite\"></span></label></li><li><label cla...[truncated]",
+                    "<div><div class=\"horizontal-filters-sortContainer\"><div><div><div class=\"sort-sortBy\"><!-- react-text: 292 -->Sort by : <!-- /react-text --><span>Recommended</span><span class=\"myntraweb-sprite sort-downArrow sprites-downArrow\"></span><ul class=\"sort-list\"><li><label class=\"sort-label \"><input type=\"radio\" value=\"recommended\"><!-- react-text: 299 -->Recommended<!-- /react-text --></label></li><li><label class=\"sort-label \"><input type=\"radio\" value=\"new\"><!-- react-text: 303 -->What's New<!-- /react-text --></label></li><li><label class=\"sort-label \"><input type=\"radio\" value=\"popularity\"><!-- react-text: 307 -->Popularity<!-- /react-text --></label></li><li><label class=\"sort-label \"><input type=\"radio\" value=\"discount\"><!-- react-text: 311 -->Better Discount<!-- /react-text --></label></li><li><label class=\"sort-label \"><input type=\"radio\" value=\"price_desc\"><!-- react-text: 315 -->Price: High to Low<!-- /react-text --></label></li><li><label class=\"sort-label \"><input type=\"radio\" value=\"price_asc\"><!-- react-text: 319 -->Price: Low to High<!-- /react-text --></label></li><li><label class=\"sort-label \"><input type=\"radio\" value=\"Customer Rating\"><!-...[truncated]",
+                    "<section class=\"horizontal-filters-base horizontal-filters-hideBorder horizontal-filters-addBoxShadow\"><div><div class=\"horizontal-filters-sortContainer\"><div><div><div class=\"sort-sortBy\"><!-- react-text: 292 -->Sort by : <!-- /react-text --><span>Recommended</span><span class=\"myntraweb-sprite sort-downArrow sprites-downArrow\"></span><ul class=\"sort-list\"><li><label class=\"sort-label \"><input type=\"radio\" value=\"recommended\"><!-- react-text: 299 -->Recommended<!-- /react-text --></label></li><li><label class=\"sort-label \"><input type=\"radio\" value=\"new\"><!-- react-text: 303 -->What's New<!-- /react-text --></label></li><li><label class=\"sort-label \"><input type=\"radio\" value=\"popularity\"><!-- react-text: 307 -->Popularity<!-- /react-text --></label></li><li><label class=\"sort-label \"><input type=\"radio\" value=\"discount\"><!-- react-text: 311 -->Better Discount<!-- /react-text --></label></li><li><label class=\"sort-label \"><input type=\"radio\" value=\"price_desc\"><!-- react-text: 315 -->Price: High to Low<!-- /react-text --></label></li><li><label class=\"sort-label \"><input type=\"radio\" value=\"price_asc\"><!-- react-text: 319 -->Price: Low to High<!-- /re...[truncated]",
+                    "<div class=\" row-base\" style=\"display: -webkit-flex;\"><section class=\"horizontal-filters-base horizontal-filters-hideBorder horizontal-filters-addBoxShadow\"><div><div class=\"horizontal-filters-sortContainer\"><div><div><div class=\"sort-sortBy\"><!-- react-text: 292 -->Sort by : <!-- /react-text --><span>Recommended</span><span class=\"myntraweb-sprite sort-downArrow sprites-downArrow\"></span><ul class=\"sort-list\"><li><label class=\"sort-label \"><input type=\"radio\" value=\"recommended\"><!-- react-text: 299 -->Recommended<!-- /react-text --></label></li><li><label class=\"sort-label \"><input type=\"radio\" value=\"new\"><!-- react-text: 303 -->What's New<!-- /react-text --></label></li><li><label class=\"sort-label \"><input type=\"radio\" value=\"popularity\"><!-- react-text: 307 -->Popularity<!-- /react-text --></label></li><li><label class=\"sort-label \"><input type=\"radio\" value=\"discount\"><!-- react-text: 311 -->Better Discount<!-- /react-text --></label></li><li><label class=\"sort-label \"><input type=\"radio\" value=\"price_desc\"><!-- react-text: 315 -->Price: High to Low<!-- /react-text --></label></li><li><label class=\"sort-label \"><input type=\"radio\" value=\"price_a...[truncated]"
+                ],
+                "act_target_style": {
+                    "display": "inline",
+                    "visibility": "visible",
+                    "opacity": "1"
+                },
+                "state_target_html_chain": null,
+                "state_target_style": null
+            },
+            "page_id": 0,
+            "delay_before_ms": 5307
+        },
+        {
+            "action_type": "hover",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Bundles\nConnectivity\nCountry of Origin\nMicrophone\nNet Quantity Unit\nRating\nSize",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2)",
+                "xpath": "//section[.//h4[contains(text(), 'Bundles')]]/div/div[2]",
+                "text": "Bundles\nConnectivity\nCountry of Origin\nMicrophone\nNet Quantity Unit\nRating\nSize",
+                "element_text": "Bundles\nConnectivity\nCountry of Origin\nMicrophone\nNet Quantity Unit\nRating\nSize",
+                "tag": "div",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 252,
+                "y": 167.40000915527344,
+                "width": 1011.2000122070312,
+                "height": 100
+            },
+            "page_url": "https://www.myntra.com/speakers?f=Brand%3AMZ%3A%3AColor%3ABlue_0074D9",
+            "timestamp": "2026-09-25T04:51:46.022Z",
+            "expect": {
+                "type": "reveal",
+                "revealed_locator_profile": {
+                    "id": null,
+                    "name": null,
+                    "role": null,
+                    "aria_label": null,
+                    "accessible_name": "",
+                    "placeholder": null,
+                    "title": null,
+                    "href": null,
+                    "product_id": null,
+                    "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > div > ul > li:nth-of-type(2) > label > div",
+                    "xpath": "//label[normalize-space(text())='Pieces']/div",
+                    "text": "",
+                    "element_text": "",
+                    "tag": "div",
+                    "attributes": {},
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                }
+            },
+            "page_id": 0,
+            "delay_before_ms": 2153
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "Pieces",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > div > ul > li:nth-of-type(2) > label",
+                "xpath": "//label[normalize-space(text())='Pieces']",
+                "text": "Pieces",
+                "element_text": "Pieces",
+                "tag": "label",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "act_target": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "Pieces",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > div > ul > li:nth-of-type(2) > label",
+                "xpath": "//label[normalize-space(text())='Pieces']",
+                "text": "Pieces",
+                "element_text": "Pieces",
+                "tag": "label",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "state_target": {
+                "locator_profile": {
+                    "id": null,
+                    "name": null,
+                    "role": "checkbox",
+                    "aria_label": null,
+                    "accessible_name": "Pieces",
+                    "placeholder": null,
+                    "title": null,
+                    "href": null,
+                    "product_id": null,
+                    "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > div > ul > li:nth-of-type(2) > label > input",
+                    "xpath": "//label[normalize-space(text())='Pieces']/input",
+                    "text": "Pieces",
+                    "element_text": "Pieces",
+                    "tag": "input",
+                    "attributes": {
+                        "type": "checkbox"
+                    },
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                },
+                "checked": true
+            },
+            "bounding_box": {
+                "x": 419,
+                "y": 240.60000610351562,
+                "width": 69.75,
+                "height": 16.80000114440918
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/speakers?f=Brand%3AMZ%3A%3AColor%3ABlue_0074D9",
+            "timestamp": "2026-09-25T04:51:46.024Z",
+            "dom_context": {
+                "act_target_html_chain": [
+                    "<label class=\"common-customCheckbox\"><input type=\"checkbox\" value=\"Pieces\"><!-- react-text: 5389 -->Pieces<!-- /react-text --><div class=\"common-checkboxIndicator\"></div></label>",
+                    "<li><label class=\"common-customCheckbox\"><input type=\"checkbox\" value=\"Pieces\"><!-- react-text: 5389 -->Pieces<!-- /react-text --><div class=\"common-checkboxIndicator\"></div></label></li>",
+                    "<ul class=\"atsa-values\"><li><label class=\"common-customCheckbox\"><input type=\"checkbox\" value=\"Piece\"><!-- react-text: 5384 -->Piece<!-- /react-text --><div class=\"common-checkboxIndicator\"></div></label></li><li><label class=\"common-customCheckbox\"><input type=\"checkbox\" value=\"Pieces\"><!-- react-text: 5389 -->Pieces<!-- /react-text --><div class=\"common-checkboxIndicator\"></div></label></li></ul>",
+                    "<div class=\"atsa-atsaFiltersOptionCtn atsa-atsaShowContainer\"><ul class=\"atsa-values\"><li><label class=\"common-customCheckbox\"><input type=\"checkbox\" value=\"Piece\"><!-- react-text: 5384 -->Piece<!-- /react-text --><div class=\"common-checkboxIndicator\"></div></label></li><li><label class=\"common-customCheckbox\"><input type=\"checkbox\" value=\"Pieces\"><!-- react-text: 5389 -->Pieces<!-- /react-text --><div class=\"common-checkboxIndicator\"></div></label></li></ul></div>",
+                    "<div class=\"atsa-base\"><ul class=\"atsa-filters\"><li><label class=\"\"><input type=\"radio\" value=\"Bundles\"><h4 class=\"atsa-title\"><!-- react-text: 330 -->Bundles<!-- /react-text --><!-- react-text: 331 --> <!-- /react-text --></h4><span class=\"atsa-downArrow sprites-arrowDownBold myntraweb-sprite\"></span></label></li><li><label class=\"\"><input type=\"radio\" value=\"Connectivity\"><h4 class=\"atsa-title\"><!-- react-text: 337 -->Connectivity<!-- /react-text --><!-- react-text: 338 --> <!-- /react-text --></h4><span class=\"atsa-downArrow sprites-arrowDownBold myntraweb-sprite\"></span></label></li><li><label class=\"\"><input type=\"radio\" value=\"Country of Origin\"><h4 class=\"atsa-title\"><!-- react-text: 34...[truncated]",
+                    "<div><div class=\"horizontal-filters-sortContainer\"><div><div><div class=\"sort-sortBy\"><!-- react-text: 292 -->Sort by : <!-- /react-text --><span>Recommended</span><span class=\"myntraweb-sprite sort-downArrow sprites-downArrow\"></span><ul class=\"sort-list\"><li><label class=\"sort-label \"><input type=\"radio\" value=\"recommended\"><!-- react-text: 299 -->Recommended<!-- /react-text --></label></li><li><label class=\"sort-label \"><input type=\"radio\" value=\"new\"><!-- react-text: 303 -->What's New<!-- /react-text --></label></li><li><label class=\"sort-label \"><input type=\"radio\" value=\"popularity\"><!-- react-text: 307 -->Popularity<!-- /react-text --></label></li><li><label class=\"sort-label \"><input t...[truncated]",
+                    "<section class=\"horizontal-filters-base horizontal-filters-hideBorder horizontal-filters-addBoxShadow\"><div><div class=\"horizontal-filters-sortContainer\"><div><div><div class=\"sort-sortBy\"><!-- react-text: 292 -->Sort by : <!-- /react-text --><span>Recommended</span><span class=\"myntraweb-sprite sort-downArrow sprites-downArrow\"></span><ul class=\"sort-list\"><li><label class=\"sort-label \"><input type=\"radio\" value=\"recommended\"><!-- react-text: 299 -->Recommended<!-- /react-text --></label></li><li><label class=\"sort-label \"><input type=\"radio\" value=\"new\"><!-- react-text: 303 -->What's New<!-- /react-text --></label></li><li><label class=\"sort-label \"><input type=\"radio\" value=\"popularity\"><!-...[truncated]"
+                ],
+                "act_target_style": {
+                    "display": "inline",
+                    "visibility": "visible",
+                    "opacity": "1"
+                },
+                "state_target_html_chain": [
+                    "<input type=\"checkbox\" value=\"Pieces\">",
+                    "<label class=\"common-customCheckbox\"><input type=\"checkbox\" value=\"Pieces\"><!-- react-text: 5389 -->Pieces<!-- /react-text --><div class=\"common-checkboxIndicator\"></div></label>",
+                    "<li><label class=\"common-customCheckbox\"><input type=\"checkbox\" value=\"Pieces\"><!-- react-text: 5389 -->Pieces<!-- /react-text --><div class=\"common-checkboxIndicator\"></div></label></li>",
+                    "<ul class=\"atsa-values\"><li><label class=\"common-customCheckbox\"><input type=\"checkbox\" value=\"Piece\"><!-- react-text: 5384 -->Piece<!-- /react-text --><div class=\"common-checkboxIndicator\"></div></label></li><li><label class=\"common-customCheckbox\"><input type=\"checkbox\" value=\"Pieces\"><!-- react-text: 5389 -->Pieces<!-- /react-text --><div class=\"common-checkboxIndicator\"></div></label></li></ul>",
+                    "<div class=\"atsa-atsaFiltersOptionCtn atsa-atsaShowContainer\"><ul class=\"atsa-values\"><li><label class=\"common-customCheckbox\"><input type=\"checkbox\" value=\"Piece\"><!-- react-text: 5384 -->Piece<!-- /react-text --><div class=\"common-checkboxIndicator\"></div></label></li><li><label class=\"common-customCheckbox\"><input type=\"checkbox\" value=\"Pieces\"><!-- react-text: 5389 -->Pieces<!-- /react-text --><div class=\"common-checkboxIndicator\"></div></label></li></ul></div...[truncated]",
+                    "<div class=\"atsa-base\"><ul class=\"atsa-filters\"><li><label class=\"\"><input type=\"radio\" value=\"Bundles\"><h4 class=\"atsa-title\"><!-- react-text: 330 -->Bundles<!-- /react-text --><!-- react-text: 331 --> <!-- /react-text --></h4><span class=\"atsa-downArrow sprites-arrowDownBold myntraweb-sprite\"></span></label></li><li><label class=\"\"><input type=\"radio\" value=\"Connectivity\"><h4 class=\"atsa-title\"><!-- react-text: 337 -->Connectivity<!-- /react-text --><!-- react-t...[truncated]",
+                    "<div><div class=\"horizontal-filters-sortContainer\"><div><div><div class=\"sort-sortBy\"><!-- react-text: 292 -->Sort by : <!-- /react-text --><span>Recommended</span><span class=\"myntraweb-sprite sort-downArrow sprites-downArrow\"></span><ul class=\"sort-list\"><li><label class=\"sort-label \"><input type=\"radio\" value=\"recommended\"><!-- react-text: 299 -->Recommended<!-- /react-text --></label></li><li><label class=\"sort-label \"><input type=\"radio\" value=\"new\"><!-- reac...[truncated]"
+                ],
+                "state_target_style": {
+                    "display": "inline-block",
+                    "visibility": "hidden",
+                    "opacity": "1"
+                }
+            },
+            "expected_state": true,
+            "classified_by": "ancestor-classname-self",
+            "expect": {
+                "type": "toggle",
+                "final_checked": true
+            },
+            "hover_chain": [
+                {
+                    "id": null,
+                    "name": null,
+                    "role": null,
+                    "aria_label": null,
+                    "accessible_name": "Bundles\nConnectivity\nCountry of Origin\nMicrophone\nNet Quantity Unit\nRating\nSize",
+                    "placeholder": null,
+                    "title": null,
+                    "href": null,
+                    "product_id": null,
+                    "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2)",
+                    "xpath": "//section[.//h4[contains(text(), 'Bundles')]]/div/div[2]",
+                    "text": "Bundles\nConnectivity\nCountry of Origin\nMicrophone\nNet Quantity Unit\nRating\nSize",
+                    "element_text": "Bundles\nConnectivity\nCountry of Origin\nMicrophone\nNet Quantity Unit\nRating\nSize",
+                    "tag": "div",
+                    "attributes": {},
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                }
+            ],
+            "page_id": 0,
+            "delay_before_ms": 2
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/speakers?f=Brand%3AMZ%3A%3AColor%3ABlue_0074D9%3A%3ANet%20Quantity%20Unit%3APieces",
+            "timestamp": "2026-09-25T04:51:46.482Z",
+            "page_id": 0,
+            "caused_by_timestamp": null,
+            "dom_snapshot_path": "storage\\snapshots\\60cb381ca86341f389cf8e869d033867\\2026-09-25T04-51-46-482Z.html",
+            "delay_before_ms": 458
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "boAt(4)",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#mountRoot > div > main > div:nth-of-type(3) > div > section > div > div:nth-of-type(2) > ul > li > label",
+                "xpath": "//label[normalize-space(text())='boAt']",
+                "text": "boAt(4)",
+                "element_text": "boAt(4)",
+                "tag": "label",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "act_target": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "boAt(4)",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#mountRoot > div > main > div:nth-of-type(3) > div > section > div > div:nth-of-type(2) > ul > li > label",
+                "xpath": "//label[normalize-space(text())='boAt']",
+                "text": "boAt(4)",
+                "element_text": "boAt(4)",
+                "tag": "label",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "state_target": {
+                "locator_profile": {
+                    "id": null,
+                    "name": null,
+                    "role": "checkbox",
+                    "aria_label": null,
+                    "accessible_name": "boAt(4)",
+                    "placeholder": null,
+                    "title": null,
+                    "href": null,
+                    "product_id": null,
+                    "css_path": "div#mountRoot > div > main > div:nth-of-type(3) > div > section > div > div:nth-of-type(2) > ul > li > label > input",
+                    "xpath": "//label[normalize-space(text())='boAt']/input",
+                    "text": "boAt(4)",
+                    "element_text": "boAt",
+                    "tag": "input",
+                    "attributes": {
+                        "type": "checkbox"
+                    },
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                },
+                "checked": true
+            },
+            "bounding_box": {
+                "x": 25,
+                "y": 267.20001220703125,
+                "width": 214.8874969482422,
+                "height": 17
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/speakers?f=Brand%3AMZ%3A%3AColor%3ABlue_0074D9%3A%3ANet%20Quantity%20Unit%3APieces",
+            "timestamp": "2026-09-25T04:51:48.223Z",
+            "dom_context": {
+                "act_target_html_chain": [
+                    "<label class=\"vertical-filters-label common-customCheckbox\"><input type=\"checkbox\" value=\"boAt\"><!-- react-text: 66 -->boAt<!-- /react-text --><span class=\"brand-num\"><!-- react-text: 68 -->(<!-- /react-text --><!-- react-text: 69 -->4<!-- /react-text --><!-- react-text: 70 -->)<!-- /react-text --></span><div class=\"common-checkboxIndicator\"></div></label>",
+                    "<li><label class=\"vertical-filters-label common-customCheckbox\"><input type=\"checkbox\" value=\"boAt\"><!-- react-text: 66 -->boAt<!-- /react-text --><span class=\"brand-num\"><!-- react-text: 68 -->(<!-- /react-text --><!-- react-text: 69 -->4<!-- /react-text --><!-- react-text: 70 -->)<!-- /react-text --></span><div class=\"common-checkboxIndicator\"></div></label></li>",
+                    "<ul class=\"brand-list\"><li><label class=\"vertical-filters-label common-customCheckbox\"><input type=\"checkbox\" value=\"boAt\"><!-- react-text: 66 -->boAt<!-- /react-text --><span class=\"brand-num\"><!-- react-text: 68 -->(<!-- /react-text --><!-- react-text: 69 -->4<!-- /react-text --><!-- react-text: 70 -->)<!-- /react-text --></span><div class=\"common-checkboxIndicator\"></div></label></li><li><label class=\"vertical-filters-label common-customCheckbox\"><input type=\"checkbox\" value=\"MZ\"><!-- react-text: 75 -->MZ<!-- /react-text --><span class=\"brand-num\"><!-- react-text: 77 -->(<!-- /react-text --><!-- react-text: 78 -->1<!-- /react-text --><!-- react-text: 79 -->)<!-- /react-text --></span><div c...[truncated]",
+                    "<div class=\"vertical-filters-filters brand-container\"><span class=\"vertical-filters-header\">Brand</span><ul class=\"brand-list\"><li><label class=\"vertical-filters-label common-customCheckbox\"><input type=\"checkbox\" value=\"boAt\"><!-- react-text: 66 -->boAt<!-- /react-text --><span class=\"brand-num\"><!-- react-text: 68 -->(<!-- /react-text --><!-- react-text: 69 -->4<!-- /react-text --><!-- react-text: 70 -->)<!-- /react-text --></span><div class=\"common-checkboxIndicator\"></div></label></li><li><label class=\"vertical-filters-label common-customCheckbox\"><input type=\"checkbox\" value=\"MZ\"><!-- react-text: 75 -->MZ<!-- /react-text --><span class=\"brand-num\"><!-- react-text: 77 -->(<!-- /react-text ...[truncated]",
+                    "<div class=\"condition-render-verticalFilters condition-render-boundary-top\"><div class=\"vertical-filters-filters header-container\"><span class=\"header-title\">FILTERS</span><span class=\"header-clearAllBtn\">CLEAR ALL</span></div><div class=\"vertical-filters-filters brand-container\"><span class=\"vertical-filters-header\">Brand</span><ul class=\"brand-list\"><li><label class=\"vertical-filters-label common-customCheckbox\"><input type=\"checkbox\" value=\"boAt\"><!-- react-text: 66 -->boAt<!-- /react-text --><span class=\"brand-num\"><!-- react-text: 68 -->(<!-- /react-text --><!-- react-text: 69 -->4<!-- /react-text --><!-- react-text: 70 -->)<!-- /react-text --></span><div class=\"common-checkboxIndicator\">...[truncated]",
+                    "<section><div class=\"condition-render-verticalFilters condition-render-boundary-top\"><div class=\"vertical-filters-filters header-container\"><span class=\"header-title\">FILTERS</span><span class=\"header-clearAllBtn\">CLEAR ALL</span></div><div class=\"vertical-filters-filters brand-container\"><span class=\"vertical-filters-header\">Brand</span><ul class=\"brand-list\"><li><label class=\"vertical-filters-label common-customCheckbox\"><input type=\"checkbox\" value=\"boAt\"><!-- react-text: 66 -->boAt<!-- /react-text --><span class=\"brand-num\"><!-- react-text: 68 -->(<!-- /react-text --><!-- react-text: 69 -->4<!-- /react-text --><!-- react-text: 70 -->)<!-- /react-text --></span><div class=\"common-checkboxIn...[truncated]",
+                    "<div class=\"search-leftContainer column-base\" style=\"-webkit-box-flex: 1; flex: 1 1 0%;\"><section><div class=\"condition-render-verticalFilters condition-render-boundary-top\"><div class=\"vertical-filters-filters header-container\"><span class=\"header-title\">FILTERS</span><span class=\"header-clearAllBtn\">CLEAR ALL</span></div><div class=\"vertical-filters-filters brand-container\"><span class=\"vertical-filters-header\">Brand</span><ul class=\"brand-list\"><li><label class=\"vertical-filters-label common-customCheckbox\"><input type=\"checkbox\" value=\"boAt\"><!-- react-text: 66 -->boAt<!-- /react-text --><span class=\"brand-num\"><!-- react-text: 68 -->(<!-- /react-text --><!-- react-text: 69 -->4<!-- /react...[truncated]"
+                ],
+                "act_target_style": {
+                    "display": "block",
+                    "visibility": "visible",
+                    "opacity": "1"
+                },
+                "state_target_html_chain": [
+                    "<input type=\"checkbox\" value=\"boAt\">",
+                    "<label class=\"vertical-filters-label common-customCheckbox\"><input type=\"checkbox\" value=\"boAt\"><!-- react-text: 66 -->boAt<!-- /react-text --><span class=\"brand-num\"><!-- react-text: 68 -->(<!-- /react-text --><!-- react-text: 69 -->4<!-- /react-text --><!-- react-text: 70 -->)<!-- /react-text --></span><div class=\"common-checkboxIndicator\"></div></label>",
+                    "<li><label class=\"vertical-filters-label common-customCheckbox\"><input type=\"checkbox\" value=\"boAt\"><!-- react-text: 66 -->boAt<!-- /react-text --><span class=\"brand-num\"><!-- react-text: 68 -->(<!-- /react-text --><!-- react-text: 69 -->4<!-- /react-text --><!-- react-text: 70 -->)<!-- /react-text --></span><div class=\"common-checkboxIndicator\"></div></label></li>",
+                    "<ul class=\"brand-list\"><li><label class=\"vertical-filters-label common-customCheckbox\"><input type=\"checkbox\" value=\"boAt\"><!-- react-text: 66 -->boAt<!-- /react-text --><span class=\"brand-num\"><!-- react-text: 68 -->(<!-- /react-text --><!-- react-text: 69 -->4<!-- /react-text --><!-- react-text: 70 -->)<!-- /react-text --></span><div class=\"common-checkboxIndicator\"></div></label></li><li><label class=\"vertical-filters-label common-customCheckbox\"><input type=\"c...[truncated]",
+                    "<div class=\"vertical-filters-filters brand-container\"><span class=\"vertical-filters-header\">Brand</span><ul class=\"brand-list\"><li><label class=\"vertical-filters-label common-customCheckbox\"><input type=\"checkbox\" value=\"boAt\"><!-- react-text: 66 -->boAt<!-- /react-text --><span class=\"brand-num\"><!-- react-text: 68 -->(<!-- /react-text --><!-- react-text: 69 -->4<!-- /react-text --><!-- react-text: 70 -->)<!-- /react-text --></span><div class=\"common-checkboxIndi...[truncated]",
+                    "<div class=\"condition-render-verticalFilters condition-render-boundary-top\"><div class=\"vertical-filters-filters header-container\"><span class=\"header-title\">FILTERS</span><span class=\"header-clearAllBtn\">CLEAR ALL</span></div><div class=\"vertical-filters-filters brand-container\"><span class=\"vertical-filters-header\">Brand</span><ul class=\"brand-list\"><li><label class=\"vertical-filters-label common-customCheckbox\"><input type=\"checkbox\" value=\"boAt\"><!-- react-tex...[truncated]",
+                    "<section><div class=\"condition-render-verticalFilters condition-render-boundary-top\"><div class=\"vertical-filters-filters header-container\"><span class=\"header-title\">FILTERS</span><span class=\"header-clearAllBtn\">CLEAR ALL</span></div><div class=\"vertical-filters-filters brand-container\"><span class=\"vertical-filters-header\">Brand</span><ul class=\"brand-list\"><li><label class=\"vertical-filters-label common-customCheckbox\"><input type=\"checkbox\" value=\"boAt\"><!-- ...[truncated]"
+                ],
+                "state_target_style": {
+                    "display": "inline-block",
+                    "visibility": "hidden",
+                    "opacity": "1"
+                }
+            },
+            "expected_state": true,
+            "classified_by": "ancestor-classname-self",
+            "expect": {
+                "type": "toggle",
+                "final_checked": true
+            },
+            "page_id": 0,
+            "delay_before_ms": 1741
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/speakers?f=Brand%3AMZ%2CboAt%3A%3AColor%3ABlue_0074D9%3A%3ANet%20Quantity%20Unit%3APieces",
+            "timestamp": "2026-09-25T04:51:48.605Z",
+            "page_id": 0,
+            "caused_by_timestamp": null,
+            "dom_snapshot_path": "storage\\snapshots\\60cb381ca86341f389cf8e869d033867\\2026-09-25T04-51-48-605Z.html",
+            "delay_before_ms": 382
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 0,
+            "page_url": "https://www.myntra.com/speakers?f=Brand%3AMZ%2CboAt%3A%3AColor%3ABlue_0074D9%3A%3ANet%20Quantity%20Unit%3APieces",
+            "remaining_page_id": null,
+            "timestamp": "2026-09-25T04:51:55.501Z",
+            "delay_before_ms": 6896
+        }
+    ],
+    "saved_at": "2026-09-25T10:21:55.570415"
+}

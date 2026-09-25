@@ -1,0 +1,1618 @@
+{
+    "name": "session_20260925_034908",
+    "session_id": "e122131963814b34bc282e2e7a048098",
+    "start_url": "https://www.myntra.com",
+    "recorded_at": "2026-09-25T03:50:04.618904",
+    "stop_reason": "browser_closed",
+    "total_actions": 43,
+    "page_count": 3,
+    "viewport_width": 1280,
+    "viewport_height": 720,
+    "device_scale_factor": null,
+    "user_agent": null,
+    "locale": null,
+    "timezone_id": null,
+    "color_scheme": null,
+    "actions": [
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com",
+            "timestamp": "2026-09-24T22:19:08.387Z",
+            "page_id": 0,
+            "delay_before_ms": 0
+        },
+        {
+            "action_type": "hover",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "WOMEN",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > nav > div > div:nth-of-type(2) > div",
+                "xpath": "//*[@id='desktop-header-cnt']/div[2]/nav/div/div[2]/div",
+                "text": "WOMEN",
+                "element_text": "WOMEN",
+                "tag": "div",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 182.125,
+                "y": 30.399999618530273,
+                "width": 91.375,
+                "height": 19.200000762939453
+            },
+            "page_url": "https://www.myntra.com/",
+            "timestamp": "2026-09-24T22:19:11.986Z",
+            "expect": {
+                "type": "reveal",
+                "revealed_locator_profile": {
+                    "id": null,
+                    "name": null,
+                    "role": null,
+                    "aria_label": null,
+                    "accessible_name": "Sunglasses Under ₹699",
+                    "placeholder": null,
+                    "title": null,
+                    "href": "/fwdgenzcollection?f=Categories%3ASunglasses&rf=Price%3A0.0_700.0_0.0%20TO%20700.0&storeContext=fwd",
+                    "product_id": "20700",
+                    "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > nav > div > div:nth-of-type(6) > div > div > div > div > li:nth-of-type(5) > ul > li:nth-of-type(14) > a",
+                    "xpath": "//a[@href='/fwdgenzcollection?f=Categories%3ASunglasses&rf=Price%3A0.0_700.0_0.0%20TO%20700.0&storeContext=fwd']",
+                    "text": "Sunglasses Under ₹699",
+                    "element_text": "Sunglasses Under ₹699",
+                    "tag": "a",
+                    "attributes": {
+                        "href": "/fwdgenzcollection?f=Categories%3ASunglasses&rf=Price%3A0.0_700.0_0.0%20TO%20700.0&storeContext=fwd"
+                    },
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                }
+            },
+            "page_id": 0,
+            "delay_before_ms": 3599
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Sunglasses Under ₹699",
+                "placeholder": null,
+                "title": null,
+                "href": "/fwdgenzcollection?f=Categories%3ASunglasses&rf=Price%3A0.0_700.0_0.0%20TO%20700.0&storeContext=fwd",
+                "product_id": "20700",
+                "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > nav > div > div:nth-of-type(6) > div > div > div > div > li:nth-of-type(5) > ul > li:nth-of-type(14) > a",
+                "xpath": "//a[@href='/fwdgenzcollection?f=Categories%3ASunglasses&rf=Price%3A0.0_700.0_0.0%20TO%20700.0&storeContext=fwd']",
+                "text": "Sunglasses Under ₹699",
+                "element_text": "Sunglasses Under ₹699",
+                "tag": "a",
+                "attributes": {
+                    "href": "/fwdgenzcollection?f=Categories%3ASunglasses&rf=Price%3A0.0_700.0_0.0%20TO%20700.0&storeContext=fwd"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 965.6000366210938,
+                "y": 428,
+                "width": 191,
+                "height": 23
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/",
+            "timestamp": "2026-09-24T22:19:11.988Z",
+            "hover_chain": [
+                {
+                    "id": null,
+                    "name": null,
+                    "role": null,
+                    "aria_label": null,
+                    "accessible_name": "WOMEN",
+                    "placeholder": null,
+                    "title": null,
+                    "href": null,
+                    "product_id": null,
+                    "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > nav > div > div:nth-of-type(2) > div",
+                    "xpath": "//*[@id='desktop-header-cnt']/div[2]/nav/div/div[2]/div",
+                    "text": "WOMEN",
+                    "element_text": "WOMEN",
+                    "tag": "div",
+                    "attributes": {},
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                }
+            ],
+            "page_id": 0,
+            "delay_before_ms": 2
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/fwdgenzcollection?f=Categories%3ASunglasses&rf=Price%3A0.0_700.0_0.0%20TO%20700.0&storeContext=fwd",
+            "timestamp": "2026-09-24T22:19:13.942Z",
+            "page_id": 0,
+            "delay_before_ms": 1954
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Recommended",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div > div > div > div > span",
+                "xpath": "//span[normalize-space(text())='Recommended']",
+                "text": "Recommended",
+                "element_text": "Recommended",
+                "tag": "span",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 1049.050048828125,
+                "y": 175.1999969482422,
+                "width": 97.11250305175781,
+                "height": 16.80000114440918
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/fwdgenzcollection?f=Categories%3ASunglasses&rf=Price%3A0.0_700.0_0.0%20TO%20700.0&storeContext=fwd",
+            "timestamp": "2026-09-24T22:19:17.487Z",
+            "page_id": 0,
+            "delay_before_ms": 3545
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "new",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div > div > div > div > ul > li:nth-of-type(2) > label > input",
+                "xpath": "//label[normalize-space(text())=\"What's New\"]/input",
+                "text": "new",
+                "element_text": "new",
+                "tag": "input",
+                "attributes": {
+                    "type": "radio"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 0,
+                "y": 0,
+                "width": 0,
+                "height": 0
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "force_click",
+            "page_url": "https://www.myntra.com/fwdgenzcollection?f=Categories%3ASunglasses&rf=Price%3A0.0_700.0_0.0%20TO%20700.0&storeContext=fwd",
+            "timestamp": "2026-09-24T22:19:19.351Z",
+            "page_id": 0,
+            "delay_before_ms": 1864
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/fwdgenzcollection?sort=new&f=Categories%3ASunglasses&rf=Price%3A0.0_700.0_0.0%20TO%20700.0",
+            "timestamp": "2026-09-24T22:19:19.788Z",
+            "page_id": 0,
+            "delay_before_ms": 437
+        },
+        {
+            "action_type": "hover",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Sunglasses\nRs. 0 To Rs. 700",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div:nth-of-type(2)",
+                "xpath": "//div[normalize-space(.)='SunglassesRs. 0 To Rs. 700']",
+                "text": "Sunglasses\nRs. 0 To Rs. 700",
+                "element_text": "Sunglasses\nRs. 0 To Rs. 700",
+                "tag": "div",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 252,
+                "y": 222.60000610351562,
+                "width": 1011.2000122070312,
+                "height": 47
+            },
+            "page_url": "https://www.myntra.com/fwdgenzcollection?sort=new&f=Categories%3ASunglasses&rf=Price%3A0.0_700.0_0.0%20TO%20700.0",
+            "timestamp": "2026-09-24T22:19:23.947Z",
+            "expect": {
+                "type": "reveal",
+                "revealed_locator_profile": {
+                    "id": null,
+                    "name": null,
+                    "role": null,
+                    "aria_label": null,
+                    "accessible_name": "Bundles\nCountry of Origin\nFace Shape\nFeature\nFrame Material\nLens Colour\nNet Quan",
+                    "placeholder": null,
+                    "title": null,
+                    "href": null,
+                    "product_id": null,
+                    "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > ul",
+                    "xpath": "//section[.//h4[contains(text(), 'Bundles')]]/div/div[2]/ul",
+                    "text": "Bundles\nCountry of Origin\nFace Shape\nFeature\nFrame Material\nLens Colour\nNet Quan",
+                    "element_text": "Bundles\nCountry of Origin\nFace Shape\nFeature\nFrame Material\nLens Colour\nNet Quan",
+                    "tag": "ul",
+                    "attributes": {},
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                }
+            },
+            "page_id": 0,
+            "delay_before_ms": 4159
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Bundles\nCountry of Origin\nFace Shape\nFeature\nFrame Material\nLens Colour\nNet Quan",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > ul",
+                "xpath": "//section[.//h4[contains(text(), 'Bundles')]]/div/div[2]/ul",
+                "text": "Bundles\nCountry of Origin\nFace Shape\nFeature\nFrame Material\nLens Colour\nNet Quan",
+                "element_text": "Bundles\nCountry of Origin\nFace Shape\nFeature\nFrame Material\nLens Colour\nNet Quan",
+                "tag": "ul",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 268,
+                "y": 167.40000915527344,
+                "width": 710.2000122070312,
+                "height": 55.20000076293945
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/fwdgenzcollection?sort=new&f=Categories%3ASunglasses&rf=Price%3A0.0_700.0_0.0%20TO%20700.0",
+            "timestamp": "2026-09-24T22:19:23.948Z",
+            "hover_chain": [
+                {
+                    "id": null,
+                    "name": null,
+                    "role": null,
+                    "aria_label": null,
+                    "accessible_name": "Sunglasses\nRs. 0 To Rs. 700",
+                    "placeholder": null,
+                    "title": null,
+                    "href": null,
+                    "product_id": null,
+                    "css_path": "div#desktopSearchResults > div > section > div:nth-of-type(2)",
+                    "xpath": "//div[normalize-space(.)='SunglassesRs. 0 To Rs. 700']",
+                    "text": "Sunglasses\nRs. 0 To Rs. 700",
+                    "element_text": "Sunglasses\nRs. 0 To Rs. 700",
+                    "tag": "div",
+                    "attributes": {},
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                }
+            ],
+            "page_id": 0,
+            "delay_before_ms": 1
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Lens Colour",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > ul > li:nth-of-type(6) > label > input",
+                "xpath": "//label[normalize-space(.)='Lens Colour']/input",
+                "text": "Lens Colour",
+                "element_text": "Lens Colour",
+                "tag": "input",
+                "attributes": {
+                    "type": "radio"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 0,
+                "y": 0,
+                "width": 0,
+                "height": 0
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "force_click",
+            "page_url": "https://www.myntra.com/fwdgenzcollection?sort=new&f=Categories%3ASunglasses&rf=Price%3A0.0_700.0_0.0%20TO%20700.0",
+            "timestamp": "2026-09-24T22:19:24.690Z",
+            "page_id": 0,
+            "delay_before_ms": 742
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "Purple",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > div > ul > li:nth-of-type(11) > label > input",
+                "xpath": "//label[normalize-space(text())='Purple']/input",
+                "text": "Purple",
+                "element_text": "Purple",
+                "tag": "input",
+                "attributes": {
+                    "type": "checkbox"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 699,
+                "y": 268,
+                "width": 13,
+                "height": 13
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/fwdgenzcollection?sort=new&f=Categories%3ASunglasses&rf=Price%3A0.0_700.0_0.0%20TO%20700.0",
+            "timestamp": "2026-09-24T22:19:27.691Z",
+            "expected_state": true,
+            "classified_by": "ancestor-classname-self",
+            "expect": {
+                "type": "toggle",
+                "final_checked": true
+            },
+            "page_id": 0,
+            "delay_before_ms": 3001
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/fwdgenzcollection?sort=new&f=Categories%3ASunglasses%3A%3ALens%20Colour%3APurple&rf=Price%3A0.0_700.0_0.0%20TO%20700.0",
+            "timestamp": "2026-09-24T22:19:27.710Z",
+            "page_id": 0,
+            "delay_before_ms": 19
+        },
+        {
+            "action_type": "hover",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Bundles\nCountry of Origin\nFace Shape\nFeature\nFrame Material\nLens Colour\nNet Quan",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > ul",
+                "xpath": "//section[.//h4[contains(text(), 'Bundles')]]/div/div[2]/ul",
+                "text": "Bundles\nCountry of Origin\nFace Shape\nFeature\nFrame Material\nLens Colour\nNet Quan",
+                "element_text": "Bundles\nCountry of Origin\nFace Shape\nFeature\nFrame Material\nLens Colour\nNet Quan",
+                "tag": "ul",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 268,
+                "y": 167.40000915527344,
+                "width": 710.2000122070312,
+                "height": 55.20000076293945
+            },
+            "page_url": "https://www.myntra.com/fwdgenzcollection?sort=new&f=Categories%3ASunglasses%3A%3ALens%20Colour%3APurple&rf=Price%3A0.0_700.0_0.0%20TO%20700.0",
+            "timestamp": "2026-09-24T22:19:31.091Z",
+            "expect": {
+                "type": "reveal",
+                "revealed_locator_profile": {
+                    "id": null,
+                    "name": null,
+                    "role": null,
+                    "aria_label": null,
+                    "accessible_name": "Frame Material",
+                    "placeholder": null,
+                    "title": null,
+                    "href": null,
+                    "product_id": null,
+                    "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > ul > li:nth-of-type(5) > label > h4",
+                    "xpath": "//h4[normalize-space(text())='Frame Material']",
+                    "text": "Frame Material",
+                    "element_text": "Frame Material",
+                    "tag": "h4",
+                    "attributes": {},
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                }
+            },
+            "page_id": 0,
+            "delay_before_ms": 3381
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Frame Material",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > ul > li:nth-of-type(5) > label > input",
+                "xpath": "//label[normalize-space(.)='Frame Material']/input",
+                "text": "Frame Material",
+                "element_text": "Frame Material",
+                "tag": "input",
+                "attributes": {
+                    "type": "radio"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 0,
+                "y": 0,
+                "width": 0,
+                "height": 0
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "force_click",
+            "page_url": "https://www.myntra.com/fwdgenzcollection?sort=new&f=Categories%3ASunglasses%3A%3ALens%20Colour%3APurple&rf=Price%3A0.0_700.0_0.0%20TO%20700.0",
+            "timestamp": "2026-09-24T22:19:31.091Z",
+            "hover_chain": [
+                {
+                    "id": null,
+                    "name": null,
+                    "role": null,
+                    "aria_label": null,
+                    "accessible_name": "Bundles\nCountry of Origin\nFace Shape\nFeature\nFrame Material\nLens Colour\nNet Quan",
+                    "placeholder": null,
+                    "title": null,
+                    "href": null,
+                    "product_id": null,
+                    "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > ul",
+                    "xpath": "//section[.//h4[contains(text(), 'Bundles')]]/div/div[2]/ul",
+                    "text": "Bundles\nCountry of Origin\nFace Shape\nFeature\nFrame Material\nLens Colour\nNet Quan",
+                    "element_text": "Bundles\nCountry of Origin\nFace Shape\nFeature\nFrame Material\nLens Colour\nNet Quan",
+                    "tag": "ul",
+                    "attributes": {},
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                }
+            ],
+            "page_id": 0,
+            "delay_before_ms": 0
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "Polycarbonate",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > div > ul > li:nth-of-type(5) > label > input",
+                "xpath": "//label[normalize-space(text())='Polycarbonate']/input",
+                "text": "Polycarbonate",
+                "element_text": "Polycarbonate",
+                "tag": "input",
+                "attributes": {
+                    "type": "checkbox"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 839,
+                "y": 241.1999969482422,
+                "width": 13,
+                "height": 13
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/fwdgenzcollection?sort=new&f=Categories%3ASunglasses%3A%3ALens%20Colour%3APurple&rf=Price%3A0.0_700.0_0.0%20TO%20700.0",
+            "timestamp": "2026-09-24T22:19:32.787Z",
+            "expected_state": false,
+            "classified_by": "label-control",
+            "expect": {
+                "type": "toggle",
+                "final_checked": false
+            },
+            "page_id": 0,
+            "delay_before_ms": 1696
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/fwdgenzcollection?sort=new&f=Categories%3ASunglasses%3A%3AFrame%20Material%3APolycarbonate%3A%3ALens%20Colour%3APurple&rf=Price%3A0.0_700.0_0.0%20TO%20700.0",
+            "timestamp": "2026-09-24T22:19:33.072Z",
+            "page_id": 0,
+            "delay_before_ms": 285
+        },
+        {
+            "action_type": "hover",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Bundles\nCountry of Origin\nFeature\nFrame Material\nLens Colour\nNet Quantity Unit\nR",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > ul",
+                "xpath": "//section[.//h4[contains(text(), 'Bundles')]]/div/div[2]/ul",
+                "text": "Bundles\nCountry of Origin\nFeature\nFrame Material\nLens Colour\nNet Quantity Unit\nR",
+                "element_text": "Bundles\nCountry of Origin\nFeature\nFrame Material\nLens Colour\nNet Quantity Unit\nR",
+                "tag": "ul",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 268,
+                "y": 167.40000915527344,
+                "width": 710.2000122070312,
+                "height": 55.20000076293945
+            },
+            "page_url": "https://www.myntra.com/fwdgenzcollection?sort=new&f=Categories%3ASunglasses%3A%3AFrame%20Material%3APolycarbonate%3A%3ALens%20Colour%3APurple&rf=Price%3A0.0_700.0_0.0%20TO%20700.0",
+            "timestamp": "2026-09-24T22:19:35.188Z",
+            "expect": {
+                "type": "reveal",
+                "revealed_locator_profile": {
+                    "id": null,
+                    "name": null,
+                    "role": null,
+                    "aria_label": null,
+                    "accessible_name": "Feature",
+                    "placeholder": null,
+                    "title": null,
+                    "href": null,
+                    "product_id": null,
+                    "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > ul > li:nth-of-type(3) > label",
+                    "xpath": "//label[normalize-space(.)='Feature']",
+                    "text": "Feature",
+                    "element_text": "Feature",
+                    "tag": "label",
+                    "attributes": {},
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                }
+            },
+            "page_id": 0,
+            "delay_before_ms": 2116
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Feature",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > ul > li:nth-of-type(3) > label > input",
+                "xpath": "//label[normalize-space(.)='Feature']/input",
+                "text": "Feature",
+                "element_text": "Feature",
+                "tag": "input",
+                "attributes": {
+                    "type": "radio"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 0,
+                "y": 0,
+                "width": 0,
+                "height": 0
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "force_click",
+            "page_url": "https://www.myntra.com/fwdgenzcollection?sort=new&f=Categories%3ASunglasses%3A%3AFrame%20Material%3APolycarbonate%3A%3ALens%20Colour%3APurple&rf=Price%3A0.0_700.0_0.0%20TO%20700.0",
+            "timestamp": "2026-09-24T22:19:35.189Z",
+            "hover_chain": [
+                {
+                    "id": null,
+                    "name": null,
+                    "role": null,
+                    "aria_label": null,
+                    "accessible_name": "Bundles\nCountry of Origin\nFeature\nFrame Material\nLens Colour\nNet Quantity Unit\nR",
+                    "placeholder": null,
+                    "title": null,
+                    "href": null,
+                    "product_id": null,
+                    "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > ul",
+                    "xpath": "//section[.//h4[contains(text(), 'Bundles')]]/div/div[2]/ul",
+                    "text": "Bundles\nCountry of Origin\nFeature\nFrame Material\nLens Colour\nNet Quantity Unit\nR",
+                    "element_text": "Bundles\nCountry of Origin\nFeature\nFrame Material\nLens Colour\nNet Quantity Unit\nR",
+                    "tag": "ul",
+                    "attributes": {},
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                }
+            ],
+            "page_id": 0,
+            "delay_before_ms": 1
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "Regular Lens",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > div > ul > li:nth-of-type(3) > label > input",
+                "xpath": "//label[normalize-space(text())='Regular Lens']/input",
+                "text": "Regular Lens",
+                "element_text": "Regular Lens",
+                "tag": "input",
+                "attributes": {
+                    "type": "checkbox"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 559,
+                "y": 241.1999969482422,
+                "width": 13,
+                "height": 13
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/fwdgenzcollection?sort=new&f=Categories%3ASunglasses%3A%3AFrame%20Material%3APolycarbonate%3A%3ALens%20Colour%3APurple&rf=Price%3A0.0_700.0_0.0%20TO%20700.0",
+            "timestamp": "2026-09-24T22:19:36.747Z",
+            "expected_state": true,
+            "classified_by": "ancestor-classname-self",
+            "expect": {
+                "type": "toggle",
+                "final_checked": true
+            },
+            "page_id": 0,
+            "delay_before_ms": 1558
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Country of Origin",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > ul > li:nth-of-type(2) > label > input",
+                "xpath": "//label[normalize-space(.)='Country of Origin']/input",
+                "text": "Country of Origin",
+                "element_text": "Country of Origin",
+                "tag": "input",
+                "attributes": {
+                    "type": "radio"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 0,
+                "y": 0,
+                "width": 0,
+                "height": 0
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "force_click",
+            "page_url": "https://www.myntra.com/fwdgenzcollection?sort=new&f=Categories%3ASunglasses%3A%3AFeature%3ARegular%20Lens%3A%3AFrame%20Material%3APolycarbonate%3A%3ALens%20Colour%3APurple&rf=Price%3A0.0_700.0_0.0%20TO%20700.0",
+            "timestamp": "2026-09-24T22:19:38.329Z",
+            "page_id": 0,
+            "delay_before_ms": 1582
+        },
+        {
+            "action_type": "hover",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Bundles\nCountry of Origin\nFeature\nFrame Material\nLens Colour\nNet Quantity Unit\nS",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2)",
+                "xpath": "//section[.//h4[contains(text(), 'Bundles')]]/div/div[2]",
+                "text": "Bundles\nCountry of Origin\nFeature\nFrame Material\nLens Colour\nNet Quantity Unit\nS",
+                "element_text": "Bundles\nCountry of Origin\nFeature\nFrame Material\nLens Colour\nNet Quantity Unit\nS",
+                "tag": "div",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 252,
+                "y": 167.40000915527344,
+                "width": 1011.2000122070312,
+                "height": 100
+            },
+            "page_url": "https://www.myntra.com/fwdgenzcollection?sort=new&f=Categories%3ASunglasses%3A%3AFeature%3ARegular%20Lens%3A%3AFrame%20Material%3APolycarbonate%3A%3ALens%20Colour%3APurple&rf=Price%3A0.0_700.0_0.0%20TO%20700.0",
+            "timestamp": "2026-09-24T22:19:40.430Z",
+            "expect": {
+                "type": "reveal",
+                "revealed_locator_profile": {
+                    "id": null,
+                    "name": null,
+                    "role": null,
+                    "aria_label": null,
+                    "accessible_name": "",
+                    "placeholder": null,
+                    "title": null,
+                    "href": null,
+                    "product_id": null,
+                    "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > div > ul > li > label > div",
+                    "xpath": "//label[normalize-space(text())='India']/div",
+                    "text": "",
+                    "element_text": "",
+                    "tag": "div",
+                    "attributes": {},
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                }
+            },
+            "page_id": 0,
+            "delay_before_ms": 2101
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "India",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > div > ul > li > label > input",
+                "xpath": "//label[normalize-space(text())='India']/input",
+                "text": "India",
+                "element_text": "India",
+                "tag": "input",
+                "attributes": {
+                    "type": "checkbox"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 279,
+                "y": 241.1999969482422,
+                "width": 13,
+                "height": 13
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/fwdgenzcollection?sort=new&f=Categories%3ASunglasses%3A%3AFeature%3ARegular%20Lens%3A%3AFrame%20Material%3APolycarbonate%3A%3ALens%20Colour%3APurple&rf=Price%3A0.0_700.0_0.0%20TO%20700.0",
+            "timestamp": "2026-09-24T22:19:40.431Z",
+            "expected_state": true,
+            "classified_by": "ancestor-classname-self",
+            "expect": {
+                "type": "toggle",
+                "final_checked": true
+            },
+            "hover_chain": [
+                {
+                    "id": null,
+                    "name": null,
+                    "role": null,
+                    "aria_label": null,
+                    "accessible_name": "Bundles\nCountry of Origin\nFeature\nFrame Material\nLens Colour\nNet Quantity Unit\nS",
+                    "placeholder": null,
+                    "title": null,
+                    "href": null,
+                    "product_id": null,
+                    "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2)",
+                    "xpath": "//section[.//h4[contains(text(), 'Bundles')]]/div/div[2]",
+                    "text": "Bundles\nCountry of Origin\nFeature\nFrame Material\nLens Colour\nNet Quantity Unit\nS",
+                    "element_text": "Bundles\nCountry of Origin\nFeature\nFrame Material\nLens Colour\nNet Quantity Unit\nS",
+                    "tag": "div",
+                    "attributes": {},
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                }
+            ],
+            "page_id": 0,
+            "delay_before_ms": 1
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/fwdgenzcollection?sort=new&f=Categories%3ASunglasses%3A%3ACountry%20of%20Origin%3AIndia%3A%3AFeature%3ARegular%20Lens%3A%3AFrame%20Material%3APolycarbonate%3A%3ALens%20Colour%3APurple&rf=Price%3A0.0_700.0_0.0%20TO%20700.0",
+            "timestamp": "2026-09-24T22:19:40.578Z",
+            "page_id": 0,
+            "delay_before_ms": 147
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Net Quantity Unit",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > ul > li:nth-of-type(6) > label > input",
+                "xpath": "//label[normalize-space(.)='Net Quantity Unit']/input",
+                "text": "Net Quantity Unit",
+                "element_text": "Net Quantity Unit",
+                "tag": "input",
+                "attributes": {
+                    "type": "radio"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 0,
+                "y": 0,
+                "width": 0,
+                "height": 0
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "force_click",
+            "page_url": "https://www.myntra.com/fwdgenzcollection?sort=new&f=Categories%3ASunglasses%3A%3ACountry%20of%20Origin%3AIndia%3A%3AFeature%3ARegular%20Lens%3A%3AFrame%20Material%3APolycarbonate%3A%3ALens%20Colour%3APurple&rf=Price%3A0.0_700.0_0.0%20TO%20700.0",
+            "timestamp": "2026-09-24T22:19:43.245Z",
+            "page_id": 0,
+            "delay_before_ms": 2667
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "Piece",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > div > ul > li > label > input",
+                "xpath": "//label[normalize-space(text())='Piece']/input",
+                "text": "Piece",
+                "element_text": "Piece",
+                "tag": "input",
+                "attributes": {
+                    "type": "checkbox"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 279,
+                "y": 241.1999969482422,
+                "width": 13,
+                "height": 13
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/fwdgenzcollection?sort=new&f=Categories%3ASunglasses%3A%3ACountry%20of%20Origin%3AIndia%3A%3AFeature%3ARegular%20Lens%3A%3AFrame%20Material%3APolycarbonate%3A%3ALens%20Colour%3APurple&rf=Price%3A0.0_700.0_0.0%20TO%20700.0",
+            "timestamp": "2026-09-24T22:19:45.138Z",
+            "expected_state": true,
+            "classified_by": "ancestor-classname-self",
+            "expect": {
+                "type": "toggle",
+                "final_checked": true
+            },
+            "page_id": 0,
+            "delay_before_ms": 1893
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/fwdgenzcollection?sort=new&f=Categories%3ASunglasses%3A%3ACountry%20of%20Origin%3AIndia%3A%3AFeature%3ARegular%20Lens%3A%3AFrame%20Material%3APolycarbonate%3A%3ALens%20Colour%3APurple%3A%3ANet%20Quantity%20Unit%3APiece&rf=Price%3A0.0_700.0_0.0%20TO%20700.0",
+            "timestamp": "2026-09-24T22:19:45.322Z",
+            "page_id": 0,
+            "delay_before_ms": 184
+        },
+        {
+            "action_type": "hover",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Bundles\nCountry of Origin\nFeature\nFrame Material\nLens Colour\nNet Quantity Unit\nS",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2)",
+                "xpath": "//section[.//h4[contains(text(), 'Bundles')]]/div/div[2]",
+                "text": "Bundles\nCountry of Origin\nFeature\nFrame Material\nLens Colour\nNet Quantity Unit\nS",
+                "element_text": "Bundles\nCountry of Origin\nFeature\nFrame Material\nLens Colour\nNet Quantity Unit\nS",
+                "tag": "div",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 252,
+                "y": 167.40000915527344,
+                "width": 1011.2000122070312,
+                "height": 100
+            },
+            "page_url": "https://www.myntra.com/fwdgenzcollection?sort=new&f=Categories%3ASunglasses%3A%3ACountry%20of%20Origin%3AIndia%3A%3AFeature%3ARegular%20Lens%3A%3AFrame%20Material%3APolycarbonate%3A%3ALens%20Colour%3APurple%3A%3ANet%20Quantity%20Unit%3APiece&rf=Price%3A0.0_700.0_0.0%20TO%20700.0",
+            "timestamp": "2026-09-24T22:19:46.861Z",
+            "expect": {
+                "type": "reveal",
+                "revealed_locator_profile": {
+                    "id": null,
+                    "name": null,
+                    "role": null,
+                    "aria_label": null,
+                    "accessible_name": "Size",
+                    "placeholder": null,
+                    "title": null,
+                    "href": null,
+                    "product_id": null,
+                    "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > ul > li:nth-of-type(7) > label > h4",
+                    "xpath": "//h4[normalize-space(text())='Size']",
+                    "text": "Size",
+                    "element_text": "Size",
+                    "tag": "h4",
+                    "attributes": {},
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                }
+            },
+            "page_id": 0,
+            "delay_before_ms": 1539
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "Piece",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > div > ul > li > label > input",
+                "xpath": "//label[normalize-space(text())='Piece']/input",
+                "text": "Piece",
+                "element_text": "Piece",
+                "tag": "input",
+                "attributes": {
+                    "type": "checkbox"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 279,
+                "y": 241.1999969482422,
+                "width": 13,
+                "height": 13
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/fwdgenzcollection?sort=new&f=Categories%3ASunglasses%3A%3ACountry%20of%20Origin%3AIndia%3A%3AFeature%3ARegular%20Lens%3A%3AFrame%20Material%3APolycarbonate%3A%3ALens%20Colour%3APurple%3A%3ANet%20Quantity%20Unit%3APiece&rf=Price%3A0.0_700.0_0.0%20TO%20700.0",
+            "timestamp": "2026-09-24T22:19:46.863Z",
+            "expected_state": true,
+            "classified_by": "geometric-square-widget-input",
+            "expect": {
+                "type": "toggle",
+                "final_checked": true
+            },
+            "hover_chain": [
+                {
+                    "id": null,
+                    "name": null,
+                    "role": null,
+                    "aria_label": null,
+                    "accessible_name": "Bundles\nCountry of Origin\nFeature\nFrame Material\nLens Colour\nNet Quantity Unit\nS",
+                    "placeholder": null,
+                    "title": null,
+                    "href": null,
+                    "product_id": null,
+                    "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2)",
+                    "xpath": "//section[.//h4[contains(text(), 'Bundles')]]/div/div[2]",
+                    "text": "Bundles\nCountry of Origin\nFeature\nFrame Material\nLens Colour\nNet Quantity Unit\nS",
+                    "element_text": "Bundles\nCountry of Origin\nFeature\nFrame Material\nLens Colour\nNet Quantity Unit\nS",
+                    "tag": "div",
+                    "attributes": {},
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                }
+            ],
+            "page_id": 0,
+            "delay_before_ms": 2
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "Onesize",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > div > ul > li:nth-of-type(3) > label > input",
+                "xpath": "//label[normalize-space(text())='Onesize']/input",
+                "text": "Onesize",
+                "element_text": "Onesize",
+                "tag": "input",
+                "attributes": {
+                    "type": "checkbox"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 559,
+                "y": 241.1999969482422,
+                "width": 13,
+                "height": 13
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/fwdgenzcollection?sort=new&f=Categories%3ASunglasses%3A%3ACountry%20of%20Origin%3AIndia%3A%3AFeature%3ARegular%20Lens%3A%3AFrame%20Material%3APolycarbonate%3A%3ALens%20Colour%3APurple%3A%3ANet%20Quantity%20Unit%3APiece&rf=Price%3A0.0_700.0_0.0%20TO%20700.0",
+            "timestamp": "2026-09-24T22:19:49.054Z",
+            "expected_state": true,
+            "classified_by": "ancestor-classname-self",
+            "expect": {
+                "type": "toggle",
+                "final_checked": true
+            },
+            "page_id": 0,
+            "delay_before_ms": 2191
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/fwdgenzcollection?sort=new&f=Categories%3ASunglasses%3A%3ACountry%20of%20Origin%3AIndia%3A%3AFeature%3ARegular%20Lens%3A%3AFrame%20Material%3APolycarbonate%3A%3ALens%20Colour%3APurple%3A%3ANet%20Quantity%20Unit%3APiece%3A%3Asize_facet%3AOnesize&rf=Price%3A0.0_700.0_0.0%20TO%20700.0",
+            "timestamp": "2026-09-24T22:19:49.096Z",
+            "page_id": 0,
+            "delay_before_ms": 42
+        },
+        {
+            "action_type": "hover",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "M\nL\nOnesize",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > div > ul",
+                "xpath": "//ul[normalize-space(.)='MLOnesize']",
+                "text": "M\nL\nOnesize",
+                "element_text": "M\nL\nOnesize",
+                "tag": "ul",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 279,
+                "y": 240.60000610351562,
+                "width": 984.2000122070312,
+                "height": 26.80000114440918
+            },
+            "page_url": "https://www.myntra.com/fwdgenzcollection?sort=new&f=Categories%3ASunglasses%3A%3ACountry%20of%20Origin%3AIndia%3A%3AFeature%3ARegular%20Lens%3A%3AFrame%20Material%3APolycarbonate%3A%3ALens%20Colour%3APurple%3A%3ANet%20Quantity%20Unit%3APiece%3A%3Asize_facet%3AOnesize&rf=Price%3A0.0_700.0_0.0%20TO%20700.0",
+            "timestamp": "2026-09-24T22:19:51.319Z",
+            "expect": {
+                "type": "reveal",
+                "revealed_locator_profile": {
+                    "id": null,
+                    "name": null,
+                    "role": null,
+                    "aria_label": null,
+                    "accessible_name": "summer dream Women Purple Lens & Gold-Toned Butterfly Sunglasses with",
+                    "placeholder": null,
+                    "title": "summer dream Women Purple Lens & Gold-Toned Butterfly Sunglasses with",
+                    "href": "sunglasses/summer+dream/summer-dream-women-purple-lens--gold-toned-butterfly-sunglasses-with/45205898/buy",
+                    "product_id": "45205898",
+                    "css_path": "li#45205898 > a > div > div > div > div > div > div:nth-of-type(2) > div > div > picture > img",
+                    "xpath": "//*[@id='45205898']/a/div/div/div/div/div/div[2]/div/div/picture/img",
+                    "text": "summer dream Women Purple Lens & Gold-Toned Butterfly Sunglasses with",
+                    "element_text": "summer dream Women Purple Lens & Gold-Toned Butterfly Sunglasses with",
+                    "tag": "img",
+                    "attributes": {
+                        "title": "summer dream Women Purple Lens & Gold-Toned Butterfly Sunglasses with"
+                    },
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                }
+            },
+            "page_id": 0,
+            "delay_before_ms": 2223
+        },
+        {
+            "action_type": "hover",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Sort by : What's New\nBundles\nCountry of Origin\nFeature\nFrame Material\nLens Colou",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section",
+                "xpath": "/html[1]/body[1]/div[2]/div[1]/main[1]/div[3]/div[2]/div[1]/div[1]/section[1]",
+                "text": "Sort by : What's New\nBundles\nCountry of Origin\nFeature\nFrame Material\nLens Colou",
+                "element_text": "Sort by : What's New\nBundles\nCountry of Origin\nFeature\nFrame Material\nLens Colou",
+                "tag": "section",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 252,
+                "y": 154.40000915527344,
+                "width": 1011.2000122070312,
+                "height": 175
+            },
+            "page_url": "https://www.myntra.com/fwdgenzcollection?sort=new&f=Categories%3ASunglasses%3A%3ACountry%20of%20Origin%3AIndia%3A%3AFeature%3ARegular%20Lens%3A%3AFrame%20Material%3APolycarbonate%3A%3ALens%20Colour%3APurple%3A%3ANet%20Quantity%20Unit%3APiece%3A%3Asize_facet%3AOnesize&rf=Price%3A0.0_700.0_0.0%20TO%20700.0",
+            "timestamp": "2026-09-24T22:19:51.352Z",
+            "expect": {
+                "type": "reveal",
+                "revealed_locator_profile": {
+                    "id": null,
+                    "name": null,
+                    "role": null,
+                    "aria_label": null,
+                    "accessible_name": "summer dream Women Purple Lens & Gold-Toned Butterfly Sunglasses with",
+                    "placeholder": null,
+                    "title": "summer dream Women Purple Lens & Gold-Toned Butterfly Sunglasses with",
+                    "href": "sunglasses/summer+dream/summer-dream-women-purple-lens--gold-toned-butterfly-sunglasses-with/45205898/buy",
+                    "product_id": "45205898",
+                    "css_path": "li#45205898 > a > div > div > div > div > div > div:nth-of-type(2) > div > div > picture > img",
+                    "xpath": "//*[@id='45205898']/a/div/div/div/div/div/div[2]/div/div/picture/img",
+                    "text": "summer dream Women Purple Lens & Gold-Toned Butterfly Sunglasses with",
+                    "element_text": "summer dream Women Purple Lens & Gold-Toned Butterfly Sunglasses with",
+                    "tag": "img",
+                    "attributes": {
+                        "title": "summer dream Women Purple Lens & Gold-Toned Butterfly Sunglasses with"
+                    },
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                }
+            },
+            "page_id": 0,
+            "delay_before_ms": 33
+        },
+        {
+            "action_type": "hover",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "summer dream Women Purple Lens & Gold-Toned Butterfly Sunglasses with",
+                "placeholder": null,
+                "title": "summer dream Women Purple Lens & Gold-Toned Butterfly Sunglasses with",
+                "href": "sunglasses/summer+dream/summer-dream-women-purple-lens--gold-toned-butterfly-sunglasses-with/45205898/buy",
+                "product_id": "45205898",
+                "css_path": "li#45205898 > a > div > div:nth-of-type(2) > div > div > picture > img",
+                "xpath": "//a[.//h4[contains(text(), 'Women Butterfly Sunglasses')]]/div/div[2]/div/div/picture/img",
+                "text": "summer dream Women Purple Lens & Gold-Toned Butterfly Sunglasses with",
+                "element_text": "summer dream Women Purple Lens & Gold-Toned Butterfly Sunglasses with",
+                "tag": "img",
+                "attributes": {
+                    "title": "summer dream Women Purple Lens & Gold-Toned Butterfly Sunglasses with"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 0,
+                "y": 0,
+                "width": 0,
+                "height": 0
+            },
+            "page_url": "https://www.myntra.com/fwdgenzcollection?sort=new&f=Categories%3ASunglasses%3A%3ACountry%20of%20Origin%3AIndia%3A%3AFeature%3ARegular%20Lens%3A%3AFrame%20Material%3APolycarbonate%3A%3ALens%20Colour%3APurple%3A%3ANet%20Quantity%20Unit%3APiece%3A%3Asize_facet%3AOnesize&rf=Price%3A0.0_700.0_0.0%20TO%20700.0",
+            "timestamp": "2026-09-24T22:19:51.353Z",
+            "expect": {
+                "type": "reveal",
+                "revealed_locator_profile": {
+                    "id": null,
+                    "name": null,
+                    "role": null,
+                    "aria_label": null,
+                    "accessible_name": "summer dream Women Purple Lens & Gold-Toned Butterfly Sunglasses with",
+                    "placeholder": null,
+                    "title": "summer dream Women Purple Lens & Gold-Toned Butterfly Sunglasses with",
+                    "href": "sunglasses/summer+dream/summer-dream-women-purple-lens--gold-toned-butterfly-sunglasses-with/45205898/buy",
+                    "product_id": "45205898",
+                    "css_path": "li#45205898 > a > div > div > div > div > div > div:nth-of-type(2) > div > div > picture > img",
+                    "xpath": "//*[@id='45205898']/a/div/div/div/div/div/div[2]/div/div/picture/img",
+                    "text": "summer dream Women Purple Lens & Gold-Toned Butterfly Sunglasses with",
+                    "element_text": "summer dream Women Purple Lens & Gold-Toned Butterfly Sunglasses with",
+                    "tag": "img",
+                    "attributes": {
+                        "title": "summer dream Women Purple Lens & Gold-Toned Butterfly Sunglasses with"
+                    },
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                }
+            },
+            "page_id": 0,
+            "delay_before_ms": 1
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "summer dream\nSizes: Onesize\nRs. 542Rs. 1299(58% OFF)",
+                "placeholder": null,
+                "title": null,
+                "href": "sunglasses/summer+dream/summer-dream-women-purple-lens--gold-toned-butterfly-sunglasses-with/45205898/buy",
+                "product_id": "45205898",
+                "css_path": "li#45205898 > a",
+                "xpath": "//a[@href='sunglasses/summer+dream/summer-dream-women-purple-lens--gold-toned-butterfly-sunglasses-with/45205898/buy']",
+                "text": "summer dream Rs. 542Rs. 1299(58% OFF)",
+                "element_text": "summer dream Rs. 542Rs. 1299(58% OFF)",
+                "tag": "a",
+                "attributes": {
+                    "href": "sunglasses/summer+dream/summer-dream-women-purple-lens--gold-toned-butterfly-sunglasses-with/45205898/buy"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 280,
+                "y": 353.3999938964844,
+                "width": 210,
+                "height": 359.8000183105469
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/fwdgenzcollection?sort=new&f=Categories%3ASunglasses%3A%3ACountry%20of%20Origin%3AIndia%3A%3AFeature%3ARegular%20Lens%3A%3AFrame%20Material%3APolycarbonate%3A%3ALens%20Colour%3APurple%3A%3ANet%20Quantity%20Unit%3APiece%3A%3Asize_facet%3AOnesize&rf=Price%3A0.0_700.0_0.0%20TO%20700.0",
+            "timestamp": "2026-09-24T22:19:51.353Z",
+            "hover_chain": [
+                {
+                    "id": null,
+                    "name": null,
+                    "role": null,
+                    "aria_label": null,
+                    "accessible_name": "M\nL\nOnesize",
+                    "placeholder": null,
+                    "title": null,
+                    "href": null,
+                    "product_id": null,
+                    "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > div > ul",
+                    "xpath": "//ul[normalize-space(.)='MLOnesize']",
+                    "text": "M\nL\nOnesize",
+                    "element_text": "M\nL\nOnesize",
+                    "tag": "ul",
+                    "attributes": {},
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                },
+                {
+                    "id": null,
+                    "name": null,
+                    "role": null,
+                    "aria_label": null,
+                    "accessible_name": "Sort by : What's New\nBundles\nCountry of Origin\nFeature\nFrame Material\nLens Colou",
+                    "placeholder": null,
+                    "title": null,
+                    "href": null,
+                    "product_id": null,
+                    "css_path": "div#desktopSearchResults > div > section",
+                    "xpath": "/html[1]/body[1]/div[2]/div[1]/main[1]/div[3]/div[2]/div[1]/div[1]/section[1]",
+                    "text": "Sort by : What's New\nBundles\nCountry of Origin\nFeature\nFrame Material\nLens Colou",
+                    "element_text": "Sort by : What's New\nBundles\nCountry of Origin\nFeature\nFrame Material\nLens Colou",
+                    "tag": "section",
+                    "attributes": {},
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                },
+                {
+                    "id": null,
+                    "name": null,
+                    "role": null,
+                    "aria_label": null,
+                    "accessible_name": "summer dream Women Purple Lens & Gold-Toned Butterfly Sunglasses with",
+                    "placeholder": null,
+                    "title": "summer dream Women Purple Lens & Gold-Toned Butterfly Sunglasses with",
+                    "href": "sunglasses/summer+dream/summer-dream-women-purple-lens--gold-toned-butterfly-sunglasses-with/45205898/buy",
+                    "product_id": "45205898",
+                    "css_path": "li#45205898 > a > div > div:nth-of-type(2) > div > div > picture > img",
+                    "xpath": "//a[.//h4[contains(text(), 'Women Butterfly Sunglasses')]]/div/div[2]/div/div/picture/img",
+                    "text": "summer dream Women Purple Lens & Gold-Toned Butterfly Sunglasses with",
+                    "element_text": "summer dream Women Purple Lens & Gold-Toned Butterfly Sunglasses with",
+                    "tag": "img",
+                    "attributes": {
+                        "title": "summer dream Women Purple Lens & Gold-Toned Butterfly Sunglasses with"
+                    },
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                }
+            ],
+            "page_id": 0,
+            "delay_before_ms": 0
+        },
+        {
+            "action_type": "tab_open",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/sunglasses/summer+dream/summer-dream-women-purple-lens--gold-toned-butterfly-sunglasses-with/45205898/buy",
+            "timestamp": "2026-09-24T22:19:53.067Z",
+            "new_tab": true,
+            "page_id": 1,
+            "from_page_id": 0,
+            "delay_before_ms": 1714
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 624,
+            "scroll_y_before": 0,
+            "scroll_y_after": 624,
+            "viewport_height": 720,
+            "document_height": 7479,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/sunglasses/summer+dream/summer-dream-women-purple-lens--gold-toned-butterfly-sunglasses-with/45205898/buy",
+            "timestamp": "2026-09-24T22:19:55.751Z",
+            "page_id": 1,
+            "delay_before_ms": 2684
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 1738,
+            "scroll_y_before": 624,
+            "scroll_y_after": 2362.39990234375,
+            "viewport_height": 720,
+            "document_height": 7478,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/sunglasses/summer+dream/summer-dream-women-purple-lens--gold-toned-butterfly-sunglasses-with/45205898/buy",
+            "timestamp": "2026-09-24T22:19:57.618Z",
+            "page_id": 1,
+            "delay_before_ms": 1867
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 245,
+            "scroll_y_before": 2362.39990234375,
+            "scroll_y_after": 2607.199951171875,
+            "viewport_height": 720,
+            "document_height": 7477,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/sunglasses/summer+dream/summer-dream-women-purple-lens--gold-toned-butterfly-sunglasses-with/45205898/buy",
+            "timestamp": "2026-09-24T22:19:58.598Z",
+            "page_id": 1,
+            "delay_before_ms": 980
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "LULU & SKY\n\nWomen Sunglasses\n\nRs. 263Rs. 1844(86% OFF)",
+                "placeholder": null,
+                "title": null,
+                "href": "/sunglasses/lulu+%26+sky/-lulu--sky-women-sunglasses/33986439/buy",
+                "product_id": "33986439",
+                "css_path": "div#mountRoot > div > div > main > div:nth-of-type(2) > div:nth-of-type(3) > div > ul > li:nth-of-type(14) > a",
+                "xpath": "//a[@href='/sunglasses/lulu+%26+sky/-lulu--sky-women-sunglasses/33986439/buy']",
+                "text": "LULU & SKY Women Sunglasses Rs. 263Rs. 1844(86% OFF)",
+                "element_text": "LULU & SKY Women Sunglasses Rs. 263Rs. 1844(86% OFF)",
+                "tag": "a",
+                "attributes": {
+                    "href": "/sunglasses/lulu+%26+sky/-lulu--sky-women-sunglasses/33986439/buy"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 775.9125366210938,
+                "y": 219.9499969482422,
+                "width": 208.6374969482422,
+                "height": 356.1750183105469
+            },
+            "scroll_x": 0,
+            "scroll_y": 2607.199951171875,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/sunglasses/summer+dream/summer-dream-women-purple-lens--gold-toned-butterfly-sunglasses-with/45205898/buy",
+            "timestamp": "2026-09-24T22:19:59.486Z",
+            "page_id": 1,
+            "delay_before_ms": 888
+        },
+        {
+            "action_type": "tab_open",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/sunglasses/lulu+%26+sky/-lulu--sky-women-sunglasses/33986439/buy",
+            "timestamp": "2026-09-24T22:20:01.314Z",
+            "new_tab": true,
+            "page_id": 2,
+            "from_page_id": 1,
+            "delay_before_ms": 1828
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 2,
+            "page_url": "https://www.myntra.com/sunglasses/lulu+%26+sky/-lulu--sky-women-sunglasses/33986439/buy",
+            "remaining_page_id": 1,
+            "timestamp": "2026-09-24T22:20:04.587Z",
+            "delay_before_ms": 3273
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 1,
+            "page_url": "https://www.myntra.com/sunglasses/summer+dream/summer-dream-women-purple-lens--gold-toned-butterfly-sunglasses-with/45205898/buy",
+            "remaining_page_id": 0,
+            "timestamp": "2026-09-24T22:20:04.599Z",
+            "delay_before_ms": 12
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 0,
+            "page_url": "https://www.myntra.com/fwdgenzcollection?sort=new&f=Categories%3ASunglasses%3A%3ACountry%20of%20Origin%3AIndia%3A%3AFeature%3ARegular%20Lens%3A%3AFrame%20Material%3APolycarbonate%3A%3ALens%20Colour%3APurple%3A%3ANet%20Quantity%20Unit%3APiece%3A%3Asize_facet%3AOnesize&rf=Price%3A0.0_700.0_0.0%20TO%20700.0",
+            "remaining_page_id": null,
+            "timestamp": "2026-09-24T22:20:04.606Z",
+            "delay_before_ms": 7
+        }
+    ],
+    "saved_at": "2026-09-25T03:50:04.654297"
+}

@@ -1,0 +1,318 @@
+{
+    "name": "session_20260922_154625",
+    "session_id": "db8ba206e7f345e0b3cb7241d224159b",
+    "start_url": "https://www.myntra.com/",
+    "recorded_at": "2026-09-22T15:46:25.529143",
+    "stop_reason": "browser_closed",
+    "total_actions": 14,
+    "page_count": 2,
+    "viewport_width": 1280,
+    "viewport_height": 720,
+    "actions": [
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/",
+            "timestamp": "2026-09-22T10:16:01.189Z",
+            "page_id": 0,
+            "delay_before_ms": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Casual Shirts",
+                "placeholder": null,
+                "title": null,
+                "href": "/men-casual-shirts",
+                "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > nav > div > div > div > div > div > div > li > ul > li:nth-of-type(3) > a",
+                "xpath": "//a[@href='/men-casual-shirts']",
+                "text": "Casual Shirts",
+                "element_text": "Casual Shirts",
+                "tag": "a",
+                "attributes": {
+                    "href": "/men-casual-shirts"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 101.5999984741211,
+                "y": 146,
+                "width": 191,
+                "height": 23
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/",
+            "timestamp": "2026-09-22T10:16:03.995Z",
+            "page_id": 0,
+            "delay_before_ms": 2806
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "Allen Solly",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#mountRoot > div > main > div:nth-of-type(3) > div > section > div > div:nth-of-type(2) > ul > li:nth-of-type(7) > label > input",
+                "xpath": "//label[normalize-space(text())='Allen Solly']/input",
+                "text": "Allen Solly",
+                "element_text": "Allen Solly",
+                "tag": "input",
+                "attributes": {
+                    "type": "checkbox"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 25,
+                "y": 411.8000183105469,
+                "width": 13,
+                "height": 13
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/men-casual-shirts",
+            "timestamp": "2026-09-22T10:16:08.704Z",
+            "expected_state": true,
+            "page_id": 0,
+            "delay_before_ms": 4709
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/men-casual-shirts?f=Brand%3AAllen%20Solly",
+            "timestamp": "2026-09-22T10:16:08.879Z",
+            "page_id": 0,
+            "delay_before_ms": 175
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 392,
+            "scroll_y_before": 0,
+            "scroll_y_after": 392,
+            "viewport_height": 720,
+            "document_height": 7878,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/men-casual-shirts?f=Brand%3AAllen%20Solly",
+            "timestamp": "2026-09-22T10:16:11.053Z",
+            "page_id": 0,
+            "delay_before_ms": 2174
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "Beige",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#mountRoot > div > main > div:nth-of-type(3) > div > section > div > div:nth-of-type(4) > ul > li:nth-of-type(5) > label > input",
+                "xpath": "//label[normalize-space(text())='Beige']/input",
+                "text": "Beige",
+                "element_text": "Beige",
+                "tag": "input",
+                "attributes": {
+                    "type": "checkbox"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 142.375,
+                "y": 434.20001220703125,
+                "width": 13,
+                "height": 13
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/men-casual-shirts?f=Brand%3AAllen%20Solly",
+            "timestamp": "2026-09-22T10:16:12.923Z",
+            "expected_state": true,
+            "page_id": 0,
+            "delay_before_ms": 1870
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/men-casual-shirts?f=Brand%3AAllen%20Solly%3A%3AColor%3ABeige_e8e6cf",
+            "timestamp": "2026-09-22T10:16:13.143Z",
+            "page_id": 0,
+            "delay_before_ms": 220
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 1604,
+            "scroll_y_before": 392,
+            "scroll_y_after": 1996,
+            "viewport_height": 720,
+            "document_height": 7878,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/men-casual-shirts?f=Brand%3AAllen%20Solly%3A%3AColor%3ABeige_e8e6cf",
+            "timestamp": "2026-09-22T10:16:17.139Z",
+            "page_id": 0,
+            "delay_before_ms": 3996
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Allen Solly\nSizes: 42\nRs. 1219Rs. 1999(39% OFF)",
+                "placeholder": null,
+                "title": null,
+                "href": "shirts/allen+solly/allen-solly-men-striped-casual-shirt/37973382/buy",
+                "css_path": "li#37973382 > a",
+                "xpath": "//a[@href='shirts/allen+solly/allen-solly-men-striped-casual-shirt/37973382/buy']",
+                "text": "Allen Solly\nSizes: 42\nRs. 1219Rs. 1999(39% OFF)",
+                "element_text": "Allen Solly\nSizes: 42\nRs. 1219Rs. 1999(39% OFF)",
+                "tag": "a",
+                "attributes": {
+                    "href": "shirts/allen+solly/allen-solly-men-striped-casual-shirt/37973382/buy"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 528.7250366210938,
+                "y": 260.8000183105469,
+                "width": 210,
+                "height": 359.8000183105469
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/men-casual-shirts?f=Brand%3AAllen%20Solly%3A%3AColor%3ABeige_e8e6cf",
+            "timestamp": "2026-09-22T10:16:18.155Z",
+            "page_id": 0,
+            "delay_before_ms": 1016
+        },
+        {
+            "action_type": "tab_open",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/shirts/allen+solly/allen-solly-men-striped-casual-shirt/37973382/buy",
+            "timestamp": "2026-09-22T10:16:21.356Z",
+            "new_tab": true,
+            "page_id": 1,
+            "from_page_id": 0,
+            "delay_before_ms": 3201
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "42",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#sizeButtonsContainer > div:nth-of-type(2) > div:nth-of-type(5) > div > button",
+                "xpath": "//button[normalize-space(.)='42']",
+                "text": "42",
+                "element_text": "42",
+                "tag": "button",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 998.1749877929688,
+                "y": 355.8000183105469,
+                "width": 50,
+                "height": 50
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/shirts/allen+solly/allen-solly-men-striped-casual-shirt/37973382/buy",
+            "timestamp": "2026-09-22T10:16:21.487Z",
+            "page_id": 1,
+            "delay_before_ms": 131
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "ADD TO BAG",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#mountRoot > div > div > main > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2) > div > div",
+                "xpath": "//div[normalize-space(text())='ADD TO BAG']",
+                "text": "ADD TO BAG",
+                "element_text": "ADD TO BAG",
+                "tag": "div",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 758.1749877929688,
+                "y": 439.8000183105469,
+                "width": 232.8874969482422,
+                "height": 53.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/shirts/allen+solly/allen-solly-men-striped-casual-shirt/37973382/buy",
+            "timestamp": "2026-09-22T10:16:22.661Z",
+            "page_id": 1,
+            "delay_before_ms": 1174
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 1,
+            "page_url": "https://www.myntra.com/shirts/allen+solly/allen-solly-men-striped-casual-shirt/37973382/buy",
+            "remaining_page_id": 0,
+            "timestamp": "2026-09-22T10:16:25.373Z",
+            "delay_before_ms": 2712
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 0,
+            "page_url": "https://www.myntra.com/men-casual-shirts?f=Brand%3AAllen%20Solly%3A%3AColor%3ABeige_e8e6cf",
+            "remaining_page_id": null,
+            "timestamp": "2026-09-22T10:16:25.465Z",
+            "delay_before_ms": 92
+        }
+    ],
+    "saved_at": "2026-09-22T15:46:25.591757"
+}

@@ -1,0 +1,58 @@
+{
+    "name": "session_20260924_211439",
+    "start_url": "http://127.0.0.1:56350/phase4_label_checkbox.html",
+    "actions": [
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "http://127.0.0.1:56350/phase4_label_checkbox.html",
+            "timestamp": "2026-09-24T15:44:39.817Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": "#for-checkbox",
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "on",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "input#for-checkbox",
+                "xpath": "//*[@id='for-checkbox']",
+                "text": "on",
+                "element_text": "on",
+                "tag": "input",
+                "attributes": {
+                    "type": "checkbox"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 259.1875,
+                "y": 11,
+                "width": 13,
+                "height": 13
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "http://127.0.0.1:56350/phase4_label_checkbox.html",
+            "timestamp": "2026-09-24T15:44:39.907Z",
+            "expected_state": false,
+            "classified_by": "label-control",
+            "expect": {
+                "type": "toggle",
+                "final_checked": false
+            },
+            "page_id": 0
+        }
+    ]
+}

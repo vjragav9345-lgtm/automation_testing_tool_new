@@ -1,0 +1,52 @@
+{
+    "name": "session_20260924_171647",
+    "start_url": "http://127.0.0.1:50352/phase4_hover_menu.html",
+    "actions": [
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "http://127.0.0.1:50352/phase4_hover_menu.html",
+            "timestamp": "2026-09-24T11:46:47.776Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#casual-shirts-link",
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Casual Shirts",
+                "placeholder": null,
+                "title": null,
+                "href": "/men-casual-shirts",
+                "product_id": null,
+                "css_path": "a#casual-shirts-link",
+                "xpath": "//*[@id='casual-shirts-link']",
+                "text": "Casual Shirts",
+                "element_text": "Casual Shirts",
+                "tag": "a",
+                "attributes": {
+                    "href": "/men-casual-shirts"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 27,
+                "y": 61,
+                "width": 160,
+                "height": 26
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "http://127.0.0.1:50352/phase4_hover_menu.html",
+            "timestamp": "2026-09-24T11:46:55.134Z",
+            "page_id": 0
+        }
+    ]
+}

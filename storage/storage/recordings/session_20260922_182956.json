@@ -1,0 +1,128 @@
+{
+    "name": "session_20260922_182956",
+    "session_id": "fc52282cef4e4cd7ab5866816eac3f51",
+    "start_url": "https://www.myntra.com/",
+    "recorded_at": "2026-09-22T18:29:56.113528",
+    "stop_reason": "browser_closed",
+    "total_actions": 6,
+    "page_count": 2,
+    "viewport_width": 1280,
+    "viewport_height": 720,
+    "actions": [
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/",
+            "timestamp": "2026-09-22T12:59:44.197Z",
+            "page_id": 0,
+            "delay_before_ms": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Formal Shirts",
+                "placeholder": null,
+                "title": null,
+                "href": "/men-formal-shirts",
+                "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > nav > div > div > div > div > div > div > li > ul > li:nth-of-type(4) > a",
+                "xpath": "//a[@href='/men-formal-shirts']",
+                "text": "Formal Shirts",
+                "element_text": "Formal Shirts",
+                "tag": "a",
+                "attributes": {
+                    "href": "/men-formal-shirts"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 101.5999984741211,
+                "y": 169,
+                "width": 191,
+                "height": 23
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/",
+            "timestamp": "2026-09-22T12:59:44.660Z",
+            "page_id": 0,
+            "delay_before_ms": 463
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "HIGHLANDER\nSizes: 39\nRs. 495Rs. 1599(69% OFF)",
+                "placeholder": null,
+                "title": null,
+                "href": "shirts/highlander/highlander-men-slim-fit-shirt/29684214/buy",
+                "css_path": "li#29684214 > a",
+                "xpath": "//ul[.//h3[contains(text(), 'AD By Arvind')]]/li[3]/a",
+                "text": "HIGHLANDER\nSizes: 39\nRs. 495Rs. 1599(69% OFF)",
+                "element_text": "HIGHLANDER\nSizes: 39\nRs. 495Rs. 1599(69% OFF)",
+                "tag": "a",
+                "attributes": {
+                    "href": "shirts/highlander/highlander-men-slim-fit-shirt/29684214/buy"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 777.4500122070312,
+                "y": 262.3999938964844,
+                "width": 210,
+                "height": 359.8000183105469
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/men-formal-shirts",
+            "timestamp": "2026-09-22T12:59:50.323Z",
+            "page_id": 0,
+            "delay_before_ms": 5663
+        },
+        {
+            "action_type": "tab_open",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/shirts/highlander/highlander-men-slim-fit-shirt/29684214/buy",
+            "timestamp": "2026-09-22T12:59:52.993Z",
+            "new_tab": true,
+            "page_id": 1,
+            "from_page_id": 0,
+            "delay_before_ms": 2670
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 1,
+            "page_url": "https://www.myntra.com/shirts/highlander/highlander-men-slim-fit-shirt/29684214/buy",
+            "remaining_page_id": 0,
+            "timestamp": "2026-09-22T12:59:56.112Z",
+            "delay_before_ms": 3119
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 0,
+            "page_url": "https://www.myntra.com/men-formal-shirts",
+            "remaining_page_id": null,
+            "timestamp": "2026-09-22T12:59:56.112Z",
+            "delay_before_ms": 0
+        }
+    ],
+    "saved_at": "2026-09-22T18:29:56.113528"
+}

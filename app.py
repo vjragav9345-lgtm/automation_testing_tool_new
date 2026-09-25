@@ -58,7 +58,7 @@ from recorder.pick_element import (
     start_pick_session, get_pick_status, prewarm_pick_session,
     _load_resolve_and_act, _replay_preceding_actions,
 )
-from generator.script_generator import generate_script, EDITED_OUTPUT_DIR, OUTPUT_DIR
+from generator.script_generator import generate_script, EDITED_OUTPUT_DIR, OUTPUT_DIR, test_case_has_otp_step
 from executor.run_execution import execute_test, start_replay, poll_replay, SCRIPT_TIMEOUT_SEC, _compute_script_timeout
 from validation.report_generator import generate_report
 
@@ -323,7 +323,14 @@ def _finish_recording(
 ):
     """Stops recorder, saves JSON and generates the normal script."""
 
-    name = f"session_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+    # reuse the SAME name the incremental draft (FIX 1 - see Recorder.
+    # start()/_flush_draft) has been writing to throughout the session,
+    # when one exists - repository.save_recording() below then simply
+    # overwrites that same file with the final, complete version instead
+    # of leaving the draft behind as an orphaned duplicate under a
+    # different timestamp.
+    _draft_path = getattr(recorder, "_draft_path", None)
+    name = _draft_path.stem if _draft_path else f"session_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
 
     test_case = recorder.stop(
         name=name,
@@ -335,6 +342,16 @@ def _finish_recording(
 
     try:
         path = repository.save_recording(test_case)
+        # FIX 5: the incremental append-only sidecar (see Recorder.
+        # _flush_draft) has done its job the moment the real, complete
+        # JSON is safely on disk - remove it rather than leaving it behind
+        # as a stray file next to every finished recording.
+        _draft_jsonl_path = getattr(recorder, "_draft_jsonl_path", None)
+        if _draft_jsonl_path is not None:
+            try:
+                _draft_jsonl_path.unlink(missing_ok=True)
+            except OSError:
+                pass
     except OSError as e:
         # A save failure here must never look like a silent hang to the
         # dashboard - surface it as a clear "failed" phase rather than
@@ -468,6 +485,17 @@ def _run_recording_session(
 
         page = context.new_page()
 
+        # FIX 1 (recorder attaches too late): install the capture bridge
+        # at the CONTEXT level, before page.goto() below ever runs, so
+        # the injected script covers this page's very first navigation
+        # too - not just navigations that happen after the old, later
+        # attach_page() call. Constructing Recorder here (rather than
+        # after goto, as before) only registers this binding/init-script
+        # early; recorder.start() below (still called only after a
+        # successful goto) is what actually turns capturing on.
+        recorder = Recorder(page)
+        recorder.install_context_capture(context)
+
         page.set_default_timeout(8000)
 
         attach_dialog_handler(page)
@@ -579,9 +607,11 @@ def _run_recording_session(
             session_state["phase"] = "recording"
             session_state["last_message"] = None
 
-        recorder = Recorder(page)
-
-        recorder.start()
+        # recorder was already constructed (and install_context_capture()
+        # already registered) right after context/page creation above -
+        # not re-created here - so the context-level binding/init-script
+        # stays the one and only registration for this session.
+        recorder.start(launch_url=url)
 
         def _on_new_page(new_page):
 
@@ -684,8 +714,17 @@ def _run_recording_session(
 
                 stop_reason = "browser_closed"
 
+                # FIX 6 (recording stop wording): the browser disconnecting
+                # is indistinguishable, from this polling loop alone,
+                # between a user deliberately closing the window to end
+                # the recording (the overwhelmingly common case) and a
+                # genuine crash - so this is worded as the NORMAL stop it
+                # almost always is. "unexpected"/crash language is
+                # reserved for the navigation_error case below and for a
+                # genuinely uncaught exception (see the except block
+                # further down this function).
                 closed_note = (
-                    "BROWSER CLOSED UNEXPECTEDLY"
+                    "Recording stopped (browser closed)"
                 )
 
                 break
@@ -697,7 +736,7 @@ def _run_recording_session(
                 stop_reason = "browser_closed"
 
                 closed_note = (
-                    "BROWSER CLOSED UNEXPECTEDLY"
+                    "Recording stopped (browser closed)"
                 )
 
                 break
@@ -720,7 +759,7 @@ def _run_recording_session(
                     stop_reason = "browser_closed"
 
                     closed_note = (
-                        "BROWSER CLOSED UNEXPECTEDLY"
+                        "Recording stopped (browser closed)"
                     )
 
                     break
@@ -960,6 +999,25 @@ def recording_editor():
             400,
         )
 
+    # ITEM 2 FIX: continue from a previously-saved edit if one exists,
+    # instead of always re-opening the pristine original. /api/recordings/
+    # save never touches the original (by design - see its own docstring),
+    # writing to storage/recordings/edited/<name>_edited.json instead. Without
+    # this, re-opening the SAME original path/link after an earlier
+    # edit+save (delete a step, add one, ...) showed the untouched
+    # original again, with every earlier change silently gone from
+    # view - even though it really had been saved, just under a
+    # different file. Only swaps when the requested file is an
+    # ORIGINAL (lives directly in storage/recordings/, not already
+    # inside its edited/ or trimmed/ subfolder) and a matching edited
+    # copy actually exists.
+    if recording_file.parent == repository.RECORDINGS_DIR:
+        edited_candidate = (
+            repository.EDITED_RECORDINGS_DIR / f"{recording_file.stem}_edited.json"
+        )
+        if edited_candidate.exists():
+            recording_file = edited_candidate
+
     try:
 
         recording = repository.load_recording(
@@ -1086,51 +1144,10 @@ def api_recordings_view():
             }
         )
 
-    # if this IS an edited recording, also hand back its untouched
-    # original so the editor can show both - "session_X_edited" always
-    # derives from "session_X" (the stable-naming convention Save Edited
-    # JSON uses), so the original's path is just that suffix stripped
-    original = None
-
-    if recording_file.parent == repository.EDITED_RECORDINGS_DIR:
-
-        original_name = (
-            recording.get("name")
-            or recording_file.stem
-        )
-
-        if original_name.endswith("_edited"):
-
-            original_name = original_name[
-                : -len("_edited")
-            ]
-
-            original_file = (
-                repository.RECORDINGS_DIR
-                / f"{original_name}.json"
-            )
-
-            if original_file.exists():
-
-                try:
-                    original = repository.load_recording(
-                        str(original_file)
-                    )
-                except (
-                    OSError,
-                    json.JSONDecodeError,
-                ) as e:
-                    logger.warning(
-                        "couldn't load original %s for comparison: %s",
-                        original_file,
-                        e,
-                    )
-
     return jsonify(
         {
             "success": True,
             "recording": recording,
-            "original": original,
         }
     )
 
@@ -1434,6 +1451,93 @@ def api_recordings_validate_locator():
             pass
 
 
+@app.route("/api/recordings/test_navigate", methods=["POST"])
+def api_recordings_test_navigate():
+    """ITEM 3: lets a "navigate" step being added/edited in the Add
+    Action modal actually be tried for real - previously a navigate
+    step's Target URL field was just a plain text input with no way to
+    confirm the URL is even reachable before saving it as inert JSON.
+
+    One-shot and self-contained, same pattern api_recordings_validate_
+    locator right above already uses: launches its OWN fresh headed
+    browser (headed preferred for the same anti-bot-detection reasoning
+    validate_locator's own comment documents), navigates to the given
+    URL, reports whether it succeeded plus the page title/final URL,
+    and closes that browser again before this request returns - it
+    NEVER touches session_path/preceding_actions, the warm Pick Element
+    session, or recordingData in any way, so it can't leave anything
+    behind that would affect how a later Pick Element click (or a real
+    Replay) resolves the recording's own, separate actions. Never
+    writes to the recording file - same as Validate/Pick Element, only
+    the user's own explicit Save does that.
+    """
+    data = request.get_json(silent=True) or {}
+    raw_url = (data.get("url") or "").strip()
+
+    if not raw_url:
+        return jsonify({"success": False, "message": "Enter a URL first."})
+
+    url = normalize_url(raw_url)
+
+    pw = None
+    browser = None
+    try:
+        pw = sync_playwright().start()
+        try:
+            browser = pw.chromium.launch(headless=False)
+        except Exception as e:
+            logger.warning("test_navigate: headed launch failed (%s), falling back to headless", e)
+            browser = pw.chromium.launch(headless=True)
+
+        context = browser.new_context()
+        page = context.new_page()
+        page.set_default_timeout(8000)
+        attach_dialog_handler(page)
+
+        try:
+            page.goto(url, wait_until="domcontentloaded", timeout=PAGE_LOAD_TIMEOUT)
+        except PWError as e:
+            return jsonify({"success": False, "message": f"Couldn't reach {url!r}: {e}"})
+
+        try:
+            title = page.title()
+        except Exception:
+            title = None
+        try:
+            final_url = page.url
+        except Exception:
+            final_url = url
+
+        return jsonify({
+            "success": True,
+            "message": f"Reached {final_url!r} - \"{title}\"" if title else f"Reached {final_url!r}",
+            "url": final_url,
+            "title": title,
+        })
+
+    except Exception as e:
+        logger.error("test_navigate failed: %s", e)
+        return jsonify({"success": False, "message": "Couldn't test that URL - please try again."})
+
+    finally:
+        # closes/returns immediately after confirming the URL, exactly
+        # as required - this test browser is never left open for the
+        # user to keep interacting with (unlike Pick Element's own,
+        # deliberately-left-open browser), so it can never be mistaken
+        # for, or interfere with, the page state any OTHER step in this
+        # recording expects.
+        try:
+            if browser is not None and browser.is_connected():
+                browser.close()
+        except Exception:
+            pass
+        try:
+            if pw is not None:
+                pw.stop()
+        except Exception:
+            pass
+
+
 @app.route("/api/recordings/pick_element/start", methods=["POST"])
 def api_recordings_pick_element_start():
     """Kicks off a Pick Element session: replays session_path's own
@@ -1547,6 +1651,24 @@ def api_recordings_pick_element_status():
     # different bugs that look identical from the browser alone.
     print(f"[pick-timing] {pick_id} poll_served t={time.time():.3f} status={result.get('status')}", flush=True)
     return jsonify(result)
+
+
+@app.route("/api/recordings/pick_element/cancel", methods=["POST"])
+def api_recordings_pick_element_cancel():
+    """Fire-and-forget, mirroring prewarm: called when the Add Action
+    modal is cancelled, saved, or otherwise closed without the user
+    having closed the picker browser window themselves (see
+    recording_editor.html's modalCancelBtn/modalSaveBtn handlers) - ends
+    that warm session's currently in-progress pick (if any) and closes
+    its browser right away, instead of leaving it open until
+    PICK_TIMEOUT_S elapses on its own. A missing/unknown warm_id, or no
+    pick actually in progress, is simply a no-op, never an error - see
+    recorder.pick_element.cancel_active_pick's own docstring.
+    """
+    data = request.get_json(silent=True) or {}
+    warm_id = (data.get("warm_id") or "").strip()
+    pick_element.cancel_active_pick(warm_id)
+    return jsonify({"success": True})
 
 
 # TEST-ONLY, off by default (AUTOFLOW_TEST_HOOKS=1 to enable): lets a
@@ -1740,223 +1862,6 @@ def api_recordings_save():
             "name": new_name,
         }
     )
-
-
-# ============================================================
-# TRIM RECORDING - keep only selected steps as a new recording
-# ============================================================
-
-@app.route("/recording/trim")
-def recording_trim():
-    """Opens an existing JSON recording in the Trim screen - same
-    selection/resolution as the Recording Editor's /recording/edit,
-    reused as-is. No save/modify logic here; that's the trim_save route.
-    """
-
-    recording_path = request.args.get("path", "").strip()
-
-    if not recording_path:
-        return ("Recording path is required.", 400)
-
-    recording_file = _resolve_recording_file(recording_path)
-
-    if recording_file is None or recording_file.suffix.lower() != ".json":
-        return ("Only JSON recordings can be opened.", 400)
-
-    if not recording_file.exists():
-        return (f"Recording not found: {recording_path}", 404)
-
-    display_path = (
-        str(recording_file.relative_to(BASE_DIR)).replace("\\", "/")
-    )
-
-    return render_template(
-        "recording_trim.html",
-        recording_path=display_path,
-    )
-
-
-def _describe_action_for_trim(action):
-    """Best-effort human label + locator string for one recorded action,
-    for the Trim screen's step list. Deliberately kept in step with
-    generator/script_generator.py's _describe_step() (same label
-    priority: element text, then value for a click, then accessible
-    name/aria-label/placeholder/id/tag) - that function itself lives
-    inside SCRIPT_TEMPLATE, the literal text later written out as a
-    standalone generated script, so it isn't a real importable symbol on
-    this module (see generate_script() - the whole replay engine only
-    becomes live code once substituted into a generated .py file).
-    """
-    lp = action.get("locator_profile") or {}
-    attrs = lp.get("attributes") or {}
-    text = (lp.get("element_text") or lp.get("text") or "").strip()
-    value = action.get("value")
-    value_as_text = (
-        value
-        if action.get("action_type") in ("click", "dblclick", "right_click") and value
-        else None
-    )
-    label = (
-        text
-        or value_as_text
-        or lp.get("accessible_name")
-        or lp.get("aria_label") or attrs.get("aria-label")
-        or lp.get("placeholder") or attrs.get("placeholder")
-        or lp.get("id")
-        or lp.get("tag")
-        or "(element)"
-    )
-    locator_display = (
-        lp.get("id")
-        or (f'a[href="{lp["href"]}"]' if lp.get("href") else None)
-        or lp.get("css_path")
-        or lp.get("xpath")
-        or "-"
-    )
-    return label, locator_display
-
-
-@app.route("/api/recordings/trim_view")
-def api_recordings_trim_view():
-    """Read-only: returns one recording's steps as a numbered,
-    human-readable list for the Trim screen's checkboxes. See
-    _describe_action_for_trim() for why this doesn't just import the
-    replay engine's own summarizer.
-    """
-
-    recording_path = request.args.get("path", "").strip()
-
-    if not recording_path:
-        return jsonify({
-            "success": False,
-            "message": "Recording path is required.",
-            "recording": None,
-            "steps": [],
-        })
-
-    recording_file = _resolve_recording_file(recording_path)
-
-    if recording_file is None or recording_file.suffix.lower() != ".json":
-        return jsonify({
-            "success": False,
-            "message": "Only JSON recordings can be opened.",
-            "recording": None,
-            "steps": [],
-        })
-
-    try:
-        recording = repository.load_recording(str(recording_file))
-    except FileNotFoundError:
-        return jsonify({
-            "success": False,
-            "message": f"Recording not found: {recording_path}",
-            "recording": None,
-            "steps": [],
-        })
-    except (OSError, json.JSONDecodeError) as e:
-        logger.error("couldn't read recording %s: %s", recording_path, e)
-        return jsonify({
-            "success": False,
-            "message": "The selected recording could not be read.",
-            "recording": None,
-            "steps": [],
-        })
-
-    steps = []
-    for index, action in enumerate(recording.get("actions", [])):
-        try:
-            label, locator_display = _describe_action_for_trim(action)
-        except Exception:
-            label, locator_display = (action.get("action_type") or "unknown"), "-"
-        steps.append({
-            "index": index,
-            "action_type": action.get("action_type"),
-            "label": label,
-            "locator_display": locator_display,
-            "page_id": action.get("page_id", 0),
-        })
-
-    return jsonify({
-        "success": True,
-        "recording": recording,
-        "steps": steps,
-    })
-
-
-@app.route("/api/recordings/trim_save", methods=["POST"])
-def api_recordings_trim_save():
-    """Saves a hand-picked SUBSET of an existing recording's actions (in
-    their original relative order) as a brand-new recording under
-    storage/recordings/trimmed/ - the recording it was trimmed from is
-    never touched. Mirrors /api/recordings/save's shape and stable-naming
-    convention, one trimmed derivative per original.
-    """
-
-    body = request.get_json(force=True, silent=True) or {}
-    recording = body.get("recording") or {}
-    actions = recording.get("actions", [])
-
-    if not isinstance(actions, list) or not actions:
-        return jsonify({
-            "success": False,
-            "message": "At least one step must be selected to trim.",
-            "path": None,
-            "name": None,
-        })
-
-    original_name = recording.get("name") or "recording"
-    new_name = (
-        original_name
-        if original_name.endswith("_trimmed")
-        else f"{original_name}_trimmed"
-    )
-
-    # the trimmed JSON is the source of truth for its own start_url too -
-    # same reasoning /api/recordings/save already uses for edited
-    # recordings: if the kept first action points at a different page
-    # than the original recording started on, start_url must follow it
-    if actions and isinstance(actions[0], dict) and actions[0].get("page_url"):
-        start_url = actions[0]["page_url"]
-    else:
-        start_url = recording.get("start_url", "")
-
-    test_case = {
-        "name": new_name,
-        "start_url": start_url,
-        "actions": actions,
-    }
-
-    try:
-        path = repository.save_trimmed_recording(test_case)
-    except OSError as e:
-        logger.error("couldn't save trimmed recording: %s", e)
-        return jsonify({
-            "success": False,
-            "message": "Couldn't save the trimmed recording.",
-            "path": None,
-            "name": None,
-        })
-
-    display_path = str(path.relative_to(BASE_DIR)).replace("\\", "/")
-
-    # same shared regenerate-on-save step every other recording-JSON save
-    # path uses, re-reading the saved file so the script is provably
-    # generated from what's actually on disk
-    try:
-        saved_test_case = repository.load_recording(str(path))
-    except Exception as e:
-        logger.error("couldn't re-read saved trimmed recording for script generation: %s", e)
-        saved_test_case = None
-
-    if saved_test_case is not None:
-        _regenerate_script_after_save(saved_test_case)
-
-    return jsonify({
-        "success": True,
-        "message": "Trimmed recording saved.",
-        "path": display_path,
-        "name": new_name,
-    })
 
 
 # ============================================================
@@ -2656,6 +2561,7 @@ def api_test_run():
         # every session - see _compute_script_timeout()
         action_count=len(test_case.get("actions", [])),
         screenshot_options=_screenshot_options_from_body(body),
+        has_otp_step=test_case_has_otp_step(test_case),
     )
 
     # execute_test already wrote the full result to report.json inside
@@ -2731,6 +2637,7 @@ def api_test_run_start():
         test_case.get("name"),
         action_count=action_count,
         screenshot_options=_screenshot_options_from_body(body),
+        has_otp_step=test_case_has_otp_step(test_case),
     )
 
     with _run_meta_lock:
@@ -2753,6 +2660,43 @@ def api_test_run_start():
         "test_name": test_case.get("name"),
         "total_steps": action_count,
     })
+
+
+# ============================================================
+# OTP-STEP HANDLING: the replay subprocess pauses and waits for a
+# human-submitted OTP value (see generator/script_generator.py's own
+# _wait_for_live_otp) via a plain marker file inside its own run_dir -
+# this route is the other end of that hand-off. run_dir is a pure,
+# deterministic function of run_id alone (the exact same computation
+# _prepare_run() in executor/run_execution.py already uses), so this
+# needs no lookup into that module's own in-memory _active_replays
+# state - only used to decide, for a genuinely unknown run_id, whether
+# to report a clear error instead of silently writing a file nothing
+# will ever read.
+# ============================================================
+
+@app.route("/api/test/run/otp_submit", methods=["POST"])
+def api_test_run_otp_submit():
+    data = request.get_json(silent=True) or {}
+    run_id = (data.get("run_id") or "").strip()
+    value = (data.get("value") or "").strip()
+
+    if not run_id:
+        return jsonify({"success": False, "message": "run_id is required."})
+    if not value:
+        return jsonify({"success": False, "message": "Enter an OTP value first."})
+
+    run_dir = BASE_DIR / "generated_scripts" / "screenshoots" / run_id
+    if not run_dir.is_dir():
+        return jsonify({"success": False, "message": "Unknown or already-finished run_id."})
+
+    try:
+        (run_dir / "otp_input.txt").write_text(value, encoding="utf-8")
+    except Exception as e:
+        logger.error("otp_submit: couldn't write OTP marker file for run %s: %s", run_id, e)
+        return jsonify({"success": False, "message": "Couldn't submit the OTP - please try again."})
+
+    return jsonify({"success": True})
 
 
 def _summarize_steps(steps):
@@ -2918,6 +2862,12 @@ def api_test_run_stream():
 
         started_at = time.monotonic()
         sent_count = 0
+        # OTP-STEP HANDLING: both stay at their initial value (0/False)
+        # for the overwhelmingly common case of a run with no OTP-shaped
+        # step at all - poll_replay()'s own awaiting_otp/live_log fields
+        # are None/empty then, so neither branch below ever fires.
+        sent_log_count = 0
+        otp_prompt_active = False
         # a run_id that's already finished by the time this connects
         # (a fast run, or a slow client opening the popup late) still
         # needs its full step history replayed once here, not just the
@@ -2988,6 +2938,32 @@ def api_test_run_stream():
                     "reason": _step_failure_reason(step),
                 })
             sent_count = len(steps)
+
+            # OTP-STEP HANDLING: relay any new Live Log lines the
+            # subprocess has written (hover-reveal and/or OTP sub-step
+            # messages - see generator/script_generator.py's own
+            # _hover_reveal_log/_otp_flow_log), and tell the popup when
+            # replay is genuinely paused waiting for a live OTP value so
+            # it can show a prompt - both no-ops (empty list / None) for
+            # any run with nothing to report here.
+            live_log = progress.get("live_log") or []
+            for entry in live_log[sent_log_count:]:
+                yield _sse("log", {"message": entry.get("message")})
+            sent_log_count = len(live_log)
+
+            awaiting_otp = progress.get("awaiting_otp")
+            if awaiting_otp and not otp_prompt_active:
+                otp_prompt_active = True
+                yield _sse("otp_needed", {
+                    "run_id": run_id,
+                    "step_index": awaiting_otp.get("step_index"),
+                    "total_steps": awaiting_otp.get("total_steps"),
+                    "message": awaiting_otp.get("message") or "Enter OTP to continue",
+                })
+            elif not awaiting_otp and otp_prompt_active:
+                otp_prompt_active = False
+                yield _sse("otp_resolved", {"run_id": run_id})
+
             total_steps = progress.get("total_steps") or meta.get("total_steps")
             recorded_actions = meta.get("actions") or []
             if total_steps and sent_count < total_steps:
@@ -3069,6 +3045,20 @@ def api_maintenance_cleanup():
 
 
 if __name__ == "__main__":
+
+    # FIX 6 (crash recovery): the other trigger point for
+    # repository.recover_orphaned_drafts() (see its own docstring and
+    # Recorder.start()'s matching call) - a session that crashed the last
+    # time this server was running gets its leftover JSONL sidecar swept
+    # up into a proper, saved recording before anything else happens.
+    # Safe here unconditionally: no recording can possibly be active yet
+    # at this point in startup.
+    try:
+        recovered = repository.recover_orphaned_drafts()
+        if recovered:
+            logger.warning("recovered %d interrupted recording(s) on startup: %s", len(recovered), recovered)
+    except Exception as e:
+        logger.error("startup crash-recovery sweep failed: %s", e)
 
     start_recordings_watcher()
 

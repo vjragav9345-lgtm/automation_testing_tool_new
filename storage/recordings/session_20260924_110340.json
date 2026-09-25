@@ -1,0 +1,197 @@
+{
+    "name": "session_20260924_110340",
+    "start_url": "https://example.com/launch",
+    "actions": [
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://example.com/launch",
+            "timestamp": "2026-09-24T05:33:40.645Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": "#cb1",
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "on",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "input#cb1",
+                "xpath": "//*[@id='cb1']",
+                "text": "on",
+                "element_text": "on",
+                "tag": "input",
+                "attributes": {
+                    "type": "checkbox"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 12,
+                "y": 11,
+                "width": 13,
+                "height": 13
+            },
+            "click_strategy": "standard",
+            "page_url": "about:blank",
+            "timestamp": "2026-09-24T05:33:40.714Z",
+            "expected_state": true,
+            "page_id": 0
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": "#styledcb",
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "styled checkbox",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#styledcb",
+                "xpath": "//*[@id='styledcb']",
+                "text": "styled checkbox",
+                "element_text": "styled checkbox",
+                "tag": "div",
+                "attributes": {
+                    "role": "checkbox"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 8,
+                "y": 27,
+                "width": 1264,
+                "height": 18
+            },
+            "click_strategy": "standard",
+            "page_url": "about:blank",
+            "timestamp": "2026-09-24T05:33:41.163Z",
+            "expected_state": false,
+            "page_id": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#link1",
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "a link",
+                "placeholder": null,
+                "title": null,
+                "href": "#",
+                "css_path": "a#link1",
+                "xpath": "//*[@id='link1']",
+                "text": "a link",
+                "element_text": "a link",
+                "tag": "a",
+                "attributes": {
+                    "href": "#"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 8,
+                "y": 46,
+                "width": 36,
+                "height": 17
+            },
+            "click_strategy": "standard",
+            "page_url": "about:blank",
+            "timestamp": "2026-09-24T05:33:41.592Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#btn2",
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "a button",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "button#btn2",
+                "xpath": "//*[@id='btn2']",
+                "text": "a button",
+                "element_text": "a button",
+                "tag": "button",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 48,
+                "y": 45,
+                "width": 64.1875,
+                "height": 21
+            },
+            "click_strategy": "standard",
+            "page_url": "about:blank#",
+            "timestamp": "2026-09-24T05:33:42.027Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": "#radio2",
+                "name": "g2",
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "on",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "input#radio2",
+                "xpath": "//*[@id='radio2']",
+                "text": "on",
+                "element_text": "on",
+                "tag": "input",
+                "attributes": {
+                    "type": "radio",
+                    "name": "g2"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 13,
+                "y": 87,
+                "width": 13,
+                "height": 13
+            },
+            "click_strategy": "standard",
+            "page_url": "about:blank#",
+            "timestamp": "2026-09-24T05:33:42.459Z",
+            "expected_state": false,
+            "page_id": 0
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 0,
+            "page_url": "about:blank",
+            "remaining_page_id": null,
+            "timestamp": "2026-09-24T05:33:42.880Z"
+        }
+    ]
+}

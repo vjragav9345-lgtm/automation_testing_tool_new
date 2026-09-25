@@ -1,0 +1,72 @@
+{
+  "status": "FAIL",
+  "message": "steps failed: [2]; UI elements missing at steps: [2]",
+  "qa_url": "https://the-internet.herokuapp.com/login",
+  "steps": [
+    {
+      "index": 1,
+      "action_type": "click",
+      "strategy_used": "id",
+      "element_found": true,
+      "success": true,
+      "error": null,
+      "screenshot": "screenshots/execution_runs/20260812_001216/step1.png",
+      "fragile": false
+    },
+    {
+      "index": 2,
+      "action_type": "click",
+      "strategy_used": null,
+      "element_found": false,
+      "success": false,
+      "error": "none of the id/css_path/xpath/text+tag locator strategies matched an element",
+      "screenshot": "screenshots/execution_runs/20260812_001216/step2.png",
+      "fragile": false
+    },
+    {
+      "index": 3,
+      "action_type": "click",
+      "strategy_used": "id",
+      "element_found": true,
+      "success": true,
+      "error": null,
+      "screenshot": "screenshots/execution_runs/20260812_001216/step3.png",
+      "fragile": false
+    }
+  ],
+  "ui_elements": [
+    {
+      "index": 1,
+      "action_type": "click",
+      "element_found": true,
+      "locator_used": "id",
+      "status": "PASS",
+      "message": null
+    },
+    {
+      "index": 2,
+      "action_type": "click",
+      "element_found": false,
+      "locator_used": null,
+      "status": "FAIL",
+      "message": "Expected UI element was not found"
+    },
+    {
+      "index": 3,
+      "action_type": "click",
+      "element_found": true,
+      "locator_used": "id",
+      "status": "PASS",
+      "message": null
+    }
+  ],
+  "ui_elements_status": "FAIL",
+  "content_check": true,
+  "screenshot_diff": {
+    "match": null,
+    "diff_ratio": null,
+    "note": "baseline screenshot not found at screenshots/baseline/does_not_exist_either.png, skipped"
+  },
+  "final_screenshot": "screenshots/execution_runs/20260812_001216/final.png",
+  "run_id": "20260812_001216"
+}

@@ -1,0 +1,50 @@
+{
+    "name": "session_20260924_211100",
+    "start_url": "http://127.0.0.1:60564/phase4_custom_checkbox_row.html",
+    "actions": [
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "http://127.0.0.1:60564/phase4_custom_checkbox_row.html",
+            "timestamp": "2026-09-24T15:41:00.280Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#printed-row",
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Printed",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#printed-row",
+                "xpath": "//*[@id='printed-row']",
+                "text": "Printed",
+                "element_text": "Printed",
+                "tag": "div",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 40,
+                "y": 40,
+                "width": 1200,
+                "height": 18
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "http://127.0.0.1:60564/phase4_custom_checkbox_row.html",
+            "timestamp": "2026-09-24T15:41:00.383Z",
+            "page_id": 0
+        }
+    ]
+}

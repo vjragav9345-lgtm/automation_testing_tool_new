@@ -1,0 +1,50 @@
+{
+    "name": "session_20260924_205957",
+    "start_url": "http://127.0.0.1:50221/phase4_chip_checkbox.html",
+    "actions": [
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "http://127.0.0.1:50221/phase4_chip_checkbox.html",
+            "timestamp": "2026-09-24T15:29:57.517Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#patterns-label",
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Patterns",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#patterns-label",
+                "xpath": "//*[@id='patterns-label']",
+                "text": "Patterns",
+                "element_text": "Patterns",
+                "tag": "div",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 55,
+                "y": 49,
+                "width": 59.59375,
+                "height": 18
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "http://127.0.0.1:50221/phase4_chip_checkbox.html",
+            "timestamp": "2026-09-24T15:29:58.545Z",
+            "page_id": 0
+        }
+    ]
+}

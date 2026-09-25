@@ -1,0 +1,70 @@
+{
+    "name": "session_20260924_154336",
+    "session_id": "e88d84ba1da1462782dbce4b09030d68",
+    "start_url": "https://www.printrest.com",
+    "recorded_at": "2026-09-24T15:43:56.740125",
+    "stop_reason": "browser_closed",
+    "total_actions": 3,
+    "page_count": 1,
+    "viewport_width": 1280,
+    "viewport_height": 720,
+    "actions": [
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.printrest.com",
+            "timestamp": "2026-09-24T10:13:36.891Z",
+            "page_id": 0,
+            "delay_before_ms": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Home Decor Ideas\n›",
+                "placeholder": null,
+                "title": null,
+                "href": "/_suggest?dp=2vE12pQaeiQ06SlOXQwFn_SNWZlHWFnabyJq6iMI6fKKlYOz8N25HIQMFxsi-blRala7yTB99vS7z2WJiHjYXXpyPuIZPLvazK2rpiYmuJrhh9gBQQCapquILd3LdReLMIlyuxHt21_R4NxscPNCUzuBbdW14Kgfn9pwIEteIzLz8SXlroCFvypIWl2V3f8P-mk9JMvBxnA3455stKo2ReTEnbDgnZTSOy_9jmIGgCXRorqzgytlbpy9b0q7_0JaEmoYrxcfwj68joXlGbjeVbf1_WsJ1uaq3Wz_ydEVBoFPC9eO_HUj2JdFwQhfdJ21jVGIs_9sbZeaYYxxS7ne1qUl5Ps931y8SZU0g50OXTYrLl-lyN5GRqcEyimQvr4cc0_C6aCkp5hVvMamE5xWcRfXe&ts=1790244818533",
+                "css_path": "body > div > main > nav > a",
+                "xpath": "//a[@href='/_suggest?dp=2vE12pQaeiQ06SlOXQwFn_SNWZlHWFnabyJq6iMI6fKKlYOz8N25HIQMFxsi-blRala7yTB99vS7z2WJiHjYXXpyPuIZPLvazK2rpiYmuJrhh9gBQQCapquILd3LdReLMIlyuxHt21_R4NxscPNCUzuBbdW14Kgfn9pwIEteIzLz8SXlroCFvypIWl2V3f8P-mk9JMvBxnA3455stKo2ReTEnbDgnZTSOy_9jmIGgCXRorqzgytlbpy9b0q7_0JaEmoYrxcfwj68joXlGbjeVbf1_WsJ1uaq3Wz_ydEVBoFPC9eO_HUj2JdFwQhfdJ21jVGIs_9sbZeaYYxxS7ne1qUl5Ps931y8SZU0g50OXTYrLl-lyN5GRqcEyimQvr4cc0_C6aCkp5hVvMamE5xWcRfXe&ts=1790244818533']",
+                "text": "Home Decor Ideas\n›",
+                "element_text": "Home Decor Ideas\n›",
+                "tag": "a",
+                "attributes": {
+                    "href": "/_suggest?dp=2vE12pQaeiQ06SlOXQwFn_SNWZlHWFnabyJq6iMI6fKKlYOz8N25HIQMFxsi-blRala7yTB99vS7z2WJiHjYXXpyPuIZPLvazK2rpiYmuJrhh9gBQQCapquILd3LdReLMIlyuxHt21_R4NxscPNCUzuBbdW14Kgfn9pwIEteIzLz8SXlroCFvypIWl2V3f8P-mk9JMvBxnA3455stKo2ReTEnbDgnZTSOy_9jmIGgCXRorqzgytlbpy9b0q7_0JaEmoYrxcfwj68joXlGbjeVbf1_WsJ1uaq3Wz_ydEVBoFPC9eO_HUj2JdFwQhfdJ21jVGIs_9sbZeaYYxxS7ne1qUl5Ps931y8SZU0g50OXTYrLl-lyN5GRqcEyimQvr4cc0_C6aCkp5hVvMamE5xWcRfXe&ts=1790244818533"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 281.6000061035156,
+                "y": 138.10000610351562,
+                "width": 700,
+                "height": 68
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.printrest.com/",
+            "timestamp": "2026-09-24T10:13:41.136Z",
+            "page_id": 0,
+            "delay_before_ms": 4245
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 0,
+            "page_url": "https://www.printrest.com/",
+            "remaining_page_id": null,
+            "timestamp": "2026-09-24T10:13:56.735Z",
+            "delay_before_ms": 15599
+        }
+    ],
+    "saved_at": "2026-09-24T15:43:56.740125"
+}

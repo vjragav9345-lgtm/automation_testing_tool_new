@@ -1,0 +1,365 @@
+{
+    "name": "session_20260923_142349",
+    "session_id": "cb36e384ab964de098dcf1f6a99153be",
+    "start_url": "https://www.myntra.com/",
+    "recorded_at": "2026-09-23T14:23:49.080395",
+    "stop_reason": "browser_closed",
+    "total_actions": 16,
+    "page_count": 2,
+    "viewport_width": 1280,
+    "viewport_height": 720,
+    "actions": [
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/",
+            "timestamp": "2026-09-23T08:53:29.487Z",
+            "page_id": 0,
+            "delay_before_ms": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Search for products, brands and more",
+                "placeholder": "Search for products, brands and more",
+                "title": null,
+                "href": null,
+                "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > div:nth-of-type(3) > input",
+                "xpath": "//input[@placeholder='Search for products, brands and more']",
+                "text": "Search for products, brands and more",
+                "element_text": "Search for products, brands and more",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Search for products, brands and more"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 731.2000122070312,
+                "y": 20,
+                "width": 324.8000183105469,
+                "height": 39.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/men-tshirts",
+            "timestamp": "2026-09-23T08:53:32.040Z",
+            "page_id": 0,
+            "delay_before_ms": 2553
+        },
+        {
+            "action_type": "fill",
+            "value": "collar",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Search for products, brands and more",
+                "placeholder": "Search for products, brands and more",
+                "title": null,
+                "href": null,
+                "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > div:nth-of-type(3) > input",
+                "xpath": "//input[@placeholder='Search for products, brands and more']",
+                "text": "Search for products, brands and more",
+                "element_text": "Search for products, brands and more",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Search for products, brands and more"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 731.2000122070312,
+                "y": 20,
+                "width": 324.8000183105469,
+                "height": 39.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/men-tshirts",
+            "timestamp": "2026-09-23T08:53:33.951Z",
+            "page_id": 0,
+            "delay_before_ms": 1911
+        },
+        {
+            "action_type": "press",
+            "value": "Enter",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Search for products, brands and more",
+                "placeholder": "Search for products, brands and more",
+                "title": null,
+                "href": null,
+                "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > div:nth-of-type(3) > input",
+                "xpath": "//input[@placeholder='Search for products, brands and more']",
+                "text": "Search for products, brands and more",
+                "element_text": "Search for products, brands and more",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Search for products, brands and more"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 731.2000122070312,
+                "y": 20,
+                "width": 324.8000183105469,
+                "height": 39.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/men-tshirts",
+            "timestamp": "2026-09-23T08:53:33.952Z",
+            "page_id": 0,
+            "delay_before_ms": 1
+        },
+        {
+            "action_type": "validate",
+            "value": "collar",
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/men-tshirts",
+            "timestamp": "2026-09-23T08:53:34.234Z",
+            "page_id": 0,
+            "delay_before_ms": 282
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/collar?rawQuery=collar",
+            "timestamp": "2026-09-23T08:53:35.645Z",
+            "page_id": 0,
+            "delay_before_ms": 1411
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 94,
+            "scroll_y_before": 0,
+            "scroll_y_after": 94.4000015258789,
+            "viewport_height": 720,
+            "document_height": 6269,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/collar?rawQuery=collar",
+            "timestamp": "2026-09-23T08:53:36.827Z",
+            "page_id": 0,
+            "delay_before_ms": 1182
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 458,
+            "scroll_y_before": 94.4000015258789,
+            "scroll_y_after": 552,
+            "viewport_height": 720,
+            "document_height": 6269,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/collar?rawQuery=collar",
+            "timestamp": "2026-09-23T08:53:37.204Z",
+            "page_id": 0,
+            "delay_before_ms": 377
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 319,
+            "scroll_y_before": 552,
+            "scroll_y_after": 871.2000122070312,
+            "viewport_height": 720,
+            "document_height": 6269,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/collar?rawQuery=collar",
+            "timestamp": "2026-09-23T08:53:38.409Z",
+            "page_id": 0,
+            "delay_before_ms": 1205
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "SOJANYA\nSizes: L\nRs. 1905Rs. 7330(74% OFF)",
+                "placeholder": null,
+                "title": null,
+                "href": "kurta-sets/sojanya/sojanya-men-floral-embroidered-regular-kantha-work-kurta-with-pyjamas/32538206/buy",
+                "css_path": "li#32538206 > a",
+                "xpath": "//a[@href='kurta-sets/sojanya/sojanya-men-floral-embroidered-regular-kantha-work-kurta-with-pyjamas/32538206/buy']",
+                "text": "SOJANYA\nSizes: L\nRs. 1905Rs. 7330(74% OFF)",
+                "element_text": "SOJANYA\nSizes: L\nRs. 1905Rs. 7330(74% OFF)",
+                "tag": "a",
+                "attributes": {
+                    "href": "kurta-sets/sojanya/sojanya-men-floral-embroidered-regular-kantha-work-kurta-with-pyjamas/32538206/buy"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 777.4500122070312,
+                "y": 534.7999877929688,
+                "width": 210,
+                "height": 359.8000183105469
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/collar?rawQuery=collar",
+            "timestamp": "2026-09-23T08:53:39.168Z",
+            "page_id": 0,
+            "delay_before_ms": 759
+        },
+        {
+            "action_type": "tab_open",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/kurta-sets/sojanya/sojanya-men-floral-embroidered-regular-kantha-work-kurta-with-pyjamas/32538206/buy",
+            "timestamp": "2026-09-23T08:53:42.794Z",
+            "new_tab": true,
+            "page_id": 1,
+            "from_page_id": 0,
+            "delay_before_ms": 3626
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "ADD TO BAG",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#mountRoot > div > div > main > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > div",
+                "xpath": "//div[normalize-space(text())='ADD TO BAG']",
+                "text": "ADD TO BAG",
+                "element_text": "ADD TO BAG",
+                "tag": "div",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 758.1749877929688,
+                "y": 379.45001220703125,
+                "width": 232.8874969482422,
+                "height": 53.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/kurta-sets/sojanya/sojanya-men-floral-embroidered-regular-kantha-work-kurta-with-pyjamas/32538206/buy",
+            "timestamp": "2026-09-23T08:53:44.081Z",
+            "page_id": 1,
+            "delay_before_ms": 1287
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "L\nRs. 1905",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#sizeButtonsContainer > div:nth-of-type(2) > div:nth-of-type(3) > div > button",
+                "xpath": "//button[normalize-space(.)='L Rs. 1905']",
+                "text": "L\nRs. 1905",
+                "element_text": "L\nRs. 1905",
+                "tag": "button",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 943.2250366210938,
+                "y": 321.6499938964844,
+                "width": 82.5250015258789,
+                "height": 48
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/kurta-sets/sojanya/sojanya-men-floral-embroidered-regular-kantha-work-kurta-with-pyjamas/32538206/buy",
+            "timestamp": "2026-09-23T08:53:45.251Z",
+            "page_id": 1,
+            "delay_before_ms": 1170
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "ADD TO BAG",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#mountRoot > div > div > main > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > div",
+                "xpath": "//div[normalize-space(text())='ADD TO BAG']",
+                "text": "ADD TO BAG",
+                "element_text": "ADD TO BAG",
+                "tag": "div",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 758.1749877929688,
+                "y": 379.45001220703125,
+                "width": 232.8874969482422,
+                "height": 53.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/kurta-sets/sojanya/sojanya-men-floral-embroidered-regular-kantha-work-kurta-with-pyjamas/32538206/buy",
+            "timestamp": "2026-09-23T08:53:46.249Z",
+            "page_id": 1,
+            "delay_before_ms": 998
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 1,
+            "page_url": "https://www.myntra.com/kurta-sets/sojanya/sojanya-men-floral-embroidered-regular-kantha-work-kurta-with-pyjamas/32538206/buy",
+            "remaining_page_id": 0,
+            "timestamp": "2026-09-23T08:53:49.054Z",
+            "delay_before_ms": 2805
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 0,
+            "page_url": "https://www.myntra.com/collar?rawQuery=collar",
+            "remaining_page_id": null,
+            "timestamp": "2026-09-23T08:53:49.080Z",
+            "delay_before_ms": 26
+        }
+    ],
+    "saved_at": "2026-09-23T14:23:49.080395"
+}

@@ -1,0 +1,253 @@
+{
+    "name": "session_20260924_105009",
+    "session_id": "650438e065fd43d385178ac2afe72c58",
+    "start_url": "https://www.myntra.com/",
+    "recorded_at": "2026-09-24T10:50:09.266819",
+    "stop_reason": "browser_closed",
+    "total_actions": 11,
+    "page_count": 2,
+    "viewport_width": 1280,
+    "viewport_height": 720,
+    "actions": [
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/",
+            "timestamp": "2026-09-24T05:19:50.487Z",
+            "page_id": 0,
+            "delay_before_ms": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "T-Shirts",
+                "placeholder": null,
+                "title": null,
+                "href": "/men-tshirts",
+                "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > nav > div > div > div > div > div > div > li > ul > li:nth-of-type(2) > a",
+                "xpath": "//a[@href='/men-tshirts']",
+                "text": "T-Shirts",
+                "element_text": "T-Shirts",
+                "tag": "a",
+                "attributes": {
+                    "href": "/men-tshirts"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 101.5999984741211,
+                "y": 123,
+                "width": 191,
+                "height": 23
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/",
+            "timestamp": "2026-09-24T05:19:51.667Z",
+            "page_id": 0,
+            "delay_before_ms": 1180
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Search for products, brands and more",
+                "placeholder": "Search for products, brands and more",
+                "title": null,
+                "href": null,
+                "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > div:nth-of-type(3) > input",
+                "xpath": "//input[@placeholder='Search for products, brands and more']",
+                "text": "Search for products, brands and more",
+                "element_text": "Search for products, brands and more",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Search for products, brands and more"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 731.2000122070312,
+                "y": 20,
+                "width": 324.8000183105469,
+                "height": 39.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/men-tshirts",
+            "timestamp": "2026-09-24T05:19:57.616Z",
+            "page_id": 0,
+            "delay_before_ms": 5949
+        },
+        {
+            "action_type": "fill",
+            "value": "collar",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Search for products, brands and more",
+                "placeholder": "Search for products, brands and more",
+                "title": null,
+                "href": null,
+                "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > div:nth-of-type(3) > input",
+                "xpath": "//input[@placeholder='Search for products, brands and more']",
+                "text": "Search for products, brands and more",
+                "element_text": "Search for products, brands and more",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Search for products, brands and more"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 731.2000122070312,
+                "y": 20,
+                "width": 324.8000183105469,
+                "height": 39.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/men-tshirts",
+            "timestamp": "2026-09-24T05:19:59.562Z",
+            "page_id": 0,
+            "delay_before_ms": 1946
+        },
+        {
+            "action_type": "press",
+            "value": "Enter",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Search for products, brands and more",
+                "placeholder": "Search for products, brands and more",
+                "title": null,
+                "href": null,
+                "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > div:nth-of-type(3) > input",
+                "xpath": "//input[@placeholder='Search for products, brands and more']",
+                "text": "Search for products, brands and more",
+                "element_text": "Search for products, brands and more",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Search for products, brands and more"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 731.2000122070312,
+                "y": 20,
+                "width": 324.8000183105469,
+                "height": 39.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/men-tshirts",
+            "timestamp": "2026-09-24T05:19:59.563Z",
+            "page_id": 0,
+            "delay_before_ms": 1
+        },
+        {
+            "action_type": "validate",
+            "value": "collar",
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/men-tshirts",
+            "timestamp": "2026-09-24T05:19:59.945Z",
+            "page_id": 0,
+            "delay_before_ms": 382
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/collar?rawQuery=collar",
+            "timestamp": "2026-09-24T05:20:01.211Z",
+            "page_id": 0,
+            "delay_before_ms": 1266
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "HRX by Hrithik Roshan\nSizes: XXL\nRs. 1187Rs. 3599(67% OFF)",
+                "placeholder": null,
+                "title": null,
+                "href": "tracksuits/hrx+by+hrithik+roshan/hrx-by-hrithik-roshan-men-rapid-dry-running-tracksuit/32381646/buy",
+                "css_path": "li#32381646 > a",
+                "xpath": "//a[@href='tracksuits/hrx+by+hrithik+roshan/hrx-by-hrithik-roshan-men-rapid-dry-running-tracksuit/32381646/buy']",
+                "text": "HRX by Hrithik Roshan\nSizes: XXL\nRs. 1187Rs. 3599(67% OFF)",
+                "element_text": "HRX by Hrithik Roshan\nSizes: XXL\nRs. 1187Rs. 3599(67% OFF)",
+                "tag": "a",
+                "attributes": {
+                    "href": "tracksuits/hrx+by+hrithik+roshan/hrx-by-hrithik-roshan-men-rapid-dry-running-tracksuit/32381646/buy"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 777.4500122070312,
+                "y": 236.60000610351562,
+                "width": 210,
+                "height": 359.8000183105469
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/collar?rawQuery=collar",
+            "timestamp": "2026-09-24T05:20:04.428Z",
+            "page_id": 0,
+            "delay_before_ms": 3217
+        },
+        {
+            "action_type": "tab_open",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/tracksuits/hrx+by+hrithik+roshan/hrx-by-hrithik-roshan-men-rapid-dry-running-tracksuit/32381646/buy",
+            "timestamp": "2026-09-24T05:20:07.384Z",
+            "new_tab": true,
+            "page_id": 1,
+            "from_page_id": 0,
+            "delay_before_ms": 2956
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 1,
+            "page_url": "https://www.myntra.com/tracksuits/hrx+by+hrithik+roshan/hrx-by-hrithik-roshan-men-rapid-dry-running-tracksuit/32381646/buy",
+            "remaining_page_id": 0,
+            "timestamp": "2026-09-24T05:20:09.016Z",
+            "delay_before_ms": 1632
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 0,
+            "page_url": "https://www.myntra.com/collar?rawQuery=collar",
+            "remaining_page_id": null,
+            "timestamp": "2026-09-24T05:20:09.231Z",
+            "delay_before_ms": 215
+        }
+    ],
+    "saved_at": "2026-09-24T10:50:09.283238"
+}

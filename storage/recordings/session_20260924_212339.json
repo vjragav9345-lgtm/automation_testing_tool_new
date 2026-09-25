@@ -1,0 +1,135 @@
+{
+    "name": "session_20260924_212339",
+    "start_url": "http://127.0.0.1:58432/phase4_chip_single_checkbox.html",
+    "actions": [
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "http://127.0.0.1:58432/phase4_chip_single_checkbox.html",
+            "timestamp": "2026-09-24T15:53:39.962Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "hover",
+            "value": null,
+            "locator_profile": {
+                "id": "#origin-chip-container",
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Country of Origin\n▾\n India",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#origin-chip-container",
+                "xpath": "//*[@id='origin-chip-container']",
+                "text": "Country of Origin\n▾\n India",
+                "element_text": "Country of Origin\n▾\n India",
+                "tag": "div",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 40,
+                "y": 40,
+                "width": 166.9375,
+                "height": 36
+            },
+            "page_url": "http://127.0.0.1:58432/phase4_chip_single_checkbox.html",
+            "timestamp": "2026-09-24T15:53:41.462Z",
+            "expect": {
+                "type": "reveal",
+                "revealed_locator_profile": {
+                    "id": "#india-cb",
+                    "name": null,
+                    "role": null,
+                    "aria_label": null,
+                    "accessible_name": "on",
+                    "placeholder": null,
+                    "title": null,
+                    "href": null,
+                    "product_id": null,
+                    "css_path": "input#india-cb",
+                    "xpath": "//*[@id='india-cb']",
+                    "text": "on",
+                    "element_text": "on",
+                    "tag": "input",
+                    "attributes": {
+                        "type": "checkbox"
+                    },
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                }
+            },
+            "page_id": 0
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": "#india-cb",
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "on",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "input#india-cb",
+                "xpath": "//*[@id='india-cb']",
+                "text": "on",
+                "element_text": "on",
+                "tag": "input",
+                "attributes": {
+                    "type": "checkbox"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 54,
+                "y": 89,
+                "width": 13,
+                "height": 13
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "http://127.0.0.1:58432/phase4_chip_single_checkbox.html",
+            "timestamp": "2026-09-24T15:53:41.464Z",
+            "expected_state": true,
+            "classified_by": "native-input-direct",
+            "expect": {
+                "type": "toggle",
+                "final_checked": true
+            },
+            "hover_chain": [
+                {
+                    "id": "#origin-chip-container",
+                    "name": null,
+                    "role": null,
+                    "aria_label": null,
+                    "accessible_name": "Country of Origin\n▾\n India",
+                    "placeholder": null,
+                    "title": null,
+                    "href": null,
+                    "product_id": null,
+                    "css_path": "div#origin-chip-container",
+                    "xpath": "//*[@id='origin-chip-container']",
+                    "text": "Country of Origin\n▾\n India",
+                    "element_text": "Country of Origin\n▾\n India",
+                    "tag": "div",
+                    "attributes": {},
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                }
+            ],
+            "page_id": 0
+        }
+    ]
+}

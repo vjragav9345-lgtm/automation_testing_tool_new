@@ -1,0 +1,203 @@
+{
+    "name": "session_20260923_102410_edited",
+    "start_url": "https://www.myntra.com/",
+    "actions": [
+        {
+            "action_type": "navigate",
+            "bounding_box": null,
+            "delay_before_ms": 0,
+            "locator_profile": null,
+            "page_id": 0,
+            "page_url": "https://www.myntra.com/",
+            "timestamp": "2026-09-23T04:53:56.228Z",
+            "value": null
+        },
+        {
+            "action_type": "fill",
+            "bounding_box": {
+                "height": 39.60000228881836,
+                "width": 324.8000183105469,
+                "x": 731.2000122070312,
+                "y": 20
+            },
+            "click_strategy": "standard",
+            "delay_before_ms": 1211,
+            "locator_profile": {
+                "accessible_name": "Search for products, brands and more",
+                "aria_label": null,
+                "attributes": {
+                    "placeholder": "Search for products, brands and more"
+                },
+                "cross_boundary": false,
+                "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > div:nth-of-type(3) > input",
+                "element_text": "Search for products, brands and more",
+                "href": null,
+                "icon_class_hint": null,
+                "id": null,
+                "name": null,
+                "placeholder": "Search for products, brands and more",
+                "role": null,
+                "tag": "input",
+                "text": "Search for products, brands and more",
+                "title": null,
+                "xpath": "//input[@placeholder='Search for products, brands and more']"
+            },
+            "page_id": 0,
+            "page_url": "https://www.myntra.com/",
+            "timestamp": "2026-09-23T04:53:57.439Z",
+            "value": "shirt"
+        },
+        {
+            "action_type": "press",
+            "bounding_box": {
+                "height": 39.60000228881836,
+                "width": 324.8000183105469,
+                "x": 731.2000122070312,
+                "y": 20
+            },
+            "click_strategy": "standard",
+            "delay_before_ms": 3,
+            "locator_profile": {
+                "accessible_name": "Search for products, brands and more",
+                "aria_label": null,
+                "attributes": {
+                    "placeholder": "Search for products, brands and more"
+                },
+                "cross_boundary": false,
+                "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > div:nth-of-type(3) > input",
+                "element_text": "Search for products, brands and more",
+                "href": null,
+                "icon_class_hint": null,
+                "id": null,
+                "name": null,
+                "placeholder": "Search for products, brands and more",
+                "role": null,
+                "tag": "input",
+                "text": "Search for products, brands and more",
+                "title": null,
+                "xpath": "//input[@placeholder='Search for products, brands and more']"
+            },
+            "page_id": 0,
+            "page_url": "https://www.myntra.com/",
+            "timestamp": "2026-09-23T04:53:57.442Z",
+            "value": "Enter"
+        },
+        {
+            "action_type": "click",
+            "page_url": "https://www.myntra.com/",
+            "page_id": 0,
+            "locator_profile": {
+                "css_path": null,
+                "xpath": "//a[.//h3[contains(text(), 'Marks & Spencer')]]/div/div/div/div/picture/img"
+            },
+            "bounding_box": null,
+            "timestamp": "2026-09-23T04:54:38.686Z"
+        },
+        {
+            "action_type": "validate",
+            "bounding_box": null,
+            "delay_before_ms": 309,
+            "locator_profile": null,
+            "page_id": 0,
+            "page_url": "https://www.myntra.com/",
+            "timestamp": "2026-09-23T04:53:57.751Z",
+            "value": "shirt"
+        },
+        {
+            "action_type": "navigate",
+            "bounding_box": null,
+            "delay_before_ms": 1060,
+            "locator_profile": null,
+            "page_id": 0,
+            "page_url": "https://www.myntra.com/shirt?rawQuery=shirt",
+            "timestamp": "2026-09-23T04:53:58.811Z",
+            "value": null
+        },
+        {
+            "action_type": "scroll",
+            "bounding_box": null,
+            "delay_before_ms": 5522,
+            "delta_x": 0,
+            "delta_y": 1569,
+            "document_height": 6294,
+            "locator_profile": null,
+            "page_id": 0,
+            "page_url": "https://www.myntra.com/shirt?rawQuery=shirt",
+            "scroll_y_after": 1568.800048828125,
+            "scroll_y_before": 0,
+            "timestamp": "2026-09-23T04:54:04.333Z",
+            "value": null,
+            "viewport_height": 720
+        },
+        {
+            "action_type": "click",
+            "bounding_box": {
+                "height": 359.8000183105469,
+                "width": 210,
+                "x": 777.4500122070312,
+                "y": 252.8000030517578
+            },
+            "click_strategy": "standard",
+            "delay_before_ms": 999,
+            "locator_profile": {
+                "accessible_name": "THE SHIRT CODE\nSizes: 44\nRs. 714Rs. 2199(68% OFF)",
+                "aria_label": null,
+                "attributes": {
+                    "href": "shirts/the+shirt+code/the-shirt-code-men-slim-fit-tartan-checks-checked-casual-shirt/44768343/buy"
+                },
+                "cross_boundary": false,
+                "css_path": "li#44768343 > a",
+                "element_text": "THE SHIRT CODE\nSizes: 44\nRs. 714Rs. 2199(68% OFF)",
+                "href": "shirts/the+shirt+code/the-shirt-code-men-slim-fit-tartan-checks-checked-casual-shirt/44768343/buy",
+                "icon_class_hint": null,
+                "id": null,
+                "name": null,
+                "placeholder": null,
+                "role": null,
+                "tag": "a",
+                "text": "THE SHIRT CODE\nSizes: 44\nRs. 714Rs. 2199(68% OFF)",
+                "title": null,
+                "xpath": "//a[@href='shirts/the+shirt+code/the-shirt-code-men-slim-fit-tartan-checks-checked-casual-shirt/44768343/buy']"
+            },
+            "page_id": 0,
+            "page_url": "https://www.myntra.com/shirt?rawQuery=shirt",
+            "timestamp": "2026-09-23T04:54:05.332Z",
+            "value": null
+        },
+        {
+            "action_type": "tab_open",
+            "bounding_box": null,
+            "delay_before_ms": 3322,
+            "from_page_id": 0,
+            "locator_profile": null,
+            "new_tab": true,
+            "page_id": 1,
+            "page_url": "https://www.myntra.com/shirts/the+shirt+code/the-shirt-code-men-slim-fit-tartan-checks-checked-casual-shirt/44768343/buy",
+            "timestamp": "2026-09-23T04:54:08.654Z",
+            "value": null
+        },
+        {
+            "action_type": "tab_close",
+            "bounding_box": null,
+            "delay_before_ms": 1591,
+            "locator_profile": null,
+            "page_id": 1,
+            "page_url": "https://www.myntra.com/shirts/the+shirt+code/the-shirt-code-men-slim-fit-tartan-checks-checked-casual-shirt/44768343/buy",
+            "remaining_page_id": 0,
+            "timestamp": "2026-09-23T04:54:10.245Z",
+            "value": null
+        },
+        {
+            "action_type": "tab_close",
+            "bounding_box": null,
+            "delay_before_ms": 16,
+            "locator_profile": null,
+            "page_id": 0,
+            "page_url": "https://www.myntra.com/shirt?rawQuery=shirt",
+            "remaining_page_id": null,
+            "timestamp": "2026-09-23T04:54:10.261Z",
+            "value": null
+        }
+    ],
+    "saved_at": "2026-09-23T10:24:40.931416"
+}

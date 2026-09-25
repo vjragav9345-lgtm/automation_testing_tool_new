@@ -1,0 +1,10 @@
+{
+  "found": true,
+  "matched_text": "The world as we have created it is a process of our thinking",
+  "match_type": "exact",
+  "selector": "text=The world as we have created it is a process of our thinking",
+  "screenshot": "screenshots/product_search/search_20260811_233946_929651.png",
+  "page_settled": true,
+  "timestamp": "2026-08-11T23:39:47.179626",
+  "note": "only the content already loaded/visible on the page was checked - try the scroll option if the site lazy-loads more results"
+}

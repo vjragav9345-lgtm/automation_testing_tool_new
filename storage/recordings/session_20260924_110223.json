@@ -1,0 +1,82 @@
+{
+    "name": "session_20260924_110223",
+    "start_url": "https://example.com/launch",
+    "actions": [
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://example.com/launch",
+            "timestamp": "2026-09-24T05:32:23.762Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#btn1",
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Click Me",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "button#btn1",
+                "xpath": "//*[@id='btn1']",
+                "text": "Click Me",
+                "element_text": "Click Me",
+                "tag": "button",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 8,
+                "y": 9,
+                "width": 67.109375,
+                "height": 21
+            },
+            "click_strategy": "standard",
+            "page_url": "about:blank",
+            "timestamp": "2026-09-24T05:32:23.816Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#radio1",
+                "name": "g1",
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "on",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "input#radio1",
+                "xpath": "//*[@id='radio1']",
+                "text": "on",
+                "element_text": "on",
+                "tag": "input",
+                "attributes": {
+                    "type": "radio",
+                    "name": "g1"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 21,
+                "y": 59,
+                "width": 13,
+                "height": 13
+            },
+            "click_strategy": "standard",
+            "page_url": "about:blank",
+            "timestamp": "2026-09-24T05:32:24.650Z",
+            "page_id": 0
+        }
+    ]
+}

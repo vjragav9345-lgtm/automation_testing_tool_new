@@ -1,0 +1,15 @@
+{
+  "status": "FAIL",
+  "message": "Couldn't reach https://sportzia-preprod.kovaionplay.com/events - check the URL is correct and the site is reachable.",
+  "diagnostic": "could not open QA URL: Page.goto: Target page, context or browser has been closed\nCall log:\nnavigating to \"https://sportzia-preprod.kovaionplay.com/events\", waiting until \"domcontentloaded\"\n",
+  "qa_url": "https://sportzia-preprod.kovaionplay.com/events",
+  "steps": [],
+  "ui_elements": [],
+  "ui_elements_status": "PASS",
+  "content_check": null,
+  "screenshot_diff": null,
+  "product_validation": null,
+  "final_screenshot": null,
+  "run_id": "session_20260922_183327_20260922_191100",
+  "run_dir": "generated_scripts/screenshoots/session_20260922_183327_20260922_191100"
+}

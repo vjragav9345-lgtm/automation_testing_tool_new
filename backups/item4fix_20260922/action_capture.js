@@ -1,0 +1,2914 @@
+// Injected once per page load. Always listens and always forwards to
+// Python via window.recordAction - whether an event actually gets kept as
+// a recorded step is decided on the Python side (Recorder.recording), not
+// here. Keeping the on/off switch out of page JS means it can't survive a
+// navigation and silently start capturing again after a recording ends.
+(function () {
+    // VERSION MARKER - bump this literal string on every meaningful
+    // change to this file. _CAPTURE_JS (recorder/record_session.py)
+    // reads this file's TEXT once, at process import time, into a
+    // module-level constant - with the Flask app run with debug=False
+    // (no reloader at all, and even Werkzeug's reloader only ever
+    // watches .py files by default, never .js ones), a running server
+    // process can silently keep serving whatever this string contained
+    // when IT started, no matter how many times this file changes on
+    // disk afterward. Logging this once per page, right when pick mode
+    // activates, is the one-line, impossible-to-misread way to confirm
+    // whether a given browser session is actually running current code
+    // instead of inferring it from symptoms.
+    window.__afqaCaptureVersion = "2026-09-21-d";
+    if (window.__afqaPickMode) {
+        console.log("[afqa-pick] action_capture.js version:", window.__afqaCaptureVersion);
+    }
+
+    if (window.__afqaListenersAttached) return;
+    window.__afqaListenersAttached = true;
+
+    // ==================================================================
+    // PICK ELEMENT MODE - OVERLAY SETUP. Only ever runs when recorder/
+    // pick_element.py's own init script has already set window.
+    // __afqaPickMode = true before this script executes (normal
+    // recording never sets that flag, so this whole block is always
+    // skipped then - zero effect on recording). A single full-viewport,
+    // ALWAYS-pointer-events-auto div, created once per page load and
+    // left in place for the entire pick session, physically sitting on
+    // top of everything else on the page (z-index: 2147483647, the
+    // maximum valid CSS z-index) so it is the one and only element that
+    // ever receives a real mousemove/click while picking is active - the
+    // real page underneath NEVER gets a live pointer event of its own,
+    // so no real :hover CSS, tooltip, or JS mouseover/mouseenter handler
+    // can ever fire on it during picking. This is deliberately NOT the
+    // "elementFromPoint() + toggle pointer-events to none" approach: that
+    // technique briefly exposes the real page to real events on every
+    // single mousemove tick specifically so elementFromPoint can see
+    // past the overlay, which is exactly the leak this design avoids by
+    // construction - pointer-events on the overlay is set once, to
+    // 'auto', and never touched again for as long as picking lasts.
+    // Finding "what's really under the cursor" instead uses
+    // document.elementsFromPoint(x, y) (plural) on the SAME event,
+    // which returns the whole stack of elements at that point without
+    // needing the overlay to step aside at all - the overlay (and the
+    // highlight box, if it happens to be under the cursor too) is simply
+    // skipped when reading that stack.
+    function _afqaSetupPickOverlay() {
+        if (window.__afqaPickOverlay) return; // idempotent - safe if called more than once
+
+        var overlay = document.createElement('div');
+        overlay.id = '__afqaPickOverlay';
+        overlay.style.cssText =
+            'position:fixed;top:0;left:0;width:100vw;height:100vh;' +
+            'z-index:2147483647;background:transparent;cursor:crosshair;';
+        (document.body || document.documentElement).appendChild(overlay);
+        window.__afqaPickOverlay = overlay;
+
+        var highlight = document.createElement('div');
+        highlight.id = '__afqaPickHighlight';
+        highlight.style.cssText =
+            'position:fixed;pointer-events:none;z-index:2147483647;' +
+            'border:2px solid #ff4081;background:rgba(255,64,129,0.15);' +
+            'box-sizing:border-box;display:none;';
+        (document.body || document.documentElement).appendChild(highlight);
+        window.__afqaPickHighlight = highlight;
+
+        // small "LOCKED" tag shown pinned to the top-left corner of the
+        // highlight box once an element is locked - the spec's own
+        // "locked state should look slightly different" requirement,
+        // on top of the thicker border toggled in lockPick() below.
+        // pointer-events:none so it can never itself become the "real"
+        // element realElementAt() finds (same reasoning as overlay/
+        // highlight already being excluded there).
+        var lockLabel = document.createElement('div');
+        lockLabel.id = '__afqaPickLockLabel';
+        lockLabel.textContent = 'LOCKED';
+        lockLabel.style.cssText =
+            'position:fixed;pointer-events:none;z-index:2147483647;' +
+            'background:#ff4081;color:#fff;font:bold 11px sans-serif;' +
+            'padding:1px 5px;border-radius:2px;display:none;';
+        (document.body || document.documentElement).appendChild(lockLabel);
+
+        // LOCK STATE - single click locks onto whatever realElementAt()
+        // resolved at that point (see the click handler further down
+        // this file); double click releases it. Kept here, not as a
+        // bare module-level var, so it shares scope with realElementAt/
+        // overlay/highlight without needing yet another window.__afqa*
+        // global just to pass it around internally.
+        var pickLocked = false;
+        var pickLockedEl = null;
+
+        function _afqaSyncLockedHighlight() {
+            if (!pickLocked || !pickLockedEl || !pickLockedEl.isConnected) return;
+            var r;
+            try {
+                r = pickLockedEl.getBoundingClientRect();
+            } catch (e) {
+                return;
+            }
+            highlight.style.left = r.left + 'px';
+            highlight.style.top = r.top + 'px';
+            highlight.style.width = r.width + 'px';
+            highlight.style.height = r.height + 'px';
+            lockLabel.style.left = r.left + 'px';
+            lockLabel.style.top = Math.max(0, r.top - 16) + 'px';
+        }
+
+        function lockPick(el) {
+            pickLocked = true;
+            pickLockedEl = el;
+            highlight.style.display = 'block';
+            highlight.style.borderWidth = '4px';
+            lockLabel.style.display = 'block';
+            _afqaSyncLockedHighlight();
+        }
+
+        function releasePick() {
+            pickLocked = false;
+            pickLockedEl = null;
+            highlight.style.borderWidth = '2px';
+            highlight.style.display = 'none';
+            lockLabel.style.display = 'none';
+        }
+
+        window.__afqaPickIsLocked = function () { return pickLocked; };
+        window.__afqaPickLock = lockPick;
+        window.__afqaPickRelease = releasePick;
+
+        // Z-INDEX-TIE DEFENSE: 2147483647 is the CSS maximum, but when
+        // two elements share the SAME z-index, the LATER one in DOM
+        // order wins the paint order - a site's own "always on top"
+        // widget (a chat bubble, a cookie-consent banner, a promo
+        // modal) that also happens to use the max value, and mounts
+        // AFTER this overlay, would still paint over it and let real
+        // clicks through underneath - confirmed as a real cause of
+        // clicks reaching the live page during picking. Keeping the
+        // overlay+highlight as the LAST two children of <body> at all
+        // times - re-asserted on every DOM mutation, plus a short
+        // interval as a fallback for anything a MutationObserver could
+        // plausibly miss - means any such tie is always broken in our
+        // favor, no matter what the site adds or when.
+        function _keepOnTop() {
+            var body = document.body;
+            if (!body) return;
+            if (body.lastElementChild !== lockLabel) {
+                body.appendChild(overlay);    // appendChild on an already-
+                body.appendChild(highlight);  // connected node MOVES it, never
+                body.appendChild(lockLabel);  // clones it
+            }
+        }
+        new MutationObserver(_keepOnTop).observe(document.documentElement, { childList: true, subtree: true });
+        // same interval also re-syncs the LOCKED highlight's position on
+        // every tick - the spec's own "stays fixed on that element even
+        // when the mouse moves, scrolls, or leaves the page" requirement.
+        // A no-op (returns immediately) whenever nothing is locked, so
+        // this costs nothing extra for the far more common unlocked case.
+        setInterval(function () { _keepOnTop(); _afqaSyncLockedHighlight(); }, 250);
+        _keepOnTop();
+        // capture-phase + passive: catches scroll on ANY nested
+        // container, not just the window, without interfering with the
+        // page's own scroll handling at all - tighter, immediate re-sync
+        // than waiting for the 250ms interval above to catch up
+        window.addEventListener('scroll', _afqaSyncLockedHighlight, { capture: true, passive: true });
+        window.addEventListener('resize', _afqaSyncLockedHighlight, { passive: true });
+
+        // shared by the mousemove highlight below AND the click handler
+        // further down this file - both need the SAME "what's really
+        // there, ignoring our own overlay/highlight nodes" answer.
+        //
+        // DRILLS INTO same-origin iframes and open shadow roots - a
+        // plain document.elementsFromPoint() stops at the <iframe>/
+        // shadow-host element itself, never revealing what's actually
+        // rendered inside it (confirmed via a live probe: an iframe
+        // resolved to tag=iframe, a shadow-DOM button resolved to its
+        // host div, neither ever the real inner target). Recurses up to
+        // MAX_DRILL_DEPTH times so a nested shadow-root-inside-an-
+        // iframe-inside-a-shadow-root (unlikely, but not impossible)
+        // still bottoms out instead of looping forever; each level
+        // re-runs elementsFromPoint in THAT level's own coordinate
+        // space, translating through the iframe's own bounding rect
+        // when crossing into one (shadow roots need no translation -
+        // they share the same viewport coordinate system as their
+        // host). A cross-ORIGIN iframe's contentDocument throws on
+        // access (browser security) - caught and treated as "can't
+        // drill further, use the iframe element itself", the exact
+        // same same-origin-only scope generator/script_generator.py's
+        // own _find_in_iframes() replay fallback already has, so this
+        // never promises more than replay can actually deliver on.
+        var MAX_DRILL_DEPTH = 5;
+
+        // the overlay is position:fixed at the viewport level, so it
+        // shows up as the topmost hit in EVERY elementsFromPoint() call
+        // this drills into - not just the initial one on `document` -
+        // confirmed via a live probe: host.shadowRoot.elementsFromPoint()
+        // returned the overlay first too, ahead of the real shadow-DOM
+        // button. Every stack this function examines, at every drill
+        // depth, needs the same overlay/highlight filter applied.
+        function firstReal(stack) {
+            for (var i = 0; i < stack.length; i++) {
+                if (stack[i] !== overlay && stack[i] !== highlight) {
+                    return stack[i];
+                }
+            }
+            return null;
+        }
+
+        function realElementAt(x, y) {
+            var found = firstReal(document.elementsFromPoint(x, y));
+            var curX = x, curY = y, depth = 0;
+            while (found && depth < MAX_DRILL_DEPTH) {
+                depth++;
+                if (found.shadowRoot) {
+                    var deeper = firstReal(found.shadowRoot.elementsFromPoint(curX, curY));
+                    if (deeper && deeper !== found) {
+                        found = deeper;
+                        continue; // same coordinate space as the host - no translation needed
+                    }
+                    break; // shadow root reported nothing deeper - stop here
+                }
+                if (found.tagName === 'IFRAME') {
+                    var innerDoc = null;
+                    try {
+                        innerDoc = found.contentDocument;
+                    } catch (e) {
+                        innerDoc = null; // cross-origin - can't see inside, stop drilling
+                    }
+                    if (!innerDoc) break;
+                    var frameRect = found.getBoundingClientRect();
+                    var relX = curX - frameRect.left, relY = curY - frameRect.top;
+                    var innerDeeper;
+                    try {
+                        innerDeeper = firstReal(innerDoc.elementsFromPoint(relX, relY));
+                    } catch (e) {
+                        break;
+                    }
+                    if (innerDeeper && innerDeeper !== found) {
+                        found = innerDeeper;
+                        curX = relX;
+                        curY = relY;
+                        continue;
+                    }
+                    break;
+                }
+                break; // neither a shadow host nor an iframe - this is the real target
+            }
+            return found;
+        }
+        window.__afqaPickRealElementAt = realElementAt;
+
+        overlay.addEventListener('mousemove', function (e) {
+            if (pickLocked) return; // locked highlight tracks pickLockedEl instead - see _afqaSyncLockedHighlight
+            var real = realElementAt(e.clientX, e.clientY);
+            if (real) {
+                var r = real.getBoundingClientRect();
+                highlight.style.display = 'block';
+                highlight.style.left = r.left + 'px';
+                highlight.style.top = r.top + 'px';
+                highlight.style.width = r.width + 'px';
+                highlight.style.height = r.height + 'px';
+            } else {
+                highlight.style.display = 'none';
+            }
+        });
+    }
+
+    if (window.__afqaPickMode) {
+        _afqaSetupPickOverlay();
+    }
+
+    // ==================================================================
+    // TEMPORARY DIAGNOSTIC INSTRUMENTATION - gated behind DEBUG_RECORDER
+    // (set the DEBUG_RECORDER=1 environment variable when launching a
+    // recording; see record_session.py for how it reaches window.
+    // __RECORDER_DEBUG__). Purely additive, purely observational - does
+    // not change what gets captured, discarded, or how, on any site, for
+    // any element. Fully generic: logs event TYPE/target/timing, never
+    // any specific button text or site-specific string. Safe to delete
+    // this whole block (and its call sites below, each clearly marked)
+    // once the investigation it's for is done.
+    // ==================================================================
+    var RECORDER_DEBUG = !!window.__RECORDER_DEBUG__;
+
+    function debugDescribeTarget(el) {
+        if (!el) return '(no target)';
+        try {
+            var tag = el.tagName ? el.tagName.toLowerCase() : String(el);
+            var id = el.id ? ('#' + el.id) : '';
+            var cls = (el.className && typeof el.className === 'string' && el.className.trim())
+                ? ('.' + el.className.trim().split(/\s+/).join('.'))
+                : '';
+            return tag + id + cls;
+        } catch (e) {
+            return '(target unreadable: ' + e + ')';
+        }
+    }
+
+    function debugLog() {
+        if (!RECORDER_DEBUG) return;
+        var args = Array.prototype.slice.call(arguments);
+        // one distinctive, greppable prefix - record_session.py's
+        // console relay (only active when DEBUG_RECORDER is set) only
+        // forwards lines starting with this, so a busy site's own
+        // console noise never floods the terminal
+        try {
+            console.log.apply(console, ['[recorder-debug]'].concat(args));
+        } catch (e) { /* console unavailable - nothing more to do */ }
+    }
+
+    // raw capture-phase listeners for the whole pointer/mouse/click
+    // sequence a single physical click actually produces, on document,
+    // so this reflects EVERY event Chromium itself dispatches for that
+    // click before recorder-specific logic (dedup, buffering, profile-
+    // building) ever runs - answers "did the event even fire" separately
+    // from "did OUR code then decide to keep or discard it"
+    if (RECORDER_DEBUG) {
+        ['pointerdown', 'pointerup', 'mousedown', 'mouseup', 'click'].forEach(function (evtType) {
+            document.addEventListener(evtType, function (e) {
+                debugLog(
+                    evtType,
+                    'target=' + debugDescribeTarget(e.target),
+                    'isTrusted=' + e.isTrusted,
+                    'defaultPrevented=' + e.defaultPrevented,
+                    't=' + Date.now() + 'ms'
+                );
+            }, true);
+        });
+    }
+    // ==================================================================
+    // end of raw event listeners - dedup/discard logging is added at
+    // each existing early-return point further below, marked the same way
+    // ==================================================================
+
+    function cssPath(el) {
+        // NOT "el instanceof Element" - an element from a same-origin
+        // IFRAME's own document belongs to a DIFFERENT JS realm, with
+        // its own separate Element constructor, so instanceof always
+        // reads false for it even though it's a perfectly normal
+        // element (confirmed real: this silently produced an empty
+        // css_path for every iframe-internal pick). nodeType is a
+        // plain number, identical across realms, and 1 === ELEMENT_NODE
+        // works the same test without that gap.
+        if (!el || el.nodeType !== 1) return '';
+        const parts = [];
+        while (el && el.nodeType === Node.ELEMENT_NODE && el.tagName !== 'HTML') {
+            let sel = el.tagName.toLowerCase();
+            if (el.id) {
+                parts.unshift(sel + '#' + el.id);
+                break;
+            }
+            let sib = el, nth = 1;
+            while (sib.previousElementSibling) {
+                sib = sib.previousElementSibling;
+                if (sib.tagName === el.tagName) nth++;
+            }
+            if (nth > 1) sel += ':nth-of-type(' + nth + ')';
+            parts.unshift(sel);
+            el = el.parentElement;
+        }
+        return parts.join(' > ');
+    }
+
+    // Confirms a candidate XPath resolves to exactly one live element,
+    // for a given target element - shared by xPath()'s own internal
+    // xpathIsUnique() and buildXpathCandidates() further down this file,
+    // so there's exactly one place that knows how to verify a candidate
+    // rather than two copies drifting apart. Never trust a candidate
+    // that matches 0 or more than 1.
+    function xpathIsUniqueFor(el, candidate) {
+        if (!candidate) return false;
+        // a shadow-DOM element's xpath can never be verified this way
+        // at all - standard XPath/document.evaluate() has no concept of
+        // shadow roots and always reports zero matches for anything
+        // describing a path that crosses into one, regardless of
+        // whether the candidate is actually correct. Every candidate is
+        // still the best real signal available (id/data-testid/text/
+        // ...) - accepted unverified here rather than incorrectly
+        // rejected as "not unique" for a reason unrelated to whether it
+        // identifies el uniquely. See buildLocatorProfile's own
+        // cross_boundary flag for how this gets surfaced instead of
+        // silently pretending the xpath was actually confirmed.
+        try {
+            if (el.getRootNode() instanceof ShadowRoot) return true;
+        } catch (e) {}
+        try {
+            // el's OWN document, not necessarily the top-level one -
+            // matters for an element inside a same-origin iframe
+            // (el.ownerDocument is that iframe's own document there);
+            // verifying against the wrong document would always read as
+            // "zero matches" even for a genuinely correct, unique
+            // candidate
+            var doc = el.ownerDocument || document;
+            var result = doc.evaluate(
+                candidate, doc, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null
+            );
+            return result.snapshotLength === 1;
+        } catch (e) {
+            return false;
+        }
+    }
+
+    function xPath(el, labelText, excludeText) {
+        // R2 (never anchor a locator on the value a fill action just
+        // typed) - excludeText, when given, is that exact typed value.
+        // CONFIRMED REAL BUG this fixes: session_20260921_081203's own
+        // OTP fill step recorded //div[normalize-space(.)='1234']/input
+        // - a wrapping div's rendered text happened to read "1234"
+        // (an OTP widget's own visible per-digit boxes, kept in sync
+        // with the real input) purely because that's what was just
+        // typed, so a real OTP run - always different digits - can
+        // never match it again. Declared once here, at the top of
+        // xPath's own scope, so every nested tier below (attrTextTiers'
+        // own text-candidate loop especially) sees it via closure
+        // without threading it through as an extra argument everywhere.
+        var _excludeText = (typeof excludeText === 'string') ? excludeText.trim() : '';
+        // shape checks for an auto-generated/reused-per-render VALUE
+        // (an id or a data-testid/data-test/data-cy alike) - moved
+        // ahead of tier 0 so both it and tier 1 below can defer to
+        // them, not just the parent-scoped attrTextTiers() walk further
+        // down. LONG_DIGIT_RUN_RE catches both a purely-numeric value
+        // AND a "word-digits" one with no clean separator; DYNAMIC_ID_RE
+        // catches the specific "<word><-_>><digits>" shape precisely
+        // enough to extract a stable PREFIX from it (e.g. "sizelabel-"
+        // out of "sizelabel-116009189"), which is what actually lets a
+        // starts-with() candidate be tried instead of just giving up.
+        // CONFIRMED REAL, not hypothetical: a real recorded element
+        // carried data-testid="sizelabel-116009189" - a real, unique
+        // per-element attribute VALUE, but one that is certain to be a
+        // DIFFERENT number on every other render of the same page (a
+        // different product's size label, a re-fetch of the same
+        // product), making an exact-match xpath built from it silently
+        // stop matching anything at replay time on a live site.
+        var DYNAMIC_ID_RE = /^([a-zA-Z]+[-_])[0-9]{3,}$/;
+        var LONG_DIGIT_RUN_RE = /\d{5,}/;
+
+        function looksAutoGenerated(value) {
+            return LONG_DIGIT_RUN_RE.test(value) || DYNAMIC_ID_RE.test(value);
+        }
+
+        // tier 0 (NEW) - a stable, human/test-authored attribute on el
+        // itself, checked BEFORE id - a data-testid/data-test/data-cy is
+        // a much stronger, more intentional signal than a bare id, which
+        // on many real sites (React apps especially) is often a
+        // framework-internal, reused/non-semantic value (numeric ids
+        // like "6", "7", reused across unrelated elements between
+        // renders) rather than a real author-written identifier.
+        // Confirmed real, not hypothetical: a real recorded element
+        // carried BOTH id="116617349" and data-testid="sizelabel-
+        // 116617349", yet its xpath was built from the bare id - tier 1
+        // below used to run unconditionally, before this tier (or any
+        // uniqueness check on the id at all) ever got a chance.
+        // xpathLiteral/xpathIsUnique are defined further down as
+        // function DECLARATIONS (hoisted to the top of this function's
+        // scope in JS), so calling them here, before their own textual
+        // definition, is safe.
+        var TIER0_ID_ATTRS = ['data-testid', 'data-test', 'data-cy'];
+        for (var t0 = 0; t0 < TIER0_ID_ATTRS.length; t0++) {
+            var t0Val = null;
+            try { t0Val = el.getAttribute(TIER0_ID_ATTRS[t0]); } catch (eT0) {}
+            if (!t0Val) continue;
+            // a long digit run anywhere in the value (a product id, a
+            // hash) means this exact value is very unlikely to survive
+            // to the next render of the same page - skip the exact-match
+            // candidate entirely rather than build a locator that's
+            // already known to be single-render-only.
+            if (LONG_DIGIT_RUN_RE.test(t0Val)) {
+                var t0Prefix = DYNAMIC_ID_RE.exec(t0Val);
+                if (t0Prefix) {
+                    var t0PrefixCandidate = '//*[starts-with(@' + TIER0_ID_ATTRS[t0] + ', ' + xpathLiteral(t0Prefix[1]) + ')]';
+                    if (xpathIsUnique(t0PrefixCandidate)) return t0PrefixCandidate;
+                }
+                continue;
+            }
+            var t0Candidate = '//*[@' + TIER0_ID_ATTRS[t0] + '=' + xpathLiteral(t0Val) + ']';
+            if (xpathIsUnique(t0Candidate)) return t0Candidate;
+        }
+
+        // tier 1 - unique id, EXCEPT a PURELY NUMERIC one or one that
+        // otherwise looks auto-generated/reused-per-render (see the
+        // looksAutoGenerated() note above) - a bare digit id ("6", "7",
+        // ...) or a "sizelabel-116009189"-shaped one is exactly the
+        // shape a framework's own internal/reused identifiers take, not
+        // a real author-written id, and is what produced the fragile,
+        // collision-prone locators this whole fix exists for. Skipped
+        // here, this still gets a real shot via attrTextTiers(el) right
+        // below (tier 2-5), whose own dynamic-id prefix matching (tier
+        // 3) can turn "sizelabel-116009189" into
+        // starts-with(@id, 'sizelabel-') - a real, non-numeric
+        // author-written id (the overwhelmingly common case) is
+        // completely unaffected - same as before this change.
+        if (el.id && !looksAutoGenerated(el.id)) return "//*[@id='" + el.id + "']";
+
+        // Builds a valid XPath 1.0 string literal for `value`. A plain
+        // single- or double-quoted literal covers the common case; a
+        // value that contains BOTH quote characters needs the standard
+        // concat() workaround, since neither quote style alone can hold
+        // it.
+        function xpathLiteral(value) {
+            value = String(value);
+            if (value.indexOf("'") === -1) return "'" + value + "'";
+            if (value.indexOf('"') === -1) return '"' + value + '"';
+            var pieces = value.split("'");
+            var exprParts = [];
+            for (var i = 0; i < pieces.length; i++) {
+                exprParts.push("'" + pieces[i] + "'");
+                if (i < pieces.length - 1) exprParts.push('"\'"');
+            }
+            return 'concat(' + exprParts.join(', ') + ')';
+        }
+
+        // Confirms a candidate XPath resolves to exactly one live
+        // element - never trust a candidate that matches 0 or more
+        // than 1. Thin wrapper around the shared, top-level
+        // xpathIsUniqueFor() (see its own docstring for the shadow-DOM/
+        // iframe handling) - extracted there so buildXpathCandidates()
+        // further down this file can reuse the EXACT same uniqueness
+        // check without duplicating it.
+        function xpathIsUnique(candidate) {
+            return xpathIsUniqueFor(el, candidate);
+        }
+
+        // concatenation of `node`'s own direct text-node children only
+        // (excludes descendant elements' text) - this is what an
+        // XPath text() predicate actually tests against, so it's
+        // tried before the more permissive full textContent
+        function directTextOf(node) {
+            var parts = [];
+            var children = node.childNodes;
+            for (var i = 0; i < children.length; i++) {
+                if (children[i].nodeType === Node.TEXT_NODE) parts.push(children[i].nodeValue);
+            }
+            return parts.join('').trim().replace(/\s+/g, ' ');
+        }
+
+        // tier 2 attributes, tried in this order - the same "genuinely
+        // stable, human/test-authored" signals STRONG_ATTRS favors
+        // elsewhere in this file, just the subset the spec calls out
+        // for xPath()
+        var STABLE_ATTRS = ['name', 'data-testid', 'data-test', 'data-cy', 'aria-label', 'placeholder', 'href'];
+
+        // generic SHAPE checks for auto-generated id/class values -
+        // these describe naming CONVENTIONS whole libraries/build
+        // tools use (CSS-in-JS hash classes, React Native Web's atomic
+        // "r-" classes, a "<word>-<digits>" generated-id shape), never
+        // any one site's actual class/id value. prefixLen is how much
+        // of a matched class is the stable, non-random part.
+        var DYNAMIC_CLASS_PATTERNS = [
+            { re: /^r-[a-z0-9]+$/, prefixLen: 2 },
+            { re: /^css-[a-z0-9]+$/, prefixLen: 4 }
+        ];
+        // DYNAMIC_ID_RE is already declared above (shared with tier 0/
+        // tier 1's own looksAutoGenerated() check) - reused here as-is.
+        var MAX_TEXT_LEN = 60;
+
+        // Tiers 2-5: tries, in order, a stable attribute, a
+        // dynamic-looking id/class matched by its stable prefix, the
+        // element's own live text, then a combined
+        // type+role+placeholder predicate - against `node`
+        // specifically. Returns the first candidate that resolves to
+        // exactly one element, or null if none of them do. Every
+        // value used is read live off `node`; nothing here is a
+        // fixed/site-specific string.
+        function attrTextTiers(node) {
+            if (!node || node.nodeType !== Node.ELEMENT_NODE) return null;
+            var tag = node.tagName.toLowerCase();
+            // CONFIRMED REAL REGRESSION, caught by this item's own
+            // regression run: <html>/<body> never has a meaningful id/
+            // data-testid, and its FULL textContent is the entire
+            // page's text (always over MAX_TEXT_LEN, so the old
+            // full-text candidate always skipped it) - but the new
+            // first-line candidate below reads just the first line of
+            // that same textContent, which is often short enough to
+            // pass, producing a deceptively clean-looking
+            // "//html[contains(., 'Page Title')]" for what was really
+            // just a click that landed on empty page background. html/
+            // body are never legitimate pick targets regardless of any
+            // text they happen to contain - skip this whole tier for
+            // them and let the walk fall through to the absolute tier 7
+            // (a bare /html is at least honestly what it is), with the
+            // large-container warning (see the pick-mode click handler)
+            // separately telling the user to hover something smaller.
+            if (tag === 'html' || tag === 'body') return null;
+
+            // tier 2 - stable, human/test-authored attribute. For the
+            // id-like subset (name/data-testid/data-test/data-cy - never
+            // href/aria-label/placeholder, which are free text, not
+            // generated identifiers) a long digit run means the exact
+            // value is unlikely to survive to the next render (same
+            // reasoning as tier 0/tier 1's own looksAutoGenerated()
+            // check above) - skip the exact match and try a starts-with()
+            // on its stable prefix instead, when the value has one.
+            var ID_LIKE_STABLE_ATTRS = { 'name': 1, 'data-testid': 1, 'data-test': 1, 'data-cy': 1 };
+            for (var i = 0; i < STABLE_ATTRS.length; i++) {
+                var attr = STABLE_ATTRS[i];
+                var val = null;
+                try { val = node.getAttribute(attr); } catch (e) {}
+                if (!val) continue;
+                if (ID_LIKE_STABLE_ATTRS[attr] && LONG_DIGIT_RUN_RE.test(val)) {
+                    var prefixMatch = DYNAMIC_ID_RE.exec(val);
+                    if (prefixMatch) {
+                        var prefixCandidate = '//' + tag + '[starts-with(@' + attr + ', ' + xpathLiteral(prefixMatch[1]) + ')]';
+                        if (xpathIsUnique(prefixCandidate)) return prefixCandidate;
+                    }
+                    continue;
+                }
+                var attrCandidate = '//' + tag + '[@' + attr + '=' + xpathLiteral(val) + ']';
+                if (xpathIsUnique(attrCandidate)) return attrCandidate;
+            }
+
+            // tier 3 - dynamic-looking id, matched by its stable prefix
+            try {
+                if (node.id && DYNAMIC_ID_RE.test(node.id)) {
+                    var idPrefix = node.id.match(DYNAMIC_ID_RE)[1];
+                    var idCandidate = '//' + tag + '[starts-with(@id, ' + xpathLiteral(idPrefix) + ')]';
+                    if (xpathIsUnique(idCandidate)) return idCandidate;
+                }
+            } catch (e) {}
+
+            // tier 3 - dynamic-looking class, matched by its stable prefix
+            try {
+                var classList = node.classList ? Array.prototype.slice.call(node.classList) : [];
+                for (var c = 0; c < classList.length; c++) {
+                    for (var p = 0; p < DYNAMIC_CLASS_PATTERNS.length; p++) {
+                        if (DYNAMIC_CLASS_PATTERNS[p].re.test(classList[c])) {
+                            var classPrefix = classList[c].slice(0, DYNAMIC_CLASS_PATTERNS[p].prefixLen);
+                            var classCandidate = '//' + tag + '[contains(@class, ' + xpathLiteral(classPrefix) + ')]';
+                            if (xpathIsUnique(classCandidate)) return classCandidate;
+                        }
+                    }
+                }
+            } catch (e) {}
+
+            // tier 4 - the element's own live text (direct text() first,
+            // the more permissive full-subtree string-value second).
+            //
+            // CONFIRMED REAL BUG (found via a live repro, not
+            // hypothetical): the "full text" candidate used to ALSO
+            // build its XPath with contains(text(), ...) - but XPath's
+            // text() only ever tests a node's OWN direct text-node
+            // children, never descendant text. A real "ADD TO BAG"-
+            // style button almost always wraps its label in a nested
+            // <span> (icon + label), so the button DIV's own text() is
+            // EMPTY even though its full textContent is exactly "ADD TO
+            // BAG" - contains(text(), 'ADD TO BAG') matches ZERO
+            // elements there (verified: 0 matches), silently falling
+            // through every tier below all the way to the absolute-path
+            // last resort, while contains(., 'ADD TO BAG') - "." being
+            // the whole subtree's string-value, the XPath equivalent of
+            // .textContent - correctly matches. Each candidate below now
+            // uses the axis that actually corresponds to how its own
+            // text was read: text() for directTextOf's direct-children
+            // reading, . for the full textContent reading.
+            try {
+                var textCandidates = [];
+                // FIRST LINE of the subtree's raw text, tried before the
+                // full concatenation below - a card/row-shaped element
+                // (a product card: name, then sizes, then a price on
+                // separate lines/child elements) collapses to one long,
+                // PRICE-MIXED string once every line is joined with
+                // spaces ("CAHOOT Sizes: M Rs. 679Rs. 1699(60% OFF)") -
+                // the price/discount portion changes on every real
+                // fetch of the same page, so an exact/contains() match
+                // built from the WHOLE thing is fragile by construction.
+                // Splitting on the RAW newlines in textContent (still
+                // present here, before the whitespace-collapsing regex
+                // below destroys them) and keeping just the first
+                // non-empty one keeps only the stable name/label part.
+                // Only ever tried as an EARLIER, more specific option -
+                // the full text below still runs as a fallback if this
+                // one doesn't resolve to exactly one element.
+                var rawLines = (node.textContent || '').split('\n');
+                var firstLine = '';
+                for (var rl = 0; rl < rawLines.length; rl++) {
+                    var candidateLine = rawLines[rl].trim().replace(/\s+/g, ' ');
+                    if (candidateLine) { firstLine = candidateLine; break; }
+                }
+                var dText = directTextOf(node);
+                var fText = (node.textContent || '').trim().replace(/\s+/g, ' ');
+                if (firstLine && firstLine !== fText) textCandidates.push({ text: firstLine, axis: '.' });
+                if (dText) textCandidates.push({ text: dText, axis: 'text()' });
+                if (fText && fText !== dText) textCandidates.push({ text: fText, axis: '.' });
+                for (var t = 0; t < textCandidates.length; t++) {
+                    var txt = textCandidates[t].text;
+                    var axis = textCandidates[t].axis;
+                    if (txt.length === 0 || txt.length > MAX_TEXT_LEN) continue;
+                    if (_excludeText && txt === _excludeText) continue;
+                    // EXACT match tried first, before contains() - a
+                    // short value ("M", "2", "L") is a substring of all
+                    // kinds of unrelated real text ("Men", "Home",
+                    // "2 items left", "Large") elsewhere on a real page;
+                    // contains() would happily (and wrongly) match any
+                    // of those. normalize-space() on the axis itself
+                    // (not a separate function call target) matches
+                    // el's committed text ignoring incidental
+                    // leading/trailing/collapsed whitespace, without
+                    // being a substring test at all. Only actually
+                    // fires when it's unique on its own; contains()
+                    // right below remains the fallback for genuinely
+                    // partial-text cases (a longer sentence/description
+                    // where only a distinctive fragment is worth
+                    // matching).
+                    var exactCandidate = '//' + tag + '[normalize-space(' + axis + ')=' + xpathLiteral(txt) + ']';
+                    if (xpathIsUnique(exactCandidate)) return exactCandidate;
+
+                    var textCandidate = '//' + tag + '[contains(' + axis + ', ' + xpathLiteral(txt) + ')]';
+                    if (xpathIsUnique(textCandidate)) return textCandidate;
+                }
+            } catch (e) {}
+
+            // tier 5 - combined type/role/placeholder
+            try {
+                var comboAttrs = ['type', 'role', 'placeholder'];
+                var present = [];
+                for (var a = 0; a < comboAttrs.length; a++) {
+                    var cVal = null;
+                    try { cVal = node.getAttribute(comboAttrs[a]); } catch (e2) {}
+                    if (cVal) present.push([comboAttrs[a], cVal]);
+                }
+                if (present.length >= 2) {
+                    var predicate = present.map(function (pair) {
+                        return '@' + pair[0] + '=' + xpathLiteral(pair[1]);
+                    }).join(' and ');
+                    var comboCandidate = '//' + tag + '[' + predicate + ']';
+                    if (xpathIsUnique(comboCandidate)) return comboCandidate;
+                }
+            } catch (e) {}
+
+            return null;
+        }
+
+        // tier 1b (NEW) - svg/icon anchor from the nearest label text.
+        // An svg (or one of its internal path/circle/rect/... children -
+        // exactly what a real click on an icon most often actually
+        // resolves to) almost never has any of its own stable
+        // attributes or text - CONFIRMED REAL: a "Donate" checkbox's own
+        // clickable target was a bare <svg><path/></svg> tick-mark icon
+        // with nothing distinguishing on it at all, which fell all the
+        // way through to the absolute-path tier 7 without this. Rather
+        // than describe the icon itself, this anchors on the nearest
+        // READABLE text near it (labelText - the same accessible-name
+        // labelText tier 6b already relies on for custom checkboxes,
+        // see its own comment) and descends to the nearest enclosing
+        // <svg> from there - name()='svg' rather than a bare svg tag
+        // test is deliberate: XPath 1.0's tag-name test against an
+        // SVG element embedded in an HTML document is namespace-
+        // sensitive in a way name() sidesteps entirely.
+        try {
+            var svgAncestor = (el.tagName && el.tagName.toLowerCase() === 'svg')
+                ? el
+                : (el.closest ? el.closest('svg') : null);
+            if (svgAncestor && typeof labelText === 'string' && labelText.trim() !== '') {
+                var svgLabelLiteral = xpathLiteral(labelText.trim());
+                var svgCandidate = "//*[contains(normalize-space(.), " + svgLabelLiteral + ")]//*[name()='svg']";
+                if (xpathIsUnique(svgCandidate)) return svgCandidate;
+                // more than one svg under that label - scope further to
+                // the SMALLEST containing element whose own text still
+                // contains the label, same "climb from the label
+                // upward until unique" approach tier 6b uses for a
+                // plain (non-svg) checkbox
+                var svgScopeAncestor = svgAncestor.parentElement;
+                var svgScopeDepth = 0;
+                while (svgScopeAncestor && svgScopeAncestor.nodeType === Node.ELEMENT_NODE && svgScopeDepth < 8) {
+                    var scopedSvgCandidate = '//' + svgScopeAncestor.tagName.toLowerCase() +
+                        "[contains(normalize-space(.), " + svgLabelLiteral + ")]//*[name()='svg']";
+                    if (xpathIsUnique(scopedSvgCandidate)) return scopedSvgCandidate;
+                    svgScopeAncestor = svgScopeAncestor.parentElement;
+                    svgScopeDepth++;
+                }
+            }
+        } catch (eSvg) {}
+
+        // tiers 2-5 against the element itself
+        var direct = attrTextTiers(el);
+        if (direct) return direct;
+
+        // tier 6 - nothing on the element itself is distinguishing;
+        // try tiers 2-5 on its parent instead and descend from there.
+        // A plain "/tag" step can still match more than one same-tag
+        // sibling under that (unique) parent, so a live-computed
+        // positional index is appended only if it's actually needed.
+        try {
+            var parent = el.parentElement;
+            var parentCandidate = attrTextTiers(parent);
+            if (parentCandidate) {
+                var childTag = el.tagName.toLowerCase();
+                var combined = parentCandidate + '/' + childTag;
+                if (xpathIsUnique(combined)) return combined;
+
+                var idx = 1;
+                var sib = el.previousElementSibling;
+                while (sib) {
+                    if (sib.tagName === el.tagName) idx++;
+                    sib = sib.previousElementSibling;
+                }
+                var indexed = combined + '[' + idx + ']';
+                if (xpathIsUnique(indexed)) return indexed;
+            }
+        } catch (e) {}
+
+        // NUMERIC ID - LAST-RESORT FALLBACK (NEW): a purely numeric id
+        // was intentionally skipped back at tier 1 (see its own note),
+        // deferring to every semantic-attribute/text/parent-based tier
+        // above first. If NONE of those found anything unique either,
+        // the numeric id is still tried here - a real, literally-correct
+        // locator at record time, just a lower-confidence one than a
+        // real author-written id or data-testid, so it only wins when
+        // genuinely nothing better exists. Still requires uniqueness,
+        // same as every other tier - a duplicate numeric id elsewhere on
+        // the page correctly falls through past this too, on to tier 6a/
+        // 6b below.
+        if (el.id && /^[0-9]+$/.test(el.id)) {
+            var numericIdCandidate = "//*[@id='" + el.id + "']";
+            if (xpathIsUnique(numericIdCandidate)) return numericIdCandidate;
+        }
+
+        // tier 6-card - container anchored by a DIFFERENT descendant's
+        // text (".//h4[contains(text(),'Shoulder Pop')]" identifying a
+        // product card, say) then a relative path from THAT container
+        // down to el - covers the real, common "product card" shape: el
+        // itself (an "ADD TO BAG" link/button, a size chip, the card's
+        // own outer link) has no useful text/id of its own, but a
+        // SIBLING/COUSIN descendant of the same card (its title, most
+        // often a heading tag) does. Different from tier 6/6b, which
+        // both anchor on EL'S OWN text or an explicitly-supplied
+        // labelText - this one looks at text that belongs to something
+        // else entirely under the same container. Deliberately tried
+        // BEFORE tier 6a-scoped just below: given a choice between
+        // anchoring on a BROAD ancestor's id (tier 6a - e.g. the whole
+        // product grid) and a NARROW container scoped to just this
+        // card's own title (this tier), the narrower one is the more
+        // specific, more change-resilient locator (surviving products
+        // being reordered/added/removed elsewhere in the same grid),
+        // so it gets first refusal. Confirmed via a real product-card
+        // fixture: without this ordering, an "ADD TO BAG" button
+        // resolved via the whole grid's id + a raw positional index
+        // instead of via its own card's title. Bounded walk, same
+        // real-world headroom as the other multi-level tiers.
+        try {
+            var HEADING_TAGS = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
+            var cardAncestor = el.parentElement;
+            var cardDepth = 0;
+            var CARD_MAX_DEPTH = 8;
+            while (cardAncestor && cardAncestor.nodeType === Node.ELEMENT_NODE && cardDepth < CARD_MAX_DEPTH) {
+                for (var ht = 0; ht < HEADING_TAGS.length; ht++) {
+                    var headings = cardAncestor.getElementsByTagName(HEADING_TAGS[ht]);
+                    for (var hi = 0; hi < headings.length; hi++) {
+                        var headingText = (headings[hi].textContent || '').trim().replace(/\s+/g, ' ');
+                        if (!headingText || headingText.length > MAX_TEXT_LEN) continue;
+                        var containerCandidate = '//' + cardAncestor.tagName.toLowerCase() +
+                            '[.//' + HEADING_TAGS[ht] + '[contains(text(), ' + xpathLiteral(headingText) + ')]]';
+                        if (!xpathIsUnique(containerCandidate)) continue; // ambiguous container - not a safe anchor
+                        var steps = relativeStepsFrom(cardAncestor, el);
+                        if (!steps) continue;
+                        var cardFull = containerCandidate + '/' + steps;
+                        if (xpathIsUnique(cardFull)) return cardFull;
+                    }
+                }
+                cardAncestor = cardAncestor.parentElement;
+                cardDepth++;
+            }
+        } catch (e) {}
+
+        // tier 6a-scoped (NEW, additive - inserted before the existing
+        // tier 6b below, never replacing it) - before ever falling to a
+        // DOCUMENT-WIDE "contains(., text)" search (what tier 6b below
+        // does), look for the closest ancestor that's independently,
+        // stably identifiable on its own (id/data-testid/data-test/
+        // data-cy/aria-label/role) - a dropdown/counter/popup panel's
+        // own wrapper virtually always has ONE of these even when the
+        // individual OPTIONS inside it (a quantity value, a size, a
+        // color swatch) don't. Scoping the contains() search to just
+        // that container's own subtree - both the uniqueness check AND
+        // the position index if more than one match remains inside
+        // it - means a page-wide shift in unrelated "contains this
+        // text" content elsewhere (ad content, recommended products,
+        // prices/ratings, pagination) can never change which element
+        // this resolves to, since those live entirely outside the
+        // scoped subtree. Confirmed real, not hypothetical: an XPath
+        // shaped like "(//div[contains(., '2')])[63]//div" - a
+        // document-wide text search pinned only by a raw document-
+        // order index - is exactly what tier 6b below produces when no
+        // scoped ancestor is tried first, and is exactly what THIS
+        // tier exists to avoid whenever a stable ancestor is available
+        // at all. Same bounded, real-world-headroom walk depth as tier
+        // 6b (TIER6B_MAX_DEPTH, defined below and reused here since
+        // this is the same kind of ancestor walk, just tried first).
+        if (typeof labelText === 'string' && labelText.trim() !== '') {
+            var STABLE_CONTAINER_ATTRS = ['id', 'data-testid', 'data-test', 'data-cy', 'aria-label'];
+            var SCOPED_MAX_DEPTH = 8;
+            try {
+                var scopedTextLiteral = xpathLiteral(labelText.trim());
+                var scopedAncestor = el.parentElement;
+                var scopedDepth = 0;
+                while (scopedAncestor && scopedAncestor.nodeType === Node.ELEMENT_NODE && scopedDepth < SCOPED_MAX_DEPTH) {
+                    var containerXPath = null;
+                    for (var sa = 0; sa < STABLE_CONTAINER_ATTRS.length; sa++) {
+                        var attrName = STABLE_CONTAINER_ATTRS[sa];
+                        var attrVal = null;
+                        try { attrVal = scopedAncestor.getAttribute(attrName); } catch (eAttr) {}
+                        if (attrVal) {
+                            var candidateContainerXPath = '//*[@' + attrName + '=' + xpathLiteral(attrVal) + ']';
+                            if (xpathIsUnique(candidateContainerXPath)) {
+                                containerXPath = candidateContainerXPath;
+                                break;
+                            }
+                        }
+                    }
+                    if (!containerXPath) {
+                        var containerRole = null;
+                        try { containerRole = scopedAncestor.getAttribute('role'); } catch (eRole) {}
+                        if (containerRole) {
+                            var roleContainerXPath = '//*[@role=' + xpathLiteral(containerRole) + ']';
+                            if (xpathIsUnique(roleContainerXPath)) containerXPath = roleContainerXPath;
+                        }
+                    }
+
+                    if (containerXPath) {
+                        var scopedRole = null;
+                        try { scopedRole = el.getAttribute ? el.getAttribute('role') : null; } catch (eR2) {}
+                        var scopedDescendantSelector = scopedRole
+                            ? '*[@role=' + xpathLiteral(scopedRole) + ']'
+                            : el.tagName.toLowerCase();
+                        var scopedRaw = containerXPath + '//' + scopedDescendantSelector +
+                            '[contains(., ' + scopedTextLiteral + ')]';
+
+                        if (xpathIsUnique(scopedRaw)) return scopedRaw;
+
+                        // more than one match WITHIN just this scoped
+                        // container - pin by position inside the
+                        // container's own subtree only, never the
+                        // whole document (see this tier's own comment
+                        // block above)
+                        try {
+                            var scopedMatches = document.evaluate(
+                                scopedRaw, document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null
+                            );
+                            var scopedIdx = -1;
+                            for (var sm = 0; sm < scopedMatches.snapshotLength; sm++) {
+                                if (scopedMatches.snapshotItem(sm) === el) { scopedIdx = sm + 1; break; }
+                            }
+                            if (scopedIdx > 0) {
+                                var scopedIndexed = '(' + scopedRaw + ')[' + scopedIdx + ']';
+                                if (xpathIsUnique(scopedIndexed)) return scopedIndexed;
+                            }
+                        } catch (eScopedIdx) {}
+                        // a stable container was found at this level but
+                        // neither the bare nor the indexed scoped
+                        // candidate panned out - stop climbing (a
+                        // farther-out ancestor's own container would
+                        // only be a WEAKER scope, never a better one)
+                        // and let tier 6b below try its own, different
+                        // (unscoped) approach instead
+                        break;
+                    }
+
+                    scopedAncestor = scopedAncestor.parentElement;
+                    scopedDepth++;
+                }
+            } catch (eScoped) {}
+        }
+
+        // tier 6b - multi-level ancestor + text-label anchor. Covers
+        // the case tier 6 can't: a custom checkbox whose readable
+        // label lives in a SIBLING, not inside el itself or its
+        // descendants (buildProfile() fetches that label separately
+        // via getCheckboxAccessibleName() and passes it in here as
+        // labelText - tier 4's own text check never sees it, since
+        // it only reads el's own text). Only attempted when a label
+        // was actually supplied. Walks upward from the immediate
+        // parent one ancestor at a time, bounded the same way
+        // SEMANTIC_WALK_MAX_DEPTH bounds the interactive-ancestor
+        // walk elsewhere in this file - real-world headroom, never an
+        // unbounded walk to <body>.
+        if (typeof labelText === 'string' && labelText.trim() !== '' && labelText.trim() !== _excludeText) {
+            var TIER6B_MAX_DEPTH = 8;
+            try {
+                var textLiteral = xpathLiteral(labelText.trim());
+                var ancestor = el.parentElement;
+                var depth = 0;
+                while (ancestor && ancestor.nodeType === Node.ELEMENT_NODE && depth < TIER6B_MAX_DEPTH) {
+                    var ancestorTag = ancestor.tagName.toLowerCase();
+                    var rawCandidate = '//' + ancestorTag + '[contains(., ' + textLiteral + ')]';
+
+                    // rawCandidate searches the WHOLE document for any
+                    // <ancestorTag> containing labelText as a
+                    // substring - since text propagates upward through
+                    // the DOM, every same-tag ancestor ABOVE this one
+                    // (a wrapping list/container div, for example) also
+                    // trivially contains it, so xpathIsUnique() on the
+                    // bare candidate would almost always be false here.
+                    // What actually identifies THIS level is this
+                    // ancestor's own live position within that match
+                    // set - found the same way tier 6b's own descendant
+                    // step below (and tier 6 before it) already pins
+                    // down a live position when a bare candidate isn't
+                    // unique by itself: resolve the set, find `ancestor`
+                    // in it by reference.
+                    var ancestorIdx = -1;
+                    try {
+                        var ancestorMatches = document.evaluate(
+                            rawCandidate, document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null
+                        );
+                        for (var a = 0; a < ancestorMatches.snapshotLength; a++) {
+                            if (ancestorMatches.snapshotItem(a) === ancestor) { ancestorIdx = a + 1; break; }
+                        }
+                    } catch (eAnc) {}
+
+                    if (ancestorIdx > 0) {
+                        // NOTE: a bare "rawCandidate[N]" would NOT mean
+                        // "the Nth item of this match set" - //tag[N]
+                        // binds position() to each node's own sibling
+                        // rank under ITS OWN parent (the classic
+                        // "//div[1] selects the first div child of
+                        // EVERY parent" gotcha), not a flattened index
+                        // across the whole document. Wrapping the
+                        // already-filtered expression in parens first
+                        // is what actually makes [N] index into this
+                        // specific match set.
+                        var ancestorCandidate = (ancestorMatches.snapshotLength === 1)
+                            ? rawCandidate
+                            : '(' + rawCandidate + ')[' + ancestorIdx + ']';
+
+                        if (xpathIsUnique(ancestorCandidate)) {
+                            // this is the nearest ancestor whose own
+                            // text actually contains labelText - it's
+                            // the anchor; stop climbing regardless of
+                            // whether the descent below actually pans
+                            // out
+                            var role6b = null;
+                            try { role6b = el.getAttribute ? el.getAttribute('role') : null; } catch (eR) {}
+                            var descendantSelector = role6b
+                                ? "*[@role=" + xpathLiteral(role6b) + ']'
+                                : el.tagName.toLowerCase();
+                            var combined6b = ancestorCandidate + '//' + descendantSelector;
+
+                            if (xpathIsUnique(combined6b)) return combined6b;
+
+                            // more than one matching descendant under
+                            // this one anchor - find el's own live
+                            // position among them (document order) and
+                            // pin to it. A previousElementSibling-style
+                            // walk (as tier 6 uses) only covers flat
+                            // siblings under a SINGLE parent; matching
+                            // descendants here can sit at different
+                            // nesting depths under the ancestor, so
+                            // their order has to come from resolving
+                            // the same candidate set itself.
+                            try {
+                                var matches6b = document.evaluate(
+                                    combined6b, document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null
+                                );
+                                var idx6b = -1;
+                                for (var m = 0; m < matches6b.snapshotLength; m++) {
+                                    if (matches6b.snapshotItem(m) === el) { idx6b = m + 1; break; }
+                                }
+                                if (idx6b > 0) {
+                                    // same parens-before-index rule as
+                                    // the ancestor step above
+                                    var indexed6b = '(' + combined6b + ')[' + idx6b + ']';
+                                    if (xpathIsUnique(indexed6b)) return indexed6b;
+                                }
+                            } catch (eIdx) {}
+
+                            break;
+                        }
+                    }
+
+                    ancestor = ancestor.parentElement;
+                    depth++;
+                }
+            } catch (e) {}
+        }
+
+        // Shared by the container-anchored-by-descendant-text tier and
+        // tier 6c below - both need "the XPath steps from some ancestor
+        // DOWN to el", expressed as plain tag/tag[N] segments (N only
+        // when there's more than one same-tag sibling at that level).
+        // Returns null if el isn't actually inside ancestor at all.
+        function relativeStepsFrom(ancestor, node) {
+            var relParts = [];
+            var relNode = node;
+            while (relNode && relNode !== ancestor) {
+                if (relNode.nodeType !== Node.ELEMENT_NODE) return null;
+                var relTag = relNode.tagName.toLowerCase();
+                var relIdx = 1;
+                var relSib = relNode.previousElementSibling;
+                while (relSib) {
+                    if (relSib.tagName === relNode.tagName) relIdx++;
+                    relSib = relSib.previousElementSibling;
+                }
+                relParts.unshift(relIdx > 1 ? relTag + '[' + relIdx + ']' : relTag);
+                relNode = relNode.parentElement;
+            }
+            return relNode === ancestor ? relParts.join('/') : null;
+        }
+
+        // tier 6c2 - a stable (human/author-written-looking) class name
+        // on el itself - tried AFTER every semantic-attribute/text/
+        // container tier above (a real id/data-testid/text signal always
+        // wins when one exists), but BEFORE ever falling to a purely
+        // positional path. Explicitly excludes anything matching the
+        // SAME "looks generated" shapes DYNAMIC_CLASS_PATTERNS already
+        // knows about (CSS-in-JS hashes, atomic-CSS classes) plus a
+        // generic "long, no separators, mixed alnum" heuristic for
+        // build-tool-generated hashes those two named patterns don't
+        // happen to cover - a real class like "product-card" or
+        // "add-to-bag-btn" passes both checks easily.
+        try {
+            var GENERIC_HASH_CLASS_RE = /^[a-z0-9]{8,}$/i;
+            var elClassList = el.classList ? Array.prototype.slice.call(el.classList) : [];
+            for (var ec = 0; ec < elClassList.length; ec++) {
+                var candidateClass = elClassList[ec];
+                var looksDynamic = GENERIC_HASH_CLASS_RE.test(candidateClass);
+                for (var dp = 0; dp < DYNAMIC_CLASS_PATTERNS.length; dp++) {
+                    if (DYNAMIC_CLASS_PATTERNS[dp].re.test(candidateClass)) looksDynamic = true;
+                }
+                if (looksDynamic) continue;
+                var classCandidateFull = '//' + tag + "[contains(concat(' ', normalize-space(@class), ' '), " +
+                    xpathLiteral(' ' + candidateClass + ' ') + ')]';
+                if (xpathIsUnique(classCandidateFull)) return classCandidateFull;
+            }
+        } catch (e) {}
+
+        // tier 6c - short relative path from the nearest ancestor that
+        // has ANY id at all, numeric/generated included - this is
+        // deliberately AFTER the numeric-id-on-el-itself and text-
+        // anchored tiers above (a real, semantic signal always wins
+        // when one exists), but BEFORE the absolute tier 7 below: any
+        // id anywhere up the chain, however unremarkable, still makes a
+        // SHORT, RELATIVE path ("//*[@id='mountRoot']/div/div/button")
+        // - only the few steps between that ancestor and el, not the
+        // whole document from <html> down - which is far more resilient
+        // to unrelated page changes than an absolute path from the root
+        // ever is. Bounded walk, same real-world headroom as the other
+        // multi-level tiers above.
+        try {
+            var idAncestor = el.parentElement;
+            var idAncestorDepth = 0;
+            var ID_ANCESTOR_MAX_DEPTH = 15;
+            while (idAncestor && idAncestor.nodeType === Node.ELEMENT_NODE && idAncestorDepth < ID_ANCESTOR_MAX_DEPTH) {
+                if (idAncestor.id) {
+                    var relSteps = relativeStepsFrom(idAncestor, el);
+                    if (relSteps) {
+                        var relCandidate = "//*[@id=" + xpathLiteral(idAncestor.id) + "]/" + relSteps;
+                        if (xpathIsUnique(relCandidate)) return relCandidate;
+                    }
+                }
+                idAncestor = idAncestor.parentElement;
+                idAncestorDepth++;
+            }
+        } catch (e) {}
+
+        // tier 7 - final fallback: existing absolute positional
+        // algorithm, unchanged
+        const parts = [];
+        while (el && el.nodeType === Node.ELEMENT_NODE) {
+            let idx2 = 1;
+            let sib2 = el.previousSibling;
+            while (sib2) {
+                if (sib2.nodeType === Node.ELEMENT_NODE && sib2.nodeName === el.nodeName) idx2++;
+                sib2 = sib2.previousSibling;
+            }
+            parts.unshift(el.nodeName.toLowerCase() + '[' + idx2 + ']');
+            el = el.parentElement;
+        }
+        return '/' + parts.join('/');
+    }
+
+    // Up to maxCount DISTINCT candidate XPaths for el, most-recommended
+    // first - always includes xPath()'s own result (unchanged, still
+    // the single source of truth for the "best" one) as the recommended
+    // candidate, then fills in up to maxCount-1 more from independent,
+    // narrower strategies (own id, own exact/contains text, own strong
+    // attribute) tried directly here rather than by re-running the full
+    // tier cascade a second time - each one only added if it's both
+    // genuinely unique AND different from every candidate already
+    // collected, so the list is never padded with near-duplicates of
+    // the same locator. Exists so the Recording Editor can show a
+    // choice instead of silently committing to whatever xPath() alone
+    // decided was best - a real, if rare, wrong guess (an id that
+    // looks stable but is actually per-render, say) is still easy for
+    // a human to spot and override when they can see the alternatives.
+    // Heuristic "stable" vs "weak" confidence tag for a finished xpath
+    // STRING - deliberately independent of buildXpathCandidates()/xPath()
+    // itself (never changes which candidate wins or what order they come
+    // in, only how each one is LABELED for a human choosing between
+    // them). "weak" means: an absolute /html path, or a bare positional
+    // index ([3], not part of an @attr='...' predicate) with no stable
+    // attribute anchored anywhere else in the same expression - a
+    // starts-with(@id, ...) or @data-testid='...' condition alongside an
+    // index makes the whole thing meaningfully more resilient than a
+    // raw document-order guess, so that combination still counts as
+    // "stable". Everything else (an id/data-testid/name/aria-label/
+    // placeholder/href/role match, a text-anchored container, a class
+    // name) is "stable".
+    function classifyXpathConfidence(xpath) {
+        if (!xpath) return 'weak';
+        if (xpath.indexOf('/html') !== -1) return 'weak';
+        var hasBareIndex = /\[\d+\]/.test(xpath);
+        if (!hasBareIndex) return 'stable';
+        var hasStableAnchor = /@(id|data-testid|data-test|data-cy|name|aria-label|placeholder|href|role)\s*=/.test(xpath) ||
+            /starts-with\(@(id|data-testid|data-test|data-cy)/.test(xpath);
+        return hasStableAnchor ? 'stable' : 'weak';
+    }
+
+    function buildXpathCandidates(el, labelText, maxCount) {
+        maxCount = maxCount || 3;
+        var out = [];
+
+        function addIfNew(candidate) {
+            if (!candidate) return;
+            if (out.indexOf(candidate) !== -1) return;
+            if (out.length >= maxCount) return;
+            out.push(candidate);
+        }
+
+        addIfNew(xPath(el, labelText));
+
+        try {
+            if (el.id) {
+                addIfNew("//*[@id=" + JSON.stringify(el.id).replace(/"/g, "'") + "]");
+            }
+        } catch (e) {}
+
+        try {
+            var tag = el.tagName.toLowerCase();
+            var fText = (el.textContent || '').trim().replace(/\s+/g, ' ');
+            if (fText && fText.length > 0 && fText.length <= 60) {
+                var literal = "'" + fText.replace(/'/g, "\\'") + "'";
+                // reuses xpathIsUniqueFor directly - this is a narrower,
+                // independent probe, not another full tier walk
+                var exactTextCandidate = '//' + tag + "[normalize-space(.)=" + literal + "]";
+                if (xpathIsUniqueFor(el, exactTextCandidate)) addIfNew(exactTextCandidate);
+            }
+        } catch (e) {}
+
+        try {
+            var altAttrs = ['data-testid', 'data-test', 'data-cy', 'name', 'aria-label', 'placeholder'];
+            for (var i = 0; i < altAttrs.length; i++) {
+                var v = el.getAttribute ? el.getAttribute(altAttrs[i]) : null;
+                if (!v) continue;
+                var attrCandidate = '//*[@' + altAttrs[i] + "='" + v.replace(/'/g, "\\'") + "']";
+                if (xpathIsUniqueFor(el, attrCandidate)) addIfNew(attrCandidate);
+            }
+        } catch (e) {}
+
+        return out;
+    }
+
+    // the strongest, most stable attributes a test-automation-minded site
+    // might expose - captured raw here, prioritized/tried in that order
+    // during replay (see generator/script_generator.py resolve_and_act)
+    var STRONG_ATTRS = ['data-testid', 'data-test', 'data-cy', 'name', 'aria-label',
+        'placeholder', 'role', 'title', 'href', 'type'];
+
+    // a physical click almost never lands exactly on the element that's
+    // semantically "the thing the user interacted with" - it lands on
+    // whatever's visually on top (an icon, a wrapping span, a product
+    // image). Recording that literal DOM node produces a locator that's
+    // only valid for that one specific render (an <img> at position 7 of
+    // a product grid that reshuffles on every page load, for example).
+    // Walking up to the nearest genuinely-interactive ancestor is what
+    // makes the capture describe the actual control instead of whatever
+    // pixel happened to be clicked - this is generic DOM/ARIA semantics,
+    // not tied to any particular site's markup.
+    var INTERACTIVE_TAGS = ['BUTTON', 'INPUT', 'SELECT', 'TEXTAREA', 'OPTION'];
+    var INTERACTIVE_ROLES = ['button', 'checkbox', 'radio', 'option', 'link', 'menuitem', 'tab', 'switch'];
+    // real component libraries commonly wrap a card's actual link several
+    // layers deeper than a hand-written page would (styling wrapper divs,
+    // layout primitives, image/picture wrappers) - 8 was measured to be
+    // one hop too shallow for a real product-card pattern (image -> picture
+    // -> 5 layout divs -> the actual <a>, 9 hops from the click target),
+    // which silently fell back to recording the raw <img> instead of the
+    // real clickable link. 16 gives real-world nesting depth headroom
+    // while still being a bounded stop, not an unbounded walk to <body>.
+    var SEMANTIC_WALK_MAX_DEPTH = 16;
+
+    function isInteractive(node) {
+        var tag = node.tagName;
+        if (INTERACTIVE_TAGS.indexOf(tag) !== -1) return true;
+        if (tag === 'A' && node.hasAttribute('href')) return true;
+        if (tag === 'LABEL') return true;
+        var role = node.getAttribute && node.getAttribute('role');
+        return !!(role && INTERACTIVE_ROLES.indexOf(role) !== -1);
+    }
+
+    function resolveSemanticTarget(el) {
+        if (!(el instanceof Element)) return el;
+        var node = el;
+        var depth = 0;
+        while (node && node.nodeType === Node.ELEMENT_NODE && depth < SEMANTIC_WALK_MAX_DEPTH) {
+            if (isInteractive(node)) {
+                // a label's real target is the form control it's bound to
+                // (nested or via for=) - the label wrapper itself isn't
+                // what replay should click
+                if (node.tagName === 'LABEL' && node.control) return node.control;
+                return node;
+            }
+            node = node.parentElement;
+            depth++;
+        }
+        // nothing semantic found within a reasonable distance - fall back
+        // to the original physical target (some custom widgets genuinely
+        // are a bare div/span with its own click handler)
+        return el;
+    }
+
+    // strips private-use-area icon-font codepoints (U+E000-U+F8FF) - a
+    // FontAwesome/Material/etc icon font renders its glyphs at these
+    // codepoints, so an element's rendered "text" can be a meaningless
+    // PUA character (or, per a CONFIRMED real recording, a spinner glyph
+    // that transiently replaces a button's real label - see the
+    // _preClickSnapshot comment above) rather than anything a human or a
+    // future replay run could recognize. Mirrors
+    // generator/script_generator.py's own _strip_icon_font_text exactly,
+    // so recording-time and replay-time agree on what counts as "real"
+    // text. Never used to REJECT an element, only to keep its glyph out
+    // of locator/label text; icon_class_hint (see iconClassHint below)
+    // is the separate, additive fallback for icon-only elements.
+    var _ICON_FONT_PUA_RE = /[-]/g;
+    function _stripIconFontText(s) {
+        if (!s) return '';
+        return String(s).replace(_ICON_FONT_PUA_RE, '').trim();
+    }
+
+    // an <input>/<textarea>'s OWN .value is the right thing to read as
+    // its "text" only when that value is an author-set static label
+    // (type=submit/button/reset/image - the same handful of types where
+    // the DOM itself treats .value as display text, not user data);
+    // for every other type, .value is whatever the USER (or this very
+    // action) just typed, which must never be baked into a locator -
+    // CONFIRMED REAL: 081203's own OTP fill step recorded
+    // //div[normalize-space(.)='1234']/input, anchored on the digits
+    // just filled into that exact input, which cannot match any run
+    // that ever fills a different value into the same field.
+    function _isUserEditableValueField(el) {
+        if (!el || !el.tagName) return false;
+        if (el.tagName === 'TEXTAREA') return true;
+        if (el.tagName === 'INPUT') {
+            var t = (el.type || 'text').toLowerCase();
+            return ['button', 'submit', 'reset', 'image', 'checkbox', 'radio'].indexOf(t) === -1;
+        }
+        return false;
+    }
+
+    // best-effort accessible name, checked in roughly the priority order
+    // browsers/screen readers use - generic, no site knowledge required
+    function accessibleName(el) {
+        var ariaLabel = _stripIconFontText(el.getAttribute('aria-label'));
+        if (ariaLabel) return ariaLabel;
+        var labelledby = el.getAttribute('aria-labelledby');
+        if (labelledby) {
+            var txt = labelledby.split(/\s+/).map(function (id) {
+                var ref = document.getElementById(id);
+                return ref ? (ref.innerText || ref.textContent || '') : '';
+            }).join(' ').trim();
+            txt = _stripIconFontText(txt);
+            if (txt) return txt;
+        }
+        if (el.tagName === 'IMG') {
+            var alt = _stripIconFontText(el.alt);
+            if (alt) return alt;
+        }
+        if ((el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') && el.placeholder) {
+            var ph = _stripIconFontText(el.placeholder);
+            if (ph) return ph;
+        }
+        var ownText = el.innerText || (_isUserEditableValueField(el) ? '' : el.value) || '';
+        return _stripIconFontText(ownText.trim().slice(0, 80));
+    }
+
+    // used by findCheckboxTarget's ancestor search below - a genuine
+    // checkbox-plus-label/icon WIDGET is a small, local UI row, not a
+    // large page section. Purely geometric (rendered width/height),
+    // never a class/id/text check, so it works identically on any site.
+    var MAX_CHECKBOX_WIDGET_WIDTH = 400;
+    var MAX_CHECKBOX_WIDGET_HEIGHT = 150;
+
+    function _isSmallEnoughForCheckboxWidget(node) {
+        if (!node || !node.getBoundingClientRect) return false;
+        try {
+            var r = node.getBoundingClientRect();
+            return r.width > 0 && r.height > 0 &&
+                r.width <= MAX_CHECKBOX_WIDGET_WIDTH && r.height <= MAX_CHECKBOX_WIDGET_HEIGHT;
+        } catch (e) {
+            return false;
+        }
+    }
+
+    function findCheckboxTarget(rawEl) {
+        if (!(rawEl instanceof Element)) return null;
+
+        // 0. Exclusion: Top navigation bars, headers, tabs, and links are NEVER checkboxes
+        var checkNav = rawEl;
+        var navDepth = 0;
+        while (checkNav && checkNav.nodeType === Node.ELEMENT_NODE && navDepth < 6 && checkNav.tagName !== 'BODY') {
+            var tag = checkNav.tagName;
+            if (tag === 'NAV' || tag === 'HEADER') return null;
+            var r = checkNav.getAttribute ? (checkNav.getAttribute('role') || '') : '';
+            if (r === 'navigation' || r === 'tablist' || r === 'tab' || r === 'menu') return null;
+            var c = (checkNav.className || '').toString().toLowerCase();
+            if (c.indexOf('header') !== -1 || c.indexOf('navbar') !== -1 || c.indexOf('topbar') !== -1 || c.indexOf('nav-bar') !== -1) {
+                return null;
+            }
+            checkNav = checkNav.parentElement;
+            navDepth++;
+        }
+
+        // 1. Direct native input[type="checkbox"]
+        if (rawEl.tagName === 'INPUT' && (rawEl.type || '').toLowerCase() === 'checkbox') {
+            return rawEl;
+        }
+
+        // 2. Direct ARIA role="checkbox"
+        var role = rawEl.getAttribute ? rawEl.getAttribute('role') : null;
+        if (role === 'checkbox' || role === 'menuitemcheckbox' || role === 'switch') {
+            return rawEl;
+        }
+
+        // 3. Direct LABEL tag
+        if (rawEl.tagName === 'LABEL') {
+            if (rawEl.control && rawEl.control.tagName === 'INPUT' && (rawEl.control.type || '').toLowerCase() === 'checkbox') {
+                return rawEl.control;
+            }
+            var forId = rawEl.getAttribute('for');
+            if (forId) {
+                var inputFor = document.getElementById(forId);
+                if (inputFor && (inputFor.tagName === 'INPUT' || inputFor.getAttribute('role') === 'checkbox')) {
+                    return inputFor;
+                }
+            }
+            var inCb = rawEl.querySelector('input[type="checkbox"], [role="checkbox"]');
+            if (inCb) return inCb;
+        }
+
+        // 4. Ancestor search (up to 5 levels) for semantic input or ARIA checkbox control
+        //
+        // CONFIRMED REAL BUG, fixed here: every node.querySelector(...)
+        // call below searches that ancestor's ENTIRE descendant subtree,
+        // not just its immediate structural neighborhood. A genuine
+        // checkbox-plus-label/icon WIDGET (what this search exists to
+        // find - clicking an icon or label text a couple of DOM levels
+        // above its own checkbox input) is a small, self-contained UI
+        // row. But by the time this walk reaches a large shared
+        // container a few levels up (a product page's main content div,
+        // say), that same unbounded subtree search can just as easily
+        // find a COMPLETELY UNRELATED checkbox living anywhere else
+        // inside it (a filter toggle, a "select all", an unrelated
+        // details-expander styled as a checkbox) - silently merging an
+        // unrelated click into a "check" action on the wrong element
+        // entirely, while the actually-clicked element's own click
+        // never gets recorded as itself. _isSmallEnoughForCheckboxWidget
+        // bounds every querySelector-based match below to the ancestor
+        // it was found in being small enough to plausibly BE that
+        // local widget - never a class name, id, or text check, purely
+        // geometric, so this works identically on any site.
+        var node = rawEl;
+        var depth = 0;
+        while (node && node.nodeType === Node.ELEMENT_NODE && depth < 5 && node.tagName !== 'BODY' && node.tagName !== 'HTML') {
+            if (node.tagName === 'LABEL') {
+                if (node.control && node.control.tagName === 'INPUT' && (node.control.type || '').toLowerCase() === 'checkbox') {
+                    return node.control;
+                }
+                if (_isSmallEnoughForCheckboxWidget(node)) {
+                    var childCb = node.querySelector('input[type="checkbox"], [role="checkbox"]');
+                    if (childCb) return childCb;
+                }
+            }
+            var nodeRole = node.getAttribute ? node.getAttribute('role') : null;
+            if (nodeRole === 'checkbox' || nodeRole === 'menuitemcheckbox' || nodeRole === 'switch') {
+                return node;
+            }
+            if (node.querySelector && _isSmallEnoughForCheckboxWidget(node)) {
+                var childCb2 = node.querySelector('input[type="checkbox"], [role="checkbox"], [role="menuitemcheckbox"], [role="switch"]');
+                if (childCb2) return childCb2;
+            }
+            var cls = (node.className || '').toString().toLowerCase();
+            var dt = node.getAttribute ? (node.getAttribute('data-type') || node.getAttribute('data-testid') || '') : '';
+            if (
+                (cls.indexOf('checkbox') !== -1 || cls.indexOf('chk') !== -1 || dt.indexOf('checkbox') !== -1) &&
+                _isSmallEnoughForCheckboxWidget(node)
+            ) {
+                var innerInput = node.querySelector ? node.querySelector('input[type="checkbox"], [role="checkbox"]') : null;
+                return innerInput || node;
+            }
+            node = node.parentElement;
+            depth++;
+        }
+
+        // 5. Generic Custom Visual Checkbox Box (React Native for Web, Tailwind, custom div/span square boxes)
+        if (rawEl.tagName === 'BUTTON' || rawEl.tagName === 'A' || rawEl.tagName === 'INPUT' || rawEl.tagName === 'TEXTAREA' || rawEl.tagName === 'SELECT') {
+            return null;
+        }
+
+        var rect = rawEl.getBoundingClientRect ? rawEl.getBoundingClientRect() : null;
+        if (rect && rect.y >= 65 && rect.width >= 10 && rect.width <= 40 && rect.height >= 10 && rect.height <= 40) {
+            var aspect = rect.width / (rect.height || 1);
+            if (aspect >= 0.5 && aspect <= 1.8) {
+                var pNode = rawEl.parentElement;
+                var pDepth = 0;
+                while (pNode && pNode.nodeType === Node.ELEMENT_NODE && pDepth < 4 && pNode.tagName !== 'BODY') {
+                    var pText = (pNode.innerText || pNode.textContent || '').trim();
+                    var pCls = (pNode.className || '').toString().toLowerCase();
+                    var pRole = pNode.getAttribute ? (pNode.getAttribute('role') || '') : '';
+                    if (pText && pText.length > 0 && pText.length <= 150) {
+                        if (pCls.indexOf('close') === -1 && pCls.indexOf('search') === -1 && pCls.indexOf('nav') === -1 && pRole !== 'button' && pRole !== 'link' && pRole !== 'tab') {
+                            // 1. Prefer actual native input or explicit ARIA control inside the option row
+                            var actualInPNode = pNode.querySelector ? pNode.querySelector('input[type="checkbox"], [role="checkbox"], [role="menuitemcheckbox"], [role="switch"]') : null;
+                            if (actualInPNode) {
+                                return actualInPNode;
+                            }
+                            // 2. Check for associated label via for attribute
+                            if (rawEl.id) {
+                                try {
+                                    var lFor = document.querySelector('label[for="' + CSS.escape(rawEl.id) + '"]');
+                                    if (lFor) return rawEl;
+                                } catch (e) {}
+                            }
+                            // 3. Return rawEl (the small visual square) as the most specific clickable element
+                            return rawEl;
+                        }
+                    }
+                    pNode = pNode.parentElement;
+                    pDepth++;
+                }
+            }
+        }
+
+        // 6. Generic Text Label clicked directly next to a small square visual checkbox box
+        if (rect && rect.y >= 65 && rawEl.parentElement && rawEl.parentElement.children) {
+            var siblings = rawEl.parentElement.children;
+            for (var i = 0; i < siblings.length; i++) {
+                var sib = siblings[i];
+                if (sib !== rawEl) {
+                    var sRect = sib.getBoundingClientRect ? sib.getBoundingClientRect() : null;
+                    if (sRect && sRect.width >= 10 && sRect.width <= 40 && sRect.height >= 10 && sRect.height <= 40) {
+                        var sAspect = sRect.width / (sRect.height || 1);
+                        if (sAspect >= 0.5 && sAspect <= 1.8) {
+                            var actualInSib = sib.querySelector ? sib.querySelector('input[type="checkbox"], [role="checkbox"]') : null;
+                            return actualInSib || sib;
+                        }
+                    }
+                }
+            }
+        }
+
+        return null;
+    }
+
+    // stable-identity check reused from STRONG_ATTRS' own definition of
+    // "stable" (id, plus the same data-testid/data-test/data-cy names
+    // already treated as strong attributes elsewhere in this file) -
+    // not a new, separate notion of what counts as stable
+    function hasStrongIdentity(el) {
+        if (!el || !el.getAttribute) return false;
+        if (el.id) return true;
+        if (el.getAttribute('data-testid')) return true;
+        if (el.getAttribute('data-test')) return true;
+        if (el.getAttribute('data-cy')) return true;
+        return false;
+    }
+
+    // Additive, LOCATOR-ONLY refinement - findCheckboxTarget() above is
+    // the checkbox DETECTION logic and is untouched: its result still
+    // fully decides role/accessible_name/expected_state, exactly as
+    // before. This separately decides which element's id/css_path/
+    // xpath/tag get recorded for replay, preferring a genuine, more
+    // stable control when one actually exists near the detected
+    // checkbox - never a different SEMANTIC target, only a more
+    // reliable one to point the locator at. Generic: no site-specific
+    // selectors, IDs, class names, or labels anywhere in this search.
+    //
+    // Falls through to returning checkboxTarget itself, completely
+    // unchanged, in every case where nothing more stable is actually
+    // found - the existing, already-working locator is kept rather
+    // than ever fabricating one.
+    function resolveCheckboxLocatorElement(checkboxTarget) {
+        if (!checkboxTarget) return checkboxTarget;
+
+        // already a native control - already the most stable/semantic
+        // thing a checkbox locator can point to
+        if (checkboxTarget.tagName === 'INPUT') return checkboxTarget;
+
+        // already carries a real id or a strong data-* attribute -
+        // nothing more stable to look for
+        if (hasStrongIdentity(checkboxTarget)) return checkboxTarget;
+
+        // 1. a genuine native checkbox/radio control nested inside the
+        // detected element - the single most reliable, generic signal
+        // of "the actual control", common when a div/span is purely a
+        // custom visual wrapper around a real (often visually hidden)
+        // input kept for accessibility/form semantics
+        var nested = checkboxTarget.querySelector
+            ? checkboxTarget.querySelector('input[type="checkbox"], input[type="radio"]')
+            : null;
+        if (nested) return nested;
+
+        // 2. a genuine native checkbox/radio control as an immediate
+        // sibling - common when the visual box and the real input are
+        // siblings rather than parent/child. Only trusted when there is
+        // EXACTLY one such sibling, so a row of several checkboxes
+        // under the same parent is never guessed at.
+        var parent = checkboxTarget.parentElement;
+        if (parent && parent.children) {
+            var siblingInputs = [];
+            for (var i = 0; i < parent.children.length; i++) {
+                var sib = parent.children[i];
+                if (sib !== checkboxTarget && sib.tagName === 'INPUT') {
+                    var t = (sib.type || '').toLowerCase();
+                    if (t === 'checkbox' || t === 'radio') siblingInputs.push(sib);
+                }
+            }
+            if (siblingInputs.length === 1) return siblingInputs[0];
+        }
+
+        // nothing more stable found nearby - keep the existing,
+        // already-working target exactly as resolved above
+        return checkboxTarget;
+    }
+
+    function isCheckboxCheckedState(el) {
+        if (!el) return false;
+        if (el.tagName === 'INPUT' && (el.type || '').toLowerCase() === 'checkbox') {
+            return !!el.checked;
+        }
+        if (el.hasAttribute && el.hasAttribute('aria-checked')) {
+            return el.getAttribute('aria-checked') === 'true';
+        }
+        if (el.hasAttribute && el.hasAttribute('data-checked')) {
+            return el.getAttribute('data-checked') === 'true';
+        }
+        var cls = (el.className || '').toString().toLowerCase();
+        if (cls.indexOf('checked') !== -1 || cls.indexOf('active') !== -1 || cls.indexOf('selected') !== -1) {
+            return true;
+        }
+        if (el.querySelector && el.querySelector('svg, [class*="check"], [class*="tick"], [class*="icon"]')) {
+            return true;
+        }
+        if (el.parentElement && el.parentElement.querySelector && el.parentElement.querySelector('svg, [class*="check"], [class*="tick"]')) {
+            return true;
+        }
+        return false;
+    }
+
+    function getCheckboxAccessibleName(checkboxEl, rawEl) {
+        var target = checkboxEl || rawEl;
+        if (!target) return '';
+
+        var ariaLabel = target.getAttribute && target.getAttribute('aria-label');
+        if (ariaLabel && ariaLabel.trim()) return ariaLabel.trim();
+
+        var labelledby = target.getAttribute && target.getAttribute('aria-labelledby');
+        if (labelledby) {
+            var txt = labelledby.split(/\s+/).map(function (id) {
+                var ref = document.getElementById(id);
+                return ref ? (ref.innerText || ref.textContent || '') : '';
+            }).join(' ').trim();
+            if (txt) return txt;
+        }
+
+        if (target.id) {
+            try {
+                var labelFor = document.querySelector('label[for="' + CSS.escape(target.id) + '"]');
+                if (labelFor) {
+                    var lTxt = (labelFor.innerText || labelFor.textContent || '').trim();
+                    if (lTxt) return lTxt;
+                }
+            } catch (e) {}
+        }
+
+        var parentLabel = target.closest ? target.closest('label') : null;
+        if (parentLabel) {
+            var pTxt = (parentLabel.innerText || parentLabel.textContent || '').trim();
+            if (pTxt) return pTxt;
+        }
+
+        var pNode = (rawEl && rawEl.parentElement) ? rawEl.parentElement : (target.parentElement ? target.parentElement : null);
+        var pDepth = 0;
+        while (pNode && pNode.nodeType === Node.ELEMENT_NODE && pDepth < 4 && pNode.tagName !== 'BODY') {
+            var rowTxt = (pNode.innerText || pNode.textContent || '').trim();
+            if (rowTxt && rowTxt.length > 0 && rowTxt.length <= 100) {
+                var lines = rowTxt.split(/[\r\n]+/);
+                var firstLine = lines[0].trim();
+                if (firstLine) return firstLine;
+            }
+            pNode = pNode.parentElement;
+            pDepth++;
+        }
+
+        return accessibleName(target) || accessibleName(rawEl) || '';
+    }
+
+    // SHARED locator-profile builder - the same rich field set (id, name,
+    // role, aria_label, accessible_name, placeholder, title, href,
+    // css_path, xpath, text, element_text, tag, attributes) every click/
+    // fill/select/submit/press target already gets via buildProfile()
+    // below, factored out so ANY action type - including scroll, which
+    // used to hand-rolled its own bare {css_path, tag} pair - can record
+    // the exact same fallback data. accNameOverride lets a caller that
+    // already computed the accessible name a different way (buildProfile's
+    // own checkbox handling, see getCheckboxAccessibleName) supply it
+    // directly instead of recomputing via accessibleName(el); omitted
+    // (undefined) means "compute it normally for this element".
+    // valueToExclude (optional, R2): the exact value a fill action just
+    // typed into el - passed through to xPath() so no text tier can
+    // anchor a locator on it (see xPath's own comment on excludeText).
+    // Never set for click-family/checkbox callers, which have no typed
+    // value to exclude in the first place.
+    function buildLocatorProfile(el, accNameOverride, valueToExclude) {
+        const attrs = {};
+        for (const a of el.attributes || []) {
+            if (STRONG_ATTRS.includes(a.name)) {
+                attrs[a.name] = a.value;
+            }
+        }
+        const accName = (accNameOverride !== undefined) ? accNameOverride : accessibleName(el);
+        const elementText = _stripIconFontText(
+            (el.innerText || (_isUserEditableValueField(el) ? '' : el.value) || '').trim().slice(0, 80)
+        );
+        const finalText = accName || elementText;
+        // true for an element inside an open shadow root OR a same-
+        // origin iframe (its ownerDocument differs from the top-level
+        // document either way) - both are cases where a DOCUMENT-WIDE
+        // xpath (evaluated from the top document) can't be trusted the
+        // normal way (see xPath()'s own xpathIsUnique for exactly why),
+        // even though css_path/id usually still resolve fine on replay
+        // (Playwright's own CSS locator pierces shadow DOM natively;
+        // generator/script_generator.py's _find_in_iframes() already
+        // covers same-origin iframes as a fallback). Surfaced here
+        // rather than silently pretending the xpath was actually
+        // verified, so the Recording Editor can warn the user to prefer
+        // the id/CSS selector for a pick like this.
+        var crossBoundary = false;
+        try {
+            crossBoundary = (el.getRootNode() instanceof ShadowRoot) || (el.ownerDocument !== document);
+        } catch (e) {}
+        return {
+            id: el.id ? '#' + el.id : null,
+            name: el.getAttribute ? (el.getAttribute('name') || null) : null,
+            role: el.getAttribute ? (el.getAttribute('role') || null) : null,
+            aria_label: el.getAttribute ? (el.getAttribute('aria-label') || null) : null,
+            accessible_name: accName,
+            placeholder: el.getAttribute ? (el.getAttribute('placeholder') || null) : null,
+            title: el.getAttribute ? (el.getAttribute('title') || null) : null,
+            href: (el.tagName === 'A' && el.hasAttribute('href')) ? el.getAttribute('href') : null,
+            css_path: cssPath(el),
+            xpath: xPath(el, finalText, valueToExclude),
+            text: finalText,
+            element_text: elementText || accName,
+            tag: el.tagName.toLowerCase(),
+            attributes: attrs,
+            cross_boundary: crossBoundary,
+            // optional, additive - a readable last-resort name hint for
+            // an icon-only element with no usable text (see
+            // _strip_icon_font_text/_icon_class_hint on the Python side):
+            // a class like "fa-user"/"icon-search"/"material-icons"
+            // names WHAT the icon actually is, unlike the private-use
+            // glyph its rendered text reads as. Checked on el itself
+            // first, then its immediate parent (an icon is very
+            // commonly one layer of <i>/<span> below the actual
+            // clickable control) - never any deeper, to stay a cheap,
+            // best-effort hint rather than another ancestor walk.
+            icon_class_hint: iconClassHint(el) || (el.parentElement ? iconClassHint(el.parentElement) : null)
+        };
+    }
+
+    // scans a className string for a recognizable icon-font class
+    // naming convention - fa-<name>/fas fa-<name> (FontAwesome), icon-
+    // <name>, glyphicon-<name> (Bootstrap 3), material-icons - generic
+    // conventions, never any one site's specific class. Returns the
+    // first match found, or null.
+    var ICON_CLASS_PATTERNS = [
+        /\bfa-[\w-]+\b/,
+        /\bicon-[\w-]+\b/,
+        /\bglyphicon-[\w-]+\b/,
+        /\bmaterial-icons\w*\b/,
+    ];
+    function iconClassHint(el) {
+        try {
+            var cls = el && el.className ? String(el.className) : '';
+            if (!cls) return null;
+            for (var i = 0; i < ICON_CLASS_PATTERNS.length; i++) {
+                var m = ICON_CLASS_PATTERNS[i].exec(cls);
+                if (m) return m[0];
+            }
+        } catch (e) {}
+        return null;
+    }
+
+    function buildProfile(rawEl, actionType, value) {
+        // PRE-CLICK SNAPSHOT reuse (see its own comment above, next to
+        // the mousedown listener that builds it) - only ever applies to
+        // a real 'click' whose mousedown was captured on this EXACT raw
+        // element; anything else (fill/select/no snapshot/a different
+        // element) falls straight through to the original, unchanged
+        // logic below.
+        var _snap = (actionType === 'click' && _preClickSnapshot && _preClickSnapshot.rawTarget === rawEl)
+            ? _preClickSnapshot : null;
+
+        var checkboxTarget = _snap ? _snap.checkboxTarget : ((actionType === 'click') ? findCheckboxTarget(rawEl) : null);
+        var effectiveActionType = checkboxTarget ? 'check' : actionType;
+
+        // locator-only refinement (see resolveCheckboxLocatorElement) -
+        // checkboxTarget itself, from the untouched detection logic
+        // above, still fully drives role/accessible_name/expected_state
+        // below; this only decides which element's id/css_path/xpath/
+        // tag get recorded
+        var checkboxLocatorTarget = checkboxTarget ? resolveCheckboxLocatorElement(checkboxTarget) : null;
+
+        var el = (effectiveActionType === 'click' || effectiveActionType === 'dblclick' || effectiveActionType === 'right_click')
+            ? resolveSemanticTarget(rawEl)
+            : (checkboxLocatorTarget || rawEl);
+
+        const rect = el.getBoundingClientRect();
+        // some real, visually-clickable elements measure as ZERO-size here
+        // (an icon-wrapper div with no explicit width/height, absolutely-
+        // positioned inner content that collapses its parent, a target
+        // rendered entirely via a ::before/::after pseudo-element) - tagged
+        // now, at record time, purely as informational metadata for replay
+        // (which still re-checks the LIVE bounding box itself and works
+        // correctly even without this tag; this just avoids re-discovering
+        // the same fact the slow way on every replay run)
+        const clickStrategy = (rect.width === 0 || rect.height === 0) ? 'force_click' : 'standard';
+        const accName = checkboxTarget ? getCheckboxAccessibleName(checkboxTarget, rawEl) : accessibleName(el);
+        // R2: a fill action's own just-typed value must never become its
+        // own locator's anchor text (see buildLocatorProfile's/xPath's
+        // own comments) - only ever passed for 'fill', never for
+        // click/check/select/etc, which have no typed value at all.
+        const valueToExclude = (effectiveActionType === 'fill' && typeof value === 'string') ? value : null;
+        const locatorProfile = (_snap && _snap.semanticEl === el)
+            ? _snap.locatorProfile
+            : buildLocatorProfile(el, accName, valueToExclude);
+        // checkbox-specific role default - an implicit checkbox (a styled
+        // <div>/<span> with no real role attribute) still needs role=
+        // 'checkbox' recorded so replay's own check-vs-click handling
+        // recognizes it; a real role attribute (handled generically inside
+        // buildLocatorProfile above) always wins over this default.
+        if (!locatorProfile.role && checkboxTarget) {
+            locatorProfile.role = 'checkbox';
+        }
+
+        var payload = {
+            action_type: effectiveActionType,
+            value: value || null,
+            locator_profile: locatorProfile,
+            bounding_box: { x: rect.x, y: rect.y, width: rect.width, height: rect.height },
+            click_strategy: clickStrategy,
+            page_url: window.location.href,
+            timestamp: new Date().toISOString()
+        };
+
+        if (effectiveActionType === 'check') {
+            payload.expected_state = isCheckboxCheckedState(checkboxTarget || el);
+        }
+
+        return payload;
+    }
+
+    // debug/test-only hook (RECORDER_DEBUG gated - see its own definition
+    // above; never set on a real recording session) so an automated test
+    // can call the exact same buildProfile() the real click listener
+    // uses, instead of re-implementing its logic against a live page.
+    if (RECORDER_DEBUG) {
+        window.__RECORDER_DEBUG_BUILD_PROFILE__ = buildProfile;
+    }
+
+    // recording-time consistency check: after each captured action, a
+    // lightweight scan of short, purely-numeric LEAF-element text (the
+    // generic SHAPE of a counter/badge - a cart count, a notification
+    // count - never any specific site's class name, id, or wording) is
+    // kept as a snapshot. If a NEW click arrives and that snapshot would
+    // now read higher than it did right after the last thing actually
+    // captured, something on the page changed a counter with no
+    // corresponding action recorded in between - exactly the signature
+    // of a missed click. Purely diagnostic: this never changes what gets
+    // captured, skipped, or how - it only prints a warning for whoever
+    // is recording to notice and re-check.
+    var MAX_BADGE_TEXT_LEN = 4;
+    var MAX_BADGE_SCAN_ELEMENTS = 500;
+
+    function scanNumericBadges() {
+        var result = {};
+        try {
+            var candidates = document.querySelectorAll('span, sup, small, b, strong, a, button, i, div');
+            var scanned = 0;
+            for (var i = 0; i < candidates.length && scanned < MAX_BADGE_SCAN_ELEMENTS; i++) {
+                var el = candidates[i];
+                // leaf elements only (no element children) - a cheap
+                // check that skips large container nodes and keeps this
+                // scan fast even on a page with thousands of elements
+                if (el.children && el.children.length > 0) continue;
+                scanned++;
+                var txt = (el.textContent || '').trim();
+                if (txt && txt.length <= MAX_BADGE_TEXT_LEN && /^\d+$/.test(txt)) {
+                    var key = cssPath(el);
+                    if (key) result[key] = parseInt(txt, 10);
+                }
+            }
+        } catch (e) {
+            // best-effort only - never lets a scan failure affect real capture
+        }
+        return result;
+    }
+
+    var lastBadgeSnapshot = null;
+    var actionsSinceLastBadgeSnapshot = 0;
+
+    function checkForMissedClick() {
+        if (!lastBadgeSnapshot) return;
+        actionsSinceLastBadgeSnapshot++;
+        var current = scanNumericBadges();
+        for (var key in current) {
+            if (
+                Object.prototype.hasOwnProperty.call(lastBadgeSnapshot, key) &&
+                current[key] > lastBadgeSnapshot[key]
+            ) {
+                send({
+                    action_type: '__consistency_warning__',
+                    value: null,
+                    locator_profile: null,
+                    bounding_box: null,
+                    page_url: window.location.href,
+                    timestamp: new Date().toISOString(),
+                    message: (
+                        'a counter/badge value changed (' + lastBadgeSnapshot[key] +
+                        ' -> ' + current[key] + ') but no corresponding click was ' +
+                        'captured in the last ' + actionsSinceLastBadgeSnapshot +
+                        ' action(s) - a click may have been missed'
+                    )
+                });
+                break; // one warning per check is enough - avoid spamming
+            }
+        }
+    }
+
+    function send(payload) {
+        try {
+            window.recordAction(JSON.stringify(payload));
+        } catch (err) {
+            // recordAction not bound yet (recording never started on this page), ignore
+        }
+        // keep the badge snapshot in sync with whatever was actually
+        // just captured, for the NEXT click's consistency check above -
+        // the two internal message types are excluded since they aren't
+        // real user actions and shouldn't reset the "since last action" window
+        if (
+            payload && payload.action_type !== '__consistency_warning__' &&
+            payload.action_type !== '__page_visible__'
+        ) {
+            lastBadgeSnapshot = scanNumericBadges();
+            actionsSinceLastBadgeSnapshot = 0;
+        }
+    }
+
+    // click vs dblclick: a real double-click always fires click, click,
+    // dblclick (in that order, same target). We can't tell a click is
+    // "final" the instant it happens, so we hold it briefly - if a second
+    // click on the same element follows fast, it's a double-click and the
+    // dblclick handler below records it instead; otherwise the held click
+    // gets sent once the window passes. This is the standard way to tell
+    // the two apart without ever recording both.
+    var DBLCLICK_WINDOW_MS = 300;
+    var pendingClick = null; // { target, payload, timer }
+
+    function flushPendingClick(supersededByTarget) {
+        if (!pendingClick) return;
+        clearTimeout(pendingClick.timer);
+        var payload = pendingClick.payload;
+        var flushedTarget = pendingClick.target;
+        pendingClick = null;
+        send(payload);
+        debugLog(
+            'FLUSHED buffered click on', debugDescribeTarget(flushedTarget),
+            '-> recorded as', payload.action_type,
+            (supersededByTarget
+                ? ('(superseded by new interaction on ' + debugDescribeTarget(supersededByTarget) + ')')
+                : '')
+        );
+    }
+
+    // a click that triggers a real page navigation can outrun its own
+    // DBLCLICK_WINDOW_MS timer: the JS context (and the pending timer
+    // with it) is torn down the moment the page actually unloads, so a
+    // click held for double-click detection at that instant is lost
+    // silently - never sent, no error, nothing in the recording. Firing
+    // is deliberately the SAME flushPendingClick() the normal window-
+    // expiry path already uses, so a click flushed this way is already
+    // cleared from pendingClick (never double-sent, whether or not its
+    // original timer still fires - clearTimeout above already prevents
+    // that anyway) and travels through the exact same send() call as
+    // every other click, unchanged.
+    window.addEventListener('beforeunload', function () { flushPendingClick(); }, true);
+
+    // clicking anywhere inside a <label> (or a custom widget whose
+    // semantic ancestor is a <label>) makes the browser dispatch a SECOND,
+    // separate native click directly on the label's bound form control,
+    // synchronously, a moment after the one on whatever was actually
+    // clicked. Both now resolve to the same semantic target (label ->
+    // control), so without this the same user click would get recorded
+    // twice. Scoped tightly (very short window + only when the raw event
+    // targets genuinely differ) so it can never suppress a real second
+    // click, including a real double-click on the same element.
+    var LABEL_CASCADE_DEDUP_MS = 50;
+    var lastSemanticClickEl = null;
+    var lastSemanticClickRawTarget = null;
+    var lastSemanticClickTime = 0;
+
+    // pressing Enter in a form field makes the browser fire a REAL,
+    // separate 'click' event on the form's implicit submit button AND a
+    // 'submit' event on the form itself (per the HTML forms spec) a few ms
+    // later - neither is a second user action, both are the same submit
+    // already captured as 'press Enter', so they need to be swallowed
+    // rather than recorded as redundant extra steps.
+    // suppressAutoSubmitForm scopes that swallow to the SPECIFIC form the
+    // Enter press happened in (null when no enclosing <form> exists) - a
+    // timestamp alone isn't enough at higher action volume: two forms can
+    // legitimately be submitted back-to-back well inside the 700ms window
+    // below, and without this, the second form's own genuine submit would
+    // be silently swallowed just for arriving too soon after the first.
+    var suppressAutoSubmitUntil = 0;
+    var suppressAutoSubmitForm = null;
+
+    function isSubmitTrigger(el) {
+        if (!el || !el.tagName) return false;
+        const tag = el.tagName.toLowerCase();
+        const type = (el.getAttribute('type') || (tag === 'button' ? 'submit' : '')).toLowerCase();
+        return (tag === 'button' || tag === 'input') && type === 'submit';
+    }
+
+    // true only for the specific form (if any) the suppression window was
+    // opened for - a null suppressAutoSubmitForm means no enclosing <form>
+    // could be identified for that Enter press, so this falls back to the
+    // original time-only check for that one edge case, same as before this
+    // fix; any IDENTIFIED form only ever suppresses its own submit.
+    function isSameSuppressedForm(formEl) {
+        if (!suppressAutoSubmitForm) return true;
+        return formEl === suppressAutoSubmitForm;
+    }
+
+    // PRE-CLICK SNAPSHOT (fixes a CONFIRMED REAL BUG, not hypothetical):
+    // an async button (Sportzia's own "Send OTP"/"Continue"/"Pick from
+    // your saved people") replaces its own label with a spinner glyph
+    // (a private-use icon-font codepoint) for roughly a second the
+    // instant it's pressed. The click listener below builds its
+    // locator profile from e.target at 'click' time - one native event
+    // LATER than 'mousedown' - and a real screen recording plus a live
+    // comparison against session_20260921_081203 (where this same
+    // button correctly recorded action_type=click, text='Send OTP')
+    // confirmed that on a real (human-paced, not synthetic-fast) click,
+    // the app's own re-render can land in that gap: the broken
+    // recording (session_20260921_095629) captured text='' (the
+    // spinner glyph) and role='checkbox' for the exact same button -
+    // findCheckboxTarget()'s own ancestor/descendant search picking up
+    // whatever transient structure the spinner state introduces nearby,
+    // something a live scan of the STABLE (non-spinner) DOM around this
+    // button confirmed has no checkbox-role anywhere in its ancestor
+    // chain at all. Capturing at 'mousedown', in the CAPTURE phase, on
+    // document - before the event even reaches the target, let alone
+    // before any bubble-phase app handler can react to it - means this
+    // always sees the same pre-interaction DOM a real user's eye saw
+    // right before pressing, regardless of how fast or slow the app's
+    // own reaction is. Only ever used as a fallback by buildProfile()
+    // below when it matches the SAME raw element the click ends up
+    // firing on; never changes anything for the (overwhelming majority)
+    // of clicks where mousedown-time and click-time DOM happen to
+    // already agree.
+    var _preClickSnapshot = null;
+
+    document.addEventListener('mousedown', function (e) {
+        try {
+            var rawTarget = e.target;
+            var semanticEl = resolveSemanticTarget(rawTarget);
+            _preClickSnapshot = {
+                rawTarget: rawTarget,
+                checkboxTarget: findCheckboxTarget(rawTarget),
+                semanticEl: semanticEl,
+                locatorProfile: buildLocatorProfile(semanticEl),
+            };
+        } catch (snapErr) {
+            _preClickSnapshot = null;
+        }
+    }, true);
+
+    document.addEventListener('click', function (e) {
+        // PICK ELEMENT MODE - a completely separate feature (Recording
+        // Editor's "Pick Element" button) from normal recording, riding
+        // on this SAME injected script since it needs the exact same
+        // buildLocatorProfile() this file already has, unchanged. Only
+        // ever active when recorder/pick_element.py's own init script
+        // explicitly set window.__afqaPickMode = true on this page - for
+        // every normal recording session that flag is simply never set,
+        // so this branch never runs and everything below (dedup, label-
+        // cascade, submit-suppression, buildProfile, send()) behaves
+        // exactly as it always has. Reports the clicked element's own
+        // locator profile back to Python via window.pickResult (exposed
+        // by pick_element.py, not recordAction) and prevents the click
+        // from actually activating whatever was clicked - the user is
+        // choosing a locator, not performing the recorded flow.
+        //
+        // CAPTURE-ONLY GUARANTEE: this whole listener is registered with
+        // useCapture=true (see the closing "}, true)" this function ends
+        // with, far below) - the ONLY 'click' listener this file ever
+        // adds to document. Capture-phase listeners on document fire
+        // FIRST in the entire dispatch sequence, before the event even
+        // reaches the clicked element, which is before ANY bubble-phase
+        // listener the site's own JS could have attached (React/Vue
+        // event delegation, an inline onclick, a directly-bound
+        // handler - all bubble by default, the overwhelming common
+        // case). This script itself is also guaranteed to be the first
+        // script that runs on the page at all (injected via Playwright's
+        // add_init_script, which always executes before the page's own
+        // bundle), so even a site that registers its OWN capture-phase
+        // document listener can't win a same-node registration-order
+        // race against this one. preventDefault() suppresses the
+        // browser's own default action (navigation, form submit,
+        // checkbox toggle, ...); stopImmediatePropagation() (stronger
+        // than stopPropagation() - also blocks any OTHER listener on
+        // this SAME node/phase, not just ones on other elements) is the
+        // deliberate belt-and-braces on top of that, so nothing else -
+        // not even another capture-phase document listener - gets a
+        // chance to react to this click while pick mode is on.
+        if (window.__afqaPickMode) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            // already locked onto an earlier click - a further plain
+            // click (not a double click) while locked is just noise
+            // (a stray click, or the first half of what turns out to be
+            // a double click below) and must NOT silently re-lock onto
+            // something else out from under the user; only the dblclick
+            // handler further down this file is allowed to release it.
+            if (window.__afqaPickIsLocked && window.__afqaPickIsLocked()) {
+                return;
+            }
+            try {
+                // e.target here is the OVERLAY itself (it's the topmost
+                // element at every point on screen while picking, by
+                // design - see _afqaSetupPickOverlay's own comment) -
+                // the real element the user meant to click is found the
+                // same way the hover highlight already found it, via
+                // elementsFromPoint at this exact click position, never
+                // by trusting e.target directly.
+                var realEl = (window.__afqaPickRealElementAt && window.__afqaPickRealElementAt(e.clientX, e.clientY)) || e.target;
+                // LARGE-CONTAINER WARNING: a picked element taller than
+                // the viewport is almost always a wrapper the user meant
+                // to hover THROUGH to something smaller inside it, not
+                // the actual intended target - locking onto it anyway
+                // (a whole page-length product-listing container, say)
+                // produces a technically-valid but practically useless
+                // locator. Purely advisory: still locks and reports the
+                // real profile below (a genuinely large container IS
+                // occasionally the real intent - a "the whole results
+                // grid is visible" check, for instance), just flags it
+                // so the modal can steer the user toward a smaller
+                // element instead of silently accepting it.
+                var largeContainer = false;
+                try {
+                    var lcRect = realEl.getBoundingClientRect();
+                    largeContainer = lcRect.height > window.innerHeight * 1.5;
+                } catch (eLc) {}
+                // CONFIRMED REAL BUG (found via this item's own isolated
+                // svg test, not hypothetical): normal recording's own
+                // buildProfile() passes getCheckboxAccessibleName()'s
+                // nearby-label-climbing result as accNameOverride for a
+                // checkbox-style target, which is exactly what lets
+                // xPath()'s new svg/icon tier (and tier 6b's existing
+                // label-anchored tiers) find something to anchor an
+                // icon-only element (a bare <svg><path/></svg> tick mark,
+                // with no text/aria-label of its own) on at all. Pick
+                // mode's own click handler used to just call
+                // buildLocatorProfile(realEl) with no override, so
+                // accessibleName(realEl) alone (empty for a bare svg/
+                // path) was all xPath() ever saw here - the label-
+                // anchored tiers never even got a chance to try,
+                // regardless of how good they are. getCheckboxAccessible
+                // Name()'s own label-finding logic isn't actually
+                // checkbox-specific (label/parent-label/nearby-row-text
+                // climbing generalizes to any element), so reusing it
+                // here - always, not just for actual checkboxes, since
+                // pick mode doesn't know in advance what kind of control
+                // was clicked - costs nothing when accessibleName(realEl)
+                // already found something real (that's tried FIRST) and
+                // fixes exactly this gap when it didn't.
+                var pickAccName = accessibleName(realEl) || getCheckboxAccessibleName(realEl, realEl);
+                var profile = buildLocatorProfile(realEl, pickAccName);
+                if (largeContainer) {
+                    profile.large_container = true;
+                    profile.large_container_message = 'You picked a large container, hover a smaller element';
+                }
+                // match-count feedback (Katalon Object Spy-style "Found:
+                // N of N") - evaluated HERE, against the live page,
+                // right while the xpath is still fresh, rather than a
+                // separate round-trip later. -1 (not 0) signals "this
+                // xpath itself couldn't even be evaluated" (a malformed
+                // expression), distinct from a genuine zero-match result.
+                //
+                // Same cross-boundary gap as xpathIsUnique() inside
+                // xPath() (see its own comment): a shadow-DOM element's
+                // xpath can never be verified via document.evaluate() at
+                // all, and an iframe-internal element needs evaluating
+                // against ITS OWN document, not the top one, or this
+                // always reads as zero matches regardless of whether the
+                // xpath is actually correct. Mirrors that same fix here,
+                // since this is a separate document.evaluate() call, not
+                // a shared helper.
+                try {
+                    if (realEl.getRootNode() instanceof ShadowRoot) {
+                        // unverifiable via XPath at all - id presence is
+                        // the best honest signal available (see
+                        // cross_boundary on the profile itself for the
+                        // UI-facing warning)
+                        profile.match_count = profile.id ? 1 : -1;
+                    } else {
+                        var evalDoc = realEl.ownerDocument || document;
+                        var xpathResult = evalDoc.evaluate(
+                            profile.xpath, evalDoc, null,
+                            XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null
+                        );
+                        profile.match_count = xpathResult.snapshotLength;
+                    }
+                } catch (xpathErr) {
+                    profile.match_count = -1;
+                }
+                // PICK-MODE ONLY - buildXpathCandidates() runs a few
+                // extra document.evaluate() probes on top of xPath()'s
+                // own, deliberately NOT folded into buildLocatorProfile()
+                // itself (that function also builds the profile for
+                // every ORDINARY recorded click/fill/etc - adding this
+                // extra work there would slow down normal recording for
+                // a feature only Pick Element needs). Lets the Recording
+                // Editor show a choice instead of silently committing to
+                // whichever one xPath() alone decided was best.
+                try {
+                    profile.xpath_candidates = buildXpathCandidates(realEl, profile.text, 3);
+                } catch (candErr) {
+                    profile.xpath_candidates = [profile.xpath];
+                }
+                // stable/weak tag per candidate, same order as
+                // xpath_candidates above - a NEW, OPTIONAL field
+                // (recording_editor.html falls back to no tag at all if
+                // it's ever missing), never changes xpath_candidates
+                // itself or which one is pre-selected.
+                try {
+                    profile.xpath_candidates_confidence = profile.xpath_candidates.map(classifyXpathConfidence);
+                } catch (confErr) {
+                    profile.xpath_candidates_confidence = [];
+                }
+                if (window.__afqaPickLock) window.__afqaPickLock(realEl);
+                // LATENCY INSTRUMENTATION (always on - see pick_element.py's
+                // matching [pick-timing] lines): timestamps the exact
+                // moment of the lock and the exact moment the binding call
+                // is dispatched, so a real run's end-to-end timeline
+                // (lock -> Python receives it -> dashboard shows it) can be
+                // reconstructed from the two logs together.
+                console.log('[pick-timing] locked_js t=' + Date.now());
+                window.pickResult(JSON.stringify(profile));
+                console.log('[pick-timing] pickResult_dispatched t=' + Date.now());
+            } catch (err) {
+                // pickResult binding not ready yet, or buildLocatorProfile
+                // threw on an unusual element - nothing more to do here,
+                // the Python side's own timeout covers this
+            }
+            return;
+        }
+        // isTrusted is false for any event dispatched by page JS itself
+        // (el.click(), a framework's own synthetic event, etc.) - only
+        // genuine OS-level user input should ever become a recorded
+        // action, never something the website's own code triggered
+        if (!e.isTrusted) {
+            debugLog('DISCARDED click on', debugDescribeTarget(e.target), '- reason: not trusted (isTrusted=false)');
+            return;
+        }
+        if (
+            suppressAutoSubmitUntil && Date.now() <= suppressAutoSubmitUntil &&
+            isSubmitTrigger(e.target) &&
+            isSameSuppressedForm(e.target.closest ? e.target.closest('form') : null)
+        ) {
+            debugLog('DISCARDED click on', debugDescribeTarget(e.target), '- reason: suppressed as an Enter-triggered submit echo');
+            return;
+        }
+
+        // everything below reads a real, trusted click's own DOM shape
+        // (resolveSemanticTarget's ancestor walk, buildProfile's
+        // attribute/text/cssPath/xPath inspection) - an unusual element
+        // structure on any given site can make ANY of that throw, and an
+        // uncaught exception here would silently abort the WHOLE
+        // listener with no trace: the click never gets buffered, never
+        // gets sent, and never shows up as an error anywhere a person
+        // recording would see it. That is a strictly worse failure mode
+        // than a slightly-less-precise fallback capture, so this is
+        // wrapped end to end - a genuine trusted click can no longer
+        // vanish from the recording without a trace, regardless of what
+        // site-specific DOM quirk triggered the failure.
+        try {
+            flushFocusedFieldIfNeeded();
+
+            var semanticEl = resolveSemanticTarget(e.target);
+
+            if (
+                semanticEl === lastSemanticClickEl &&
+                e.target !== lastSemanticClickRawTarget &&
+                (Date.now() - lastSemanticClickTime) < LABEL_CASCADE_DEDUP_MS
+            ) {
+                debugLog(
+                    'DISCARDED click on', debugDescribeTarget(e.target),
+                    '- reason: label-cascade dedup, same semantic element',
+                    debugDescribeTarget(semanticEl),
+                    'as a click', (Date.now() - lastSemanticClickTime) + 'ms ago',
+                    '(window=' + LABEL_CASCADE_DEDUP_MS + 'ms)'
+                );
+                return;
+            }
+
+            if (pendingClick && pendingClick.target === e.target) {
+                // second click of a double-click - let the dblclick handler
+                // below record the real action, this pair doesn't get its own
+                debugLog(
+                    'DISCARDED click on', debugDescribeTarget(e.target),
+                    '- reason: treated as the second click of a double-click,',
+                    'deferring to the dblclick handler instead'
+                );
+                clearTimeout(pendingClick.timer);
+                pendingClick = null;
+                return;
+            }
+            // a pending click on a DIFFERENT element wasn't part of a double
+            // click after all - it was just a normal single click, send it now
+            flushPendingClick(e.target);
+
+            // compares against the badge snapshot taken right after
+            // whatever was captured last (see send() above) - placed
+            // here, after flushPendingClick() has already run, so a
+            // click that's about to be correctly flushed/sent right now
+            // is never mistaken for one that was missed
+            checkForMissedClick();
+
+            lastSemanticClickEl = semanticEl;
+            lastSemanticClickRawTarget = e.target;
+            lastSemanticClickTime = Date.now();
+
+            var payload = buildProfile(e.target, 'click', null);
+            debugLog(
+                'BUFFERED click on', debugDescribeTarget(e.target),
+                '(semantic target', debugDescribeTarget(semanticEl) + ')',
+                '- will send in', DBLCLICK_WINDOW_MS + 'ms unless a dblclick follows'
+            );
+            pendingClick = {
+                target: e.target,
+                payload: payload,
+                timer: setTimeout(function () {
+                    pendingClick = null;
+                    send(payload);
+                    debugLog(
+                        'FLUSHED buffered click on', debugDescribeTarget(e.target),
+                        '-> recorded as', payload.action_type,
+                        '(normal', DBLCLICK_WINDOW_MS + 'ms timeout, no dblclick followed)'
+                    );
+                }, DBLCLICK_WINDOW_MS)
+            };
+        } catch (captureErr) {
+            debugLog(
+                'EXCEPTION building profile for click on', debugDescribeTarget(e.target),
+                '- falling back to a minimal/coordinate-only capture:', String(captureErr)
+            );
+            // best-effort fallback: a raw coordinate is still real
+            // evidence of where a genuine trusted click landed, even
+            // when nothing above could be safely inspected. Sent
+            // immediately (not buffered through pendingClick) since the
+            // richer double-click disambiguation this function is built
+            // around isn't available for a payload built this way anyway.
+            //
+            // whatever threw above almost certainly did so reading a JS
+            // PROPERTY (.id, .className, a custom getter, a framework
+            // proxy) - getAttribute() is a more fundamental, far less
+            // likely to be intercepted DOM method, so it's tried here,
+            // independently guarded, as a second chance at a real
+            // locator instead of falling straight to coordinate-only
+            var fallbackTag = null, fallbackId = null, fallbackCssPath = null;
+            try {
+                fallbackTag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : null;
+            } catch (e1) { /* even tagName isn't safe to assume here */ }
+            try {
+                var rawId = (e.target && e.target.getAttribute) ? e.target.getAttribute('id') : null;
+                if (rawId) {
+                    fallbackId = '#' + rawId;
+                    fallbackCssPath = (fallbackTag || '*') + '#' + rawId;
+                }
+            } catch (e2) { /* fall through with whatever we already have */ }
+
+            try {
+                send({
+                    action_type: 'click',
+                    value: null,
+                    locator_profile: (fallbackId || fallbackTag) ? {
+                        id: fallbackId,
+                        css_path: fallbackCssPath,
+                        tag: fallbackTag,
+                        attributes: {}
+                    } : null,
+                    // a truly 0x0 box is deliberately SKIPPED by the
+                    // replay engine's own bounding_box fallback tier
+                    // ("occupies no space, nothing to click") - a 1x1
+                    // placeholder centered on the real click point keeps
+                    // this fallback capture genuinely replayable instead
+                    // of silently unusable
+                    bounding_box: (typeof e.clientX === 'number')
+                        ? { x: e.clientX - 0.5, y: e.clientY - 0.5, width: 1, height: 1 }
+                        : null,
+                    click_strategy: 'force_click',
+                    page_url: window.location.href,
+                    timestamp: new Date().toISOString(),
+                    capture_error: String((captureErr && captureErr.message) || captureErr)
+                });
+            } catch (sendErr) {
+                // truly nothing more this listener can do
+            }
+        }
+    }, true);
+
+    document.addEventListener('dblclick', function (e) {
+        // PICK ELEMENT MODE - releases a locked selection (see the
+        // click handler's own pick-mode branch above for how it gets
+        // locked in the first place) and resumes hover mode, so the
+        // user can pick a different element after realizing the first
+        // one was wrong. Only meaningful while something IS actually
+        // locked - a double click with nothing locked yet has no lock
+        // to release, and just falls through as a no-op here (the
+        // single-click handler already dealt with both of its own
+        // constituent clicks by the time this fires).
+        if (window.__afqaPickMode) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            if (window.__afqaPickIsLocked && window.__afqaPickIsLocked()) {
+                window.__afqaPickRelease();
+                try {
+                    window.pickReleased && window.pickReleased();
+                } catch (err) {
+                    // pickReleased binding not ready - nothing more to do,
+                    // the highlight has already visually released either way
+                }
+            }
+            return;
+        }
+        if (!e.isTrusted) return;
+        flushFocusedFieldIfNeeded();
+        if (pendingClick) {
+            clearTimeout(pendingClick.timer);
+            pendingClick = null;
+        }
+        send(buildProfile(e.target, 'dblclick', null));
+        debugLog('RESOLVED as dblclick on', debugDescribeTarget(e.target));
+    }, true);
+
+    // right-click: the browser only fires 'contextmenu' for the secondary
+    // button, never 'click', so there's no disambiguation needed here
+    document.addEventListener('contextmenu', function (e) {
+        if (!e.isTrusted) return;
+        flushFocusedFieldIfNeeded();
+        flushPendingClick(e.target);
+        send(buildProfile(e.target, 'right_click', null));
+    }, true);
+
+    // change fires once on blur/commit, not per keystroke - that's what
+    // keeps typing from generating a huge pile of actions. But "type into
+    // a search box then press Enter" often submits/navigates WITHOUT the
+    // field ever blurring, so change never fires and the typed text gets
+    // lost. sendFillIfChanged() is also called directly from keydown below
+    // to flush the current value before that can happen; the dedup check
+    // here (against the last value we actually sent) keeps both paths
+    // from ever producing two fill actions for the same committed value.
+    function sendFillIfChanged(el) {
+        // single authoritative guard for every call site below (change,
+        // the Enter/Tab flush, and the blur/focus-based fallback further
+        // down) - a submit/button-style <input> (or any other non-text-
+        // entry control) must never become a 'fill' just because it's
+        // still, technically, an <input> element - see isTextLikeField.
+        if (!isTextLikeField(el)) return;
+        const current = el.value;
+        if (el.__afqaLastSentValue === current) return;
+        el.__afqaLastSentValue = current;
+        send(buildProfile(el, 'fill', current));
+    }
+
+    // autofill (browser-saved credentials, password managers, a site's own
+    // "remember me" restore) and some non-standard value-setting paths
+    // frequently don't fire the input/change events the listeners above
+    // rely on - the field ends up with a real value on screen (and the
+    // page's own logic sees it fine, since most such flows read el.value
+    // directly rather than depending on the event) but no fill action ever
+    // gets recorded, because nothing here was ever told it happened. This
+    // catches that value the same way change already does - by reading
+    // el.value - just triggered by a different, more reliable signal that
+    // doesn't depend on any particular DOM event having fired for it: the
+    // field losing focus. sendFillIfChanged's own dedup (against
+    // __afqaLastSentValue) means this is a genuine no-op whenever change
+    // already captured the same value, so a normal fill never gets
+    // recorded twice - this only ever adds the ONE fill that would
+    // otherwise have been silently missing.
+    // input types that are never genuine text entry, even though they're
+    // still <input> elements - a submit/button/reset/image control is a
+    // trigger the user clicks (already correctly recorded as its own
+    // 'click' action by the click listener below, on any site), not
+    // something typed into; checkbox/radio/file/color/range are likewise
+    // non-textual controls already handled elsewhere. Anything NOT in
+    // this list (text, search, email, tel, url, password, number, date,
+    // etc.) is genuine text entry and still gets treated as fill-worthy.
+    var NON_TEXT_ENTRY_INPUT_TYPES = [
+        'checkbox', 'radio', 'submit', 'button', 'reset', 'image', 'file', 'color', 'range',
+    ];
+
+    function isTextLikeField(el) {
+        if (!el || !el.tagName) return false;
+        const tag = el.tagName.toLowerCase();
+        if (tag !== 'input' && tag !== 'textarea') return false;
+        const inputType = (el.getAttribute('type') || 'text').toLowerCase();
+        return NON_TEXT_ENTRY_INPUT_TYPES.indexOf(inputType) === -1;
+    }
+
+    var lastFocusedTextField = null;
+
+    document.addEventListener('focusin', function (e) {
+        lastFocusedTextField = isTextLikeField(e.target) ? e.target : null;
+    }, true);
+
+    // blur doesn't bubble, but a capture-phase listener on document still
+    // sees every blur on its way down to the actual target - same pattern
+    // every other listener in this file already uses
+    document.addEventListener('blur', function (e) {
+        if (!isTextLikeField(e.target)) return;
+        if (!e.target.value) return;
+        sendFillIfChanged(e.target);
+    }, true);
+
+    // defense-in-depth for widgets that manage their own visual "focus"
+    // state without a real native blur ever firing on the underlying
+    // field (some component libraries render the actual editable element
+    // detached from where focus visually appears to be) - right before
+    // ANY click is recorded, flush whatever field this page last put
+    // focus into if it still has an uncaptured value. This is exactly the
+    // "about to click Sign in/submit with a filled-but-uncaptured field"
+    // case, but written generically: it runs before every click, not a
+    // detected "submit-style" one, since a click that turns out to
+    // navigate/submit can't be told apart from any other click in
+    // advance, and a plain click on an unrelated element makes this a
+    // harmless no-op (sendFillIfChanged's own dedup already covers a
+    // field that blur already flushed normally).
+    function flushFocusedFieldIfNeeded() {
+        var el = lastFocusedTextField;
+        if (el && el.isConnected && el.value) {
+            sendFillIfChanged(el);
+        }
+    }
+
+    document.addEventListener('change', function (e) {
+        if (!e.isTrusted) return;
+        const tag = e.target.tagName.toLowerCase();
+        if (tag === 'select') {
+            // dropdowns are their own action type, not a "fill" - replay
+            // needs page.select_option(), not page.fill()
+            send(buildProfile(e.target, 'select', e.target.value));
+            return;
+        }
+        if (tag === 'input' || tag === 'textarea') {
+            // checkboxes/radios/submit-or-button-style inputs already get
+            // recorded as a plain 'click' above (that's the correct
+            // replay action for them too, on any site) - only genuine
+            // text-entry inputs need their committed value captured;
+            // sendFillIfChanged itself also guards this (see
+            // isTextLikeField), this pre-check just avoids the call
+            // entirely for the common case.
+            sendFillIfChanged(e.target);
+        }
+    }, true);
+
+    document.addEventListener('submit', function (e) {
+        if (!e.isTrusted) return;
+        // e.target on a 'submit' event IS the <form> itself
+        if (suppressAutoSubmitUntil && Date.now() <= suppressAutoSubmitUntil && isSameSuppressedForm(e.target)) {
+            return;
+        }
+        send(buildProfile(e.target, 'submit', null));
+    }, true);
+
+    // only a few keys are worth recording as their own step - everything
+    // else (regular typing) is already captured by the change event above
+    var MEANINGFUL_KEYS = ['Enter', 'Tab', 'Escape', 'Backspace'];
+    document.addEventListener('keydown', function (e) {
+        if (!e.isTrusted) return;
+        if (MEANINGFUL_KEYS.indexOf(e.key) === -1) return;
+        const el = e.target;
+        const tag = el.tagName ? el.tagName.toLowerCase() : '';
+        const editingText = tag === 'input' || tag === 'textarea' || el.isContentEditable;
+        // backspace while editing text is just a correction mid-typing -
+        // the eventual change event already captures the corrected value,
+        // recording every backspace on top of that would be noise
+        if (e.key === 'Backspace' && editingText) return;
+
+        // Enter/Tab can trigger a form submit or navigation before blur
+        // ever fires (blur is what normally commits the fill via change,
+        // above) - flush the current value now, synchronously, while the
+        // field still definitely has it, so a search box's typed text
+        // never gets lost to a same-tick Enter-submits-the-form flow
+        if ((tag === 'input' || tag === 'textarea') && (e.key === 'Enter' || e.key === 'Tab')) {
+            // sendFillIfChanged itself guards non-text-entry inputs (see
+            // isTextLikeField) - no need to re-check the type here too
+            sendFillIfChanged(el);
+            if (e.key === 'Enter') {
+                // how long after Enter the browser's own synthetic submit
+                // click/submit events show up varies a lot by site - ~11ms
+                // on Amazon, ~530ms on eBay (likely autocomplete/typeahead
+                // teardown running first) - 700ms covers both with room to
+                // spare, while still being far shorter than a human
+                // deliberately clicking a different submit button next
+                suppressAutoSubmitUntil = Date.now() + 700;
+                suppressAutoSubmitForm = el.closest ? el.closest('form') : null;
+            }
+        }
+
+        send(buildProfile(el, 'press', e.key));
+    }, true);
+
+    // scroll: fires directly on whatever element's scroll position
+    // ACTUALLY changed, however that happened - mouse wheel, a scrollbar
+    // thumb dragged with the mouse, keyboard (Page Down/Up, arrows,
+    // Space), touch, or a page's own programmatic scrollTo()/scrollTop
+    // assignment. Deliberately reworked from an earlier, wheel-event-
+    // based approach: 'wheel' only observes the INPUT device gesture,
+    // not the result, so it stays silent for every one of those other
+    // scroll mechanisms, AND can straightforwardly misreport the result
+    // even for an ordinary mouse-wheel gesture if a page's own JS
+    // intercepts the wheel event to drive some custom scroll behavior
+    // that doesn't move scrollTop the way the browser's native response
+    // would have - confirmed missing entirely on a real product-listing/
+    // search-results grid page, where scrolling still visibly happened
+    // (confirmed on video) but zero scroll actions ever reached the
+    // saved recording. Listening for the actual 'scroll' event instead
+    // means this only ever reacts to a REAL, already-applied position
+    // change, on any site, however it was driven.
+    //
+    // 'scroll' does not bubble past its own target (only the window's
+    // own scroll, which targets `document`, propagates to window
+    // listeners) - a nested scrollable container's own scroll event
+    // never reaches a bubble-phase listener on an ancestor at all. The
+    // CAPTURE phase is the only propagation phase that visits every
+    // ancestor top-down regardless of bubbling, so registering here in
+    // the capture phase on document is what makes one listener see a
+    // scroll fired on ANY element on the page, nested or not - not just
+    // stylistic, load-bearing for the same reason capture:true was for
+    // the previous wheel-based listener.
+    var SCROLL_SETTLE_MS = 250;
+    // per-element (not one global) debounce timer/start-position - a page
+    // can legitimately have the user scroll the window, then a nested
+    // panel, then the window again, and each needs its own independent
+    // settle-cycle and "before" baseline rather than borrowing whatever
+    // the last-scrolled element's value was
+    var scrollSettleTimers = new WeakMap();
+    var scrollGestureStart = new WeakMap();
+    var lastSettledScrollTop = new WeakMap();
+    var lastSettledScrollLeft = new WeakMap();
+    // a permanent, DOM-independent sentinel used as the WeakMap key for
+    // window/document-level scrolling - deliberately NOT document.
+    // scrollingElement/documentElement, which don't exist yet at the
+    // exact moment this script runs (add_init_script executes at the
+    // very start of a fresh document's lifecycle, before the parser has
+    // created ANY node) and would make an initial "seed this at 0, right
+    // now, before the user could possibly have scrolled anything" seed
+    // either throw (WeakMap keys must be objects) or - if merely
+    // skipped - silently miss its only genuinely race-free opportunity,
+    // leaving the real element to be seeded much later, by which point
+    // Chromium's own compositor-thread fast-path scrolling (which
+    // doesn't wait for a passive listener like this one, since passive
+    // means it's guaranteed not to call preventDefault) may already have
+    // applied the scroll before this script ever observes it. A plain
+    // object literal has no such dependency and is always available.
+    var WINDOW_SCROLL_KEY = {};
+    // seeded immediately, unconditionally, at script-injection time -
+    // window.scrollY/X are always valid, ordinary numbers (0 by
+    // definition for a document that hasn't rendered anything yet) with
+    // no DOM-readiness dependency at all, unlike an element reference
+    lastSettledScrollTop.set(WINDOW_SCROLL_KEY, window.scrollY);
+    lastSettledScrollLeft.set(WINDOW_SCROLL_KEY, window.scrollX);
+
+    // the REAL scrollingElement, needed only for reading its
+    // scrollHeight/clientHeight when building a payload - by the time
+    // any of that happens (well after a real scroll settled), the DOM
+    // genuinely exists, so this is always safe to call there, just not
+    // safe to rely on for anything at true script-top-level.
+    function windowScrollFallback() {
+        return document.scrollingElement || document.documentElement;
+    }
+
+    function scrollEventTarget(e) {
+        // the window/document's own scroll fires with target === document
+        // (or, in older engines, target === window) - normalized here to
+        // the same permanent sentinel every other window-scroll code path
+        // in this file already keys off of, so lastSettledScrollTop/Left
+        // above always index it consistently
+        var t = e.target;
+        if (t === document || t === window || (t && t.nodeType === Node.DOCUMENT_NODE)) {
+            return WINDOW_SCROLL_KEY;
+        }
+        return t;
+    }
+
+    // seeds lastSettledScrollTop/Left for a candidate NESTED element (and
+    // every ancestor up to body) BEFORE any resulting scroll happens -
+    // solves a real gap the 'scroll' event alone can't: unlike the
+    // wheel-driven approach this replaced, 'scroll' only ever fires
+    // AFTER a position change already happened, so the very first time
+    // this listener ever sees a given element, it has no way to know
+    // what its position was just before that - and simply falling back
+    // to "whatever it reads right now" would read the ALREADY-CHANGED
+    // value, making before/after look identical and silently dropping
+    // the very first scroll recorded on any element. This is a purely
+    // passive cache - it never records or sends anything, and never
+    // overwrites a value that's already known, so a genuine settled
+    // position from an earlier gesture is never clobbered. Walking the
+    // whole ancestor chain (not just one guessed container) means this
+    // doesn't need to know ahead of time which element will actually
+    // turn out to be the one that scrolls - whichever one does is
+    // already seeded by the time it does.
+    //
+    // Window/document scrolling is deliberately handled separately (see
+    // WINDOW_SCROLL_KEY above), not here - a NATIVELY-scrollable target
+    // (the window itself, or a nested overflow:auto/scroll container)
+    // can still race ahead of even a capture-phase 'wheel'/'mousedown'
+    // seed exactly like it does the 'scroll' event itself (Chromium's
+    // compositor-thread fast-path scrolling doesn't wait for a passive
+    // listener), so seeding from a gesture-start event here is only
+    // reliable for a target that ISN'T natively scrolled by the browser
+    // on its own - a nested container is the common real case (its
+    // scrollTop only ever changes via explicit script/user-driven
+    // scrolling this listener also observes), while the window's own
+    // baseline is instead seeded exactly once, unconditionally, at true
+    // script-injection time above, before any scrolling could possibly
+    // have happened yet.
+    //
+    // scrollSettleTimers.has(node) is just as important a guard here as
+    // lastSettledScrollTop.has(node) - confirmed real, not hypothetical:
+    // a single logical scroll gesture routinely produces MULTIPLE raw
+    // 'wheel'/'mousedown' ticks before its own debounce ever settles
+    // (lastSettledScrollTop is deliberately only written AT settle time,
+    // see the 'scroll' listener below), and without this second guard, a
+    // later tick within that SAME still-in-progress gesture would see
+    // lastSettledScrollTop still empty and re-seed it with whatever the
+    // position has ALREADY moved to mid-gesture - silently corrupting
+    // the correct "before" value scrollGestureStart captured at the
+    // gesture's true start into a near-zero, no-op-looking delta.
+    function seedScrollBaseline(el) {
+        var node = el;
+        while (node && node.nodeType === Node.ELEMENT_NODE) {
+            if (!lastSettledScrollTop.has(node) && !scrollSettleTimers.has(node)) {
+                lastSettledScrollTop.set(node, node.scrollTop);
+                lastSettledScrollLeft.set(node, node.scrollLeft);
+            }
+            node = node.parentElement;
+        }
+    }
+    // any of these commonly precede a real scroll actually happening
+    // (mouse wheel, a scrollbar thumb grabbed with the mouse, keyboard
+    // Page Down/arrows/Space, a touch drag) - capture phase so this sees
+    // the gesture starting on any element, nested or not, the same
+    // reasoning as the 'scroll' listener itself below.
+    //
+    // 'mouseover' is ALSO in this list, and that one is not like the
+    // others - it doesn't precede a scroll gesture the way a wheel/
+    // mousedown/keydown/touchstart tick does, it precedes the CURSOR
+    // arriving somewhere, which usually happens earlier still. That gap
+    // matters: Chromium's compositor-thread fast-path scrolling (see the
+    // WINDOW_SCROLL_KEY comment above for the window's own version of
+    // this same problem) can apply a NESTED container's scroll before
+    // even a capture-phase 'wheel' listener runs - confirmed via a real
+    // debug-instrumented repro (DEBUG_RECORDER=1): a single fast wheel
+    // gesture over a nested scrollable div showed the container's own
+    // scrollTop already at its POST-scroll value (e.g. 50, on the very
+    // first debounce tick of a 0->300 gesture) by the time seedScrollBaseline
+    // ran from 'wheel', undercounting the recorded delta by however much
+    // the compositor won the race by - up to the ENTIRE gesture for one
+    // large, fast jump, which silently drops the scroll from the
+    // recording altogether. seedScrollBaseline's own .has() guard already
+    // makes it a no-op once a real pre-gesture value is cached, so adding
+    // 'mouseover' here costs nothing on top of the existing listeners -
+    // it just gives the SAME idempotent seed an earlier, race-free chance
+    // to run at the moment the cursor first arrives over a scrollable
+    // element, strictly before any wheel/keydown/touchstart tick (and
+    // therefore before the compositor has any scroll to race ahead of).
+    ['wheel', 'mousedown', 'keydown', 'touchstart', 'mouseover'].forEach(function (evtType) {
+        document.addEventListener(evtType, function (e) {
+            if (e.target && e.target.nodeType === Node.ELEMENT_NODE) {
+                seedScrollBaseline(e.target);
+            }
+        }, { passive: true, capture: true });
+    });
+
+    document.addEventListener('scroll', function (e) {
+        var el = scrollEventTarget(e);
+        if (!el) return;
+        var isWindowScroll = (el === WINDOW_SCROLL_KEY);
+        // the REAL element to read DOM properties (scrollTop/Height,
+        // clientHeight, tag, css_path) from - el itself for a nested
+        // container, but the actual scrollingElement for the window
+        // case, since el there is WINDOW_SCROLL_KEY, a plain object with
+        // no such properties at all (see WINDOW_SCROLL_KEY's own comment
+        // for why the WeakMap key and the real element can't just be the
+        // same reference)
+        var realEl = isWindowScroll ? windowScrollFallback() : el;
+        var curTop = isWindowScroll ? window.scrollY : el.scrollTop;
+        var curLeft = isWindowScroll ? window.scrollX : el.scrollLeft;
+
+        debugLog(
+            'scroll event on', debugDescribeTarget(realEl),
+            '(event target=' + debugDescribeTarget(e.target) + ')',
+            'scrollTop=' + curTop,
+            'scrollHeight=' + (realEl ? realEl.scrollHeight : null),
+            'isWindowScroll=' + isWindowScroll
+        );
+
+        if (!scrollSettleTimers.has(el)) {
+            // first event of a new settle-cycle for this element - lock
+            // in its pre-gesture position now, before any further
+            // movement in this same burst happens. Same "previous
+            // gesture's own settled value, not a mid-gesture sample" idea
+            // the old wheel-based approach used - a fast, rapid-fire
+            // burst of scroll events can already reflect a position well
+            // past where this specific burst started by the time this
+            // handler runs.
+            var beforeTop = lastSettledScrollTop.has(el) ? lastSettledScrollTop.get(el) : curTop;
+            var beforeLeft = lastSettledScrollLeft.has(el) ? lastSettledScrollLeft.get(el) : curLeft;
+            scrollGestureStart.set(el, { top: beforeTop, left: beforeLeft });
+        } else {
+            clearTimeout(scrollSettleTimers.get(el));
+        }
+
+        var timer = setTimeout(function () {
+            scrollSettleTimers.delete(el);
+            var start = scrollGestureStart.get(el) || { top: curTop, left: curLeft };
+            scrollGestureStart.delete(el);
+
+            var yBefore = start.top;
+            var xBefore = start.left;
+            var yAfter = isWindowScroll ? window.scrollY : el.scrollTop;
+            var xAfter = isWindowScroll ? window.scrollX : el.scrollLeft;
+            lastSettledScrollTop.set(el, yAfter);
+            lastSettledScrollLeft.set(el, xAfter);
+
+            var dy = Math.round(yAfter - yBefore);
+            var dx = Math.round(xAfter - xBefore);
+            if (dx === 0 && dy === 0) {
+                // settled back exactly where this burst started (a
+                // momentum overshoot that fully reversed, or an already-
+                // at-boundary no-op) - not a real position change,
+                // nothing to record
+                return;
+            }
+
+            var payload = {
+                action_type: 'scroll',
+                value: null,
+                delta_x: dx,
+                delta_y: dy,
+                scroll_y_before: yBefore,
+                scroll_y_after: yAfter,
+                viewport_height: isWindowScroll ? window.innerHeight : realEl.clientHeight,
+                document_height: realEl.scrollHeight,
+                // only a nested container needs a locator to re-find at
+                // replay time - plain window scrolling has none. Same
+                // buildLocatorProfile() every click/fill/select/submit/
+                // press target already goes through (see its own comment)
+                // - a scroll target used to get only {css_path, tag}, with
+                // no id/aria-label/xpath/text/attributes to fall back to
+                // if css_path's nth-of-type-based path drifts between
+                // record and replay time, unlike every other action type.
+                locator_profile: isWindowScroll ? null : buildLocatorProfile(realEl),
+                bounding_box: null,
+                page_url: window.location.href,
+                timestamp: new Date().toISOString()
+            };
+            debugLog(
+                'scroll captured on', debugDescribeTarget(realEl),
+                'dx=' + dx, 'dy=' + dy,
+                'before=' + yBefore, 'after=' + yAfter
+            );
+            send(payload);
+        }, SCROLL_SETTLE_MS);
+        scrollSettleTimers.set(el, timer);
+    }, { passive: true, capture: true });
+
+    // Page Visibility API - the only generic, DOM-standard way to detect
+    // that the user switched TO this tab from page-level JS (browser
+    // tab-strip clicks happen outside any page's DOM, so there's no click/
+    // focus event for them). Every visible transition is forwarded; the
+    // Python side (Recorder._handle_visibility) decides whether it's a
+    // genuine switch back to an already-open tab or just this page's own
+    // first-ever activation (initial load / just-opened new tab), and
+    // only the former becomes a recorded tab_switch action. Note this can
+    // also fire from OS-level app-switching (alt-tab away and back), a
+    // known limitation of this API - there's no way to distinguish that
+    // from a real browser tab switch at this layer.
+    document.addEventListener('visibilitychange', function () {
+        if (document.visibilityState !== 'visible') return;
+        send({
+            action_type: '__page_visible__',
+            value: null,
+            locator_profile: null,
+            bounding_box: null,
+            page_url: window.location.href,
+            timestamp: new Date().toISOString()
+        });
+    });
+})();

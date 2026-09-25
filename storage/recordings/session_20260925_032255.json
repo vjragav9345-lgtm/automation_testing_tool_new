@@ -1,0 +1,26 @@
+{
+    "name": "session_20260925_032255",
+    "start_url": "http://127.0.0.1:56302/page1.html",
+    "actions": [
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "http://127.0.0.1:56302/page1.html",
+            "timestamp": "2026-09-24T21:52:55.856Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "http://127.0.0.1:56302/page2.html",
+            "timestamp": "2026-09-24T21:52:55.894Z",
+            "page_id": 0,
+            "caused_by_timestamp": null,
+            "dom_snapshot_path": "storage\\snapshots\\6ac287355df8490fbc6a11a26f3a6e12\\2026-09-24T21-52-55-894Z.html"
+        }
+    ]
+}

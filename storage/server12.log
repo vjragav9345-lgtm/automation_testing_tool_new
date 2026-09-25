@@ -1,0 +1,5 @@
+::ffff:127.0.0.1 - - [11/Sep/2026 08:37:49] "GET /qty_working.html HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [11/Sep/2026 08:38:02] "GET /qty_broken.html HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [11/Sep/2026 08:38:25] "GET /qty_broken.html HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [11/Sep/2026 08:38:58] "GET /normal_login.html HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [11/Sep/2026 08:39:07] "GET /normal_login.html HTTP/1.1" 200 -

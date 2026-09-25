@@ -1,0 +1,222 @@
+{
+    "name": "session_20260923_095853",
+    "session_id": "498af7e2db7e452d922e23c313066e62",
+    "start_url": "https://www.myntra.com/",
+    "recorded_at": "2026-09-23T09:58:53.147281",
+    "stop_reason": "browser_closed",
+    "total_actions": 11,
+    "page_count": 2,
+    "viewport_width": 1280,
+    "viewport_height": 720,
+    "actions": [
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/",
+            "timestamp": "2026-09-23T04:28:40.391Z",
+            "page_id": 0,
+            "delay_before_ms": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Casual Shirts",
+                "placeholder": null,
+                "title": null,
+                "href": "/men-casual-shirts",
+                "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > nav > div > div > div > div > div > div > li > ul > li:nth-of-type(3) > a",
+                "xpath": "//a[@href='/men-casual-shirts']",
+                "text": "Casual Shirts",
+                "element_text": "Casual Shirts",
+                "tag": "a",
+                "attributes": {
+                    "href": "/men-casual-shirts"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 101.5999984741211,
+                "y": 146,
+                "width": 191,
+                "height": 23
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/",
+            "timestamp": "2026-09-23T04:28:40.630Z",
+            "page_id": 0,
+            "delay_before_ms": 239
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 184,
+            "scroll_y_before": 0,
+            "scroll_y_after": 184,
+            "viewport_height": 720,
+            "document_height": 7833,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/men-casual-shirts",
+            "timestamp": "2026-09-23T04:28:45.301Z",
+            "page_id": 0,
+            "delay_before_ms": 4671
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "Blue",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#mountRoot > div > main > div:nth-of-type(3) > div > section > div > div:nth-of-type(4) > ul > li > label > input",
+                "xpath": "//label[normalize-space(text())='Blue']/input",
+                "text": "Blue",
+                "element_text": "Blue",
+                "tag": "input",
+                "attributes": {
+                    "type": "checkbox"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 144.27500915527344,
+                "y": 472.8000183105469,
+                "width": 13,
+                "height": 13
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/men-casual-shirts",
+            "timestamp": "2026-09-23T04:28:46.496Z",
+            "expected_state": true,
+            "page_id": 0,
+            "delay_before_ms": 1195
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/men-casual-shirts?f=Color%3ABlue_0074D9",
+            "timestamp": "2026-09-23T04:28:46.818Z",
+            "page_id": 0,
+            "delay_before_ms": 322
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": -184,
+            "scroll_y_before": 184,
+            "scroll_y_after": 0,
+            "viewport_height": 720,
+            "document_height": 7879,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/men-casual-shirts?f=Color%3ABlue_0074D9",
+            "timestamp": "2026-09-23T04:28:47.765Z",
+            "page_id": 0,
+            "delay_before_ms": 947
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 365,
+            "scroll_y_before": 0,
+            "scroll_y_after": 364.79998779296875,
+            "viewport_height": 720,
+            "document_height": 7879,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/men-casual-shirts?f=Color%3ABlue_0074D9",
+            "timestamp": "2026-09-23T04:28:49.019Z",
+            "page_id": 0,
+            "delay_before_ms": 1254
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Roadster\nSizes: 40\nRs. 543Rs. 1699(68% OFF)",
+                "placeholder": null,
+                "title": null,
+                "href": "shirts/roadster/the-roadster-life-co-pure-cotton-opaque-striped-relaxed-fit-casual-shirt/30588198/buy",
+                "css_path": "li#30588198 > a",
+                "xpath": "//a[@href='shirts/roadster/the-roadster-life-co-pure-cotton-opaque-striped-relaxed-fit-casual-shirt/30588198/buy']",
+                "text": "Roadster\nSizes: 40\nRs. 543Rs. 1699(68% OFF)",
+                "element_text": "Roadster\nSizes: 40\nRs. 543Rs. 1699(68% OFF)",
+                "tag": "a",
+                "attributes": {
+                    "href": "shirts/roadster/the-roadster-life-co-pure-cotton-opaque-striped-relaxed-fit-casual-shirt/30588198/buy"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 528.7250366210938,
+                "y": 333.6000061035156,
+                "width": 210,
+                "height": 359.8000183105469
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/men-casual-shirts?f=Color%3ABlue_0074D9",
+            "timestamp": "2026-09-23T04:28:49.695Z",
+            "page_id": 0,
+            "delay_before_ms": 676
+        },
+        {
+            "action_type": "tab_open",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/shirts/roadster/the-roadster-life-co-pure-cotton-opaque-striped-relaxed-fit-casual-shirt/30588198/buy",
+            "timestamp": "2026-09-23T04:28:52.586Z",
+            "new_tab": true,
+            "page_id": 1,
+            "from_page_id": 0,
+            "delay_before_ms": 2891
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 1,
+            "page_url": "https://www.myntra.com/shirts/roadster/the-roadster-life-co-pure-cotton-opaque-striped-relaxed-fit-casual-shirt/30588198/buy",
+            "remaining_page_id": 0,
+            "timestamp": "2026-09-23T04:28:53.135Z",
+            "delay_before_ms": 549
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 0,
+            "page_url": "https://www.myntra.com/men-casual-shirts?f=Color%3ABlue_0074D9",
+            "remaining_page_id": null,
+            "timestamp": "2026-09-23T04:28:53.145Z",
+            "delay_before_ms": 10
+        }
+    ],
+    "saved_at": "2026-09-23T09:58:53.148050"
+}

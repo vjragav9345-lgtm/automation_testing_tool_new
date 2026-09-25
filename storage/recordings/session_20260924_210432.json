@@ -1,0 +1,15 @@
+{
+    "name": "session_20260924_210432",
+    "start_url": "http://127.0.0.1:65366/phase4_chip_checkbox2.html",
+    "actions": [
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "http://127.0.0.1:65366/phase4_chip_checkbox2.html",
+            "timestamp": "2026-09-24T15:34:32.608Z",
+            "page_id": 0
+        }
+    ]
+}

@@ -1,0 +1,50 @@
+{
+    "name": "session_20260924_210022",
+    "start_url": "http://127.0.0.1:50225/phase4_chip_checkbox.html",
+    "actions": [
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "http://127.0.0.1:50225/phase4_chip_checkbox.html",
+            "timestamp": "2026-09-24T15:30:22.306Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#patterns-chip-container",
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Patterns\n Printed\n Solid",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#patterns-chip-container",
+                "xpath": "//*[@id='patterns-chip-container']",
+                "text": "Patterns\n Printed\n Solid",
+                "element_text": "Patterns\n Printed\n Solid",
+                "tag": "div",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 40,
+                "y": 40,
+                "width": 89.59375,
+                "height": 36
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "http://127.0.0.1:50225/phase4_chip_checkbox.html",
+            "timestamp": "2026-09-24T15:30:23.340Z",
+            "page_id": 0
+        }
+    ]
+}

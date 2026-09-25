@@ -1,0 +1,906 @@
+{
+    "name": "session_20260922_182440",
+    "session_id": "ed454cd5c0e94b2fbfc3eb6ed3593116",
+    "start_url": "https://www.myntra.com/",
+    "recorded_at": "2026-09-22T18:24:40.885311",
+    "stop_reason": "browser_closed",
+    "total_actions": 37,
+    "page_count": 2,
+    "viewport_width": 1280,
+    "viewport_height": 720,
+    "actions": [
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/",
+            "timestamp": "2026-09-22T12:53:55.319Z",
+            "page_id": 0,
+            "delay_before_ms": 0
+        },
+        {
+            "action_type": "fill",
+            "value": "shirt",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Search for products, brands and more",
+                "placeholder": "Search for products, brands and more",
+                "title": null,
+                "href": null,
+                "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > div:nth-of-type(3) > input",
+                "xpath": "//input[@placeholder='Search for products, brands and more']",
+                "text": "Search for products, brands and more",
+                "element_text": "Search for products, brands and more",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Search for products, brands and more"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 731.2000122070312,
+                "y": 20,
+                "width": 324.8000183105469,
+                "height": 39.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/",
+            "timestamp": "2026-09-22T12:53:58.160Z",
+            "page_id": 0,
+            "delay_before_ms": 2841
+        },
+        {
+            "action_type": "press",
+            "value": "Enter",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Search for products, brands and more",
+                "placeholder": "Search for products, brands and more",
+                "title": null,
+                "href": null,
+                "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > div:nth-of-type(3) > input",
+                "xpath": "//input[@placeholder='Search for products, brands and more']",
+                "text": "Search for products, brands and more",
+                "element_text": "Search for products, brands and more",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Search for products, brands and more"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 731.2000122070312,
+                "y": 20,
+                "width": 324.8000183105469,
+                "height": 39.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/",
+            "timestamp": "2026-09-22T12:53:58.163Z",
+            "page_id": 0,
+            "delay_before_ms": 3
+        },
+        {
+            "action_type": "validate",
+            "value": "shirt",
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/",
+            "timestamp": "2026-09-22T12:53:58.444Z",
+            "page_id": 0,
+            "delay_before_ms": 281
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/shirt?rawQuery=shirt",
+            "timestamp": "2026-09-22T12:53:59.513Z",
+            "page_id": 0,
+            "delay_before_ms": 1069
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 638,
+            "scroll_y_before": 0,
+            "scroll_y_after": 638.4000244140625,
+            "viewport_height": 720,
+            "document_height": 6294,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/shirt?rawQuery=shirt",
+            "timestamp": "2026-09-22T12:54:02.008Z",
+            "page_id": 0,
+            "delay_before_ms": 2495
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "Grey",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#mountRoot > div > main > div:nth-of-type(3) > div > section > div > div:nth-of-type(5) > ul > li:nth-of-type(5) > label > input",
+                "xpath": "//label[normalize-space(text())='Grey']/input",
+                "text": "Grey",
+                "element_text": "Grey",
+                "tag": "input",
+                "attributes": {
+                    "type": "checkbox"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 149.2375030517578,
+                "y": 338.20001220703125,
+                "width": 13,
+                "height": 13
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/shirt?rawQuery=shirt",
+            "timestamp": "2026-09-22T12:54:03.515Z",
+            "expected_state": true,
+            "page_id": 0,
+            "delay_before_ms": 1507
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/shirt?f=Color%3AGrey_808080&rawQuery=shirt",
+            "timestamp": "2026-09-22T12:54:03.615Z",
+            "page_id": 0,
+            "delay_before_ms": 100
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": -638,
+            "scroll_y_before": 638.4000244140625,
+            "scroll_y_after": 0,
+            "viewport_height": 720,
+            "document_height": 6341,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/shirt?f=Color%3AGrey_808080&rawQuery=shirt",
+            "timestamp": "2026-09-22T12:54:06.155Z",
+            "page_id": 0,
+            "delay_before_ms": 2540
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "HIGHLANDER",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#mountRoot > div > main > div:nth-of-type(3) > div > section > div > div:nth-of-type(3) > ul > li > label > input",
+                "xpath": "//label[normalize-space(text())='HIGHLANDER']/input",
+                "text": "HIGHLANDER",
+                "element_text": "HIGHLANDER",
+                "tag": "input",
+                "attributes": {
+                    "type": "checkbox"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 25,
+                "y": 398.6000061035156,
+                "width": 13,
+                "height": 13
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/shirt?f=Color%3AGrey_808080&rawQuery=shirt",
+            "timestamp": "2026-09-22T12:54:07.737Z",
+            "expected_state": true,
+            "page_id": 0,
+            "delay_before_ms": 1582
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/shirt?f=Brand%3AHIGHLANDER%3A%3AColor%3AGrey_808080&rawQuery=shirt",
+            "timestamp": "2026-09-22T12:54:07.762Z",
+            "page_id": 0,
+            "delay_before_ms": 25
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 863,
+            "scroll_y_before": 0,
+            "scroll_y_after": 863.2000122070312,
+            "viewport_height": 720,
+            "document_height": 6340,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/shirt?f=Brand%3AHIGHLANDER%3A%3AColor%3AGrey_808080&rawQuery=shirt",
+            "timestamp": "2026-09-22T12:54:10.221Z",
+            "page_id": 0,
+            "delay_before_ms": 2459
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": -1,
+            "scroll_y_before": 863.2000122070312,
+            "scroll_y_after": 862.4000244140625,
+            "viewport_height": 720,
+            "document_height": 6340,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/shirt?f=Brand%3AHIGHLANDER%3A%3AColor%3AGrey_808080&rawQuery=shirt",
+            "timestamp": "2026-09-22T12:54:10.481Z",
+            "page_id": 0,
+            "delay_before_ms": 260
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "HIGHLANDER\nSizes: 42\nRs. 431Rs. 1799(76% OFF)",
+                "placeholder": null,
+                "title": null,
+                "href": "shirts/highlander/highlander-checked-slim-fit-shirt/28282080/buy",
+                "css_path": "li#28282080 > a",
+                "xpath": "//a[@href='shirts/highlander/highlander-checked-slim-fit-shirt/28282080/buy']",
+                "text": "HIGHLANDER\nSizes: 42\nRs. 431Rs. 1799(76% OFF)",
+                "element_text": "HIGHLANDER\nSizes: 42\nRs. 431Rs. 1799(76% OFF)",
+                "tag": "a",
+                "attributes": {
+                    "href": "shirts/highlander/highlander-checked-slim-fit-shirt/28282080/buy"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 528.7250366210938,
+                "y": 225,
+                "width": 210,
+                "height": 359.8000183105469
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/shirt?f=Brand%3AHIGHLANDER%3A%3AColor%3AGrey_808080&rawQuery=shirt",
+            "timestamp": "2026-09-22T12:54:10.986Z",
+            "page_id": 0,
+            "delay_before_ms": 505
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": "Olive / Black",
+                "href": "/shirts/highlander/highlander-men-olive-green--black-slim-fit-checked-casual-shirt/11780934/buy",
+                "css_path": "div#mountRoot > div > div > main > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2) > div > div > a:nth-of-type(4)",
+                "xpath": "//a[@href='/shirts/highlander/highlander-men-olive-green--black-slim-fit-checked-casual-shirt/11780934/buy']",
+                "text": "",
+                "element_text": "",
+                "tag": "a",
+                "attributes": {
+                    "title": "Olive / Black",
+                    "href": "/shirts/highlander/highlander-men-olive-green--black-slim-fit-checked-casual-shirt/11780934/buy"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 953.1749877929688,
+                "y": 367.6499938964844,
+                "width": 65,
+                "height": 19.200000762939453
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/shirts/highlander/highlander-checked-slim-fit-shirt/28282080/buy",
+            "timestamp": "2026-09-22T12:54:13.893Z",
+            "page_id": 1,
+            "delay_before_ms": 2907
+        },
+        {
+            "action_type": "tab_open",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/shirts/highlander/highlander-checked-slim-fit-shirt/28282080/buy",
+            "timestamp": "2026-09-22T12:54:14.052Z",
+            "new_tab": true,
+            "page_id": 1,
+            "from_page_id": 0,
+            "delay_before_ms": 159
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": "Black / White",
+                "href": "/shirts/highlander/highlander-men-black-slim-fit-tartan-checks-cotton-checked-casual-shirt/15835946/buy",
+                "css_path": "div#mountRoot > div > div > main > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2) > div > div > a:nth-of-type(4)",
+                "xpath": "//a[@href='/shirts/highlander/highlander-men-black-slim-fit-tartan-checks-cotton-checked-casual-shirt/15835946/buy']",
+                "text": "",
+                "element_text": "",
+                "tag": "a",
+                "attributes": {
+                    "title": "Black / White",
+                    "href": "/shirts/highlander/highlander-men-black-slim-fit-tartan-checks-cotton-checked-casual-shirt/15835946/buy"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 953.1749877929688,
+                "y": 475.6499938964844,
+                "width": 65,
+                "height": 19.200000762939453
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/shirts/highlander/highlander-men-olive-green--black-slim-fit-checked-casual-shirt/11780934/buy",
+            "timestamp": "2026-09-22T12:54:15.684Z",
+            "page_id": 1,
+            "delay_before_ms": 1632
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 300,
+            "scroll_y_before": 0,
+            "scroll_y_after": 300,
+            "viewport_height": 720,
+            "document_height": 10886,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/shirts/highlander/highlander-men-black-slim-fit-tartan-checks-cotton-checked-casual-shirt/15835946/buy",
+            "timestamp": "2026-09-22T12:54:19.757Z",
+            "page_id": 1,
+            "delay_before_ms": 4073
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "42",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#sizeButtonsContainer > div:nth-of-type(2) > div:nth-of-type(3) > div > button",
+                "xpath": "//button[normalize-space(.)='42']",
+                "text": "42",
+                "element_text": "42",
+                "tag": "button",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 878.1749877929688,
+                "y": 514.4000244140625,
+                "width": 50,
+                "height": 50
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/shirts/highlander/highlander-men-black-slim-fit-tartan-checks-cotton-checked-casual-shirt/15835946/buy",
+            "timestamp": "2026-09-22T12:54:20.591Z",
+            "page_id": 1,
+            "delay_before_ms": 834
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 315,
+            "scroll_y_before": 300,
+            "scroll_y_after": 615.2000122070312,
+            "viewport_height": 720,
+            "document_height": 10962,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/shirts/highlander/highlander-men-black-slim-fit-tartan-checks-cotton-checked-casual-shirt/15835946/buy",
+            "timestamp": "2026-09-22T12:54:21.703Z",
+            "page_id": 1,
+            "delay_before_ms": 1112
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "ADD TO BAG",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#mountRoot > div > div > main > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > div",
+                "xpath": "//div[normalize-space(text())='ADD TO BAG']",
+                "text": "ADD TO BAG",
+                "element_text": "ADD TO BAG",
+                "tag": "div",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 758.1749877929688,
+                "y": 283.20001220703125,
+                "width": 232.8874969482422,
+                "height": 53.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/shirts/highlander/highlander-men-black-slim-fit-tartan-checks-cotton-checked-casual-shirt/15835946/buy",
+            "timestamp": "2026-09-22T12:54:22.370Z",
+            "page_id": 1,
+            "delay_before_ms": 667
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "GO TO BAG",
+                "placeholder": null,
+                "title": null,
+                "href": "/checkout/cart",
+                "css_path": "div#mountRoot > div > div > main > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > a",
+                "xpath": "//a[normalize-space(.)='GO TO BAG']",
+                "text": "GO TO BAG",
+                "element_text": "GO TO BAG",
+                "tag": "a",
+                "attributes": {
+                    "href": "/checkout/cart"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 758.1749877929688,
+                "y": 283.20001220703125,
+                "width": 232.8874969482422,
+                "height": 50.79999923706055
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/shirts/highlander/highlander-men-black-slim-fit-tartan-checks-cotton-checked-casual-shirt/15835946/buy",
+            "timestamp": "2026-09-22T12:54:23.832Z",
+            "page_id": 1,
+            "delay_before_ms": 1462
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Size: 42",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#cartItemsList > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div:nth-of-type(3) > div > div > span",
+                "xpath": "//*[@data-testid='cart-item-size-value']",
+                "text": "Size: 42",
+                "element_text": "Size: 42",
+                "tag": "span",
+                "attributes": {
+                    "data-testid": "cart-item-size-value"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 295.3999938964844,
+                "y": 348.2749938964844,
+                "width": 51.125,
+                "height": 16.80000114440918
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/checkout/cart",
+            "timestamp": "2026-09-22T12:54:27.082Z",
+            "page_id": 1,
+            "delay_before_ms": 3250
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/checkout/cart#modal",
+            "timestamp": "2026-09-22T12:54:27.526Z",
+            "page_id": 1,
+            "delay_before_ms": 444
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "39\n40\n42\n44",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#cartItemsList > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(4) > div > div > div:nth-of-type(2) > div:nth-of-type(2)",
+                "xpath": "//div[normalize-space(.)='39404244']",
+                "text": "39\n40\n42\n44",
+                "element_text": "39\n40\n42\n44",
+                "tag": "div",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 447.8999938964844,
+                "y": 349,
+                "width": 367.3999938964844,
+                "height": 56.45000076293945
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/checkout/cart#modal",
+            "timestamp": "2026-09-22T12:54:28.427Z",
+            "page_id": 1,
+            "delay_before_ms": 901
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "44",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#50680804 > div",
+                "xpath": "//*[@id='50680804']//div[contains(., '44')]",
+                "text": "44",
+                "element_text": "44",
+                "tag": "div",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 643.5875244140625,
+                "y": 359.8000183105469,
+                "width": 20.262500762939453,
+                "height": 22.850000381469727
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/checkout/cart#modal",
+            "timestamp": "2026-09-22T12:54:29.252Z",
+            "expected_state": false,
+            "page_id": 1,
+            "delay_before_ms": 825
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "button",
+                "aria_label": null,
+                "accessible_name": "DONE",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#cartItemsList > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(4) > div > div > div:nth-of-type(2) > button",
+                "xpath": "//button[normalize-space(.)='DONE']",
+                "text": "DONE",
+                "element_text": "DONE",
+                "tag": "button",
+                "attributes": {
+                    "role": "button"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 447.8999938964844,
+                "y": 452.3000183105469,
+                "width": 367.3999938964844,
+                "height": 40
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/checkout/cart#modal",
+            "timestamp": "2026-09-22T12:54:30.215Z",
+            "page_id": 1,
+            "delay_before_ms": 963
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Qty: 1",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#cartItemsList > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > div > div:nth-of-type(3) > div > div:nth-of-type(2)",
+                "xpath": "//*[@data-testid='cart-item-qty']",
+                "text": "Qty: 1",
+                "element_text": "Qty: 1",
+                "tag": "div",
+                "attributes": {
+                    "data-testid": "cart-item-qty"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 378.2749938964844,
+                "y": 347.07501220703125,
+                "width": 65.20000457763672,
+                "height": 20
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/checkout/cart",
+            "timestamp": "2026-09-22T12:54:31.564Z",
+            "page_id": 1,
+            "delay_before_ms": 1349
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "3",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#3 > div",
+                "xpath": "//div[normalize-space(text())='3']",
+                "text": "3",
+                "element_text": "3",
+                "tag": "div",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 619.4000244140625,
+                "y": 480.25,
+                "width": 14,
+                "height": 19.200000762939453
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/checkout/cart#modal",
+            "timestamp": "2026-09-22T12:54:32.881Z",
+            "expected_state": false,
+            "page_id": 1,
+            "delay_before_ms": 1317
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "button",
+                "aria_label": null,
+                "accessible_name": "DONE",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#cartItemsList > div > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(4) > div > button",
+                "xpath": "//button[normalize-space(.)='DONE']",
+                "text": "DONE",
+                "element_text": "DONE",
+                "tag": "button",
+                "attributes": {
+                    "role": "button"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 495.3999938964844,
+                "y": 541.4500122070312,
+                "width": 272.3999938964844,
+                "height": 40
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/checkout/cart#modal",
+            "timestamp": "2026-09-22T12:54:34.151Z",
+            "page_id": 1,
+            "delay_before_ms": 1270
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/checkout/cart",
+            "timestamp": "2026-09-22T12:54:34.705Z",
+            "page_id": 1,
+            "delay_before_ms": 554
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#appContent > div > div > div > div > div:nth-of-type(2) > div > div > div:nth-of-type(4) > div > svg",
+                "xpath": "/html[1]/body[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[4]/div[1]/svg[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "svg",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 782,
+                "y": 422.9750061035156,
+                "width": 16,
+                "height": 16
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/checkout/cart",
+            "timestamp": "2026-09-22T12:54:36.054Z",
+            "expected_state": true,
+            "page_id": 1,
+            "delay_before_ms": 1349
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 164,
+            "scroll_y_before": 0,
+            "scroll_y_after": 164,
+            "viewport_height": 720,
+            "document_height": 8599,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/checkout/cart",
+            "timestamp": "2026-09-22T12:54:38.063Z",
+            "page_id": 1,
+            "delay_before_ms": 2009
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "button",
+                "aria_label": null,
+                "accessible_name": "PLACE ORDER",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#appContent > div > div > div > div > div:nth-of-type(2) > div:nth-of-type(4) > button",
+                "xpath": "//button[normalize-space(.)='PLACE ORDER']",
+                "text": "PLACE ORDER",
+                "element_text": "PLACE ORDER",
+                "tag": "button",
+                "attributes": {
+                    "role": "button"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 782,
+                "y": 673.6875,
+                "width": 320,
+                "height": 40
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/checkout/cart",
+            "timestamp": "2026-09-22T12:54:38.565Z",
+            "page_id": 1,
+            "delay_before_ms": 502
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 1,
+            "scroll_y_before": 0,
+            "scroll_y_after": 0.800000011920929,
+            "viewport_height": 720,
+            "document_height": 780,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/login?referer=/checkout/cart",
+            "timestamp": "2026-09-22T12:54:39.620Z",
+            "page_id": 1,
+            "delay_before_ms": 1055
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 1,
+            "page_url": "https://www.myntra.com/checkout/cart",
+            "remaining_page_id": 0,
+            "timestamp": "2026-09-22T12:54:40.883Z",
+            "delay_before_ms": 1263
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 0,
+            "page_url": "https://www.myntra.com/shirt?f=Brand%3AHIGHLANDER%3A%3AColor%3AGrey_808080&rawQuery=shirt",
+            "remaining_page_id": null,
+            "timestamp": "2026-09-22T12:54:40.883Z",
+            "delay_before_ms": 0
+        }
+    ],
+    "saved_at": "2026-09-22T18:24:40.885311"
+}

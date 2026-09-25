@@ -1,0 +1,277 @@
+{
+    "name": "session_20260924_171403",
+    "session_id": "53db657ce21c489bb54988fc761d1d29",
+    "start_url": "https://www.myntra.com",
+    "recorded_at": "2026-09-24T17:14:30.922445",
+    "stop_reason": "browser_closed",
+    "total_actions": 11,
+    "page_count": 1,
+    "viewport_width": 1280,
+    "viewport_height": 720,
+    "actions": [
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com",
+            "timestamp": "2026-09-24T11:44:03.296Z",
+            "page_id": 0,
+            "delay_before_ms": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "T-Shirts",
+                "placeholder": null,
+                "title": null,
+                "href": "/men-tshirts",
+                "product_id": null,
+                "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > nav > div > div > div > div > div > div > li > ul > li:nth-of-type(2) > a",
+                "xpath": "//a[@href='/men-tshirts']",
+                "text": "T-Shirts",
+                "element_text": "T-Shirts",
+                "tag": "a",
+                "attributes": {
+                    "href": "/men-tshirts"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 101.5999984741211,
+                "y": 123,
+                "width": 191,
+                "height": 23
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/",
+            "timestamp": "2026-09-24T11:44:03.486Z",
+            "page_id": 0,
+            "delay_before_ms": 190
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Search for products, brands and more",
+                "placeholder": "Search for products, brands and more",
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > div:nth-of-type(3) > input",
+                "xpath": "//input[@placeholder='Search for products, brands and more']",
+                "text": "Search for products, brands and more",
+                "element_text": "Search for products, brands and more",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Search for products, brands and more"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 731.2000122070312,
+                "y": 20,
+                "width": 324.8000183105469,
+                "height": 39.60000228881836
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/men-tshirts",
+            "timestamp": "2026-09-24T11:44:05.722Z",
+            "page_id": 0,
+            "delay_before_ms": 2236
+        },
+        {
+            "action_type": "fill",
+            "value": "colar",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Search for products, brands and more",
+                "placeholder": "Search for products, brands and more",
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > div:nth-of-type(3) > input",
+                "xpath": "//input[@placeholder='Search for products, brands and more']",
+                "text": "Search for products, brands and more",
+                "element_text": "Search for products, brands and more",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Search for products, brands and more"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 731.2000122070312,
+                "y": 20,
+                "width": 324.8000183105469,
+                "height": 39.60000228881836
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/men-tshirts",
+            "timestamp": "2026-09-24T11:44:08.050Z",
+            "page_id": 0,
+            "delay_before_ms": 2328
+        },
+        {
+            "action_type": "press",
+            "value": "Enter",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Search for products, brands and more",
+                "placeholder": "Search for products, brands and more",
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > div:nth-of-type(3) > input",
+                "xpath": "//input[@placeholder='Search for products, brands and more']",
+                "text": "Search for products, brands and more",
+                "element_text": "Search for products, brands and more",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Search for products, brands and more"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 731.2000122070312,
+                "y": 20,
+                "width": 324.8000183105469,
+                "height": 39.60000228881836
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/men-tshirts",
+            "timestamp": "2026-09-24T11:44:08.052Z",
+            "page_id": 0,
+            "delay_before_ms": 2
+        },
+        {
+            "action_type": "validate",
+            "value": "colar",
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/men-tshirts",
+            "timestamp": "2026-09-24T11:44:08.696Z",
+            "page_id": 0,
+            "delay_before_ms": 644
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/colar?rawQuery=colar",
+            "timestamp": "2026-09-24T11:44:10.103Z",
+            "page_id": 0,
+            "delay_before_ms": 1407
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 14,
+            "scroll_y_before": 0,
+            "scroll_y_after": 14.399999618530273,
+            "viewport_height": 720,
+            "document_height": 6269,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/colar?rawQuery=colar",
+            "timestamp": "2026-09-24T11:44:11.402Z",
+            "page_id": 0,
+            "delay_before_ms": 1299
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 208,
+            "scroll_y_before": 14.399999618530273,
+            "scroll_y_after": 222.39999389648438,
+            "viewport_height": 720,
+            "document_height": 6269,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/colar?rawQuery=colar",
+            "timestamp": "2026-09-24T11:44:11.825Z",
+            "page_id": 0,
+            "delay_before_ms": 423
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "NEW\nNEW\nNEW\nNEW\nNEW\nNEW\nNEW\nNEW\nNEW\nNEW\nMonk Mode\nSizes: XXL\nRs. 744Rs. 1699(56%",
+                "placeholder": null,
+                "title": null,
+                "href": "tshirts/monk+mode/monk-mode-men-striped-polo-collar-t-shirt/45954123/buy",
+                "product_id": "45954123",
+                "css_path": "li#45954123 > a",
+                "xpath": "//a[@href='tshirts/monk+mode/monk-mode-men-striped-polo-collar-t-shirt/45954123/buy']",
+                "text": "NEW\nNEW\nNEW\nNEW\nNEW\nNEW\nNEW\nNEW\nNEW\nNEW\nMonk Mode\nSizes: XXL\nRs. 744Rs. 1699(56%",
+                "element_text": "NEW Monk Mode Rs. 744Rs. 1699(56%",
+                "tag": "a",
+                "attributes": {
+                    "href": "tshirts/monk+mode/monk-mode-men-striped-polo-collar-t-shirt/45954123/buy"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 777.4500122070312,
+                "y": 404,
+                "width": 210,
+                "height": 359.8000183105469
+            },
+            "scroll_x": 0,
+            "scroll_y": 222.39999389648438,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/colar?rawQuery=colar",
+            "timestamp": "2026-09-24T11:44:12.181Z",
+            "page_id": 0,
+            "delay_before_ms": 356
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 0,
+            "page_url": "https://www.myntra.com/colar?rawQuery=colar",
+            "remaining_page_id": null,
+            "timestamp": "2026-09-24T11:44:30.902Z",
+            "delay_before_ms": 18721
+        }
+    ],
+    "saved_at": "2026-09-24T17:14:30.933734"
+}

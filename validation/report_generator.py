@@ -48,24 +48,42 @@ def _to_data_uri(rel_path):
         return None
 
 
+def _step_outcome(s):
+    """FIX 4 (report/live-log correctness): a step the generator flagged
+    not_run (stop_on_failure halted before reaching it) or otp_role (a
+    manual-input/OTP step that didn't itself fail) is neither a pass nor a
+    genuine failure - CONFIRMED REAL BUG this fixes, against an actual
+    Myntra recording: the downloadable report counted 48 never-attempted
+    steps as "failed" and listed the first of them as the failure reason.
+    Kept in sync with static/js/script.js's own _stepOutcome() by
+    construction (same three fields, same precedence)."""
+    if s.get("not_run"):
+        return "not_run"
+    if s.get("otp_role") and s.get("success") is not False:
+        return "manual_input"
+    return "pass" if s.get("success") else "fail"
+
+
 def generate_report(execution_result: dict, output_dir: Path = None) -> Path:
     template = _env.get_template("report.html")
 
     steps = []
     for s in execution_result.get("steps", []):
-        steps.append({**s, "screenshot_data": _to_data_uri(s.get("screenshot"))})
+        steps.append({**s, "screenshot_data": _to_data_uri(s.get("screenshot")), "outcome": _step_outcome(s)})
 
     ui_elements = execution_result.get("ui_elements", [])
     execution_summary = {
         "total": len(steps),
-        "passed": sum(1 for s in steps if s.get("success")),
-        "failed": sum(1 for s in steps if not s.get("success")),
-        "first_failed": next((s for s in steps if not s.get("success")), None),
+        "passed": sum(1 for s in steps if s["outcome"] == "pass"),
+        "failed": sum(1 for s in steps if s["outcome"] == "fail"),
+        "not_run": sum(1 for s in steps if s["outcome"] == "not_run"),
+        "manual_input": sum(1 for s in steps if s["outcome"] == "manual_input"),
+        "first_failed": next((s for s in steps if s["outcome"] == "fail"), None),
     }
     ui_summary = {
         "total": len(ui_elements),
-        "found": sum(1 for e in ui_elements if e.get("element_found")),
-        "missing": sum(1 for e in ui_elements if not e.get("element_found")),
+        "found": sum(1 for e in ui_elements if e.get("status") == "PASS"),
+        "missing": sum(1 for e in ui_elements if e.get("status") == "FAIL"),
         "status": execution_result.get("ui_elements_status"),
     }
 
@@ -81,11 +99,13 @@ def generate_report(execution_result: dict, output_dir: Path = None) -> Path:
     validation_steps = [s for s in steps if s.get("action_type") in VALIDATION_ACTION_TYPES]
     action_steps = [s for s in steps if s.get("action_type") not in VALIDATION_ACTION_TYPES]
     validation_summary = {
-        "actions_passed": sum(1 for s in action_steps if s.get("success")),
+        "actions_passed": sum(1 for s in action_steps if s["outcome"] == "pass"),
         "actions_total": len(action_steps),
-        "validations_passed": sum(1 for s in validation_steps if s.get("success")),
+        "validations_passed": sum(1 for s in validation_steps if s["outcome"] == "pass"),
         "validations_total": len(validation_steps),
-        "failed_total": sum(1 for s in steps if not s.get("success")),
+        "failed_total": sum(1 for s in steps if s["outcome"] == "fail"),
+        "not_run_total": sum(1 for s in steps if s["outcome"] == "not_run"),
+        "manual_input_total": sum(1 for s in steps if s["outcome"] == "manual_input"),
         "locator_warnings": sum(1 for s in steps if (s.get("locator_report") or {}).get("weak")),
     }
 

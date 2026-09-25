@@ -1,0 +1,101 @@
+{
+  "status": "FAIL",
+  "message": "steps failed: [3]; UI elements missing at steps: [3]",
+  "diagnostic": null,
+  "qa_url": "http://127.0.0.1:8899/page1.html",
+  "steps": [
+    {
+      "index": 1,
+      "action_type": "navigate",
+      "name": "Page1 page",
+      "strategy_used": null,
+      "element_found": true,
+      "success": true,
+      "error": null,
+      "warning": null,
+      "effect_verified": null,
+      "large_bbox_flag": false,
+      "screenshot": "generated_scripts/screenshoots/bisect_item7_negative_script_20260922_162832/page1_html/step01_page1_page_2026-09-22_16-28-35.png",
+      "url_before": "http://127.0.0.1:8899/page1.html",
+      "url_after": "http://127.0.0.1:8899/page1.html",
+      "duration": 0.015,
+      "locator_report": null,
+      "expected": null,
+      "actual": null,
+      "fragile": false
+    },
+    {
+      "index": 2,
+      "action_type": "click",
+      "name": "\"I agree\" field",
+      "strategy_used": "id",
+      "element_found": true,
+      "success": true,
+      "error": null,
+      "warning": null,
+      "effect_verified": null,
+      "large_bbox_flag": false,
+      "screenshot": null,
+      "url_before": "http://127.0.0.1:8899/page1.html",
+      "url_after": "http://127.0.0.1:8899/page1.html",
+      "duration": 1.438,
+      "locator_report": {
+        "strategy": "id",
+        "strategy_label": "Element ID",
+        "fallback_level": 4,
+        "resolved": true,
+        "weak": false,
+        "resolution_ms": 1438,
+        "message": "I agree found using Element ID. (resolved in 1438ms)"
+      },
+      "expected": null,
+      "actual": null,
+      "fragile": false
+    },
+    {
+      "index": 3,
+      "action_type": "tab_open",
+      "name": "tab_open",
+      "strategy_used": null,
+      "element_found": false,
+      "success": false,
+      "error": "page_id=1 could not be resolved - waited 12s for page_id=1 to appear as a real new tab/page (a genuine browser 'page' event triggered by a real click) but it never did - this never manufactures a substitute page here, since doing so wouldn't verify a real click actually triggered it",
+      "warning": null,
+      "effect_verified": null,
+      "large_bbox_flag": false,
+      "screenshot": null,
+      "url_before": "http://127.0.0.1:8899/page1.html",
+      "url_after": "http://127.0.0.1:8899/page1.html",
+      "duration": 0.0,
+      "locator_report": null,
+      "expected": null,
+      "actual": null,
+      "fragile": false
+    }
+  ],
+  "ui_elements": [
+    {
+      "index": 2,
+      "action_type": "click",
+      "element_found": true,
+      "locator_used": "id",
+      "status": "PASS",
+      "message": null
+    },
+    {
+      "index": 3,
+      "action_type": "tab_open",
+      "element_found": false,
+      "locator_used": null,
+      "status": "FAIL",
+      "message": "Expected UI element was not found"
+    }
+  ],
+  "ui_elements_status": "FAIL",
+  "content_check": null,
+  "screenshot_diff": null,
+  "product_validation": null,
+  "final_screenshot": null,
+  "run_id": "bisect_item7_negative_script_20260922_162832",
+  "run_dir": "generated_scripts/screenshoots/bisect_item7_negative_script_20260922_162832"
+}

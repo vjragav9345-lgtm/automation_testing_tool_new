@@ -1,0 +1,128 @@
+{
+    "name": "session_20260922_172448",
+    "session_id": "abd85879aa09422897315c144c099486",
+    "start_url": "https://www.myntra.com/",
+    "recorded_at": "2026-09-22T17:24:48.751878",
+    "stop_reason": "browser_closed",
+    "total_actions": 6,
+    "page_count": 2,
+    "viewport_width": 1280,
+    "viewport_height": 720,
+    "actions": [
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/",
+            "timestamp": "2026-09-22T11:54:40.012Z",
+            "page_id": 0,
+            "delay_before_ms": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "T-Shirts",
+                "placeholder": null,
+                "title": null,
+                "href": "/men-tshirts",
+                "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > nav > div > div > div > div > div > div > li > ul > li:nth-of-type(2) > a",
+                "xpath": "//a[@href='/men-tshirts']",
+                "text": "T-Shirts",
+                "element_text": "T-Shirts",
+                "tag": "a",
+                "attributes": {
+                    "href": "/men-tshirts"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 101.5999984741211,
+                "y": 123,
+                "width": 191,
+                "height": 23
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/",
+            "timestamp": "2026-09-22T11:54:41.530Z",
+            "page_id": 0,
+            "delay_before_ms": 1518
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "U.S. Polo Assn.\nSizes: XXL\nRs. 1467Rs. 1649(11% OFF)",
+                "placeholder": null,
+                "title": null,
+                "href": "lounge-tshirts/u.s.+polo+assn./us-polo-assn-men-crew-neck-breathable-lounge-tshirt/36468830/buy",
+                "css_path": "li#36468830 > a",
+                "xpath": "//li[.//h4[contains(text(), 'Men Breathable Lounge Tshirt')]]/a",
+                "text": "U.S. Polo Assn.\nSizes: XXL\nRs. 1467Rs. 1649(11% OFF)",
+                "element_text": "U.S. Polo Assn.\nSizes: XXL\nRs. 1467Rs. 1649(11% OFF)",
+                "tag": "a",
+                "attributes": {
+                    "href": "lounge-tshirts/u.s.+polo+assn./us-polo-assn-men-crew-neck-breathable-lounge-tshirt/36468830/buy"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 777.4500122070312,
+                "y": 236.60000610351562,
+                "width": 210,
+                "height": 359.8000183105469
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/men-tshirts",
+            "timestamp": "2026-09-22T11:54:44.744Z",
+            "page_id": 0,
+            "delay_before_ms": 3214
+        },
+        {
+            "action_type": "tab_open",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/lounge-tshirts/u.s.+polo+assn./us-polo-assn-men-crew-neck-breathable-lounge-tshirt/36468830/buy",
+            "timestamp": "2026-09-22T11:54:47.687Z",
+            "new_tab": true,
+            "page_id": 1,
+            "from_page_id": 0,
+            "delay_before_ms": 2943
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 1,
+            "page_url": "https://www.myntra.com/lounge-tshirts/u.s.+polo+assn./us-polo-assn-men-crew-neck-breathable-lounge-tshirt/36468830/buy",
+            "remaining_page_id": 0,
+            "timestamp": "2026-09-22T11:54:48.747Z",
+            "delay_before_ms": 1060
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 0,
+            "page_url": "https://www.myntra.com/men-tshirts",
+            "remaining_page_id": null,
+            "timestamp": "2026-09-22T11:54:48.750Z",
+            "delay_before_ms": 3
+        }
+    ],
+    "saved_at": "2026-09-22T17:24:48.752901"
+}

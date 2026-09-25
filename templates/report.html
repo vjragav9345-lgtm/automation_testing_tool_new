@@ -39,6 +39,7 @@
     th { color: #64748b; font-size: 12px; text-transform: uppercase; }
     tr.fragile { background: #fef3c7; }
     tr.failed { background: #fee2e2; }
+    tr.not-run-row { background: #f8fafc; color: #94a3b8; }
     .pill {
         display: inline-block;
         padding: 2px 8px;
@@ -61,6 +62,8 @@
     .validation-card { border-radius: 8px; padding: 10px 12px; border: 1px solid #e2e8f0; background: #f8fafc; }
     .validation-card.pass { border-color: #bbf7d0; background: #f0fdf4; }
     .validation-card.fail { border-color: #fecaca; background: #fef2f2; }
+    .validation-card.not-run { border-color: #e2e8f0; background: #f8fafc; opacity: 0.75; }
+    .validation-card.manual-input { border-color: #bfdbfe; background: #eff6ff; }
     .validation-card-line { font-weight: 600; font-size: 14px; }
     .validation-card-field { font-size: 12px; color: #64748b; margin-top: 2px; }
 </style>
@@ -85,6 +88,12 @@
             · {{ validation_summary.validations_passed }}/{{ validation_summary.validations_total }} validation{{ '' if validation_summary.validations_total == 1 else 's' }} passed
             {% endif %}
             · {{ validation_summary.failed_total }} failed
+            {% if validation_summary.not_run_total %}
+            · {{ validation_summary.not_run_total }} not run
+            {% endif %}
+            {% if validation_summary.manual_input_total %}
+            · {{ validation_summary.manual_input_total }} manual-input
+            {% endif %}
             {% if validation_summary.locator_warnings %}
             · {{ validation_summary.locator_warnings }} locator warning{{ '' if validation_summary.locator_warnings == 1 else 's' }}
             {% endif %}
@@ -92,22 +101,24 @@
         {% if validation_steps %}
         <div class="validation-cards">
             {% for s in validation_steps %}
-            <div class="validation-card {{ 'pass' if s.success else 'fail' }}">
+            <div class="validation-card {{ s.outcome.replace('_', '-') }}">
                 <div class="validation-card-line">
-                    {{ '✓' if s.success else '✗' }}
+                    {{ {'pass': '✓', 'fail': '✗', 'not_run': '○', 'manual_input': '🔐'}[s.outcome] }}
                     {% if s.expected %}
                         {{ (s.locator_report.strategy_label if s.locator_report else s.action_type) }}
-                        {{ 'equals' if s.success else 'mismatch' }}
-                        {{ '"%s"' % s.expected if s.success else '' }}
+                        {{ 'equals' if s.outcome == 'pass' else 'mismatch' }}
+                        {{ '"%s"' % s.expected if s.outcome == 'pass' else '' }}
                     {% else %}
                         {{ s.action_type }}
                     {% endif %}
                 </div>
-                {% if not s.success %}
+                {% if s.outcome == 'fail' %}
                     {% if s.expected %}<div class="validation-card-field">Expected: {{ s.expected }}</div>{% endif %}
                     {% if s.actual %}<div class="validation-card-field">Actual: {{ s.actual }}</div>{% endif %}
                     <div class="validation-card-field">Step: {{ s.index }}</div>
                     {% if s.locator_report and s.locator_report.strategy_label %}<div class="validation-card-field">Element: {{ s.locator_report.strategy_label }}</div>{% endif %}
+                {% elif s.outcome == 'not_run' %}
+                    <div class="validation-card-field">{{ s.error or 'Not run' }}</div>
                 {% endif %}
             </div>
             {% endfor %}
@@ -228,6 +239,18 @@
                 {% else %}<span class="pill ok">0</span>{% endif %}
             </span>
         </div>
+        {% if execution_summary.not_run %}
+        <div class="result-row">
+            <span class="result-label">Not Run</span>
+            <span><span class="pill unknown">{{ execution_summary.not_run }}</span></span>
+        </div>
+        {% endif %}
+        {% if execution_summary.manual_input %}
+        <div class="result-row">
+            <span class="result-label">Manual-Input</span>
+            <span><span class="pill unknown">{{ execution_summary.manual_input }}</span></span>
+        </div>
+        {% endif %}
         {% if execution_summary.first_failed %}
         <div class="result-row">
             <span class="result-label">First Failed Step</span>
@@ -252,7 +275,7 @@
             </thead>
             <tbody>
                 {% for s in steps %}
-                <tr class="{{ 'failed' if not s.success else ('fragile' if s.fragile else '') }}">
+                <tr class="{{ 'failed' if s.outcome == 'fail' else ('not-run-row' if s.outcome == 'not_run' else ('fragile' if s.fragile else '')) }}">
                     <td>{{ s.index }}</td>
                     <td>{{ s.action_type }}{% if s.name %}<br><small>{{ s.name }}</small>{% endif %}</td>
                     <td>
@@ -269,8 +292,12 @@
                         {% endif %}
                     </td>
                     <td>
-                        {% if s.success %}
+                        {% if s.outcome == 'pass' %}
                             <span class="pill ok">passed</span>
+                        {% elif s.outcome == 'not_run' %}
+                            <span class="pill unknown">not run</span>
+                        {% elif s.outcome == 'manual_input' %}
+                            <span class="pill unknown">manual-input</span>
                         {% else %}
                             <span class="pill bad">failed</span>
                         {% endif %}
@@ -334,12 +361,14 @@
             </thead>
             <tbody>
                 {% for el in ui_elements %}
-                <tr class="{{ 'failed' if el.status == 'FAIL' else '' }}">
+                <tr class="{{ 'failed' if el.status == 'FAIL' else ('not-run-row' if el.status in ('NOT_RUN', 'MANUAL_INPUT') else '') }}">
                     <td>{{ el.index }}</td>
                     <td>{{ el.action_type }}</td>
                     <td>{{ el.locator_used or '-' }}</td>
                     <td>
                         {% if el.status == 'PASS' %}<span class="pill ok">PASS</span>
+                        {% elif el.status == 'NOT_RUN' %}<span class="pill unknown">NOT RUN</span>
+                        {% elif el.status == 'MANUAL_INPUT' %}<span class="pill unknown">MANUAL-INPUT</span>
                         {% else %}<span class="pill bad">FAIL</span>{% endif %}
                     </td>
                     <td>{{ el.message or '' }}</td>

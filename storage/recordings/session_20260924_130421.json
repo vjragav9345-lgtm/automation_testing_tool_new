@@ -1,0 +1,93 @@
+{
+    "name": "session_20260924_130421",
+    "session_id": "51125cc8ca994e6da80f02618263f463",
+    "start_url": "https://www.myntra.com",
+    "recorded_at": "2026-09-24T13:04:26.502108",
+    "stop_reason": "browser_closed",
+    "total_actions": 5,
+    "page_count": 2,
+    "viewport_width": 1280,
+    "viewport_height": 720,
+    "actions": [
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "United Colors of Benetton\nSizes: 8-9Y\nRs. 979Rs. 1999(51% OFF)",
+                "placeholder": null,
+                "title": null,
+                "href": "shirts/united+colors+of+benetton/united-colors-of-benetton-boys-tartan-checks-twill-weave-shirt/36388112/buy",
+                "css_path": "li#36388112 > a",
+                "xpath": "//a[@href='shirts/united+colors+of+benetton/united-colors-of-benetton-boys-tartan-checks-twill-weave-shirt/36388112/buy']",
+                "text": "United Colors of Benetton\nSizes: 8-9Y\nRs. 979Rs. 1999(51% OFF)",
+                "element_text": "United Colors of Benetton\nSizes: 8-9Y\nRs. 979Rs. 1999(51% OFF)",
+                "tag": "a",
+                "attributes": {
+                    "href": "shirts/united+colors+of+benetton/united-colors-of-benetton-boys-tartan-checks-twill-weave-shirt/36388112/buy"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 1026.175048828125,
+                "y": 175.1999969482422,
+                "width": 210,
+                "height": 359.8000183105469
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/shirt?rawQuery=shirt",
+            "timestamp": "2026-09-24T07:34:21.783Z",
+            "page_id": 0,
+            "delay_before_ms": 0
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com",
+            "timestamp": "2026-09-24T07:34:21.954Z",
+            "page_id": 0,
+            "delay_before_ms": 171
+        },
+        {
+            "action_type": "tab_open",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/shirts/united+colors+of+benetton/united-colors-of-benetton-boys-tartan-checks-twill-weave-shirt/36388112/buy",
+            "timestamp": "2026-09-24T07:34:23.610Z",
+            "new_tab": true,
+            "page_id": 1,
+            "from_page_id": 0,
+            "delay_before_ms": 1656
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 1,
+            "page_url": "https://www.myntra.com/shirts/united+colors+of+benetton/united-colors-of-benetton-boys-tartan-checks-twill-weave-shirt/36388112/buy",
+            "remaining_page_id": 0,
+            "timestamp": "2026-09-24T07:34:26.462Z",
+            "delay_before_ms": 2852
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 0,
+            "page_url": "https://www.myntra.com/shirt?rawQuery=shirt",
+            "remaining_page_id": null,
+            "timestamp": "2026-09-24T07:34:26.482Z",
+            "delay_before_ms": 20
+        }
+    ],
+    "saved_at": "2026-09-24T13:04:26.506720"
+}

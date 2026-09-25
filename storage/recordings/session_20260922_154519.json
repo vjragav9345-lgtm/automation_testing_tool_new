@@ -1,0 +1,915 @@
+{
+    "name": "session_20260922_154519",
+    "session_id": "9bbbf405510d452ab3c4c431819e0fab",
+    "start_url": "https://www.google.com/search?q=myntra&sca_esv=10891fa1ffde4481&source=hp&ei=DFWyaueKH_CYhvcPk9Sw4Ao&iflsig=ABILxe8AAAAAarJjHIgCjZXS_E_6WPqJp0zkVdJQ71NU&ved=0ahUKEwjnwPiR-oGXAxVwjOEIHRMqDKwQ4dUDCB0&uact=5&oq=myntra&gs_lp=Egdnd3Mtd2l6IgZteW50cmEyCBAAGIAEGLEDMgUQABiABDIIEAAYgAQYsQMyCBAAGIAEGLQHMggQABiABBi0BzIFEAAYgAQyCBAAGIAEGLEDMggQABiABBi0BzIIEAAYgAQYtAcyCBAAGIAEGLEDSOoTUOAEWP0NcAF4AJABAJgBswGgAcEGqgEDMC42uAEDyAEA-AEBmAIHoAKOB6gCCsICChAAGAMYjwEY6gLCAg4QLhiABBixAxjHARjRA8ICCxAAGIAEGLEDGIMBwgIREC4YgAQYigUYjQYYsQMYgwHCAg4QABiABBiKBRixAxiDAZgDFfEFcIkwNOx2uN2SBwMxLjagB6kjsgcDMC42uAf4BsIHBTItNS4yyAc4gAgB&sclient=gws-wiz",
+    "recorded_at": "2026-09-22T15:45:19.370659",
+    "stop_reason": "browser_closed",
+    "total_actions": 27,
+    "page_count": 1,
+    "viewport_width": 1280,
+    "viewport_height": 720,
+    "actions": [
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.google.com/search?q=myntra&sca_esv=10891fa1ffde4481&source=hp&ei=DFWyaueKH_CYhvcPk9Sw4Ao&iflsig=ABILxe8AAAAAarJjHIgCjZXS_E_6WPqJp0zkVdJQ71NU&ved=0ahUKEwjnwPiR-oGXAxVwjOEIHRMqDKwQ4dUDCB0&uact=5&oq=myntra&gs_lp=Egdnd3Mtd2l6IgZteW50cmEyCBAAGIAEGLEDMgUQABiABDIIEAAYgAQYsQMyCBAAGIAEGLQHMggQABiABBi0BzIFEAAYgAQyCBAAGIAEGLEDMggQABiABBi0BzIIEAAYgAQYtAcyCBAAGIAEGLEDSOoTUOAEWP0NcAF4AJABAJgBswGgAcEGqgEDMC42uAEDyAEA-AEBmAIHoAKOB6gCCsICChAAGAMYjwEY6gLCAg4QLhiABBixAxjHARjRA8ICCxAAGIAEGLEDGIMBwgIREC4YgAQYigUYjQYYsQMYgwHCAg4QABiABBiKBRixAxiDAZgDFfEFcIkwNOx2uN2SBwMxLjagB6kjsgcDMC42uAf4BsIHBTItNS4yyAc4gAgB&sclient=gws-wiz",
+            "timestamp": "2026-09-22T10:14:39.139Z",
+            "page_id": 0,
+            "delay_before_ms": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#rc-imageselect-target > table > tbody",
+                "xpath": "//*[@id='rc-imageselect-target']/table/tbody",
+                "text": "",
+                "element_text": "",
+                "tag": "tbody",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 6,
+                "y": 126,
+                "width": 388,
+                "height": 388
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.google.com/recaptcha/enterprise/bframe?hl=en&v=zqB-6Xpbd3lCIvi7Tr2D0pob&k=6LdLLIMbAAAAAIl-KLj9p1ePhM-4LCCDbjtJLqRO&bft=0dAFcWeA7cIElKrq1KW4ExxyHbBb1aBEiplp99VGjGHOD1W9DEjjqwKAIqH6hZyvUFBJwJHf-g_RKr0xYMwXKKCnwboI9x2sFIHw",
+            "timestamp": "2026-09-22T10:14:43.954Z",
+            "page_id": 0,
+            "delay_before_ms": 4815
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#10",
+                "name": null,
+                "role": "button",
+                "aria_label": "Image challenge",
+                "accessible_name": "Image challenge",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "td#10",
+                "xpath": "//*[@id='10']",
+                "text": "Image challenge",
+                "element_text": "Image challenge",
+                "tag": "td",
+                "attributes": {
+                    "role": "button",
+                    "aria-label": "Image challenge"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 200,
+                "y": 320,
+                "width": 97,
+                "height": 97
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.google.com/recaptcha/enterprise/bframe?hl=en&v=zqB-6Xpbd3lCIvi7Tr2D0pob&k=6LdLLIMbAAAAAIl-KLj9p1ePhM-4LCCDbjtJLqRO&bft=0dAFcWeA7cIElKrq1KW4ExxyHbBb1aBEiplp99VGjGHOD1W9DEjjqwKAIqH6hZyvUFBJwJHf-g_RKr0xYMwXKKCnwboI9x2sFIHw",
+            "timestamp": "2026-09-22T10:14:44.369Z",
+            "page_id": 0,
+            "delay_before_ms": 415
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#6",
+                "name": null,
+                "role": "button",
+                "aria_label": "Image challenge",
+                "accessible_name": "Image challenge",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "td#6",
+                "xpath": "//*[@id='6']",
+                "text": "Image challenge",
+                "element_text": "Image challenge",
+                "tag": "td",
+                "attributes": {
+                    "role": "button",
+                    "aria-label": "Image challenge"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 200,
+                "y": 223,
+                "width": 97,
+                "height": 97
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.google.com/recaptcha/enterprise/bframe?hl=en&v=zqB-6Xpbd3lCIvi7Tr2D0pob&k=6LdLLIMbAAAAAIl-KLj9p1ePhM-4LCCDbjtJLqRO&bft=0dAFcWeA7cIElKrq1KW4ExxyHbBb1aBEiplp99VGjGHOD1W9DEjjqwKAIqH6hZyvUFBJwJHf-g_RKr0xYMwXKKCnwboI9x2sFIHw",
+            "timestamp": "2026-09-22T10:14:45.202Z",
+            "page_id": 0,
+            "delay_before_ms": 833
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#7",
+                "name": null,
+                "role": "button",
+                "aria_label": "Image challenge",
+                "accessible_name": "Image challenge",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "td#7",
+                "xpath": "//*[@id='7']",
+                "text": "Image challenge",
+                "element_text": "Image challenge",
+                "tag": "td",
+                "attributes": {
+                    "role": "button",
+                    "aria-label": "Image challenge"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 297,
+                "y": 223,
+                "width": 97,
+                "height": 97
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.google.com/recaptcha/enterprise/bframe?hl=en&v=zqB-6Xpbd3lCIvi7Tr2D0pob&k=6LdLLIMbAAAAAIl-KLj9p1ePhM-4LCCDbjtJLqRO&bft=0dAFcWeA7cIElKrq1KW4ExxyHbBb1aBEiplp99VGjGHOD1W9DEjjqwKAIqH6hZyvUFBJwJHf-g_RKr0xYMwXKKCnwboI9x2sFIHw",
+            "timestamp": "2026-09-22T10:14:46.289Z",
+            "page_id": 0,
+            "delay_before_ms": 1087
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#recaptcha-verify-button",
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "NEXT",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "button#recaptcha-verify-button",
+                "xpath": "//*[@id='recaptcha-verify-button']",
+                "text": "NEXT",
+                "element_text": "NEXT",
+                "tag": "button",
+                "attributes": {
+                    "title": ""
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 292,
+                "y": 529.7999877929688,
+                "width": 100,
+                "height": 42
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.google.com/recaptcha/enterprise/bframe?hl=en&v=zqB-6Xpbd3lCIvi7Tr2D0pob&k=6LdLLIMbAAAAAIl-KLj9p1ePhM-4LCCDbjtJLqRO&bft=0dAFcWeA7cIElKrq1KW4ExxyHbBb1aBEiplp99VGjGHOD1W9DEjjqwKAIqH6hZyvUFBJwJHf-g_RKr0xYMwXKKCnwboI9x2sFIHw",
+            "timestamp": "2026-09-22T10:14:48.136Z",
+            "page_id": 0,
+            "delay_before_ms": 1847
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#0",
+                "name": null,
+                "role": "button",
+                "aria_label": "Image challenge",
+                "accessible_name": "Image challenge",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "td#0",
+                "xpath": "//*[@id='0']",
+                "text": "Image challenge",
+                "element_text": "Image challenge",
+                "tag": "td",
+                "attributes": {
+                    "role": "button",
+                    "aria-label": "Image challenge"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 6,
+                "y": 126,
+                "width": 97,
+                "height": 97
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.google.com/recaptcha/enterprise/bframe?hl=en&v=zqB-6Xpbd3lCIvi7Tr2D0pob&k=6LdLLIMbAAAAAIl-KLj9p1ePhM-4LCCDbjtJLqRO&bft=0dAFcWeA7cIElKrq1KW4ExxyHbBb1aBEiplp99VGjGHOD1W9DEjjqwKAIqH6hZyvUFBJwJHf-g_RKr0xYMwXKKCnwboI9x2sFIHw",
+            "timestamp": "2026-09-22T10:14:50.467Z",
+            "page_id": 0,
+            "delay_before_ms": 2331
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#1",
+                "name": null,
+                "role": "button",
+                "aria_label": "Image challenge",
+                "accessible_name": "Image challenge",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "td#1",
+                "xpath": "//*[@id='1']",
+                "text": "Image challenge",
+                "element_text": "Image challenge",
+                "tag": "td",
+                "attributes": {
+                    "role": "button",
+                    "aria-label": "Image challenge"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 103,
+                "y": 126,
+                "width": 97,
+                "height": 97
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.google.com/recaptcha/enterprise/bframe?hl=en&v=zqB-6Xpbd3lCIvi7Tr2D0pob&k=6LdLLIMbAAAAAIl-KLj9p1ePhM-4LCCDbjtJLqRO&bft=0dAFcWeA7cIElKrq1KW4ExxyHbBb1aBEiplp99VGjGHOD1W9DEjjqwKAIqH6hZyvUFBJwJHf-g_RKr0xYMwXKKCnwboI9x2sFIHw",
+            "timestamp": "2026-09-22T10:14:51.294Z",
+            "page_id": 0,
+            "delay_before_ms": 827
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#recaptcha-verify-button",
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "NEXT",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "button#recaptcha-verify-button",
+                "xpath": "//*[@id='recaptcha-verify-button']",
+                "text": "NEXT",
+                "element_text": "NEXT",
+                "tag": "button",
+                "attributes": {
+                    "title": ""
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 292,
+                "y": 529.7999877929688,
+                "width": 100,
+                "height": 42
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.google.com/recaptcha/enterprise/bframe?hl=en&v=zqB-6Xpbd3lCIvi7Tr2D0pob&k=6LdLLIMbAAAAAIl-KLj9p1ePhM-4LCCDbjtJLqRO&bft=0dAFcWeA7cIElKrq1KW4ExxyHbBb1aBEiplp99VGjGHOD1W9DEjjqwKAIqH6hZyvUFBJwJHf-g_RKr0xYMwXKKCnwboI9x2sFIHw",
+            "timestamp": "2026-09-22T10:14:52.547Z",
+            "page_id": 0,
+            "delay_before_ms": 1253
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#rc-imageselect-target > table > tbody",
+                "xpath": "//*[@id='rc-imageselect-target']/table/tbody",
+                "text": "",
+                "element_text": "",
+                "tag": "tbody",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 6,
+                "y": 126,
+                "width": 388,
+                "height": 388
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.google.com/recaptcha/enterprise/bframe?hl=en&v=zqB-6Xpbd3lCIvi7Tr2D0pob&k=6LdLLIMbAAAAAIl-KLj9p1ePhM-4LCCDbjtJLqRO&bft=0dAFcWeA7cIElKrq1KW4ExxyHbBb1aBEiplp99VGjGHOD1W9DEjjqwKAIqH6hZyvUFBJwJHf-g_RKr0xYMwXKKCnwboI9x2sFIHw",
+            "timestamp": "2026-09-22T10:14:55.110Z",
+            "page_id": 0,
+            "delay_before_ms": 2563
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#8",
+                "name": null,
+                "role": "button",
+                "aria_label": "Image challenge",
+                "accessible_name": "Image challenge",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "td#8",
+                "xpath": "//*[@id='8']",
+                "text": "Image challenge",
+                "element_text": "Image challenge",
+                "tag": "td",
+                "attributes": {
+                    "role": "button",
+                    "aria-label": "Image challenge"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 6,
+                "y": 320,
+                "width": 97,
+                "height": 97
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.google.com/recaptcha/enterprise/bframe?hl=en&v=zqB-6Xpbd3lCIvi7Tr2D0pob&k=6LdLLIMbAAAAAIl-KLj9p1ePhM-4LCCDbjtJLqRO&bft=0dAFcWeA7cIElKrq1KW4ExxyHbBb1aBEiplp99VGjGHOD1W9DEjjqwKAIqH6hZyvUFBJwJHf-g_RKr0xYMwXKKCnwboI9x2sFIHw",
+            "timestamp": "2026-09-22T10:14:55.549Z",
+            "page_id": 0,
+            "delay_before_ms": 439
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#4",
+                "name": null,
+                "role": "button",
+                "aria_label": "Image challenge",
+                "accessible_name": "Image challenge",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "td#4",
+                "xpath": "//*[@id='4']",
+                "text": "Image challenge",
+                "element_text": "Image challenge",
+                "tag": "td",
+                "attributes": {
+                    "role": "button",
+                    "aria-label": "Image challenge"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 6,
+                "y": 223,
+                "width": 97,
+                "height": 97
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.google.com/recaptcha/enterprise/bframe?hl=en&v=zqB-6Xpbd3lCIvi7Tr2D0pob&k=6LdLLIMbAAAAAIl-KLj9p1ePhM-4LCCDbjtJLqRO&bft=0dAFcWeA7cIElKrq1KW4ExxyHbBb1aBEiplp99VGjGHOD1W9DEjjqwKAIqH6hZyvUFBJwJHf-g_RKr0xYMwXKKCnwboI9x2sFIHw",
+            "timestamp": "2026-09-22T10:14:56.587Z",
+            "page_id": 0,
+            "delay_before_ms": 1038
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#5",
+                "name": null,
+                "role": "button",
+                "aria_label": "Image challenge",
+                "accessible_name": "Image challenge",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "td#5",
+                "xpath": "//*[@id='5']",
+                "text": "Image challenge",
+                "element_text": "Image challenge",
+                "tag": "td",
+                "attributes": {
+                    "role": "button",
+                    "aria-label": "Image challenge"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 103,
+                "y": 223,
+                "width": 97,
+                "height": 97
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.google.com/recaptcha/enterprise/bframe?hl=en&v=zqB-6Xpbd3lCIvi7Tr2D0pob&k=6LdLLIMbAAAAAIl-KLj9p1ePhM-4LCCDbjtJLqRO&bft=0dAFcWeA7cIElKrq1KW4ExxyHbBb1aBEiplp99VGjGHOD1W9DEjjqwKAIqH6hZyvUFBJwJHf-g_RKr0xYMwXKKCnwboI9x2sFIHw",
+            "timestamp": "2026-09-22T10:14:57.442Z",
+            "page_id": 0,
+            "delay_before_ms": 855
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#9",
+                "name": null,
+                "role": "button",
+                "aria_label": "Image challenge",
+                "accessible_name": "Image challenge",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "td#9",
+                "xpath": "//*[@id='9']",
+                "text": "Image challenge",
+                "element_text": "Image challenge",
+                "tag": "td",
+                "attributes": {
+                    "role": "button",
+                    "aria-label": "Image challenge"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 103,
+                "y": 320,
+                "width": 97,
+                "height": 97
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.google.com/recaptcha/enterprise/bframe?hl=en&v=zqB-6Xpbd3lCIvi7Tr2D0pob&k=6LdLLIMbAAAAAIl-KLj9p1ePhM-4LCCDbjtJLqRO&bft=0dAFcWeA7cIElKrq1KW4ExxyHbBb1aBEiplp99VGjGHOD1W9DEjjqwKAIqH6hZyvUFBJwJHf-g_RKr0xYMwXKKCnwboI9x2sFIHw",
+            "timestamp": "2026-09-22T10:14:58.774Z",
+            "page_id": 0,
+            "delay_before_ms": 1332
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "NEXT",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "div#rc-imageselect > div:nth-of-type(3) > div:nth-of-type(2) > div",
+                "xpath": "/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[1]",
+                "text": "NEXT",
+                "element_text": "NEXT",
+                "tag": "div",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 0,
+                "y": 521.7999877929688,
+                "width": 400,
+                "height": 60
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.google.com/recaptcha/enterprise/bframe?hl=en&v=zqB-6Xpbd3lCIvi7Tr2D0pob&k=6LdLLIMbAAAAAIl-KLj9p1ePhM-4LCCDbjtJLqRO&bft=0dAFcWeA7cIElKrq1KW4ExxyHbBb1aBEiplp99VGjGHOD1W9DEjjqwKAIqH6hZyvUFBJwJHf-g_RKr0xYMwXKKCnwboI9x2sFIHw",
+            "timestamp": "2026-09-22T10:14:59.872Z",
+            "page_id": 0,
+            "delay_before_ms": 1098
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#recaptcha-verify-button",
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "NEXT",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "button#recaptcha-verify-button",
+                "xpath": "//*[@id='recaptcha-verify-button']",
+                "text": "NEXT",
+                "element_text": "NEXT",
+                "tag": "button",
+                "attributes": {
+                    "title": ""
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 292,
+                "y": 529.7999877929688,
+                "width": 100,
+                "height": 42
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.google.com/recaptcha/enterprise/bframe?hl=en&v=zqB-6Xpbd3lCIvi7Tr2D0pob&k=6LdLLIMbAAAAAIl-KLj9p1ePhM-4LCCDbjtJLqRO&bft=0dAFcWeA7cIElKrq1KW4ExxyHbBb1aBEiplp99VGjGHOD1W9DEjjqwKAIqH6hZyvUFBJwJHf-g_RKr0xYMwXKKCnwboI9x2sFIHw",
+            "timestamp": "2026-09-22T10:15:00.831Z",
+            "page_id": 0,
+            "delay_before_ms": 959
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#recaptcha-verify-button",
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "SKIP",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "button#recaptcha-verify-button",
+                "xpath": "//*[@id='recaptcha-verify-button']",
+                "text": "SKIP",
+                "element_text": "SKIP",
+                "tag": "button",
+                "attributes": {
+                    "title": ""
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 292,
+                "y": 529.7999877929688,
+                "width": 100,
+                "height": 42
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.google.com/recaptcha/enterprise/bframe?hl=en&v=zqB-6Xpbd3lCIvi7Tr2D0pob&k=6LdLLIMbAAAAAIl-KLj9p1ePhM-4LCCDbjtJLqRO&bft=0dAFcWeA7cIElKrq1KW4ExxyHbBb1aBEiplp99VGjGHOD1W9DEjjqwKAIqH6hZyvUFBJwJHf-g_RKr0xYMwXKKCnwboI9x2sFIHw",
+            "timestamp": "2026-09-22T10:15:02.563Z",
+            "page_id": 0,
+            "delay_before_ms": 1732
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#recaptcha-verify-button",
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "SKIP",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "button#recaptcha-verify-button",
+                "xpath": "//*[@id='recaptcha-verify-button']",
+                "text": "SKIP",
+                "element_text": "SKIP",
+                "tag": "button",
+                "attributes": {
+                    "title": ""
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 292,
+                "y": 529.7999877929688,
+                "width": 100,
+                "height": 42
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.google.com/recaptcha/enterprise/bframe?hl=en&v=zqB-6Xpbd3lCIvi7Tr2D0pob&k=6LdLLIMbAAAAAIl-KLj9p1ePhM-4LCCDbjtJLqRO&bft=0dAFcWeA7cIElKrq1KW4ExxyHbBb1aBEiplp99VGjGHOD1W9DEjjqwKAIqH6hZyvUFBJwJHf-g_RKr0xYMwXKKCnwboI9x2sFIHw",
+            "timestamp": "2026-09-22T10:15:04.235Z",
+            "page_id": 0,
+            "delay_before_ms": 1672
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#recaptcha-verify-button",
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "SKIP",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "button#recaptcha-verify-button",
+                "xpath": "//*[@id='recaptcha-verify-button']",
+                "text": "SKIP",
+                "element_text": "SKIP",
+                "tag": "button",
+                "attributes": {
+                    "title": ""
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 292,
+                "y": 560.6000366210938,
+                "width": 100,
+                "height": 42
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.google.com/recaptcha/enterprise/bframe?hl=en&v=zqB-6Xpbd3lCIvi7Tr2D0pob&k=6LdLLIMbAAAAAIl-KLj9p1ePhM-4LCCDbjtJLqRO&bft=0dAFcWeA7cIElKrq1KW4ExxyHbBb1aBEiplp99VGjGHOD1W9DEjjqwKAIqH6hZyvUFBJwJHf-g_RKr0xYMwXKKCnwboI9x2sFIHw",
+            "timestamp": "2026-09-22T10:15:06.788Z",
+            "page_id": 0,
+            "delay_before_ms": 2553
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#recaptcha-verify-button",
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "SKIP",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "button#recaptcha-verify-button",
+                "xpath": "//*[@id='recaptcha-verify-button']",
+                "text": "SKIP",
+                "element_text": "SKIP",
+                "tag": "button",
+                "attributes": {
+                    "title": ""
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 292,
+                "y": 529.7999877929688,
+                "width": 100,
+                "height": 42
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.google.com/recaptcha/enterprise/bframe?hl=en&v=zqB-6Xpbd3lCIvi7Tr2D0pob&k=6LdLLIMbAAAAAIl-KLj9p1ePhM-4LCCDbjtJLqRO&bft=0dAFcWeA7cIElKrq1KW4ExxyHbBb1aBEiplp99VGjGHOD1W9DEjjqwKAIqH6hZyvUFBJwJHf-g_RKr0xYMwXKKCnwboI9x2sFIHw",
+            "timestamp": "2026-09-22T10:15:08.627Z",
+            "page_id": 0,
+            "delay_before_ms": 1839
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#recaptcha-verify-button",
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "SKIP",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "button#recaptcha-verify-button",
+                "xpath": "//*[@id='recaptcha-verify-button']",
+                "text": "SKIP",
+                "element_text": "SKIP",
+                "tag": "button",
+                "attributes": {
+                    "title": ""
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 292,
+                "y": 529.7999877929688,
+                "width": 100,
+                "height": 42
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.google.com/recaptcha/enterprise/bframe?hl=en&v=zqB-6Xpbd3lCIvi7Tr2D0pob&k=6LdLLIMbAAAAAIl-KLj9p1ePhM-4LCCDbjtJLqRO&bft=0dAFcWeA7cIElKrq1KW4ExxyHbBb1aBEiplp99VGjGHOD1W9DEjjqwKAIqH6hZyvUFBJwJHf-g_RKr0xYMwXKKCnwboI9x2sFIHw",
+            "timestamp": "2026-09-22T10:15:09.950Z",
+            "page_id": 0,
+            "delay_before_ms": 1323
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#recaptcha-verify-button",
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "SKIP",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "button#recaptcha-verify-button",
+                "xpath": "//*[@id='recaptcha-verify-button']",
+                "text": "SKIP",
+                "element_text": "SKIP",
+                "tag": "button",
+                "attributes": {
+                    "title": ""
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 292,
+                "y": 529.7999877929688,
+                "width": 100,
+                "height": 42
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.google.com/recaptcha/enterprise/bframe?hl=en&v=zqB-6Xpbd3lCIvi7Tr2D0pob&k=6LdLLIMbAAAAAIl-KLj9p1ePhM-4LCCDbjtJLqRO&bft=0dAFcWeA7cIElKrq1KW4ExxyHbBb1aBEiplp99VGjGHOD1W9DEjjqwKAIqH6hZyvUFBJwJHf-g_RKr0xYMwXKKCnwboI9x2sFIHw",
+            "timestamp": "2026-09-22T10:15:11.525Z",
+            "page_id": 0,
+            "delay_before_ms": 1575
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#recaptcha-verify-button",
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "SKIP",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "button#recaptcha-verify-button",
+                "xpath": "//*[@id='recaptcha-verify-button']",
+                "text": "SKIP",
+                "element_text": "SKIP",
+                "tag": "button",
+                "attributes": {
+                    "title": ""
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 292,
+                "y": 529.7999877929688,
+                "width": 100,
+                "height": 42
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.google.com/recaptcha/enterprise/bframe?hl=en&v=zqB-6Xpbd3lCIvi7Tr2D0pob&k=6LdLLIMbAAAAAIl-KLj9p1ePhM-4LCCDbjtJLqRO&bft=0dAFcWeA7cIElKrq1KW4ExxyHbBb1aBEiplp99VGjGHOD1W9DEjjqwKAIqH6hZyvUFBJwJHf-g_RKr0xYMwXKKCnwboI9x2sFIHw",
+            "timestamp": "2026-09-22T10:15:12.750Z",
+            "page_id": 0,
+            "delay_before_ms": 1225
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#8",
+                "name": null,
+                "role": "button",
+                "aria_label": "Image challenge",
+                "accessible_name": "Image challenge",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "td#8",
+                "xpath": "//*[@id='8']",
+                "text": "Image challenge",
+                "element_text": "Image challenge",
+                "tag": "td",
+                "attributes": {
+                    "role": "button",
+                    "aria-label": "Image challenge"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 6,
+                "y": 320,
+                "width": 97,
+                "height": 97
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.google.com/recaptcha/enterprise/bframe?hl=en&v=zqB-6Xpbd3lCIvi7Tr2D0pob&k=6LdLLIMbAAAAAIl-KLj9p1ePhM-4LCCDbjtJLqRO&bft=0dAFcWeA7cIElKrq1KW4ExxyHbBb1aBEiplp99VGjGHOD1W9DEjjqwKAIqH6hZyvUFBJwJHf-g_RKr0xYMwXKKCnwboI9x2sFIHw",
+            "timestamp": "2026-09-22T10:15:14.788Z",
+            "page_id": 0,
+            "delay_before_ms": 2038
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#4",
+                "name": null,
+                "role": "button",
+                "aria_label": "Image challenge",
+                "accessible_name": "Image challenge",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "td#4",
+                "xpath": "//*[@id='4']",
+                "text": "Image challenge",
+                "element_text": "Image challenge",
+                "tag": "td",
+                "attributes": {
+                    "role": "button",
+                    "aria-label": "Image challenge"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 6,
+                "y": 223,
+                "width": 97,
+                "height": 97
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.google.com/recaptcha/enterprise/bframe?hl=en&v=zqB-6Xpbd3lCIvi7Tr2D0pob&k=6LdLLIMbAAAAAIl-KLj9p1ePhM-4LCCDbjtJLqRO&bft=0dAFcWeA7cIElKrq1KW4ExxyHbBb1aBEiplp99VGjGHOD1W9DEjjqwKAIqH6hZyvUFBJwJHf-g_RKr0xYMwXKKCnwboI9x2sFIHw",
+            "timestamp": "2026-09-22T10:15:15.516Z",
+            "page_id": 0,
+            "delay_before_ms": 728
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#recaptcha-verify-button",
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "NEXT",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "button#recaptcha-verify-button",
+                "xpath": "//*[@id='recaptcha-verify-button']",
+                "text": "NEXT",
+                "element_text": "NEXT",
+                "tag": "button",
+                "attributes": {
+                    "title": ""
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 292,
+                "y": 529.7999877929688,
+                "width": 100,
+                "height": 42
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.google.com/recaptcha/enterprise/bframe?hl=en&v=zqB-6Xpbd3lCIvi7Tr2D0pob&k=6LdLLIMbAAAAAIl-KLj9p1ePhM-4LCCDbjtJLqRO&bft=0dAFcWeA7cIElKrq1KW4ExxyHbBb1aBEiplp99VGjGHOD1W9DEjjqwKAIqH6hZyvUFBJwJHf-g_RKr0xYMwXKKCnwboI9x2sFIHw",
+            "timestamp": "2026-09-22T10:15:16.602Z",
+            "page_id": 0,
+            "delay_before_ms": 1086
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 0,
+            "page_url": "https://www.google.com/search?q=myntra&sca_esv=10891fa1ffde4481&source=hp&ei=DFWyaueKH_CYhvcPk9Sw4Ao&iflsig=ABILxe8AAAAAarJjHIgCjZXS_E_6WPqJp0zkVdJQ71NU&ved=0ahUKEwjnwPiR-oGXAxVwjOEIHRMqDKwQ4dUDCB0&uact=5&oq=myntra&gs_lp=Egdnd3Mtd2l6IgZteW50cmEyCBAAGIAEGLEDMgUQABiABDIIEAAYgAQYsQMyCBAAGIAEGLQHMggQABiABBi0BzIFEAAYgAQyCBAAGIAEGLEDMggQABiABBi0BzIIEAAYgAQYtAcyCBAAGIAEGLEDSOoTUOAEWP0NcAF4AJABAJgBswGgAcEGqgEDMC42uAEDyAEA-AEBmAIHoAKOB6gCCsICChAAGAMYjwEY6gLCAg4QLhiABBixAxjHARjRA8ICCxAAGIAEGLEDGIMBwgIREC4YgAQYigUYjQYYsQMYgwHCAg4QABiABBiKBRixAxiDAZgDFfEFcIkwNOx2uN2SBwMxLjagB6kjsgcDMC42uAf4BsIHBTItNS4yyAc4gAgB&sclient=gws-wiz",
+            "remaining_page_id": null,
+            "timestamp": "2026-09-22T10:15:19.356Z",
+            "delay_before_ms": 2754
+        }
+    ],
+    "saved_at": "2026-09-22T15:45:19.372254"
+}

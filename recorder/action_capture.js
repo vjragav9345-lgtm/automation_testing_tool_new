@@ -16,7 +16,7 @@
     // activates, is the one-line, impossible-to-misread way to confirm
     // whether a given browser session is actually running current code
     // instead of inferring it from symptoms.
-    window.__afqaCaptureVersion = "2026-09-21-d";
+    window.__afqaCaptureVersion = "2026-09-24-c";
     if (window.__afqaPickMode) {
         console.log("[afqa-pick] action_capture.js version:", window.__afqaCaptureVersion);
     }
@@ -95,11 +95,58 @@
         var pickLocked = false;
         var pickLockedEl = null;
 
+        // ITEM 4: getBoundingClientRect() is relative to the element's
+        // OWN window - for an element found inside a same-origin iframe
+        // (see realElementAt's own drilling below), that's the iframe's
+        // viewport, not the top-level page's. highlight/lockLabel are
+        // both appended to the TOP-level document.body and positioned
+        // position:fixed against the TOP-level viewport, so using an
+        // iframe-local rect directly renders the box wherever the
+        // iframe's own (0,0) happens to be relative to the page - often
+        // nowhere near the real element, sometimes off-screen entirely.
+        // Confirmed as the actual cause of "highlight sometimes missing"
+        // via a live probe: an iframe-nested button resolved to the
+        // correct element (realElementAt already handled that part) but
+        // its highlight box rendered offset by exactly the iframe's own
+        // page position. Walks up through however many same-origin
+        // iframes the element is nested in (generic - no assumption
+        // about depth), summing each ancestor iframe's own top-level-
+        // relative rect; a shadow-DOM element needs no such walk since
+        // shadow roots share their host's coordinate space already.
+        function _afqaTopLevelRect(el) {
+            var r = el.getBoundingClientRect();
+            var left = r.left, top = r.top;
+            var win;
+            try {
+                win = el.ownerDocument.defaultView;
+            } catch (e) {
+                win = null;
+            }
+            var depth = 0;
+            while (win && win.frameElement && depth < MAX_DRILL_DEPTH) {
+                var frameRect;
+                try {
+                    frameRect = win.frameElement.getBoundingClientRect();
+                } catch (e) {
+                    break;
+                }
+                left += frameRect.left;
+                top += frameRect.top;
+                try {
+                    win = win.frameElement.ownerDocument.defaultView;
+                } catch (e) {
+                    break;
+                }
+                depth++;
+            }
+            return { left: left, top: top, width: r.width, height: r.height };
+        }
+
         function _afqaSyncLockedHighlight() {
             if (!pickLocked || !pickLockedEl || !pickLockedEl.isConnected) return;
             var r;
             try {
-                r = pickLockedEl.getBoundingClientRect();
+                r = _afqaTopLevelRect(pickLockedEl);
             } catch (e) {
                 return;
             }
@@ -257,7 +304,7 @@
             if (pickLocked) return; // locked highlight tracks pickLockedEl instead - see _afqaSyncLockedHighlight
             var real = realElementAt(e.clientX, e.clientY);
             if (real) {
-                var r = real.getBoundingClientRect();
+                var r = _afqaTopLevelRect(real);
                 highlight.style.display = 'block';
                 highlight.style.left = r.left + 'px';
                 highlight.style.top = r.top + 'px';
@@ -1310,6 +1357,66 @@
         return el;
     }
 
+    // RC1: identical walk to resolveSemanticTarget above, MINUS its
+    // "LABEL -> node.control" substitution - CONFIRMED REAL BUG that
+    // substitution causes: a real custom checkbox/radio/sort-option row
+    // is near-universally a visible <label>...text...</label> wrapping
+    // an invisible native <input> (kept for accessibility/form
+    // semantics only) - jumping straight to that input is exactly
+    // backwards for act_target, which needs to stay on the VISIBLE
+    // element the user's pointer was actually on so replay can find and
+    // click something that's actually on screen. Used ONLY for
+    // act_target; every other resolveSemanticTarget() call site (the
+    // mousedown snapshot and the click handler's own dedup comparisons)
+    // is unchanged and must stay unchanged - those compare identity
+    // across TWO physical click events for the SAME gesture (a label's
+    // own click plus the browser's native forwarded click directly on
+    // its control), which only agree in the first place because both
+    // already resolve to the control.
+    function _hasNoLayoutBox(node) {
+        try {
+            var r = node.getBoundingClientRect();
+            return r.width === 0 && r.height === 0;
+        } catch (e) {
+            return false;
+        }
+    }
+
+    function resolveSemanticActTarget(el) {
+        if (!(el instanceof Element)) return el;
+        var node = el;
+        var depth = 0;
+        while (node && node.nodeType === Node.ELEMENT_NODE && depth < SEMANTIC_WALK_MAX_DEPTH) {
+            if (isInteractive(node)) {
+                // a checkbox/radio <input> with NO layout box at all
+                // (display:none, or an ancestor that is) can never
+                // actually be the thing replay clicks - it structurally
+                // isn't there to click, regardless of act_target's own
+                // "stay visible" goal. Keep walking past it to the next
+                // interactive ancestor (its wrapping label/row) instead
+                // of stopping on something un-clickable. An input that's
+                // merely opacity:0 (a real box, just invisible - the
+                // other very common custom-checkbox technique) is left
+                // alone: it genuinely IS where the click landed and
+                // Playwright can interact with it directly at that same
+                // screen position.
+                if (
+                    node.tagName === 'INPUT' &&
+                    ['checkbox', 'radio'].indexOf((node.type || '').toLowerCase()) !== -1 &&
+                    _hasNoLayoutBox(node)
+                ) {
+                    node = node.parentElement;
+                    depth++;
+                    continue;
+                }
+                return node;
+            }
+            node = node.parentElement;
+            depth++;
+        }
+        return el;
+    }
+
     // strips private-use-area icon-font codepoints (U+E000-U+F8FF) - a
     // FontAwesome/Material/etc icon font renders its glyphs at these
     // codepoints, so an element's rendered "text" can be a meaningless
@@ -1374,6 +1481,119 @@
         return _stripIconFontText(ownText.trim().slice(0, 80));
     }
 
+    // CONFIRMED REAL BUG this fixes: a filter-chip trigger (a chevron/
+    // arrow icon with no readable label of its own, sitting next to a
+    // text label inside the same small chip container) has effectively
+    // empty innerText - it slips under findCheckboxTarget's own "step
+    // 0.5" ownText.length > 2 exclusion (a decorative single-glyph
+    // arrow is length 1), which then lets the ancestor/descendant search
+    // below run and grab the chip's own hover-revealed checkbox PANEL,
+    // recording the click as a "check" on some checkbox inside it
+    // instead of the actual chip click.
+    //
+    // An earlier version of this fix gated the whole descendant search
+    // on "does rawEl have its own direct text" - that broke a real,
+    // equally common widget shape: a plain, non-<label> row wrapping its
+    // OWN readable text alongside a custom visual box and a native
+    // (often visually hidden) checkbox as sibling children -
+    // <div>Printed <span class="box"></span><input type="checkbox"
+    // hidden></div> - which unconditionally lost its "check"
+    // classification the same way the chip's chevron icon needed to.
+    // The actual distinguishing signal was never "does rawEl have text"
+    // - it's "is there exactly ONE checkbox candidate in the searched
+    // container, or several": a row with its own single, unambiguous
+    // checkbox is safe to search into regardless of whether rawEl
+    // carries a label; a container with MULTIPLE checkboxes (a whole
+    // filter panel with several options) can never be safely collapsed
+    // to "the click meant THIS one" and is now treated as an ordinary
+    // click instead of guessing which checkbox was meant.
+    //
+    // Deliberately NOT also gated on a plain display/visibility check -
+    // a custom-styled checkbox very commonly hides its real native
+    // <input> PERMANENTLY (the `hidden` attribute, opacity:0 - a design
+    // choice, not a reveal-in-progress state) while a sibling element
+    // provides the visible checked/unchecked box, and that reads
+    // identically to "not revealed yet" from a pure display/visibility
+    // check - there is no way to tell those apart by visibility alone.
+    //
+    // CONFIRMED REAL BUG uniqueness ALONE still missed: a chip whose
+    // hover panel holds exactly ONE option ("Country of Origin" -> just
+    // "India") makes the count check above trivially pass for ANY click
+    // anywhere in the whole chip (its text, its arrow) - not just a
+    // click genuinely on the India row. Two further, independent
+    // conditions are required together with uniqueness, not instead of
+    // it:
+    //
+    // (1) the click must have actually landed inside the candidate's
+    //     OWN row - its nearest <label> ancestor (or its own immediate
+    //     parent, when nothing wraps it in a label) - not merely
+    //     somewhere inside a large shared container the checkbox
+    //     happens to also be inside. Approximated via the ACTUAL
+    //     clicked element's (clickOriginEl) own bounding-box center -
+    //     that element is, by definition, exactly where the click
+    //     landed.
+    // (2) the candidate must NOT be something that only became visible
+    //     because of the CURRENT hover - reuses _ambientVisiblePrev,
+    //     the same pre-hover baseline snapshot already built for
+    //     hover-chain detection (see its own docstring): a checkbox
+    //     that wasn't part of that baseline was just revealed by
+    //     hovering to reach this click, so the click was never for it.
+    //
+    // Together these three conditions correctly separate the real cases:
+    // a single always-present, always-hidden-by-design checkbox in a
+    // small custom row (uniqueness + click lands in its own row + it
+    // was already there before any hover) is accepted; a single-item
+    // hover panel (uniqueness alone would pass, but the click landed
+    // outside the India row AND/OR India only just became visible) is
+    // correctly rejected; a multi-item hover panel is already rejected
+    // by uniqueness regardless of the other two.
+    function _findRowContainerForCheckbox(cb) {
+        var node = cb;
+        var depth = 0;
+        while (node && node.nodeType === Node.ELEMENT_NODE && depth < 4) {
+            if (node.tagName === 'LABEL') return node;
+            node = node.parentElement;
+            depth++;
+        }
+        return cb.parentElement || cb;
+    }
+
+    function _findUniqueCheckboxDescendant(node, selector, clickOriginEl) {
+        if (!node || !node.querySelectorAll) return null;
+        var matches;
+        try {
+            matches = node.querySelectorAll(selector);
+        } catch (e) {
+            return null;
+        }
+        if (!matches || matches.length !== 1) return null;
+        var cand = matches[0];
+
+        if (clickOriginEl && clickOriginEl.getBoundingClientRect) {
+            try {
+                var originRect = clickOriginEl.getBoundingClientRect();
+                var ox = originRect.left + originRect.width / 2;
+                var oy = originRect.top + originRect.height / 2;
+                var rowRect = _findRowContainerForCheckbox(cand).getBoundingClientRect();
+                if (ox < rowRect.left || ox > rowRect.right || oy < rowRect.top || oy > rowRect.bottom) {
+                    return null;
+                }
+            } catch (eRow) {
+                return null;
+            }
+        }
+
+        if (
+            typeof _ambientVisiblePrev !== 'undefined' && _ambientVisiblePrev &&
+            (Date.now() - _ambientVisiblePrev.time) < 500 &&
+            !_ambientVisiblePrev.visibleSet.has(cand)
+        ) {
+            return null;
+        }
+
+        return cand;
+    }
+
     // used by findCheckboxTarget's ancestor search below - a genuine
     // checkbox-plus-label/icon WIDGET is a small, local UI row, not a
     // large page section. Purely geometric (rendered width/height),
@@ -1392,7 +1612,109 @@
         }
     }
 
+    function _isDirectCheckboxOrRadio(el) {
+        if (!(el instanceof Element)) return false;
+        if (el.tagName === 'INPUT') {
+            var t = (el.getAttribute('type') || '').toLowerCase();
+            if (t === 'checkbox' || t === 'radio') return true;
+        }
+        var r = el.getAttribute ? (el.getAttribute('role') || '') : '';
+        return r === 'checkbox' || r === 'radio' || r === 'switch';
+    }
+
+    // Used only by the step-0.5 button/link exclusion above: true when
+    // rawEl ITSELF (never a further-out ancestor) is unambiguously a
+    // checkbox/radio/switch, or sits inside a <label> that wraps/points
+    // at one - see that exclusion's own comment for why this matters
+    // (a role="button" row that still contains a real radio input).
+    function _isCheckboxOrRadioTargetItself(rawEl) {
+        if (_isDirectCheckboxOrRadio(rawEl)) return true;
+        var node = rawEl;
+        var depth = 0;
+        while (node && node.nodeType === Node.ELEMENT_NODE && depth < 6 && node.tagName !== 'BODY') {
+            if (node.tagName === 'LABEL') {
+                if (node.control && _isDirectCheckboxOrRadio(node.control)) return true;
+                var forId = node.getAttribute('for');
+                if (forId) {
+                    var inputFor = document.getElementById(forId);
+                    if (inputFor && _isDirectCheckboxOrRadio(inputFor)) return true;
+                }
+                if (node.querySelector('input[type="checkbox"], input[type="radio"], [role="checkbox"], [role="radio"], [role="switch"]')) {
+                    return true;
+                }
+            }
+            node = node.parentElement;
+            depth++;
+        }
+        return false;
+    }
+
+    // FIX D: strict "does this actually expose checked/unchecked state"
+    // check, used to gate the purely-geometric "small square" heuristics
+    // (branches 5/6 below) - deliberately narrower than
+    // isCheckboxCheckedState() further down (which also trusts class-
+    // name/icon-presence heuristics for deciding CURRENT checked-ness
+    // once something is ALREADY known to be a checkbox; those same
+    // signals are too loose to decide whether it's a checkbox AT ALL -
+    // almost any small icon button would match "contains an svg").
+    function _exposesCheckedState(el) {
+        if (!el) return false;
+        if (el.tagName === 'INPUT') {
+            var t = (el.getAttribute('type') || '').toLowerCase();
+            if (t === 'checkbox' || t === 'radio') return true;
+        }
+        if (el.hasAttribute && (el.hasAttribute('aria-checked') || el.hasAttribute('data-checked'))) {
+            return true;
+        }
+        if (el.querySelector) {
+            var nested = el.querySelector('input[type="checkbox"], input[type="radio"], [aria-checked], [data-checked]');
+            if (nested) return true;
+        }
+        return false;
+    }
+
+    // FIX D: action words that, when they appear in an icon-bearing
+    // element's own accessible name/title/nearby text, mean this is an
+    // ACTION button (add/remove/send/continue/verify/pick a person,
+    // etc), never a checkbox/radio - purely a word list, no site-
+    // specific selector. Checked as whole tokens (split on non-
+    // alphanumeric, like the consent-overlay accept-word matching
+    // elsewhere in this project) so e.g. "sender" doesn't false-match
+    // "send", and "+"/"-" are checked as literal single-character
+    // tokens since they're not alphanumeric words at all.
+    var ACTION_WORDS = ['add', 'remove', 'send', 'continue', 'verify', 'pick'];
+    var ACTION_SYMBOLS = ['+', '-'];
+
+    function _looksLikeActionIcon(el) {
+        if (!el || !el.querySelector) return false;
+        var svg = el.querySelector('svg');
+        if (!svg) return false;
+        var pieces = [
+            el.getAttribute ? (el.getAttribute('aria-label') || '') : '',
+            el.getAttribute ? (el.getAttribute('title') || '') : '',
+            svg.getAttribute ? (svg.getAttribute('aria-label') || '') : '',
+            (el.innerText || el.textContent || ''),
+        ];
+        var combined = pieces.join(' ').trim();
+        if (ACTION_SYMBOLS.indexOf(combined) !== -1) return true;
+        var lower = combined.toLowerCase();
+        var tokens = lower.split(/[^a-z0-9]+/).filter(Boolean);
+        return ACTION_WORDS.some(function (w) { return tokens.indexOf(w) !== -1; });
+    }
+
+    // FIX D debug field ("classified_by"): set as a side effect by
+    // findCheckboxTarget immediately before each of its own non-null
+    // return points, naming which branch actually classified this click
+    // as a checkbox/radio - read right after the call (see buildProfile
+    // and the _snap.checkboxTarget capture site) and written into the
+    // recorded action as a plain diagnostic field. findCheckboxTarget's
+    // own signature/return value is completely unchanged (still just
+    // element-or-null) - this is a parallel, additive side channel, not
+    // a refactor of its callers.
+    var lastCheckboxClassifiedBy = null;
+
     function findCheckboxTarget(rawEl) {
+        lastCheckboxClassifiedBy = null;
         if (!(rawEl instanceof Element)) return null;
 
         // 0. Exclusion: Top navigation bars, headers, tabs, and links are NEVER checkboxes
@@ -1411,31 +1733,162 @@
             navDepth++;
         }
 
-        // 1. Direct native input[type="checkbox"]
-        if (rawEl.tagName === 'INPUT' && (rawEl.type || '').toLowerCase() === 'checkbox') {
-            return rawEl;
+        // 0.5. Exclusion: an unambiguous button/link - or, per FIX D,
+        // anything else that structurally behaves like an action control
+        // rather than a toggle - is never a checkbox, no matter what any
+        // of the heuristics below might otherwise find nearby (an
+        // ancestor/descendant that merely LOOKS checkbox-shaped is
+        // beside the point once the actual click target already has
+        // real action semantics of its own). Never inferred from aria-
+        // pressed or any DOM change after the click.
+        //
+        // Does NOT apply when the actual click target itself is
+        // unambiguously a checkbox/radio/switch, or sits inside a <label>
+        // that wraps/points at one - a whole row can legitimately carry
+        // role="button" (or descriptive text, or an action-shaped icon)
+        // for click-target convenience while still containing a real
+        // radio/checkbox input (a settings row, a participant-picker
+        // row, etc); only checked against rawEl itself (and a <label>
+        // ancestor), never against a further-out ancestor - that's what
+        // still lets a genuine button/link/action-icon elsewhere in that
+        // same row be excluded normally.
+        if (!_isCheckboxOrRadioTargetItself(rawEl)) {
+            // (b) FIX D: rawEl's OWN visible text (not an aggregate of
+            // ancestors, which would also pick up an unrelated sibling
+            // label's text next to a genuine small-square checkbox and
+            // wrongly exclude that legitimate case) - a real action
+            // button/link almost always has its own short, readable
+            // label; a bare toggle control usually has none.
+            //
+            // REFINED (real regression this fixes): that heuristic alone
+            // wrongly excludes an equally common, legitimate widget - a
+            // plain, non-<label> row that wraps its OWN readable text
+            // alongside a custom visual box and a native (often visually
+            // hidden) checkbox as sibling children, e.g. <div>Printed
+            // <span class="box"></span><input type="checkbox"
+            // hidden></div>. The same uniqueness principle
+            // _findUniqueCheckboxDescendant already uses below (see its
+            // own docstring) resolves the conflict: if rawEl - bounded to
+            // plausibly BE a self-contained widget, not a large page
+            // section - has EXACTLY ONE checkbox/radio/switch descendant
+            // regardless of that descendant's own current visibility
+            // (see that function's own reasoning for why visibility
+            // can't distinguish "hidden by design" from "not revealed
+            // yet"), this is unambiguous enough to skip the length-based
+            // exclusion for. A container with SEVERAL such descendants
+            // (a whole filter panel with multiple options) still finds
+            // none here (matches.length !== 1) and is excluded exactly
+            // as before.
+            var ownText = (rawEl.innerText || rawEl.textContent || '').trim();
+            // NOT bounded by _isSmallEnoughForCheckboxWidget here,
+            // unlike step 4's ancestor walk below - this searches rawEl's
+            // OWN subtree only (the exact thing that was actually
+            // clicked), never an outer ancestor's, so a wide, full-width
+            // flex row (a filter/settings row commonly stretches to fill
+            // its container - a real, common layout, not a sign of
+            // ambiguity) never wrongly loses this check just for being
+            // visually wide. Uniqueness within rawEl's own subtree is
+            // already the precise signal; the size bound exists for the
+            // OUTWARD ancestor search, where growing container size
+            // really can mean "now searching a shared section with other,
+            // unrelated widgets in it."
+            var _rawElOwnUniqueCheckbox = _findUniqueCheckboxDescendant(
+                rawEl, 'input[type="checkbox"], [role="checkbox"], [role="menuitemcheckbox"], [role="switch"]', rawEl,
+            );
+            if (ownText.length > 2 && rawEl.tagName !== 'LABEL' && !_rawElOwnUniqueCheckbox) {
+                return null;
+            }
+
+            var checkBtn = rawEl;
+            var btnDepth = 0;
+            while (checkBtn && checkBtn.nodeType === Node.ELEMENT_NODE && btnDepth < 6 && checkBtn.tagName !== 'BODY') {
+                var btnTag = checkBtn.tagName;
+                var btnRole = checkBtn.getAttribute ? (checkBtn.getAttribute('role') || '') : '';
+                var btnType = (btnTag === 'INPUT' && checkBtn.getAttribute) ? (checkBtn.getAttribute('type') || '').toLowerCase() : '';
+                if (
+                    btnTag === 'BUTTON' || btnTag === 'A' || btnRole === 'button' ||
+                    (btnTag === 'INPUT' && (btnType === 'submit' || btnType === 'button'))
+                ) {
+                    return null;
+                }
+                // (a) FIX D: an explicit onclick attribute, or a real
+                // interactive affordance (tabindex="0" - the standard
+                // way a non-native element opts into keyboard/focus
+                // interactivity, a strong React/custom-component signal)
+                // combined with a pointer cursor
+                var hasOnclickAttr = checkBtn.hasAttribute && checkBtn.hasAttribute('onclick');
+                var isFocusable = checkBtn.getAttribute && checkBtn.getAttribute('tabindex') === '0';
+                var cursorPointer = false;
+                try {
+                    cursorPointer = getComputedStyle(checkBtn).cursor === 'pointer';
+                } catch (eCursor) {}
+                if (hasOnclickAttr || (isFocusable && cursorPointer)) {
+                    return null;
+                }
+                // (c) FIX D: an icon (svg) whose own accessible name/
+                // title/text suggests an action (+, -, add, remove,
+                // send, continue, verify, pick) - never a toggle
+                if (_looksLikeActionIcon(checkBtn)) {
+                    return null;
+                }
+                checkBtn = checkBtn.parentElement;
+                btnDepth++;
+            }
         }
 
-        // 2. Direct ARIA role="checkbox"
+        // 1. Direct native input[type="checkbox"|"radio"] - radio added
+        // alongside checkbox (previously handled only indirectly, if at
+        // all, by the ancestor/descendant heuristics further below) since
+        // a plain, unambiguous radio input is exactly as much a real
+        // toggle control as a checkbox is; purely additive; a page target
+        // this would ever have matched.
+        if (rawEl.tagName === 'INPUT') {
+            var directType = (rawEl.type || '').toLowerCase();
+            if (directType === 'checkbox' || directType === 'radio') {
+                lastCheckboxClassifiedBy = 'native-input-direct';
+                return rawEl;
+            }
+        }
+
+        // 2. Direct ARIA role="checkbox"|"radio"|"switch"|"menuitemcheckbox"
         var role = rawEl.getAttribute ? rawEl.getAttribute('role') : null;
-        if (role === 'checkbox' || role === 'menuitemcheckbox' || role === 'switch') {
+        if (role === 'checkbox' || role === 'menuitemcheckbox' || role === 'switch' || role === 'radio') {
+            lastCheckboxClassifiedBy = 'aria-role-direct';
             return rawEl;
         }
 
         // 3. Direct LABEL tag
         if (rawEl.tagName === 'LABEL') {
-            if (rawEl.control && rawEl.control.tagName === 'INPUT' && (rawEl.control.type || '').toLowerCase() === 'checkbox') {
+            // RC1: widened from checkbox-only to also recognize radio -
+            // a real single-select filter/sort option (Myntra's own
+            // "Price: Low to High" radio group, confirmed via a live
+            // recording) is exactly as much a <label>-wraps-native-input
+            // widget as a checkbox is; excluding radio here meant
+            // state_target could never be populated for it at all, even
+            // though act_target's own fix (resolveSemanticActTarget)
+            // already handles the label side correctly on its own.
+            if (
+                rawEl.control && rawEl.control.tagName === 'INPUT' &&
+                ['checkbox', 'radio'].indexOf((rawEl.control.type || '').toLowerCase()) !== -1
+            ) {
+                lastCheckboxClassifiedBy = 'label-control';
                 return rawEl.control;
             }
             var forId = rawEl.getAttribute('for');
             if (forId) {
                 var inputFor = document.getElementById(forId);
-                if (inputFor && (inputFor.tagName === 'INPUT' || inputFor.getAttribute('role') === 'checkbox')) {
+                if (inputFor && (inputFor.tagName === 'INPUT' || inputFor.getAttribute('role') === 'checkbox' || inputFor.getAttribute('role') === 'radio')) {
+                    lastCheckboxClassifiedBy = 'label-for';
                     return inputFor;
                 }
             }
-            var inCb = rawEl.querySelector('input[type="checkbox"], [role="checkbox"]');
-            if (inCb) return inCb;
+            var inCb = _findUniqueCheckboxDescendant(
+                rawEl, 'input[type="checkbox"], input[type="radio"], [role="checkbox"], [role="radio"]', rawEl,
+            );
+            if (inCb) {
+                lastCheckboxClassifiedBy = 'label-descendant';
+                return inCb;
+            }
         }
 
         // 4. Ancestor search (up to 5 levels) for semantic input or ARIA checkbox control
@@ -1459,25 +1912,61 @@
         // it was found in being small enough to plausibly BE that
         // local widget - never a class name, id, or text check, purely
         // geometric, so this works identically on any site.
+        //
+        // SECOND CONFIRMED REAL BUG this also fixes: a filter-chip's own
+        // chevron/toggle icon (own text short enough - even a single
+        // decorative glyph - to slip under the step-0.5 exclusion above)
+        // sits right next to the chip's own hover-revealed checkbox
+        // PANEL in the same small container. _isSmallEnoughForCheckboxWidget
+        // alone doesn't catch this: the panel is small (it's meant to
+        // be), so the search still finds a real checkbox in it and
+        // misrecords the click as a "check" instead of the actual chip
+        // click. Every querySelector-based descendant search below now
+        // uses _findUniqueCheckboxDescendant - see its own docstring for
+        // why "exactly one candidate in the container" is the actual
+        // safe/unsafe boundary. Ancestor NODE checks (its own tag/role)
+        // are unaffected either way.
         var node = rawEl;
         var depth = 0;
         while (node && node.nodeType === Node.ELEMENT_NODE && depth < 5 && node.tagName !== 'BODY' && node.tagName !== 'HTML') {
+            // rawEl's own subtree was already searched, unbounded by
+            // size, in step 0.5 above (see _rawElOwnUniqueCheckbox's own
+            // comment for why a wide/full-width row must not lose this
+            // just for being visually wide) - reuse that same result
+            // here on the very first iteration (node === rawEl) instead
+            // of re-searching it a second time through the size-bounded
+            // path below, which would otherwise reject a genuinely wide
+            // row's own unique checkbox right back out again.
+            if (node === rawEl && _rawElOwnUniqueCheckbox) {
+                lastCheckboxClassifiedBy = 'own-unique-descendant';
+                return _rawElOwnUniqueCheckbox;
+            }
             if (node.tagName === 'LABEL') {
                 if (node.control && node.control.tagName === 'INPUT' && (node.control.type || '').toLowerCase() === 'checkbox') {
+                    lastCheckboxClassifiedBy = 'ancestor-label-control';
                     return node.control;
                 }
                 if (_isSmallEnoughForCheckboxWidget(node)) {
-                    var childCb = node.querySelector('input[type="checkbox"], [role="checkbox"]');
-                    if (childCb) return childCb;
+                    var childCb = _findUniqueCheckboxDescendant(node, 'input[type="checkbox"], [role="checkbox"]', rawEl);
+                    if (childCb) {
+                        lastCheckboxClassifiedBy = 'ancestor-label-descendant';
+                        return childCb;
+                    }
                 }
             }
             var nodeRole = node.getAttribute ? node.getAttribute('role') : null;
             if (nodeRole === 'checkbox' || nodeRole === 'menuitemcheckbox' || nodeRole === 'switch') {
+                lastCheckboxClassifiedBy = 'ancestor-aria-role';
                 return node;
             }
-            if (node.querySelector && _isSmallEnoughForCheckboxWidget(node)) {
-                var childCb2 = node.querySelector('input[type="checkbox"], [role="checkbox"], [role="menuitemcheckbox"], [role="switch"]');
-                if (childCb2) return childCb2;
+            if (_isSmallEnoughForCheckboxWidget(node)) {
+                var childCb2 = _findUniqueCheckboxDescendant(
+                    node, 'input[type="checkbox"], [role="checkbox"], [role="menuitemcheckbox"], [role="switch"]', rawEl,
+                );
+                if (childCb2) {
+                    lastCheckboxClassifiedBy = 'ancestor-widget-descendant';
+                    return childCb2;
+                }
             }
             var cls = (node.className || '').toString().toLowerCase();
             var dt = node.getAttribute ? (node.getAttribute('data-type') || node.getAttribute('data-testid') || '') : '';
@@ -1485,7 +1974,8 @@
                 (cls.indexOf('checkbox') !== -1 || cls.indexOf('chk') !== -1 || dt.indexOf('checkbox') !== -1) &&
                 _isSmallEnoughForCheckboxWidget(node)
             ) {
-                var innerInput = node.querySelector ? node.querySelector('input[type="checkbox"], [role="checkbox"]') : null;
+                var innerInput = _findUniqueCheckboxDescendant(node, 'input[type="checkbox"], [role="checkbox"]', rawEl);
+                lastCheckboxClassifiedBy = innerInput ? 'ancestor-classname-descendant' : 'ancestor-classname-self';
                 return innerInput || node;
             }
             node = node.parentElement;
@@ -1512,17 +2002,31 @@
                             // 1. Prefer actual native input or explicit ARIA control inside the option row
                             var actualInPNode = pNode.querySelector ? pNode.querySelector('input[type="checkbox"], [role="checkbox"], [role="menuitemcheckbox"], [role="switch"]') : null;
                             if (actualInPNode) {
+                                lastCheckboxClassifiedBy = 'geometric-square-widget-input';
                                 return actualInPNode;
                             }
                             // 2. Check for associated label via for attribute
                             if (rawEl.id) {
                                 try {
                                     var lFor = document.querySelector('label[for="' + CSS.escape(rawEl.id) + '"]');
-                                    if (lFor) return rawEl;
+                                    if (lFor) {
+                                        lastCheckboxClassifiedBy = 'geometric-square-labeled';
+                                        return rawEl;
+                                    }
                                 } catch (e) {}
                             }
-                            // 3. Return rawEl (the small visual square) as the most specific clickable element
-                            return rawEl;
+                            // 3. FIX D: only return rawEl itself (the bare
+                            // small visual square, purely on GEOMETRY) if
+                            // it (or a hidden input inside it) actually
+                            // exposes checked/aria-checked state - size and
+                            // position alone are not enough; an action
+                            // icon (a "+", a send arrow, ...) can easily be
+                            // the same small square shape as a real
+                            // checkbox.
+                            if (_exposesCheckedState(rawEl)) {
+                                lastCheckboxClassifiedBy = 'geometric-square-fallback';
+                                return rawEl;
+                            }
                         }
                     }
                     pNode = pNode.parentElement;
@@ -1542,7 +2046,18 @@
                         var sAspect = sRect.width / (sRect.height || 1);
                         if (sAspect >= 0.5 && sAspect <= 1.8) {
                             var actualInSib = sib.querySelector ? sib.querySelector('input[type="checkbox"], [role="checkbox"]') : null;
-                            return actualInSib || sib;
+                            if (actualInSib) {
+                                lastCheckboxClassifiedBy = 'geometric-sibling-input';
+                                return actualInSib;
+                            }
+                            // FIX D: same _exposesCheckedState gate as
+                            // branch 5's own bare-geometry fallback - the
+                            // sibling "square" must actually expose
+                            // checked state, not just be the right size.
+                            if (_exposesCheckedState(sib)) {
+                                lastCheckboxClassifiedBy = 'geometric-sibling-fallback';
+                                return sib;
+                            }
                         }
                     }
                 }
@@ -1623,9 +2138,25 @@
         return checkboxTarget;
     }
 
+    function _nativeCheckboxRoleDefault(el) {
+        // 'radio' or 'checkbox' when el is a genuine native input of that
+        // type (radio has no explicit role="..." attribute in real HTML -
+        // it's an implicit ARIA role - so this is the only reliable
+        // source for it); null for anything else, letting the caller keep
+        // its own generic fallback for a non-native styled target.
+        if (el && el.tagName === 'INPUT') {
+            var t = (el.type || '').toLowerCase();
+            if (t === 'radio' || t === 'checkbox') return t;
+        }
+        return null;
+    }
+
     function isCheckboxCheckedState(el) {
         if (!el) return false;
-        if (el.tagName === 'INPUT' && (el.type || '').toLowerCase() === 'checkbox') {
+        if (
+            el.tagName === 'INPUT' &&
+            ['checkbox', 'radio'].indexOf((el.type || '').toLowerCase()) !== -1
+        ) {
             return !!el.checked;
         }
         if (el.hasAttribute && el.hasAttribute('aria-checked')) {
@@ -1645,6 +2176,101 @@
             return true;
         }
         return false;
+    }
+
+    // RC1 (checked-state race - CONFIRMED via the hidden-radio-sort
+    // fixture: a plain live read of checkboxTarget.checked here, taken
+    // from the SAME click event that resolved to a label/wrapper as
+    // rawEl, still shows the PRE-click value). A native <input
+    // type=checkbox|radio> only actually flips its own .checked as part
+    // of ITS OWN "pre-click activation steps" - which run before ANY
+    // listener sees ITS OWN click event, but that's a SEPARATE, later
+    // click event the browser dispatches only once the ORIGINAL click
+    // (whatever rawEl actually was - typically a wrapping <label>)
+    // finishes bubbling and its own post-click activation behavior
+    // forwards a synthetic click() to the control. Our capture-phase
+    // document listener processes that ORIGINAL event synchronously,
+    // before that forwarding ever happens, so checkboxTarget.checked
+    // read at that point is always stale whenever rawEl isn't
+    // checkboxTarget itself. When rawEl IS checkboxTarget (the user's
+    // pointer landed on the native input directly), there is no
+    // forwarding involved at all and the live read is already correct
+    // (that control's own pre-click activation steps already ran before
+    // this same click event reached us) - only the forwarded-click case
+    // needs the platform-defined result predicted instead of read.
+    function _predictedCheckedState(checkboxTarget, rawEl) {
+        if (!checkboxTarget) return null;
+        if (rawEl === checkboxTarget) {
+            return isCheckboxCheckedState(checkboxTarget);
+        }
+        var type = (checkboxTarget.tagName === 'INPUT') ? (checkboxTarget.type || '').toLowerCase() : '';
+        if (type === 'radio') return true;
+        if (type === 'checkbox') return !isCheckboxCheckedState(checkboxTarget);
+        return isCheckboxCheckedState(checkboxTarget);
+    }
+
+    // RC4 (real DOM evidence for the future) - a compact snapshot of the
+    // actual markup around act_target/state_target at record time, so a
+    // later replay failure (or tests/fixture_from_snapshot.py) can show
+    // "here is exactly what the site's DOM looked like" instead of only
+    // a locator profile that no longer matches after a site redesign.
+    // Deliberately capped (~8KB total) and best-effort throughout - a
+    // huge/unusual subtree must never abort or slow down the actual
+    // recorded action just to gather this extra evidence.
+    var DOM_CONTEXT_MAX_BYTES = 8192;
+    var DOM_CONTEXT_MAX_ANCESTORS = 6;
+
+    function _domContextComputedStyle(el) {
+        try {
+            var cs = window.getComputedStyle(el);
+            return { display: cs.display, visibility: cs.visibility, opacity: cs.opacity };
+        } catch (e) {
+            return null;
+        }
+    }
+
+    function _domContextHtmlChain(el) {
+        var chain = [];
+        var node = el;
+        var depth = 0;
+        while (node && node.nodeType === Node.ELEMENT_NODE && depth <= DOM_CONTEXT_MAX_ANCESTORS) {
+            try {
+                chain.push(node.outerHTML || '');
+            } catch (e) {
+                chain.push('');
+            }
+            node = node.parentElement;
+            depth++;
+        }
+        return chain;
+    }
+
+    function _domContextTrimChain(chain, budgetBytes) {
+        if (!chain || !chain.length) return chain;
+        var perItemBudget = Math.max(200, Math.floor(budgetBytes / chain.length));
+        return chain.map(function (html) {
+            return html.length > perItemBudget
+                ? html.slice(0, perItemBudget) + '...[truncated]'
+                : html;
+        });
+    }
+
+    function buildDomContext(actEl, stateEl) {
+        try {
+            var hasState = stateEl && stateEl !== actEl;
+            var actBudget = hasState ? Math.floor(DOM_CONTEXT_MAX_BYTES * 0.6) : DOM_CONTEXT_MAX_BYTES;
+            var stateBudget = DOM_CONTEXT_MAX_BYTES - actBudget;
+            return {
+                act_target_html_chain: _domContextTrimChain(_domContextHtmlChain(actEl), actBudget),
+                act_target_style: _domContextComputedStyle(actEl),
+                state_target_html_chain: hasState
+                    ? _domContextTrimChain(_domContextHtmlChain(stateEl), stateBudget)
+                    : null,
+                state_target_style: hasState ? _domContextComputedStyle(stateEl) : null,
+            };
+        } catch (e) {
+            return null;
+        }
     }
 
     function getCheckboxAccessibleName(checkboxEl, rawEl) {
@@ -1711,6 +2337,35 @@
     // anchor a locator on it (see xPath's own comment on excludeText).
     // Never set for click-family/checkbox callers, which have no typed
     // value to exclude in the first place.
+    // BUG 2 (product card label includes hover-only content): a card-
+    // shaped container's own innerText commonly includes repeated badge
+    // text ("NEW" appearing once per product tile in the same grid, all
+    // captured together because the recorded target is an ANCESTOR
+    // container, not just the single badge) and CSS ::hover-revealed
+    // overlay text ("Sizes: XXL", a size-picker strip that only renders
+    // while the pointer is actually over the card - genuinely
+    // indistinguishable from "always there" text once the mouse has to
+    // be over the card to click it in the first place, so there is no
+    // real "before hover" DOM snapshot to take here). Cleans up after
+    // the fact instead: collapses consecutive duplicate lines (10x
+    // "NEW" -> one "NEW") and drops any line that's just a "Sizes:"-
+    // style overlay label, rather than trying to prevent the browser's
+    // own :hover state from ever being visible in innerText at all.
+    function _cleanCardLabelText(text) {
+        if (!text) return text;
+        var lines = text.split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
+        var deduped = [];
+        for (var i = 0; i < lines.length; i++) {
+            if (deduped.length === 0 || deduped[deduped.length - 1] !== lines[i]) {
+                deduped.push(lines[i]);
+            }
+        }
+        deduped = deduped.filter(function (line) {
+            return !/^sizes\s*:/i.test(line);
+        });
+        return deduped.join(' ').trim().slice(0, 80);
+    }
+
     function buildLocatorProfile(el, accNameOverride, valueToExclude) {
         const attrs = {};
         for (const a of el.attributes || []) {
@@ -1719,10 +2374,39 @@
             }
         }
         const accName = (accNameOverride !== undefined) ? accNameOverride : accessibleName(el);
-        const elementText = _stripIconFontText(
+        // BUG 2: the click target for a product-grid card commonly
+        // resolves to a DESCENDANT of the real <a href> card (an image,
+        // a price span) rather than the anchor itself - widen href
+        // capture (and the numeric product id inside it, when present)
+        // to the nearest enclosing <a href>, not just el itself, so a
+        // card click always gets a stable href-based locator regardless
+        // of which inner element actually resolved.
+        var _cardAnchor = (el.tagName === 'A' && el.hasAttribute('href'))
+            ? el
+            : (el.closest ? el.closest('a[href]') : null);
+        var _cardHref = _cardAnchor ? _cardAnchor.getAttribute('href') : null;
+        var _cardProductId = null;
+        if (_cardHref) {
+            var _pidMatch = _cardHref.match(/(\d{4,})/);
+            _cardProductId = _pidMatch ? _pidMatch[1] : null;
+        }
+        var elementText = _stripIconFontText(
             (el.innerText || (_isUserEditableValueField(el) ? '' : el.value) || '').trim().slice(0, 80)
         );
-        const finalText = accName || elementText;
+        if (_cardAnchor) {
+            elementText = _cleanCardLabelText(elementText);
+        }
+        var finalText = accName || elementText;
+        // BUG 2: a plain <a> with no aria-label gets an IMPLICIT
+        // accessible name computed from its own (raw, uncleaned) text
+        // content - accName can independently carry the exact same
+        // repeated-badge/overlay noise elementText was just cleaned of,
+        // and finalText prefers accName whenever it's non-empty. Clean
+        // finalText too, once, right here, so whichever source actually
+        // won still ends up card-cleaned.
+        if (_cardAnchor) {
+            finalText = _cleanCardLabelText(finalText);
+        }
         // true for an element inside an open shadow root OR a same-
         // origin iframe (its ownerDocument differs from the top-level
         // document either way) - both are cases where a DOCUMENT-WIDE
@@ -1747,7 +2431,14 @@
             accessible_name: accName,
             placeholder: el.getAttribute ? (el.getAttribute('placeholder') || null) : null,
             title: el.getAttribute ? (el.getAttribute('title') || null) : null,
-            href: (el.tagName === 'A' && el.hasAttribute('href')) ? el.getAttribute('href') : null,
+            href: _cardHref,
+            // BUG 2: numeric product id parsed out of the card's own
+            // href (e.g. ".../buy/45954123" -> "45954123") - a stable
+            // locator signal independent of the card's on-screen text,
+            // which can legitimately change between recording and
+            // replay (price, badges, stock). null whenever href itself
+            // has no href or no numeric id segment.
+            product_id: _cardProductId,
             css_path: cssPath(el),
             xpath: xPath(el, finalText, valueToExclude),
             text: finalText,
@@ -1803,6 +2494,11 @@
             ? _preClickSnapshot : null;
 
         var checkboxTarget = _snap ? _snap.checkboxTarget : ((actionType === 'click') ? findCheckboxTarget(rawEl) : null);
+        // FIX D debug field: whichever findCheckboxTarget call actually
+        // produced checkboxTarget above - the snapshot's own value when
+        // reused, or the fresh call's lastCheckboxClassifiedBy otherwise.
+        // null whenever checkboxTarget itself is null (a plain click).
+        var checkboxClassifiedBy = _snap ? _snap.checkboxClassifiedBy : lastCheckboxClassifiedBy;
         var effectiveActionType = checkboxTarget ? 'check' : actionType;
 
         // locator-only refinement (see resolveCheckboxLocatorElement) -
@@ -1812,9 +2508,31 @@
         // tag get recorded
         var checkboxLocatorTarget = checkboxTarget ? resolveCheckboxLocatorElement(checkboxTarget) : null;
 
-        var el = (effectiveActionType === 'click' || effectiveActionType === 'dblclick' || effectiveActionType === 'right_click')
-            ? resolveSemanticTarget(rawEl)
-            : (checkboxLocatorTarget || rawEl);
+        // RC1 (hidden native input as target - CONFIRMED REAL BUG via a
+        // live Myntra recording: a filter radio's own recorded label was
+        // "price_asc", its raw value attribute, not the visible "Price:
+        // Low to High" text a person actually saw and clicked; replay
+        // then requires that native <input> itself to be visible, which
+        // it structurally never is - a real custom checkbox/radio/sort
+        // option is near-universally a hidden <input> plus a visible
+        // label/indicator). `el` used to be the underlying input itself
+        // for a "check"-classified action (checkboxLocatorTarget,
+        // deliberately preferred for its LOCATOR stability), which is
+        // exactly backwards for what replay needs to actually CLICK -
+        // act_target is now always the VISIBLE thing the user's pointer
+        // was actually on (resolveSemanticTarget's own ancestor walk,
+        // unchanged, run unconditionally now instead of only for a
+        // plain, non-checkbox click); state_target - separate, new -
+        // carries the underlying input's own locator + current state,
+        // used for postcondition verification and as the PROXY source
+        // if act_target ever fails to resolve live (see resolve_and_act
+        // on the replay side). Both are the SAME element whenever the
+        // user directly clicked the native input itself (act_target and
+        // state_target simply end up pointing at the same thing) - nothing
+        // changes for that already-fine case.
+        var actTargetEl = resolveSemanticActTarget(rawEl);
+        var stateTargetEl = checkboxLocatorTarget;
+        var el = actTargetEl;
 
         const rect = el.getBoundingClientRect();
         // some real, visually-clickable elements measure as ZERO-size here
@@ -1840,23 +2558,101 @@
         // 'checkbox' recorded so replay's own check-vs-click handling
         // recognizes it; a real role attribute (handled generically inside
         // buildLocatorProfile above) always wins over this default.
+        //
+        // BUG FOUND against a real Myntra recording (session_
+        // 20260925_103118.json step 10): a native <input type="radio">
+        // has NO explicit role="..." HTML attribute (radio is an IMPLICIT
+        // ARIA role derived from tag+type, not a literal attribute), so
+        // buildLocatorProfile's generic `el.getAttribute('role')` read
+        // above always comes back null for it - which used to fall
+        // through to this same unconditional 'checkbox' default even
+        // though the live element is genuinely a radio. That wrong role
+        // then fed replay's is-this-a-radio-group verification logic,
+        // which never even considered treating it as one. Fixed: derive
+        // the default from the element's own native type when it IS the
+        // input (radio -> 'radio', checkbox -> 'checkbox'), keeping the
+        // old blanket 'checkbox' default only for a genuinely non-native
+        // target (a styled <div>/<span> with no type attribute at all).
         if (!locatorProfile.role && checkboxTarget) {
-            locatorProfile.role = 'checkbox';
+            locatorProfile.role = _nativeCheckboxRoleDefault(el) || 'checkbox';
+        }
+
+        // RC1: state_target - the underlying input's OWN locator profile
+        // + its current checked state, separate from act_target/
+        // locator_profile above (which is always the VISIBLE thing
+        // actually clicked). Only ever built when checkboxTarget
+        // resolved to something at all; null on a plain click. Reuses
+        // the same buildLocatorProfile() + getCheckboxAccessibleName()
+        // already used for the checkbox-classified case above, just
+        // anchored on stateTargetEl specifically rather than el.
+        var stateTargetProfile = null;
+        if (stateTargetEl) {
+            stateTargetProfile = (stateTargetEl === el)
+                ? locatorProfile
+                : buildLocatorProfile(stateTargetEl, getCheckboxAccessibleName(checkboxTarget, rawEl), null);
+            if (!stateTargetProfile.role) {
+                // same fix as locatorProfile's own default above -
+                // state_target IS the underlying input itself, so its
+                // native type (when present) is always the right source
+                // of truth, never a blanket 'checkbox' guess.
+                stateTargetProfile.role = _nativeCheckboxRoleDefault(stateTargetEl) || 'checkbox';
+            }
         }
 
         var payload = {
             action_type: effectiveActionType,
             value: value || null,
             locator_profile: locatorProfile,
+            act_target: locatorProfile,
+            state_target: stateTargetProfile ? {
+                locator_profile: stateTargetProfile,
+                checked: checkboxTarget ? _predictedCheckedState(checkboxTarget, rawEl) : null,
+            } : null,
             bounding_box: { x: rect.x, y: rect.y, width: rect.width, height: rect.height },
+            // BUG 3 (scroll leak across steps): bounding_box's x/y are
+            // VIEWPORT-relative (getBoundingClientRect()) - meaningless
+            // as a raw-coordinate replay fallback unless the page is
+            // scrolled back to (roughly) this same position first. Every
+            // action now carries the window scroll position it was
+            // actually captured at, not just dedicated "scroll" actions,
+            // so that fallback can restore it before trusting the
+            // recorded coordinate.
+            scroll_x: window.scrollX,
+            scroll_y: window.scrollY,
             click_strategy: clickStrategy,
             page_url: window.location.href,
-            timestamp: new Date().toISOString()
+            timestamp: new Date().toISOString(),
+            dom_context: buildDomContext(el, stateTargetEl),
         };
 
         if (effectiveActionType === 'check') {
-            payload.expected_state = isCheckboxCheckedState(checkboxTarget || el);
+            payload.expected_state = checkboxTarget
+                ? _predictedCheckedState(checkboxTarget, rawEl)
+                : isCheckboxCheckedState(el);
+            // FIX D debug field: which findCheckboxTarget branch actually
+            // classified this as a checkbox/radio - only meaningful (and
+            // only ever set) for a "check" action; a plain click never
+            // gets this field at all.
+            payload.classified_by = checkboxClassifiedBy;
+            // FIX 1.4 (postcondition) - same value as expected_state
+            // above, just under the shared "expect" field's own
+            // {type, ...} shape so replay's postcondition verification
+            // (see resolve_and_act's "check" dispatch) can check for it
+            // generically alongside a hover's own "reveal" expect,
+            // without needing a per-action-type special case for this
+            // one. expected_state itself is untouched, still read
+            // directly by every existing consumer exactly as before.
+            payload.expect = { type: 'toggle', final_checked: payload.expected_state };
         }
+
+        // FIX 2 (locator stability, additive only): ~300ms after this
+        // profile is captured, count how many live elements its primary
+        // locators actually match right now - never inline/synchronous
+        // with the click itself, so this never adds latency to the
+        // capture path real-time recording depends on. See
+        // _scheduleLocatorStabilityCheck's own docstring for what gets
+        // reported back and how.
+        _scheduleLocatorStabilityCheck(payload.timestamp, locatorProfile);
 
         return payload;
     }
@@ -1938,11 +2734,254 @@
         }
     }
 
-    function send(payload) {
+    // FIX 1 (recorder attaches too late): the recordAction binding is now
+    // registered at the context level BEFORE page.goto() ever runs (see
+    // record_session.py's install_context_capture), so in practice it is
+    // already callable the instant this script's very first line runs -
+    // this queue is defensive insurance for the remaining sliver of a
+    // race (a binding call still in flight on the Playwright/CDP side)
+    // rather than the primary fix. An event that fires while
+    // window.recordAction genuinely isn't callable yet is queued, in
+    // order, instead of being silently dropped - flushed the moment the
+    // binding becomes available, and only ever drained oldest-first so
+    // nothing is ever sent out of order or twice.
+    var __afqaPendingQueue = [];
+    var __afqaFlushTimer = null;
+    // bounds the queue against a binding that never recovers (page stuck
+    // in some broken state) - each queued entry is already the fully
+    // serialized JSON payload, so its own "timestamp" field (set at the
+    // moment send() was first called for it) never changes regardless of
+    // how long it sits queued or when it's eventually flushed
+    var __AFQA_QUEUE_CAP = 50;
+
+    function __afqaEnqueue(serialized) {
+        if (__afqaPendingQueue.length >= __AFQA_QUEUE_CAP) {
+            // drop the OLDEST once genuinely full, never the newest - a
+            // queue this deep means the binding has been unavailable for
+            // a long time already; keeping the most recent activity is
+            // more useful than an ever-growing backlog no one can act on
+            __afqaPendingQueue.shift();
+        }
+        __afqaPendingQueue.push(serialized);
+        if (!__afqaFlushTimer) {
+            __afqaFlushTimer = setInterval(__afqaTryFlushQueue, 50);
+        }
+    }
+
+    function __afqaTryFlushQueue() {
+        if (!__afqaPendingQueue.length) {
+            if (__afqaFlushTimer) { clearInterval(__afqaFlushTimer); __afqaFlushTimer = null; }
+            return;
+        }
+        if (typeof window.recordAction !== 'function') return;
+        var pending = __afqaPendingQueue;
+        __afqaPendingQueue = [];
+        for (var i = 0; i < pending.length; i++) {
+            try {
+                window.recordAction(pending[i]);
+            } catch (err) {
+                // binding disappeared again mid-flush (page unloading) - put
+                // whatever's left back, oldest-first, and stop for now
+                __afqaPendingQueue = pending.slice(i).concat(__afqaPendingQueue);
+                break;
+            }
+        }
+        if (!__afqaPendingQueue.length && __afqaFlushTimer) {
+            clearInterval(__afqaFlushTimer);
+            __afqaFlushTimer = null;
+        }
+    }
+
+    // FIX 2 (locator stability, additive only): a locator that looks
+    // unique at capture time can still turn out to match several
+    // elements on the live page (a list of otherwise-identical rows, a
+    // css_path that happens to also match a hidden duplicate elsewhere) -
+    // this doesn't change what gets recorded as the action's own
+    // locator_profile at all, it only ever ADDS a match_count/
+    // disambiguation report replay can use as an EXTRA scoring signal
+    // (see _score_candidates_and_pick's own use of it) alongside its
+    // existing tiers, never a replacement for any of them.
+    var LOCATOR_STABILITY_CHECK_DELAY_MS = 300;
+    // NOTE on ordering: css_path/xpath are POSITIONAL (nth-of-type-based -
+    // see buildLocatorProfile's own xPath()/cssPath() builders), so they
+    // are essentially always unique AT CAPTURE TIME by construction, even
+    // for one of several visually-identical elements - the count that
+    // actually matters for "is this locator inherently ambiguous"
+    // purposes is text+tag (content-based, the same signal
+    // _score_candidates_and_pick's own recorded-text check and the real
+    // resolve_and_act tier chain both use), checked BEFORE css_path/xpath
+    // to match the real tier priority order.
+    var LOCATOR_MATCH_PRIORITY = ['data-testid', 'data-test', 'data-cy', 'id', 'name', 'aria_label', 'text+tag', 'css_path', 'xpath'];
+
+    function _countLocatorMatches(lp) {
+        var counts = {};
+        var attrs = lp.attributes || {};
         try {
-            window.recordAction(JSON.stringify(payload));
-        } catch (err) {
-            // recordAction not bound yet (recording never started on this page), ignore
+            if (lp.id) counts.id = document.querySelectorAll(lp.id).length;
+        } catch (e) {}
+        ['data-testid', 'data-test', 'data-cy'].forEach(function (attr) {
+            var val = attrs[attr];
+            if (!val) return;
+            try {
+                counts[attr] = document.querySelectorAll('[' + attr + '="' + CSS.escape(val) + '"]').length;
+            } catch (e) {}
+        });
+        try {
+            if (lp.name) counts.name = document.getElementsByName(lp.name).length;
+        } catch (e) {}
+        try {
+            if (lp.aria_label) counts.aria_label = document.querySelectorAll('[aria-label="' + CSS.escape(lp.aria_label) + '"]').length;
+        } catch (e) {}
+        try {
+            var text = (lp.text || lp.element_text || '').trim();
+            var tag = (lp.tag || '').toUpperCase();
+            if (text && tag) {
+                var sameTag = document.getElementsByTagName(tag);
+                var textCount = 0;
+                for (var t = 0; t < sameTag.length; t++) {
+                    if ((sameTag[t].textContent || '').trim() === text) textCount++;
+                }
+                counts['text+tag'] = textCount;
+            }
+        } catch (e) {}
+        try {
+            if (lp.css_path) counts.css_path = document.querySelectorAll(lp.css_path).length;
+        } catch (e) {}
+        try {
+            if (lp.xpath) {
+                var xr = document.evaluate(lp.xpath, document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
+                counts.xpath = xr.snapshotLength;
+            }
+        } catch (e) {}
+        return counts;
+    }
+
+    function _bestLocatorTier(counts) {
+        for (var i = 0; i < LOCATOR_MATCH_PRIORITY.length; i++) {
+            if (LOCATOR_MATCH_PRIORITY[i] in counts) return LOCATOR_MATCH_PRIORITY[i];
+        }
+        return null;
+    }
+
+    function _resolveForStabilityCheck(lp) {
+        // best-effort representative element for the disambiguation
+        // context below - same priority as the count above; when several
+        // elements match, the first one found stands in for "the element
+        // this action targeted" (good enough for a rough, additive
+        // scoring signal - not meant to be exact)
+        try {
+            if (lp.id) {
+                var byId = document.querySelector(lp.id);
+                if (byId) return byId;
+            }
+        } catch (e) {}
+        try {
+            if (lp.css_path) {
+                var byCss = document.querySelector(lp.css_path);
+                if (byCss) return byCss;
+            }
+        } catch (e) {}
+        try {
+            if (lp.xpath) {
+                var xr = document.evaluate(lp.xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null);
+                if (xr.singleNodeValue) return xr.singleNodeValue;
+            }
+        } catch (e) {}
+        return null;
+    }
+
+    function _buildDisambiguationContext(el) {
+        // container path: up to 3 ancestor levels, tag + id/class summary
+        // - cheap, generic "where in the page structure is this" hint
+        var containerPath = [];
+        var node = el.parentElement;
+        for (var i = 0; i < 3 && node; i++) {
+            var desc = (node.tagName || '').toLowerCase();
+            if (node.id) {
+                desc += '#' + node.id;
+            } else if (node.className && typeof node.className === 'string' && node.className.trim()) {
+                desc += '.' + node.className.trim().split(/\s+/).join('.');
+            }
+            containerPath.push(desc);
+            node = node.parentElement;
+        }
+
+        // same-text sibling index: this element's position among every
+        // same-tag element (scoped to its own grandparent - one level
+        // above its immediate wrapper, which for a typical item/row/list
+        // structure lands on the shared list container everything else
+        // being compared actually sits in; falls back to the whole
+        // document when there's no grandparent at all) whose own trimmed
+        // text content matches exactly - a purely structural/content
+        // signal, never a site-specific selector
+        var sameTextIndex = null, sameTextTotal = null;
+        try {
+            var scope = (el.parentElement && el.parentElement.parentElement) || document;
+            var ownText = (el.textContent || '').trim();
+            var candidates = Array.prototype.filter.call(
+                scope.getElementsByTagName(el.tagName),
+                function (c) { return (c.textContent || '').trim() === ownText; }
+            );
+            sameTextTotal = candidates.length;
+            sameTextIndex = candidates.indexOf(el);
+        } catch (e) {}
+
+        // relative position: this element's own live bounding box, for
+        // replay to compare against each candidate's box as a proximity
+        // tiebreaker - the same kind of signal _score_candidates_and_pick
+        // already uses via its own recorded_box, just sourced from here
+        var boundingBox = null;
+        try {
+            var r = el.getBoundingClientRect();
+            boundingBox = { x: r.x, y: r.y, width: r.width, height: r.height };
+        } catch (e) {}
+
+        return {
+            container_path: containerPath,
+            same_text_sibling_index: sameTextIndex,
+            same_text_sibling_total: sameTextTotal,
+            bounding_box: boundingBox,
+        };
+    }
+
+    function _scheduleLocatorStabilityCheck(actionTimestamp, lp) {
+        if (!lp || !actionTimestamp) return;
+        setTimeout(function () {
+            try {
+                var counts = _countLocatorMatches(lp);
+                var bestTier = _bestLocatorTier(counts);
+                var patchPayload = {
+                    action_type: '__locator_stability__',
+                    target_timestamp: actionTimestamp,
+                    match_count: counts,
+                };
+                if (bestTier && counts[bestTier] > 1) {
+                    var el = _resolveForStabilityCheck(lp);
+                    if (el) patchPayload.disambiguation = _buildDisambiguationContext(el);
+                }
+                send(patchPayload);
+            } catch (e) {}
+        }, LOCATOR_STABILITY_CHECK_DELAY_MS);
+    }
+
+    function send(payload) {
+        var serialized = JSON.stringify(payload);
+        if (__afqaPendingQueue.length > 0) {
+            // older events are still waiting to flush - queue this one too
+            // instead of letting it jump the line ahead of them (calling
+            // recordAction directly here, even though it might well be
+            // callable again by now, would send THIS one before whatever
+            // is still queued, violating capture order), then try to
+            // drain everything, oldest-first, in one pass
+            __afqaEnqueue(serialized);
+            __afqaTryFlushQueue();
+        } else {
+            try {
+                window.recordAction(serialized);
+            } catch (err) {
+                // recordAction not bound yet - queue it instead of dropping it
+                __afqaEnqueue(serialized);
+            }
         }
         // keep the badge snapshot in sync with whatever was actually
         // just captured, for the NEXT click's consistency check above -
@@ -1950,7 +2989,8 @@
         // real user actions and shouldn't reset the "since last action" window
         if (
             payload && payload.action_type !== '__consistency_warning__' &&
-            payload.action_type !== '__page_visible__'
+            payload.action_type !== '__page_visible__' &&
+            payload.action_type !== '__locator_stability__'
         ) {
             lastBadgeSnapshot = scanNumericBadges();
             actionsSinceLastBadgeSnapshot = 0;
@@ -2071,18 +3111,603 @@
     // already agree.
     var _preClickSnapshot = null;
 
+    // BUG 1 (hover-revealed menu not recorded): a hover-then-click
+    // sequence (hover "MEN" -> a mega-menu opens -> click "Casual
+    // Shirts") produces no recordable event of its own for the hover -
+    // only the eventual click on the now-visible menu item. Replaying
+    // just that click against a page where the menu was never opened
+    // finds the target attached-but-hidden and has no idea a hover
+    // needs to happen first. Tracked here so the click handler below
+    // can emit an explicit "hover" step immediately before such a click,
+    // but ONLY when there's real, structural evidence the hover is what
+    // revealed it - never for an ordinary click with no menu involved.
+    // RC2 (wrong/noisy hover steps - CONFIRMED via a live Myntra
+    // recording: several hover steps targeted an "incidental mouse
+    // pass" - the header search box, a product card, an unrelated
+    // paragraph - that had nothing to do with the click that followed).
+    // A first attempt tightened this all the way to 800ms on the theory
+    // that a real "hover to reveal, then click" gesture happens close
+    // together - CONFIRMED REAL REGRESSION that caused, via this file's
+    // own hover-menu fixture test: a real person hovering a menu open
+    // and then taking a MOMENT to find and click the revealed item
+    // (well over 800ms is completely normal human pacing) lost its
+    // hover step entirely. 2500ms keeps a real margin over that normal
+    // pacing while still being meaningfully tighter than the original
+    // 4000ms; the STRUCTURAL fix that actually eliminates the "Brands"-
+    // header-style incidental pass (see hoverEl.contains(clickTarget)
+    // below) doesn't depend on timing at all, so this window only needs
+    // to bound "how long is a real hover-then-click gesture allowed to
+    // take", not carry the whole burden of rejecting unrelated hovers.
+    var HOVER_PENDING_MAX_AGE_MS = 2500;
+    // hoverChain replaces the old single pendingHover slot: an ordered
+    // array of { el, baselineSet, time }, OUTERMOST trigger first - built
+    // live as the mouse moves (see the mouseover listener below), so a
+    // NESTED reveal (hovering "Filters" opens a chip row, then hovering
+    // the "Patterns" chip inside that row opens ITS OWN checkbox panel)
+    // is captured as a real, ordered chain instead of only ever
+    // recording the last, deepest hover (which would just equal the
+    // eventual click target - the "nothing to report" case).
+    var hoverChain = [];
+
+    function _isHoverCandidateVisible(el) {
+        if (!el || !el.getBoundingClientRect) return false;
+        var r = el.getBoundingClientRect();
+        if (r.width <= 0 || r.height <= 0) return false;
+        var cs = getComputedStyle(el);
+        if (cs.visibility === 'hidden' || cs.display === 'none') return false;
+        if (parseFloat(cs.opacity) === 0) return false;
+        return true;
+    }
+
+    // snapshot of which "revealed-content-shaped" descendants are
+    // visible right now, near `el` - purely structural (bounded ancestor
+    // walk, generic tag/role/leaf-text selection), never a site-specific
+    // selector. Walked from a bounded ancestor (not el itself) since a
+    // mega-menu's own revealed panel is typically a SIBLING of the
+    // trigger under one shared wrapper, not a descendant of the trigger.
+    //
+    // A real dropdown/filter-chip/sort-menu panel's own items are just
+    // as often plain <li>/<span>/<div>-shaped (a filter chip, a sort
+    // option, a checkbox's own <label>) as they are semantic <a>/
+    // <button> - matching ONLY semantic interactive tags (the original,
+    // narrower version of this function) undercounts real UI badly
+    // enough that hovering straight through an entire reveal can measure
+    // as "nothing changed." Two generic signals, neither tied to any
+    // site's own naming: (1) semantically interactive by tag/role/
+    // tabindex/onclick, or (2) a LEAF element (no element children) that
+    // has its own non-empty text - covers a chip label, a menu item, a
+    // checkbox's label, without ever matching a bare structural wrapper
+    // <div>/<span> that merely contains other things.
+    var _INTERACTIVE_TAG_RE = /^(A|BUTTON|INPUT|SELECT|TEXTAREA|LABEL|LI|OPTION)$/;
+    function _isRevealCandidateShaped(node) {
+        if (_INTERACTIVE_TAG_RE.test(node.tagName)) return true;
+        if (node.hasAttribute('role') || node.hasAttribute('tabindex') || node.hasAttribute('onclick')) return true;
+        // has its own DIRECT text (a text node child, not just text that
+        // belongs to some nested child ELEMENT) - covers a chip/menu-item
+        // label that ALSO wraps its own dropdown panel as a child
+        // element (very common real markup - a chip's label and its
+        // panel share one wrapper), not just genuine no-children leaves.
+        var kids = node.childNodes;
+        for (var i = 0; i < kids.length; i++) {
+            if (kids[i].nodeType === 3 && kids[i].textContent.trim().length > 0) return true;
+        }
+        return false;
+    }
+    function _visibleCandidatesNear(el) {
+        var container = el;
+        var depth = 0;
+        while (container && container.parentElement && depth < 3) {
+            container = container.parentElement;
+            depth++;
+        }
+        var visibleSet = new Set();
+        if (container && container.querySelectorAll) {
+            var candidates = container.querySelectorAll('*');
+            for (var i = 0; i < candidates.length; i++) {
+                var node = candidates[i];
+                if (!_isRevealCandidateShaped(node)) continue;
+                if (_isHoverCandidateVisible(node)) {
+                    visibleSet.add(node);
+                }
+            }
+        }
+        return visibleSet;
+    }
+
+    // CONFIRMED (empirically, not just in theory): a browser resolves
+    // :hover synchronously with the mouse actually entering an element -
+    // by the time a 'mouseover' handler for that element runs and reads
+    // layout/style, CSS ":hover .submenu { display: block }" has already
+    // taken effect. Snapshotting visibility INSIDE the mouseover handler
+    // itself therefore always captures the POST-reveal state, never
+    // "what was visible before this hover" - the exact comparison this
+    // whole mechanism needs. The fix: maintain a rolling AMBIENT snapshot
+    // via 'mousemove' (which fires repeatedly as the pointer approaches a
+    // trigger, strictly BEFORE the boundary crossing that flips :hover),
+    // and use the most recent one - captured just prior to this hover -
+    // as pendingHover's baseline instead of recomputing fresh.
+    // two generations, not just the latest: browsers dispatch mousemove
+    // and mouseover essentially back-to-back for the SAME crossing event
+    // (moving into a new element fires mousemove for that position, then
+    // mouseover) - if mousemove's own handler runs first and overwrites
+    // _ambientVisible right before mouseover reads it, the "ambient"
+    // value would already reflect THIS SAME transition's post-reveal
+    // state, not a genuinely prior one. Using the PREVIOUS generation
+    // (one tick further back, ~80ms+ earlier) as the actual baseline
+    // keeps a real safety margin ahead of that same-event race.
+    var _ambientVisible = { visibleSet: new Set(), time: 0 };
+    var _ambientVisiblePrev = { visibleSet: new Set(), time: 0 };
+    var _lastAmbientSampleAt = 0;
+    document.addEventListener('mousemove', function (e) {
+        var now = Date.now();
+        if (now - _lastAmbientSampleAt < 80) return; // throttle to ~12/sec
+        _lastAmbientSampleAt = now;
+        try {
+            var atPoint = document.elementFromPoint(e.clientX, e.clientY);
+            if (atPoint) {
+                _ambientVisiblePrev = _ambientVisible;
+                _ambientVisible = { visibleSet: _visibleCandidatesNear(atPoint), time: now };
+            }
+        } catch (eAmbient) {}
+    }, true);
+
+    // the not-yet-confirmed candidate for the NEXT chain link - exactly
+    // the same role the old single-slot pendingHover played, just
+    // rebased against the LAST CONFIRMED link's own freezeSize instead of
+    // always against 0, so a second (or third) nested reveal can be
+    // detected the same way the first one is.
+    var _tentativeHover = null; // { el, baselineSet, time }
+
+    document.addEventListener('mouseover', function (e) {
+        try {
+            var target = e.target;
+            // the ambient snapshot is only trustworthy as a PRE-hover
+            // baseline when it's fresh enough to plausibly predate this
+            // exact hover transition (a real mousemove ~just before
+            // entering); a stale/missing one (mouse warped via focus,
+            // programmatic dispatch with no preceding mousemove, etc.)
+            // falls back to a fresh read - loses the pre/post distinction
+            // for that one hover, but never crashes or blocks recording.
+            var baselineSet = (Date.now() - _ambientVisiblePrev.time < 500)
+                ? _ambientVisiblePrev.visibleSet
+                : _visibleCandidatesNear(target);
+            // SELF-referential growth check (deliberately NOT compared
+            // against a fixed/global reference point - the page's own
+            // "ambient noise floor" for _visibleCandidatesNear is not
+            // reliably 0; an ordinary, always-visible link elsewhere on
+            // the page can easily be included in that scan, so "was
+            // anything at all visible" is never a safe baseline).
+            // Comparing each new mouseover's baseline against
+            // _tentativeHover's OWN previously-recorded baseline is what
+            // actually isolates a REAL reveal: mouseover fires (and
+            // bubbles) for EVERY element the pointer transitions into,
+            // including nested descendants - moving from a trigger down
+            // INTO its own just-revealed submenu, then onto a link
+            // inside it, fires three separate mouseover events for three
+            // different elements. The FIRST of those to actually cause
+            // new content to become visible (this baseline growing past
+            // _tentativeHover's own) confirms _tentativeHover as a real
+            // trigger - pushed onto hoverChain - and _tentativeHover is
+            // then reset to null so the very NEXT mouseover bootstraps a
+            // fresh comparison point from the page's NEW (already grown)
+            // resting state, letting a SECOND, nested reveal (hovering a
+            // chip inside an already-open row, opening ITS OWN panel) be
+            // detected the exact same self-referential way, instead of
+            // every subsequent mouseover just drifting a single old
+            // pendingHover slot all the way down to the click target
+            // itself (the "nothing to report" case this mechanism exists
+            // to avoid).
+            if (_tentativeHover && baselineSet.size > _tentativeHover.baselineSet.size) {
+                if (target !== _tentativeHover.el
+                    && !(target.contains && target.contains(_tentativeHover.el))
+                    && hoverChain.length < 3) {
+                    // bounded depth (3) - covers any realistic menu/
+                    // panel nesting without letting a pathological page
+                    // turn this into an unbounded chain
+                    hoverChain.push({
+                        el: _tentativeHover.el,
+                        baselineSet: _tentativeHover.baselineSet,
+                        time: _tentativeHover.time,
+                    });
+                }
+                _tentativeHover = null;
+                return;
+            }
+            _tentativeHover = { el: target, baselineSet: baselineSet, time: Date.now() };
+        } catch (eHover) {
+            // never let a hover-tracking failure break normal recording
+        }
+    }, true);
+
+    // Consumed (and cleared) by the click handler below, at most once
+    // per qualifying click - never re-emitted for a later, unrelated
+    // click that merely happens to follow the same hover eventually.
+    // Returns an ORDERED array of trigger elements (outermost first,
+    // possibly empty) - see hoverChain's own docstring above.
+    function _consumeHoverChain(clickTarget) {
+        var now = Date.now();
+        var result = [];
+        for (var i = 0; i < hoverChain.length; i++) {
+            var link = hoverChain[i];
+            if (now - link.time > HOVER_PENDING_MAX_AGE_MS) continue;
+            var hoverEl = link.el;
+            if (!hoverEl || hoverEl === clickTarget) continue;
+            // hovering something INSIDE what you go on to click (the
+            // reverse direction only) is completely ordinary - e.g.
+            // hovering an icon then clicking the button that wraps it -
+            // never a "hover revealed a separate menu" case.
+            if (clickTarget.contains && clickTarget.contains(hoverEl)) continue;
+            // RC2 (CONFIRMED via a live Amazon.in recording: a hover step
+            // got recorded targeting the filter section's own "Brands"
+            // header while the mouse merely passed near it on the way to
+            // clicking an actual, always-visible "Allen Solly" filter
+            // option several DOM levels away in a totally different
+            // branch - no genuine :hover-driven reveal was involved at
+            // all). A trigger whose hover genuinely reveals clickTarget
+            // is - by how CSS :hover-based reveals actually work -
+            // structurally an ANCESTOR of what it reveals (the DOM
+            // shape every real mega-menu/dropdown/panel in this file's
+            // own fixtures uses: trigger -> ... -> revealed item).
+            // Requiring that here, strictly, is what rejects "just
+            // happened to be hovered nearby" candidates that share only
+            // some much higher, unrelated common ancestor (the whole
+            // page, a shared layout wrapper) - a SIBLING-shaped trigger
+            // (rarer) is still covered independently by the REPLAY-side
+            // safety net (_reveal_via_ancestor_hover's own sibling walk,
+            // used for every recording, old or new, regardless of
+            // whether a hover_chain was ever recorded for this step at
+            // all), so nothing is lost by not also recording it here.
+            if (!(hoverEl.contains && hoverEl.contains(clickTarget))) continue;
+            // was NOT visible before this link's own hover - the click
+            // target must not already have been among the candidates
+            // snapshotted as visible at that moment.
+            if (link.baselineSet.has(clickTarget)) continue;
+            // RC2 ("the trigger must be the SMALLEST element that caused
+            // the reveal" - CONFIRMED via a live Myntra recording: the
+            // hover step's own recorded text was the ENTIRE filter bar's
+            // seven category names concatenated - "Bundles\nCountry of
+            // Origin\nMaterials\n..." - not the one chip actually
+            // hovered).
+            //
+            // An earlier version of this check compared hoverEl's own
+            // AGGREGATE innerText (or its sibling count) against a
+            // threshold - CONFIRMED REAL REGRESSION via this file's own
+            // hover-menu fixture test: a genuine single trigger's
+            // aggregate innerText NATURALLY includes its own revealed
+            // submenu's text too (the submenu is a DESCENDANT of the
+            // trigger being hovered), and a genuine trigger very
+            // commonly sits alongside OTHER top-level nav items as
+            // siblings (every ordinary navbar) - both signals fired on
+            // the perfectly legitimate case, not just the "whole bar"
+            // one. The signal that actually only fires for the bad case:
+            // does hoverEl DIRECTLY contain (as its own immediate
+            // children, not deep descendants) more than one element that
+            // independently looks trigger-shaped? A real trigger's own
+            // direct children are typically just its label text and/or
+            // ONE wrapping element for its own revealed panel - the
+            // "Bundles/Country of Origin/..." container, by contrast,
+            // directly contains several sibling <li>/option elements,
+            // each with its own label, as its own immediate children.
+            var hoverDirectTriggerChildCount = 0;
+            if (hoverEl.children) {
+                for (var ci = 0; ci < hoverEl.children.length; ci++) {
+                    if (_isRevealCandidateShaped(hoverEl.children[ci])) {
+                        hoverDirectTriggerChildCount++;
+                    }
+                }
+            }
+            if (hoverDirectTriggerChildCount > 1) continue;
+            result.push(hoverEl);
+        }
+        hoverChain = [];
+        _tentativeHover = null;
+        return result;
+    }
+
+    // FIX 1.1 (gesture id): one physical user gesture is everything from
+    // a mousedown through whatever native events the browser generates
+    // as a direct consequence of it - most commonly just its own click,
+    // but for a <label> (wrapping a control, or associated via for=) the
+    // browser ALSO dispatches a second, synthetic click directly on the
+    // control, plus a change event, all for that SAME physical press.
+    // _currentGestureId increments on every real mousedown (a NEW
+    // physical press always starts a new gesture); _lastSentGestureId
+    // records which gesture the most recently SENT click-family action
+    // belonged to, so a second native click/change arriving for the
+    // SAME still-current gesture is recognized generically (never a
+    // site-specific label/for=/framework check) rather than relying only
+    // on the semantic-element/timing heuristic below.
+    var _gestureCounter = 0;
+    var _currentGestureId = 0;
+    var _lastSentGestureId = -1;
+
     document.addEventListener('mousedown', function (e) {
         try {
+            _currentGestureId = ++_gestureCounter;
             var rawTarget = e.target;
             var semanticEl = resolveSemanticTarget(rawTarget);
+            var _snapCheckboxTarget = findCheckboxTarget(rawTarget);
             _preClickSnapshot = {
                 rawTarget: rawTarget,
-                checkboxTarget: findCheckboxTarget(rawTarget),
+                checkboxTarget: _snapCheckboxTarget,
+                // FIX D debug field - snapshotted immediately alongside
+                // checkboxTarget itself, from the SAME findCheckboxTarget
+                // call, so a later findCheckboxTarget call elsewhere
+                // (before this snapshot is actually consumed) can never
+                // overwrite it out from under this one.
+                checkboxClassifiedBy: lastCheckboxClassifiedBy,
                 semanticEl: semanticEl,
                 locatorProfile: buildLocatorProfile(semanticEl),
+                gestureId: _currentGestureId,
+            };
+            // FIX 3 (drag detection): opened on EVERY mousedown, cleared
+            // on mouseup whether or not it turned out to be a real drag
+            // (see the mouseup listener below) - capturing sourceRect and
+            // valueBefore NOW, before the page has any chance to react to
+            // this press, is what keeps a slider's own "before" value
+            // honest even if the site starts mutating the control the
+            // instant it receives focus/mousedown (some custom sliders do).
+            var _dragThumbInfo = _findSliderThumbInfo(semanticEl);
+            _dragState = {
+                startX: e.clientX,
+                startY: e.clientY,
+                maxDist: 0,
+                path: [{ x: e.clientX, y: e.clientY, t: 0 }],
+                lastSampleAt: Date.now(),
+                t0: Date.now(),
+                gestureId: _currentGestureId,
+                sourceRect: semanticEl.getBoundingClientRect(),
+                thumbInfo: _dragThumbInfo,
+                valueBefore: _captureDragValueSnapshot(semanticEl, _dragThumbInfo),
             };
         } catch (snapErr) {
             _preClickSnapshot = null;
+            _dragState = null;
+        }
+    }, true);
+
+    // FIX 3 (new "drag" action - sliders, range inputs, drag-and-drop,
+    // sortable lists): a pointerdown followed by movement beyond
+    // DRAG_MOVE_THRESHOLD_PX and a pointerup is ONE "drag" action, sharing
+    // the SAME gesture id _preClickSnapshot already assigns on mousedown -
+    // sending it here and marking _lastSentGestureId (exactly like every
+    // other click-family action does) makes the existing gesture-id dedup
+    // at the top of the 'click' listener below suppress the trailing
+    // click for free, with no separate mechanism needed. A plain click/
+    // tap (no real movement) is completely unaffected - _dragState is
+    // simply cleared with nothing sent.
+    var DRAG_MOVE_THRESHOLD_PX = 5;
+    var DRAG_MAX_PATH_POINTS = 20;
+    var DRAG_PATH_SAMPLE_MS = 40;
+    var DRAG_VALUE_SETTLE_TIMEOUT_MS = 500;
+    var DRAG_VALUE_SETTLE_POLL_MS = 50;
+    var _dragState = null;
+    var _dragDropInfo = null; // set by dragstart/drop listeners below, consumed on mouseup
+
+    function _closestSliderLikeElement(el) {
+        // walks up a few ancestor levels looking for input[type=range],
+        // [role="slider"], or an aria-valuenow-bearing element - generic,
+        // no site-specific selector/class-name assumption
+        var node = el;
+        for (var i = 0; i < 4 && node; i++) {
+            if (node.tagName === 'INPUT' && (node.type || '').toLowerCase() === 'range') return node;
+            if (node.getAttribute && (node.getAttribute('role') === 'slider' || node.hasAttribute('aria-valuenow'))) return node;
+            node = node.parentElement;
+        }
+        return null;
+    }
+
+    // multi-thumb sliders (a price-RANGE control with separate min/max
+    // handles, say): dragging one thumb must never read/verify the OTHER
+    // thumb's value just because they're both "the nearest slider-like
+    // element" and happen to sit close together. Identifies which thumb
+    // (by index among ALL of them, plus its own locator) the drag's own
+    // source element actually is, generically - no site-specific
+    // selector, just "how many sibling elements share the same native-
+    // range/role=slider/aria-valuenow shape, within the nearest shared
+    // container". Returns null for an ordinary single-thumb slider (or
+    // no slider at all) - nothing extra to record in that case, the
+    // existing _closestSliderLikeElement-based path is already unambiguous.
+    function _findSliderThumbInfo(el) {
+        var thumbEl = null;
+        if (el.tagName === 'INPUT' && (el.type || '').toLowerCase() === 'range') {
+            thumbEl = el;
+        } else if (el.getAttribute && (el.getAttribute('role') === 'slider' || el.hasAttribute('aria-valuenow'))) {
+            thumbEl = el;
+        } else if (el.querySelector) {
+            try {
+                thumbEl = el.querySelector('input[type="range"], [role="slider"], [aria-valuenow]');
+            } catch (e) {}
+        }
+        if (!thumbEl) return null;
+
+        var selector = (thumbEl.tagName === 'INPUT' && (thumbEl.type || '').toLowerCase() === 'range')
+            ? 'input[type="range"]'
+            : '[role="slider"], [aria-valuenow]';
+        var container = thumbEl.parentElement;
+        var thumbs = [];
+        for (var i = 0; i < 4 && container; i++) {
+            try {
+                thumbs = Array.prototype.slice.call(container.querySelectorAll(selector));
+            } catch (e) {
+                thumbs = [];
+            }
+            if (thumbs.length > 1) break;
+            container = container.parentElement;
+        }
+        if (thumbs.length <= 1) return null; // single-thumb (or no) slider - nothing extra to record
+        var idx = thumbs.indexOf(thumbEl);
+        if (idx === -1) return null;
+        return { thumbEl: thumbEl, index: idx, total: thumbs.length };
+    }
+
+    function _captureDragValueSnapshot(sourceEl, thumbInfo) {
+        // best-effort, generic "what value does this control show right
+        // now" - a real native range input's own .value, else aria-
+        // valuenow/valuetext off the nearest slider-role ancestor, else
+        // (last resort, for a fully custom-styled slider with no ARIA at
+        // all - exactly the Myntra price-range case) nearby text that
+        // looks numeric/currency, climbing a few container levels.
+        // Returns null (not a slider at all) rather than guessing when
+        // none of these signals exist. thumbInfo (optional, see
+        // _findSliderThumbInfo) pins this to a SPECIFIC thumb on a multi-
+        // thumb slider instead of whichever slider-like element happens
+        // to be nearest.
+        try {
+            var slider = (thumbInfo && thumbInfo.thumbEl) || _closestSliderLikeElement(sourceEl);
+            if (slider) {
+                if (slider.tagName === 'INPUT') {
+                    return { kind: 'range_value', value: slider.value };
+                }
+                return {
+                    kind: 'aria_value',
+                    value: slider.getAttribute('aria-valuenow'),
+                    text: slider.getAttribute('aria-valuetext'),
+                };
+            }
+            var container = (sourceEl.closest && sourceEl.closest('[class]')) || sourceEl.parentElement;
+            for (var j = 0; j < 3 && container; j++) {
+                var txt = (container.innerText || '').trim();
+                if (txt && txt.length < 200 && /\d/.test(txt)) {
+                    return { kind: 'nearby_text', value: txt };
+                }
+                container = container.parentElement;
+            }
+        } catch (e) {}
+        return null;
+    }
+
+    document.addEventListener('mousemove', function (e) {
+        if (!_dragState) return;
+        var dx = e.clientX - _dragState.startX;
+        var dy = e.clientY - _dragState.startY;
+        var dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist > _dragState.maxDist) _dragState.maxDist = dist;
+        var now = Date.now();
+        if (now - _dragState.lastSampleAt >= DRAG_PATH_SAMPLE_MS && _dragState.path.length < DRAG_MAX_PATH_POINTS) {
+            _dragState.path.push({ x: e.clientX, y: e.clientY, t: now - _dragState.t0 });
+            _dragState.lastSampleAt = now;
+        }
+    }, true);
+
+    // HTML5 drag-and-drop (draggable="true" elements, sortable lists that
+    // use the native DnD API rather than plain pointer tracking): the
+    // browser dispatches dragstart/drop instead of a plain mousedown-move-
+    // mouseup sequence landing cleanly on the same target throughout, so
+    // this is recorded as a SEPARATE signal and merged into whichever
+    // gesture is currently open (or, if none is (some browsers suppress
+    // the plain mouse sequence entirely for a real native drag), used on
+    // its own in _finishDragGesture's dragstart/drop-only fallback path).
+    document.addEventListener('dragstart', function (e) {
+        try {
+            _dragDropInfo = { html5: true, sourceEl: resolveSemanticTarget(e.target), dropEl: null };
+        } catch (err) {}
+    }, true);
+    document.addEventListener('drop', function (e) {
+        if (!_dragDropInfo) return;
+        try {
+            _dragDropInfo.dropEl = resolveSemanticTarget(e.target);
+        } catch (err) {}
+    }, true);
+
+    function _finishDragGesture(state, upEvent) {
+        var sourceEl = (_preClickSnapshot && _preClickSnapshot.gestureId === state.gestureId)
+            ? _preClickSnapshot.semanticEl
+            : resolveSemanticTarget(upEvent.target);
+        var sourceProfile = (_preClickSnapshot && _preClickSnapshot.gestureId === state.gestureId)
+            ? _preClickSnapshot.locatorProfile
+            : buildLocatorProfile(sourceEl);
+        var sourceRect = state.sourceRect || sourceEl.getBoundingClientRect();
+        var containerEl = sourceEl.parentElement || sourceEl;
+        var containerRect = containerEl.getBoundingClientRect();
+
+        var endX = upEvent.clientX, endY = upEvent.clientY;
+        var dropEl = document.elementFromPoint(endX, endY);
+        var dropSemanticEl = dropEl ? resolveSemanticTarget(dropEl) : null;
+        var dropProfile = null;
+        if (_dragDropInfo && _dragDropInfo.dropEl && _dragDropInfo.dropEl !== sourceEl) {
+            dropProfile = buildLocatorProfile(_dragDropInfo.dropEl);
+        } else if (dropSemanticEl && dropSemanticEl !== sourceEl && !sourceEl.contains(dropSemanticEl)) {
+            dropProfile = buildLocatorProfile(dropSemanticEl);
+        }
+
+        var pathPoints = state.path.map(function (p) {
+            return { dx: p.x - sourceRect.left, dy: p.y - sourceRect.top, t: p.t };
+        });
+
+        var valueBefore = state.valueBefore;
+        var gestureIdForDrag = state.gestureId;
+        var html5 = !!(_dragDropInfo && _dragDropInfo.html5);
+        _dragDropInfo = null;
+
+        // FIX 3 continuation (multi-thumb sliders): recorded once, at
+        // mousedown, from the SAME element _findSliderThumbInfo identified
+        // then (see its own docstring) - re-deriving it here from the
+        // post-drag DOM would risk landing on a DIFFERENT thumb if the
+        // drag itself reordered them (a sortable multi-handle range, say).
+        var thumbInfo = state.thumbInfo;
+        var thumbProfile = thumbInfo ? buildLocatorProfile(thumbInfo.thumbEl) : null;
+
+        function sendDragPayload(valueAfter) {
+            var payload = {
+                action_type: 'drag',
+                html5: html5,
+                source_target: sourceProfile,
+                locator_profile: sourceProfile,
+                drop_target: dropProfile,
+                start_offset: { x: state.startX - sourceRect.left, y: state.startY - sourceRect.top },
+                end_delta: { dx: endX - state.startX, dy: endY - state.startY },
+                end_relative_to_container: { x: endX - containerRect.left, y: endY - containerRect.top },
+                path: pathPoints,
+                value_before: valueBefore || null,
+                value_after: valueAfter || null,
+                // multi-thumb sliders only - both null for a single-thumb
+                // slider/plain drag, so replay's own thumb-specific
+                // handling (see resolve_and_act's "drag" branch) is a
+                // no-op for every recording made before this existed too.
+                thumb_index: thumbInfo ? thumbInfo.index : null,
+                thumb_total: thumbInfo ? thumbInfo.total : null,
+                thumb_locator_profile: thumbProfile,
+                expect: (valueBefore || valueAfter)
+                    ? { type: 'value_change', before: valueBefore, after: valueAfter }
+                    : { type: 'move', drop_target: !!dropProfile },
+                bounding_box: { x: sourceRect.x, y: sourceRect.y, width: sourceRect.width, height: sourceRect.height },
+                page_url: window.location.href,
+                timestamp: new Date().toISOString(),
+            };
+            send(payload);
+            _lastSentGestureId = gestureIdForDrag;
+        }
+
+        // give the site's own drop-handling a brief, bounded chance to
+        // settle before capturing the AFTER value - mirrors this file's
+        // other bounded-poll settle waits (never open-ended); a control
+        // with no detectable value at all (valueBefore === null) skips
+        // straight to sending, since there's nothing to wait for.
+        if (!valueBefore) {
+            sendDragPayload(null);
+            return;
+        }
+        var pollDeadline = Date.now() + DRAG_VALUE_SETTLE_TIMEOUT_MS;
+        (function pollForSettledValue() {
+            var current = _captureDragValueSnapshot(sourceEl, thumbInfo);
+            var changed = current && JSON.stringify(current) !== JSON.stringify(valueBefore);
+            if (changed || Date.now() >= pollDeadline) {
+                sendDragPayload(current);
+            } else {
+                setTimeout(pollForSettledValue, DRAG_VALUE_SETTLE_POLL_MS);
+            }
+        })();
+    }
+
+    document.addEventListener('mouseup', function (e) {
+        var state = _dragState;
+        _dragState = null;
+        if (!state || state.maxDist <= DRAG_MOVE_THRESHOLD_PX || !e.isTrusted) return;
+        try {
+            _finishDragGesture(state, e);
+        } catch (dragErr) {
+            debugLog('drag gesture failed to record', dragErr && dragErr.message);
         }
     }, true);
 
@@ -2300,6 +3925,27 @@
 
             var semanticEl = resolveSemanticTarget(e.target);
 
+            // FIX 1.1 (gesture id) - a second native click firing for the
+            // SAME physical mousedown (a <label> forwarding to its
+            // control, whether wrapped or associated via for=, or an
+            // equivalent framework pattern) is recognized purely by
+            // gesture id here, with no dependency on DOM containment or
+            // semantic-target resolution agreeing between the two events
+            // at all - a broader, more principled net than the
+            // semantic-element check just below, which stays as a
+            // second, independent guard for a genuine same-gesture
+            // cascade this one might not otherwise structurally expect
+            // (see its own comment).
+            if (_currentGestureId === _lastSentGestureId) {
+                debugLog(
+                    'DISCARDED click on', debugDescribeTarget(e.target),
+                    '- reason: gesture-id dedup, another click-family action',
+                    'already sent for this same physical mousedown (gesture',
+                    _currentGestureId + ')'
+                );
+                return;
+            }
+
             if (
                 semanticEl === lastSemanticClickEl &&
                 e.target !== lastSemanticClickRawTarget &&
@@ -2341,8 +3987,62 @@
             lastSemanticClickEl = semanticEl;
             lastSemanticClickRawTarget = e.target;
             lastSemanticClickTime = Date.now();
+            _lastSentGestureId = _currentGestureId;
+
+            // BUG 1 / hover chain: emit an explicit hover step for EACH
+            // trigger in the chain that revealed this click's target (see
+            // _consumeHoverChain's own docstring for exactly when a link
+            // qualifies), outermost first, immediately before the click's
+            // own payload. Sent immediately, unbuffered (never held for
+            // the double-click window the click itself gets) - each
+            // one's own earlier timestamp is what keeps them ordered
+            // before the click once Python-side sorts by timestamp
+            // (Recorder.stop()), regardless of send order.
+            var hoverTriggerChain = _consumeHoverChain(e.target);
+            var hoverChainLocatorProfiles = [];
+            // FIX 1.4 (postcondition): what this hover was actually FOR -
+            // the eventual click target's own locator profile - recorded
+            // once and attached to every link's own "expect" field, so
+            // replay can verify each hover step's own reveal actually
+            // happened (see resolve_and_act's hover dispatch) instead of
+            // just trusting that .hover() not raising means it worked.
+            var _revealExpectLp = null;
+            try {
+                _revealExpectLp = buildLocatorProfile(e.target);
+            } catch (eExpectLp) {}
+            for (var _hci = 0; _hci < hoverTriggerChain.length; _hci++) {
+                var _hoverTrigger = hoverTriggerChain[_hci];
+                try {
+                    var _hoverLp = buildLocatorProfile(_hoverTrigger);
+                    hoverChainLocatorProfiles.push(_hoverLp);
+                    var hoverRect = _hoverTrigger.getBoundingClientRect();
+                    send({
+                        action_type: 'hover',
+                        value: null,
+                        locator_profile: _hoverLp,
+                        bounding_box: { x: hoverRect.x, y: hoverRect.y, width: hoverRect.width, height: hoverRect.height },
+                        page_url: window.location.href,
+                        timestamp: new Date().toISOString(),
+                        expect: _revealExpectLp ? { type: 'reveal', revealed_locator_profile: _revealExpectLp } : null,
+                    });
+                    debugLog('EMITTED hover step for', debugDescribeTarget(_hoverTrigger), '- revealed', debugDescribeTarget(e.target));
+                } catch (eHoverEmit) {
+                    // never let hover-step emission break the click it precedes
+                }
+            }
 
             var payload = buildProfile(e.target, 'click', null);
+            // FIX 2.a/2.b (replay preconditions/resolve): the full chain
+            // also travels WITH the click's own payload (not just as
+            // separate hover steps) so replay can re-establish it
+            // directly from this one action even if something upstream
+            // ever strips/reorders the standalone hover steps - never
+            // required to be non-empty; absent/empty means "no hover
+            // chain was involved in reaching this click" exactly as
+            // before.
+            if (hoverChainLocatorProfiles.length) {
+                payload.hover_chain = hoverChainLocatorProfiles;
+            }
             debugLog(
                 'BUFFERED click on', debugDescribeTarget(e.target),
                 '(semantic target', debugDescribeTarget(semanticEl) + ')',

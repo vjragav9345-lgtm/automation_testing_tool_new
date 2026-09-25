@@ -1,0 +1,113 @@
+{
+    "name": "session_20260922_120517_edited",
+    "start_url": "https://www.myntra.com/men-sweatshirts",
+    "actions": [
+        {
+            "action_type": "click",
+            "bounding_box": {
+                "height": 359.8000183105469,
+                "width": 210,
+                "x": 777.4500122070312,
+                "y": 262.3999938964844
+            },
+            "click_strategy": "standard",
+            "delay_before_ms": 3488,
+            "locator_profile": {
+                "accessible_name": "Mast & Harbour\nSizes: M\nRs. 781Rs. 2299(66% OFF)",
+                "aria_label": null,
+                "attributes": {
+                    "href": "sweatshirts/mast+%26+harbour/mast--harbour-typography-printed-mock-collar-raglan-sleeves-pullover-sweatshirt/33605396/buy"
+                },
+                "cross_boundary": false,
+                "css_path": "li#33605396 > a",
+                "element_text": "Mast & Harbour\nSizes: M\nRs. 781Rs. 2299(66% OFF)",
+                "href": "sweatshirts/mast+%26+harbour/mast--harbour-typography-printed-mock-collar-raglan-sleeves-pullover-sweatshirt/33605396/buy",
+                "icon_class_hint": null,
+                "id": null,
+                "name": null,
+                "placeholder": null,
+                "role": null,
+                "tag": "a",
+                "text": "Mast & Harbour\nSizes: M\nRs. 781Rs. 2299(66% OFF)",
+                "title": null,
+                "xpath": "//li[.//h4[contains(text(), 'Printed Mock Collar Pullover')]]/a"
+            },
+            "page_id": 0,
+            "page_url": "https://www.myntra.com/men-sweatshirts",
+            "timestamp": "2026-09-22T06:35:08.420Z",
+            "value": null
+        },
+        {
+            "action_type": "scroll",
+            "bounding_box": null,
+            "delay_before_ms": 553,
+            "delta_x": 0,
+            "delta_y": -1033,
+            "document_height": 9671,
+            "locator_profile": null,
+            "page_id": 1,
+            "page_url": "https://www.myntra.com/sweatshirts/mast+%26+harbour/mast--harbour-typography-printed-mock-collar-raglan-sleeves-pullover-sweatshirt/33605396/buy",
+            "scroll_y_after": 0,
+            "scroll_y_before": 1032.800048828125,
+            "timestamp": "2026-09-22T06:35:12.312Z",
+            "value": null,
+            "viewport_height": 720
+        },
+        {
+            "action_type": "click",
+            "bounding_box": {
+                "height": 53.60000228881836,
+                "width": 232.8874969482422,
+                "x": 758.1749877929688,
+                "y": 629.4500122070312
+            },
+            "click_strategy": "standard",
+            "delay_before_ms": 1139,
+            "locator_profile": {
+                "accessible_name": "ADD TO BAG",
+                "aria_label": null,
+                "attributes": {},
+                "cross_boundary": false,
+                "css_path": "div#mountRoot > div > div > main > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > div",
+                "element_text": "ADD TO BAG",
+                "href": null,
+                "icon_class_hint": null,
+                "id": null,
+                "name": null,
+                "placeholder": null,
+                "role": null,
+                "tag": "div",
+                "text": "ADD TO BAG",
+                "title": null,
+                "xpath": "//div[normalize-space(text())='ADD TO BAG']"
+            },
+            "page_id": 1,
+            "page_url": "https://www.myntra.com/sweatshirts/mast+%26+harbour/mast--harbour-typography-printed-mock-collar-raglan-sleeves-pullover-sweatshirt/33605396/buy",
+            "timestamp": "2026-09-22T06:35:14.519Z",
+            "value": null
+        },
+        {
+            "action_type": "tab_close",
+            "bounding_box": null,
+            "delay_before_ms": 3079,
+            "locator_profile": null,
+            "page_id": 1,
+            "page_url": "https://www.myntra.com/sweatshirts/mast+%26+harbour/mast--harbour-typography-printed-mock-collar-raglan-sleeves-pullover-sweatshirt/33605396/buy",
+            "remaining_page_id": 0,
+            "timestamp": "2026-09-22T06:35:17.598Z",
+            "value": null
+        },
+        {
+            "action_type": "tab_close",
+            "bounding_box": null,
+            "delay_before_ms": 29,
+            "locator_profile": null,
+            "page_id": 0,
+            "page_url": "https://www.myntra.com/men-sweatshirts",
+            "remaining_page_id": null,
+            "timestamp": "2026-09-22T06:35:17.627Z",
+            "value": null
+        }
+    ],
+    "saved_at": "2026-09-22T12:09:59.608585"
+}

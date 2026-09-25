@@ -1,0 +1,99 @@
+{
+    "name": "session_20260924_153751",
+    "start_url": "https://www.townscript.com/in/india",
+    "actions": [
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.townscript.com/in/india",
+            "timestamp": "2026-09-24T10:07:51.595Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 2562,
+            "scroll_y_before": 0,
+            "scroll_y_after": 2561.60009765625,
+            "viewport_height": 720,
+            "document_height": 4437,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.townscript.com/in/india?page=2",
+            "timestamp": "2026-09-24T10:07:52.670Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": -2562,
+            "scroll_y_before": 2561.60009765625,
+            "scroll_y_after": 0,
+            "viewport_height": 720,
+            "document_height": 720,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.townscript.com/in/india?page=2",
+            "timestamp": "2026-09-24T10:07:53.637Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#cityInput",
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Browse events...",
+                "placeholder": "Browse events...",
+                "title": null,
+                "href": null,
+                "css_path": "input#cityInput",
+                "xpath": "//*[@id='cityInput']",
+                "text": "Browse events...",
+                "element_text": "Browse events...",
+                "tag": "input",
+                "attributes": {
+                    "type": "text",
+                    "placeholder": "Browse events..."
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 261.8625183105469,
+                "y": 266.8999938964844,
+                "width": 498.2375183105469,
+                "height": 19.950000762939453
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.townscript.com/in/india?page=2",
+            "timestamp": "2026-09-24T10:07:53.905Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.townscript.com/in/india?page=2",
+            "timestamp": "2026-09-24T10:07:51.673Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 0,
+            "page_url": "https://www.townscript.com/in/india?page=2",
+            "remaining_page_id": null,
+            "timestamp": "2026-09-24T10:08:08.634Z"
+        }
+    ]
+}

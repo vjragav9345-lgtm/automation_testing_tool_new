@@ -1,0 +1,89 @@
+{
+    "name": "session_20260925_033716",
+    "start_url": "http://127.0.0.1:57665/phase4_hover_menu.html",
+    "actions": [
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "http://127.0.0.1:57665/phase4_hover_menu.html",
+            "timestamp": "2026-09-24T22:07:16.160Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": "#ordinary-link",
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "About (ordinary, always visible)",
+                "placeholder": null,
+                "title": null,
+                "href": "/about",
+                "product_id": null,
+                "css_path": "a#ordinary-link",
+                "xpath": "//*[@id='ordinary-link']",
+                "text": "About (ordinary, always visible)",
+                "element_text": "About (ordinary, always visible)",
+                "tag": "a",
+                "attributes": {
+                    "href": "/about"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "act_target": {
+                "id": "#ordinary-link",
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "About (ordinary, always visible)",
+                "placeholder": null,
+                "title": null,
+                "href": "/about",
+                "product_id": null,
+                "css_path": "a#ordinary-link",
+                "xpath": "//*[@id='ordinary-link']",
+                "text": "About (ordinary, always visible)",
+                "element_text": "About (ordinary, always visible)",
+                "tag": "a",
+                "attributes": {
+                    "href": "/about"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "state_target": null,
+            "bounding_box": {
+                "x": 186.671875,
+                "y": 16,
+                "width": 220.234375,
+                "height": 34
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "http://127.0.0.1:57665/phase4_hover_menu.html",
+            "timestamp": "2026-09-24T22:07:16.265Z",
+            "dom_context": {
+                "act_target_html_chain": [
+                    "<a href=\"/about\" id=\"ordinary-link\" style=\"color:#fff;\">About (ordinary, always visible)</a>",
+                    "<div class=\"navbar\">\n    <div class=\"nav-item\" id=\"men-trigger\">MEN\n      <div class=\"submenu\" id=\"men-submenu\">\n        <a href=\"/men-casual-shirts\" id=\"casual-shirts-link\">Casual Shirts</a>\n        <a href=\"/men-formal-shirts\" id=\"formal-shirts-link\">Formal Shirts</a>\n      </div>\n    </div>\n    <div class=\"nav-item\" id=\"women-trigger\">WOMEN\n      <div class=\"submenu\" id=\"women-submenu\">\n        <a href=\"/women-dresses\" id=\"dresses-link\">Dresses</a>\n      </div>\n    </div>\n    <a href=\"/about\" id=\"ordinary-link\" style=\"color:#fff;\">About (ordinary, always visible)</a>\n  </div>",
+                    "<body>\n  <div class=\"navbar\">\n    <div class=\"nav-item\" id=\"men-trigger\">MEN\n      <div class=\"submenu\" id=\"men-submenu\">\n        <a href=\"/men-casual-shirts\" id=\"casual-shirts-link\">Casual Shirts</a>\n        <a href=\"/men-formal-shirts\" id=\"formal-shirts-link\">Formal Shirts</a>\n      </div>\n    </div>\n    <div class=\"nav-item\" id=\"women-trigger\">WOMEN\n      <div class=\"submenu\" id=\"women-submenu\">\n        <a href=\"/women-dresses\" id=\"dresses-link\">Dresses</a>\n      </div>\n    </div>\n    <a href=\"/about\" id=\"ordinary-link\" style=\"color:#fff;\">About (ordinary, always visible)</a>\n  </div>\n  <div class=\"filler\"><p style=\"padding:20px;\">filler content so a scroll-search has somewhere to go if it mistakenly runs</p></div>\n  <footer id=\"footer\">Footer content - never the real target</footer>\n  <script>\n    document.getElementById('casual-shirts-link').addEventListener('click', function (e) {\n      e.preventDefault();\n      document.title = 'CASUAL_SHIRTS_CLICKED';\n    });\n    document.getElementById('ordinary-link').addEventListener('click', function (e) {\n      e.preventDefault();\n      document.title = 'ORDINARY_LINK_CLICKED';\n    });\n  </script>\n\n\n</body>",
+                    "<html><head>\n<meta charset=\"utf-8\">\n<title>Hover Menu Fixture</title>\n<style>\n  body { margin: 0; font-family: sans-serif; }\n  .navbar { display: flex; gap: 20px; padding: 16px; background: #222; }\n  .nav-item { position: relative; color: #fff; cursor: pointer; padding: 8px; }\n  .submenu { display: none; position: absolute; top: 100%; left: 0; background: #fff;\n             border: 1px solid #ccc; padding: 10px; min-width: 160px; z-index: 10; }\n  .nav-item:hover .submenu { display: block; }\n  .submenu a { display: block; color: #000; text-decoration: none; padding: 4px 0; }\n  .filler { height: 3000px; background: linear-gradient(#eee, #ddd); }\n  footer { height: 200px; background: #333; color: #fff; text-align: center; line-height: 200px; }\n</style>\n</head>\n<body>\n  <div class=\"navbar\">\n    <div class=\"nav-item\" id=\"men-trigger\">MEN\n      <div class=\"submenu\" id=\"men-submenu\">\n        <a href=\"/men-casual-shirts\" id=\"casual-shirts-link\">Casual Shirts</a>\n        <a href=\"/men-formal-shirts\" id=\"formal-shirts-link\">Formal Shirts</a>\n      </div>\n    </div>\n    <div class=\"nav-item\" id=\"women-trigger\">WOMEN\n      <div class=\"submenu\" id=\"women-submenu\">\n        <a href=\"/women-dresses\" id=\"dresses-link\">Dresses</a>\n      </div>\n    </div>\n    <a href=\"/about\" id=\"ordinary-link\" style=\"color:#fff;\">About (ordinary, always visible)</a>\n  </div>\n  <div class=\"filler\"><p style=\"padding:20px;\">filler content so a scroll-search has somewhere to go if it mistakenly runs</p></div>\n  <footer id=\"footer\">Footer content - never the real target</footer>\n  <script>\n    document.getElementById('casual-shirts-link').addEventListener('click', function (e) {\n      e.preventDefault();\n      document.title = 'CASUAL_SHIRTS_CLICKED';\n    });\n    document.getElementById('ordinary-link').addEventListener('click', function (e) {\n      e.preventDefault();\n      document.title = 'ORDINARY_LINK_CLICKED';\n    });\n  </script>\n\n\n</body></html>"
+                ],
+                "act_target_style": {
+                    "display": "block",
+                    "visibility": "visible",
+                    "opacity": "1"
+                },
+                "state_target_html_chain": null,
+                "state_target_style": null
+            },
+            "page_id": 0
+        }
+    ]
+}

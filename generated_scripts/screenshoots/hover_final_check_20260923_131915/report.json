@@ -1,0 +1,101 @@
+{
+  "status": "PASS",
+  "message": "all steps resolved and validations passed",
+  "diagnostic": null,
+  "qa_url": "http://127.0.0.1:8899/page1.html",
+  "steps": [
+    {
+      "index": 1,
+      "action_type": "navigate",
+      "name": "Page1 page",
+      "strategy_used": null,
+      "element_found": true,
+      "success": true,
+      "error": null,
+      "warning": null,
+      "effect_verified": null,
+      "large_bbox_flag": false,
+      "screenshot": "generated_scripts/screenshoots/hover_final_check_20260923_131915/page1_html/step01_page1_page_2026-09-23_13-19-17.png",
+      "url_before": "http://127.0.0.1:8899/page1.html",
+      "url_after": "http://127.0.0.1:8899/page1.html",
+      "duration": 0.0,
+      "locator_report": null,
+      "expected": null,
+      "actual": null,
+      "fragile": false
+    },
+    {
+      "index": 2,
+      "action_type": "scroll",
+      "name": "down 0px on Page1",
+      "strategy_used": null,
+      "element_found": true,
+      "success": true,
+      "error": null,
+      "warning": "scroll target container not found - fell back to window-level scroll",
+      "effect_verified": true,
+      "large_bbox_flag": false,
+      "screenshot": null,
+      "url_before": "http://127.0.0.1:8899/page1.html",
+      "url_after": "http://127.0.0.1:8899/page1.html",
+      "duration": 0.203,
+      "locator_report": {
+        "strategy": null,
+        "strategy_label": "unknown",
+        "fallback_level": null,
+        "resolved": true,
+        "weak": false,
+        "resolution_ms": 203,
+        "message": "body found using an unrecognized strategy."
+      },
+      "expected": null,
+      "actual": null,
+      "fragile": false
+    },
+    {
+      "index": 3,
+      "action_type": "click",
+      "name": "\"T-Shirts\" link",
+      "strategy_used": "id",
+      "element_found": true,
+      "success": true,
+      "error": null,
+      "warning": null,
+      "effect_verified": null,
+      "large_bbox_flag": false,
+      "screenshot": null,
+      "url_before": "http://127.0.0.1:8899/page1.html",
+      "url_after": "http://127.0.0.1:8899/page2.html",
+      "duration": 30.219,
+      "locator_report": {
+        "strategy": "id",
+        "strategy_label": "Element ID",
+        "fallback_level": 4,
+        "resolved": true,
+        "weak": false,
+        "resolution_ms": 30219,
+        "message": "T-Shirts found using Element ID. (resolved in 30219ms)"
+      },
+      "expected": null,
+      "actual": null,
+      "fragile": false
+    }
+  ],
+  "ui_elements": [
+    {
+      "index": 3,
+      "action_type": "click",
+      "element_found": true,
+      "locator_used": "id",
+      "status": "PASS",
+      "message": null
+    }
+  ],
+  "ui_elements_status": "PASS",
+  "content_check": null,
+  "screenshot_diff": null,
+  "product_validation": null,
+  "final_screenshot": null,
+  "run_id": "hover_final_check_20260923_131915",
+  "run_dir": "generated_scripts/screenshoots/hover_final_check_20260923_131915"
+}

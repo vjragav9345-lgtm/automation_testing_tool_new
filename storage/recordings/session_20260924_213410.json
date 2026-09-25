@@ -1,0 +1,1750 @@
+{
+    "name": "session_20260924_213410",
+    "session_id": "7452af888f144ad199aa3ffced9cc12d",
+    "start_url": "https://www.myntra.com",
+    "recorded_at": "2026-09-24T21:35:39.550470",
+    "stop_reason": "browser_closed",
+    "total_actions": 46,
+    "page_count": 3,
+    "viewport_width": 1280,
+    "viewport_height": 720,
+    "device_scale_factor": null,
+    "user_agent": null,
+    "locale": null,
+    "timezone_id": null,
+    "color_scheme": null,
+    "actions": [
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com",
+            "timestamp": "2026-09-24T16:04:10.700Z",
+            "page_id": 0,
+            "delay_before_ms": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Clothing",
+                "placeholder": null,
+                "title": null,
+                "href": "/women-sportswear-clothing",
+                "product_id": null,
+                "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > nav > div > div:nth-of-type(2) > div > div > div > div > li:nth-of-type(3) > ul > li:nth-of-type(10) > a",
+                "xpath": "//a[@href='/women-sportswear-clothing']",
+                "text": "Clothing",
+                "element_text": "Clothing",
+                "tag": "a",
+                "attributes": {
+                    "href": "/women-sportswear-clothing"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 533.6000366210938,
+                "y": 368,
+                "width": 191,
+                "height": 23
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/",
+            "timestamp": "2026-09-24T16:04:15.205Z",
+            "page_id": 0,
+            "delay_before_ms": 4505
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "Bra",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#mountRoot > div > main > div:nth-of-type(3) > div > section > div > div:nth-of-type(2) > ul > li > label > input",
+                "xpath": "//label[normalize-space(text())='Bra']/input",
+                "text": "Bra",
+                "element_text": "Bra",
+                "tag": "input",
+                "attributes": {
+                    "type": "checkbox"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 25,
+                "y": 267.8000183105469,
+                "width": 13,
+                "height": 13
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/women-sportswear-clothing",
+            "timestamp": "2026-09-24T16:04:27.328Z",
+            "expected_state": true,
+            "classified_by": "ancestor-classname-self",
+            "expect": {
+                "type": "toggle",
+                "final_checked": true
+            },
+            "page_id": 0,
+            "delay_before_ms": 12123
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/women-sportswear-clothing?f=Categories%3ABra",
+            "timestamp": "2026-09-24T16:04:27.374Z",
+            "page_id": 0,
+            "delay_before_ms": 46
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "Tights",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#mountRoot > div > main > div:nth-of-type(3) > div > section > div > div:nth-of-type(2) > ul > li:nth-of-type(2) > label > input",
+                "xpath": "//label[normalize-space(text())='Tights']/input",
+                "text": "Tights",
+                "element_text": "Tights",
+                "tag": "input",
+                "attributes": {
+                    "type": "checkbox"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 25,
+                "y": 291.8000183105469,
+                "width": 13,
+                "height": 13
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/women-sportswear-clothing?f=Categories%3ABra",
+            "timestamp": "2026-09-24T16:04:29.328Z",
+            "expected_state": true,
+            "classified_by": "ancestor-classname-self",
+            "expect": {
+                "type": "toggle",
+                "final_checked": true
+            },
+            "page_id": 0,
+            "delay_before_ms": 1954
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/women-sportswear-clothing?f=Categories%3ABra%2CTights",
+            "timestamp": "2026-09-24T16:04:29.751Z",
+            "page_id": 0,
+            "delay_before_ms": 423
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Caps Under ₹899",
+                "placeholder": null,
+                "title": null,
+                "href": "/myntra?f=Categories%3ACaps%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0&storeContext=fwd",
+                "product_id": "20900",
+                "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > nav > div > div:nth-of-type(6) > div > div > div > div > li:nth-of-type(5) > ul > li:nth-of-type(16) > a",
+                "xpath": "//a[@href='/myntra?f=Categories%3ACaps%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0&storeContext=fwd']",
+                "text": "Caps Under ₹899",
+                "element_text": "Caps Under ₹899",
+                "tag": "a",
+                "attributes": {
+                    "href": "/myntra?f=Categories%3ACaps%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0&storeContext=fwd"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 965.6000366210938,
+                "y": 474,
+                "width": 191,
+                "height": 23
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/women-sportswear-clothing?f=Categories%3ABra%2CTights",
+            "timestamp": "2026-09-24T16:04:40.431Z",
+            "page_id": 0,
+            "delay_before_ms": 10680
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "price_asc",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div > div > div > div > ul > li:nth-of-type(6) > label > input",
+                "xpath": "//label[normalize-space(text())='Price: Low to High']/input",
+                "text": "price_asc",
+                "element_text": "price_asc",
+                "tag": "input",
+                "attributes": {
+                    "type": "radio"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 0,
+                "y": 0,
+                "width": 0,
+                "height": 0
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "force_click",
+            "page_url": "https://www.myntra.com/myntra?f=Categories%3ACaps%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0&storeContext=fwd",
+            "timestamp": "2026-09-24T16:04:55.466Z",
+            "page_id": 0,
+            "delay_before_ms": 15035
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/myntra?sort=price_asc&f=Categories%3ACaps%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0",
+            "timestamp": "2026-09-24T16:04:55.716Z",
+            "page_id": 0,
+            "delay_before_ms": 250
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Patterns",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > ul > li:nth-of-type(6) > label > input",
+                "xpath": "//label[normalize-space(.)='Patterns']/input",
+                "text": "Patterns",
+                "element_text": "Patterns",
+                "tag": "input",
+                "attributes": {
+                    "type": "radio"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 0,
+                "y": 0,
+                "width": 0,
+                "height": 0
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "force_click",
+            "page_url": "https://www.myntra.com/myntra?sort=price_asc&f=Categories%3ACaps%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0",
+            "timestamp": "2026-09-24T16:04:59.399Z",
+            "page_id": 0,
+            "delay_before_ms": 3683
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "Embroidered",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > div > ul > li:nth-of-type(2) > label > input",
+                "xpath": "//label[normalize-space(text())='Embroidered']/input",
+                "text": "Embroidered",
+                "element_text": "Embroidered",
+                "tag": "input",
+                "attributes": {
+                    "type": "checkbox"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 419,
+                "y": 241.1999969482422,
+                "width": 13,
+                "height": 13
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/myntra?sort=price_asc&f=Categories%3ACaps%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0",
+            "timestamp": "2026-09-24T16:05:01.794Z",
+            "expected_state": false,
+            "classified_by": "label-control",
+            "expect": {
+                "type": "toggle",
+                "final_checked": false
+            },
+            "page_id": 0,
+            "delay_before_ms": 2395
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/myntra?sort=price_asc&f=Categories%3ACaps%3A%3APatterns%3AEmbroidered%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0",
+            "timestamp": "2026-09-24T16:05:02.162Z",
+            "page_id": 0,
+            "delay_before_ms": 368
+        },
+        {
+            "action_type": "hover",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Bundles\nCountry of Origin\nMaterials\nNet Quantity Unit\nOccasions\nPatterns\nRating",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2)",
+                "xpath": "//section[.//h4[contains(text(), 'Bundles')]]/div/div[2]",
+                "text": "Bundles\nCountry of Origin\nMaterials\nNet Quantity Unit\nOccasions\nPatterns\nRating",
+                "element_text": "Bundles\nCountry of Origin\nMaterials\nNet Quantity Unit\nOccasions\nPatterns\nRating",
+                "tag": "div",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 252,
+                "y": 167.40000915527344,
+                "width": 1011.2000122070312,
+                "height": 100
+            },
+            "page_url": "https://www.myntra.com/myntra?sort=price_asc&f=Categories%3ACaps%3A%3APatterns%3AEmbroidered%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0",
+            "timestamp": "2026-09-24T16:05:04.162Z",
+            "expect": {
+                "type": "reveal",
+                "revealed_locator_profile": {
+                    "id": null,
+                    "name": null,
+                    "role": null,
+                    "aria_label": null,
+                    "accessible_name": "Occasions",
+                    "placeholder": null,
+                    "title": null,
+                    "href": null,
+                    "product_id": null,
+                    "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > ul > li:nth-of-type(5) > label > h4",
+                    "xpath": "//h4[normalize-space(text())='Occasions']",
+                    "text": "Occasions",
+                    "element_text": "Occasions",
+                    "tag": "h4",
+                    "attributes": {},
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                }
+            },
+            "page_id": 0,
+            "delay_before_ms": 2000
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Occasions",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > ul > li:nth-of-type(5) > label > input",
+                "xpath": "//label[normalize-space(.)='Occasions']/input",
+                "text": "Occasions",
+                "element_text": "Occasions",
+                "tag": "input",
+                "attributes": {
+                    "type": "radio"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 0,
+                "y": 0,
+                "width": 0,
+                "height": 0
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "force_click",
+            "page_url": "https://www.myntra.com/myntra?sort=price_asc&f=Categories%3ACaps%3A%3APatterns%3AEmbroidered%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0",
+            "timestamp": "2026-09-24T16:05:04.163Z",
+            "hover_chain": [
+                {
+                    "id": null,
+                    "name": null,
+                    "role": null,
+                    "aria_label": null,
+                    "accessible_name": "Bundles\nCountry of Origin\nMaterials\nNet Quantity Unit\nOccasions\nPatterns\nRating",
+                    "placeholder": null,
+                    "title": null,
+                    "href": null,
+                    "product_id": null,
+                    "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2)",
+                    "xpath": "//section[.//h4[contains(text(), 'Bundles')]]/div/div[2]",
+                    "text": "Bundles\nCountry of Origin\nMaterials\nNet Quantity Unit\nOccasions\nPatterns\nRating",
+                    "element_text": "Bundles\nCountry of Origin\nMaterials\nNet Quantity Unit\nOccasions\nPatterns\nRating",
+                    "tag": "div",
+                    "attributes": {},
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                }
+            ],
+            "page_id": 0,
+            "delay_before_ms": 1
+        },
+        {
+            "action_type": "hover",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Bundles\nCountry of Origin\nMaterials\nNet Quantity Unit\nOccasions\nPatterns\nRating",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2)",
+                "xpath": "//section[.//h4[contains(text(), 'Bundles')]]/div/div[2]",
+                "text": "Bundles\nCountry of Origin\nMaterials\nNet Quantity Unit\nOccasions\nPatterns\nRating",
+                "element_text": "Bundles\nCountry of Origin\nMaterials\nNet Quantity Unit\nOccasions\nPatterns\nRating",
+                "tag": "div",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 252,
+                "y": 167.40000915527344,
+                "width": 1011.2000122070312,
+                "height": 100
+            },
+            "page_url": "https://www.myntra.com/myntra?sort=price_asc&f=Categories%3ACaps%3A%3APatterns%3AEmbroidered%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0",
+            "timestamp": "2026-09-24T16:05:05.953Z",
+            "expect": {
+                "type": "reveal",
+                "revealed_locator_profile": {
+                    "id": null,
+                    "name": null,
+                    "role": null,
+                    "aria_label": null,
+                    "accessible_name": "",
+                    "placeholder": null,
+                    "title": null,
+                    "href": null,
+                    "product_id": null,
+                    "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > div > ul > li:nth-of-type(2) > label > div",
+                    "xpath": "//label[normalize-space(text())='Sports']/div",
+                    "text": "",
+                    "element_text": "",
+                    "tag": "div",
+                    "attributes": {},
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                }
+            },
+            "page_id": 0,
+            "delay_before_ms": 1790
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "Sports",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > div > ul > li:nth-of-type(2) > label > input",
+                "xpath": "//label[normalize-space(text())='Sports']/input",
+                "text": "Sports",
+                "element_text": "Sports",
+                "tag": "input",
+                "attributes": {
+                    "type": "checkbox"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 419,
+                "y": 241.1999969482422,
+                "width": 13,
+                "height": 13
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/myntra?sort=price_asc&f=Categories%3ACaps%3A%3APatterns%3AEmbroidered%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0",
+            "timestamp": "2026-09-24T16:05:05.954Z",
+            "expected_state": true,
+            "classified_by": "ancestor-classname-self",
+            "expect": {
+                "type": "toggle",
+                "final_checked": true
+            },
+            "hover_chain": [
+                {
+                    "id": null,
+                    "name": null,
+                    "role": null,
+                    "aria_label": null,
+                    "accessible_name": "Bundles\nCountry of Origin\nMaterials\nNet Quantity Unit\nOccasions\nPatterns\nRating",
+                    "placeholder": null,
+                    "title": null,
+                    "href": null,
+                    "product_id": null,
+                    "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2)",
+                    "xpath": "//section[.//h4[contains(text(), 'Bundles')]]/div/div[2]",
+                    "text": "Bundles\nCountry of Origin\nMaterials\nNet Quantity Unit\nOccasions\nPatterns\nRating",
+                    "element_text": "Bundles\nCountry of Origin\nMaterials\nNet Quantity Unit\nOccasions\nPatterns\nRating",
+                    "tag": "div",
+                    "attributes": {},
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                }
+            ],
+            "page_id": 0,
+            "delay_before_ms": 1
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/myntra?sort=price_asc&f=Categories%3ACaps%3A%3AOccasions%3ASports%3A%3APatterns%3AEmbroidered%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0",
+            "timestamp": "2026-09-24T16:05:06.484Z",
+            "page_id": 0,
+            "delay_before_ms": 530
+        },
+        {
+            "action_type": "hover",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Bundles\nCountry of Origin\nMaterials\nNet Quantity Unit\nOccasions\nPatterns\nRating",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2)",
+                "xpath": "//section[.//h4[contains(text(), 'Bundles')]]/div/div[2]",
+                "text": "Bundles\nCountry of Origin\nMaterials\nNet Quantity Unit\nOccasions\nPatterns\nRating",
+                "element_text": "Bundles\nCountry of Origin\nMaterials\nNet Quantity Unit\nOccasions\nPatterns\nRating",
+                "tag": "div",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 252,
+                "y": 167.40000915527344,
+                "width": 1011.2000122070312,
+                "height": 100
+            },
+            "page_url": "https://www.myntra.com/myntra?sort=price_asc&f=Categories%3ACaps%3A%3AOccasions%3ASports%3A%3APatterns%3AEmbroidered%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0",
+            "timestamp": "2026-09-24T16:05:07.698Z",
+            "expect": {
+                "type": "reveal",
+                "revealed_locator_profile": {
+                    "id": null,
+                    "name": null,
+                    "role": null,
+                    "aria_label": null,
+                    "accessible_name": "Net Quantity Unit",
+                    "placeholder": null,
+                    "title": null,
+                    "href": null,
+                    "product_id": null,
+                    "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > ul > li:nth-of-type(4) > label",
+                    "xpath": "//label[normalize-space(.)='Net Quantity Unit']",
+                    "text": "Net Quantity Unit",
+                    "element_text": "Net Quantity Unit",
+                    "tag": "label",
+                    "attributes": {},
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                }
+            },
+            "page_id": 0,
+            "delay_before_ms": 1214
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Net Quantity Unit",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > ul > li:nth-of-type(4) > label > input",
+                "xpath": "//label[normalize-space(.)='Net Quantity Unit']/input",
+                "text": "Net Quantity Unit",
+                "element_text": "Net Quantity Unit",
+                "tag": "input",
+                "attributes": {
+                    "type": "radio"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 0,
+                "y": 0,
+                "width": 0,
+                "height": 0
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "force_click",
+            "page_url": "https://www.myntra.com/myntra?sort=price_asc&f=Categories%3ACaps%3A%3AOccasions%3ASports%3A%3APatterns%3AEmbroidered%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0",
+            "timestamp": "2026-09-24T16:05:07.700Z",
+            "hover_chain": [
+                {
+                    "id": null,
+                    "name": null,
+                    "role": null,
+                    "aria_label": null,
+                    "accessible_name": "Bundles\nCountry of Origin\nMaterials\nNet Quantity Unit\nOccasions\nPatterns\nRating",
+                    "placeholder": null,
+                    "title": null,
+                    "href": null,
+                    "product_id": null,
+                    "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2)",
+                    "xpath": "//section[.//h4[contains(text(), 'Bundles')]]/div/div[2]",
+                    "text": "Bundles\nCountry of Origin\nMaterials\nNet Quantity Unit\nOccasions\nPatterns\nRating",
+                    "element_text": "Bundles\nCountry of Origin\nMaterials\nNet Quantity Unit\nOccasions\nPatterns\nRating",
+                    "tag": "div",
+                    "attributes": {},
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                }
+            ],
+            "page_id": 0,
+            "delay_before_ms": 2
+        },
+        {
+            "action_type": "hover",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Search for products, brands and more",
+                "placeholder": "Search for products, brands and more",
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > div:nth-of-type(3) > input",
+                "xpath": "//input[@placeholder='Search for products, brands and more']",
+                "text": "Search for products, brands and more",
+                "element_text": "Search for products, brands and more",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Search for products, brands and more"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 731.2000122070312,
+                "y": 20,
+                "width": 324.8000183105469,
+                "height": 39.60000228881836
+            },
+            "page_url": "https://www.myntra.com/myntra?sort=price_asc&f=Categories%3ACaps%3A%3AOccasions%3ASports%3A%3APatterns%3AEmbroidered%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0",
+            "timestamp": "2026-09-24T16:05:12.248Z",
+            "expect": {
+                "type": "reveal",
+                "revealed_locator_profile": {
+                    "id": null,
+                    "name": null,
+                    "role": null,
+                    "aria_label": null,
+                    "accessible_name": "",
+                    "placeholder": null,
+                    "title": null,
+                    "href": null,
+                    "product_id": null,
+                    "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > div > ul > li:nth-of-type(2) > label > div",
+                    "xpath": "//label[normalize-space(text())='Pieces']/div",
+                    "text": "",
+                    "element_text": "",
+                    "tag": "div",
+                    "attributes": {},
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                }
+            },
+            "page_id": 0,
+            "delay_before_ms": 4548
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "Pieces",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > div > ul > li:nth-of-type(2) > label > input",
+                "xpath": "//label[normalize-space(text())='Pieces']/input",
+                "text": "Pieces",
+                "element_text": "Pieces",
+                "tag": "input",
+                "attributes": {
+                    "type": "checkbox"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 419,
+                "y": 241.1999969482422,
+                "width": 13,
+                "height": 13
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/myntra?sort=price_asc&f=Categories%3ACaps%3A%3AOccasions%3ASports%3A%3APatterns%3AEmbroidered%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0",
+            "timestamp": "2026-09-24T16:05:12.250Z",
+            "expected_state": true,
+            "classified_by": "ancestor-classname-self",
+            "expect": {
+                "type": "toggle",
+                "final_checked": true
+            },
+            "hover_chain": [
+                {
+                    "id": null,
+                    "name": null,
+                    "role": null,
+                    "aria_label": null,
+                    "accessible_name": "Search for products, brands and more",
+                    "placeholder": "Search for products, brands and more",
+                    "title": null,
+                    "href": null,
+                    "product_id": null,
+                    "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > div:nth-of-type(3) > input",
+                    "xpath": "//input[@placeholder='Search for products, brands and more']",
+                    "text": "Search for products, brands and more",
+                    "element_text": "Search for products, brands and more",
+                    "tag": "input",
+                    "attributes": {
+                        "placeholder": "Search for products, brands and more"
+                    },
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                }
+            ],
+            "page_id": 0,
+            "delay_before_ms": 2
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/myntra?sort=price_asc&f=Categories%3ACaps%3A%3ANet%20Quantity%20Unit%3APieces%3A%3AOccasions%3ASports%3A%3APatterns%3AEmbroidered%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0",
+            "timestamp": "2026-09-24T16:05:12.504Z",
+            "page_id": 0,
+            "delay_before_ms": 254
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Materials",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > ul > li:nth-of-type(3) > label > input",
+                "xpath": "//label[normalize-space(.)='Materials']/input",
+                "text": "Materials",
+                "element_text": "Materials",
+                "tag": "input",
+                "attributes": {
+                    "type": "radio"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 0,
+                "y": 0,
+                "width": 0,
+                "height": 0
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "force_click",
+            "page_url": "https://www.myntra.com/myntra?sort=price_asc&f=Categories%3ACaps%3A%3ANet%20Quantity%20Unit%3APieces%3A%3AOccasions%3ASports%3A%3APatterns%3AEmbroidered%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0",
+            "timestamp": "2026-09-24T16:05:13.785Z",
+            "page_id": 0,
+            "delay_before_ms": 1281
+        },
+        {
+            "action_type": "hover",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Caps\nRs. 0 To Rs. 900\nEmbroidered\nSports\nPieces",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div:nth-of-type(2)",
+                "xpath": "//div[normalize-space(.)='CapsRs. 0 To Rs. 900EmbroideredSportsPieces']",
+                "text": "Caps\nRs. 0 To Rs. 900\nEmbroidered\nSports\nPieces",
+                "element_text": "Caps\nRs. 0 To Rs. 900\nEmbroidered\nSports\nPieces",
+                "tag": "div",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 252,
+                "y": 267.3999938964844,
+                "width": 1011.2000122070312,
+                "height": 47
+            },
+            "page_url": "https://www.myntra.com/myntra?sort=price_asc&f=Categories%3ACaps%3A%3ANet%20Quantity%20Unit%3APieces%3A%3AOccasions%3ASports%3A%3APatterns%3AEmbroidered%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0",
+            "timestamp": "2026-09-24T16:05:15.664Z",
+            "expect": {
+                "type": "reveal",
+                "revealed_locator_profile": {
+                    "id": null,
+                    "name": null,
+                    "role": null,
+                    "aria_label": null,
+                    "accessible_name": "",
+                    "placeholder": null,
+                    "title": null,
+                    "href": null,
+                    "product_id": null,
+                    "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > div > ul > li > label > div",
+                    "xpath": "//label[normalize-space(text())='Polyester']/div",
+                    "text": "",
+                    "element_text": "",
+                    "tag": "div",
+                    "attributes": {},
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                }
+            },
+            "page_id": 0,
+            "delay_before_ms": 1879
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "Polyester",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > div > ul > li > label > input",
+                "xpath": "//label[normalize-space(text())='Polyester']/input",
+                "text": "Polyester",
+                "element_text": "Polyester",
+                "tag": "input",
+                "attributes": {
+                    "type": "checkbox"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 279,
+                "y": 241.1999969482422,
+                "width": 13,
+                "height": 13
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/myntra?sort=price_asc&f=Categories%3ACaps%3A%3ANet%20Quantity%20Unit%3APieces%3A%3AOccasions%3ASports%3A%3APatterns%3AEmbroidered%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0",
+            "timestamp": "2026-09-24T16:05:15.665Z",
+            "expected_state": true,
+            "classified_by": "ancestor-classname-self",
+            "expect": {
+                "type": "toggle",
+                "final_checked": true
+            },
+            "hover_chain": [
+                {
+                    "id": null,
+                    "name": null,
+                    "role": null,
+                    "aria_label": null,
+                    "accessible_name": "Caps\nRs. 0 To Rs. 900\nEmbroidered\nSports\nPieces",
+                    "placeholder": null,
+                    "title": null,
+                    "href": null,
+                    "product_id": null,
+                    "css_path": "div#desktopSearchResults > div > section > div:nth-of-type(2)",
+                    "xpath": "//div[normalize-space(.)='CapsRs. 0 To Rs. 900EmbroideredSportsPieces']",
+                    "text": "Caps\nRs. 0 To Rs. 900\nEmbroidered\nSports\nPieces",
+                    "element_text": "Caps\nRs. 0 To Rs. 900\nEmbroidered\nSports\nPieces",
+                    "tag": "div",
+                    "attributes": {},
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                }
+            ],
+            "page_id": 0,
+            "delay_before_ms": 1
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/myntra?sort=price_asc&f=Categories%3ACaps%3A%3AMaterials%3APolyester%3A%3ANet%20Quantity%20Unit%3APieces%3A%3AOccasions%3ASports%3A%3APatterns%3AEmbroidered%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0",
+            "timestamp": "2026-09-24T16:05:16.100Z",
+            "page_id": 0,
+            "delay_before_ms": 435
+        },
+        {
+            "action_type": "hover",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Bundles\nCountry of Origin\nMaterials\nNet Quantity Unit\nOccasions\nPatterns\nRating",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > ul",
+                "xpath": "//section[.//h4[contains(text(), 'Bundles')]]/div/div[2]/ul",
+                "text": "Bundles\nCountry of Origin\nMaterials\nNet Quantity Unit\nOccasions\nPatterns\nRating",
+                "element_text": "Bundles\nCountry of Origin\nMaterials\nNet Quantity Unit\nOccasions\nPatterns\nRating",
+                "tag": "ul",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 268,
+                "y": 167.40000915527344,
+                "width": 710.2000122070312,
+                "height": 55.20000076293945
+            },
+            "page_url": "https://www.myntra.com/myntra?sort=price_asc&f=Categories%3ACaps%3A%3AMaterials%3APolyester%3A%3ANet%20Quantity%20Unit%3APieces%3A%3AOccasions%3ASports%3A%3APatterns%3AEmbroidered%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0",
+            "timestamp": "2026-09-24T16:05:17.241Z",
+            "expect": {
+                "type": "reveal",
+                "revealed_locator_profile": {
+                    "id": null,
+                    "name": null,
+                    "role": null,
+                    "aria_label": null,
+                    "accessible_name": "Country of Origin",
+                    "placeholder": null,
+                    "title": null,
+                    "href": null,
+                    "product_id": null,
+                    "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > ul > li:nth-of-type(2) > label > h4",
+                    "xpath": "//h4[normalize-space(text())='Country of Origin']",
+                    "text": "Country of Origin",
+                    "element_text": "Country of Origin",
+                    "tag": "h4",
+                    "attributes": {},
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                }
+            },
+            "page_id": 0,
+            "delay_before_ms": 1141
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Country of Origin",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > ul > li:nth-of-type(2) > label > input",
+                "xpath": "//label[normalize-space(.)='Country of Origin']/input",
+                "text": "Country of Origin",
+                "element_text": "Country of Origin",
+                "tag": "input",
+                "attributes": {
+                    "type": "radio"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 0,
+                "y": 0,
+                "width": 0,
+                "height": 0
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "force_click",
+            "page_url": "https://www.myntra.com/myntra?sort=price_asc&f=Categories%3ACaps%3A%3AMaterials%3APolyester%3A%3ANet%20Quantity%20Unit%3APieces%3A%3AOccasions%3ASports%3A%3APatterns%3AEmbroidered%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0",
+            "timestamp": "2026-09-24T16:05:17.242Z",
+            "hover_chain": [
+                {
+                    "id": null,
+                    "name": null,
+                    "role": null,
+                    "aria_label": null,
+                    "accessible_name": "Bundles\nCountry of Origin\nMaterials\nNet Quantity Unit\nOccasions\nPatterns\nRating",
+                    "placeholder": null,
+                    "title": null,
+                    "href": null,
+                    "product_id": null,
+                    "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > ul",
+                    "xpath": "//section[.//h4[contains(text(), 'Bundles')]]/div/div[2]/ul",
+                    "text": "Bundles\nCountry of Origin\nMaterials\nNet Quantity Unit\nOccasions\nPatterns\nRating",
+                    "element_text": "Bundles\nCountry of Origin\nMaterials\nNet Quantity Unit\nOccasions\nPatterns\nRating",
+                    "tag": "ul",
+                    "attributes": {},
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                }
+            ],
+            "page_id": 0,
+            "delay_before_ms": 1
+        },
+        {
+            "action_type": "check",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "checkbox",
+                "aria_label": null,
+                "accessible_name": "India",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div > section > div > div:nth-of-type(2) > div > ul > li > label > input",
+                "xpath": "//label[normalize-space(text())='India']/input",
+                "text": "India",
+                "element_text": "India",
+                "tag": "input",
+                "attributes": {
+                    "type": "checkbox"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 279,
+                "y": 241.1999969482422,
+                "width": 13,
+                "height": 13
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/myntra?sort=price_asc&f=Categories%3ACaps%3A%3AMaterials%3APolyester%3A%3ANet%20Quantity%20Unit%3APieces%3A%3AOccasions%3ASports%3A%3APatterns%3AEmbroidered%3A%3AQuick%20Filters%3AHot%20Trends&rf=Price%3A0.0_900.0_0.0%20TO%20900.0",
+            "timestamp": "2026-09-24T16:05:18.740Z",
+            "expected_state": true,
+            "classified_by": "ancestor-classname-self",
+            "expect": {
+                "type": "toggle",
+                "final_checked": true
+            },
+            "page_id": 0,
+            "delay_before_ms": 1498
+        },
+        {
+            "action_type": "hover",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "4.4\n|\n2.5k\nWROGN\nSizes: Onesize\nRs. 591Rs. 1499(61% OFF)\nWISHLIST\nPage 1Previous",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#desktopSearchResults > div:nth-of-type(2)",
+                "xpath": "//main[.//h1[contains(text(), 'Myntra')]]/div[3]/div[2]/div/div[2]",
+                "text": "4.4\n|\n2.5k\nWROGN\nSizes: Onesize\nRs. 591Rs. 1499(61% OFF)\nWISHLIST\nPage 1Previous",
+                "element_text": "4.4\n|\n2.5k\nWROGN\nSizes: Onesize\nRs. 591Rs. 1499(61% OFF)\nWISHLIST\nPage 1Previous",
+                "tag": "div",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 252,
+                "y": 329.3999938964844,
+                "width": 1011.2000122070312,
+                "height": 602.6000366210938
+            },
+            "page_url": "https://www.myntra.com/myntra?sort=price_asc&f=Categories%3ACaps%3A%3ACountry%20of%20Origin%3AIndia%3A%3AMaterials%3APolyester%3A%3ANet%20Quantity%20Unit%3APieces%3A%3AOccasions%3ASports%3A%3APatterns%3AEmbroidered%3A%3AQuick%20Filters%3AHot%20Trends",
+            "timestamp": "2026-09-24T16:05:21.021Z",
+            "expect": {
+                "type": "reveal",
+                "revealed_locator_profile": {
+                    "id": null,
+                    "name": null,
+                    "role": null,
+                    "aria_label": null,
+                    "accessible_name": "WROGN Unisex Embroidered Baseball Cap",
+                    "placeholder": null,
+                    "title": "WROGN Unisex Embroidered Baseball Cap",
+                    "href": "caps/wrogn/wrogn-unisex-embroidered-baseball-cap/36019799/buy",
+                    "product_id": "36019799",
+                    "css_path": "li#36019799 > a > div > div > div > div > div > div:nth-of-type(2) > div > div > picture > img",
+                    "xpath": "//*[@id='36019799']/a/div/div/div/div/div/div[2]/div/div/picture/img",
+                    "text": "WROGN Unisex Embroidered Baseball Cap",
+                    "element_text": "WROGN Unisex Embroidered Baseball Cap",
+                    "tag": "img",
+                    "attributes": {
+                        "title": "WROGN Unisex Embroidered Baseball Cap"
+                    },
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                }
+            },
+            "page_id": 0,
+            "delay_before_ms": 2281
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "WROGN\nSizes: Onesize\nRs. 591Rs. 1499(61% OFF)",
+                "placeholder": null,
+                "title": null,
+                "href": "caps/wrogn/wrogn-unisex-embroidered-baseball-cap/36019799/buy",
+                "product_id": "36019799",
+                "css_path": "li#36019799 > a",
+                "xpath": "//a[@href='caps/wrogn/wrogn-unisex-embroidered-baseball-cap/36019799/buy']",
+                "text": "WROGN Rs. 591Rs. 1499(61% OFF)",
+                "element_text": "WROGN Rs. 591Rs. 1499(61% OFF)",
+                "tag": "a",
+                "attributes": {
+                    "href": "caps/wrogn/wrogn-unisex-embroidered-baseball-cap/36019799/buy"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 280,
+                "y": 353.3999938964844,
+                "width": 210,
+                "height": 359.8000183105469
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/myntra?sort=price_asc&f=Categories%3ACaps%3A%3ACountry%20of%20Origin%3AIndia%3A%3AMaterials%3APolyester%3A%3ANet%20Quantity%20Unit%3APieces%3A%3AOccasions%3ASports%3A%3APatterns%3AEmbroidered%3A%3AQuick%20Filters%3AHot%20Trends",
+            "timestamp": "2026-09-24T16:05:21.022Z",
+            "hover_chain": [
+                {
+                    "id": null,
+                    "name": null,
+                    "role": null,
+                    "aria_label": null,
+                    "accessible_name": "4.4\n|\n2.5k\nWROGN\nSizes: Onesize\nRs. 591Rs. 1499(61% OFF)\nWISHLIST\nPage 1Previous",
+                    "placeholder": null,
+                    "title": null,
+                    "href": null,
+                    "product_id": null,
+                    "css_path": "div#desktopSearchResults > div:nth-of-type(2)",
+                    "xpath": "//main[.//h1[contains(text(), 'Myntra')]]/div[3]/div[2]/div/div[2]",
+                    "text": "4.4\n|\n2.5k\nWROGN\nSizes: Onesize\nRs. 591Rs. 1499(61% OFF)\nWISHLIST\nPage 1Previous",
+                    "element_text": "4.4\n|\n2.5k\nWROGN\nSizes: Onesize\nRs. 591Rs. 1499(61% OFF)\nWISHLIST\nPage 1Previous",
+                    "tag": "div",
+                    "attributes": {},
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                }
+            ],
+            "page_id": 0,
+            "delay_before_ms": 1
+        },
+        {
+            "action_type": "tab_open",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/caps/wrogn/wrogn-unisex-embroidered-baseball-cap/36019799/buy",
+            "timestamp": "2026-09-24T16:05:23.256Z",
+            "new_tab": true,
+            "page_id": 1,
+            "from_page_id": 0,
+            "delay_before_ms": 2234
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 418,
+            "scroll_y_before": 0,
+            "scroll_y_after": 418.3999938964844,
+            "viewport_height": 720,
+            "document_height": 8015,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/caps/wrogn/wrogn-unisex-embroidered-baseball-cap/36019799/buy",
+            "timestamp": "2026-09-24T16:05:24.205Z",
+            "page_id": 1,
+            "delay_before_ms": 949
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 3270,
+            "scroll_y_before": 418.3999938964844,
+            "scroll_y_after": 3688,
+            "viewport_height": 720,
+            "document_height": 8040,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/caps/wrogn/wrogn-unisex-embroidered-baseball-cap/36019799/buy",
+            "timestamp": "2026-09-24T16:05:25.634Z",
+            "page_id": 1,
+            "delay_before_ms": 1429
+        },
+        {
+            "action_type": "hover",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Please enter PIN code to check delivery time & Pay on Delivery Availability",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#mountRoot > div > div > main > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(5) > div > div > p",
+                "xpath": "//main[.//h1[contains(text(), 'WROGN')]]/div[2]/div[2]/div[2]/div[5]/div/div/p",
+                "text": "Please enter PIN code to check delivery time & Pay on Delivery Availability",
+                "element_text": "Please enter PIN code to check delivery time & Pay on Delivery Availability",
+                "tag": "p",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 758.1749877929688,
+                "y": -2723.300048828125,
+                "width": 477.01251220703125,
+                "height": 15.199999809265137
+            },
+            "page_url": "https://www.myntra.com/caps/wrogn/wrogn-unisex-embroidered-baseball-cap/36019799/buy",
+            "timestamp": "2026-09-24T16:05:26.230Z",
+            "expect": {
+                "type": "reveal",
+                "revealed_locator_profile": {
+                    "id": null,
+                    "name": null,
+                    "role": null,
+                    "aria_label": null,
+                    "accessible_name": "Red Tape Unisex Beige Brown Colourblocked Cotton Twill Baseball Cap with Adjustable Strap",
+                    "placeholder": null,
+                    "title": "Red Tape Unisex Beige Brown Colourblocked Cotton Twill Baseball Cap with Adjustable Strap",
+                    "href": "/caps/red+tape/red-tape-unisex-beige-brown-colourblocked-cotton-twill-baseball-cap-with-adjustable-strap/40555448/buy",
+                    "product_id": "40555448",
+                    "css_path": "div#mountRoot > div > div > main > div:nth-of-type(2) > div:nth-of-type(3) > div > ul > li:nth-of-type(19) > a > div > div > picture > img",
+                    "xpath": "//*[@id='mountRoot']/div/div/main/div[2]/div[3]/div/ul/li[19]/a/div/div/picture/img",
+                    "text": "Red Tape Unisex Beige Brown Colourblocked Cotton Twill Baseball Cap with Adjusta",
+                    "element_text": "Red Tape Unisex Beige Brown Colourblocked Cotton Twill Baseball Cap with Adjustable Strap",
+                    "tag": "img",
+                    "attributes": {
+                        "title": "Red Tape Unisex Beige Brown Colourblocked Cotton Twill Baseball Cap with Adjustable Strap"
+                    },
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                }
+            },
+            "page_id": 1,
+            "delay_before_ms": 596
+        },
+        {
+            "action_type": "hover",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "4.0",
+                "placeholder": null,
+                "title": null,
+                "href": "/caps/wrogn/wrogn-unisex-embroidered-cotton-baseball-cap/37344622/buy",
+                "product_id": "37344622",
+                "css_path": "div#mountRoot > div > div > main > div:nth-of-type(2) > div:nth-of-type(3) > div > ul > li:nth-of-type(4) > a > div > div:nth-of-type(2) > span",
+                "xpath": "((//div[contains(., '4.0')])[8]//span)[1]",
+                "text": "4.0",
+                "element_text": "4.0",
+                "tag": "span",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 786.7125244140625,
+                "y": -449.125,
+                "width": 15.300000190734863,
+                "height": 12
+            },
+            "page_url": "https://www.myntra.com/caps/wrogn/wrogn-unisex-embroidered-baseball-cap/36019799/buy",
+            "timestamp": "2026-09-24T16:05:26.248Z",
+            "expect": {
+                "type": "reveal",
+                "revealed_locator_profile": {
+                    "id": null,
+                    "name": null,
+                    "role": null,
+                    "aria_label": null,
+                    "accessible_name": "Red Tape Unisex Beige Brown Colourblocked Cotton Twill Baseball Cap with Adjustable Strap",
+                    "placeholder": null,
+                    "title": "Red Tape Unisex Beige Brown Colourblocked Cotton Twill Baseball Cap with Adjustable Strap",
+                    "href": "/caps/red+tape/red-tape-unisex-beige-brown-colourblocked-cotton-twill-baseball-cap-with-adjustable-strap/40555448/buy",
+                    "product_id": "40555448",
+                    "css_path": "div#mountRoot > div > div > main > div:nth-of-type(2) > div:nth-of-type(3) > div > ul > li:nth-of-type(19) > a > div > div > picture > img",
+                    "xpath": "//*[@id='mountRoot']/div/div/main/div[2]/div[3]/div/ul/li[19]/a/div/div/picture/img",
+                    "text": "Red Tape Unisex Beige Brown Colourblocked Cotton Twill Baseball Cap with Adjusta",
+                    "element_text": "Red Tape Unisex Beige Brown Colourblocked Cotton Twill Baseball Cap with Adjustable Strap",
+                    "tag": "img",
+                    "attributes": {
+                        "title": "Red Tape Unisex Beige Brown Colourblocked Cotton Twill Baseball Cap with Adjustable Strap"
+                    },
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                }
+            },
+            "page_id": 1,
+            "delay_before_ms": 18
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "4.2\n\nRed Tape\n\nEmbroidered Baseball Cap\n\nRs. 719Rs. 2399(70% OFF)",
+                "placeholder": null,
+                "title": null,
+                "href": "/caps/red+tape/red-tape-unisex-beige-brown-colourblocked-cotton-twill-baseball-cap-with-adjustable-strap/40555448/buy",
+                "product_id": "40555448",
+                "css_path": "div#mountRoot > div > div > main > div:nth-of-type(2) > div:nth-of-type(3) > div > ul > li:nth-of-type(19) > a",
+                "xpath": "//a[@href='/caps/red+tape/red-tape-unisex-beige-brown-colourblocked-cotton-twill-baseball-cap-with-adjustable-strap/40555448/buy']",
+                "text": "4.2 Red Tape Embroidered Baseball Cap Rs. 719Rs. 2399(70% OFF)",
+                "element_text": "4.2 Red Tape Embroidered Baseball Cap Rs. 719Rs. 2399(70% OFF)",
+                "tag": "a",
+                "attributes": {
+                    "href": "/caps/red+tape/red-tape-unisex-beige-brown-colourblocked-cotton-twill-baseball-cap-with-adjustable-strap/40555448/buy"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 775.9125366210938,
+                "y": 524.4249877929688,
+                "width": 208.6374969482422,
+                "height": 356.1750183105469
+            },
+            "scroll_x": 0,
+            "scroll_y": 3688,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/caps/wrogn/wrogn-unisex-embroidered-baseball-cap/36019799/buy",
+            "timestamp": "2026-09-24T16:05:26.250Z",
+            "hover_chain": [
+                {
+                    "id": null,
+                    "name": null,
+                    "role": null,
+                    "aria_label": null,
+                    "accessible_name": "Please enter PIN code to check delivery time & Pay on Delivery Availability",
+                    "placeholder": null,
+                    "title": null,
+                    "href": null,
+                    "product_id": null,
+                    "css_path": "div#mountRoot > div > div > main > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(5) > div > div > p",
+                    "xpath": "//main[.//h1[contains(text(), 'WROGN')]]/div[2]/div[2]/div[2]/div[5]/div/div/p",
+                    "text": "Please enter PIN code to check delivery time & Pay on Delivery Availability",
+                    "element_text": "Please enter PIN code to check delivery time & Pay on Delivery Availability",
+                    "tag": "p",
+                    "attributes": {},
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                },
+                {
+                    "id": null,
+                    "name": null,
+                    "role": null,
+                    "aria_label": null,
+                    "accessible_name": "4.0",
+                    "placeholder": null,
+                    "title": null,
+                    "href": "/caps/wrogn/wrogn-unisex-embroidered-cotton-baseball-cap/37344622/buy",
+                    "product_id": "37344622",
+                    "css_path": "div#mountRoot > div > div > main > div:nth-of-type(2) > div:nth-of-type(3) > div > ul > li:nth-of-type(4) > a > div > div:nth-of-type(2) > span",
+                    "xpath": "((//div[contains(., '4.0')])[8]//span)[1]",
+                    "text": "4.0",
+                    "element_text": "4.0",
+                    "tag": "span",
+                    "attributes": {},
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                }
+            ],
+            "page_id": 1,
+            "delay_before_ms": 2
+        },
+        {
+            "action_type": "tab_open",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/caps/red+tape/red-tape-unisex-beige-brown-colourblocked-cotton-twill-baseball-cap-with-adjustable-strap/40555448/buy",
+            "timestamp": "2026-09-24T16:05:28.672Z",
+            "new_tab": true,
+            "page_id": 2,
+            "from_page_id": 1,
+            "delay_before_ms": 2422
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 40,
+            "scroll_y_before": 0,
+            "scroll_y_after": 40,
+            "viewport_height": 720,
+            "document_height": 7956,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/caps/red+tape/red-tape-unisex-beige-brown-colourblocked-cotton-twill-baseball-cap-with-adjustable-strap/40555448/buy",
+            "timestamp": "2026-09-24T16:05:30.104Z",
+            "page_id": 2,
+            "delay_before_ms": 1432
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 355,
+            "scroll_y_before": 40,
+            "scroll_y_after": 395.20001220703125,
+            "viewport_height": 720,
+            "document_height": 7956,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/caps/red+tape/red-tape-unisex-beige-brown-colourblocked-cotton-twill-baseball-cap-with-adjustable-strap/40555448/buy",
+            "timestamp": "2026-09-24T16:05:30.697Z",
+            "page_id": 2,
+            "delay_before_ms": 593
+        },
+        {
+            "action_type": "hover",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "100% Original Products",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#mountRoot > div > div > main > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(6) > div > div > div",
+                "xpath": "//div[normalize-space(text())='100% Original Products']",
+                "text": "100% Original Products",
+                "element_text": "100% Original Products",
+                "tag": "div",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 758.1749877929688,
+                "y": 544.0499877929688,
+                "width": 429.3000183105469,
+                "height": 19.200000762939453
+            },
+            "page_url": "https://www.myntra.com/caps/red+tape/red-tape-unisex-beige-brown-colourblocked-cotton-twill-baseball-cap-with-adjustable-strap/40555448/buy",
+            "timestamp": "2026-09-24T16:05:32.583Z",
+            "expect": {
+                "type": "reveal",
+                "revealed_locator_profile": {
+                    "id": null,
+                    "name": null,
+                    "role": null,
+                    "aria_label": null,
+                    "accessible_name": "ADD TO BAG",
+                    "placeholder": null,
+                    "title": null,
+                    "href": null,
+                    "product_id": null,
+                    "css_path": "div#mountRoot > div > div > main > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > div",
+                    "xpath": "//div[normalize-space(text())='ADD TO BAG']",
+                    "text": "ADD TO BAG",
+                    "element_text": "ADD TO BAG",
+                    "tag": "div",
+                    "attributes": {},
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                }
+            },
+            "page_id": 2,
+            "delay_before_ms": 1886
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "ADD TO BAG",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#mountRoot > div > div > main > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > div",
+                "xpath": "//div[normalize-space(text())='ADD TO BAG']",
+                "text": "ADD TO BAG",
+                "element_text": "ADD TO BAG",
+                "tag": "div",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 758.1749877929688,
+                "y": 232.25,
+                "width": 232.8874969482422,
+                "height": 53.60000228881836
+            },
+            "scroll_x": 0,
+            "scroll_y": 395.20001220703125,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/caps/red+tape/red-tape-unisex-beige-brown-colourblocked-cotton-twill-baseball-cap-with-adjustable-strap/40555448/buy",
+            "timestamp": "2026-09-24T16:05:32.585Z",
+            "hover_chain": [
+                {
+                    "id": null,
+                    "name": null,
+                    "role": null,
+                    "aria_label": null,
+                    "accessible_name": "100% Original Products",
+                    "placeholder": null,
+                    "title": null,
+                    "href": null,
+                    "product_id": null,
+                    "css_path": "div#mountRoot > div > div > main > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(6) > div > div > div",
+                    "xpath": "//div[normalize-space(text())='100% Original Products']",
+                    "text": "100% Original Products",
+                    "element_text": "100% Original Products",
+                    "tag": "div",
+                    "attributes": {},
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                }
+            ],
+            "page_id": 2,
+            "delay_before_ms": 2
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "GO TO BAG",
+                "placeholder": null,
+                "title": null,
+                "href": "/checkout/cart",
+                "product_id": null,
+                "css_path": "div#mountRoot > div > div > main > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(3) > div > a",
+                "xpath": "//a[normalize-space(.)='GO TO BAG']",
+                "text": "GO TO BAG",
+                "element_text": "GO TO BAG",
+                "tag": "a",
+                "attributes": {
+                    "href": "/checkout/cart"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 758.1749877929688,
+                "y": 232.25,
+                "width": 232.8874969482422,
+                "height": 50.79999923706055
+            },
+            "scroll_x": 0,
+            "scroll_y": 395.20001220703125,
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/caps/red+tape/red-tape-unisex-beige-brown-colourblocked-cotton-twill-baseball-cap-with-adjustable-strap/40555448/buy",
+            "timestamp": "2026-09-24T16:05:34.285Z",
+            "page_id": 2,
+            "delay_before_ms": 1700
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 2,
+            "page_url": "https://www.myntra.com/caps/red+tape/red-tape-unisex-beige-brown-colourblocked-cotton-twill-baseball-cap-with-adjustable-strap/40555448/buy",
+            "remaining_page_id": 0,
+            "timestamp": "2026-09-24T16:05:39.264Z",
+            "delay_before_ms": 4979
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 1,
+            "page_url": "https://www.myntra.com/caps/wrogn/wrogn-unisex-embroidered-baseball-cap/36019799/buy",
+            "remaining_page_id": 0,
+            "timestamp": "2026-09-24T16:05:39.413Z",
+            "delay_before_ms": 149
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 0,
+            "page_url": "https://www.myntra.com/myntra?sort=price_asc&f=Categories%3ACaps%3A%3ACountry%20of%20Origin%3AIndia%3A%3AMaterials%3APolyester%3A%3ANet%20Quantity%20Unit%3APieces%3A%3AOccasions%3ASports%3A%3APatterns%3AEmbroidered%3A%3AQuick%20Filters%3AHot%20Trends",
+            "remaining_page_id": null,
+            "timestamp": "2026-09-24T16:05:39.525Z",
+            "delay_before_ms": 112
+        }
+    ],
+    "saved_at": "2026-09-24T21:35:39.617125"
+}

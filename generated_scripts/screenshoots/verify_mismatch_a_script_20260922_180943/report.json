@@ -1,0 +1,73 @@
+{
+  "status": "FAIL",
+  "message": "steps failed: [2]",
+  "diagnostic": null,
+  "qa_url": "http://127.0.0.1:8899/page1.html",
+  "steps": [
+    {
+      "index": 1,
+      "action_type": "navigate",
+      "name": "Page1 page",
+      "strategy_used": null,
+      "element_found": true,
+      "success": true,
+      "error": null,
+      "warning": null,
+      "effect_verified": null,
+      "large_bbox_flag": false,
+      "screenshot": "generated_scripts/screenshoots/verify_mismatch_a_script_20260922_180943/page1_html/step01_page1_page_2026-09-22_18-09-45.png",
+      "url_before": "http://127.0.0.1:8899/page1.html",
+      "url_after": "http://127.0.0.1:8899/page1.html",
+      "duration": 0.016,
+      "locator_report": null,
+      "expected": null,
+      "actual": null,
+      "fragile": false
+    },
+    {
+      "index": 2,
+      "action_type": "click",
+      "name": "\"Go to Page 2 (footer link)\" link",
+      "strategy_used": null,
+      "element_found": true,
+      "success": false,
+      "error": "[content-mismatch] the element resolved for this click links to a different destination than what was recorded (href: recorded 'totally-different-destination.html' vs actual 'page2.html') - the page's own content has likely changed since this was recorded",
+      "warning": null,
+      "effect_verified": null,
+      "large_bbox_flag": false,
+      "screenshot": null,
+      "url_before": "http://127.0.0.1:8899/page1.html",
+      "url_after": "http://127.0.0.1:8899/page1.html",
+      "duration": 10.89,
+      "locator_report": {
+        "strategy": null,
+        "strategy_label": "unknown",
+        "fallback_level": null,
+        "resolved": true,
+        "weak": false,
+        "resolution_ms": 10890,
+        "message": "Go to Page 2 (footer link) found using an unrecognized strategy."
+      },
+      "expected": null,
+      "actual": null,
+      "fragile": false
+    }
+  ],
+  "ui_elements": [
+    {
+      "index": 2,
+      "action_type": "click",
+      "element_found": true,
+      "locator_used": null,
+      "status": "PASS",
+      "message": null
+    }
+  ],
+  "ui_elements_status": "PASS",
+  "content_check": null,
+  "screenshot_diff": null,
+  "product_validation": null,
+  "final_screenshot": null,
+  "run_id": "verify_mismatch_a_script_20260922_180943",
+  "run_dir": "generated_scripts/screenshoots/verify_mismatch_a_script_20260922_180943"
+}

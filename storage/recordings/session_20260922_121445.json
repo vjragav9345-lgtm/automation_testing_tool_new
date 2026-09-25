@@ -1,0 +1,150 @@
+{
+    "name": "session_20260922_121445",
+    "session_id": "ce172545e0ce4f88834a07f162994eb8",
+    "start_url": "https://www.myntra.com/",
+    "recorded_at": "2026-09-22T12:14:45.451045",
+    "stop_reason": "browser_closed",
+    "total_actions": 7,
+    "page_count": 2,
+    "viewport_width": 1280,
+    "viewport_height": 720,
+    "actions": [
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "T-Shirts",
+                "placeholder": null,
+                "title": null,
+                "href": "/men-tshirts",
+                "css_path": "header#desktop-header-cnt > div:nth-of-type(2) > nav > div > div > div > div > div > div > li > ul > li:nth-of-type(2) > a",
+                "xpath": "//a[@href='/men-tshirts']",
+                "text": "T-Shirts",
+                "element_text": "T-Shirts",
+                "tag": "a",
+                "attributes": {
+                    "href": "/men-tshirts"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 101.5999984741211,
+                "y": 123,
+                "width": 191,
+                "height": 23
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/",
+            "timestamp": "2026-09-22T06:44:35.882Z",
+            "page_id": 0,
+            "delay_before_ms": 0
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 444,
+            "scroll_y_before": 0,
+            "scroll_y_after": 444,
+            "viewport_height": 720,
+            "document_height": 9245,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/men-tshirts",
+            "timestamp": "2026-09-22T06:44:40.618Z",
+            "page_id": 0,
+            "delay_before_ms": 4736
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 496,
+            "scroll_y_before": 444,
+            "scroll_y_after": 940,
+            "viewport_height": 720,
+            "document_height": 9245,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/men-tshirts",
+            "timestamp": "2026-09-22T06:44:41.439Z",
+            "page_id": 0,
+            "delay_before_ms": 821
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "playR\nSizes: M\nRs. 719Rs. 1199(40% OFF)",
+                "placeholder": null,
+                "title": null,
+                "href": "tshirts/playr/playr-csk-2026-unisex-7d-replica-jersey/40238337/buy",
+                "css_path": "li#40238337 > a",
+                "xpath": "//li[.//h3[contains(text(), 'playR')]]/a",
+                "text": "playR\nSizes: M\nRs. 719Rs. 1199(40% OFF)",
+                "element_text": "playR\nSizes: M\nRs. 719Rs. 1199(40% OFF)",
+                "tag": "a",
+                "attributes": {
+                    "href": "tshirts/playr/playr-csk-2026-unisex-7d-replica-jersey/40238337/buy"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 777.4500122070312,
+                "y": 466,
+                "width": 210,
+                "height": 359.8000183105469
+            },
+            "click_strategy": "standard",
+            "page_url": "https://www.myntra.com/men-tshirts",
+            "timestamp": "2026-09-22T06:44:42.207Z",
+            "page_id": 0,
+            "delay_before_ms": 768
+        },
+        {
+            "action_type": "tab_open",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.myntra.com/tshirts/playr/playr-csk-2026-unisex-7d-replica-jersey/40238337/buy",
+            "timestamp": "2026-09-22T06:44:44.889Z",
+            "new_tab": true,
+            "page_id": 1,
+            "from_page_id": 0,
+            "delay_before_ms": 2682
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 1,
+            "page_url": "https://www.myntra.com/tshirts/playr/playr-csk-2026-unisex-7d-replica-jersey/40238337/buy",
+            "remaining_page_id": 0,
+            "timestamp": "2026-09-22T06:44:45.451Z",
+            "delay_before_ms": 562
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 0,
+            "page_url": "https://www.myntra.com/men-tshirts",
+            "remaining_page_id": null,
+            "timestamp": "2026-09-22T06:44:45.451Z",
+            "delay_before_ms": 0
+        }
+    ],
+    "saved_at": "2026-09-22T12:14:45.451045"
+}

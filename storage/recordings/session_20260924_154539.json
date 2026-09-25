@@ -1,0 +1,1209 @@
+{
+    "name": "session_20260924_154539",
+    "session_id": "410b63f277724a988360c750231278a3",
+    "start_url": "https://mechconnect-chi.vercel.app",
+    "recorded_at": "2026-09-24T15:47:39.847746",
+    "stop_reason": "browser_closed",
+    "total_actions": 43,
+    "page_count": 2,
+    "viewport_width": 1280,
+    "viewport_height": 720,
+    "actions": [
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://mechconnect-chi.vercel.app",
+            "timestamp": "2026-09-24T10:15:39.730Z",
+            "page_id": 0,
+            "delay_before_ms": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Create account",
+                "placeholder": null,
+                "title": null,
+                "href": "/auth/register",
+                "css_path": "body > div > div > div:nth-of-type(2) > div > a",
+                "xpath": "//a[@href='/auth/register']",
+                "text": "Create account",
+                "element_text": "Create account",
+                "tag": "a",
+                "attributes": {
+                    "href": "/auth/register"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 668.0375366210938,
+                "y": 547.2000122070312,
+                "width": 103.5875015258789,
+                "height": 16.80000114440918
+            },
+            "click_strategy": "standard",
+            "page_url": "https://mechconnect-chi.vercel.app/auth/login",
+            "timestamp": "2026-09-24T10:15:42.017Z",
+            "page_id": 0,
+            "delay_before_ms": 2287
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://mechconnect-chi.vercel.app/auth/register",
+            "timestamp": "2026-09-24T10:15:42.334Z",
+            "page_id": 0,
+            "delay_before_ms": 317
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "John Doe",
+                "placeholder": "John Doe",
+                "title": null,
+                "href": null,
+                "css_path": "body > div > div > div:nth-of-type(2) > form > div > div > input",
+                "xpath": "//input[@placeholder='John Doe']",
+                "text": "John Doe",
+                "element_text": "John Doe",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "John Doe",
+                    "type": "text"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 446,
+                "y": 270.8000183105469,
+                "width": 382.3999938964844,
+                "height": 45.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://mechconnect-chi.vercel.app/auth/register",
+            "timestamp": "2026-09-24T10:15:43.357Z",
+            "page_id": 0,
+            "delay_before_ms": 1023
+        },
+        {
+            "action_type": "fill",
+            "value": "vijay",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "John Doe",
+                "placeholder": "John Doe",
+                "title": null,
+                "href": null,
+                "css_path": "body > div > div > div:nth-of-type(2) > form > div > div > input",
+                "xpath": "//input[@placeholder='John Doe']",
+                "text": "John Doe",
+                "element_text": "John Doe",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "John Doe",
+                    "type": "text"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 446,
+                "y": 270.8000183105469,
+                "width": 382.3999938964844,
+                "height": 45.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://mechconnect-chi.vercel.app/auth/register",
+            "timestamp": "2026-09-24T10:15:46.157Z",
+            "page_id": 0,
+            "delay_before_ms": 2800
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "you@example.com",
+                "placeholder": "you@example.com",
+                "title": null,
+                "href": null,
+                "css_path": "body > div > div > div:nth-of-type(2) > form > div:nth-of-type(2) > div > input",
+                "xpath": "//input[@placeholder='you@example.com']",
+                "text": "you@example.com",
+                "element_text": "you@example.com",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "you@example.com",
+                    "type": "email"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 446,
+                "y": 358.3999938964844,
+                "width": 382.3999938964844,
+                "height": 45.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://mechconnect-chi.vercel.app/auth/register",
+            "timestamp": "2026-09-24T10:15:46.377Z",
+            "page_id": 0,
+            "delay_before_ms": 220
+        },
+        {
+            "action_type": "fill",
+            "value": "vijay@123",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "you@example.com",
+                "placeholder": "you@example.com",
+                "title": null,
+                "href": null,
+                "css_path": "body > div > div > div:nth-of-type(2) > form > div:nth-of-type(2) > div > input",
+                "xpath": "//input[@placeholder='you@example.com']",
+                "text": "you@example.com",
+                "element_text": "you@example.com",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "you@example.com",
+                    "type": "email"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 446,
+                "y": 358.3999938964844,
+                "width": 382.3999938964844,
+                "height": 45.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://mechconnect-chi.vercel.app/auth/register",
+            "timestamp": "2026-09-24T10:15:55.373Z",
+            "page_id": 0,
+            "delay_before_ms": 8996
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "+91 98765 43210",
+                "placeholder": "+91 98765 43210",
+                "title": null,
+                "href": null,
+                "css_path": "body > div > div > div:nth-of-type(2) > form > div:nth-of-type(3) > div > input",
+                "xpath": "//input[@placeholder='+91 98765 43210']",
+                "text": "+91 98765 43210",
+                "element_text": "+91 98765 43210",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "+91 98765 43210",
+                    "type": "tel"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 446,
+                "y": 446,
+                "width": 382.3999938964844,
+                "height": 45.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://mechconnect-chi.vercel.app/auth/register",
+            "timestamp": "2026-09-24T10:15:55.591Z",
+            "page_id": 0,
+            "delay_before_ms": 218
+        },
+        {
+            "action_type": "fill",
+            "value": "9345691852",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "+91 98765 43210",
+                "placeholder": "+91 98765 43210",
+                "title": null,
+                "href": null,
+                "css_path": "body > div > div > div:nth-of-type(2) > form > div:nth-of-type(3) > div > input",
+                "xpath": "//input[@placeholder='+91 98765 43210']",
+                "text": "+91 98765 43210",
+                "element_text": "+91 98765 43210",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "+91 98765 43210",
+                    "type": "tel"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 446,
+                "y": 446,
+                "width": 382.3999938964844,
+                "height": 45.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://mechconnect-chi.vercel.app/auth/register",
+            "timestamp": "2026-09-24T10:15:59.905Z",
+            "page_id": 0,
+            "delay_before_ms": 4314
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Chennai, Tamil Nadu",
+                "placeholder": "Chennai, Tamil Nadu",
+                "title": null,
+                "href": null,
+                "css_path": "body > div > div > div:nth-of-type(2) > form > div:nth-of-type(4) > div > input",
+                "xpath": "//input[@placeholder='Chennai, Tamil Nadu']",
+                "text": "Chennai, Tamil Nadu",
+                "element_text": "Chennai, Tamil Nadu",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Chennai, Tamil Nadu",
+                    "type": "text"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 446,
+                "y": 533.6000366210938,
+                "width": 382.3999938964844,
+                "height": 45.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://mechconnect-chi.vercel.app/auth/register",
+            "timestamp": "2026-09-24T10:16:00.121Z",
+            "page_id": 0,
+            "delay_before_ms": 216
+        },
+        {
+            "action_type": "fill",
+            "value": "chennai",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Chennai, Tamil Nadu",
+                "placeholder": "Chennai, Tamil Nadu",
+                "title": null,
+                "href": null,
+                "css_path": "body > div > div > div:nth-of-type(2) > form > div:nth-of-type(4) > div > input",
+                "xpath": "//input[@placeholder='Chennai, Tamil Nadu']",
+                "text": "Chennai, Tamil Nadu",
+                "element_text": "Chennai, Tamil Nadu",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Chennai, Tamil Nadu",
+                    "type": "text"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 446,
+                "y": 533.6000366210938,
+                "width": 382.3999938964844,
+                "height": 45.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://mechconnect-chi.vercel.app/auth/register",
+            "timestamp": "2026-09-24T10:16:02.804Z",
+            "page_id": 0,
+            "delay_before_ms": 2683
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Min 6 characters",
+                "placeholder": "Min 6 characters",
+                "title": null,
+                "href": null,
+                "css_path": "body > div > div > div:nth-of-type(2) > form > div:nth-of-type(5) > div > input",
+                "xpath": "//input[@placeholder='Min 6 characters']",
+                "text": "Min 6 characters",
+                "element_text": "Min 6 characters",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Min 6 characters",
+                    "type": "password"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 446,
+                "y": 621.2000122070312,
+                "width": 382.3999938964844,
+                "height": 45.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://mechconnect-chi.vercel.app/auth/register",
+            "timestamp": "2026-09-24T10:16:03.021Z",
+            "page_id": 0,
+            "delay_before_ms": 217
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 86,
+            "scroll_y_before": 0,
+            "scroll_y_after": 86.4000015258789,
+            "viewport_height": 720,
+            "document_height": 884,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://mechconnect-chi.vercel.app/auth/register",
+            "timestamp": "2026-09-24T10:16:10.817Z",
+            "page_id": 0,
+            "delay_before_ms": 7796
+        },
+        {
+            "action_type": "fill",
+            "value": "Vijay@1122",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Min 6 characters",
+                "placeholder": "Min 6 characters",
+                "title": null,
+                "href": null,
+                "css_path": "body > div > div > div:nth-of-type(2) > form > div:nth-of-type(5) > div > input",
+                "xpath": "//input[@placeholder='Min 6 characters']",
+                "text": "Min 6 characters",
+                "element_text": "Min 6 characters",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Min 6 characters",
+                    "type": "password"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 446,
+                "y": 534.7999877929688,
+                "width": 382.3999938964844,
+                "height": 45.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://mechconnect-chi.vercel.app/auth/register",
+            "timestamp": "2026-09-24T10:16:11.249Z",
+            "page_id": 0,
+            "delay_before_ms": 432
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Create Account",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "body > div > div > div:nth-of-type(2) > form > button",
+                "xpath": "//button[normalize-space(text())='Create Account']",
+                "text": "Create Account",
+                "element_text": "Create Account",
+                "tag": "button",
+                "attributes": {
+                    "type": "submit"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 455.5600280761719,
+                "y": 597.6000366210938,
+                "width": 363.2799987792969,
+                "height": 45.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://mechconnect-chi.vercel.app/auth/register",
+            "timestamp": "2026-09-24T10:16:11.464Z",
+            "page_id": 0,
+            "delay_before_ms": 215
+        },
+        {
+            "action_type": "submit",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Full Name\nEmail\nPhone Number\nYour City\nPassword\nCreate Account",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "body > div > div > div:nth-of-type(2) > form",
+                "xpath": "//form[normalize-space(.)='Full NameEmailPhone NumberYour CityPasswordCreate Account']",
+                "text": "Full Name\nEmail\nPhone Number\nYour City\nPassword\nCreate Account",
+                "element_text": "Full Name\nEmail\nPhone Number\nYour City\nPassword\nCreate Account",
+                "tag": "form",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 446,
+                "y": 158.40000915527344,
+                "width": 382.3999938964844,
+                "height": 486
+            },
+            "click_strategy": "standard",
+            "page_url": "https://mechconnect-chi.vercel.app/auth/register",
+            "timestamp": "2026-09-24T10:16:11.466Z",
+            "page_id": 0,
+            "delay_before_ms": 2
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "you@example.com",
+                "placeholder": "you@example.com",
+                "title": null,
+                "href": null,
+                "css_path": "body > div > div > div:nth-of-type(2) > form > div:nth-of-type(2) > div > input",
+                "xpath": "//input[@placeholder='you@example.com']",
+                "text": "you@example.com",
+                "element_text": "you@example.com",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "you@example.com",
+                    "type": "email"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 446,
+                "y": 272,
+                "width": 382.3999938964844,
+                "height": 45.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://mechconnect-chi.vercel.app/auth/register",
+            "timestamp": "2026-09-24T10:16:14.872Z",
+            "page_id": 0,
+            "delay_before_ms": 3406
+        },
+        {
+            "action_type": "fill",
+            "value": "vijayaragavanv18@gmail.com",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "you@example.com",
+                "placeholder": "you@example.com",
+                "title": null,
+                "href": null,
+                "css_path": "body > div > div > div:nth-of-type(2) > form > div:nth-of-type(2) > div > input",
+                "xpath": "//input[@placeholder='you@example.com']",
+                "text": "you@example.com",
+                "element_text": "you@example.com",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "you@example.com",
+                    "type": "email"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 446,
+                "y": 272,
+                "width": 382.3999938964844,
+                "height": 45.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://mechconnect-chi.vercel.app/auth/register",
+            "timestamp": "2026-09-24T10:16:25.997Z",
+            "page_id": 0,
+            "delay_before_ms": 11125
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Min 6 characters",
+                "placeholder": "Min 6 characters",
+                "title": null,
+                "href": null,
+                "css_path": "body > div > div > div:nth-of-type(2) > form > div:nth-of-type(5) > div > input",
+                "xpath": "//input[@placeholder='Min 6 characters']",
+                "text": "Min 6 characters",
+                "element_text": "Min 6 characters",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Min 6 characters",
+                    "type": "password"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 446,
+                "y": 534.7999877929688,
+                "width": 382.3999938964844,
+                "height": 45.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://mechconnect-chi.vercel.app/auth/register",
+            "timestamp": "2026-09-24T10:16:26.220Z",
+            "page_id": 0,
+            "delay_before_ms": 223
+        },
+        {
+            "action_type": "fill",
+            "value": "Anjjusree@02",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Min 6 characters",
+                "placeholder": "Min 6 characters",
+                "title": null,
+                "href": null,
+                "css_path": "body > div > div > div:nth-of-type(2) > form > div:nth-of-type(5) > div > input",
+                "xpath": "//input[@placeholder='Min 6 characters']",
+                "text": "Min 6 characters",
+                "element_text": "Min 6 characters",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "Min 6 characters",
+                    "type": "password"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 446,
+                "y": 534.7999877929688,
+                "width": 382.3999938964844,
+                "height": 45.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://mechconnect-chi.vercel.app/auth/register",
+            "timestamp": "2026-09-24T10:16:44.117Z",
+            "page_id": 0,
+            "delay_before_ms": 17897
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Create Account",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "body > div > div > div:nth-of-type(2) > form > button",
+                "xpath": "//button[normalize-space(text())='Create Account']",
+                "text": "Create Account",
+                "element_text": "Create Account",
+                "tag": "button",
+                "attributes": {
+                    "type": "submit"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 455.5600280761719,
+                "y": 597.6000366210938,
+                "width": 363.2799987792969,
+                "height": 45.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://mechconnect-chi.vercel.app/auth/register",
+            "timestamp": "2026-09-24T10:16:44.343Z",
+            "page_id": 0,
+            "delay_before_ms": 226
+        },
+        {
+            "action_type": "submit",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Full Name\nEmail\nPhone Number\nYour City\nPassword\nCreate Account",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "body > div > div > div:nth-of-type(2) > form",
+                "xpath": "//form[normalize-space(.)='Full NameEmailPhone NumberYour CityPasswordCreate Account']",
+                "text": "Full Name\nEmail\nPhone Number\nYour City\nPassword\nCreate Account",
+                "element_text": "Full Name\nEmail\nPhone Number\nYour City\nPassword\nCreate Account",
+                "tag": "form",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 446,
+                "y": 158.40000915527344,
+                "width": 382.3999938964844,
+                "height": 486
+            },
+            "click_strategy": "standard",
+            "page_url": "https://mechconnect-chi.vercel.app/auth/register",
+            "timestamp": "2026-09-24T10:16:44.344Z",
+            "page_id": 0,
+            "delay_before_ms": 1
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": -86,
+            "scroll_y_before": 86.4000015258789,
+            "scroll_y_after": 0,
+            "viewport_height": 720,
+            "document_height": 720,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://mechconnect-chi.vercel.app/auth/login",
+            "timestamp": "2026-09-24T10:16:46.309Z",
+            "page_id": 0,
+            "delay_before_ms": 1965
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://mechconnect-chi.vercel.app/auth/login",
+            "timestamp": "2026-09-24T10:16:46.539Z",
+            "page_id": 0,
+            "delay_before_ms": 230
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "you@example.com",
+                "placeholder": "you@example.com",
+                "title": null,
+                "href": null,
+                "css_path": "body > div > div > div:nth-of-type(2) > form > div > div > input",
+                "xpath": "//input[@placeholder='you@example.com']",
+                "text": "you@example.com",
+                "element_text": "you@example.com",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "you@example.com",
+                    "type": "email"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 448.8000183105469,
+                "y": 316.3999938964844,
+                "width": 382.3999938964844,
+                "height": 45.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://mechconnect-chi.vercel.app/auth/login",
+            "timestamp": "2026-09-24T10:16:47.636Z",
+            "page_id": 0,
+            "delay_before_ms": 1097
+        },
+        {
+            "action_type": "fill",
+            "value": "vijayaragavanv18@gmail.com",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "you@example.com",
+                "placeholder": "you@example.com",
+                "title": null,
+                "href": null,
+                "css_path": "body > div > div > div:nth-of-type(2) > form > div > div > input",
+                "xpath": "//input[@placeholder='you@example.com']",
+                "text": "you@example.com",
+                "element_text": "you@example.com",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "you@example.com",
+                    "type": "email"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 448.8000183105469,
+                "y": 316.3999938964844,
+                "width": 382.3999938964844,
+                "height": 45.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://mechconnect-chi.vercel.app/auth/login",
+            "timestamp": "2026-09-24T10:16:58.261Z",
+            "page_id": 0,
+            "delay_before_ms": 10625
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "••••••••",
+                "placeholder": "••••••••",
+                "title": null,
+                "href": null,
+                "css_path": "body > div > div > div:nth-of-type(2) > form > div:nth-of-type(2) > div > input",
+                "xpath": "//input[@placeholder='••••••••']",
+                "text": "••••••••",
+                "element_text": "••••••••",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "••••••••",
+                    "type": "password"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 448.8000183105469,
+                "y": 408,
+                "width": 382.3999938964844,
+                "height": 45.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://mechconnect-chi.vercel.app/auth/login",
+            "timestamp": "2026-09-24T10:16:58.476Z",
+            "page_id": 0,
+            "delay_before_ms": 215
+        },
+        {
+            "action_type": "fill",
+            "value": "Anjjusree@02",
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "••••••••",
+                "placeholder": "••••••••",
+                "title": null,
+                "href": null,
+                "css_path": "body > div > div > div:nth-of-type(2) > form > div:nth-of-type(2) > div > input",
+                "xpath": "//input[@placeholder='••••••••']",
+                "text": "••••••••",
+                "element_text": "••••••••",
+                "tag": "input",
+                "attributes": {
+                    "placeholder": "••••••••",
+                    "type": "password"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 448.8000183105469,
+                "y": 408,
+                "width": 382.3999938964844,
+                "height": 45.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://mechconnect-chi.vercel.app/auth/login",
+            "timestamp": "2026-09-24T10:17:06.294Z",
+            "page_id": 0,
+            "delay_before_ms": 7818
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Sign In",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "body > div > div > div:nth-of-type(2) > form > button",
+                "xpath": "//button[normalize-space(text())='Sign In']",
+                "text": "Sign In",
+                "element_text": "Sign In",
+                "tag": "button",
+                "attributes": {
+                    "type": "submit"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 458.3600158691406,
+                "y": 474.8000183105469,
+                "width": 363.280029296875,
+                "height": 45.60000228881836
+            },
+            "click_strategy": "standard",
+            "page_url": "https://mechconnect-chi.vercel.app/auth/login",
+            "timestamp": "2026-09-24T10:17:06.510Z",
+            "page_id": 0,
+            "delay_before_ms": 216
+        },
+        {
+            "action_type": "submit",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Email Address\nPassword\nSign In",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "body > div > div > div:nth-of-type(2) > form",
+                "xpath": "//form[normalize-space(.)='Email AddressPasswordSign In']",
+                "text": "Email Address\nPassword\nSign In",
+                "element_text": "Email Address\nPassword\nSign In",
+                "tag": "form",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 448.8000183105469,
+                "y": 290.3999938964844,
+                "width": 382.3999938964844,
+                "height": 231.1999969482422
+            },
+            "click_strategy": "standard",
+            "page_url": "https://mechconnect-chi.vercel.app/auth/login",
+            "timestamp": "2026-09-24T10:17:06.511Z",
+            "page_id": 0,
+            "delay_before_ms": 1
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://mechconnect-chi.vercel.app/user/dashboard",
+            "timestamp": "2026-09-24T10:17:09.781Z",
+            "page_id": 0,
+            "delay_before_ms": 3270
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 269,
+            "scroll_y_before": 0,
+            "scroll_y_after": 268.79998779296875,
+            "viewport_height": 720,
+            "document_height": 1085,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://mechconnect-chi.vercel.app/user/dashboard",
+            "timestamp": "2026-09-24T10:17:12.424Z",
+            "page_id": 0,
+            "delay_before_ms": 2643
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Call Operators\n\nLogin to contact directly",
+                "placeholder": null,
+                "title": null,
+                "href": "/user/search",
+                "css_path": "body > div > main > div > div:nth-of-type(2) > a:nth-of-type(2)",
+                "xpath": "//a[normalize-space(.)='Call OperatorsLogin to contact directly']",
+                "text": "Call Operators\n\nLogin to contact directly",
+                "element_text": "Call Operators\n\nLogin to contact directly",
+                "tag": "a",
+                "attributes": {
+                    "href": "/user/search"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 440.8000183105469,
+                "y": 104.80000305175781,
+                "width": 392.8000183105469,
+                "height": 185.60000610351562
+            },
+            "click_strategy": "standard",
+            "page_url": "https://mechconnect-chi.vercel.app/user/dashboard",
+            "timestamp": "2026-09-24T10:17:13.194Z",
+            "page_id": 0,
+            "delay_before_ms": 770
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://mechconnect-chi.vercel.app/user/search",
+            "timestamp": "2026-09-24T10:17:13.410Z",
+            "page_id": 0,
+            "delay_before_ms": 216
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": -269,
+            "scroll_y_before": 268.79998779296875,
+            "scroll_y_after": 0,
+            "viewport_height": 720,
+            "document_height": 977,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://mechconnect-chi.vercel.app/user/search",
+            "timestamp": "2026-09-24T10:17:13.472Z",
+            "page_id": 0,
+            "delay_before_ms": 62
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "View Profile",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "body > div > main > div > div:nth-of-type(3) > div > div > div:nth-of-type(3) > button:nth-of-type(4)",
+                "xpath": "((//div[contains(., 'View Profile')])[6]//button)[4]",
+                "text": "View Profile",
+                "element_text": "View Profile",
+                "tag": "button",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 1077.5999755859375,
+                "y": 476.3999938964844,
+                "width": 144,
+                "height": 40
+            },
+            "click_strategy": "standard",
+            "page_url": "https://mechconnect-chi.vercel.app/user/search",
+            "timestamp": "2026-09-24T10:17:21.574Z",
+            "page_id": 0,
+            "delay_before_ms": 8102
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://mechconnect-chi.vercel.app/user/vehicle/cmo6swmj10001wogk78uphacd",
+            "timestamp": "2026-09-24T10:17:23.738Z",
+            "page_id": 0,
+            "delay_before_ms": 2164
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "body > div > main > div",
+                "xpath": "/html[1]/body[1]/div[1]/main[1]/div[1]",
+                "text": "",
+                "element_text": "",
+                "tag": "div",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 125.20000457763672,
+                "y": 113.5999984741211,
+                "width": 1024,
+                "height": 448
+            },
+            "click_strategy": "standard",
+            "page_url": "https://mechconnect-chi.vercel.app/user/vehicle/cmo6swmj10001wogk78uphacd",
+            "timestamp": "2026-09-24T10:17:23.835Z",
+            "page_id": 0,
+            "delay_before_ms": 97
+        },
+        {
+            "action_type": "scroll",
+            "value": null,
+            "delta_x": 0,
+            "delta_y": 88,
+            "scroll_y_before": 0,
+            "scroll_y_after": 88,
+            "viewport_height": 720,
+            "document_height": 1338,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://mechconnect-chi.vercel.app/user/vehicle/cmo6swmj10001wogk78uphacd",
+            "timestamp": "2026-09-24T10:17:27.141Z",
+            "page_id": 0,
+            "delay_before_ms": 3306
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": null,
+                "aria_label": null,
+                "accessible_name": "Enquire on WhatsApp",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "css_path": "body > div > main > div > div > div:nth-of-type(2) > div > div:nth-of-type(2) > button:nth-of-type(2)",
+                "xpath": "//button[normalize-space(text())='Enquire on WhatsApp']",
+                "text": "Enquire on WhatsApp",
+                "element_text": "Enquire on WhatsApp",
+                "tag": "button",
+                "attributes": {},
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 838,
+                "y": 260.3999938964844,
+                "width": 254.40000915527344,
+                "height": 48
+            },
+            "click_strategy": "standard",
+            "page_url": "https://mechconnect-chi.vercel.app/user/vehicle/cmo6swmj10001wogk78uphacd",
+            "timestamp": "2026-09-24T10:17:34.956Z",
+            "page_id": 0,
+            "delay_before_ms": 7815
+        },
+        {
+            "action_type": "tab_open",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://api.whatsapp.com/send/?phone=918940986047&text=Hi%2C+I+found+your+service+on+MechConnect.+Vehicle%3A+TN58AE8485.+I+would+like+to+enquire+about+booking+this+vehicle.&type=phone_number&app_absent=0",
+            "timestamp": "2026-09-24T10:17:37.247Z",
+            "new_tab": true,
+            "page_id": 1,
+            "from_page_id": 0,
+            "delay_before_ms": 2291
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 1,
+            "page_url": "https://api.whatsapp.com/send/?phone=918940986047&text=Hi%2C+I+found+your+service+on+MechConnect.+Vehicle%3A+TN58AE8485.+I+would+like+to+enquire+about+booking+this+vehicle.&type=phone_number&app_absent=0",
+            "remaining_page_id": 0,
+            "timestamp": "2026-09-24T10:17:38.290Z",
+            "delay_before_ms": 1043
+        },
+        {
+            "action_type": "tab_close",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_id": 0,
+            "page_url": "https://mechconnect-chi.vercel.app/user/vehicle/cmo6swmj10001wogk78uphacd",
+            "remaining_page_id": null,
+            "timestamp": "2026-09-24T10:17:39.841Z",
+            "delay_before_ms": 1551
+        }
+    ],
+    "saved_at": "2026-09-24T15:47:39.847746"
+}

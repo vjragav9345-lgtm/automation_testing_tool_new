@@ -67,7 +67,7 @@ import hashlib
 import logging
 from datetime import datetime
 from pathlib import Path
-from urllib.parse import urlsplit, urlunsplit, urljoin
+from urllib.parse import urlsplit, urlunsplit, urljoin, parse_qsl
 
 from playwright.sync_api import sync_playwright
 from PIL import Image, ImageChops
@@ -197,6 +197,70 @@ def _parse_timestamp(ts):
         return datetime.fromisoformat(ts.replace("Z", "+00:00"))
     except Exception:
         return None
+
+
+MERGED_DUPLICATE_WINDOW_MS = 300
+
+
+def _merged_duplicate_gap_ms(step, prev_step):
+    """Milliseconds between two consecutive steps' own recorded
+    timestamps - float('inf') when either is missing/unparseable (never
+    treated as "close enough" to merge)."""
+    if not prev_step:
+        return float("inf")
+    prev = _parse_timestamp(prev_step.get("timestamp"))
+    cur = _parse_timestamp(step.get("timestamp"))
+    if prev is None or cur is None:
+        return float("inf")
+    return abs((cur - prev).total_seconds()) * 1000.0
+
+
+def _is_merged_duplicate_of_previous(step, prev_step, prev_report):
+    """FIX 2.i: true when `step` (a click/check) looks like the SAME
+    physical user gesture as the immediately preceding step, already
+    executed and reported as `prev_report` - a native <label>-wraps-
+    checkbox click (or an equivalent framework pattern) commonly
+    dispatches two separate native click events for one gesture, which
+    an already-saved recording may have captured as two separate
+    actions. Both checks must hold: (1) recorded within
+    MERGED_DUPLICATE_WINDOW_MS of each other (a real second, deliberate
+    click by the same user is essentially never THIS close), and (2)
+    same target, identified generically via the strongest recorded
+    identity signal available (href exact match, else id exact match,
+    else case-insensitive text substring in either direction) - never a
+    site-specific check. Only ever compares against the IMMEDIATELY
+    preceding step, never scans further back.
+
+    Merges regardless of whether the previous step succeeded OR failed
+    (changed from an earlier, narrower version that only merged after a
+    success): these two recorded actions are the SAME physical gesture
+    either way, and the merged step's own report already mirrors
+    whatever prev_report says (see its build site in the main loop) - a
+    failed step 6 (say, a click that never reached its real target)
+    merging step 7 means step 7 is correctly reported as that SAME
+    failure, not independently re-dispatched as a fresh toggle attempt
+    that could land on a checkbox in an unintended state and report a
+    misleading, unrelated success.
+    """
+    if not prev_step or prev_step.get("action_type") not in ("click", "check"):
+        return False
+    if _merged_duplicate_gap_ms(step, prev_step) > MERGED_DUPLICATE_WINDOW_MS:
+        return False
+    lp = step.get("locator_profile") or {}
+    prev_lp = prev_step.get("locator_profile") or {}
+    href = (lp.get("href") or "").strip()
+    prev_href = (prev_lp.get("href") or "").strip()
+    if href and prev_href:
+        return href == prev_href
+    id_ = (lp.get("id") or "").strip()
+    prev_id = (prev_lp.get("id") or "").strip()
+    if id_ and prev_id:
+        return id_ == prev_id
+    text = (lp.get("text") or lp.get("element_text") or "").strip().lower()
+    prev_text = (prev_lp.get("text") or prev_lp.get("element_text") or "").strip().lower()
+    if text and prev_text:
+        return text in prev_text or prev_text in text
+    return False
 
 
 def _replay_delay(prev_ts, cur_ts):
@@ -734,6 +798,29 @@ def _derive_action_name(action):
         state_word = "checked" if (expected_state in (True, "true", "True", "1", 1) or expected_state is None) else "unchecked"
         return f'"{label or "checkbox"}" checkbox ({state_word})'
 
+    if action_type == "drag":
+        source_lp = action.get("source_target") or lp
+        source_label = (
+            _strip_icon_font_text((source_lp.get("text") or "").split("\\n")[0]).strip()
+            or (source_lp.get("accessible_name") or "").strip()
+            or (source_lp.get("aria_label") or "").strip()
+            or "element"
+        )[:40]
+        value_after = (action.get("value_after") or {}).get("value") or (action.get("value_after") or {}).get("text")
+        value_before = (action.get("value_before") or {}).get("value") or (action.get("value_before") or {}).get("text")
+        drop_lp = action.get("drop_target")
+        if value_after or value_before:
+            target_desc = str(value_after or value_before)
+        elif drop_lp:
+            target_desc = (
+                (drop_lp.get("text") or "").strip()
+                or (drop_lp.get("accessible_name") or "").strip()
+                or "drop target"
+            )[:40]
+        else:
+            target_desc = "new position"
+        return f'Drag - "{source_label}" -> {target_desc}'
+
     if action_type == "scroll":
         delta_y = action.get("delta_y") or 0
         direction = "down" if (delta_y or 0) >= 0 else "up"
@@ -1097,10 +1184,107 @@ def _find_by_href(page, lp):
                 return anchors.nth(i)
             except Exception:
                 return None
+
+    # BUG 2 fallback: an exact (normalized) href match can fail even
+    # though the SAME product/listing is still live at a href that
+    # differs in some other path segment (a re-derived SEO slug, an
+    # extra tracking segment) while keeping the same numeric product id
+    # - a[href*="<id>"] is deliberately looser than the exact match
+    # above, so it's only tried once that's already failed.
+    product_id = (lp.get("product_id") or "").strip()
+    if product_id:
+        try:
+            cand = page.locator(f'a[href*="{product_id}"]')
+            if cand.count() > 0:
+                return cand.first
+        except Exception:
+            pass
     return None
 
 
-def _find_by_text_tag(page, lp):
+_ELEMENT_HIT_SELF_OR_DESCENDANT_JS = (
+    "(node0, [px, py]) => { "
+    "  const hit = document.elementFromPoint(px, py); "
+    "  if (!hit) return false; "
+    "  return (hit === node0) || node0.contains(hit); "
+    "}"
+)
+
+
+def _element_hit_testable(el):
+    """True only if document.elementFromPoint() at el's own bounding-box
+    center resolves to el itself or one of el's own descendants (an icon/
+    text span nested inside a button, say) - never an unrelated ancestor
+    or a completely separate overlapping element. Used both by the
+    nested-duplicate text-match collapse below and the generic pre-
+    dispatch target-verification gate in resolve_and_act (see
+    _verify_resolved_target). Never raises; an unmeasurable element (no
+    box) or a failed evaluate is treated as NOT hit-testable - this check
+    exists specifically to require positive proof, not to give the
+    benefit of the doubt.
+    """
+    try:
+        box = el.bounding_box()
+    except Exception:
+        return False
+    if not box or not box.get("width") or not box.get("height"):
+        return False
+    cx = box["x"] + box["width"] / 2
+    cy = box["y"] + box["height"] / 2
+    try:
+        return bool(el.evaluate(_ELEMENT_HIT_SELF_OR_DESCENDANT_JS, [cx, cy]))
+    except Exception:
+        return False
+
+
+def _handle_contains(a_handle, b_handle):
+    try:
+        return bool(a_handle.evaluate("(e, other) => e.contains(other)", b_handle))
+    except Exception:
+        return False
+
+
+def _collapse_nested_text_matches(loc, exact_idx):
+    """See _find_by_text_tag: several elements whose own trimmed inner
+    text all exactly equal the recorded text are not necessarily
+    genuinely separate/ambiguous candidates - the common real-world shape
+    is one clickable container (a button) that also contains, as its only
+    content, a nested element whose own innerText is identical (the
+    button's own label span). When every candidate nests inside exactly
+    one other candidate that contains ALL the others (a single ancestor
+    -> descendant chain, confirmed via native DOM .contains()), this
+    returns the OUTERMOST one - provided it is itself genuinely hit-
+    testable at its own center (see _element_hit_testable) - since that
+    is the real, clickable target a person would have clicked. Returns
+    None (leaving the caller's existing ambiguous-match handling in
+    charge) for two or more GENUINELY separate matches, or when the
+    outermost candidate isn't safely hit-testable.
+    """
+    handles = []
+    for i in exact_idx:
+        try:
+            h = loc.nth(i).element_handle()
+        except Exception:
+            h = None
+        if h is None:
+            return None
+        handles.append(h)
+
+    outer_idx = None
+    for a in range(len(handles)):
+        if all(a == b or _handle_contains(handles[a], handles[b]) for b in range(len(handles))):
+            outer_idx = a
+            break
+    if outer_idx is None:
+        return None
+
+    outer_el = loc.nth(exact_idx[outer_idx])
+    if not _element_hit_testable(outer_el):
+        return None
+    return outer_el
+
+
+def _find_by_text_tag(page, lp, hover_chain_els=None, recorded_box=None):
     # exact, whole-trimmed-text match against each candidate's own text -
     # Playwright's has_text (substring match anywhere in the subtree) is
     # too permissive for short/generic labels ("8", "1", "OK") common to
@@ -1142,6 +1326,20 @@ def _find_by_text_tag(page, lp):
         except Exception:
             return None
 
+    # NESTED-DUPLICATE COLLAPSE (root-cause fix, intermittent Sportzia OTP
+    # flow): several exact-text matches are not necessarily genuinely
+    # separate/ambiguous candidates - a clickable container that also
+    # contains, as its only content, a nested element whose own innerText
+    # happens to be identical (a button's own label span, say) produces
+    # exactly this shape on any site. When every match nests inside one
+    # match that contains all the others, they describe the SAME real
+    # target - handled first, before the "genuinely separate" ambiguity
+    # handling below, which still applies to matches that DON'T form a
+    # single chain.
+    collapsed = _collapse_nested_text_matches(loc, exact_idx)
+    if collapsed is not None:
+        return collapsed
+
     # longer, non-weak text isn't immune to the same ambiguity - a label
     # repeated identically across many like items on any site (a
     # "Register Now"/"Add to Cart"/"View Details" button on every card in
@@ -1155,13 +1353,25 @@ def _find_by_text_tag(page, lp):
     # THIS click, the same way a person would tell the candidates apart -
     # an href identifies one specific link among several identically-
     # labeled ones; the exact recorded css_path identifies one specific
-    # structural position. Only trust a match found this way; if neither
-    # signal exists or neither resolves to one of these candidates, admit
-    # this tier can't tell them apart rather than guess, and let the
-    # search continue to css_path/xpath below instead of reporting a
-    # confident but potentially wrong success.
+    # structural position.
     candidate = _disambiguate_exact_text_matches(page, loc, exact_idx, lp)
-    return candidate
+    if candidate is not None:
+        return candidate
+
+    # FIX 2 items 1+2: href/css_path couldn't single one out either -
+    # rather than admit defeat immediately (the old behavior: fall
+    # through to css_path/xpath below, which a Sort-by/filter dropdown's
+    # own OPTIONS commonly have none of at all, since they're the exact
+    # same repeated markup shape across every option), score the
+    # candidates instead - see _score_candidates_and_pick's own
+    # docstring for exactly what "score" means and why. Only returns a
+    # real candidate when one clearly clears the threshold; otherwise
+    # this is exactly as before - the search continues to css_path/xpath.
+    return _score_candidates_and_pick(
+        page, loc, exact_idx, lp,
+        hover_chain_els=hover_chain_els, recorded_box=recorded_box,
+        label="text+tag",
+    )
 
 
 def _disambiguate_exact_text_matches(page, loc, exact_idx, lp):
@@ -1210,6 +1420,254 @@ def _disambiguate_exact_text_matches(page, loc, exact_idx, lp):
             pass
 
     return None
+
+
+CANDIDATE_SCORE_THRESHOLD = 50
+
+
+# RC4 (real DOM evidence for the future): every candidate
+# _score_candidates_and_pick considered for the CURRENT step, so a step
+# that ultimately fails can report exactly what was there to choose from
+# (outerHTML + score + why) instead of just "not found". Cleared at the
+# top of each step's own loop iteration (see the main per-step loop in
+# run()), so it only ever reflects the step currently being resolved.
+_LAST_CANDIDATE_DIAGNOSTICS = []
+
+# same size-capping philosophy as action_capture.js's own DOM_CONTEXT_MAX_
+# BYTES (RC4's recorder-side counterpart) - a candidate's outerHTML can be
+# huge on a real page; this is forensic evidence for a report, not a full
+# page dump.
+_CANDIDATE_DIAGNOSTIC_HTML_MAX = 2000
+
+
+def _live_container_path(el_handle):
+    """Live counterpart of action_capture.js's own container-path builder
+    (see _buildDisambiguationContext) - up to 3 ancestor levels, tag +
+    id/class summary. Used only as an extra _score_candidates_and_pick
+    signal (FIX 2, item 3) against the recorded disambiguation.
+    container_path; never used for resolution itself."""
+    try:
+        return el_handle.evaluate("""e => {
+            var path = [];
+            var node = e.parentElement;
+            for (var i = 0; i < 3 && node; i++) {
+                var desc = (node.tagName || '').toLowerCase();
+                if (node.id) {
+                    desc += '#' + node.id;
+                } else if (node.className && typeof node.className === 'string' && node.className.trim()) {
+                    desc += '.' + node.className.trim().split(/\\s+/).join('.');
+                }
+                path.push(desc);
+                node = node.parentElement;
+            }
+            return path;
+        }""")
+    except Exception:
+        return None
+
+
+def _live_same_text_sibling_index(el_handle):
+    """Live counterpart of action_capture.js's own same-text-sibling-index
+    calculation - see _buildDisambiguationContext's own docstring for
+    what this measures and why. Extra scoring signal only (FIX 2, item 3)."""
+    try:
+        return el_handle.evaluate("""e => {
+            var scope = (e.parentElement && e.parentElement.parentElement) || document;
+            var ownText = (e.textContent || '').trim();
+            var candidates = Array.prototype.filter.call(
+                scope.getElementsByTagName(e.tagName),
+                function (c) { return (c.textContent || '').trim() === ownText; }
+            );
+            return { index: candidates.indexOf(e), total: candidates.length };
+        }""")
+    except Exception:
+        return None
+
+
+def _score_candidates_and_pick(page, loc, indices, lp, hover_chain_els=None, recorded_box=None, label="candidate"):
+    """FIX 2 items 1+2: when a tier's own exact-match/href/css_path
+    disambiguation still leaves more than one genuinely separate
+    candidate (several elements that all match equally well by every
+    signal a tier normally checks), score them instead of giving up -
+    keeps this file's existing tier ORDER completely unchanged; this
+    only replaces "ambiguous -> fail this tier" with "ambiguous -> pick
+    the best-scored one, if any clears a real bar" for tiers that opt
+    into it.
+
+    Signals (never site-specific - the same five checks on any site):
+    - effective visibility, AFTER giving each non-visible candidate a
+      real chance via the SAME ancestor/sibling hover-reveal safety net
+      _verify_resolved_target already uses for a single candidate (this
+      is what makes it work for an OLD recording with no hover_chain at
+      all - the exact gap Step 3's "4 candidates, all not visible" was
+      falling into, since only ONE candidate ever got that chance
+      before).
+    - exact (or case-insensitive) recorded text match against the
+      candidate's own live text.
+    - overlap between the recorded STRONG_ATTRS values and the
+      candidate's own live attributes.
+    - whether the candidate sits inside an element THIS step's own
+      hover_chain just revealed (see resolve_and_act's _hover_chain_els).
+    - proximity between the candidate's live bounding box and the
+      recorded one (a soft tie-breaker only - scroll/layout drift since
+      recording means this alone is never trusted as a hard signal).
+    - FIX 2 (locator stability, additive only): when the recorded
+      locator_profile carries a disambiguation report (action_capture.js's
+      _scheduleLocatorStabilityCheck, ~300ms after capture - see its own
+      docstring), how well each candidate's own LIVE container path and
+      same-text-sibling-index match the recorded ones, plus a small
+      overall-confidence bonus when the live ambiguity count still matches
+      what match_count recorded. Absent entirely on any recording made
+      before this existed, or when the recorded locator was never
+      ambiguous at capture time - every existing signal above and the
+      threshold/tier order are completely unaffected either way.
+
+    Every candidate's own score is printed (see CANDIDATE_SCORE_
+    THRESHOLD) so a real run's log always shows why one candidate won
+    over the others. Returns None (this tier still reports "not found",
+    exactly as before this existed) when no candidate clears the
+    threshold - never a low-confidence guess.
+    """
+    hover_chain_els = hover_chain_els or []
+    attrs = lp.get("attributes") or {}
+    recorded_text = _strip_icon_font_text((lp.get("text") or lp.get("element_text") or "")).strip()
+    scored = []
+    for i in indices:
+        try:
+            cand = loc.nth(i)
+            el_handle = cand.element_handle(timeout=1000)
+        except Exception:
+            el_handle = None
+        if el_handle is None:
+            continue
+        score = 0.0
+        reasons = []
+        try:
+            visible = cand.is_visible()
+        except Exception:
+            visible = False
+        if not visible:
+            try:
+                if _reveal_via_ancestor_hover(page, cand):
+                    visible = cand.is_visible()
+            except Exception:
+                pass
+        if visible:
+            score += 50
+            reasons.append("visible+50")
+        try:
+            live_text = _strip_icon_font_text(cand.inner_text(timeout=500) or "").strip()
+        except Exception:
+            live_text = ""
+        if recorded_text and live_text == recorded_text:
+            score += 20
+            reasons.append("exact-text+20")
+        elif recorded_text and live_text.lower() == recorded_text.lower():
+            score += 10
+            reasons.append("ci-text+10")
+        try:
+            live_attrs = el_handle.evaluate(
+                "e => { const o = {}; for (const a of e.attributes) { o[a.name] = a.value; } return o; }"
+            )
+        except Exception:
+            live_attrs = {}
+        matched_attrs = sum(1 for k, v in attrs.items() if v and live_attrs.get(k) == v)
+        if matched_attrs:
+            attr_score = min(15, matched_attrs * 5)
+            score += attr_score
+            reasons.append(f"attrs+{attr_score}")
+        if hover_chain_els:
+            inside_chain = False
+            for chain_el in hover_chain_els:
+                try:
+                    if chain_el.evaluate("(e, other) => e.contains(other)", el_handle):
+                        inside_chain = True
+                        break
+                except Exception:
+                    continue
+            if inside_chain:
+                score += 25
+                reasons.append("in-hover-chain+25")
+        if recorded_box and recorded_box.get("x") is not None and recorded_box.get("width"):
+            try:
+                live_box = cand.bounding_box()
+            except Exception:
+                live_box = None
+            if live_box and live_box.get("width"):
+                rcx = recorded_box["x"] + recorded_box.get("width", 0) / 2
+                rcy = recorded_box["y"] + recorded_box.get("height", 0) / 2
+                lcx = live_box["x"] + live_box["width"] / 2
+                lcy = live_box["y"] + live_box["height"] / 2
+                dist = ((rcx - lcx) ** 2 + (rcy - lcy) ** 2) ** 0.5
+                proximity_score = max(0.0, 10.0 - dist / 50.0)
+                if proximity_score:
+                    score += proximity_score
+                    reasons.append(f"proximity+{proximity_score:.1f}")
+
+        # FIX 2 (locator stability, additive only) - see this function's
+        # own docstring above for what these compare against and why.
+        disambiguation = lp.get("disambiguation")
+        if disambiguation:
+            rec_path = disambiguation.get("container_path") or []
+            live_path = _live_container_path(el_handle)
+            if rec_path and live_path:
+                matched_levels = sum(1 for a, b in zip(rec_path, live_path) if a == b)
+                if matched_levels:
+                    path_score = min(15, matched_levels * 5)
+                    score += path_score
+                    reasons.append(f"container-path+{path_score}")
+
+            rec_idx = disambiguation.get("same_text_sibling_index")
+            if rec_idx is not None and rec_idx >= 0:
+                live_sibling = _live_same_text_sibling_index(el_handle)
+                if live_sibling and live_sibling.get("index") == rec_idx:
+                    score += 15
+                    reasons.append("same-text-sibling-index+15")
+
+        match_count = lp.get("match_count")
+        if match_count and len(indices) in match_count.values():
+            # the live ambiguity (how many candidates this SAME tier
+            # found just now) matches what was recorded at capture time -
+            # a small overall-confidence bonus that this is genuinely the
+            # same kind of ambiguous situation the disambiguation context
+            # above was captured for, not an unrelated one. Applied
+            # equally to every candidate in this set (it says nothing
+            # about telling them apart from EACH OTHER - the per-candidate
+            # signals above do that), so it only ever helps a plausible
+            # set clear CANDIDATE_SCORE_THRESHOLD, never re-ranks anyone.
+            score += 5
+            reasons.append("match-count-consistent+5")
+
+        scored.append((score, i))
+        print(f"[candidate-score] {label} #{i}: score={score:.1f} ({', '.join(reasons) or 'no signals'})")
+        try:
+            outer_html = el_handle.evaluate("e => e.outerHTML") or ""
+        except Exception:
+            outer_html = ""
+        if len(outer_html) > _CANDIDATE_DIAGNOSTIC_HTML_MAX:
+            outer_html = outer_html[:_CANDIDATE_DIAGNOSTIC_HTML_MAX] + "...[truncated]"
+        _LAST_CANDIDATE_DIAGNOSTICS.append({
+            "index": i,
+            "score": round(score, 1),
+            "reasons": reasons,
+            "visible": visible,
+            "outer_html": outer_html,
+        })
+
+    if not scored:
+        return None
+    scored.sort(key=lambda t: -t[0])
+    best_score, best_i = scored[0]
+    if best_score < CANDIDATE_SCORE_THRESHOLD:
+        print(
+            f"[candidate-score] {label}: best score {best_score:.1f} is below "
+            f"threshold {CANDIDATE_SCORE_THRESHOLD} - treating as unresolved rather than guessing"
+        )
+        return None
+    try:
+        return loc.nth(best_i)
+    except Exception:
+        return None
 
 
 def _find_by_value_text(page, lp, value, action_type):
@@ -1276,14 +1734,57 @@ def _structural_match_conflicts_with_recorded_href(candidate, page, recorded_hre
     return recorded_key is not None and live_key is not None and recorded_key != live_key
 
 
+def _pick_unambiguous_by_text(loc, count, lp):
+    """Shared by _find_by_css/_find_by_xpath (root-cause fix, intermittent
+    Sportzia OTP flow): when a structural selector (css_path/xpath)
+    matches more than one element on the live page, that ambiguity is
+    only ever resolved by an independent identity signal, never by
+    position (.first/.last) alone - the recorded selector's own DOM
+    structure has drifted since recording (a common real cause is a
+    bare, unqualified final segment like "> div" that matched a unique
+    child at record time but now has several structurally-identical
+    siblings; CONFIRMED against a real recorded session: the recorded
+    css_path for a "Send OTP" button matched 5 elements live, and its
+    OWN first match was an unrelated icon). Returns the single match
+    whose own text is consistent with the recorded text (see
+    _strip_icon_font_text - an icon-font glyph never counts as a match),
+    or None when zero or more than one candidate qualifies - several
+    qualifying matches are just as unresolvable as none.
+    """
+    recorded_text = _strip_icon_font_text((lp.get("text") or lp.get("element_text") or "")).strip()
+    if not recorded_text:
+        return None
+    matches = []
+    for i in range(count):
+        try:
+            cand = loc.nth(i)
+            live_text = _strip_icon_font_text(cand.inner_text(timeout=1000) or "").strip()
+        except Exception:
+            continue
+        if not live_text:
+            continue
+        r, l = recorded_text.lower(), live_text.lower()
+        if r in l or l in r:
+            matches.append(cand)
+    if len(matches) == 1:
+        return matches[0]
+    return None
+
+
 def _find_by_css(page, lp):
     if not lp.get("css_path"):
         return None
     try:
         c = page.locator(lp["css_path"])
-        if c.count() == 0:
+        count = c.count()
+        if count == 0:
             return None
-        candidate = c.first
+        if count == 1:
+            candidate = c.first
+        else:
+            candidate = _pick_unambiguous_by_text(c, count, lp)
+            if candidate is None:
+                return None
         if _structural_match_conflicts_with_recorded_href(candidate, page, lp.get("href")):
             return None
         return candidate
@@ -1296,14 +1797,98 @@ def _find_by_xpath(page, lp):
         return None
     try:
         c = page.locator("xpath=" + lp["xpath"])
-        if c.count() == 0:
+        count = c.count()
+        if count == 0:
             return None
-        candidate = c.first
+        if count == 1:
+            candidate = c.first
+        else:
+            candidate = _pick_unambiguous_by_text(c, count, lp)
+            if candidate is None:
+                return None
         if _structural_match_conflicts_with_recorded_href(candidate, page, lp.get("href")):
             return None
         return candidate
     except Exception:
         return None
+
+
+def _find_by_image_ancestor_or_title(page, lp):
+    """FIX 3 (SPA not settled before click): for a recorded <img> target
+    with alt text (a common card/banner pattern - "Banner for X" on any
+    listing page), tries the nearest clickable ancestor (a/button/
+    role="button"/onclick) of a live <img> whose alt text matches,
+    BEFORE ever falling through to position_fallback/css_path/xpath/the
+    raw-coordinate bounding_box last resort. A card's own wrapper link/
+    button is a far more stable target than the raw image itself, whose
+    underlying resource may still be loading (still attached and
+    scrollable-into-view either way, so even the bare-image fallback
+    below is safe to click).
+
+    Purely generic: alt-text equality plus tag/role/onclick, never a
+    site-specific selector or class name. Returns None when this
+    recorded target isn't an <img>, has no alt/aria-label/text to match,
+    or no live image matches it at all.
+    """
+    tag = (lp.get("tag") or "").lower()
+    if tag != "img":
+        return None
+    attrs = lp.get("attributes") or {}
+    alt_text = (
+        attrs.get("alt") or lp.get("aria_label") or lp.get("text") or lp.get("element_text") or ""
+    ).strip()
+    if not alt_text:
+        return None
+    # neither XPath string literals nor CSS attribute selectors support
+    # backslash-escaping an embedded quote - pick whichever quote
+    # character isn't itself present in the value, and skip entirely
+    # (rather than build a malformed/unsafe selector) on the rare value
+    # that contains both.
+    if chr(34) in alt_text and chr(39) in alt_text:
+        return None
+    q = chr(39) if chr(34) in alt_text else chr(34)
+
+    img_loc = None
+    try:
+        _candidate_img = page.locator("img[alt=" + q + alt_text + q + "]")
+        if _candidate_img.count() > 0:
+            img_loc = _candidate_img.first
+    except Exception:
+        pass
+
+    try:
+        ancestor_loc = page.locator(
+            "xpath=//img[@alt=" + q + alt_text + q + "]/ancestor::*"
+            "[self::a or self::button or @role=" + q + "button" + q + " or @onclick][1]"
+        )
+        if ancestor_loc.count() > 0:
+            ancestor_first = ancestor_loc.first
+            # skip an ancestor whose own box is disproportionately larger
+            # than the image's - a real card wrapper is close to the
+            # image's own size (plus a title/price row); an ancestor this
+            # much bigger is more likely the whole section/page container
+            # matching the XPath's own broad "closest a/button" search
+            # too loosely, and clicking IT could land anywhere.
+            _skip_too_big = False
+            if img_loc is not None:
+                try:
+                    img_box = img_loc.bounding_box()
+                    anc_box = ancestor_first.bounding_box()
+                    if img_box and anc_box and img_box.get("width") and img_box.get("height"):
+                        img_area = img_box["width"] * img_box["height"]
+                        anc_area = (anc_box.get("width") or 0) * (anc_box.get("height") or 0)
+                        if img_area > 0 and anc_area > 4 * img_area:
+                            _skip_too_big = True
+                except Exception:
+                    pass
+            if not _skip_too_big:
+                return ancestor_first
+    except Exception:
+        pass
+
+    if img_loc is not None:
+        return img_loc
+    return None
 
 
 def _parse_nth_of_type(segment):
@@ -1322,6 +1907,150 @@ def _parse_nth_of_type(segment):
     if not (tag and num_str.isdigit()):
         return None
     return tag, int(num_str)
+
+
+def _dispatch_in_frame(page, step):
+    """FIX 6 (iframe/frame tracking - Razorpay's checkout is a cross-
+    origin iframe): for a step recorded with frame info (action["frame"],
+    set by record_session.py's _describe_frame - a parent_iframe_src plus
+    the frame's own URL), resolves and dispatches directly against that
+    SPECIFIC frame via page.frame_locator(), matched by the iframe's src
+    HOST (not the full src, which commonly carries per-session tokens
+    that differ between record and replay). Waits for a matching iframe
+    to actually attach first (bounded, non-fatal on timeout).
+
+    A deliberately separate, narrower path from the main tier chain
+    (which has no frame-awareness at all and only ever searches the top-
+    level document) - tries just the recorded id/text/css_path/xpath
+    signals, in that priority order, inside the matched frame, then
+    applies the SAME _verify_resolved_target gate every other dispatch
+    already goes through before ever clicking. Returns (strategy, found,
+    ok, err), the same shape resolve_and_act returns.
+    """
+    frame_info = step.get("frame") or {}
+    iframe_src = frame_info.get("parent_iframe_src")
+    frame_url = frame_info.get("frame_url")
+    lp = step.get("locator_profile") or {}
+    action_type = step.get("action_type")
+
+    frame_loc = None
+
+    if iframe_src:
+        try:
+            iframe_host = urlsplit(iframe_src).netloc
+        except Exception:
+            iframe_host = None
+        if iframe_host:
+            deadline = time.monotonic() + 10.0
+            iframe_css = f'iframe[src*="{iframe_host}"]'
+            while time.monotonic() < deadline:
+                try:
+                    if page.locator(iframe_css).count() > 0:
+                        frame_loc = page.frame_locator(iframe_css).first
+                        break
+                except Exception:
+                    pass
+                try:
+                    page.wait_for_timeout(300)
+                except Exception:
+                    break
+
+    if frame_loc is None and frame_url:
+        # FIX 6: parent_iframe_src can legitimately be empty (a same-
+        # origin iframe with no explicit src set directly, a srcdoc
+        # frame, etc.) - fall back to matching one of the page's OWN live
+        # frames (page.frames) by comparing the recorded frame's own URL
+        # host against each live frame's CURRENT URL host. A real
+        # Playwright Frame object supports the same .locator()/
+        # .get_by_text() calls used below as a FrameLocator does, so the
+        # rest of this function needs no special-casing for which path
+        # matched. Waits for a matching frame to actually show up,
+        # bounded, non-fatal.
+        try:
+            target_host = urlsplit(frame_url).netloc
+        except Exception:
+            target_host = None
+        if target_host:
+            deadline = time.monotonic() + 10.0
+            while frame_loc is None and time.monotonic() < deadline:
+                try:
+                    for fr in page.frames:
+                        try:
+                            if urlsplit(fr.url).netloc == target_host:
+                                frame_loc = fr
+                                break
+                        except Exception:
+                            continue
+                except Exception:
+                    pass
+                if frame_loc is not None:
+                    break
+                try:
+                    page.wait_for_timeout(300)
+                except Exception:
+                    break
+
+    if frame_loc is None:
+        return None, False, False, (
+            f"no frame matched (parent_iframe_src={iframe_src!r}, frame_url={frame_url!r})"
+        )
+
+    el, strategy = None, None
+    recorded_id = lp.get("id")
+    if recorded_id:
+        try:
+            sel = recorded_id if recorded_id.startswith("#") else f"#{recorded_id}"
+            cand = frame_loc.locator(sel)
+            if cand.count() > 0:
+                el, strategy = cand.first, "id"
+        except Exception:
+            pass
+    if el is None:
+        text = (lp.get("text") or "").strip()
+        if text:
+            try:
+                cand = frame_loc.get_by_text(text, exact=True)
+                if cand.count() > 0:
+                    el, strategy = cand.first, "text"
+            except Exception:
+                pass
+    if el is None and lp.get("css_path"):
+        try:
+            cand = frame_loc.locator(lp["css_path"])
+            if cand.count() > 0:
+                el, strategy = cand.first, "css_path"
+        except Exception:
+            pass
+    if el is None and lp.get("xpath"):
+        try:
+            cand = frame_loc.locator(f'xpath={lp["xpath"]}')
+            if cand.count() > 0:
+                el, strategy = cand.first, "xpath"
+        except Exception:
+            pass
+
+    if el is None:
+        return "frame_locator", False, False, (
+            f"none of id/text/css_path/xpath resolved inside the matched iframe (host={iframe_host!r})"
+        )
+
+    try:
+        tv_ok, tv_reason = _verify_resolved_target(page, el, lp)
+        if not tv_ok:
+            return strategy, True, False, f"in-frame target-verify rejected: {tv_reason}"
+        if action_type == "check":
+            el.click(timeout=5000, force=True)
+        elif action_type == "dblclick":
+            el.dblclick(timeout=5000)
+        elif action_type == "right_click":
+            el.click(timeout=5000, button="right")
+        elif action_type == "hover":
+            el.hover(timeout=5000)
+        else:
+            el.click(timeout=5000)
+        return strategy, True, True, None
+    except Exception as e:
+        return strategy, True, False, f"in-frame dispatch failed: {e}"
 
 
 def _find_by_position(page, lp, info=None):
@@ -1512,6 +2241,341 @@ def _find_alternate_clickable(el):
         return None
 
 
+# ============================================================
+# CLICK-EFFECT DETECTION - root-cause fix for the intermittent Sportzia
+# OTP-flow failure (and generically, any site where a click's real
+# effect is merely SLOW, not absent). The click-no-effect retry used to
+# conclude "no effect" from a single DOM-fingerprint comparison after
+# one FIXED 400ms wait (CLICK_NO_EFFECT_WAIT_MS, now unused elsewhere -
+# kept only so any external reference to it doesn't NameError). A real
+# async click (a backend call that sends an OTP, validates a phone
+# number, etc.) can easily take longer than 400ms to produce any
+# visible change, and a plain element-count/class/style fingerprint can
+# also completely miss a same-element, text-only re-render (a button
+# whose own label just changed, nothing else) - either gap made this
+# conclude "nothing happened" while a real effect was still in flight,
+# then fire a real, unwanted second click. CONFIRMED via a live harness
+# reproduction (tests/otp_race_harness.py) against the real Sportzia
+# site under artificial response delay: a "Send OTP" click reported
+# success while the site's own UI never advanced.
+#
+# Used by both the "click" action's own no-effect retry AND the
+# "check" action's non-native force-click path (see each call site's
+# own comment) - the SAME underlying dispatch (a real .click()) reached
+# through two different recorded action_type labels, so both need the
+# same protection; never site- or text-specific.
+# ============================================================
+
+# how long, and how often, _check_click_had_effect below polls for ANY
+# of several generic effect signals (DOM mutation, URL/navigation
+# change, a new tab/page, a network request starting, the target
+# becoming detached/hidden/disabled/aria-busy, or focus moving) before
+# concluding "nothing happened" - polling stops the INSTANT any signal
+# fires, so a fast, genuinely-real effect is never artificially
+# delayed; only the rare "truly nothing happened" case pays the full
+# window.
+CLICK_EFFECT_OBSERVE_TIMEOUT_S = 2.0
+CLICK_EFFECT_OBSERVE_POLL_MS = 100
+# once a network request is seen (conclusive on its own - see above),
+# how long to additionally wait for it to actually FINISH before
+# reporting the step's own success, bounded so a request that never
+# resolves can't hang the step forever
+CLICK_EFFECT_REQUEST_WAIT_TIMEOUT_S = 5.0
+# how long the new enabled-gate (before any check-action force-click,
+# or force=True fallback) waits for a visually-disabled target to
+# become enabled, before failing the step outright instead of ever
+# force-clicking it
+ENABLED_GATE_TIMEOUT_S = 5.0
+ENABLED_GATE_POLL_MS = 150
+
+_EFFECT_MUTATION_ARM_JS = """
+() => {
+    try {
+        if (window.__afqaEffectObserver) { window.__afqaEffectObserver.disconnect(); }
+        window.__afqaEffectMutationCount = 0;
+        window.__afqaEffectObserver = new MutationObserver((muts) => {
+            window.__afqaEffectMutationCount = (window.__afqaEffectMutationCount || 0) + muts.length;
+        });
+        window.__afqaEffectObserver.observe(document.documentElement, {
+            childList: true, subtree: true, attributes: true
+        });
+    } catch (e) {}
+}
+"""
+
+_EFFECT_MUTATION_READ_JS = "() => window.__afqaEffectMutationCount || 0"
+
+_EFFECT_MUTATION_DISARM_JS = """
+() => {
+    try {
+        if (window.__afqaEffectObserver) {
+            window.__afqaEffectObserver.disconnect();
+            window.__afqaEffectObserver = null;
+        }
+    } catch (e) {}
+}
+"""
+
+_EFFECT_FOCUS_ARM_JS = "() => { window.__afqaEffectPrevActive = document.activeElement; }"
+_EFFECT_FOCUS_CHANGED_JS = "() => document.activeElement !== window.__afqaEffectPrevActive"
+
+
+def _describe_target_state(el):
+    """Generic, content-agnostic snapshot of el's own attached/visible/
+    disabled/aria-busy state - used by the click-effect detector below
+    to tell "the target itself changed as a result of the click"
+    (detached, hidden, newly disabled, newly aria-busy) apart from
+    "nothing happened at all", and by the enabled-gate to tell a
+    genuinely disabled target from an enabled one. Never raises; a
+    failure here (most commonly because el is now detached) reads as
+    not-connected/not-visible, the safer default for both callers.
+    """
+    try:
+        return el.evaluate(
+            "e => ({ "
+            "connected: e.isConnected, "
+            "visible: !!(e.getClientRects && e.getClientRects().length), "
+            "disabled: !!e.disabled, "
+            "ariaDisabled: e.getAttribute('aria-disabled'), "
+            "ariaBusy: e.getAttribute('aria-busy'), "
+            "pointerEvents: getComputedStyle(e).pointerEvents "
+            "})"
+        )
+    except Exception:
+        return {
+            "connected": False, "visible": False, "disabled": None,
+            "ariaDisabled": None, "ariaBusy": None, "pointerEvents": None,
+        }
+
+
+def _arm_click_effect_tracking(page, el):
+    """Installs generic tracking for "did the upcoming click have ANY
+    real effect": a MutationObserver on the whole document, a listener
+    for any network request that starts afterward (and whether each one
+    finishes), and a marker for the currently-focused element. Must be
+    called BEFORE the click fires. Returns a plain dict the caller
+    threads through _check_click_had_effect and
+    _disarm_click_effect_tracking; never raises - any one piece failing
+    to install just means that one signal never fires, the others still
+    work.
+    """
+    tracking = {"requests": [], "finished": set(), "listeners": []}
+
+    def _on_request(request):
+        tracking["requests"].append(request)
+
+    def _on_settled(request):
+        tracking["finished"].add(request)
+
+    try:
+        page.on("request", _on_request)
+        page.on("requestfinished", _on_settled)
+        page.on("requestfailed", _on_settled)
+        tracking["listeners"] = [
+            ("request", _on_request),
+            ("requestfinished", _on_settled),
+            ("requestfailed", _on_settled),
+        ]
+    except Exception:
+        pass
+    try:
+        page.evaluate(_EFFECT_MUTATION_ARM_JS)
+    except Exception:
+        pass
+    try:
+        el.evaluate(_EFFECT_FOCUS_ARM_JS)
+    except Exception:
+        pass
+    return tracking
+
+
+def _disarm_click_effect_tracking(page, tracking):
+    """Cleans up everything _arm_click_effect_tracking installed -
+    always safe to call, regardless of whether an effect was detected,
+    a retry fired, or anything raised in between. Never raises.
+    """
+    for event_name, handler in tracking.get("listeners") or []:
+        try:
+            page.remove_listener(event_name, handler)
+        except Exception:
+            pass
+    try:
+        page.evaluate(_EFFECT_MUTATION_DISARM_JS)
+    except Exception:
+        pass
+
+
+def _check_click_had_effect(page, el, tracking, url_before, page_count_before,
+                             timeout_s=CLICK_EFFECT_OBSERVE_TIMEOUT_S):
+    """Polls, condition-based (never a fixed wait), for up to timeout_s
+    for any generic sign the click just fired had a real effect: a DOM
+    mutation anywhere in the document, a URL change/navigation, a new
+    tab/page opening, a network request starting, the target itself
+    becoming detached/hidden/disabled/aria-busy, or focus moving away
+    from where it was. Exits the INSTANT any of these is observed - a
+    fast, obviously-real effect is never artificially delayed.
+
+    If a network request was seen, additionally waits (bounded by
+    CLICK_EFFECT_REQUEST_WAIT_TIMEOUT_S) for it to finish before
+    returning - a request STARTING is already conclusive on its own,
+    this extra wait only affects how long the step takes to report
+    success, never whether a retry fires.
+
+    Returns (had_effect: bool, reason: str or None). Never raises.
+    """
+    deadline = time.monotonic() + timeout_s
+    reason = None
+    while time.monotonic() < deadline:
+        if tracking["requests"]:
+            reason = f"{len(tracking['requests'])} network request(s) started"
+            break
+        try:
+            mutation_count = page.evaluate(_EFFECT_MUTATION_READ_JS)
+        except Exception:
+            mutation_count = 0
+        if mutation_count:
+            reason = f"{mutation_count} DOM mutation(s) observed"
+            break
+        try:
+            url_now = page.url
+        except Exception:
+            url_now = None
+        if url_before is not None and url_now is not None and url_now != url_before:
+            reason = f"URL changed ({url_before!r} -> {url_now!r})"
+            break
+        try:
+            page_count_now = len(page.context.pages)
+        except Exception:
+            page_count_now = None
+        if page_count_before is not None and page_count_now is not None and page_count_now > page_count_before:
+            reason = "a new tab/page opened"
+            break
+        state_now = _describe_target_state(el)
+        if not state_now["connected"]:
+            reason = "the target element became detached from the page"
+            break
+        if not state_now["visible"]:
+            reason = "the target element became hidden"
+            break
+        if state_now["disabled"]:
+            reason = "the target element became disabled"
+            break
+        if state_now["ariaDisabled"] == "true":
+            reason = "the target element's aria-disabled became true"
+            break
+        if state_now["ariaBusy"] == "true":
+            reason = "the target element's aria-busy became true"
+            break
+        try:
+            focus_moved = page.evaluate(_EFFECT_FOCUS_CHANGED_JS)
+        except Exception:
+            focus_moved = False
+        if focus_moved:
+            reason = "focus moved to a different element"
+            break
+        try:
+            page.wait_for_timeout(CLICK_EFFECT_OBSERVE_POLL_MS)
+        except Exception:
+            break
+
+    if reason is None:
+        return False, None
+
+    if tracking["requests"]:
+        _wait_deadline = time.monotonic() + CLICK_EFFECT_REQUEST_WAIT_TIMEOUT_S
+        while time.monotonic() < _wait_deadline:
+            if all(r in tracking["finished"] for r in tracking["requests"]):
+                break
+            try:
+                page.wait_for_timeout(CLICK_EFFECT_OBSERVE_POLL_MS)
+            except Exception:
+                break
+
+    return True, reason
+
+
+def _target_still_safe_for_retry(page, el, dom_fp_before, url_before):
+    """Right before actually firing the no-effect retry click - re-
+    confirms nothing has changed in the brief moment since the
+    observation window ended, so a real effect that lands in exactly
+    that gap can't still result in an unwanted second click. Returns
+    (safe, reason) - safe=True means proceed with the retry exactly as
+    before; safe=False means cancel it. Never raises.
+    """
+    try:
+        url_now = page.url
+    except Exception:
+        url_now = None
+    if url_before is not None and url_now is not None and url_now != url_before:
+        return False, f"page URL changed to {url_now!r} just before the retry"
+    state_now = _describe_target_state(el)
+    if not state_now["connected"]:
+        return False, "the original target is no longer attached to the page"
+    if not state_now["visible"]:
+        return False, "the original target is no longer visible"
+    fp_now = _capture_dom_change_fingerprint(el)
+    if dom_fp_before is not None and fp_now is not None and fp_now != dom_fp_before:
+        return False, "the page changed just before the retry"
+    return True, None
+
+
+def _wait_until_enabled(page, el, timeout_s=ENABLED_GATE_TIMEOUT_S):
+    """Condition-based (never a fixed sleep), bounded wait for el to
+    become enabled before a force-click ever dispatches - generic
+    signals only, no recorded text/site involved: no native `disabled`
+    property, aria-disabled != "true" on el OR its nearest ancestor
+    that itself looks clickable (role=button/onclick/cursor:pointer -
+    the same structural signature _find_alternate_clickable already
+    uses elsewhere in this file), and computed pointer-events != "none"
+    on el. Exits the instant the target looks enabled; never waits
+    longer than necessary. Returns (enabled: bool, reason: str or None)
+    - reason is only ever set on a timeout, for a clear failure message.
+    Never raises.
+    """
+    def _read():
+        try:
+            return el.evaluate(
+                "e => { "
+                "const isDisabledLike = (node) => { "
+                "  if (!node) return false; "
+                "  if (node.disabled) return true; "
+                "  if (node.getAttribute('aria-disabled') === 'true') return true; "
+                "  return false; "
+                "}; "
+                "let disabled = isDisabledLike(e); "
+                "if (!disabled) { "
+                "  let node = e.parentElement; "
+                "  let depth = 0; "
+                "  while (node && depth < 6 && !disabled) { "
+                "    const clickable = node.getAttribute('role') === 'button' "
+                "      || node.hasAttribute('onclick') "
+                "      || getComputedStyle(node).cursor === 'pointer'; "
+                "    if (clickable) { disabled = isDisabledLike(node); break; } "
+                "    node = node.parentElement; "
+                "    depth += 1; "
+                "  } "
+                "} "
+                "const pe = getComputedStyle(e).pointerEvents; "
+                "return { disabled: disabled || pe === 'none' }; "
+                "}"
+            )
+        except Exception:
+            return {"disabled": True}
+
+    deadline = time.monotonic() + timeout_s
+    state = _read()
+    while state.get("disabled") and time.monotonic() < deadline:
+        try:
+            page.wait_for_timeout(ENABLED_GATE_POLL_MS)
+        except Exception:
+            break
+        state = _read()
+
+    if state.get("disabled"):
+        return False, f"element stayed disabled for {timeout_s:.0f}s"
+    return True, None
+
+
 # see _do_fill's own docstring - how many verify-then-retry rounds to
 # attempt before giving up, and how long to wait after each attempt
 # before reading the input's displayed value back to check it
@@ -1609,10 +2673,34 @@ def _do_fill(page, el, value, turbo=False):
     )
 
 
+# FIX 2.f: soft per-step time budget - see resolve_and_act's own
+# docstring for exactly what this does and doesn't bound. Configurable
+# via env var for anyone who genuinely needs a slower/faster site's own
+# worst case covered differently; 15s matches the requested default.
+STEP_TIME_BUDGET_S = float(os.environ.get("AUTOFLOW_STEP_BUDGET_S", "15"))
+
+# FAILURE POLICY: default stop-on-first-FAILED-step (see the `elif not ok`
+# branch further down, in run()'s main per-step loop) - a step only ever
+# fails after already exhausting STEP_TIME_BUDGET_S's own internal tier/
+# strategy retries above, so this is genuinely "gave the step every
+# reasonable chance, then stop" rather than a hair-trigger abort. Same
+# env-var-configurable pattern as STEP_TIME_BUDGET_S: set
+# AUTOFLOW_STOP_ON_FAILURE=0 to fall back to the old recover-and-continue
+# behavior (every step still attempted regardless of earlier failures).
+STOP_ON_FAILURE = os.environ.get("AUTOFLOW_STOP_ON_FAILURE", "1").strip().lower() not in (
+    "0", "false", "no", "off",
+)
+
 # how many ancestor levels _reveal_via_ancestor_hover will try hovering,
 # nearest first, before giving up - bounds the worst case for a target
 # nested unusually deep inside a menu/panel structure
-HOVER_REVEAL_MAX_ANCESTOR_DEPTH = 6
+HOVER_REVEAL_MAX_ANCESTOR_DEPTH = 8
+# BUG 1: how many of each hovered ancestor's own visible SIBLINGS to also
+# try hovering (a mega-menu's real trigger - "MEN" - is commonly a
+# SIBLING of the revealed panel's own container under one shared parent,
+# not an ancestor of the target inside that panel at all - hovering only
+# ancestors can never reach it)
+HOVER_REVEAL_MAX_SIBLINGS = 12
 # per-ancestor hover timeout and the settle pause after each one, before
 # re-checking whether the target became visible
 HOVER_REVEAL_HOVER_TIMEOUT_MS = 2000
@@ -1623,19 +2711,34 @@ HOVER_REVEAL_SETTLE_MS = 150
 # wait - Playwright's own actionability check still applies regardless)
 BOUNDING_BOX_STABLE_SAMPLE_MS = 200
 BOUNDING_BOX_STABLE_MAX_ATTEMPTS = 5
-# how long to wait after a click before checking whether it produced any
-# observable effect at all (see _capture_dom_change_fingerprint /
-# _find_alternate_clickable) - long enough for an ordinary synchronous
-# UI reaction (a modal opening, a class toggling) to land, short enough
-# that this never meaningfully slows down a normal replay
+# CONTENT-DRIFT MARKER: prefixes an error message wherever resolution
+# hard-confirms the live page no longer matches what was recorded (an
+# exact href difference, or a different element sitting at the click
+# coordinate than the one resolved) - as opposed to an ordinary "not
+# found yet" style failure, which can be a timing issue and isn't
+# evidence the SITE ITSELF has changed. A plain, generic text marker
+# (never a site-specific value) so any caller - the main replay loop
+# here, or recorder/pick_element.py's own preceding-actions walk, which
+# reuses this exact same resolve_and_act - can tell the two failure
+# classes apart from the returned error string alone, without resolve_
+# and_act's return signature (used by many callers already) having to
+# change shape.
+_CONTENT_MISMATCH_MARKER = "[content-mismatch]"
+# see CLICK_EFFECT_OBSERVE_TIMEOUT_S's own comment (moved earlier in
+# this file, right before the click-effect-detection helpers that need
+# it as a default parameter value) for the full root-cause explanation.
 CLICK_NO_EFFECT_WAIT_MS = 400
 # how long/often _post_click_check polls for a DOM change after a
 # focus-identity mismatch, before accepting it as a genuine misclick -
 # see that function's own comment for the confirmed real slow-modal
 # case this covers. Polling (stop the instant a change appears) rather
 # than one fixed sleep keeps the fast, common case fast while still
-# tolerating a slower-mounting modal on the rare mismatch path.
-DOM_CHANGE_POLL_TIMEOUT_S = 1.5
+# tolerating a slower-mounting modal on the rare mismatch path. Bumped
+# from 1.5s to 5s as part of the same OTP-flow root-cause fix above -
+# a passing step is not slower (the poll still exits the instant a
+# change appears), only a genuinely-stuck step waits longer before
+# being declared a real failure.
+DOM_CHANGE_POLL_TIMEOUT_S = 5.0
 DOM_CHANGE_POLL_INTERVAL_MS = 250
 # see _wait_for_modal_target_visible's own stability requirement - how
 # long after a first visible+confirmed check to wait before re-checking
@@ -1776,10 +2879,120 @@ def _is_genuinely_interactable(el):
         # couldn't read computed style - trust is_visible() alone rather
         # than blocking a click over an inconclusive check
         pass
+    # SHARED "effective visibility" definition (recorder + replay): the
+    # final signal is whether a real click would actually land on el at
+    # all - document.elementFromPoint() at el's own box center resolving
+    # to el or one of its own descendants, which also transitively
+    # requires el's box to be genuinely within the current viewport
+    # (elementFromPoint returns whatever's really there at that
+    # viewport-relative point; a box positioned off-screen via a
+    # transform, or one truncated to nothing by an ancestor's own
+    # scroll/clip, can never satisfy this). See _element_hit_testable's
+    # own docstring.
+    if not _element_hit_testable(el):
+        return False
     return True
 
 
-def _reveal_via_ancestor_hover(page, el, max_depth=HOVER_REVEAL_MAX_ANCESTOR_DEPTH):
+def _hover_reveal_log(message, result=None, output_json_path=None):
+    """Always prints (terminal/stdout visibility for a headed run), and -
+    only when the caller has a live report.json to write to (the real
+    replay loop; Pick Element's own fast-forward walk passes neither,
+    so this is a no-op there) - also appends to result["live_log"] and
+    persists immediately, the same incremental-write pattern every other
+    per-step report.json update already uses, so the dashboard's Live
+    Log view can show it while replay is still running. Never raises;
+    a write failure here must never break the hover/click it's just
+    describing.
+    """
+    print(f"[hover-reveal] {message}")
+    if result is None or output_json_path is None:
+        return
+    try:
+        result.setdefault("live_log", []).append({"t": time.time(), "message": message})
+        _write_result(result, output_json_path)
+    except Exception:
+        pass
+
+
+def _scroll_and_check_viewport(page, el):
+    """Scrolls el into view, then verifies its own bounding box is
+    actually within the current viewport - re-scrolls and re-checks ONCE
+    more if the first attempt didn't land it there (a sticky header
+    covering part of the viewport, or a layout shift mid-scroll, are
+    both common real-world causes of a scroll_into_view_if_needed() that
+    technically succeeds while the target still isn't really visible on
+    screen). Returns (in_viewport, box) - box is None only when el
+    genuinely has no box at all (detached/display:none); in_viewport is
+    False whenever it couldn't be confirmed on-screen. Never raises.
+    """
+    def _read_box():
+        # a genuinely display:none/detached element (the COMMON case when
+        # this is called on el's own nearest ancestor - a mega-menu's
+        # revealed panel is very often the immediate parent of its own
+        # items) has NO box for scroll_into_view_if_needed to scroll
+        # toward at all - Playwright's own actionability wait wastes its
+        # FULL timeout finding that out. is_visible() is instant, so
+        # checking it FIRST skips straight to "no box" without paying
+        # that cost; a real, merely off-screen element (genuinely visible
+        # but needs scrolling) is completely unaffected and still gets
+        # its normal scroll_into_view_if_needed attempt.
+        try:
+            if not el.is_visible():
+                return None
+        except Exception:
+            return None
+        try:
+            el.scroll_into_view_if_needed(timeout=3000)
+        except Exception:
+            pass
+        try:
+            return el.bounding_box()
+        except Exception:
+            return None
+
+    def _in_viewport(box):
+        if not box or not box.get("width") or not box.get("height"):
+            return False
+        try:
+            vp = page.viewport_size
+            if not vp:
+                vp = page.evaluate("() => ({width: window.innerWidth, height: window.innerHeight})")
+        except Exception:
+            vp = None
+        if not vp:
+            return False
+        cx = box["x"] + box["width"] / 2
+        cy = box["y"] + box["height"] / 2
+        return 0 <= cx <= vp["width"] and 0 <= cy <= vp["height"]
+
+    box = _read_box()
+    in_view = _in_viewport(box)
+    if not in_view:
+        # one re-scroll-and-recheck, exactly once - never an unbounded loop
+        box = _read_box()
+        in_view = _in_viewport(box)
+    return in_view, box
+
+
+def _short_describe(el):
+    """Short, generic "tag + trimmed text" description of el for log
+    lines (e.g. "[hover-reveal] via <div 'MEN'>") - never raises, never
+    site-specific, just whatever tag/text el actually has right now.
+    """
+    try:
+        info = el.evaluate(
+            "e => ({ tag: e.tagName ? e.tagName.toLowerCase() : '?', "
+            "text: (e.innerText || e.textContent || '').trim().slice(0, 40) })"
+        )
+        tag = info.get("tag") or "?"
+        text = info.get("text") or ""
+        return f"<{tag} {text!r}>" if text else f"<{tag}>"
+    except Exception:
+        return "<element>"
+
+
+def _reveal_via_ancestor_hover(page, el, max_depth=HOVER_REVEAL_MAX_ANCESTOR_DEPTH, result=None, output_json_path=None):
     """If `el` isn't currently GENUINELY interactable (see
     _is_genuinely_interactable), tries hovering successive DOM ancestors
     of el - the NEAREST parent first, walking up - a generic proxy for
@@ -1797,6 +3010,12 @@ def _reveal_via_ancestor_hover(page, el, max_depth=HOVER_REVEAL_MAX_ANCESTOR_DEP
     ancestors have been tried, and always leaves el in whatever state it
     ends up in - the caller's own stability check and Playwright's own
     actionability check still apply on top of this regardless.
+
+    result/output_json_path (both optional) let this ALSO surface each
+    ancestor's own "Hover: element in viewport" check into the
+    dashboard's Live Log view while replay is running - see
+    _hover_reveal_log's own docstring; omitted entirely by every other
+    caller of this function, which keeps behaving exactly as before.
     """
     if _is_genuinely_interactable(el):
         return True
@@ -1807,30 +3026,283 @@ def _reveal_via_ancestor_hover(page, el, max_depth=HOVER_REVEAL_MAX_ANCESTOR_DEP
     except Exception:
         return False
 
-    for depth in range(1, min(max_depth, ancestor_count) + 1):
+    tried = min(max_depth, ancestor_count)
+    siblings_tried = 0
+    for depth in range(1, tried + 1):
         try:
             # ancestors is in document order (root first); the nearest
             # parent is the LAST entry, so depth counts backward from it
             ancestor = ancestors.nth(ancestor_count - depth)
-            ancestor.hover(timeout=HOVER_REVEAL_HOVER_TIMEOUT_MS)
         except Exception:
             continue
-        try:
-            page.wait_for_timeout(HOVER_REVEAL_SETTLE_MS)
-            if _is_genuinely_interactable(el):
-                logger.debug(
-                    "hover-reveal: target became interactable after "
-                    "hovering ancestor at depth %d", depth,
-                )
-                return True
-        except Exception:
-            pass
 
-    return _is_genuinely_interactable(el)
+        # BEFORE hovering: scroll the ancestor into view and verify its
+        # bounding box is actually inside the viewport, re-scrolling and
+        # re-checking once if not - see _scroll_and_check_viewport's own
+        # docstring. Logged either way (visible on both a "worked" and a
+        # "didn't" hover-reveal), so a real recorded flow can be checked
+        # step by step against what actually happened.
+        in_view, box = _scroll_and_check_viewport(page, ancestor)
+        box_desc = (
+            f"x={box['x']:.0f} y={box['y']:.0f} w={box['width']:.0f} h={box['height']:.0f}"
+            if box else "(no box)"
+        )
+        _hover_reveal_log(
+            f"Hover: element in viewport = {in_view} (ancestor depth {depth}/{tried}, bbox: {box_desc})",
+            result=result, output_json_path=output_json_path,
+        )
+
+        # no box at all (display:none/detached, per _scroll_and_check_
+        # viewport above) means there's no valid screen position to move
+        # a pointer to in the first place - skip straight to this
+        # ancestor's own siblings below rather than letting .hover()
+        # burn its own full timeout finding out the same thing again.
+        if box is None:
+            ancestor = None
+        else:
+            try:
+                ancestor.hover(timeout=HOVER_REVEAL_HOVER_TIMEOUT_MS)
+            except Exception:
+                ancestor = None
+        if ancestor is not None:
+            try:
+                # brief wait for the hover-triggered content (a mega-menu,
+                # a submenu) to actually render before checking/proceeding -
+                # same settle window this already used, just now logged
+                page.wait_for_timeout(HOVER_REVEAL_SETTLE_MS)
+                if _is_genuinely_interactable(el):
+                    logger.debug(
+                        "hover-reveal: target became interactable after "
+                        "hovering ancestor at depth %d", depth,
+                    )
+                    _hover_reveal_log(
+                        f"via {_short_describe(ancestor)} (ancestor depth {depth}/{tried})",
+                        result=result, output_json_path=output_json_path,
+                    )
+                    return True
+            except Exception:
+                pass
+
+        # BUG 1: the real trigger for a mega-menu is often a SIBLING of
+        # this ancestor (a shared-parent "MEN | WOMEN | KIDS" nav row,
+        # where the revealed panel and the trigger both sit one level
+        # under the same wrapper), never an ancestor OF the eventual
+        # target at all - hovering only ancestors can structurally never
+        # reach it. Tries this ancestor's own visible siblings next,
+        # bounded by a single GLOBAL cap (HOVER_REVEAL_MAX_SIBLINGS)
+        # across the whole call, not per-ancestor, so a wide row can
+        # never blow out the worst-case cost.
+        if siblings_tried >= HOVER_REVEAL_MAX_SIBLINGS:
+            continue
+        try:
+            siblings = ancestors.nth(ancestor_count - depth).locator(
+                "xpath=../*[not(self::script) and not(self::style)]"
+            )
+            sibling_count = siblings.count()
+        except Exception:
+            sibling_count = 0
+        for s_idx in range(sibling_count):
+            if siblings_tried >= HOVER_REVEAL_MAX_SIBLINGS:
+                break
+            try:
+                sib = siblings.nth(s_idx)
+                if not sib.is_visible():
+                    continue
+            except Exception:
+                continue
+            siblings_tried += 1
+            try:
+                sib.hover(timeout=HOVER_REVEAL_HOVER_TIMEOUT_MS)
+                page.wait_for_timeout(HOVER_REVEAL_SETTLE_MS)
+            except Exception:
+                continue
+            try:
+                if _is_genuinely_interactable(el):
+                    logger.debug(
+                        "hover-reveal: target became interactable after "
+                        "hovering a sibling of the ancestor at depth %d", depth,
+                    )
+                    _hover_reveal_log(
+                        f"via {_short_describe(sib)} (sibling of ancestor "
+                        f"depth {depth}/{tried}, {siblings_tried} sibling(s) tried)",
+                        result=result, output_json_path=output_json_path,
+                    )
+                    return True
+            except Exception:
+                pass
+
+    still_hidden = not _is_genuinely_interactable(el)
+    if still_hidden:
+        # matches this function's own existing contract: never raises,
+        # never blocks the caller - the click/step that needed this
+        # reveal still proceeds with whatever el's state actually is,
+        # exactly as before this change. Only new behavior is this one
+        # explicit warning line, so a "hover had no effect" case is
+        # visible instead of silently falling through.
+        _hover_reveal_log(
+            f"WARNING: no ancestor or sibling hover made the target "
+            f"interactable after trying {tried} ancestor(s) and "
+            f"{siblings_tried} sibling(s) - continuing anyway",
+            result=result, output_json_path=output_json_path,
+        )
+    return not still_hidden
 
 
 # how long to hold the mouse at the target before pressing down (lets a
 # real mouseenter/hover-triggered handler settle first) and how long to
+# ============================================================
+# OTP-STEP HANDLING - additive, scoped only to a recognized OTP fill
+# step and its immediate neighbors (see _detect_otp_flow_roles). Every
+# other step in any recording is completely unaffected: _otp_roles is
+# an empty dict unless a recording actually contains an OTP-shaped
+# step, and every check below is keyed off that dict.
+# ============================================================
+
+# how long replay waits for a human to submit a live OTP value via the
+# dashboard before giving up - generous (a real SMS/email can take a
+# while to arrive, plus time to read and type it), same "wait for a
+# human" order of magnitude as Pick Element's own PICK_TIMEOUT_S
+OTP_WAIT_TIMEOUT_S = 180
+OTP_WAIT_POLL_MS = 500
+
+
+def _otp_flow_log(message, result=None, output_json_path=None):
+    """Same pattern as _hover_reveal_log above - always prints, and also
+    appends to result["live_log"] (persisted immediately) when a live
+    report.json is available, so the dashboard's Live Log view shows it
+    while replay is still running. Never raises.
+    """
+    print(f"[otp] {message}")
+    if result is None or output_json_path is None:
+        return
+    try:
+        result.setdefault("live_log", []).append({"t": time.time(), "message": message})
+        _write_result(result, output_json_path)
+    except Exception:
+        pass
+
+
+def _looks_like_otp_fill_step(step, prev_step):
+    """Generic, non-hardcoded heuristic: a fill step whose own recorded
+    value is short (4-8 characters - the range real OTPs almost
+    universally fall into) and purely numeric, immediately preceded by
+    a step whose own recorded text/accessible_name mentions "otp" (an
+    "OTP-send"/"Resend OTP" button, say). Never anchored to any specific
+    site, exact button wording beyond the word "otp" itself, or field
+    structure - the same check would fire for any recording, on any
+    site, that has this exact shape.
+    """
+    if not step or step.get("action_type") != "fill":
+        return False
+    value = step.get("value")
+    if not isinstance(value, str) or not value.isdigit():
+        return False
+    if not (4 <= len(value) <= 8):
+        return False
+    if not prev_step:
+        return False
+    prev_lp = prev_step.get("locator_profile") or {}
+    prev_text = f"{prev_lp.get('text') or ''} {prev_lp.get('accessible_name') or ''}".lower()
+    return "otp" in prev_text
+
+
+def _detect_otp_flow_roles(steps):
+    """Scans the full recorded action list ONCE, before replay starts,
+    for the first OTP-shaped fill step (see _looks_like_otp_fill_step)
+    and labels it plus its immediate neighbors purely for the
+    dashboard's Live Log lines - the phone/mobile-entry fill just
+    before the send-otp click, the send-otp click itself, the OTP fill,
+    and the verify click right after it. Only the OTP fill step itself
+    ever gets different REPLAY treatment (see _wait_for_live_otp) -
+    labeling its neighbors never changes how THEY resolve or act, only
+    adds a plain-language Live Log line describing what's happening.
+
+    Returns {1-based step index: role string}; empty when no OTP-shaped
+    step exists anywhere in the recording (the overwhelmingly common
+    case), so this costs nothing and changes nothing for any other
+    recording.
+    """
+    roles = {}
+    for i, step in enumerate(steps, start=1):
+        prev_step = steps[i - 2] if i >= 2 else None
+        if _looks_like_otp_fill_step(step, prev_step):
+            roles[i] = "otp_fill"
+            roles[i - 1] = "send_otp"
+            if i >= 3:
+                roles.setdefault(i - 2, "phone_entry")
+            if i + 1 <= len(steps):
+                roles.setdefault(i + 1, "verify")
+            break  # only the first OTP-shaped sequence in a recording is treated this way
+    return roles
+
+
+def _wait_for_live_otp(page, result, output_json_path, run_dir, step_index, total_steps):
+    """Pauses replay and waits for a human to submit a live OTP value via
+    the dashboard (see app.py's /api/test/run/otp_submit route) - the
+    recorded OTP value is never reused here, since a real one-time code
+    is different on every run. Hands off through a plain marker file
+    (run_dir/otp_input.txt) that route writes to - the simplest possible
+    connection between this subprocess and the Flask app serving the
+    dashboard, since both sides already know run_dir independently (the
+    Flask side derives it from run_id the same way _prepare_run() does).
+
+    Sets/clears result["awaiting_otp"] so the dashboard can show a
+    prompt while genuinely waiting, and know to stop showing it either
+    way this ends. Returns the submitted value (stripped, never empty),
+    or None if nothing arrived within OTP_WAIT_TIMEOUT_S.
+    """
+    otp_file = run_dir / "otp_input.txt"
+    try:
+        if otp_file.exists():
+            otp_file.unlink()
+    except Exception:
+        pass
+
+    result["awaiting_otp"] = {
+        "step_index": step_index,
+        "total_steps": total_steps,
+        "message": "Enter OTP to continue",
+    }
+    _otp_flow_log(
+        f"Step {step_index}/{total_steps}: OTP field is ready - waiting for you to enter the OTP",
+        result=result, output_json_path=output_json_path,
+    )
+    print(f"[otp] waiting up to {OTP_WAIT_TIMEOUT_S}s for a live OTP value via the dashboard")
+
+    deadline = time.monotonic() + OTP_WAIT_TIMEOUT_S
+    value = None
+    while time.monotonic() < deadline:
+        try:
+            if otp_file.exists():
+                value = (otp_file.read_text(encoding="utf-8") or "").strip()
+                try:
+                    otp_file.unlink()
+                except Exception:
+                    pass
+                if value:
+                    break
+                value = None
+        except Exception:
+            pass
+        try:
+            # a real Playwright call (not a bare time.sleep()) for the
+            # same reason recorder/pick_element.py's own long human-wait
+            # loop uses page.wait_for_timeout() - see that module's own
+            # comment on why this matters when anything else might need
+            # Playwright's connection serviced during the wait
+            page.wait_for_timeout(OTP_WAIT_POLL_MS)
+        except Exception:
+            time.sleep(OTP_WAIT_POLL_MS / 1000)
+
+    result["awaiting_otp"] = None
+    if value:
+        _otp_flow_log(f"Step {step_index}/{total_steps}: OTP entered, continuing", result=result, output_json_path=output_json_path)
+    else:
+        _otp_flow_log(f"Step {step_index}/{total_steps}: no OTP entered within {OTP_WAIT_TIMEOUT_S}s", result=result, output_json_path=output_json_path)
+    _write_result(result, output_json_path)
+    return value
+
+
 # hold the button down before releasing (mimics a genuine human click
 # rather than an instantaneous down-up pair some debounced/threshold
 # JS logic could otherwise treat differently) - matches natural human
@@ -2119,23 +3591,38 @@ def _warn_if_resolved_identity_mismatched(el, lp, action_type):
     while a page's dynamic content means it isn't genuinely the intended
     element - a duplicate href living elsewhere in the DOM, a different
     entry in a search/typeahead list that happened to match first,
-    unrelated to the real one. Never blocks the click or changes
-    strategy/found/success - purely an immediate, visible console
-    warning, so a "misclick due to dynamic content" surfaces right away
-    instead of only showing up later via a failed navigation/effect
-    check. Compares loosely (case-insensitive substring, either
-    direction, for text/aria-label) since minor recorded-vs-live
-    wording differences are normal and not evidence of anything wrong;
-    href is compared exactly, since a genuinely different destination is
-    exactly what this exists to catch.
+    unrelated to the real one. Compares loosely (case-insensitive
+    substring, either direction, for text/aria-label) since minor
+    recorded-vs-live wording differences are normal and not evidence of
+    anything wrong (a price, a quantity, pluralization) - those remain
+    warn-only, never block anything.
+
+    href is different: it's compared exactly, and an exact mismatch is
+    an unambiguous "this is a different link/destination", not benign
+    variance - CONFIRMED REAL CAUSE of a live regression (a real
+    replay/Pick Element session against myntra.com): a recorded nav
+    link's exact position/content shifted between recording and replay,
+    a LATER, weaker tier still matched something by loose text alone,
+    this function warned about the href mismatch exactly as designed,
+    but nothing actually stopped the click - it proceeded onto a
+    completely different category page, and every step after that (or,
+    in Pick Element, the picker itself) silently continued against page
+    content nobody actually recorded. An exact href mismatch now hard-
+    fails THIS tier (falls through to the next one, exactly like
+    _verify_click_target_hit_test below already does for its own,
+    different signal) instead of only warning.
+
+    Returns (hard_fail, reason): hard_fail is True only for the href
+    case; text/aria-label-only mismatches still just print the warning
+    below and return (False, None).
     """
     if action_type not in ("click", "dblclick", "right_click"):
-        return
+        return False, None
     recorded_text = (lp.get("text") or lp.get("element_text") or "").strip()
     recorded_aria = (lp.get("aria_label") or "").strip()
     recorded_href = (lp.get("href") or "").strip()
     if not recorded_text and not recorded_aria and not recorded_href:
-        return
+        return False, None
 
     try:
         live_text = (el.inner_text(timeout=1000) or "").strip()
@@ -2155,12 +3642,35 @@ def _warn_if_resolved_identity_mismatched(el, lp, action_type):
         return r not in l and l not in r
 
     mismatches = []
+    hard_fail_reason = None
     if recorded_text and live_text and _loose_mismatch(recorded_text, live_text):
         mismatches.append(f"text: recorded {recorded_text!r} vs actual {live_text!r}")
     if recorded_aria and live_aria and _loose_mismatch(recorded_aria, live_aria):
         mismatches.append(f"aria-label: recorded {recorded_aria!r} vs actual {live_aria!r}")
     if recorded_href and live_href and recorded_href != live_href:
-        mismatches.append(f"href: recorded {recorded_href!r} vs actual {live_href!r}")
+        href_detail = f"href: recorded {recorded_href!r} vs actual {live_href!r}"
+        # BUG 2: a product/listing card's own href can legitimately drift
+        # (a re-derived SEO slug, an extra tracking segment) while still
+        # being the SAME product - the numeric product_id recorded
+        # alongside href (see action_capture.js) is exactly the signal
+        # that distinguishes "same product, cosmetic URL change" from a
+        # genuinely different destination. Only downgrades to a warning
+        # when that id is present in BOTH sides; any other href mismatch
+        # (no product_id recorded at all, or the id itself differs) still
+        # hard-fails exactly as before - this never weakens the original,
+        # confirmed-real Myntra regression this check exists to catch.
+        product_id = (lp.get("product_id") or "").strip()
+        same_product = bool(product_id) and product_id in recorded_href and product_id in live_href
+        if same_product:
+            mismatches.append(f"{href_detail} (same product_id={product_id!r} - treated as a cosmetic URL drift)")
+        else:
+            mismatches.append(href_detail)
+            hard_fail_reason = (
+                f"{_CONTENT_MISMATCH_MARKER} the element resolved for this "
+                f"{action_type} links to a different destination than what was "
+                f"recorded ({href_detail}) - the page's own content has likely "
+                f"changed since this was recorded"
+            )
 
     if mismatches:
         print(
@@ -2168,6 +3678,8 @@ def _warn_if_resolved_identity_mismatched(el, lp, action_type):
             f"{action_type} may not match the recording - {'; '.join(mismatches)} "
             f"- possible misclick due to dynamic page content"
         )
+
+    return (hard_fail_reason is not None), hard_fail_reason
 
 
 def _verify_click_target_hit_test(page, el, lp):
@@ -2244,6 +3756,33 @@ def _verify_click_target_hit_test(page, el, lp):
 _ICON_FONT_PUA_RE = re.compile("[\\ue000-\\uf8ff]")
 
 
+def _dedupe_repeated_lines(text):
+    """BUG 2: a product/listing card's own repeated badge count ("NEW"
+    appearing 3, 5, or 10 times - the exact count is layout/grid-position
+    noise, not a meaningful signal) can genuinely differ between whatever
+    got recorded and what's live now, even for the SAME card, without the
+    card itself having changed at all. Collapses consecutive duplicate
+    lines down to one before any text-consistency comparison involving a
+    card (an href-bearing target) is made, on EITHER side of the
+    comparison - a raw substring check can never match two strings that
+    repeat the same token a different number of times, no matter how
+    close they otherwise are. Never a site-specific check: purely
+    line-level deduplication, same rule the recorder itself already
+    applies at record time (see action_capture.js's own
+    _cleanCardLabelText) - this is its replay-side counterpart, so an
+    OLD recording made before that existed (raw, un-deduped label) still
+    compares correctly against today's live text.
+    """
+    if not text:
+        return text
+    lines = [ln.strip() for ln in text.splitlines() if ln.strip()]
+    deduped = []
+    for ln in lines:
+        if not deduped or deduped[-1] != ln:
+            deduped.append(ln)
+    return " ".join(deduped)
+
+
 def _strip_icon_font_text(text):
     """A string that's ENTIRELY (or almost entirely) private-use-area
     codepoints (U+E000-U+F8FF) is an icon-font glyph rendered as "text" -
@@ -2301,11 +3840,38 @@ def _identity_hit_matches(lp, hit_info, where):
     def _loose_match(a, b):
         return bool(a) and bool(b) and (a in b or b in a)
 
-    if _loose_match(recorded_text, hit_text) or _loose_match(recorded_aria, hit_aria):
+    # href, when BOTH sides have one, is checked first and is
+    # authoritative either way - CONFIRMED REAL CAUSE of a live
+    # regression (a real replay/Pick Element session against
+    # myntra.com): the OLD order checked text/aria first and returned a
+    # pass the instant either loosely matched, so a completely
+    # DIFFERENT link that merely happened to share matching text
+    # elsewhere on the page (a "T-Shirts" mention in an unrelated best-
+    # sellers widget, say) was accepted before its own, clearly
+    # different href was ever even looked at. An exact destination
+    # match/mismatch is a far more specific signal than shared wording -
+    # text/aria only get the final say when no href is recorded, or the
+    # live element being checked doesn't expose one at all (a button,
+    # not a link).
+    if recorded_href and hit_href:
+        if recorded_href == hit_href:
+            return True, None
+        # BUG 2: same tolerance as _warn_if_resolved_identity_mismatched -
+        # a product/listing card's href can legitimately drift (a
+        # re-derived SEO slug, an extra tracking segment) while it's
+        # still the SAME product; the recorded numeric product_id being
+        # present in BOTH hrefs is what distinguishes that from a
+        # genuinely different destination, which still falls through to
+        # the failure return below exactly as before.
+        product_id = (lp.get("product_id") or "").strip()
+        if product_id and product_id in recorded_href and product_id in hit_href:
+            return True, None
+        # falls through to the failure return below - an exact,
+        # confirmed destination mismatch, regardless of what the text
+        # says
+    elif _loose_match(recorded_text, hit_text) or _loose_match(recorded_aria, hit_aria):
         return True, None
-    if recorded_href and hit_href and recorded_href == hit_href:
-        return True, None
-    if not recorded_text and not recorded_aria and not recorded_href:
+    elif not recorded_text and not recorded_aria and not recorded_href:
         # nothing recorded to compare against at all - inconclusive, not a confirmed mismatch
         return True, None
 
@@ -2318,9 +3884,239 @@ def _identity_hit_matches(lp, hit_info, where):
         or lp.get("href") or "(unrecorded)"
     )
     return False, (
-        f"a different element is actually at the {where} - "
+        f"{_CONTENT_MISMATCH_MARKER} a different element is actually at the {where} - "
         f"recorded target was {recorded_label!r}, but {hit_label!r} is really there"
     )
+
+
+_CONSENT_OVERLAY_CHECK_JS = """
+(node0, [px, py]) => {
+    function isAcceptText(text) {
+        // whole-word only - "ok" must never match inside "cookie", nor
+        // "agree"/"allow" inside "disagree"/"disallow". Split on any run
+        // of non-alphanumeric characters (no regex backslash escapes -
+        // safer to embed in a template-generated script) and compare
+        // exact tokens; "got it" is checked as its own two-word phrase
+        // since splitting it into single tokens would lose the phrase.
+        const lower = (text || '').toLowerCase();
+        if (lower.indexOf('got it') !== -1) return true;
+        const tokens = lower.split(/[^a-z0-9]+/).filter(Boolean);
+        const words = ['accept', 'agree', 'ok', 'allow'];
+        return words.some((w) => tokens.indexOf(w) !== -1);
+    }
+    const hit = document.elementFromPoint(px, py);
+    if (!hit || hit === node0 || node0.contains(hit) || hit.contains(node0)) return null;
+    const style = getComputedStyle(hit);
+    if (style.position !== 'fixed' && style.position !== 'sticky') return null;
+    const text = (hit.innerText || '').toLowerCase();
+    if (text.indexOf('cookie') === -1 && text.indexOf('consent') === -1) return null;
+    const buttons = Array.from(hit.querySelectorAll('button, a, [role="button"]'));
+    for (const b of buttons) {
+        if (isAcceptText((b.innerText || '').trim())) return true;
+    }
+    return null;
+}
+"""
+
+_CONSENT_OVERLAY_CLICK_JS = """
+(node0, [px, py]) => {
+    function isAcceptText(text) {
+        const lower = (text || '').toLowerCase();
+        if (lower.indexOf('got it') !== -1) return true;
+        const tokens = lower.split(/[^a-z0-9]+/).filter(Boolean);
+        const words = ['accept', 'agree', 'ok', 'allow'];
+        return words.some((w) => tokens.indexOf(w) !== -1);
+    }
+    const hit = document.elementFromPoint(px, py);
+    if (!hit) return false;
+    const buttons = Array.from(hit.querySelectorAll('button, a, [role="button"]'));
+    for (const b of buttons) {
+        if (isAcceptText((b.innerText || '').trim())) {
+            b.click();
+            return true;
+        }
+    }
+    return false;
+}
+"""
+
+
+def _maybe_dismiss_consent_overlay(page, el):
+    """FIX 4 (overlays not captured - cookie consent): optional, narrowly-
+    scoped pre-click handler. Only ever fires when a DIFFERENT, fixed/
+    sticky element currently intercepts el's own click point (exactly
+    the case _verify_resolved_target's hit-test already detects as "not
+    hit-testable") - and even then, only when that intercepting
+    element's own text contains "cookie" or "consent" AND it contains a
+    button/link whose own text looks like an accept/agree/ok action.
+    Clicks ONLY that button, once, and returns True so the caller can
+    retry the same candidate. Never touches an intercepting element that
+    doesn't match this exact pattern - returns False, changes nothing,
+    for every other case (which is the overwhelming majority of "not
+    hit-testable" rejections, and must stay a real rejection, not get
+    silently clicked through).
+    """
+    try:
+        box = el.bounding_box()
+    except Exception:
+        return False
+    if not box or not box.get("width") or not box.get("height"):
+        return False
+    cx = box["x"] + box["width"] / 2
+    cy = box["y"] + box["height"] / 2
+    try:
+        matches = el.evaluate(_CONSENT_OVERLAY_CHECK_JS, [cx, cy])
+    except Exception:
+        return False
+    if not matches:
+        return False
+    try:
+        clicked = el.evaluate(_CONSENT_OVERLAY_CLICK_JS, [cx, cy])
+    except Exception:
+        clicked = False
+    if not clicked:
+        return False
+    print("[overlay-dismiss] auto-dismissed overlay - clicked its accept/agree button once")
+    try:
+        page.wait_for_timeout(300)
+    except Exception:
+        pass
+    return True
+
+
+def _verify_resolved_target(page, el, lp):
+    """Generic pre-dispatch gate (root-cause fix for the intermittent
+    Sportzia OTP flow, and any equivalent case on any other site): every
+    locator tier in resolve_and_act's main tier loop is required to pass
+    this BEFORE its result is ever accepted for a click/check dispatch -
+    not just the position_fallback tier, which previously had its own,
+    narrower identity check and was the only one. Confirms the resolved
+    element is visible, enabled, that its own text is consistent with
+    what was recorded (an icon-font glyph like a private-use-area
+    character - see _strip_icon_font_text - never counts as matching
+    real recorded words: no normalizing it to an empty string that would
+    then trivially "match" via an empty substring), and that clicking it
+    will actually land on it (document.elementFromPoint() at its own
+    center resolves to itself or one of its own descendants, never an
+    unrelated, overlapping element - see _element_hit_testable). A
+    strategy whose candidate fails any of these is rejected outright -
+    the caller skips to the next tier rather than ever dispatching a
+    click that can't be proven to land on the right place. Returns
+    (ok, reason).
+    """
+    _reveal_note = None
+    try:
+        visible = el.is_visible()
+    except Exception:
+        visible = False
+    if not visible:
+        # FIX 3: an <img> whose underlying resource is still loading can
+        # report not-visible (zero intrinsic size) while genuinely
+        # attached and positioned - scroll it into view and re-check
+        # once before giving up, rather than rejecting a target that's
+        # perfectly clickable, just not finished loading its picture yet.
+        try:
+            is_img = (el.evaluate("e => e.tagName") or "").upper() == "IMG"
+        except Exception:
+            is_img = False
+        if is_img:
+            try:
+                el.scroll_into_view_if_needed(timeout=3000)
+                visible = el.is_visible()
+            except Exception:
+                visible = False
+        if not visible:
+            # BUG 1 (hover-revealed menu not recorded): a target that's
+            # attached but hidden is exactly the "lives inside a
+            # dropdown/mega-menu whose trigger hasn't been hovered yet"
+            # case - give _reveal_via_ancestor_hover (ancestors AND their
+            # visible siblings) a real chance before rejecting outright.
+            # Without this, this very gate's own visibility requirement
+            # (added for the OTP-flow fix) would reject the resolved
+            # element before the click-dispatch code further down ever
+            # got a chance to attempt the SAME hover-reveal - silently
+            # routing every hover-menu click into the scroll-search/
+            # bounding_box fallback instead, on any site.
+            if _reveal_via_ancestor_hover(page, el):
+                try:
+                    visible = el.is_visible()
+                except Exception:
+                    visible = False
+                if visible:
+                    # PASS-with-warning (BUG 1 safety net): this recording
+                    # has no explicit recorded "hover" step for whatever
+                    # trigger actually reveals this target - it only became
+                    # visible because _reveal_via_ancestor_hover hovered an
+                    # ancestor/sibling on its behalf, live, during replay.
+                    # Surfaced up through the (ok, reason) contract exactly
+                    # like the position_fallback tier's own success_note
+                    # does, so the step still reports success=True but with
+                    # a non-null note instead of looking identical to an
+                    # ordinary, already-visible target match.
+                    _reveal_note = (
+                        "target was hidden and required an un-recorded "
+                        "hover-reveal (see [hover-reveal] log lines) to "
+                        "become visible - consider re-recording this step "
+                        "so the hover itself is captured"
+                    )
+        if not visible:
+            return False, "target is not visible"
+
+    try:
+        enabled = el.is_enabled()
+    except Exception:
+        enabled = True
+    if not enabled:
+        return False, "target is not enabled"
+
+    try:
+        is_img_tag = (el.evaluate("e => e.tagName") or "").upper() == "IMG"
+    except Exception:
+        is_img_tag = False
+
+    # BUG 2: a product/listing card commonly reveals extra text on
+    # ::hover (a "Sizes: XXL" size-picker strip, say) that was already
+    # present in whatever got recorded (recording a click necessarily
+    # means the mouse was over the card first) - identified generically
+    # by the recorded href, never a site-specific class/shape check.
+    # Hovering the resolved candidate here, before the live-text read
+    # just below, gives that same overlay content a chance to render so
+    # the comparison isn't comparing "hovered" recorded text against
+    # "not hovered" live text. Best-effort and silent: a target that
+    # isn't actually hoverable (already gone, detached) just falls
+    # through to the comparison as before.
+    if lp.get("href"):
+        try:
+            el.hover(timeout=1500)
+        except Exception:
+            pass
+
+    recorded_text = _strip_icon_font_text((lp.get("text") or lp.get("element_text") or "")).strip()
+    if recorded_text:
+        try:
+            if is_img_tag:
+                # an <img> has no inner_text of its own - its alt
+                # attribute is the comparable "text" (what the tier that
+                # resolved it, _find_by_image_ancestor_or_title, matched
+                # against in the first place)
+                live_text = _strip_icon_font_text(el.get_attribute("alt") or "").strip()
+            else:
+                live_text = _strip_icon_font_text(el.inner_text(timeout=1000) or "").strip()
+        except Exception:
+            live_text = ""
+        r, l = recorded_text.lower(), live_text.lower()
+        if lp.get("href"):
+            r, l = _dedupe_repeated_lines(r), _dedupe_repeated_lines(l)
+        if not (l and (r in l or l in r)):
+            return False, (
+                f"text mismatch: recorded {recorded_text!r} is not consistent with "
+                f"the resolved element's own text {live_text!r}"
+            )
+
+    if not _element_hit_testable(el):
+        return False, "not hit-testable at its own center - a different element sits there"
+
+    return True, _reveal_note
 
 
 def _verify_post_click_identity(page, lp):
@@ -2380,6 +4176,34 @@ def _verify_post_click_identity(page, lp):
         recorded_testid, lp.get("text") or lp.get("element_text"), active,
     )
     if not active or not (active.get("text") or active.get("ariaLabel") or active.get("href")):
+        return True, None
+    # ROOT-CAUSE FIX (part of the same Sportzia OTP-flow fix as
+    # CLICK_EFFECT_OBSERVE_TIMEOUT_S above): a click whose real,
+    # intended effect is opening a dialog/modal legitimately moves
+    # focus to something inside it - that new content's own identity
+    # was never going to match the recorded target's, by design, and
+    # is not evidence of a misclick. Checked generically (role=dialog
+    # or aria-modal="true" on the focused element or any ancestor),
+    # never any recorded/site-specific text. The DOM-change poll below
+    # already covers "content that wasn't there before the click"; this
+    # covers the STATIC case (a dialog container that already existed
+    # in the DOM, hidden, and simply became visible/focused).
+    try:
+        in_dialog = page.evaluate(
+            "() => { "
+            "let e = document.activeElement; "
+            "while (e) { "
+            "  if (e.getAttribute && (e.getAttribute('role') === 'dialog' "
+            "      || e.getAttribute('aria-modal') === 'true')) return true; "
+            "  e = e.parentElement; "
+            "} "
+            "return false; "
+            "}"
+        )
+    except Exception:
+        in_dialog = False
+    if in_dialog:
+        logger.debug("click-diagnostic: focused element is inside a dialog/modal - treating as a genuine effect")
         return True, None
     return _identity_hit_matches(lp, active, "post-click focus target")
 
@@ -2636,6 +4460,138 @@ def _locator_findable(page, lp):
         return False
 
 
+def _resolve_for_hover_chain(page, lp):
+    """Resolve a single hover_chain link's own locator_profile to a live
+    element - the same finder tiers/priority order _locator_findable
+    already uses (search-only, no action), reused here since hovering a
+    chain trigger needs the actual element, not just a yes/no.
+    """
+    attrs = lp.get("attributes") or {}
+    finders = (
+        lambda: _by_attr(page, "data-testid", attrs.get("data-testid")),
+        lambda: _by_attr(page, "data-test", attrs.get("data-test")),
+        lambda: _by_attr(page, "data-cy", attrs.get("data-cy")),
+        lambda: _find_by_id(page, lp),
+        lambda: _by_attr(page, "name", attrs.get("name")),
+        lambda: _by_attr(page, "aria-label", attrs.get("aria-label")),
+        lambda: _by_attr(page, "placeholder", attrs.get("placeholder")),
+        lambda: _by_attr(page, "title", attrs.get("title")),
+        lambda: _find_by_role(page, lp, attrs),
+        lambda: _find_by_href(page, lp),
+        lambda: _find_by_text_tag(page, lp),
+        lambda: _find_by_css(page, lp),
+        lambda: _find_by_xpath(page, lp),
+    )
+    for finder in finders:
+        try:
+            cand = finder()
+            if cand is not None:
+                return cand
+        except Exception:
+            continue
+    return None
+
+
+def _derive_visible_proxy_from_state_target(page, state_target):
+    """RC1 (hidden native input as target): when act_target/locator_
+    profile can't be resolved at all (the recorded visible element is
+    genuinely gone - page redesign, A/B test, etc), state_target - the
+    underlying checkbox/radio input's own locator profile, recorded
+    alongside act_target - is the last-resort fallback: resolve the
+    input itself (findable even while invisible - _resolve_for_hover_
+    chain's own finder tiers don't require visibility), then derive a
+    VISIBLE proxy near it to actually click, since the input itself is
+    near-universally not clickable directly:
+
+    1. its wrapping <label> ancestor (bounded walk), if any
+    2. label[for=<input's id>], when the input has an id
+    3. the nearest visible ancestor with a non-trivial box (a "row"
+       container - bounded walk, generic size/visibility check, never a
+       class/id/text check)
+
+    Returns (proxy_element, resolved_input_element) or (None, None).
+    Never raises.
+    """
+    if not state_target:
+        return None, None
+    lp = (state_target or {}).get("locator_profile") or {}
+    if not lp:
+        return None, None
+    try:
+        input_el = _resolve_for_hover_chain(page, lp)
+    except Exception:
+        input_el = None
+    if input_el is None:
+        return None, None
+
+    # 1. wrapping <label> ancestor
+    try:
+        label_loc = input_el.locator("xpath=ancestor::label[1]")
+        if label_loc.count() > 0:
+            return label_loc.first, input_el
+    except Exception:
+        pass
+
+    # 2. label[for=id]
+    try:
+        input_id = input_el.get_attribute("id", timeout=1000)
+        if input_id:
+            for_loc = page.locator(f'label[for="{input_id}"]')
+            if for_loc.count() > 0:
+                return for_loc.first, input_el
+    except Exception:
+        pass
+
+    # 3. nearest visible ancestor with a real box ("the row")
+    try:
+        ancestors = input_el.locator("xpath=ancestor::*")
+        ancestor_count = ancestors.count()
+    except Exception:
+        ancestor_count = 0
+    for depth in range(1, min(ancestor_count, 6) + 1):
+        try:
+            cand = ancestors.nth(ancestor_count - depth)
+            if cand.is_visible():
+                box = cand.bounding_box()
+                if box and box.get("width") and box.get("height"):
+                    return cand, input_el
+        except Exception:
+            continue
+
+    return None, input_el
+
+
+def _establish_hover_chain(page, chain):
+    """FIX 2.a/hover chain: hovers each recorded trigger in `chain`
+    (outermost first - see action_capture.js's own hoverChain docstring)
+    in order, waiting briefly after each one for the next link (or the
+    step's own eventual target) to have a real chance to render before
+    moving on. Best-effort and entirely silent per link - a chain
+    recorded against a page that's since changed just does as much of it
+    as still resolves; the caller's own downstream resolution/safety net
+    is what actually determines success or failure for the step itself,
+    never this.
+
+    Returns the list of chain-link elements actually resolved and
+    hovered (possibly shorter than `chain`, possibly empty) - used by
+    the candidate-scoring tie-breaker (see _score_candidates_and_pick)
+    to credit a candidate for being inside the area this same chain just
+    revealed.
+    """
+    resolved = []
+    for chain_lp in chain or []:
+        try:
+            el = _resolve_for_hover_chain(page, chain_lp or {})
+            if el is None:
+                continue
+            el.hover(timeout=HOVER_REVEAL_HOVER_TIMEOUT_MS)
+            page.wait_for_timeout(HOVER_REVEAL_SETTLE_MS)
+            resolved.append(el)
+        except Exception:
+            continue
+    return resolved
+
+
 def _hover_recorded_ancestor_if_not_findable(page, lp, max_hops=HOVER_REVEAL_MAX_ANCESTOR_DEPTH):
     """Pre-resolution reveal for a click target that doesn't exist in the
     DOM AT ALL yet, not merely one that's present-but-hidden -
@@ -2803,6 +4759,284 @@ def _resolve_with_timeout(page, lp, timeout_ms=None, poll_ms=None):
             page.wait_for_timeout(poll_ms)
         except Exception:
             return None, None, attempt
+
+
+# FIX 1/FIX 2 (reliable post-action verification + resolution timing):
+# shared by every action type that verifies an effect (check/radio/select/
+# fill/drag/hover). Root cause this replaces (confirmed against a real
+# Myntra recording, session_20260925_103118.json step 10): the OLD
+# verification read state straight off the SAME `el` used to dispatch the
+# action - for a <label>-wraps-<input> control (act_target = the label),
+# that means reading aria-checked/class heuristics off the LABEL itself,
+# which never carries that signal at all (only the input, or a sibling
+# span/li, does) - and it read it with zero settle time, so even a native
+# input read via the correct element could still lose a timing race against
+# the SPA's own re-render. Both are fixed by: always re-resolve the STATE
+# target (never act_target) fresh via its own locator_profile - a
+# Playwright Locator, not a cached handle, so it re-queries the live DOM on
+# every call rather than describing a node that may have since been
+# replaced - after waiting for the page to settle, then polling.
+def _wait_for_settle(page, timeout_s=2.0, quiet_ms=300):
+    """Waits for the page to go quiet after an action: network activity
+    idle (capped) OR DOM mutations quiet for quiet_ms (capped) - whichever
+    signal is available. Never raises and never blocks past timeout_s;
+    an SPA that never truly reaches "networkidle" (long-poll/analytics
+    beacons) still returns once DOM mutations stop, and vice versa for a
+    page with no MutationObserver support for some reason."""
+    deadline = time.monotonic() + timeout_s
+    try:
+        remaining_ms = max(50, int((deadline - time.monotonic()) * 1000))
+        page.wait_for_load_state("networkidle", timeout=remaining_ms)
+    except Exception:
+        pass
+    try:
+        remaining_ms = max(0, int((deadline - time.monotonic()) * 1000))
+        if remaining_ms > 0:
+            page.wait_for_function(
+                """(quietMs) => {
+                    if (window.__afqaLastMutationTs === undefined) {
+                        window.__afqaLastMutationTs = Date.now();
+                        new MutationObserver(() => { window.__afqaLastMutationTs = Date.now(); })
+                            .observe(document.documentElement, {
+                                childList: true, subtree: true, attributes: true, characterData: true,
+                            });
+                        return false;
+                    }
+                    return (Date.now() - window.__afqaLastMutationTs) >= quietMs;
+                }""",
+                arg=quiet_ms,
+                timeout=remaining_ms,
+            )
+    except Exception:
+        pass
+
+
+def _resolve_state_target_locator(page, step):
+    """Fresh Locator for the element that actually carries this step's
+    state (checked/selected/value) - state_target's own locator_profile
+    when the recording has one (RC1: the underlying input, never the
+    act_target label/wrapper that was merely clicked), else the step's own
+    top-level locator_profile (older recordings, or action types with no
+    separate act/state split). Returns None if neither resolves."""
+    state_target = step.get("state_target") or {}
+    lp = state_target.get("locator_profile") or step.get("locator_profile") or {}
+    if not lp:
+        return None
+    try:
+        return _resolve_element(page, lp)
+    except Exception:
+        return None
+
+
+def _read_control_state(loc):
+    """Best-effort current checked/selected state of loc, fresh - native
+    is_checked() when it's a real input, else aria-checked/aria-selected/
+    class-name/icon heuristics (the same generic signals used elsewhere in
+    this file). Returns None (indeterminate) rather than guessing when
+    loc itself can't be resolved at all."""
+    if loc is None:
+        return None
+    try:
+        if loc.evaluate("e => e.tagName === 'INPUT'"):
+            try:
+                return bool(loc.is_checked())
+            except Exception:
+                pass
+    except Exception:
+        pass
+    try:
+        return loc.evaluate("""e => {
+            const av = e.getAttribute('aria-checked') || e.getAttribute('aria-selected');
+            if (av === 'true') return true;
+            if (av === 'false') return false;
+            if (e.tagName === 'INPUT' || e.tagName === 'OPTION') {
+                if ('checked' in e) return !!e.checked;
+                if ('selected' in e) return !!e.selected;
+            }
+            const cls = (e.className || '').toString().toLowerCase();
+            if (cls.includes('checked') || cls.includes('active') || cls.includes('selected')) return true;
+            if (e.querySelector('svg, i[class*="check"], [class*="check"], [class*="tick"]')) return true;
+            return false;
+        }""")
+    except Exception:
+        return None
+
+
+def _recorded_url_change_keys(step, next_step):
+    """Which query-param KEYS the recording shows changing as a direct
+    result of this step - derived generically from this step's own
+    recorded page_url vs the NEXT recorded action's page_url, when that
+    next action is a navigate (the recorder emits a navigate action
+    immediately after whatever caused it - see record_session.py's
+    _on_navigate). Comparing by key (not exact value) is deliberate: a
+    live replay's session id/timestamp/nonce query params will genuinely
+    differ from the recorded ones even on a perfect replay, but the SAME
+    keys changing is real, site-agnostic evidence that the recorded effect
+    (a filter/sort/pagination param appearing or changing) happened again.
+    Returns an empty set when there's nothing to compare (no next navigate,
+    or no page_url on either side)."""
+    if not next_step or next_step.get("action_type") != "navigate":
+        return set()
+    before = step.get("page_url")
+    after = next_step.get("page_url")
+    if not before or not after:
+        return set()
+    try:
+        before_q = dict(parse_qsl(urlsplit(before).query))
+        after_q = dict(parse_qsl(urlsplit(after).query))
+    except Exception:
+        return set()
+    changed = set()
+    for k in set(before_q) | set(after_q):
+        if before_q.get(k) != after_q.get(k):
+            changed.add(k)
+    return changed
+
+
+def _live_url_change_matches(url_before, url_now, recorded_keys):
+    if not recorded_keys or not url_before or not url_now:
+        return False
+    try:
+        before_q = dict(parse_qsl(urlsplit(url_before).query))
+        now_q = dict(parse_qsl(urlsplit(url_now).query))
+    except Exception:
+        return False
+    changed = {k for k in set(before_q) | set(now_q) if before_q.get(k) != now_q.get(k)}
+    return bool(changed & recorded_keys)
+
+
+_DRAG_VALUE_SNAPSHOT_JS = """
+(sourceEl) => {
+    function closestSliderLike(el) {
+        var node = el;
+        for (var i = 0; i < 4 && node; i++) {
+            if (node.tagName === 'INPUT' && (node.type || '').toLowerCase() === 'range') return node;
+            if (node.getAttribute && (node.getAttribute('role') === 'slider' || node.hasAttribute('aria-valuenow'))) return node;
+            node = node.parentElement;
+        }
+        return null;
+    }
+    var slider = closestSliderLike(sourceEl);
+    if (slider) {
+        if (slider.tagName === 'INPUT') return { kind: 'range_value', value: slider.value };
+        return {
+            kind: 'aria_value',
+            value: slider.getAttribute('aria-valuenow'),
+            text: slider.getAttribute('aria-valuetext'),
+        };
+    }
+    var container = (sourceEl.closest && sourceEl.closest('[class]')) || sourceEl.parentElement;
+    for (var j = 0; j < 3 && container; j++) {
+        var txt = (container.innerText || '').trim();
+        if (txt && txt.length < 200 && /\\d/.test(txt)) {
+            return { kind: 'nearby_text', value: txt };
+        }
+        container = container.parentElement;
+    }
+    return null;
+}
+"""
+
+
+def _captureDragValueSnapshot_py(el):
+    """Python-side mirror of action_capture.js's own _captureDragValueSnapshot
+    - same logic, same shape ({kind, value[, text]}) - so a live post-drag
+    read can be compared directly against the step's own recorded
+    value_after for FIX 3's slider/range verification. Kept in sync with
+    the JS version by construction (both walk the same 4 ancestor levels
+    for a slider-like element, then the same 3 for nearby numeric text).
+    """
+    try:
+        return el.evaluate(_DRAG_VALUE_SNAPSHOT_JS)
+    except Exception:
+        return None
+
+
+def _verify_recorded_effect(
+    page, step, next_step=None, url_before=None, expected_state=None,
+    is_radio_like=False, timeout_s=3.0, poll_ms=150,
+):
+    """FIX 1: accept the step as successful when ANY recorded effect is
+    observed, polling for up to timeout_s (never a single immediate read).
+    Checked, in order of cheapness, on every poll iteration:
+      1. the re-resolved state_target's own state matches expected_state
+         (or, for a radio-like control where expected_state is always
+         True, being the selected option in its own name-group also
+         counts - see below);
+      2. the recorded URL change (by query-param key, see
+         _recorded_url_change_keys) has happened live;
+      3. a recorded DOM effect: the state_target's own ancestor chain
+         (dom_context) genuinely differs now from what was captured right
+         before the action.
+    Returns (ok: bool, detail: str). Never raises.
+    """
+    recorded_keys = _recorded_url_change_keys(step, next_step)
+    state_target = step.get("state_target") or {}
+    group_name = None
+    if is_radio_like:
+        try:
+            group_name = (state_target.get("locator_profile") or {}).get("name")
+        except Exception:
+            group_name = None
+    dom_ctx = step.get("dom_context") or {}
+    before_chain = dom_ctx.get("state_target_html_chain") or dom_ctx.get("act_target_html_chain") or []
+    before_html = before_chain[0] if before_chain else None
+
+    deadline = time.monotonic() + timeout_s
+    last_state = None
+    while True:
+        loc = _resolve_state_target_locator(page, step)
+        last_state = _read_control_state(loc)
+        if expected_state is not None and last_state is not None and bool(last_state) == bool(expected_state):
+            return True, f"state_target now reads checked={last_state!r} (matches recorded expectation)"
+        if is_radio_like and expected_state and loc is not None and group_name:
+            try:
+                is_selected_in_group = loc.evaluate(
+                    """(e, name) => {
+                        if (!name) return false;
+                        var group = document.getElementsByName(name);
+                        for (var i = 0; i < group.length; i++) {
+                            if (group[i] !== e && group[i].checked) return false;
+                        }
+                        return true;
+                    }""",
+                    group_name,
+                )
+                if is_selected_in_group:
+                    return True, "state_target is the selected option in its own name-group"
+            except Exception:
+                pass
+        try:
+            url_now = page.url
+        except Exception:
+            url_now = None
+        if _live_url_change_matches(url_before, url_now, recorded_keys):
+            return True, f"recorded URL change observed (query keys changed: {sorted(recorded_keys)})"
+        if before_html is not None and loc is not None:
+            try:
+                now_html = loc.evaluate("e => e.outerHTML") or ""
+                # walk up a couple of ancestor levels too - a class/attr
+                # change often lands on a wrapper, not the input itself
+                for _ in range(2):
+                    now_html += loc.evaluate(
+                        "e => e.parentElement ? e.parentElement.outerHTML : ''"
+                    ) or ""
+            except Exception:
+                now_html = None
+            if now_html is not None and now_html != before_html:
+                return True, "recorded DOM effect observed (target's markup changed since before the action)"
+        if time.monotonic() >= deadline:
+            break
+        try:
+            page.wait_for_timeout(poll_ms)
+        except Exception:
+            break
+
+    return False, (
+        f"no recorded effect observed after {timeout_s:.1f}s - state_target reads "
+        f"checked={last_state!r} (expected {expected_state!r}), no matching URL "
+        f"change, no DOM change detected"
+    )
 
 
 # Pink bounding-box highlight for a validation step, on REPLAY - visually
@@ -2983,11 +5217,10 @@ def _describe_locator_resolution(element_label, strategy_used, element_found, su
 
 def _element_report_label(step):
     """Short, human name for a step's target, for locator-report messages
-    - same field priority _describe_step (the Trim screen's own summarizer
-    - see app.py's _describe_action_for_trim, kept deliberately in step
-    with it) already uses: recorded element text/value first, then
-    accessible name/aria-label/placeholder/id, then the tag, then a
-    generic fallback naming the action itself.
+    - same field priority _describe_step (this file's own step summarizer)
+    already uses: recorded element text/value first, then accessible
+    name/aria-label/placeholder/id, then the tag, then a generic
+    fallback naming the action itself.
     """
     lp = step.get("locator_profile") or {}
     attrs = lp.get("attributes") or {}
@@ -3073,6 +5306,58 @@ def _wait_for_next_step_ready(page, next_step, timeout_s=9.0, interval_s=0.3):
                 return True
         except Exception:
             return True
+        page.wait_for_timeout(int(interval_s * 1000))
+    return False
+
+
+def _wait_for_hover_reveal(page, next_step, timeout_s=3.0, interval_s=0.15):
+    """BUG 1 (hover-revealed menu): after a 'hover' step dispatches,
+    best-effort, non-fatal wait for the NEXT recorded step's own target
+    to actually become visible as a result of that hover - gives a mega-
+    menu/dropdown a bounded window to finish opening/animating in before
+    the next step's own resolution attempt begins. Never fails the hover
+    step itself either way; the caller only logs the outcome.
+
+    Same finder tiers _locator_findable already uses (search-only, no
+    action attempted), except this also requires is_visible() rather
+    than merely present-in-DOM - a hover target is, by definition,
+    already attached-but-hidden before the hover fires, so "present" was
+    already known and tells us nothing new here.
+    """
+    if not next_step:
+        return False
+    lp = next_step.get("locator_profile") or {}
+    attrs = lp.get("attributes") or {}
+    has_identifying_signal = (
+        any(lp.get(k) for k in ("id", "css_path", "xpath", "href", "element_text", "text"))
+        or bool(attrs)
+    )
+    if not has_identifying_signal:
+        return False
+    finders = (
+        lambda: _by_attr(page, "data-testid", attrs.get("data-testid")),
+        lambda: _by_attr(page, "data-test", attrs.get("data-test")),
+        lambda: _by_attr(page, "data-cy", attrs.get("data-cy")),
+        lambda: _find_by_id(page, lp),
+        lambda: _by_attr(page, "name", attrs.get("name")),
+        lambda: _by_attr(page, "aria-label", attrs.get("aria-label")),
+        lambda: _by_attr(page, "placeholder", attrs.get("placeholder")),
+        lambda: _by_attr(page, "title", attrs.get("title")),
+        lambda: _find_by_role(page, lp, attrs),
+        lambda: _find_by_href(page, lp),
+        lambda: _find_by_text_tag(page, lp),
+        lambda: _find_by_css(page, lp),
+        lambda: _find_by_xpath(page, lp),
+    )
+    deadline = time.monotonic() + timeout_s
+    while time.monotonic() < deadline:
+        for finder in finders:
+            try:
+                cand = finder()
+                if cand is not None and cand.is_visible():
+                    return True
+            except Exception:
+                continue
         page.wait_for_timeout(int(interval_s * 1000))
     return False
 
@@ -4581,22 +6866,47 @@ def _wait_for_effect_url(page, target_url, timeout_s=EFFECT_VERIFY_TIMEOUT_S, in
 
 
 def _find_modal_check_value(steps, start_index, close_url):
-    """Scans the RECORDING forward from start_index (0-based - the step
-    right after a navigate-to-modal-style-URL) looking for a "check"
-    step's own recorded value - generically, whatever it is (a
-    quantity, a size, a color, ...), never a hardcoded concept. Stops as
-    soon as either:
+    """Scans the RECORDING forward from start_index (0-based - the
+    ALREADY-CONFIRMED "into the modal/detail page" navigate step itself,
+    immediately after the click this whole sequence is keyed off)
+    looking for a "check" step's own recorded value - generically,
+    whatever it is (a quantity, a size, a color, ...), never a
+    hardcoded concept. Bounded to ONLY the intermediate page between the
+    two navigations (into the modal/detail state, then back out):
+    that first, already-known "into" navigate is skipped explicitly
+    (never itself treated as a stop signal), then stops as soon as
+    either:
       - a "check" step with a non-empty recorded text is found (returns
         that text), or
-      - a "navigate" step whose own page_url already matches close_url
-        is reached first (the sequence closed with no check in it - not
-        this pattern, returns None).
+      - a SUBSEQUENT "navigate" step is reached, whether or not it
+        matches close_url (the sequence closed with no check in it -
+        not this pattern; a DIFFERENT navigate would mean this has
+        already left the one intermediate page this is scoped to -
+        either way, returns None: plain back-navigation, verified by
+        route only).
+
+    FIX C: this used to scan with NO upper bound at all except an exact-
+    string match against close_url on a "navigate" step - a live
+    "https://x/events/" vs a recorded "https://x/events" fails that
+    exact comparison, so a plain click -> navigate-to-detail -> navigate-
+    straight-back sequence (nothing in between at all) never matched
+    that stop condition and instead kept scanning the ENTIRE REST of the
+    recording, past dozens of unrelated steps, until it hit some much
+    later, completely unrelated check (confirmed real: it picked up a
+    "Send OTP" check dozens of steps later as if it were "the value
+    selected in this modal"). Now bounded to stop at the very next
+    navigate of ANY kind after the first, known one - a route-equality
+    match against close_url is no longer even needed to close that gap.
+
     Purely structural: driven entirely by action_type and recorded
     fields already in the JSON, never any element/site-specific detail.
     """
-    for j in range(start_index, len(steps)):
+    j0 = start_index
+    if j0 < len(steps) and (steps[j0] or {}).get("action_type") == "navigate":
+        j0 += 1
+    for j in range(j0, len(steps)):
         s_type = steps[j].get("action_type")
-        if s_type == "navigate" and steps[j].get("page_url") == close_url:
+        if s_type == "navigate":
             return None
         if s_type == "check":
             lp = steps[j].get("locator_profile") or {}
@@ -5082,7 +7392,82 @@ def _wait_for_page_settle(page, timeout_s=6.0, quiet_window_ms=500):
         pass
 
 
-def resolve_and_act(page, step, prev_action_type=None, fast_fail=False, turbo=False):
+_SKELETON_REMAINING_JS = """
+() => {
+    const sel = '[class*="skeleton" i], [class*="shimmer" i], [class*="placeholder" i], '
+        + '[class*="loading" i], [aria-busy="true"]';
+    const nodes = Array.from(document.querySelectorAll(sel));
+    let count = 0;
+    for (const el of nodes) {
+        // an <input>/<textarea> whose own placeholder ATTRIBUTE, or a
+        // class literally named e.g. "placeholder-text" for unrelated
+        // styling, would otherwise match the [class*="placeholder"]
+        // pattern purely by coincidence - never a real loading skeleton
+        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') continue;
+        // only count something actually on screen right now - an
+        // off-screen/zero-size/hidden match can never be what's blocking
+        // the click this wait exists for
+        const rect = el.getBoundingClientRect();
+        if (rect.width <= 0 || rect.height <= 0) continue;
+        const style = getComputedStyle(el);
+        if (style.visibility === 'hidden' || style.display === 'none') continue;
+        if (parseFloat(style.opacity) === 0) continue;
+        count++;
+    }
+    return count;
+}
+"""
+
+
+def _wait_for_spa_settle_no_skeleton(page, timeout_s=8.0):
+    """FIX 3 (SPA not settled before click): called before resolving any
+    click/check locator whose immediately preceding RECORDED step was a
+    navigate (or, generically, any route change) - a client-rendered SPA
+    can finish domcontentloaded/networkidle while its own skeleton/
+    shimmer/placeholder loading state is still on screen, which is
+    exactly what makes a locator tier miss the real content and a
+    bounding_box fallback land on a placeholder instead.
+
+    Two capped, non-fatal, best-effort stages:
+      1. network-idle (reuses _settle - the same one used throughout this
+         file), capped at timeout_s.
+      2. polls for document.querySelectorAll(...) matching common
+         skeleton/shimmer/placeholder/loading class-name patterns or
+         aria-busy="true" - excluding input/textarea and anything not
+         actually visible right now (see _SKELETON_REMAINING_JS) - to
+         reach zero, capped at the SAME overall timeout_s budget (never
+         doubles the wait).
+
+    Purely generic (class-name substring + aria-busy only, never a site-
+    specific selector); if the count never reaches zero (a page that
+    genuinely always has a "loading" class somewhere, unrelated to what's
+    being clicked), this simply gives up at the deadline and the caller
+    proceeds exactly as it already does today - never a hard failure.
+    Logs how long this actually waited either way, so a slow step is
+    visible in the log instead of looking like unexplained latency.
+    """
+    _wait_t0 = time.monotonic()
+    deadline = _wait_t0 + timeout_s
+    try:
+        page.wait_for_load_state("networkidle", timeout=int(timeout_s * 1000))
+    except Exception:
+        pass
+
+    while time.monotonic() < deadline:
+        try:
+            remaining = page.evaluate(_SKELETON_REMAINING_JS)
+        except Exception:
+            break
+        if not remaining:
+            break
+        try:
+            page.wait_for_timeout(200)
+        except Exception:
+            break
+    print(f"[spa-settle] waited {time.monotonic() - _wait_t0:.2f}s for network-idle/no-skeleton before this step")
+
+
+def resolve_and_act(page, step, prev_action_type=None, fast_fail=False, turbo=False, result=None, output_json_path=None, next_step=None):
     """Try each locator strategy in priority order, then perform the step's
     action. Strongest/most stable signals first (test-automation attributes,
     id, other stable attributes), generic/fragile ones last.
@@ -5091,6 +7476,12 @@ def resolve_and_act(page, step, prev_action_type=None, fast_fail=False, turbo=Fa
     RECORDED step (or None for the first step / when unknown) - used only
     for the pre-click state-fingerprint check below, never for locating
     anything.
+
+    result/output_json_path (both optional, default None) are forwarded
+    only to _reveal_via_ancestor_hover's own Live Log lines - see that
+    function's docstring. Every existing caller (Pick Element's fast-
+    forward walk, validate_locator) omits them and is completely
+    unaffected; only the real replay loop passes them.
 
     fast_fail, when True, means the navigate that led to this step already
     signaled its destination target never became findable - this step
@@ -5110,6 +7501,11 @@ def resolve_and_act(page, step, prev_action_type=None, fast_fail=False, turbo=Fa
     best-effort preceding-actions walk (recorder/pick_element.py), whose
     entire purpose is reaching the right page state as fast as possible
     for a human to click something, not demonstrating realistic pacing.
+
+    next_step (optional) is the immediately-following recorded action, if
+    any - used only by FIX 1's post-action effect verification (see
+    _recorded_url_change_keys) to recognize a recorded URL change caused
+    by this step. Never used for anything else.
 
     Unlike a simple "first tier that finds anything wins" search, EVERY
     tier that finds an element gets an actual attempt at the action before
@@ -5131,13 +7527,55 @@ def resolve_and_act(page, step, prev_action_type=None, fast_fail=False, turbo=Fa
     action_type = step.get("action_type")
     value = step.get("value")
 
+    # FIX 2.f (hard per-step budget): a real, non-preemptive deadline
+    # this same call's own expensive ESCALATION tiers (scroll-and-
+    # recheck, the bounding_box backoff-retry loop) check themselves
+    # against before starting another round, so a step that's already
+    # spent its whole budget on cheaper tiers skips straight to failing
+    # fast instead of also paying for the slow ones - this is what
+    # actually bounds a single step's worst case close to
+    # STEP_TIME_BUDGET_S, rather than every escalation's own individual
+    # timeout simply summing without limit (confirmed real: ~40s per
+    # failed step before this existed). Deliberately NOT a true
+    # preemptive cancellation (Playwright's sync API has no safe way to
+    # abort a single in-flight call from outside it without risking a
+    # second thread touching the same page) - a single already-in-
+    # -progress Playwright wait (e.g. one el.hover(timeout=2000) call)
+    # can still finish out its own bounded timeout even if that crosses
+    # the deadline; this only stops the NEXT escalation round from
+    # starting once time is up.
+    _step_deadline = time.monotonic() + STEP_TIME_BUDGET_S
+
     # an action type this executor has no handler for must never be
     # silently treated as a no-op success just because a locator happened
     # to resolve - fail it outright, clearly labeled, before spending any
     # time searching for an element to act on
-    SUPPORTED_ACTIONS = ("click", "dblclick", "right_click", "fill", "select", "submit", "press", "check")
+    SUPPORTED_ACTIONS = ("click", "dblclick", "right_click", "fill", "select", "submit", "press", "check", "hover", "drag")
     if action_type not in SUPPORTED_ACTIONS:
         return None, False, False, f"UNSUPPORTED action_type: {action_type!r}"
+
+    # FIX 2.a (replay preconditions) / hover chain: a click step recorded
+    # with a hover_chain (see action_capture.js's own hoverChain
+    # docstring) needs EVERY trigger in that chain hovered, in order,
+    # BEFORE this step's own target is ever searched for - a nested
+    # reveal (Filters -> Patterns chip -> its own checkbox panel) only
+    # renders its innermost content once each outer level has genuinely
+    # been hovered first, exactly like the original recording. Best-
+    # effort and silent per link: a chain link that can't be resolved
+    # live (page drifted since recording) just gets skipped rather than
+    # failing the whole step - the existing _verify_resolved_target
+    # safety net (ancestor+sibling hover-reveal) still gets a real shot
+    # at the final target regardless of whether the chain fully replayed.
+    # populated below when this step has a recorded hover_chain -
+    # threaded into the tier list's own candidate-scoring tie-breaker
+    # (see _score_candidates_and_pick) so a candidate that's inside the
+    # area THIS chain just revealed is preferred over one that isn't,
+    # among several otherwise-tied matches. Empty (never None) whenever
+    # there's no chain, or every link failed to resolve - scoring
+    # degrades gracefully to its other signals in that case.
+    _hover_chain_els = []
+    if action_type in ("click", "dblclick", "right_click", "check") and step.get("hover_chain"):
+        _hover_chain_els = _establish_hover_chain(page, step.get("hover_chain"))
 
     # portal-readiness pre-check: a recorded css_path starting with
     # "body > " (rather than the main app root) is a generic, structural
@@ -5314,6 +7752,16 @@ def resolve_and_act(page, step, prev_action_type=None, fast_fail=False, turbo=Fa
     if action_type in ("click", "dblclick", "right_click", "check") and prev_action_type == "scroll":
         _wait_for_page_settle(page, timeout_s=POST_SCROLL_SETTLE_TIMEOUT_S, quiet_window_ms=POST_SCROLL_QUIET_WINDOW_MS)
 
+    # FIX 3 (SPA not settled before click): analogous post-NAVIGATE wait -
+    # a click/check immediately preceded by a navigate is exactly where a
+    # client-rendered SPA's own skeleton/shimmer/placeholder loading state
+    # can still be on screen even after networkidle/domcontentloaded, so
+    # every locator tier below gets a real chance to see the FINAL
+    # content instead of a placeholder. See _wait_for_spa_settle_no_
+    # skeleton's own docstring; capped and non-fatal either way.
+    if action_type in ("click", "dblclick", "right_click", "check") and prev_action_type == "navigate":
+        _wait_for_spa_settle_no_skeleton(page, timeout_s=8.0)
+
     # state-dependent target readiness: a prior interaction (a size
     # pick, a toggle) can trigger the site's OWN JS to swap this step's
     # target from one state into another (a disabled "SELECT SIZE"
@@ -5408,8 +7856,18 @@ def resolve_and_act(page, step, prev_action_type=None, fast_fail=False, turbo=Fa
         ("title", lambda: _find_by_title(page, lp, attrs)),
         ("role", lambda: _find_by_role(page, lp, attrs)),
         ("href", lambda: _find_by_href(page, lp)),
-        ("text+tag", lambda: _find_by_text_tag(page, lp)),
+        ("text+tag", lambda: _find_by_text_tag(
+            page, lp, hover_chain_els=_hover_chain_els, recorded_box=step.get("bounding_box"),
+        )),
         ("text+tag", lambda: _find_by_value_text(page, lp, value, action_type)),
+        # FIX 3 (SPA not settled before click - card-banner <img> targets
+        # specifically): for a recorded <img> with alt text, tries the
+        # nearest clickable ancestor (a/button/role=button/onclick) BEFORE
+        # falling to position_fallback/css_path/xpath/bounding_box - a
+        # card banner is normally wrapped in its own link/button, and
+        # that wrapper is a far more reliable, still-clickable target than
+        # a raw <img> whose own image resource may still be loading.
+        ("image-ancestor", lambda: _find_by_image_ancestor_or_title(page, lp)),
         # only reached once every exact-content signal above (href, text)
         # has found NOTHING at all - the recorded item's identity can no
         # longer be verified on the live page (content genuinely changed
@@ -5427,6 +7885,13 @@ def resolve_and_act(page, step, prev_action_type=None, fast_fail=False, turbo=Fa
     element_found = False
     last_err = None
     position_fallback_info = {}
+    # count of candidates that resolved to SOMETHING but were rejected by
+    # _verify_resolved_target (root-cause fix, intermittent Sportzia OTP
+    # flow) - tracked separately from last_err so the final failure
+    # message (see the "could not uniquely resolve target" return below)
+    # can report how many candidates were actually considered and
+    # rejected, not just the last one's own reason.
+    target_verify_rejections = []
 
     # the tier loop itself is unchanged (same strategies, same priority
     # order, same per-tier overlay-recovery retry) - it's just wrapped in
@@ -5434,17 +7899,22 @@ def resolve_and_act(page, step, prev_action_type=None, fast_fail=False, turbo=Fa
     # before giving up and falling to the bounding_box last resort below.
     # See the settle-and-retry call site right after this definition.
     def _attempt_tiers():
-        nonlocal element_found, last_err
+        nonlocal element_found, last_err, target_verify_rejections
         _pre_action_dom_fp = [None]
         _pre_action_url = [None]
 
         def _post_click_check(el_for_fp):
-            # only click-type actions have the text/href identity
+            # click/dblclick/right_click, and "check" (widened as part
+            # of the same OTP-flow root-cause fix - a non-native "check"
+            # target dispatches a real .click() identically to the
+            # plain "click" action_type, just reached through a
+            # different recorded label - see CLICK_EFFECT_OBSERVE_
+            # TIMEOUT_S's own comment) have the text/href identity
             # _verify_post_click_identity compares - fill/select/submit/
-            # press/check all skip it trivially (inconclusive, never a
+            # press all skip it trivially (inconclusive, never a
             # failure), same as every other click-only identity check in
             # this function
-            if action_type not in ("click", "dblclick", "right_click"):
+            if action_type not in ("click", "dblclick", "right_click", "check"):
                 return True, None
             # CONFIRMED REAL BUG this fixes (a live screen recording of
             # Sportzia showed 3 clicks that visibly worked - a modal
@@ -5495,13 +7965,26 @@ def resolve_and_act(page, step, prev_action_type=None, fast_fail=False, turbo=Fa
                     _post_url = page.url
                 except Exception:
                     _post_url = None
+                # explicit detached/hidden check on the ORIGINAL target
+                # itself, on top of the existing global fingerprint
+                # comparison below - the fingerprint's own element-count
+                # signals already catch this indirectly in most cases,
+                # this is a direct, robust check for it specifically
+                # (part of the same OTP-flow root-cause fix - see
+                # CLICK_EFFECT_OBSERVE_TIMEOUT_S's own comment).
+                _target_state = _describe_target_state(el_for_fp)
+                _target_gone = not _target_state["connected"] or not _target_state["visible"]
                 dom_changed = bool(
-                    _pre_action_dom_fp[0] is not None
-                    and (_post_fp is None or _post_fp != _pre_action_dom_fp[0])
-                ) or bool(
-                    _pre_action_url[0] is not None
-                    and _post_url is not None
-                    and _post_url != _pre_action_url[0]
+                    _target_gone
+                    or (
+                        _pre_action_dom_fp[0] is not None
+                        and (_post_fp is None or _post_fp != _pre_action_dom_fp[0])
+                    )
+                    or (
+                        _pre_action_url[0] is not None
+                        and _post_url is not None
+                        and _post_url != _pre_action_url[0]
+                    )
                 )
                 if dom_changed or time.monotonic() >= _poll_deadline:
                     break
@@ -5561,8 +8044,38 @@ def resolve_and_act(page, step, prev_action_type=None, fast_fail=False, turbo=Fa
                 if not _pf_ok:
                     print(f"[position-fallback-check] REJECTED: {_pf_reason}")
                     continue
+
+            # GENERIC PRE-DISPATCH TARGET-VERIFICATION GATE (root-cause
+            # fix, intermittent Sportzia OTP flow): applies to EVERY
+            # strategy's own candidate, not just position_fallback above -
+            # see _verify_resolved_target's own docstring. A REJECTED
+            # candidate here is never clicked; this tier is skipped
+            # entirely and the next one is tried instead. This replaces
+            # relying on a post-click "did anything happen" check (which
+            # a trivial, cosmetic mutation could satisfy even on a
+            # genuine misclick) with confirming BEFORE the click that it
+            # can only land on the right place.
+            if action_type in ("click", "dblclick", "right_click", "check", "hover"):
+                _tv_ok, _tv_reason = _verify_resolved_target(page, el, lp)
+                if not _tv_ok:
+                    # FIX 4: a "not hit-testable" rejection specifically
+                    # means some OTHER element sits on top of el's own
+                    # click point - if that's a fixed/sticky cookie-
+                    # consent-shaped overlay, dismiss it (its own accept/
+                    # agree/ok button only - nothing else) and give this
+                    # exact candidate one more chance before moving on.
+                    if "not hit-testable" in _tv_reason and _maybe_dismiss_consent_overlay(page, el):
+                        _tv_ok, _tv_reason = _verify_resolved_target(page, el, lp)
+                    if not _tv_ok:
+                        print(f"[target-verify] REJECTED strategy={strategy}: {_tv_reason}")
+                        last_err = f"{strategy}: {_tv_reason}"
+                        target_verify_rejections.append(f"{strategy}: {_tv_reason}")
+                        continue
+                if _tv_ok and _tv_reason:
+                    print(f"[target-verify] PASSED WITH WARNING: {_tv_reason}")
+
             element_found = True
-            if action_type in ("click", "dblclick", "right_click"):
+            if action_type in ("click", "dblclick", "right_click", "check"):
                 _pre_action_dom_fp[0] = _capture_dom_change_fingerprint(el)
                 try:
                     _pre_action_url[0] = page.url
@@ -5581,6 +8094,12 @@ def resolve_and_act(page, step, prev_action_type=None, fast_fail=False, turbo=Fa
                     f"(#{position_fallback_info.get('position')}) instead, "
                     f"content may differ from recording"
                 )
+            elif action_type in ("click", "dblclick", "right_click", "check", "hover") and _tv_reason:
+                # BUG 1 PASS-with-warning: _verify_resolved_target's own
+                # (ok, reason) contract returns a non-None reason on
+                # SUCCESS too when its safety-net hover-reveal fired for
+                # this candidate - see that function's docstring.
+                success_note = _tv_reason
 
             # numeric-id reliability check: a purely numeric id (e.g.
             # id="7") is a strong signal of a REUSED, non-semantic,
@@ -5699,11 +8218,13 @@ def resolve_and_act(page, step, prev_action_type=None, fast_fail=False, turbo=Fa
             # one - exactly the kind of silent misclick this exists to
             # catch. Every check here is purely structural/generic (live
             # DOM ancestor walk, geometry, loose text/href comparison) -
-            # never any recorded or hardcoded site-specific string - and
-            # none of it blocks the click below: it only gives a hidden
-            # target a real chance to become genuinely visible and
-            # settled first, and warns immediately if what got resolved
-            # doesn't look like the recording's own description of it.
+            # never any recorded or hardcoded site-specific string. Most
+            # of this only gives a hidden target a real chance to become
+            # genuinely visible and settled first, and warns immediately
+            # if what got resolved doesn't look like the recording's own
+            # description of it - except an exact href mismatch, which
+            # hard-fails this tier below (see
+            # _warn_if_resolved_identity_mismatched's own docstring).
             if action_type in ("click", "dblclick", "right_click"):
                 # captured BEFORE _reveal_via_ancestor_hover runs (it's a
                 # no-op when el is already interactable) - if a genuine
@@ -5720,7 +8241,7 @@ def resolve_and_act(page, step, prev_action_type=None, fast_fail=False, turbo=Fa
                 _click_needed_hover_reveal = (
                     action_type == "click" and not _is_genuinely_interactable(el)
                 )
-                _reveal_via_ancestor_hover(page, el)
+                _reveal_via_ancestor_hover(page, el, result=result, output_json_path=output_json_path)
                 # dynamic option list (search/typeahead suggestions, a
                 # dropdown's options) still repopulating right as this
                 # step reaches it - waits for the sibling set to stop
@@ -5729,7 +8250,12 @@ def resolve_and_act(page, step, prev_action_type=None, fast_fail=False, turbo=Fa
                 # target that isn't part of a list at all
                 _wait_for_option_list_stable(page, el)
                 _wait_for_bounding_box_stable(page, el)
-                _warn_if_resolved_identity_mismatched(el, lp, action_type)
+                _identity_hard_fail, _identity_hard_fail_reason = _warn_if_resolved_identity_mismatched(el, lp, action_type)
+                if _identity_hard_fail:
+                    logger.debug("resolved via %s but identity mismatch: %s", strategy, _identity_hard_fail_reason)
+                    print(f"[misclick-check] FAILED FAST: {_identity_hard_fail_reason} (strategy={strategy})")
+                    last_err = _identity_hard_fail_reason
+                    continue
                 # click-diagnostic logging (AUTOFLOW_DEBUG only): always
                 # logs recorded vs live identity for every click, whether
                 # or not anything looks wrong - purely so two similar
@@ -5982,99 +8508,23 @@ def resolve_and_act(page, step, prev_action_type=None, fast_fail=False, turbo=Fa
                         _log_elements_from_point_stack(
                             _click_dispatch_el, _efp_x, _efp_y, label="AFTER CLICK",
                         )
-                    # generic self-correcting retry: a click that
-                    # produces literally NO observable effect (no
-                    # navigation, no new/changed content anywhere in
-                    # body, no modal-shaped overlay, no attribute change
-                    # on the clicked element or its immediate parent) is
-                    # exactly what a recorded locator resolving to a
-                    # plain wrapper/text node instead of the real
-                    # clickable hit-area looks like - the recorded
-                    # element technically "clicks" without error, but
-                    # nothing was actually listening there. Rather than
-                    # just reporting success on a click that visibly did
-                    # nothing, this looks for a genuinely interactive
-                    # element nearby (role="button"/onclick/cursor:
-                    # pointer - see _find_alternate_clickable) and
-                    # retries ONCE. Never site-specific, never gated on
-                    # any recorded text - applies to any click, on any
-                    # site, that produces zero detectable effect.
-                    if _dom_fp_before is not None:
-                        try:
-                            page.wait_for_timeout(CLICK_NO_EFFECT_WAIT_MS)
-                        except Exception:
-                            pass
-                        try:
-                            _url_after_click = page.url
-                        except Exception:
-                            _url_after_click = None
-                        try:
-                            _page_count_after_click = len(page.context.pages)
-                        except Exception:
-                            _page_count_after_click = None
-                        _opened_new_page = (
-                            _page_count_before_click is not None
-                            and _page_count_after_click is not None
-                            and _page_count_after_click > _page_count_before_click
-                        )
-                        _dom_fp_after = _capture_dom_change_fingerprint(el)
-                        _no_observable_effect = (
-                            not _opened_new_page
-                            and _url_after_click is not None
-                            and _url_after_click == _url_before_click
-                            and _dom_fp_after is not None
-                            and _dom_fp_after == _dom_fp_before
-                        )
-                        if _no_observable_effect:
-                            print(
-                                f"[click-no-effect] WARNING: click on recorded target "
-                                f"produced no detectable DOM change (strategy={strategy}) "
-                                f"- looking for the real clickable hit-area nearby and "
-                                f"retrying once"
-                            )
-                            _alt_el = _find_alternate_clickable(el)
-                            # trusted mouse events (move -> pause -> down
-                            # -> pause -> up) are the retry MECHANISM here
-                            # - a real, OS-level input sequence rather
-                            # than el.click()'s own internal dispatch -
-                            # applied regardless of whether a different
-                            # (alt_el) or the SAME (el) element ends up
-                            # being retried, since "where to click" and
-                            # "how to click" are independent fixes for
-                            # independent failure causes. Falls back to
-                            # an ordinary .click() only if the trusted
-                            # sequence itself couldn't run at all (no
-                            # measurable bounding box), never silently
-                            # skips the retry.
-                            _retry_el = _alt_el if _alt_el is not None else el
-                            _retry_desc = (
-                                "an alternate ancestor/descendant element"
-                                if _alt_el is not None else "the same recorded element"
-                            )
-                            try:
-                                if _trusted_mouse_click(page, _retry_el):
-                                    print(
-                                        f"[click-mechanism] TRUSTED MOUSE SEQUENCE used for "
-                                        f"the retry on {_retry_desc} (standard click's first "
-                                        f"attempt produced no observable effect)"
-                                    )
-                                else:
-                                    _retry_el.click(timeout=3000)
-                                    print(
-                                        f"[click-mechanism] standard click used for the retry "
-                                        f"on {_retry_desc} (target had no measurable bounding "
-                                        f"box for a trusted mouse sequence)"
-                                    )
-                                logger.debug(
-                                    "click-no-effect: retry fired on %s (strategy=%s)",
-                                    _retry_desc, strategy,
-                                )
-                            except Exception as e_alt:
-                                print(f"[click-no-effect] retry click failed: {e_alt}")
-                                logger.debug(
-                                    "click-no-effect: retry click failed (strategy=%s): %s",
-                                    strategy, e_alt,
-                                )
+                    # NO re-click here (root-cause fix for the intermittent
+                    # Sportzia OTP flow - see _verify_resolved_target's own
+                    # docstring): a click is dispatched at most once per
+                    # step. The old "no observable effect -> retry once"
+                    # mechanism this block used to have was itself the bug -
+                    # a trivial, cosmetic DOM mutation (a hover/active-state
+                    # class toggle on the clicked element) was enough to
+                    # count as "effect", so a genuine misclick (confirmed
+                    # live: the resolved element was a small icon, not the
+                    # real "Send OTP" button) was reported as SUCCESS
+                    # instead of failing. The real fix is upstream, before
+                    # this point: _verify_resolved_target already confirmed
+                    # (in the tier loop above) that el is visible, enabled,
+                    # text-consistent with what was recorded, and hit-
+                    # testable at its own center before it was ever accepted
+                    # as this step's target - there is nothing left to
+                    # verify or retry by re-clicking afterward.
                     if click_strategy_used != "standard":
                         logger.debug(
                             "smart_click used fallback strategy=%s (zero-size "
@@ -6094,6 +8544,10 @@ def resolve_and_act(page, step, prev_action_type=None, fast_fail=False, turbo=Fa
                 elif action_type == "press" and value:
                     el.press(value, timeout=5000)
                 elif action_type == "check":
+                    try:
+                        _url_before_check = page.url
+                    except Exception:
+                        _url_before_check = None
                     expected_state = step.get("expected_state")
                     if expected_state is None:
                         expected_state = True
@@ -6178,6 +8632,30 @@ def resolve_and_act(page, step, prev_action_type=None, fast_fail=False, turbo=Fa
                             f"comparison, since that comparison isn't reliable for a "
                             f"single-select/radio-style control recorded as 'check'"
                         )
+                        # FIX 2 replay-side protection: an OLDER recording
+                        # (made before the recorder's own classifier was
+                        # narrowed - see findCheckboxTarget's button/link
+                        # exclusion in action_capture.js) can still carry a
+                        # "check" step whose target has no checkbox/radio/
+                        # switch semantics at all (not role=checkbox/radio/
+                        # switch either) - a plain button/link that was
+                        # simply misclassified at record time. Rather than
+                        # let a future, stricter check ever treat that as an
+                        # error, this is reported explicitly as exactly what
+                        # it is: dispatched as an ordinary click (which is
+                        # already what happens for every non-native target
+                        # above), just labeled so it's visible in the log/
+                        # report instead of looking like a real toggle.
+                        try:
+                            _role_for_reclass = (el.get_attribute("role") or "").strip().lower()
+                        except Exception:
+                            _role_for_reclass = ""
+                        if _role_for_reclass not in ("checkbox", "radio", "switch", "menuitemcheckbox"):
+                            print(
+                                "[reclassified: toggle->click] resolved element has no "
+                                "checkbox/radio/switch semantics at all - this recorded "
+                                "'check' step is being executed as a plain click"
+                            )
 
                     if should_interact:
                         # force=True below deliberately bypasses Playwright's
@@ -6217,7 +8695,286 @@ def resolve_and_act(page, step, prev_action_type=None, fast_fail=False, turbo=Fa
                             # element); see the NOTE above for why this
                             # always runs rather than being gated on
                             # is_checked/expected_state
+                            #
+                            # ROOT-CAUSE FIX (intermittent Sportzia OTP
+                            # flow, and generically any recording where a
+                            # real button got captured as "check"): this
+                            # dispatches a real click exactly like the
+                            # plain "click" action_type elsewhere in this
+                            # function. An enabled-gate still runs before
+                            # ever force-clicking a target that's still
+                            # visually disabled. No re-click here: el was
+                            # already verified by _verify_resolved_target
+                            # in the tier loop above (visible, enabled,
+                            # text-consistent, hit-testable at its own
+                            # center) before it was ever accepted as this
+                            # step's target - the old "no observable
+                            # effect -> retry once" mechanism this used to
+                            # have was itself the bug (see the click
+                            # branch's own comment on this for the full
+                            # story: a trivial cosmetic mutation was
+                            # enough to count as "effect", masking a
+                            # genuine misclick as SUCCESS).
+                            _check_enabled, _check_enabled_reason = _wait_until_enabled(page, el)
+                            if not _check_enabled:
+                                raise RuntimeError(_check_enabled_reason)
                             el.click(timeout=5000, force=True)
+
+                        # FIX 1 (reliable post-action verification): the OLD
+                        # code re-read state straight off `el` - the ACT
+                        # target (e.g. a <label>), which for a label-wraps-
+                        # input control never carries aria-checked/class
+                        # signals at all, only the underlying input does -
+                        # AND it read once, immediately, with no settle time
+                        # for the SPA's own re-render. Confirmed as the root
+                        # cause of a real false failure (Myntra recording
+                        # session_20260925_103118.json, step 10: "20% and
+                        # above" discount filter genuinely applied - the URL
+                        # itself proves it - but verification reported
+                        # checked=False). Fixed: settle, then re-resolve the
+                        # STATE target fresh via its OWN locator_profile
+                        # (never `el`) and poll for up to 3s, accepting
+                        # ANY recorded effect (state match, the recorded
+                        # URL change, or a recorded DOM change) - see
+                        # _verify_recorded_effect's own docstring.
+                        _wait_for_settle(page)
+                        _is_radio_like = False
+                        try:
+                            _st_lp = (step.get("state_target") or {}).get("locator_profile") or {}
+                            _is_radio_like = (
+                                _st_lp.get("role") == "radio"
+                                or (_st_lp.get("attributes") or {}).get("type") == "radio"
+                                or bool(el.evaluate("e => (e.type || '').toLowerCase() === 'radio'"))
+                            )
+                        except Exception:
+                            _is_radio_like = False
+                        _effect_ok, _effect_detail = _verify_recorded_effect(
+                            page, step, next_step=next_step, url_before=_url_before_check,
+                            expected_state=expected_state, is_radio_like=_is_radio_like,
+                        )
+                        if not _effect_ok:
+                            return strategy, element_found, False, (
+                                f"toggle did not reach its recorded final state - expected "
+                                f"checked={bool(expected_state)} - {_effect_detail}"
+                            )
+                        print(f"[toggle-verify] {_effect_detail}")
+                elif action_type == "drag":
+                    try:
+                        _url_before_drag = page.url
+                    except Exception:
+                        _url_before_drag = None
+                    # FIX 3 (new "drag" action - sliders, range inputs,
+                    # drag-and-drop, sortable lists): `el` above already
+                    # resolved the SOURCE (locator_profile == source_target,
+                    # see generate_script()'s whitelist) through the exact
+                    # same tier chain every other action type uses - no
+                    # separate resolution path needed.
+                    #
+                    # Multi-thumb sliders (item 4): `el` is the source the
+                    # 12-tier chain resolved against source_target's own
+                    # profile, which is usually already the exact right
+                    # thumb - but a multi-thumb slider's several thumbs can
+                    # share a near-identical profile (same class, no
+                    # unique attribute), so `el` alone isn't guaranteed to
+                    # be THIS specific one. thumb_locator_profile (see
+                    # action_capture.js's _findSliderThumbInfo) is recorded
+                    # specifically to disambiguate that case - re-resolved
+                    # fresh here (never el's own possibly-wrong resolution)
+                    # and used for every value read/adjustment/verification
+                    # below whenever it's present, so the closed-loop
+                    # adjustment always nudges the SAME thumb that was
+                    # actually dragged, not whichever one `el` happened to
+                    # land on. Absent entirely for a single-thumb slider or
+                    # plain drag - _thumb_el then just falls back to `el`,
+                    # identical to before this existed.
+                    _thumb_lp = step.get("thumb_locator_profile")
+                    _thumb_el = _resolve_element(page, _thumb_lp) if _thumb_lp else None
+                    if _thumb_lp and _thumb_el is None:
+                        print(
+                            "[drag-thumb] recorded as a multi-thumb slider drag but this "
+                            "step's own specific thumb could not be re-resolved live - "
+                            "falling back to the general drag-source element"
+                        )
+                    _thumb_el = _thumb_el or el
+                    _drop_lp = step.get("drop_target")
+                    if step.get("html5") and _drop_lp:
+                        _drop_loc = _resolve_element(page, _drop_lp)
+                        if _drop_loc is None:
+                            raise RuntimeError(
+                                "recorded as an HTML5 drag-and-drop but the drop target "
+                                "could not be resolved live"
+                            )
+                        el.drag_to(_drop_loc, timeout=8000)
+                    else:
+                        # pointer drag: resolve the source's CURRENT box
+                        # (never the recorded one - the SPA may have moved/
+                        # resized it since recording) and replay the
+                        # recorded path as OFFSETS from that live box's
+                        # top-left, so the same relative gesture reproduces
+                        # correctly wherever the control actually sits now.
+                        try:
+                            el.scroll_into_view_if_needed(timeout=3000)
+                        except Exception:
+                            pass
+                        _box = el.bounding_box()
+                        if not _box:
+                            raise RuntimeError("drag source has no live bounding box (not visible/laid out)")
+                        _start_off = step.get("start_offset") or {"x": _box["width"] / 2, "y": _box["height"] / 2}
+                        _start_x = _box["x"] + _start_off.get("x", _box["width"] / 2)
+                        _start_y = _box["y"] + _start_off.get("y", _box["height"] / 2)
+                        _path = step.get("path") or []
+                        _delta = step.get("end_delta") or {"dx": 0, "dy": 0}
+                        _end_x = _start_x + _delta.get("dx", 0)
+                        _end_y = _start_y + _delta.get("dy", 0)
+                        page.mouse.move(_start_x, _start_y)
+                        page.mouse.down()
+                        try:
+                            _prev_x, _prev_y = _start_x, _start_y
+                            for _pt in _path:
+                                _tx = _box["x"] + _pt.get("dx", 0)
+                                _ty = _box["y"] + _pt.get("dy", 0)
+                                # steps proportional to distance - a long
+                                # hop gets a smoother synthetic path than a
+                                # short one, matching a real drag's own
+                                # continuous pointermove stream instead of
+                                # one big teleport some sliders ignore
+                                _dist = ((_tx - _prev_x) ** 2 + (_ty - _prev_y) ** 2) ** 0.5
+                                _n_steps = max(1, min(20, int(_dist / 15)))
+                                page.mouse.move(_tx, _ty, steps=_n_steps)
+                                _prev_x, _prev_y = _tx, _ty
+                            # ALWAYS finish at the recorded exact release
+                            # point (derived from end_delta, captured
+                            # straight from the real mouseup coordinates -
+                            # never subject to the path array's own ~40ms
+                            # sampling throttle/20-point cap, which can
+                            # easily miss the true final position for a
+                            # fast drag with few intermediate samples).
+                            # Sampled path points above are purely for a
+                            # smoother, more realistic intermediate motion;
+                            # this is what makes the final value correct.
+                            if (_prev_x, _prev_y) != (_end_x, _end_y):
+                                _dist = ((_end_x - _prev_x) ** 2 + (_end_y - _prev_y) ** 2) ** 0.5
+                                page.mouse.move(_end_x, _end_y, steps=max(1, min(20, int(_dist / 15))))
+                        finally:
+                            page.mouse.up()
+
+                    # FIX 1 (verification): a slider/range control's own
+                    # before/after value snapshot (see action_capture.js's
+                    # _captureDragValueSnapshot) - closed-loop adjustment
+                    # when the drag alone didn't land exactly on the
+                    # recorded final value, same idea as a fill's own
+                    # verify-and-retry loop. Never runs at all for a drag
+                    # with no detectable slider/range value (a plain
+                    # reorder/drop gesture) - _verify_recorded_effect's own
+                    # URL/DOM-change signals cover that case instead, below.
+                    _value_after = step.get("value_after")
+                    if _value_after:
+                        _adjust_deadline = time.monotonic() + 2.0
+                        while time.monotonic() < _adjust_deadline:
+                            try:
+                                _cur_kind = _value_after.get("kind")
+                                if _cur_kind == "range_value" and _thumb_el.evaluate("e => e.tagName === 'INPUT'"):
+                                    _cur_val = _thumb_el.input_value(timeout=1000)
+                                    _target_val = _value_after.get("value")
+                                    if _cur_val == _target_val:
+                                        break
+                                    try:
+                                        _cur_f, _tgt_f = float(_cur_val), float(_target_val)
+                                        _key = "ArrowRight" if _tgt_f > _cur_f else "ArrowLeft"
+                                        _thumb_el.press(_key, timeout=1000)
+                                    except Exception:
+                                        break
+                                else:
+                                    # aria_value/nearby_text - no well-defined
+                                    # keyboard nudge exists generically; a tiny
+                                    # extra mouse nudge in the recorded drag
+                                    # direction is the only generic retry that
+                                    # makes sense here, then re-check via
+                                    # _verify_recorded_effect below regardless
+                                    break
+                            except Exception:
+                                break
+                            try:
+                                page.wait_for_timeout(150)
+                            except Exception:
+                                break
+
+                    _wait_for_settle(page)
+                    if _value_after:
+                        # direct value comparison is the strongest, most
+                        # precise signal available here - re-read fresh
+                        # rather than trusting whatever the closed-loop
+                        # adjustment above last saw. Falls through to the
+                        # generic URL/DOM-effect check below only when this
+                        # exact value can no longer even be read (control
+                        # detached/replaced) - never silently ignored.
+                        try:
+                            _cur_final = _captureDragValueSnapshot_py(_thumb_el)
+                        except Exception:
+                            _cur_final = None
+                        if _cur_final is not None:
+                            if _cur_final == _value_after:
+                                print(f"[drag-verify] value_target reads {_cur_final!r} (matches recorded)")
+                            else:
+                                return strategy, element_found, False, (
+                                    f"drag did not reach its recorded final value - expected "
+                                    f"{_value_after!r}, got {_cur_final!r}"
+                                )
+                        else:
+                            _drag_effect_ok, _drag_effect_detail = _verify_recorded_effect(
+                                page, step, next_step=next_step, url_before=_url_before_drag, expected_state=None,
+                            )
+                            if not _drag_effect_ok:
+                                return strategy, element_found, False, (
+                                    f"drag's own value control could no longer be read after the "
+                                    f"drag, and no other recorded effect was observed - {_drag_effect_detail}"
+                                )
+                            print(f"[drag-verify] {_drag_effect_detail}")
+                    else:
+                        _drag_effect_ok, _drag_effect_detail = _verify_recorded_effect(
+                            page, step, next_step=next_step, url_before=_url_before_drag, expected_state=None,
+                        )
+                        if not _drag_effect_ok:
+                            return strategy, element_found, False, (
+                                f"drag produced no observable effect - {_drag_effect_detail}"
+                            )
+                        print(f"[drag-verify] {_drag_effect_detail}")
+                elif action_type == "hover":
+                    # BUG 1: hover-revealed menu recorded as its own step
+                    # (see the recorder-side pendingHover/emit logic in
+                    # action_capture.js) - just hover el itself; no
+                    # descendant-click-target resolution, hit-testing, dom-
+                    # fingerprint, or new-tab detection applies here (those
+                    # are all click-only concerns further up this same
+                    # function), and the tier loop above (including the
+                    # _verify_resolved_target gate's own ancestor+sibling
+                    # hover-reveal fallback) already resolved el using the
+                    # exact same tiers a click target would use.
+                    el.hover(timeout=5000)
+                    # FIX 1.4/postcondition: a hover step recorded its own
+                    # "expect" (what it actually revealed at record time -
+                    # see action_capture.js's own hoverChain emission) -
+                    # PASS this step only if that same thing genuinely
+                    # became visible after hovering, not merely because
+                    # .hover() itself didn't raise (hovering the WRONG
+                    # element, or a page that's since changed so this
+                    # hover no longer reveals anything, both still
+                    # "succeed" at the bare .hover() call). Bounded to 3s,
+                    # same budget as the informational wait in the main
+                    # loop; absent/unparseable expect (an older recording)
+                    # skips this entirely, unchanged from before this
+                    # existed.
+                    _hover_expect = step.get("expect") or {}
+                    if _hover_expect.get("type") == "reveal" and _hover_expect.get("revealed_locator_profile"):
+                        _reveal_ready = _wait_for_hover_reveal(
+                            page, {"locator_profile": _hover_expect["revealed_locator_profile"]}, timeout_s=3.0,
+                        )
+                        if not _reveal_ready:
+                            return strategy, element_found, False, (
+                                "hover did not reveal its recorded target within 3s - "
+                                "the page may have changed since this was recorded, or "
+                                "this hovered the wrong trigger"
+                            )
                 # post-click identity check: the click just fired for
                 # real - if what actually ended up focused doesn't match
                 # what was recorded, this is a confirmed misclick, and
@@ -6269,6 +9026,16 @@ def resolve_and_act(page, step, prev_action_type=None, fast_fail=False, turbo=Fa
                     and not _is_zero_size_element(el)
                 ):
                     try:
+                        # ROOT-CAUSE FIX (H2, confirmed): every force=True
+                        # dispatch in this fallback used to skip straight
+                        # past Playwright's own enabled check along with
+                        # its visibility one - never safe, since a
+                        # genuinely disabled target would silently
+                        # "succeed" here too. Bounded, condition-based
+                        # wait; never force-clicks a still-disabled target.
+                        _fb_enabled, _fb_enabled_reason = _wait_until_enabled(page, el)
+                        if not _fb_enabled:
+                            raise RuntimeError(_fb_enabled_reason)
                         if action_type == "click":
                             el.click(timeout=5000, force=True)
                         else:
@@ -6358,6 +9125,19 @@ def resolve_and_act(page, step, prev_action_type=None, fast_fail=False, turbo=Fa
                 continue
         return None
 
+    # FIX 2 (resolution timing): a cheap, always-on "DOM mutation quiet"
+    # check before the FIRST resolution attempt, on top of the heavier,
+    # already-tuned waits above (which only fire for specific preceding-
+    # action shapes - post-navigate, post-scroll, state-dependent). This
+    # one is unconditional but deliberately tiny (~300ms cap): a page
+    # that's already quiet (the overwhelmingly common case) returns almost
+    # immediately, so it doesn't meaningfully add up across a long
+    # recording, but a step whose target was JUST mutated in a way none of
+    # the more specific waits above were watching for (e.g. an unrelated
+    # background widget re-rendering, or an action type not covered by
+    # those gates) still gets a real, brief chance to settle before the
+    # tier search below ever runs, instead of racing it.
+    _wait_for_settle(page, timeout_s=0.3, quiet_ms=150)
     first_attempt = _attempt_tiers()
     if first_attempt is not None:
         return first_attempt
@@ -6396,82 +9176,142 @@ def resolve_and_act(page, step, prev_action_type=None, fast_fail=False, turbo=Fa
             )
             return retry_attempt
 
-        # scroll-and-recheck: covers infinite-scroll/lazy-loaded content that
-        # genuinely doesn't exist in the DOM yet, no matter how long the
-        # settle wait above lasted - the site only renders it once the page
-        # is actually scrolled near its position. One small, incremental
-        # scroll at a time (reusing _replay_scroll exactly as the scroll
-        # action itself already does - not one big jump), then a settle wait
-        # before rechecking. This reuses _settle() rather than
-        # _wait_for_next_step_ready() (already used once, above, for the
-        # single one-time wait before this loop): _settle() is the SAME
-        # settle utility used for post-navigation readiness throughout this
-        # file, and its own docstring is this exact scenario - "domcontent
-        # fires before JS-heavy sites finish rendering the elements a step
-        # is about to look for". _wait_for_next_step_ready() polls for up to
-        # 9s per call, which is appropriate for the single one-time wait
-        # above, but multiplying that across several scroll iterations is
-        # exactly the "stuck for dozens of seconds" symptom this fix exists
-        # to eliminate, not reproduce. Every standard strategy is tried
-        # again after each settle. Bounded entirely by the page's OWN real
-        # state, never a fixed count: it stops the moment a scroll genuinely
-        # produces no further movement AND no further document growth, i.e.
-        # the page has actually reached the end of what it has to offer -
-        # there's nothing further down that scrolling could ever reveal past
-        # that point.
-        try:
-            prev_scroll_height = page.evaluate("document.body.scrollHeight")
-            prev_scroll_y = page.evaluate("window.scrollY")
-        except Exception:
-            prev_scroll_height = None
-            prev_scroll_y = None
-
-        scroll_increment_count = 0
-        while prev_scroll_height is not None:
-            try:
-                viewport_height = page.evaluate("window.innerHeight") or 600
-            except Exception:
-                viewport_height = 600
-            # a fraction of the viewport per hop - a real user scrolling to
-            # find something moves the page a bit at a time, not a full jump
-            increment = max(1, int(viewport_height * 0.6))
-
+        # BUG 3/1: scroll-and-recheck is for content that genuinely isn't
+        # IN THE DOM yet (infinite-scroll/lazy-loaded) - it must never run
+        # for a target that WAS found (some tier matched it) but is
+        # attached-and-hidden, since _verify_resolved_target's own gate
+        # (see its docstring) already gave that exact case a real chance
+        # via _reveal_via_ancestor_hover (ancestors + their visible
+        # siblings) before rejecting it. Scrolling the whole page looking
+        # for something that's already known to be sitting right there,
+        # just hidden behind a menu that hover-reveal couldn't open, only
+        # ever wastes time and risks landing on a same-page different
+        # element by coincidence (the exact bounding_box misclick this
+        # was reported against). Detected generically via the same
+        # target_verify_rejections list the final "could not uniquely
+        # resolve" error message below already reads.
+        _found_but_hidden = any(
+            "not visible" in _r.lower() for _r in target_verify_rejections
+        )
+        if _found_but_hidden:
             logger.debug(
-                "scroll-and-recheck: attempt %d, scrolling %dpx to look for the target",
-                scroll_increment_count + 1, increment,
+                "skipping scroll-and-recheck: target was found but stayed "
+                "hidden after hover-reveal was already attempted - not a "
+                "not-yet-rendered/infinite-scroll case"
             )
+        elif time.monotonic() >= _step_deadline:
+            # FIX 2.f: this step has already spent its whole time budget
+            # on cheaper tiers - starting a whole new scroll-and-recheck
+            # round now is exactly the kind of uncapped escalation that
+            # produced the ~40s-per-failed-step symptom this budget
+            # exists to bound.
+            logger.debug("skipping scroll-and-recheck: step time budget already exhausted")
+        else:
+            # scroll-and-recheck: covers infinite-scroll/lazy-loaded content
+            # that genuinely doesn't exist in the DOM yet, no matter how long
+            # the settle wait above lasted - the site only renders it once
+            # the page is actually scrolled near its position. One small,
+            # incremental scroll at a time (reusing _replay_scroll exactly as
+            # the scroll action itself already does - not one big jump), then
+            # a settle wait before rechecking. This reuses _settle() rather
+            # than _wait_for_next_step_ready() (already used once, above, for
+            # the single one-time wait before this loop): _settle() is the
+            # SAME settle utility used for post-navigation readiness
+            # throughout this file, and its own docstring is this exact
+            # scenario - "domcontent fires before JS-heavy sites finish
+            # rendering the elements a step is about to look for".
+            # _wait_for_next_step_ready() polls for up to 9s per call, which
+            # is appropriate for the single one-time wait above, but
+            # multiplying that across several scroll iterations is exactly
+            # the "stuck for dozens of seconds" symptom this fix exists to
+            # eliminate, not reproduce. Every standard strategy is tried
+            # again after each settle. Bounded by the page's OWN real state
+            # (stops the moment a scroll genuinely produces no further
+            # movement AND no further document growth) AND by a hard 10s
+            # wall-clock cap (BUG 1/3) - a very tall/near-infinite page could
+            # otherwise keep "growing" just enough each hop to never trip the
+            # no-further-movement stop, which is exactly the ~40s scroll-to-
+            # footer symptom this cap exists to bound. If the target is
+            # never found, the scroll position is restored to wherever it
+            # was before this tier started (BUG 3), so a failed search here
+            # never leaves a later step reading the wrong part of the page.
             try:
-                _replay_scroll(page, 0, increment)
+                _scroll_search_original_y = page.evaluate("window.scrollY")
             except Exception:
-                break
-            scroll_increment_count += 1
-
-            _settle(page)
-
-            retry_after_scroll = _attempt_tiers()
-            if retry_after_scroll is not None:
-                logger.debug(
-                    "step resolved via scroll-and-recheck after %d increment(s)",
-                    scroll_increment_count,
-                )
-                return retry_after_scroll
-
+                _scroll_search_original_y = None
             try:
-                new_scroll_height = page.evaluate("document.body.scrollHeight")
-                new_scroll_y = page.evaluate("window.scrollY")
+                prev_scroll_height = page.evaluate("document.body.scrollHeight")
+                prev_scroll_y = page.evaluate("window.scrollY")
             except Exception:
-                new_scroll_height, new_scroll_y = None, None
+                prev_scroll_height = None
+                prev_scroll_y = None
 
-            if new_scroll_height == prev_scroll_height and new_scroll_y == prev_scroll_y:
+            _scroll_search_deadline = time.monotonic() + 10.0
+            scroll_increment_count = 0
+            while prev_scroll_height is not None and time.monotonic() < _scroll_search_deadline:
+                try:
+                    viewport_height = page.evaluate("window.innerHeight") or 600
+                except Exception:
+                    viewport_height = 600
+                # a fraction of the viewport per hop - a real user scrolling to
+                # find something moves the page a bit at a time, not a full jump
+                increment = max(1, int(viewport_height * 0.6))
+
                 logger.debug(
-                    "scroll-and-recheck: stopping after %d increment(s) - "
-                    "reached the end of the page's scrollable content",
-                    scroll_increment_count,
+                    "scroll-and-recheck: attempt %d, scrolling %dpx to look for the target",
+                    scroll_increment_count + 1, increment,
                 )
-                break
+                try:
+                    _replay_scroll(page, 0, increment)
+                except Exception:
+                    break
+                scroll_increment_count += 1
 
-            prev_scroll_height = new_scroll_height
-            prev_scroll_y = new_scroll_y
+                _settle(page)
+
+                retry_after_scroll = _attempt_tiers()
+                if retry_after_scroll is not None:
+                    logger.debug(
+                        "step resolved via scroll-and-recheck after %d increment(s)",
+                        scroll_increment_count,
+                    )
+                    return retry_after_scroll
+
+                try:
+                    new_scroll_height = page.evaluate("document.body.scrollHeight")
+                    new_scroll_y = page.evaluate("window.scrollY")
+                except Exception:
+                    new_scroll_height, new_scroll_y = None, None
+
+                if new_scroll_height == prev_scroll_height and new_scroll_y == prev_scroll_y:
+                    logger.debug(
+                        "scroll-and-recheck: stopping after %d increment(s) - "
+                        "reached the end of the page's scrollable content",
+                        scroll_increment_count,
+                    )
+                    break
+
+                prev_scroll_height = new_scroll_height
+                prev_scroll_y = new_scroll_y
+            else:
+                if prev_scroll_height is not None and scroll_increment_count:
+                    logger.debug(
+                        "scroll-and-recheck: stopping after %d increment(s) - "
+                        "hit the 10s cap without finding the target",
+                        scroll_increment_count,
+                    )
+
+            # give up on this tier: restore the scroll position it started
+            # from (BUG 3) rather than leaving the page wherever the last
+            # increment landed - a subsequent bounding_box fallback or the
+            # next step entirely must not inherit this tier's own scroll
+            # drift.
+            if scroll_increment_count and _scroll_search_original_y is not None:
+                try:
+                    page.evaluate("(y) => window.scrollTo(0, y)", _scroll_search_original_y)
+                    _settle(page)
+                except Exception:
+                    pass
 
     else:
         logger.debug(
@@ -6602,27 +9442,89 @@ def resolve_and_act(page, step, prev_action_type=None, fast_fail=False, turbo=Fa
         if role_text_el is not None:
             try:
                 role_text_el.scroll_into_view_if_needed(timeout=5000)
-                if action_type == "click":
-                    smart_click(page, role_text_el)
-                elif action_type == "dblclick":
-                    role_text_el.dblclick(timeout=5000)
+                # PRE-click identity + hit-test, the same two gates the
+                # main tier loop above already applies to every one of
+                # its own tiers - CONFIRMED GAP this closes (found while
+                # tracing a live myntra.com misclick): this branch
+                # previously only verified identity AFTER clicking
+                # (_verify_post_click_identity below), which is blind
+                # exactly when the click itself navigates the page away
+                # (any real link) - by the time that check runs, the
+                # original element is already gone and there is nothing
+                # meaningful left to compare against, so a wrong-but-
+                # text-matching element's click was never actually
+                # caught. Checking here, before the click fires, catches
+                # it while the target (right or wrong) is still on-screen
+                # to inspect - falls through to the raw bounding-box
+                # fallback below on a confirmed mismatch, exactly like a
+                # failed tier anywhere else in this function. Both checks
+                # matter and catch different things: identity compares
+                # this element's OWN recorded-vs-live text/href (href
+                # takes priority - see _identity_hit_matches); hit-test
+                # separately confirms the click coordinate itself isn't
+                # actually landing on some OTHER, overlapping element.
+                _rtr_identity_hard_fail, _rtr_identity_reason = _warn_if_resolved_identity_mismatched(role_text_el, lp, action_type)
+                if _rtr_identity_hard_fail:
+                    _rtr_hit_ok, _rtr_hit_reason = False, _rtr_identity_reason
                 else:
-                    role_text_el.click(timeout=5000, button="right")
-                post_ok, post_reason = _verify_post_click_identity(page, lp)
-                if not post_ok:
-                    print(f"[misclick-check] FAILED (post-click): {post_reason}")
-                    return "role_text_refresh", True, False, post_reason
-                logger.debug("step resolved via strategy=role_text_refresh")
-                note = (
-                    "recorded click position was stale (or every other "
-                    "locator signal failed) - re-resolved the target live "
-                    "via role/accessible-name/text instead of the "
-                    "recorded coordinate"
-                )
-                print(f"[role-text-refresh] {note}")
-                return "role_text_refresh", True, True, note
+                    _rtr_hit_ok, _rtr_hit_reason = _verify_click_target_hit_test(page, role_text_el, lp)
+                if _rtr_hit_ok:
+                    if action_type == "click":
+                        smart_click(page, role_text_el)
+                    elif action_type == "dblclick":
+                        role_text_el.dblclick(timeout=5000)
+                    else:
+                        role_text_el.click(timeout=5000, button="right")
+                    post_ok, post_reason = _verify_post_click_identity(page, lp)
+                    if not post_ok:
+                        print(f"[misclick-check] FAILED (post-click): {post_reason}")
+                        return "role_text_refresh", True, False, post_reason
+                    logger.debug("step resolved via strategy=role_text_refresh")
+                    note = (
+                        "recorded click position was stale (or every other "
+                        "locator signal failed) - re-resolved the target live "
+                        "via role/accessible-name/text instead of the "
+                        "recorded coordinate"
+                    )
+                    print(f"[role-text-refresh] {note}")
+                    return "role_text_refresh", True, True, note
+                else:
+                    print(f"[misclick-check] FAILED FAST: {_rtr_hit_reason} (strategy=role_text_refresh)")
+                    last_err = _rtr_hit_reason
             except Exception as e:
                 last_err = str(e)
+
+    # RC1 (hidden native input as target): every normal tier above has
+    # now failed to resolve act_target/locator_profile at all - before
+    # falling all the way to a blind coordinate click, try deriving a
+    # VISIBLE proxy from this step's own recorded state_target (the
+    # underlying checkbox/radio input's own locator, if any - see
+    # action_capture.js's own buildProfile). A precise, semantically
+    # correct fallback (click the real wrapping label/row) is always
+    # preferable to a raw coordinate guess when it's available at all.
+    if action_type in ("click", "dblclick", "right_click", "check") and step.get("state_target"):
+        _proxy_el, _proxy_input_el = _derive_visible_proxy_from_state_target(page, step.get("state_target"))
+        if _proxy_el is not None:
+            try:
+                _proxy_el.scroll_into_view_if_needed(timeout=5000)
+                if action_type == "dblclick":
+                    _proxy_el.dblclick(timeout=5000)
+                elif action_type == "right_click":
+                    _proxy_el.click(timeout=5000, button="right")
+                else:
+                    _proxy_el.click(timeout=5000)
+                print(
+                    "[state-target-proxy] act_target could not be resolved - clicked a "
+                    "visible proxy (wrapping label/row) derived from this step's own "
+                    "recorded state_target instead"
+                )
+                return "state_target_proxy", True, True, (
+                    "act_target could not be resolved live - clicked a visible proxy "
+                    "derived from the recorded state_target (underlying checkbox/radio "
+                    "input) instead; consider re-recording this step"
+                )
+            except Exception as e:
+                last_err = f"state_target proxy click failed: {e}"
 
     # bounding box is a last resort for click-type actions only - selects/
     # submits/keypresses need a real element to act on, a blind coordinate
@@ -6636,71 +9538,134 @@ def resolve_and_act(page, step, prev_action_type=None, fast_fail=False, turbo=Fa
     # BOTH dimensions are zero occupies no space at all and is skipped.
     box = step.get("bounding_box")
     if action_type in ("click", "dblclick", "right_click") and box and (box.get("width") or box.get("height")):
-        try:
-            x = box["x"] + box["width"] / 2
-            y = box["y"] + box["height"] / 2
-            # a blind coordinate click is only real evidence of an
-            # interaction if something is actually rendered there right
-            # now - on a stale/wrong/not-yet-loaded page this coordinate
-            # can just be empty page background, and clicking it would
-            # silently "succeed" while doing nothing real, masking
-            # exactly the kind of navigation-timing problem this tier
-            # exists to be a last resort for, not a cover for. Checking
-            # what's really at (x, y) first means this fallback can never
-            # manufacture false confidence that a page is ready when it
-            # isn't - on any site, for any click-type action.
-            real_target = page.evaluate(
-                "([px, py]) => { "
-                "const el = document.elementFromPoint(px, py); "
-                "if (!el) return null; "
-                "const link = el.closest('a'); "
-                "return { "
-                "isPageBackground: el === document.body || el === document.documentElement, "
-                "text: (el.innerText || '').trim().slice(0, 80), "
-                "href: link ? link.getAttribute('href') : null, "
-                "ariaLabel: el.getAttribute('aria-label') "
-                "}; "
-                "}",
-                [x, y],
-            )
-            if not real_target or real_target.get("isPageBackground"):
-                return "bounding_box", element_found, False, (
-                    "bounding box fallback found no real element at the recorded position"
+        # FIX 3: content-mismatch here often just means the SPA hadn't
+        # finished rendering by the time every earlier tier (and this
+        # raw-coordinate check) already ran - up to 2 more full passes,
+        # with backoff, before this is finally treated as a permanent
+        # mismatch. The mismatch GUARD itself (_identity_hit_matches) is
+        # completely unchanged; only whether the whole resolution gets
+        # one more chance on a mismatch is new.
+        # BUG 3 (scroll leak across steps): box's x/y were captured
+        # VIEWPORT-relative (getBoundingClientRect()) at record time - if
+        # this page's own scroll position has since drifted (an earlier
+        # step's scroll-and-recheck tier, a lazy-load auto-scroll,
+        # anything), the SAME raw coordinate now points at something
+        # completely different. Restoring the recorded scroll_x/scroll_y
+        # (when present - older recordings made before this field existed
+        # simply skip this, unchanged) before trusting the coordinate is
+        # what actually keeps this fallback pointed at the right place.
+        _bbox_scroll_x = step.get("scroll_x")
+        _bbox_scroll_y = step.get("scroll_y")
+        if _bbox_scroll_x is not None or _bbox_scroll_y is not None:
+            try:
+                page.evaluate(
+                    "([sx, sy]) => window.scrollTo(sx || 0, sy || 0)",
+                    [_bbox_scroll_x, _bbox_scroll_y],
                 )
-            # same hard identity gate the tier loop's own hit-test already
-            # applies (_verify_click_target_hit_test / _identity_hit_matches)
-            # - this raw coordinate click has no resolved Locator to run that
-            # check against directly, but the recorded locator_profile's own
-            # text/aria-label/href is exactly the same signal, compared
-            # against whatever elementFromPoint() reports is really at this
-            # position. Without this, a click that every tier above already
-            # refused (because the recorded target is confirmed to be
-            # somewhere else - an adjacent overlapping link, say) would still
-            # reach here and dispatch a raw click at the wrong element,
-            # silently reported as success whenever an earlier tier had at
-            # least LOCATED the recorded element by selector (element_found).
-            hit_ok, hit_reason = _identity_hit_matches(lp, real_target, "recorded click position")
-            if not hit_ok:
-                print(f"[misclick-check] FAILED FAST: {hit_reason} (strategy=bounding_box)")
-                return "bounding_box", element_found, False, hit_reason
-            if action_type == "dblclick":
-                page.mouse.dblclick(x, y)
-            elif action_type == "right_click":
-                page.mouse.click(x, y, button="right")
-            else:
-                page.mouse.click(x, y)
-            # element_found reflects whether any EARLIER tier ever
-            # actually located the recorded, intended element - a blind
-            # coordinate click that never verified it hit that element
-            # (element_found is False here in the common case: nothing
-            # above found anything at all) must never be reported as a
-            # success just because the click itself didn't raise. When
-            # an earlier tier DID find the real element but couldn't
-            # interact with it through normal means, this mirrors that
-            # genuine finding instead.
-            return "bounding_box", element_found, element_found, None
-        except Exception as e:
-            return "bounding_box", element_found, False, f"coordinate click failed: {e}"
+            except Exception:
+                pass
+
+        _bbox_backoffs_s = [1.0, 2.0]
+        _bbox_attempt = 0
+        while True:
+            try:
+                x = box["x"] + box["width"] / 2
+                y = box["y"] + box["height"] / 2
+                # a blind coordinate click is only real evidence of an
+                # interaction if something is actually rendered there right
+                # now - on a stale/wrong/not-yet-loaded page this coordinate
+                # can just be empty page background, and clicking it would
+                # silently "succeed" while doing nothing real, masking
+                # exactly the kind of navigation-timing problem this tier
+                # exists to be a last resort for, not a cover for. Checking
+                # what's really at (x, y) first means this fallback can never
+                # manufacture false confidence that a page is ready when it
+                # isn't - on any site, for any click-type action.
+                real_target = page.evaluate(
+                    "([px, py]) => { "
+                    "const el = document.elementFromPoint(px, py); "
+                    "if (!el) return null; "
+                    "const link = el.closest('a'); "
+                    "return { "
+                    "isPageBackground: el === document.body || el === document.documentElement, "
+                    "text: (el.innerText || '').trim().slice(0, 80), "
+                    "href: link ? link.getAttribute('href') : null, "
+                    "ariaLabel: el.getAttribute('aria-label') "
+                    "}; "
+                    "}",
+                    [x, y],
+                )
+                if not real_target or real_target.get("isPageBackground"):
+                    return "bounding_box", element_found, False, (
+                        "bounding box fallback found no real element at the recorded position"
+                    )
+                # same hard identity gate the tier loop's own hit-test already
+                # applies (_verify_click_target_hit_test / _identity_hit_matches)
+                # - this raw coordinate click has no resolved Locator to run that
+                # check against directly, but the recorded locator_profile's own
+                # text/aria-label/href is exactly the same signal, compared
+                # against whatever elementFromPoint() reports is really at this
+                # position. Without this, a click that every tier above already
+                # refused (because the recorded target is confirmed to be
+                # somewhere else - an adjacent overlapping link, say) would still
+                # reach here and dispatch a raw click at the wrong element,
+                # silently reported as success whenever an earlier tier had at
+                # least LOCATED the recorded element by selector (element_found).
+                hit_ok, hit_reason = _identity_hit_matches(lp, real_target, "recorded click position")
+                if not hit_ok:
+                    if _bbox_attempt < len(_bbox_backoffs_s) and time.monotonic() < _step_deadline:
+                        _wait_s = _bbox_backoffs_s[_bbox_attempt]
+                        _bbox_attempt += 1
+                        print(
+                            f"[bounding-box-retry] content-mismatch ({hit_reason}) - "
+                            f"waiting {_wait_s:.0f}s and retrying the full tier chain "
+                            f"(attempt {_bbox_attempt}/{len(_bbox_backoffs_s)})"
+                        )
+                        try:
+                            page.wait_for_timeout(int(_wait_s * 1000))
+                        except Exception:
+                            pass
+                        _settle(page)
+                        _retry_result = _attempt_tiers()
+                        if _retry_result is not None:
+                            return _retry_result
+                        continue
+                    print(f"[misclick-check] FAILED FAST: {hit_reason} (strategy=bounding_box)")
+                    return "bounding_box", element_found, False, hit_reason
+                if action_type == "dblclick":
+                    page.mouse.dblclick(x, y)
+                elif action_type == "right_click":
+                    page.mouse.click(x, y, button="right")
+                else:
+                    page.mouse.click(x, y)
+                # element_found reflects whether any EARLIER tier ever
+                # actually located the recorded, intended element - a blind
+                # coordinate click that never verified it hit that element
+                # (element_found is False here in the common case: nothing
+                # above found anything at all) must never be reported as a
+                # success just because the click itself didn't raise. When
+                # an earlier tier DID find the real element but couldn't
+                # interact with it through normal means, this mirrors that
+                # genuine finding instead.
+                return "bounding_box", element_found, element_found, None
+            except Exception as e:
+                return "bounding_box", element_found, False, f"coordinate click failed: {e}"
+
+    # explicit, honest failure (root-cause fix, intermittent Sportzia OTP
+    # flow): one or more strategies DID resolve a candidate for this
+    # click/check, but every one of them was rejected by
+    # _verify_resolved_target (not visible/enabled, hit-testable at its
+    # own center, or text-consistent with what was recorded) - this is
+    # never silently treated as "no element found" (which would look
+    # identical to a page that simply hasn't loaded yet); it is reported
+    # as exactly what it is, so a step whose only candidates are
+    # confirmed wrong fails clearly instead of guessing.
+    if action_type in ("click", "dblclick", "right_click", "check") and target_verify_rejections:
+        return None, element_found, False, (
+            f"could not uniquely resolve target: {len(target_verify_rejections)} "
+            f"candidate(s) considered, none hit-testable/text-consistent "
+            f"({'; '.join(target_verify_rejections[:5])})"
+        )
 
     return None, element_found, False, last_err
 
@@ -6708,6 +9673,7 @@ def resolve_and_act(page, step, prev_action_type=None, fast_fail=False, turbo=Fa
 def _resolve_and_act_with_retry(
     page, step, retry_budget_s=4.5, retry_interval_s=0.35,
     prev_action_type=None, fast_fail=False,
+    report_result=None, output_json_path=None, next_step=None,
 ):
     """fill/select actions are the ones exposed to a different failure mode
     than click-type actions: the target can genuinely not exist in the DOM
@@ -6730,9 +9696,16 @@ def _resolve_and_act_with_retry(
     Click/dblclick/right_click/submit/press are unaffected - only
     fill/select get this treatment, and only because they're the ones
     actually exposed to this timing gap.
+
+    report_result/output_json_path (both optional) are forwarded to
+    resolve_and_act's own same-named result/output_json_path params
+    (renamed here only to avoid colliding with this function's own
+    local `result` variable below, which holds resolve_and_act's
+    RETURN tuple, not the report dict) - see resolve_and_act's own
+    docstring for what they're actually used for.
     """
     if step.get("action_type") not in ("fill", "select"):
-        return resolve_and_act(page, step, prev_action_type=prev_action_type, fast_fail=fast_fail)
+        return resolve_and_act(page, step, prev_action_type=prev_action_type, fast_fail=fast_fail, result=report_result, output_json_path=output_json_path, next_step=next_step)
 
     # CRITICAL - DO NOT REMOVE OR SHORTEN THIS RETRY LOOP. This fixes a
     # bug that has already broken and been re-fixed multiple times:
@@ -6756,12 +9729,12 @@ def _resolve_and_act_with_retry(
     deadline = start + retry_budget_s
     attempt = 1
     print(f"[fill-retry] attempt {attempt} for {target_desc!r} at t=0.0s")
-    result = resolve_and_act(page, step, prev_action_type=prev_action_type, fast_fail=fast_fail)
+    result = resolve_and_act(page, step, prev_action_type=prev_action_type, fast_fail=fast_fail, result=report_result, output_json_path=output_json_path, next_step=next_step)
     while not result[2] and time.monotonic() < deadline:
         page.wait_for_timeout(int(retry_interval_s * 1000))
         attempt += 1
         print(f"[fill-retry] attempt {attempt} for {target_desc!r} at t={time.monotonic() - start:.1f}s")
-        result = resolve_and_act(page, step, prev_action_type=prev_action_type, fast_fail=fast_fail)
+        result = resolve_and_act(page, step, prev_action_type=prev_action_type, fast_fail=fast_fail, result=report_result, output_json_path=output_json_path, next_step=next_step)
 
     if not result[2]:
         _diagnose_fill_select_failure(page, target_desc)
@@ -6859,19 +9832,37 @@ def _get_valid_open_page(pages, preferred=None):
     return None
 
 
-def _resolve_target_page(pages, target_page_id, anchor_page, fallback_url=None, wait_seconds=5):
-    """Returns (page_or_None, reason) for the page a step with this
-    page_id should execute against. reason is None on success, or a
-    concrete explanation of why resolution failed - callers must surface
-    it rather than let a page-mismatch fail silently with no clue why.
+def _resolve_target_page(pages, target_page_id, anchor_page, fallback_url=None, wait_seconds=5, allow_fallback=True):
+    """Returns (page_or_None, reason, via_fallback) for the page a step
+    with this page_id should execute against. reason is None on success,
+    or a concrete explanation of why resolution failed - callers must
+    surface it rather than let a page-mismatch fail silently with no
+    clue why.
 
     The common case (page already known - almost always page_id 0)
     returns immediately with no waiting at all. A page_id that hasn't
-    appeared yet is given a short window to show up via the context's
-    "page" event (it's usually mid-flight from the click that immediately
+    appeared yet is given a window to show up via the context's "page"
+    event (it's usually mid-flight from the click that immediately
     preceded this step) before falling back to opening it directly at the
     recorded URL, so a popup that doesn't fire identically on this run
     still doesn't stall or silently misdirect the action to the wrong page.
+
+    ITEM 7: via_fallback is True only when that last resort - a manually
+    created + manually navigated page, never a real popup the browser
+    itself reported via its own "page" event - is what actually produced
+    the returned page.
+
+    allow_fallback=False (new) skips that last resort entirely: once the
+    wait window elapses with no real "page" event, this returns
+    (None, reason, False) rather than ever calling context.new_page().
+    tab_open (see its own handling in run()'s main loop) passes this,
+    because a manufactured page is never accepted as a valid tab_open
+    result anyway (see ITEM 7 above) - manufacturing one first and
+    rejecting it a moment later served no purpose except leaving a
+    second, unverified tab open in the browser (visible to the user as a
+    stray tab, e.g. one sitting at a raw/unrewritten fallback URL) side by
+    side with whatever real tab the click eventually does open. Every
+    other caller keeps the previous fallback-creation behavior unchanged.
     """
     if target_page_id in pages:
         existing = pages[target_page_id]
@@ -6880,11 +9871,11 @@ def _resolve_target_page(pages, target_page_id, anchor_page, fallback_url=None, 
         except Exception:
             closed = True
         if not closed:
-            return existing, None
+            return existing, None, False
         return None, (
             f"page_id={target_page_id} was already closed (a recorded tab_close closed "
             f"it earlier in this replay) and cannot be used for this action"
-        )
+        ), False
 
     # anchor_page (typically the loop's last-used page) may itself already
     # be closed here - e.g. the immediately preceding step was a
@@ -6898,20 +9889,28 @@ def _resolve_target_page(pages, target_page_id, anchor_page, fallback_url=None, 
         return None, (
             f"page_id={target_page_id} has not appeared and no open page remains "
             f"to wait on or open a fallback page from (every registered page is closed)"
-        )
+        ), False
 
     deadline = time.monotonic() + wait_seconds
     while time.monotonic() < deadline:
         if target_page_id in pages:
-            return pages[target_page_id], None
+            return pages[target_page_id], None, False
         safe_anchor.wait_for_timeout(100)
+
+    if not allow_fallback:
+        return None, (
+            f"waited {wait_seconds}s for page_id={target_page_id} to appear as a real "
+            f"new tab/page (a genuine browser 'page' event triggered by a real click) "
+            f"but it never did - this never manufactures a substitute page here, since "
+            f"doing so wouldn't verify a real click actually triggered it"
+        ), False
 
     if not fallback_url:
         return None, (
             f"waited {wait_seconds}s for page_id={target_page_id} to appear as a new "
             f"tab/page (context 'page' event) but it never did, and this step has no "
             f"recorded URL to fall back to opening it directly"
-        )
+        ), False
 
     try:
         new_page = safe_anchor.context.new_page()
@@ -6919,13 +9918,13 @@ def _resolve_target_page(pages, target_page_id, anchor_page, fallback_url=None, 
         new_page.on("dialog", _dismiss_dialog)
         new_page.goto(fallback_url, wait_until="domcontentloaded", timeout=30000)
         pages[target_page_id] = new_page
-        return new_page, None
+        return new_page, None, True
     except Exception as e:
         return None, (
             f"waited {wait_seconds}s for page_id={target_page_id} to appear as a new "
             f"tab/page but it never did; fallback attempt to open {fallback_url!r} "
             f"directly also failed: {e}"
-        )
+        ), False
 
 
 def _settle(page):
@@ -7783,6 +10782,68 @@ def run(qa_url, output_json_path=None, screenshot_dir=None, headless=True, produ
         "total_duration_s": None,
     }
 
+    # ITEM 1: a recording's own actions list must always begin with an
+    # explicit "navigate" action (see recorder/record_session.py's
+    # Recorder.start(), which now always records one as the very first
+    # action of every NEW recording) - replaying from anything else
+    # means there is no recorded proof of how the browser is even
+    # supposed to reach its starting page at all, which is exactly the
+    # "undefined starting state" this rejects instead of guessing.
+    # Checked before ANY setup (directories, browser launch) - a
+    # structurally invalid recording is rejected immediately, not after
+    # already doing work that was never going to lead anywhere valid.
+    # A recording with genuinely zero actions is a DIFFERENT, already-
+    # handled case (see the recorded_count == 0 check further down) -
+    # this only fires when there's at least one action and it isn't a
+    # navigate.
+    if STEPS and (STEPS[0] or {}).get("action_type") != "navigate":
+        print(
+            "Replay failed - this recording's first action is not a "
+            "Navigate action. Every recording must begin with an "
+            "explicit navigation to its starting page - if the "
+            "original first action was deleted in the editor, restore "
+            "it (or add a Navigate action at the very start) before "
+            "replaying."
+        )
+        result["message"] = (
+            "Invalid recording: the first action must be a Navigate "
+            "action (was it deleted?)."
+        )
+        result["diagnostic"] = (
+            f"actions[0].action_type == {(STEPS[0] or {}).get('action_type')!r}, expected 'navigate'"
+        )
+        # ITEM 2: every recorded action depended on the missing starting
+        # navigation - each one is explicitly reported as its own failed,
+        # not-executed step (same shape the mid-replay backfill further
+        # down already uses for a truncated run), not just a single
+        # top-level message with an empty steps list, so the report/live
+        # log makes clear EVERY action was affected, not just the first.
+        for i, step in enumerate(STEPS, start=1):
+            result["steps"].append({
+                "index": i,
+                "action_type": step.get("action_type"),
+                "strategy_used": None,
+                "element_found": False,
+                "success": False,
+                "error": (
+                    "not executed - the recording's first action is not a "
+                    "Navigate action, likely caused by a deleted/missing "
+                    "starting action"
+                ),
+                "warning": None,
+                "effect_verified": None,
+                "large_bbox_flag": False,
+                "screenshot": None,
+                "url_before": None,
+                "url_after": None,
+                "duration": 0,
+                "locator_report": None,
+                "expected": None,
+                "actual": None,
+            })
+        _write_result(result, output_json_path)
+        return result
+
     # an explicit screenshot_dir (the dashboard flows always pass one -
     # see execute_test in executor/run_execution.py) is already a fresh,
     # unique-per-run folder, used as-is. The fallback here only kicks in
@@ -7885,7 +10946,29 @@ def run(qa_url, output_json_path=None, screenshot_dir=None, headless=True, produ
             # live screen recording plus a direct page.viewport_size/
             # window.innerHeight dump showing replay's viewport was 900
             # regardless of what got recorded.
-            context = browser.new_context(viewport={"width": $viewport_width_literal, "height": $viewport_height_literal})
+            # FIX 4 (consistency): the rest of the recorded environment
+            # (device scale factor, user agent, locale, timezone, color
+            # scheme - see record_session.py's Recorder.stop() for what
+            # each one is and why) alongside viewport above. Built as a
+            # plain dict with any None entries dropped, rather than
+            # passed as literal kwargs, since Playwright's new_context()
+            # treats an explicit None differently from the kwarg being
+            # absent entirely for some of these (locale=None is NOT the
+            # same as "use the OS default locale") - an older recording
+            # made before this existed (or any one field record() simply
+            # couldn't read) has None for that field here and this drops
+            # it, falling back to Playwright's own current default
+            # exactly as before this existed.
+            _context_options = {
+                "viewport": {"width": $viewport_width_literal, "height": $viewport_height_literal},
+                "device_scale_factor": $device_scale_factor_literal,
+                "user_agent": $user_agent_literal,
+                "locale": $locale_literal,
+                "timezone_id": $timezone_id_literal,
+                "color_scheme": $color_scheme_literal,
+            }
+            _context_options = {k: v for k, v in _context_options.items() if v is not None}
+            context = browser.new_context(**_context_options)
             # A recorded click on a page's Share control invokes the real
             # navigator.share() browser API - during replay that opens a
             # genuine, native, OS-level share dialog, not a page element,
@@ -7933,6 +11016,34 @@ def run(qa_url, output_json_path=None, screenshot_dir=None, headless=True, produ
                 browser.close()
             except Exception:
                 pass
+            _write_result(result, output_json_path)
+            return result
+
+        # ITEM 5: fail clearly, before ever touching the browser's own
+        # navigation, when there is no real starting URL to go to - the
+        # most common real cause being the recording's own first action
+        # (the initial navigation) having been deleted in the editor,
+        # which leaves nothing for start_url to be recomputed from at
+        # save time (see /api/recordings/save's own "start_url follows
+        # actions[0].page_url" logic). Previously this fell straight
+        # through to page.goto(""), which Chromium/Playwright rejects
+        # with a raw "Protocol error: Cannot navigate to invalid URL" -
+        # technically already a stop, but not an explicit, readable
+        # explanation of WHY there was nothing to navigate to.
+        if not qa_url or not qa_url.strip():
+            print(
+                "Replay failed - no starting URL to navigate to. The "
+                "recording's starting action (the initial page "
+                "navigation) is missing or invalid - if it was deleted "
+                "in the editor, restore it or re-record before replaying."
+            )
+            result["message"] = (
+                "Missing starting action: this recording has no valid "
+                "starting URL to navigate to (was the first recorded "
+                "action deleted?)."
+            )
+            result["diagnostic"] = "qa_url/start_url was empty at replay start"
+            browser.close()
             _write_result(result, output_json_path)
             return result
 
@@ -8007,7 +11118,49 @@ def run(qa_url, output_json_path=None, screenshot_dir=None, headless=True, produ
         except Exception:
             _max_recorded_page_id = 0
 
+        # BUG 4: page_id -> {"page": manufactured_page, "url": fallback_url}
+        # for every tab_open step that gave up waiting for a real "page"
+        # event and recovered by opening its recorded URL directly (see
+        # the tab-open-recovery block in the main loop below). A real
+        # click can genuinely take longer than the wait window on a slow/
+        # JS-heavy site - if the browser's own "page" event for THIS SAME
+        # popup still arrives late, _on_replay_new_page below adopts it
+        # into the same page_id (closing the manufactured stand-in)
+        # instead of assigning it a new, unrelated one - a late genuine
+        # event must replace the recovery, never sit beside it as a
+        # second, undead tab.
+        _recovered_fallback_pages = {}
+
         def _on_replay_new_page(new_page):
+            # BUG 4: adopt a late genuine popup into whichever recovered
+            # tab_open it actually belongs to, rather than handing it the
+            # next sequential id as if it were an unrelated extra tab.
+            # Only one pending recovery is the overwhelmingly common case
+            # (a single popup running late); when more than one is
+            # pending simultaneously, the oldest is adopted first - still
+            # correct as long as popups resolve in the order they were
+            # opened, which is the normal case this is guarding.
+            if _recovered_fallback_pages:
+                _adopt_pid = next(iter(_recovered_fallback_pages))
+                _stale = _recovered_fallback_pages.pop(_adopt_pid)
+                pages[_adopt_pid] = new_page
+                try:
+                    new_page.set_default_timeout(8000)
+                    new_page.on("dialog", _dismiss_dialog)
+                except Exception:
+                    pass
+                print(
+                    f"[tab-open-recovery] late genuine 'page' event adopted as "
+                    f"page_id={_adopt_pid} (url={new_page.url}) - closing the "
+                    f"earlier manufactured fallback page for this same slot"
+                )
+                try:
+                    if _stale["page"] is not new_page and not _stale["page"].is_closed():
+                        _stale["page"].close()
+                except Exception:
+                    pass
+                return
+
             pid = _next_replay_page_id[0]
             _next_replay_page_id[0] += 1
             pages[pid] = new_page
@@ -8093,10 +11246,139 @@ def run(qa_url, output_json_path=None, screenshot_dir=None, headless=True, produ
         # never anything quantity/size-specific.
         _skip_deps_until_url = None
 
+        # FIX 6 (Browser Back recorded as Navigate): the sequence of
+        # distinct URLs actually visited so far this run, in order -
+        # used only to detect "this recorded navigate's target is the
+        # page we were on immediately before the current one", i.e. a
+        # real Back navigation, so it can be replayed via page.go_back()
+        # instead of a fresh goto (see the navigate handling below).
+        # Playwright itself exposes no public "peek at browser history"
+        # API, so this is tracked here, on the Python side.
+        _url_history = []
+
+        # FIX 5/B (recover-and-continue, narrowed): when set, it is
+        # always the 0-based index of the step IMMEDIATELY after a just-
+        # failed click/fill/check step whose own next step is a Navigate -
+        # never further ahead, and nothing is ever skipped to reach it
+        # (replay was already about to run that exact next step normally
+        # regardless - see the failure-handling site below). Purely a
+        # label: once that step runs, it's tagged "recovered" in the
+        # report so it's clear it's the step right after a failure, not a
+        # control-flow mechanism. click_if_exists's own stop_replay_
+        # after_step halt path never touches this - it keeps raising
+        # _StopReplay exactly as before.
+        _recovery_target_index = None
+        _is_recovery_step = False
+        recovered_step_indexes = []
+        # FAILURE POLICY: set to the 1-based index of whichever step
+        # actually triggered a stop_on_failure halt (see the `elif not ok`
+        # branch below) - None for every other way the loop can end
+        # (completed normally, click_if_exists's own halt, a dead
+        # browser). The post-loop backfill uses this to word its NOT-RUN
+        # entries as "stopped after step N failed" specifically for this
+        # case, instead of the generic "not executed" message that covers
+        # every other early-exit reason.
+        _stopped_after_step = None
+
+        # OTP-STEP HANDLING: computed once, up front - see
+        # _detect_otp_flow_roles' own docstring. Empty for the
+        # overwhelmingly common case of a recording with no OTP-shaped
+        # step at all, so nothing below this point ever triggers for
+        # such a recording.
+        _otp_roles = _detect_otp_flow_roles(STEPS)
+
+        # RC3: resolve every navigate step's own caused_by_timestamp (see
+        # record_session.py's Recorder._on_navigate) to a real 1-based
+        # step index, once, up front - timestamps are unique per action,
+        # so a plain equality scan is enough. _caused_by_index[i] is the
+        # index of the action that directly, immediately caused navigate
+        # step i; absent whenever that navigate had no specific single
+        # cause, or the recording predates caused_by_timestamp entirely.
+        _timestamp_to_index = {
+            s.get("timestamp"): idx for idx, s in enumerate(STEPS, start=1) if s.get("timestamp")
+        }
+        _caused_by_index = {}
+        for idx, s in enumerate(STEPS, start=1):
+            if s.get("action_type") != "navigate":
+                continue
+            _cbt = s.get("caused_by_timestamp")
+            if _cbt and _cbt in _timestamp_to_index:
+                _caused_by_index[idx] = _timestamp_to_index[_cbt]
+
         for i, step in enumerate(STEPS, start=1):
             action_type = step.get("action_type")
             cur_timestamp = step.get("timestamp")
+            # RC4 (real DOM evidence for the future): whatever candidate
+            # diagnostics _score_candidates_and_pick gathers for THIS
+            # step's own resolution attempts - cleared before each step so
+            # a step whose resolution never hits that scoring path (single
+            # unambiguous match, or a tier that fails before ever reaching
+            # it) correctly reports none, rather than stale data left over
+            # from an earlier step.
+            _LAST_CANDIDATE_DIAGNOSTICS.clear()
+
+            # FIX 2.i (old-recording duplicates): a native <label>-wraps-
+            # checkbox click can make the browser dispatch two separate
+            # native click events for the SAME physical gesture, which
+            # some already-saved recordings captured as two separate
+            # actions (a plain click immediately followed by a check on
+            # the same/overlapping target) - see action_capture.js's own
+            # LABEL_CASCADE_DEDUP_MS for the recorder-side guard against
+            # this for FUTURE recordings; this is the replay-side safety
+            # net for recordings already saved before/without it. Only
+            # ever merges an IMMEDIATELY preceding, already-executed
+            # click/check step whose own recorded text and timestamp are
+            # both consistent with being the same gesture - never a
+            # site-specific check, and never touches any step that
+            # doesn't match this narrow shape.
+            try:
+                _is_dup = (
+                    action_type in ("click", "check")
+                    and bool(result["steps"])
+                    and _is_merged_duplicate_of_previous(step, STEPS[i - 2] if i >= 2 else None, result["steps"][-1])
+                )
+            except Exception:
+                # this check runs BEFORE the main per-step try/except
+                # below (it has to, to short-circuit the step entirely) -
+                # never let a failure in the check itself crash the whole
+                # loop; worst case, a real duplicate just gets executed
+                # again instead of merged, which is never worse than not
+                # detecting it at all.
+                _is_dup = False
+            if _is_dup:
+                _prev_report = result["steps"][-1]
+                print(
+                    f"[merged-duplicate] step {i} ({action_type}) looks like the same physical "
+                    f"gesture as step {i - 1} (same target, recorded "
+                    f"{_merged_duplicate_gap_ms(step, STEPS[i - 2]):.0f}ms apart) - not re-dispatched"
+                )
+                result["steps"].append({
+                    "index": i,
+                    "action_type": action_type,
+                    "name": _derive_action_name(step),
+                    "strategy_used": "merged_duplicate",
+                    "element_found": _prev_report.get("element_found"),
+                    "success": _prev_report.get("success"),
+                    "error": "merged duplicate - same physical gesture as the immediately preceding step",
+                    "warning": None,
+                    "effect_verified": None,
+                    "large_bbox_flag": False,
+                    "screenshot": _prev_report.get("screenshot"),
+                    "url_before": _prev_report.get("url_after"),
+                    "url_after": _prev_report.get("url_after"),
+                    "duration": 0,
+                    "locator_report": None,
+                    "expected": None,
+                    "actual": None,
+                    "recovered": False,
+                })
+                _write_result(result, output_json_path)
+                continue
+
             nav_warning = None
+            # reset every iteration - only ever True for the exact step
+            # _recovery_target_index pointed at, checked immediately below
+            _is_recovery_step = False
             if action_type == "navigate" and failed_since_last_navigate:
                 nav_warning = (
                     "prior step(s) since the last successful navigation "
@@ -8119,7 +11401,17 @@ def run(qa_url, output_json_path=None, screenshot_dir=None, headless=True, produ
             # since there's no way to know which specific sub-element
             # inside that area was actually meant.
             large_bbox_flag = False
-            if action_type in ("click", "dblclick", "right_click"):
+            # BUG 2: a real product/listing card - identified generically
+            # by its own recorded href, never a site-specific class/shape
+            # check - is legitimately wide/tall (image + title + price +
+            # badges all inside the one clickable <a>), not a broad/
+            # accidental click; the recording-quality flag below exists
+            # for the OTHER case (a sidebar/section container caught by
+            # accident) and would otherwise misfire on every ordinary
+            # card click.
+            _lbf_lp = step.get("locator_profile") or {}
+            _lbf_is_card = bool(_lbf_lp.get("href"))
+            if action_type in ("click", "dblclick", "right_click") and not _lbf_is_card:
                 _lbf_box = step.get("bounding_box") or {}
                 _lbf_w = _lbf_box.get("width") or 0
                 _lbf_h = _lbf_box.get("height") or 0
@@ -8198,6 +11490,20 @@ def run(qa_url, output_json_path=None, screenshot_dir=None, headless=True, produ
                     _write_result(result, output_json_path)
                     continue
 
+            # FIX 5/B (recover-and-continue, narrowed): _recovery_target_
+            # index is only ever set (at the single failure-handling site
+            # further down) to the 0-based index of the IMMEDIATELY next
+            # step - never further ahead - so it is always satisfied on
+            # the very next loop iteration. No step is ever skipped by
+            # this: it exists purely to tag that one next step
+            # (_is_recovery_step) for the RECOVERED label and the ok=
+            # False-penalty exemption further down, both purely cosmetic/
+            # non-controlling - this step runs exactly as it would have
+            # anyway.
+            if _recovery_target_index is not None and (i - 1) == _recovery_target_index:
+                _is_recovery_step = True
+                _recovery_target_index = None
+
             # Everything for this one step lives inside this try/except.
             # Every individual action type already catches its OWN
             # execution errors below (a normal "element not found" keeps
@@ -8235,9 +11541,33 @@ def run(qa_url, output_json_path=None, screenshot_dir=None, headless=True, produ
                 # same page_id hits the instant fast-path above instead
                 # of repeating the wait.
                 target_page_id = step.get("page_id", 0)
+                # ITEM 7: reset every step - only ever meaningful for a
+                # tab_open step's own resolution a few lines/branches
+                # below, checked immediately after it's computed so a
+                # stale True from an earlier step's resolution can never
+                # leak into a later, unrelated step.
+                page_resolved_via_fallback = False
                 if target_page_id not in pages:
                     fallback_url = to_qa_url(step.get("page_url"), qa_url) if step.get("page_url") else None
-                    resolved_page, resolve_err = _resolve_target_page(pages, target_page_id, page, fallback_url=fallback_url)
+                    if action_type == "tab_open":
+                        # a real click that genuinely opens a new tab can
+                        # take noticeably longer than the ordinary
+                        # page-recovery fallback's 5s window on a real,
+                        # JS-heavy site (analytics/ad calls before the
+                        # actual window.open) - regressed before by using
+                        # that same short window here and racing it
+                        # against a real popup that was always coming,
+                        # just not within 5s, which both false-failed the
+                        # step AND (via the fallback below) left a second,
+                        # never-verified tab open. allow_fallback=False
+                        # means a timeout here can only ever produce
+                        # resolved_page=None, never a manufactured page.
+                        resolved_page, resolve_err, page_resolved_via_fallback = _resolve_target_page(
+                            pages, target_page_id, page, fallback_url=fallback_url,
+                            wait_seconds=12, allow_fallback=False,
+                        )
+                    else:
+                        resolved_page, resolve_err, page_resolved_via_fallback = _resolve_target_page(pages, target_page_id, page, fallback_url=fallback_url)
                 else:
                     resolved_page, resolve_err = pages[target_page_id], None
 
@@ -8275,6 +11605,53 @@ def run(qa_url, output_json_path=None, screenshot_dir=None, headless=True, produ
                 # snapshot further down and _wait_for_modal_target_visible
                 pre_click_inner_target_visible = None
 
+                # BUG 4 (tab_open never manufactures a substitute page -
+                # see _resolve_target_page's own allow_fallback=False
+                # docstring for why that's still correct in general): the
+                # opener click that was SUPPOSED to open this tab already
+                # has its own, separate result entry in result["steps"] by
+                # this point (one entry per step, appended in order - see
+                # the "guarantee exactly one result entry per recorded
+                # action" comment near the end of this loop). When that
+                # opener is the one that already failed, a real popup was
+                # never going to arrive no matter how long this waited -
+                # opening this step's own recorded URL directly is a
+                # deliberate, narrow RECOVERY (same spirit as FIX 5's
+                # recover-and-continue elsewhere in this file), not the
+                # "manufacture a page to hide a real failure" case that
+                # allow_fallback=False exists to prevent: the opener's own
+                # FAILED result is untouched either way, and this only
+                # lets the REST of the recording keep exercising the
+                # already-known-correct destination instead of every
+                # single later step on this page_id failing too.
+                _tab_open_recovered = False
+                if (
+                    resolved_page is None
+                    and action_type == "tab_open"
+                    and fallback_url
+                    and result["steps"]
+                    and result["steps"][-1].get("success") is False
+                ):
+                    print(
+                        f"[tab-open-recovery] opener step {result['steps'][-1].get('index')} "
+                        f"failed and no real popup ever appeared for page_id={target_page_id} - "
+                        f"opening the recorded URL directly instead: {fallback_url}"
+                    )
+                    try:
+                        _recovered_page = page.context.new_page()
+                        _recovered_page.set_default_timeout(8000)
+                        _recovered_page.on("dialog", _dismiss_dialog)
+                        _recovered_page.goto(fallback_url, wait_until="domcontentloaded", timeout=30000)
+                        pages[target_page_id] = _recovered_page
+                        _recovered_fallback_pages[target_page_id] = {
+                            "page": _recovered_page, "url": fallback_url,
+                        }
+                        resolved_page = _recovered_page
+                        page_resolved_via_fallback = True
+                        _tab_open_recovered = True
+                    except Exception as _tab_open_recovery_e:
+                        print(f"[tab-open-recovery] FAILED: {_tab_open_recovery_e}")
+
                 if resolved_page is None:
                     strategy, found, ok, err = None, False, False, (
                         f"page_id={target_page_id} could not be resolved - {resolve_err}"
@@ -8292,6 +11669,17 @@ def run(qa_url, output_json_path=None, screenshot_dir=None, headless=True, produ
                     except Exception:
                         url_before = None
 
+                    # FIX 6: record this as a visited URL, in order,
+                    # before this step does anything - only when it's
+                    # actually different from the last entry, so a run
+                    # that lingers on the same page across several
+                    # non-navigating steps doesn't pad the history with
+                    # duplicates (which would break the "immediately
+                    # before" comparison the back-navigation check below
+                    # relies on).
+                    if url_before and (not _url_history or _url_history[-1] != url_before):
+                        _url_history.append(url_before)
+
                     step_start = time.monotonic()
 
                     if action_type == "navigate":
@@ -8308,8 +11696,87 @@ def run(qa_url, output_json_path=None, screenshot_dir=None, headless=True, produ
                                 tu.scheme, tu.netloc, tu.path.rstrip("/") or "/", tu.query
                             )
 
+                        # FIX 6 (Browser Back recorded as Navigate): if this
+                        # navigate's target matches the URL visited
+                        # immediately before the current one, replay it as a
+                        # real browser back-navigation - preserves whatever
+                        # client-side state (scroll position, form/filter
+                        # state) a real Back click would have, which a fresh
+                        # page.goto() to the same URL would not. Purely a
+                        # best-effort head start: if go_back() fails or
+                        # doesn't land on the right route, this changes
+                        # nothing - the EXISTING _same_route(page.url) check
+                        # and its own goto-based fallback right below run
+                        # completely unchanged either way.
+                        if (
+                            len(_url_history) >= 2
+                            and _same_route(_url_history[-2])
+                            and not _same_route(page.url)
+                        ):
+                            try:
+                                page.go_back(wait_until="domcontentloaded", timeout=8000)
+                                _settle(page)
+                                print(
+                                    "[back-navigation] recorded navigate target matches "
+                                    "the previous page - used page.go_back()"
+                                )
+                            except Exception as e:
+                                print(
+                                    f"[back-navigation] go_back() failed ({e}) - falling "
+                                    "back to normal navigate handling"
+                                )
+
                         try:
-                            if _same_route(page.url):
+                            if i == 1:
+                                # FIX A (step 1 navigate false-failure): step
+                                # 1 can never have a preceding click whose
+                                # effect this needs to verify - there is no
+                                # step 0 - and the real initial page.goto(
+                                # qa_url) that already ran before this loop
+                                # even started may well have already
+                                # redirected (a bare-domain launch URL
+                                # landing on /feed, a locale/login gate,
+                                # etc, on any site) - completely normal, not
+                                # a sign anything went wrong. Verified
+                                # generically: same HOST as the target and
+                                # the page actually loaded - never an exact
+                                # route/path match, since a real redirect is
+                                # expected here, not a failure.
+                                try:
+                                    _step1_cur_url = page.url
+                                except Exception:
+                                    _step1_cur_url = None
+                                try:
+                                    _step1_target_host = urlsplit(target).netloc
+                                except Exception:
+                                    _step1_target_host = None
+                                try:
+                                    _step1_cur_host = urlsplit(_step1_cur_url).netloc if _step1_cur_url else None
+                                except Exception:
+                                    _step1_cur_host = None
+                                if _step1_cur_host and _step1_target_host and _step1_cur_host == _step1_target_host:
+                                    _settle(page)
+                                    strategy, found, ok, err = None, True, True, None
+                                else:
+                                    # not even the right host yet - one real,
+                                    # direct attempt before giving up, the
+                                    # same forced-goto every other branch
+                                    # here already falls back to
+                                    try:
+                                        page.goto(target, wait_until="domcontentloaded", timeout=30000)
+                                        _settle(page)
+                                        _step1_cur_url = page.url
+                                        _step1_cur_host = urlsplit(_step1_cur_url).netloc
+                                        _step1_ok = bool(_step1_target_host) and _step1_cur_host == _step1_target_host
+                                    except Exception:
+                                        _step1_cur_url, _step1_ok = None, False
+                                    strategy, found, ok, err = None, True, _step1_ok, (
+                                        None if _step1_ok else
+                                        f"could not reach {target!r} (host mismatch) - landed on {_step1_cur_url!r}"
+                                    )
+                                if ok and _step1_cur_url and _step1_cur_url != target:
+                                    print(f"[redirect] launch URL -> {_step1_cur_url}")
+                            elif _same_route(page.url):
                                 # a preceding action (already executed above,
                                 # this step's own click/submit/etc.) already
                                 # triggered the app's own client-side
@@ -8371,6 +11838,51 @@ def run(qa_url, output_json_path=None, screenshot_dir=None, headless=True, produ
                                     _settle(page)
                                     strategy, found, ok, err = None, True, True, None
                                 except Exception:
+                                    # RC3: this navigate was recorded as a
+                                    # DIRECT, immediate effect of a specific
+                                    # preceding action (caused_by_timestamp,
+                                    # resolved to _caused_by_index up front -
+                                    # see its own comment) - if that action's
+                                    # own result already reports success,
+                                    # force-navigating here would paper over
+                                    # a genuine "the app's own URL update
+                                    # never arrived in time" problem by just
+                                    # jumping straight to the recorded
+                                    # destination regardless of whether the
+                                    # click actually produced it. goto is
+                                    # reserved for when the CAUSE is known to
+                                    # have failed (the existing forced-
+                                    # fallback path below, still used
+                                    # exactly as before for every case NOT
+                                    # covered by this - no caused_by tag at
+                                    # all, an older recording, or the cause
+                                    # itself failed).
+                                    _cb_idx = _caused_by_index.get(i)
+                                    if _cb_idx is not None:
+                                        _cb_result = None
+                                        for _s in reversed(result["steps"]):
+                                            if _s.get("index") == _cb_idx:
+                                                _cb_result = _s
+                                                break
+                                        if _cb_result is not None and _cb_result.get("success"):
+                                            strategy, found, ok, err = None, True, False, (
+                                                f"step {_cb_idx}'s own action succeeded, but the URL "
+                                                f"change it was recorded as directly causing never "
+                                                f"arrived within the wait window - not force-navigating "
+                                                f"to the recorded URL, since that action already "
+                                                f"reported success and this would just paper over "
+                                                f"whatever actually went wrong"
+                                            )
+                                            print(
+                                                f"[navigate-caused-by] step {_cb_idx} succeeded but its "
+                                                f"own recorded effect (this navigate) never arrived - "
+                                                f"reporting FAILED, not forcing the URL"
+                                            )
+                                            _skip_forced_navigate_fallback = True
+                                        else:
+                                            _skip_forced_navigate_fallback = False
+                                    else:
+                                        _skip_forced_navigate_fallback = False
                                     # the natural client-side transition never
                                     # reached the recorded target. Before
                                     # forcing the stale recorded URL, check
@@ -8458,6 +11970,15 @@ def run(qa_url, output_json_path=None, screenshot_dir=None, headless=True, produ
                                             f"following that real destination instead of forcing the stale "
                                             f"recorded URL"
                                         )
+                                    elif _skip_forced_navigate_fallback:
+                                        # RC3: ok/err/strategy were already
+                                        # set to the "caused_by action
+                                        # succeeded but its own effect never
+                                        # arrived" failure above - never
+                                        # force-navigate here, and never let
+                                        # anything below this point overwrite
+                                        # that result back to success.
+                                        pass
                                     else:
                                         print(f"[navigate-fallback] instructed to navigate to: {target!r}")
                                         page.goto(target, wait_until="domcontentloaded", timeout=30000)
@@ -8481,7 +12002,8 @@ def run(qa_url, output_json_path=None, screenshot_dir=None, headless=True, produ
                                             "redirect/canonical-URL rewrite on the destination itself, "
                                             "not a bug in what URL this fallback requested"
                                         )
-                                    strategy, found, ok, err = None, True, True, None
+                                    if not _skip_forced_navigate_fallback:
+                                        strategy, found, ok, err = None, True, True, None
                                     if _follow_edited_destination:
                                         fallback_note = (
                                             f"navigated to {_actual_landed_url!r} instead of the recorded "
@@ -8496,6 +12018,12 @@ def run(qa_url, output_json_path=None, screenshot_dir=None, headless=True, produ
                                         # verified, not as an unresolved
                                         # recovery
                                         effect_verified = True
+                                    elif _skip_forced_navigate_fallback:
+                                        fallback_note = (
+                                            "RC3: this navigate's own caused_by action already "
+                                            "succeeded, so no forced navigation was attempted - see "
+                                            "the error field for why this step still failed"
+                                        )
                                     else:
                                         fallback_note = (
                                             "forced hard-navigation fallback - preceding action "
@@ -8544,6 +12072,33 @@ def run(qa_url, output_json_path=None, screenshot_dir=None, headless=True, produ
                                             "expected navigation, force-navigated as fallback - "
                                             "original click target uncertain"
                                         )
+                                        # FIX 2.h: this navigate only ever
+                                        # forces the URL directly when the
+                                        # preceding action's own effect was
+                                        # NOT independently confirmed - "goto
+                                        # only as recovery after a failed UI
+                                        # action" is exactly what already
+                                        # happens here; the one gap was never
+                                        # SURFACING that in the report the
+                                        # same explicit way tab_open's own
+                                        # recovery already does. When the
+                                        # immediately preceding step's own
+                                        # result is already known to have
+                                        # failed, this navigate's own
+                                        # success:True is what actually let
+                                        # replay continue past it - marking
+                                        # it recovered makes that visible in
+                                        # the same recovered_steps list a
+                                        # human/report already checks,
+                                        # instead of only the nav_warning
+                                        # text.
+                                        if result["steps"] and result["steps"][-1].get("success") is False:
+                                            _is_recovery_step = True
+                                            print(
+                                                f"[navigate-fallback] preceding step "
+                                                f"{result['steps'][-1].get('index')} already failed - "
+                                                f"marking this forced navigate RECOVERED"
+                                            )
                                         # same shared verify-then-retry as the
                                         # _same_route "already there" branch
                                         # above - see _verify_modal_opened_or_
@@ -8567,7 +12122,24 @@ def run(qa_url, output_json_path=None, screenshot_dir=None, headless=True, produ
                                             _skip_deps_until_url = url_before
                                         elif _modal_retried:
                                             effect_verified = True
-                                        elif not urlsplit(target).fragment:
+                                        elif (
+                                            not urlsplit(target).fragment
+                                            and not _is_recovery_step
+                                            # FIX A: this penalty exists to
+                                            # catch a CLICK whose own client-
+                                            # side navigation never arrived -
+                                            # it must never fire when there
+                                            # was no preceding step at all
+                                            # (step 1 is handled in its own
+                                            # branch above regardless) or the
+                                            # preceding step was ITSELF a
+                                            # navigate (a Back-navigation
+                                            # pair, say) - there is no click
+                                            # effect to have failed to verify
+                                            # in either case.
+                                            and _prev_step is not None
+                                            and _prev_step.get("action_type") in NAV_CAUSING_ACTIONS
+                                        ):
                                             # _verify_modal_opened_or_retry only
                                             # ever checks a FRAGMENT-based modal
                                             # sub-state (see its own docstring/
@@ -8593,6 +12165,22 @@ def run(qa_url, output_json_path=None, screenshot_dir=None, headless=True, produ
                                             # instead surfaces that as a real
                                             # failure rather than a silent
                                             # wrong-page pass.
+                                            #
+                                            # EXCEPT for FIX 5's own recovery
+                                            # step (_is_recovery_step): there,
+                                            # the preceding step's failure is
+                                            # not a mystery this needs to
+                                            # (re-)surface - it's already
+                                            # recorded as its own FAILED step -
+                                            # and successfully forcing this
+                                            # navigate to the recorded URL,
+                                            # confirmed against the actually-
+                                            # landed URL above, IS the recovery
+                                            # succeeding. Penalizing it here
+                                            # too would make "recover-and-
+                                            # continue" unable to ever actually
+                                            # report a recovered step as
+                                            # recovered.
                                             ok = False
                                             err = (
                                                 "forced hard-navigation fallback: the preceding "
@@ -8899,17 +12487,46 @@ def run(qa_url, output_json_path=None, screenshot_dir=None, headless=True, produ
                         except Exception as e:
                             strategy, found, ok, err = None, True, False, str(e)
                     elif action_type == "tab_open":
-                        # the page-resolution step above already found (a
-                        # real popup, if one happened) or created (the
-                        # fallback in _resolve_target_page) the runtime
-                        # page for this recorded page_id - no separate
-                        # goto here: the page is already at the right URL,
-                        # and re-navigating an already-loaded new tab
-                        # could re-trigger side effects the original
-                        # tab-open never had. Just let it settle.
+                        # ITEM 7: a tab_open step must normally be the
+                        # direct result of a real, verifiable click on the
+                        # preceding step's own target - never a raw
+                        # navigation this replay manufactured on its own
+                        # because no real popup ever showed up. The
+                        # page-resolution step above calls
+                        # _resolve_target_page with allow_fallback=False
+                        # for this exact step, so ordinarily reaching this
+                        # branch (resolved_page was not None) already
+                        # proves a real "page" event from the browser
+                        # itself is what produced `page`.
+                        #
+                        # BUG 4's one narrow exception: _tab_open_recovered
+                        # (set above, right before the resolved_page-is-
+                        # None check) means THIS step's own page really is
+                        # a manufactured substitute - the opener click that
+                        # was supposed to produce a real "page" event
+                        # already has its own FAILED result recorded, so
+                        # continuing to wait here could only ever time out
+                        # again. Surfaced via nav_warning (not silently
+                        # identical to a real tab-open) and via this step's
+                        # own "recovered" report field. No separate goto
+                        # either way: the page is already at the right URL
+                        # (either a real popup, or the fallback_url this
+                        # step's own recovery already navigated to), and
+                        # re-navigating an already-loaded new tab could
+                        # re-trigger side effects the original tab-open
+                        # never had. Just let it settle.
                         try:
                             _settle(page)
                             strategy, found, ok, err = None, True, True, None
+                            if _tab_open_recovered:
+                                _recovery_note = (
+                                    f"opener click failed - no real browser 'page' event "
+                                    f"ever arrived for page_id={target_page_id}; opened "
+                                    f"this step's own recorded URL directly instead "
+                                    f"({fallback_url})"
+                                )
+                                nav_warning = f"{nav_warning}; {_recovery_note}" if nav_warning else _recovery_note
+                                print(f"[tab-open-recovery] RECOVERED: {_recovery_note}")
                         except Exception as e:
                             strategy, found, ok, err = None, True, False, str(e)
                     elif action_type == "tab_close":
@@ -9431,6 +13048,99 @@ def run(qa_url, output_json_path=None, screenshot_dir=None, headless=True, produ
                             ok = (actual_value == expected_state)
                             err = None if ok else f"validate_enabled: element is {actual_value}, expected {expected_state}"
                             print(f"[validate_enabled] expected={expected_state} actual={actual_value}: {'PASS' if ok else 'FAIL'}")
+
+                    elif action_type == "validate_checked":
+                        # NATIVE checkbox path: input[type=checkbox].checked
+                        # is universal, unambiguous browser semantics -
+                        # authoritative, no heuristic needed.
+                        #
+                        # CUSTOM (non-native, div-based) checkbox path: unlike
+                        # the existing 'check' ACTION's own is_checked
+                        # heuristic elsewhere in this file (aria-checked/
+                        # class-name/icon-presence - already documented
+                        # there as best-effort, NOT reliable for a single-
+                        # select control), this VALIDATION only trusts ONE
+                        # proven signal for this site's own custom
+                        # checkboxes: an empty own-text icon means
+                        # unchecked - confirmed live against this site's
+                        # "Apply Coupon Code" checkbox (no aria-checked, no
+                        # data-checked, no role, no "checked"/"active"
+                        # class anywhere on it or its parent - own text is
+                        # simply empty). The CHECKED side
+                        # (own text == this one exact glyph) is taken from
+                        # session_20260921_081203's own step 28 - a real
+                        # human's actually-completed T&C checkbox recorded
+                        # this exact codepoint as its own text once
+                        # checked - but that glyph was NOT independently
+                        # toggled live during this investigation (repeated
+                        # live attempts to reach that same checkbox were
+                        # blocked by unrelated site/session flakiness deep
+                        # in the OTP/payment flow), so this one specific
+                        # signal is inferred from stored recording data,
+                        # not directly confirmed - flagged here for a
+                        # future session to independently verify live.
+                        # Deliberately narrow: an icon that's neither empty
+                        # nor this exact glyph (the spinner , an
+                        # unrelated icon, anything else) fails clearly
+                        # instead of guessing either state.
+                        lp = step.get("locator_profile") or {}
+                        expected_state = (step.get("expected_state") or "checked").strip().lower()
+                        expected_value = expected_state
+                        el, strategy, _attempt = _resolve_with_timeout(page, lp)
+                        if el is None:
+                            found, ok, err = False, False, "validate_checked: element not found"
+                        else:
+                            found = True
+                            validate_shot_override = _draw_validation_highlight(page, el, "Validate Checked", shot_dir=shot_dir)
+                            try:
+                                is_native_input = bool(el.evaluate(
+                                    "e => e.tagName === 'INPUT' && (e.type||'').toLowerCase() === 'checkbox'"
+                                ))
+                            except Exception:
+                                is_native_input = False
+
+                            custom_note = ""
+                            own_text = None
+                            if is_native_input:
+                                try:
+                                    actual_value = "checked" if el.is_checked() else "unchecked"
+                                except Exception:
+                                    actual_value = None
+                            else:
+                                custom_note = " (custom checkbox, read from icon)"
+                                try:
+                                    own_text = el.evaluate(
+                                        "e => Array.from(e.childNodes)"
+                                        ".filter(n => n.nodeType === 3)"
+                                        ".map(n => n.textContent).join('').trim()"
+                                    )
+                                except Exception:
+                                    own_text = None
+                                if own_text == "":
+                                    actual_value = "unchecked"
+                                elif own_text == "":
+                                    actual_value = "checked"
+                                else:
+                                    actual_value = None
+
+                            if actual_value is None:
+                                found_desc = "unreadable" if is_native_input else repr(own_text)
+                                ok = False
+                                err = f"validate_checked: can't determine checked state (found: {found_desc})"
+                                print(f"[validate_checked] {err}")
+                            else:
+                                ok = (actual_value == expected_state)
+                                err = None if ok else f"validate_checked: checkbox is {actual_value}, expected {expected_state}"
+                                print(f"[validate_checked] expected={expected_state} actual={actual_value}: {'PASS' if ok else 'FAIL'}")
+                                _label = (
+                                    lp.get("accessible_name") or _strip_icon_font_text(lp.get("text") or "") or
+                                    lp.get("aria_label") or lp.get("placeholder") or lp.get("tag") or "checkbox"
+                                )
+                                _label = " ".join(str(_label).split())[:40]
+                                print(
+                                    f"Validation: checkbox [{_label}] is {expected_state} -> "
+                                    f"{'PASSED' if ok else 'FAILED'} (expected {expected_state}, actual {actual_value}){custom_note}"
+                                )
 
                     elif action_type == "count_elements":
                         # Counts how many matching elements exist on the
@@ -10026,6 +13736,95 @@ def run(qa_url, output_json_path=None, screenshot_dir=None, headless=True, produ
                                 ).get("element_text") or (step.get("locator_profile") or {}).get("text") or "target"
                                 print(f"[modal-timing-detail] click dispatched on {_click_target_desc!r} at t=0ms (reference point for this flow)")
 
+                        # OTP-STEP HANDLING (see _detect_otp_flow_roles) -
+                        # a complete no-op for every step outside a
+                        # detected OTP flow (_otp_role is None then,
+                        # exactly as before this existed). For the OTP
+                        # fill step itself, this replaces its own
+                        # recorded value with a LIVE one entered by a
+                        # human via the dashboard - the recorded value is
+                        # never replayed, since a real OTP differs every
+                        # run. Handled here, right before the normal
+                        # dispatch below, rather than inside resolve_and_
+                        # act's own generic fill handling, since this is
+                        # the one call site that already has result/
+                        # output_json_path/run_dir in scope.
+                        _otp_role = _otp_roles.get(i)
+                        _otp_wait_failed = False
+                        if _otp_role == "phone_entry":
+                            _otp_flow_log(f"Step {i}/{total_steps}: entering phone/mobile number", result=result, output_json_path=output_json_path)
+                        elif _otp_role == "send_otp":
+                            # wait for the button to actually become
+                            # enabled - condition-based (polls the same
+                            # generic _is_genuinely_interactable signal
+                            # _reveal_via_ancestor_hover already uses,
+                            # not a fixed sleep), bounded to 5s. This
+                            # button is very often a styled <div>/<button>
+                            # with no native `disabled` attribute at all
+                            # (confirmed on a real Sportzia recording -
+                            # role="checkbox", no `disabled`), so
+                            # Playwright's own actionability wait can't
+                            # tell "enabled" from "disabled" for it on
+                            # its own; best-effort only - never blocks the
+                            # click below if the button can't be resolved
+                            # here (the normal dispatch still tries it).
+                            try:
+                                _otp_send_el = _resolve_element(page, step.get("locator_profile") or {})
+                            except Exception:
+                                _otp_send_el = None
+                            _otp_send_enabled = None
+                            if _otp_send_el is not None:
+                                _otp_enabled_deadline = time.monotonic() + 5.0
+                                while time.monotonic() < _otp_enabled_deadline:
+                                    _otp_send_enabled = _is_genuinely_interactable(_otp_send_el)
+                                    if _otp_send_enabled:
+                                        break
+                                    page.wait_for_timeout(200)
+                            if _otp_send_enabled is None:
+                                _otp_flow_log(f"Step {i}/{total_steps}: clicking Send OTP", result=result, output_json_path=output_json_path)
+                            else:
+                                _otp_flow_log(
+                                    f"Step {i}/{total_steps}: Send OTP button enabled = {_otp_send_enabled} - clicking",
+                                    result=result, output_json_path=output_json_path,
+                                )
+                        elif _otp_role == "verify":
+                            _otp_flow_log(f"Step {i}/{total_steps}: clicking Verify & Continue", result=result, output_json_path=output_json_path)
+                        elif _otp_role == "otp_fill":
+                            # confirm the OTP field itself actually
+                            # rendered before prompting for a value to
+                            # put into it - bounded (8s), condition-based
+                            # wait using the same generic resolver every
+                            # other tier here already relies on. Purely
+                            # informational (logged either way); the
+                            # fill dispatch below still has its own
+                            # independent retry budget regardless.
+                            _otp_field_deadline = time.monotonic() + 8.0
+                            _otp_field_visible = False
+                            while time.monotonic() < _otp_field_deadline:
+                                try:
+                                    _otp_field_el = _resolve_element(page, step.get("locator_profile") or {})
+                                    _otp_field_visible = bool(_otp_field_el is not None and _otp_field_el.is_visible())
+                                except Exception:
+                                    _otp_field_visible = False
+                                if _otp_field_visible:
+                                    break
+                                page.wait_for_timeout(300)
+                            _otp_flow_log(
+                                f"Step {i}/{total_steps}: OTP field visible = {_otp_field_visible}",
+                                result=result, output_json_path=output_json_path,
+                            )
+                            _live_otp_value = _wait_for_live_otp(page, result, output_json_path, run_dir, i, total_steps)
+                            if _live_otp_value is None:
+                                _otp_wait_failed = True
+                                strategy, found, ok, err = None, False, False, (
+                                    "no OTP was entered within the wait window - the "
+                                    "recorded OTP value is never replayed, since a real "
+                                    "OTP is different every time"
+                                )
+                            else:
+                                step = dict(step)
+                                step["value"] = _live_otp_value
+
                         # see _arm_modal_interaction_timing's own docstring -
                         # this is the generic per-step dispatch point every
                         # non-navigate action goes through, so it's also
@@ -10033,7 +13832,13 @@ def run(qa_url, output_json_path=None, screenshot_dir=None, headless=True, produ
                         # own timing context (if this happens to be the exact
                         # step it was armed for) gets consumed and logged
                         _maybe_log_modal_interaction_timing(page, step)
-                        if _consume_force_interacted(page, step):
+                        if _otp_wait_failed:
+                            # strategy/found/ok/err already set above - the
+                            # normal dispatch below is skipped entirely so
+                            # nothing tries to act using this step's own
+                            # (never-valid) recorded OTP value
+                            pass
+                        elif _consume_force_interacted(page, step):
                             # see _MODAL_FORCE_INTERACTED_STEPS's own
                             # comment: _wait_for_modal_target_visible's own
                             # force-interact fallback already dispatched a
@@ -10056,12 +13861,26 @@ def run(qa_url, output_json_path=None, screenshot_dir=None, headless=True, produ
                                 "[force-interact] this step's target was already force-clicked "
                                 "during the preceding modal-open verification - not re-clicking it"
                             )
+                        elif step.get("frame") and action_type in ("click", "dblclick", "right_click", "check"):
+                            # FIX 6 (iframe/frame tracking - e.g. Razorpay's
+                            # checkout, a cross-origin iframe): this exact
+                            # step was recorded with frame info (see
+                            # record_session.py's _describe_frame) - a
+                            # deliberately separate, narrower dispatch path
+                            # from the main tier chain (which has no frame-
+                            # awareness at all), scoped to the matched
+                            # iframe via page.frame_locator(). See
+                            # _dispatch_in_frame's own docstring.
+                            strategy, found, ok, err = _dispatch_in_frame(page, step)
                         else:
                             try:
                                 strategy, found, ok, err = _resolve_and_act_with_retry(
                                     page, step,
                                     prev_action_type=prev_action_type,
                                     fast_fail=this_step_fast_fail,
+                                    report_result=result,
+                                    output_json_path=output_json_path,
+                                    next_step=STEPS[i] if i < len(STEPS) else None,
                                 )
                                 if this_step_fast_fail and not ok:
                                     print(
@@ -10073,6 +13892,19 @@ def run(qa_url, output_json_path=None, screenshot_dir=None, headless=True, produ
                                 # one bad step shouldn't blank out the rest of the run
                                 strategy, found, ok, err = None, False, False, str(e)
                                 logger.error("step %d raised unexpectedly: %s", i, e)
+
+                        if ok and action_type == "hover":
+                            # BUG 1: best-effort, non-fatal wait for the
+                            # very next recorded step's own target to
+                            # become visible as a result of this hover
+                            # (a mega-menu opening, say) - never affects
+                            # ok/err for this step either way; just gives
+                            # the revealed content a bounded head start
+                            # before the next step's own resolution
+                            # attempt runs.
+                            _hover_next_step = STEPS[i] if i < len(STEPS) else None
+                            _hover_reveal_ready = _wait_for_hover_reveal(page, _hover_next_step, timeout_s=3.0)
+                            print(f"[hover] next-step target visible within 3s: {_hover_reveal_ready}")
 
                         if ok and action_type in NAV_CAUSING_ACTIONS:
                             # TEMPORARY DEBUG PRINT - confirms this code path
@@ -10625,6 +14457,64 @@ def run(qa_url, output_json_path=None, screenshot_dir=None, headless=True, produ
                             print(f"[modal-sequence-verify] WARNING: {err}")
                         pending_modal_verification = None
 
+                # ITEM 6: a failed step whose own recorded page_url
+                # differs from the IMMEDIATELY PRECEDING recorded step's
+                # page_url, with no navigate/tab_open/tab_close between
+                # them, is a strong structural signal that the action
+                # which actually caused that page change (almost always
+                # a "navigate" step, sometimes the click that triggered
+                # one) was deleted from the recording in the editor - the
+                # replay never got there, so this step's target can never
+                # legitimately be found. Purely diagnostic: only enriches
+                # an ALREADY-failing step's own reported reason, never
+                # changes whether any step passes or fails, and never
+                # runs at all for a step that already succeeded.
+                #
+                # Skipped when `err` already carries _CONTENT_MISMATCH_
+                # MARKER: that means resolution already confirmed a
+                # SPECIFIC, different cause (the live page's own content
+                # no longer matches what was recorded) - guessing
+                # "deleted/missing prior action" on top of an already-
+                # identified cause would be actively misleading, not
+                # just redundant (CONFIRMED via a live myntra.com repro:
+                # this exact combination printed together, one of them
+                # necessarily wrong, since nothing had actually been
+                # deleted).
+                if (
+                    not ok
+                    and action_type not in ("navigate", "tab_open", "tab_close")
+                    and _CONTENT_MISMATCH_MARKER not in (err or "")
+                ):
+                    _prev_step_for_gap = STEPS[i - 2] if i >= 2 else None
+                    if (
+                        _prev_step_for_gap is not None
+                        and step.get("page_url")
+                        and _prev_step_for_gap.get("page_url")
+                        and step.get("page_url") != _prev_step_for_gap.get("page_url")
+                    ):
+                        # RC3: worded to acknowledge BOTH real causes
+                        # rather than asserting the (often wrong) one -
+                        # older recordings made before every URL change
+                        # got its own recorded navigate step (see
+                        # record_session.py's own caused_by_timestamp)
+                        # can show this exact gap simply because the
+                        # PRECEDING action's own navigation was never
+                        # recorded as a separate step at all, not because
+                        # anything was deleted in the editor. A newer
+                        # recording reaching this point at all already
+                        # means something genuinely doesn't add up, since
+                        # every URL change is now recorded.
+                        err = (
+                            f"{err} -- this step's recorded page "
+                            f"({step.get('page_url')}) differs from the "
+                            f"immediately preceding step's recorded page "
+                            f"({_prev_step_for_gap.get('page_url')}) with no "
+                            f"navigate action recorded in between - either a "
+                            f"prior action was deleted in the editor, or this "
+                            f"is an older recording made before every URL "
+                            f"change got its own recorded navigate step"
+                        )
+
                 duration = time.monotonic() - step_start
 
                 if action_type == "navigate":
@@ -10636,6 +14526,18 @@ def run(qa_url, output_json_path=None, screenshot_dir=None, headless=True, produ
                     url_after = page.url
                 except Exception:
                     url_after = None
+
+                # OTP-STEP HANDLING (see _detect_otp_flow_roles): the
+                # "verify" role step is the click right after the OTP
+                # fill - if it succeeded, this is the moment replay
+                # actually navigated past the OTP screen. Scoped to only
+                # this one recognized role; every other step's own
+                # url_after handling right above is unaffected.
+                if _otp_roles.get(i) == "verify" and ok:
+                    _otp_flow_log(
+                        f"Step {i}/{total_steps}: navigated to {url_after or '(unknown URL)'}",
+                        result=result, output_json_path=output_json_path,
+                    )
 
                 # every recorded action still gets its own screenshot
                 # ATTEMPT here, no exceptions, positioned after any
@@ -10706,6 +14608,19 @@ def run(qa_url, output_json_path=None, screenshot_dir=None, headless=True, produ
                     print(f"WARNING: {nav_warning}")
                 print()
 
+                # FIX 5 (recover-and-continue): this exact step is the one
+                # _recovery_target_index pointed at (set at the earlier
+                # failure's own handling site) - its own navigate-handling
+                # above already performed the real page.goto normally;
+                # this only adds a "recovered" marker to ITS result entry
+                # so the final report can list it separately, per the
+                # explicit requirement that a recovered run still shows
+                # FAIL overall (the earlier failed step's own success:
+                # False entry is untouched) while making clear which step
+                # is where replay picked back up.
+                if (_is_recovery_step or _tab_open_recovered) and ok:
+                    recovered_step_indexes.append(i)
+
                 result["steps"].append({
                     "index": i,
                     "action_type": action_type,
@@ -10728,6 +14643,32 @@ def run(qa_url, output_json_path=None, screenshot_dir=None, headless=True, produ
                     "locator_report": locator_report,
                     "expected": expected_value,
                     "actual": actual_value,
+                    "recovered": bool((_is_recovery_step or _tab_open_recovered) and ok),
+                    # RC4: every candidate _score_candidates_and_pick
+                    # considered while resolving THIS step, with its own
+                    # outerHTML/score/visibility reason - only kept on a
+                    # FAILED step (a passing step already has its answer;
+                    # this is purely forensic evidence for debugging a
+                    # failure), and only when that scoring path actually
+                    # ran at all (a step resolved by a single unambiguous
+                    # match never reaches it, so this is None far more
+                    # often than not - that's expected, not a bug).
+                    "candidate_diagnostics": (
+                        list(_LAST_CANDIDATE_DIAGNOSTICS) if (not ok and _LAST_CANDIDATE_DIAGNOSTICS) else None
+                    ),
+                    # FIX 4 (report/live-log correctness): this step was
+                    # genuinely ATTEMPTED (as opposed to a backfilled entry
+                    # for a step stop_on_failure never reached at all - see
+                    # the post-loop backfill below, which sets this True) -
+                    # always False here. otp_role tags a step that's part
+                    # of a detected OTP/manual-input flow (see
+                    # _detect_otp_flow_roles), None for every ordinary
+                    # step - both let the executor/dashboard report
+                    # Passed/Failed/Not run/Manual-input as separate
+                    # counts instead of lumping a manual-input wait or an
+                    # unreached step in with a genuine failure.
+                    "not_run": False,
+                    "otp_role": _otp_roles.get(i),
                 })
 
                 # incremental persistence: writes result (with its steps
@@ -10742,13 +14683,75 @@ def run(qa_url, output_json_path=None, screenshot_dir=None, headless=True, produ
                 # many times - only its final content once the run ends.
                 _write_result(result, output_json_path)
 
+                # ITEM 4: replay must stop the instant ANY step fails, not
+                # just the one pre-existing click_if_exists case
+                # (stop_replay_after_step) - a plain step failure used to
+                # just print STATUS: FAILED above and let the loop move on
+                # to the next action regardless, replaying every remaining
+                # step against a page whose state no longer matches what
+                # was recorded. Reuses the exact same _StopReplay/break
+                # mechanism click_if_exists already relied on - this is
+                # additive (checks `not ok` alongside the existing flag),
+                # never changes how any individual action type resolves,
+                # retries, or reports its own success/failure above.
                 if stop_replay_after_step:
+                    # unchanged - click_if_exists's own halt path never
+                    # attempts recovery, exactly as before FIX 5
                     print(
                         "Halting replay - click_if_exists did not find/click "
                         "its target; no further actions will run."
                     )
                     print()
                     raise _StopReplay()
+                elif not ok and STOP_ON_FAILURE and _otp_roles.get(i) is None:
+                    # FAILURE POLICY: default stop-on-first-FAILED-step.
+                    # MANUAL-INPUT steps (an OTP fill/send/verify role -
+                    # see _detect_otp_flow_roles) are deliberately excluded
+                    # from this check even when their own `ok` came back
+                    # False (an OTP wait timing out is a human not having
+                    # entered it in time yet, not a locator/replay defect)
+                    # - those already have their own bespoke handling
+                    # above and always fall through to the unconditional
+                    # continue-behavior below instead.
+                    print(
+                        f"Step {i} ({action_type}) failed - stopping replay "
+                        f"(stop_on_failure is on; set AUTOFLOW_STOP_ON_FAILURE=0 "
+                        f"to fall back to recover-and-continue). Remaining steps "
+                        f"will be marked NOT RUN."
+                    )
+                    print()
+                    _stopped_after_step = i
+                    break
+                elif not ok:
+                    # FIX B (recover-and-continue, narrowed): a plain step
+                    # failure NEVER halts replay and NEVER skips any step,
+                    # full stop - the original FIX 5 policy's bounded
+                    # multi-step lookahead is exactly what let a genuine,
+                    # must-run recorded action (a cookie-accept click, a
+                    # nav-menu click) get silently skipped as
+                    # "recovered past" when an EARLIER step (often step 1
+                    # itself) failed. This step's own FAILED result was
+                    # already appended above; the loop simply continues to
+                    # the very next recorded step, unconditionally, no
+                    # exception raised.
+                    #
+                    # Only reached at all when STOP_ON_FAILURE is off (see
+                    # the branch above) or this was a MANUAL-INPUT/OTP
+                    # step - either way, the same old behavior as before
+                    # the FAILURE POLICY existed.
+                    #
+                    # The only thing left to decide is a purely cosmetic
+                    # RECOVERED label: for a failed click/fill/check
+                    # SPECIFICALLY, if the very next step (zero skipped)
+                    # is a Navigate, tag it so - it was always going to run
+                    # next regardless, this only makes the report show
+                    # WHY it's the one right after a failure.
+                    print(f"Step {i} ({action_type}) failed - continuing with the next step (no skip, no halt).")
+                    print()
+                    if action_type in ("click", "fill", "check") and i < len(STEPS):
+                        _next_step_peek_b = STEPS[i] or {}
+                        if _next_step_peek_b.get("action_type") == "navigate" and _next_step_peek_b.get("page_url"):
+                            _recovery_target_index = i
 
             except _StopReplay:
                 break
@@ -10796,6 +14799,36 @@ def run(qa_url, output_json_path=None, screenshot_dir=None, headless=True, produ
                     browser_alive = False
                 if browser_alive and _get_valid_open_page(pages, preferred=page) is not None:
                     continue
+                # FIX 3 (never crash): the browser itself died (crashed,
+                # was killed, ran out of memory) or every registered page
+                # closed - reused to just mean "stop the whole replay"
+                # before this existed. One bounded relaunch attempt with
+                # the SAME launch/context options this run started with,
+                # landing back on the crashed step's own last known URL
+                # (its url_before, when available) before continuing the
+                # loop - a genuinely dead browser process is a real,
+                # if rare, failure mode (OOM, a driver crash) that
+                # shouldn't have to end an otherwise-recoverable replay
+                # partway through. Never retried more than once per
+                # crash: if the relaunch itself fails, this is a genuine
+                # "nothing further could possibly succeed" case and the
+                # loop stops exactly as before.
+                try:
+                    print("[crash-recovery] browser/page unusable - attempting one relaunch")
+                    browser = p.chromium.launch(**launch_kwargs)
+                    context = browser.new_context(**_context_options)
+                    context.on("page", _on_replay_new_page)
+                    _relaunch_page = context.new_page()
+                    _relaunch_page.on("dialog", _dismiss_dialog)
+                    _relaunch_url = url_before or step.get("page_url") or qa_url
+                    _relaunch_page.goto(_relaunch_url, wait_until="domcontentloaded", timeout=30000)
+                    pages.clear()
+                    pages[step.get("page_id", 0)] = _relaunch_page
+                    page = _relaunch_page
+                    print(f"[crash-recovery] relaunched successfully, landed on {_relaunch_page.url!r}")
+                    continue
+                except Exception as _relaunch_e:
+                    print(f"[crash-recovery] relaunch FAILED: {_relaunch_e}")
                 break
 
         # guarantee exactly one result entry per recorded action - if the
@@ -10804,15 +14837,26 @@ def run(qa_url, output_json_path=None, screenshot_dir=None, headless=True, produ
         # than just missing, so a truncated run can never be mistaken for
         # a complete one just because everything THAT DID RUN succeeded
         executed_indexes = {s["index"] for s in result["steps"]}
+        # FAILURE POLICY: when the loop broke because of a stop_on_failure
+        # halt specifically (as opposed to every other early-exit reason -
+        # a dead browser, click_if_exists's own halt - which keep the
+        # older generic message), word every backfilled entry the way the
+        # policy asks for: "NOT RUN (stopped after step N failed)".
+        _not_run_msg = (
+            f"NOT RUN (stopped after step {_stopped_after_step} failed)"
+            if _stopped_after_step is not None
+            else "not executed - replay stopped before reaching this action"
+        )
         for i, step in enumerate(STEPS, start=1):
             if i not in executed_indexes:
                 result["steps"].append({
                     "index": i,
                     "action_type": step.get("action_type"),
+                    "name": _derive_action_name(step),
                     "strategy_used": None,
                     "element_found": False,
                     "success": False,
-                    "error": "not executed - replay stopped before reaching this action",
+                    "error": _not_run_msg,
                     "warning": None,
                     "effect_verified": None,
                     "large_bbox_flag": False,
@@ -10823,6 +14867,9 @@ def run(qa_url, output_json_path=None, screenshot_dir=None, headless=True, produ
                     "locator_report": None,
                     "expected": None,
                     "actual": None,
+                    "candidate_diagnostics": None,
+                    "not_run": _stopped_after_step is not None,
+                    "otp_role": _otp_roles.get(i),
                 })
         result["steps"].sort(key=lambda s: s["index"])
 
@@ -10926,7 +14973,15 @@ def run(qa_url, output_json_path=None, screenshot_dir=None, headless=True, produ
         # under-report a run that was cut short.
         NOT_EXECUTED_MSG = "not executed - replay stopped before reaching this action"
         recorded_count = total_steps
-        not_executed_steps = [s for s in result["steps"] if s["error"] == NOT_EXECUTED_MSG]
+        # FAILURE POLICY: a stop_on_failure halt backfills with its own
+        # "NOT RUN (stopped after step N failed)" wording instead of the
+        # generic NOT_EXECUTED_MSG above (see the backfill loop) - tagged
+        # with not_run=True there specifically so this count recognizes
+        # both forms as the same thing: an action the replay never
+        # reached, regardless of which of the two ways that happened.
+        not_executed_steps = [
+            s for s in result["steps"] if s["error"] == NOT_EXECUTED_MSG or s.get("not_run")
+        ]
         attempted_count = recorded_count - len(not_executed_steps)
         successful_actions = sum(1 for s in result["steps"] if s["success"])
         failed_actions = attempted_count - successful_actions
@@ -10937,12 +14992,36 @@ def run(qa_url, output_json_path=None, screenshot_dir=None, headless=True, produ
         # NOT EXECUTED) or any individual failure both force FAIL
         steps_ok = not_executed_count == 0 and failed_actions == 0
         result["status"] = "PASS" if steps_ok else "FAIL"
+        # FIX 5 (recover-and-continue): listed separately from the PASS/
+        # FAIL steps above - a recovered run still reports FAIL overall
+        # (the step that originally failed still counts as a failure in
+        # failed_actions above), this is purely "here's where replay
+        # picked back up after that failure", never a status override.
+        result["recovered_steps"] = recovered_step_indexes
         if not_executed_count:
             result["message"] = f"replay stopped early - {not_executed_count} action(s) never executed"
         elif failed_actions:
             result["message"] = "one or more steps failed"
         else:
             result["message"] = "all steps resolved"
+
+        # ITEM 5 (related): a recording with ZERO actions - e.g. every
+        # action was deleted in the editor, including the very first/
+        # only one - used to satisfy steps_ok VACUOUSLY (0 not-executed,
+        # 0 failed) and report a plain PASS after just navigating to
+        # start_url and doing nothing at all. That's an undefined,
+        # untested "starting state" being reported as a passing test,
+        # which is exactly the false confidence this item exists to
+        # prevent. Checked here, after the normal PASS/FAIL computation
+        # above, so it only ever overrides that one specific vacuous
+        # case - a real run with at least one recorded action is
+        # completely unaffected.
+        if recorded_count == 0:
+            result["status"] = "FAIL"
+            result["message"] = (
+                "This recording has no actions to replay - they may all "
+                "have been deleted (including the starting action)."
+            )
 
         total_duration_s = time.monotonic() - replay_start
         result["total_duration_s"] = round(total_duration_s, 3)
@@ -10966,6 +15045,8 @@ def run(qa_url, output_json_path=None, screenshot_dir=None, headless=True, produ
             print(f"Not executed: {first_missed}-{last_missed} ({not_executed_count} action(s))")
         else:
             print("Not executed: 0")
+        if recovered_step_indexes:
+            print(f"Recovered: {', '.join(str(idx) for idx in recovered_step_indexes)} (recover-and-continue after an earlier failure)")
         print()
         print(f"RESULT: {result['status']}")
         print()
@@ -11043,6 +15124,39 @@ if __name__ == "__main__":
 ''')
 
 
+def test_case_has_otp_step(test_case: dict) -> bool:
+    """Real, importable module-level twin of the generated script's own
+    _looks_like_otp_fill_step/_detect_otp_flow_roles (both defined INSIDE
+    SCRIPT_TEMPLATE above, so they only exist as literal template text
+    until generate_script() below writes them into an actual .py file -
+    see this module's own top-of-file note on why nothing inside that
+    template is directly callable). executor/run_execution.py uses this,
+    BEFORE the subprocess even launches, purely to decide whether to add
+    the OTP-wait timeout buffer (see start_replay/execute_test's own
+    otp_wait_buffer_s handling) - kept logically identical to the
+    template's own check (short, purely-numeric fill value immediately
+    preceded by a step whose recorded text/accessible_name mentions
+    "otp"), duplicated only because the real check can't be imported
+    from inside the template string.
+    """
+    actions = test_case.get("actions") or []
+    for i, step in enumerate(actions):
+        if (step or {}).get("action_type") != "fill":
+            continue
+        value = step.get("value")
+        if not isinstance(value, str) or not value.isdigit():
+            continue
+        if not (4 <= len(value) <= 8):
+            continue
+        if i == 0:
+            continue
+        prev_lp = (actions[i - 1] or {}).get("locator_profile") or {}
+        prev_text = f"{prev_lp.get('text') or ''} {prev_lp.get('accessible_name') or ''}".lower()
+        if "otp" in prev_text:
+            return True
+    return False
+
+
 def generate_script(test_case: dict, out_name: str = None, output_dir: Path = None) -> Path:
     steps = []
     for action in test_case.get("actions", []):
@@ -11078,6 +15192,86 @@ def generate_script(test_case: dict, out_name: str = None, output_dir: Path = No
             "delta_y": action.get("delta_y"),
             "scroll_y_before": action.get("scroll_y_before"),
             "scroll_y_after": action.get("scroll_y_after"),
+            # BUG 3 (scroll leak across steps): the window scroll position
+            # THIS action's own bounding_box was captured at (every
+            # action now records it, not just dedicated "scroll" actions -
+            # see action_capture.js's own buildProfile) - restored before
+            # the bounding_box last-resort tier ever trusts that
+            # viewport-relative coordinate. None on any recording made
+            # before this field existed; that fallback simply skips the
+            # restore, unchanged.
+            "scroll_x": action.get("scroll_x"),
+            "scroll_y": action.get("scroll_y"),
+            # hover chain (see action_capture.js's own hoverChain
+            # docstring): ordered list of locator_profile dicts for every
+            # trigger that had to be hovered, in order, to reveal this
+            # click's real target. None/absent on any recording made
+            # before this existed, or an ordinary click with no reveal
+            # involved at all.
+            "hover_chain": action.get("hover_chain"),
+            # postcondition (FIX 1.4): what actually happened within the
+            # observation window right after this action was recorded -
+            # see record_session.py's own capture of it. None whenever
+            # nothing conclusive was observed, or on an older recording.
+            "expect": action.get("expect"),
+            # RC3: which action's own recorded timestamp caused this
+            # navigate (see record_session.py's own Recorder._on_navigate
+            # for exactly when this is set) - resolved to a real step
+            # index at replay time (timestamps are unique per action), so
+            # a navigate that's a direct, immediate effect of the
+            # preceding action only ever VERIFIES the URL instead of
+            # force-navigating to it. None on every navigate with no
+            # specific single cause, or on any recording made before this
+            # existed.
+            "caused_by_timestamp": action.get("caused_by_timestamp"),
+            # RC4: relative path (from the project root) to the full-page
+            # HTML snapshot captured at this navigate's own moment, under
+            # storage/snapshots/<session_id>/ - forensic evidence only
+            # (tests/fixture_from_snapshot.py, manual debugging); replay
+            # itself never reads this field. None on a non-navigate step
+            # or any recording made before this existed.
+            "dom_snapshot_path": action.get("dom_snapshot_path"),
+            # RC1: act_target (the VISIBLE element the user actually
+            # clicked) is already the SAME dict as locator_profile above
+            # (action_capture.js's own buildProfile sets both from the
+            # same source - see its own comment), kept as a separate key
+            # too so replay code can refer to "the locator profile I
+            # should treat as act_target" explicitly without relying on
+            # locator_profile always meaning that (true today, but not a
+            # given for every future action type). state_target - the
+            # underlying checkbox/radio input's own locator profile plus
+            # its checked state - is None on a plain click, or on any
+            # recording made before this existed.
+            "act_target": action.get("act_target"),
+            "state_target": action.get("state_target"),
+            # RC4 (real DOM evidence for the future): outerHTML of
+            # act_target/state_target plus a few ancestor levels, trimmed
+            # to a small size cap, plus their computed display/visibility/
+            # opacity at record time - kept purely as forensic evidence
+            # for a later replay-failure diagnostic or
+            # tests/fixture_from_snapshot.py; replay's own resolve/click
+            # logic never reads this field. None on any recording made
+            # before this existed.
+            "dom_context": action.get("dom_context"),
+            # FIX 3 (new "drag" action) - see recorder/action_capture.js's
+            # own _finishDragGesture for how these are captured. All None
+            # on every non-drag action, and on any recording made before
+            # this existed.
+            "html5": action.get("html5"),
+            "source_target": action.get("source_target"),
+            "drop_target": action.get("drop_target"),
+            "start_offset": action.get("start_offset"),
+            "end_delta": action.get("end_delta"),
+            "end_relative_to_container": action.get("end_relative_to_container"),
+            "path": action.get("path"),
+            "value_before": action.get("value_before"),
+            "value_after": action.get("value_after"),
+            # multi-thumb sliders only (item 4) - see action_capture.js's
+            # own _findSliderThumbInfo. All None for a single-thumb
+            # slider/plain drag, or any recording made before this existed.
+            "thumb_index": action.get("thumb_index"),
+            "thumb_total": action.get("thumb_total"),
+            "thumb_locator_profile": action.get("thumb_locator_profile"),
             "viewport_height": action.get("viewport_height"),
             "document_height": action.get("document_height"),
             "timestamp": action.get("timestamp"),
@@ -11132,7 +15326,13 @@ def generate_script(test_case: dict, out_name: str = None, output_dir: Path = No
     # surfaced at replay time via the REPLAY SOURCE banner so it's always
     # clear which version of a test actually ran
     source_type = "EDITED" if EDITED_OUTPUT_DIR in target_dir.resolve().parents or target_dir.resolve() == EDITED_OUTPUT_DIR.resolve() else "ORIGINAL"
-    source_name = test_case.get("name", "unnamed")
+    # `or`, not a dict-default: Recorder.stop() can write an explicit
+    # "name": None (no name was ever passed to it) - .get("name",
+    # "unnamed") only falls back when the KEY is missing entirely, not
+    # when it's present and None, and json.dumps(None) is "null", not
+    # valid Python - see the exact same pattern already used just above
+    # for viewport_width/height.
+    source_name = test_case.get("name") or "unnamed"
 
     # pformat, not json.dumps - this text gets embedded directly as Python
     # source. JSON's null/true/false aren't valid Python and would crash
@@ -11148,6 +15348,20 @@ def generate_script(test_case: dict, out_name: str = None, output_dir: Path = No
     viewport_width = test_case.get("viewport_width") or 1280
     viewport_height = test_case.get("viewport_height") or 720
 
+    # FIX 4 (consistency): the rest of the recorded environment,
+    # alongside viewport above - see record_session.py's Recorder.stop()
+    # for exactly what's captured and why. None on any field record()
+    # couldn't read (or an older recording made before this existed)
+    # means the corresponding new_context() kwarg is simply omitted below
+    # (see the None-filtering right before that call), falling back to
+    # Playwright's own current default for that one setting exactly as
+    # before this existed - never a hard requirement.
+    device_scale_factor = test_case.get("device_scale_factor")
+    user_agent = test_case.get("user_agent")
+    locale = test_case.get("locale")
+    timezone_id = test_case.get("timezone_id")
+    color_scheme = test_case.get("color_scheme")
+
     script_text = SCRIPT_TEMPLATE.substitute(
         source_name=source_name,
         generated_at=datetime.now().isoformat(),
@@ -11155,6 +15369,14 @@ def generate_script(test_case: dict, out_name: str = None, output_dir: Path = No
         start_url_literal=json.dumps(test_case.get("start_url", "")),
         viewport_width_literal=json.dumps(viewport_width),
         viewport_height_literal=json.dumps(viewport_height),
+        # repr(), not json.dumps() - these can be None, and JSON's null
+        # is not valid Python (see steps_literal's own comment above for
+        # the exact same gotcha with pformat vs json.dumps).
+        device_scale_factor_literal=repr(device_scale_factor),
+        user_agent_literal=repr(user_agent),
+        locale_literal=repr(locale),
+        timezone_id_literal=repr(timezone_id),
+        color_scheme_literal=repr(color_scheme),
         source_name_literal=json.dumps(source_name),
         source_type_literal=json.dumps(source_type),
         script_filename=name,

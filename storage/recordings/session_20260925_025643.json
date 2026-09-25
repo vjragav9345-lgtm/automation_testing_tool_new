@@ -1,0 +1,88 @@
+{
+    "name": "session_20260925_025643",
+    "start_url": "https://www.amazon.in/s?k=t+shirts+men",
+    "actions": [
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.amazon.in/s?k=t+shirts+men",
+            "timestamp": "2026-09-24T21:26:43.879Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "link",
+                "aria_label": "Apply the filter Van Heusen to narrow results",
+                "accessible_name": "Apply the filter Van Heusen to narrow results",
+                "placeholder": null,
+                "title": null,
+                "href": "/s?k=t+shirts+men&rh=p_123%3A232761&dc&qid=1790285200&rnid=91049095031&ref=sr_nr_p_123_2&ds=v1%3AVSzX55KBTU%2FDlg2eri2yiI3t7Ux6jlu5Ug46BGPBO3Y",
+                "product_id": "232761",
+                "css_path": "li#p_123/232761 > span > a",
+                "xpath": "//a[@aria-label='Apply the filter Van Heusen to narrow results']",
+                "text": "Apply the filter Van Heusen to narrow results",
+                "element_text": "Van Heusen",
+                "tag": "a",
+                "attributes": {
+                    "aria-label": "Apply the filter Van Heusen to narrow results",
+                    "href": "/s?k=t+shirts+men&rh=p_123%3A232761&dc&qid=1790285200&rnid=91049095031&ref=sr_nr_p_123_2&ds=v1%3AVSzX55KBTU%2FDlg2eri2yiI3t7Ux6jlu5Ug46BGPBO3Y",
+                    "role": "link"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "act_target": {
+                "id": null,
+                "name": null,
+                "role": "link",
+                "aria_label": "Apply the filter Van Heusen to narrow results",
+                "accessible_name": "Apply the filter Van Heusen to narrow results",
+                "placeholder": null,
+                "title": null,
+                "href": "/s?k=t+shirts+men&rh=p_123%3A232761&dc&qid=1790285200&rnid=91049095031&ref=sr_nr_p_123_2&ds=v1%3AVSzX55KBTU%2FDlg2eri2yiI3t7Ux6jlu5Ug46BGPBO3Y",
+                "product_id": "232761",
+                "css_path": "li#p_123/232761 > span > a",
+                "xpath": "//a[@aria-label='Apply the filter Van Heusen to narrow results']",
+                "text": "Apply the filter Van Heusen to narrow results",
+                "element_text": "Van Heusen",
+                "tag": "a",
+                "attributes": {
+                    "aria-label": "Apply the filter Van Heusen to narrow results",
+                    "href": "/s?k=t+shirts+men&rh=p_123%3A232761&dc&qid=1790285200&rnid=91049095031&ref=sr_nr_p_123_2&ds=v1%3AVSzX55KBTU%2FDlg2eri2yiI3t7Ux6jlu5Ug46BGPBO3Y",
+                    "role": "link"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "state_target": null,
+            "bounding_box": {
+                "x": 41.015625,
+                "y": 616.234375,
+                "width": 76.015625,
+                "height": 16
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "https://www.amazon.in/s?k=t+shirts+men",
+            "timestamp": "2026-09-24T21:26:46.470Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.amazon.in/s?k=t+shirts+men&rh=p_123%3A232761&dc&qid=1790285200&rnid=91049095031&ref=sr_nr_p_123_2&ds=v1%3AVSzX55KBTU%2FDlg2eri2yiI3t7Ux6jlu5Ug46BGPBO3Y",
+            "timestamp": "2026-09-24T21:26:46.568Z",
+            "page_id": 0,
+            "caused_by_timestamp": null
+        }
+    ]
+}

@@ -853,37 +853,6 @@ function createRecordingCard(
     );
 
 
-    const trimButton =
-        document.createElement(
-            "button"
-        );
-
-    trimButton.className =
-        "secondary-btn";
-
-    trimButton.textContent =
-        "Trim";
-
-    trimButton.addEventListener(
-        "click",
-        () => {
-
-            const trimUrl =
-                "/recording/trim?path=" +
-                encodeURIComponent(
-                    recording.path
-                );
-
-            window.location.href =
-                trimUrl;
-        }
-    );
-
-    buttons.appendChild(
-        trimButton
-    );
-
-
     const runButton =
         document.createElement(
             "button"
@@ -1016,6 +985,11 @@ const ACTION_TYPE_LABELS = {
     capture_list: "Capture List",
     compare_list_overlap: "Compare List Overlap",
     validate_value_range: "Validate Value Range",
+    // ITEM 7 FIX: validate_checked was wired into replay/ACTION_FIELD_DEFS
+    // but never added to this label map (or the other two copies this
+    // codebase keeps - see templates/live_log.html and
+    // templates/recording_editor.html's own ACTION_TYPE_LABELS).
+    validate_checked: "Validate Checkbox State",
 };
 
 function actionTypeLabel(actionType) {
@@ -1049,6 +1023,20 @@ const VALIDATION_ACTION_TYPES = new Set([
     "compare_counts", "count_summary", "detect_duplicates",
     "compare_list_overlap",
 ]);
+
+// FIX 4 (report/live-log correctness): a step the backend flagged as
+// not_run (stop_on_failure halted before reaching it) or otp_role (a
+// manual-input/OTP step that didn't itself fail) must never render as a
+// plain failure - CONFIRMED REAL BUG this fixes, against an actual Myntra
+// recording: 48 never-attempted steps were shown as red FAILED. Every
+// place that used to read `step.success` directly for coloring/counting
+// now goes through this instead, so all four outcomes (pass/fail/not_run/
+// manual_input) stay visually and numerically distinct everywhere.
+function _stepOutcome(step) {
+    if (step.not_run) return "not_run";
+    if (step.otp_role && step.success !== false) return "manual_input";
+    return step.success ? "pass" : "fail";
+}
 
 // one plain-English line for a validation card, built entirely from
 // fields the report already carries (expected/actual/locator_report/
@@ -1091,9 +1079,11 @@ function renderValidationPanel(container, result) {
 
         const validationSteps = steps.filter(s => VALIDATION_ACTION_TYPES.has(s.action_type));
         const actionSteps = steps.filter(s => !VALIDATION_ACTION_TYPES.has(s.action_type));
-        const actionsPassed = actionSteps.filter(s => s.success).length;
-        const validationsPassed = validationSteps.filter(s => s.success).length;
-        const failedCount = steps.filter(s => !s.success).length;
+        const actionsPassed = actionSteps.filter(s => _stepOutcome(s) === "pass").length;
+        const validationsPassed = validationSteps.filter(s => _stepOutcome(s) === "pass").length;
+        const failedCount = steps.filter(s => _stepOutcome(s) === "fail").length;
+        const notRunCount = steps.filter(s => _stepOutcome(s) === "not_run").length;
+        const manualInputCount = steps.filter(s => _stepOutcome(s) === "manual_input").length;
         const locatorWarnings = steps.filter(s => s.locator_report && s.locator_report.weak).length;
 
         const statsLine = document.createElement("p");
@@ -1106,6 +1096,12 @@ function renderValidationPanel(container, result) {
             statsParts.push(`${validationsPassed}/${validationSteps.length} validation${validationSteps.length === 1 ? "" : "s"} passed`);
         }
         statsParts.push(`${failedCount} failed`);
+        if (notRunCount > 0) {
+            statsParts.push(`${notRunCount} not run`);
+        }
+        if (manualInputCount > 0) {
+            statsParts.push(`${manualInputCount} manual-input`);
+        }
         if (locatorWarnings > 0) {
             statsParts.push(`${locatorWarnings} locator warning${locatorWarnings === 1 ? "" : "s"}`);
         }
@@ -1121,15 +1117,17 @@ function renderValidationPanel(container, result) {
 
             validationSteps.forEach(step => {
 
+                const outcome = _stepOutcome(step);
                 const card = document.createElement("div");
-                card.className = "validation-card " + (step.success ? "validation-card-pass" : "validation-card-fail");
+                card.className = "validation-card validation-card-" + outcome.replace("_", "-");
 
+                const icons = { pass: "✓ ", fail: "✗ ", not_run: "○ ", manual_input: "🔐 " };
                 const line = document.createElement("div");
                 line.className = "validation-card-line";
-                line.textContent = (step.success ? "✓ " : "✗ ") + _validationCardLine(step);
+                line.textContent = icons[outcome] + _validationCardLine(step);
                 card.appendChild(line);
 
-                if (!step.success) {
+                if (outcome === "fail") {
                     const fields = [
                         ["Expected", step.expected],
                         ["Actual", step.actual],
@@ -1186,15 +1184,17 @@ function renderValidationPanel(container, result) {
             const row = document.createElement("div");
             row.className = "validation-step-row";
 
+            const stepOutcome = _stepOutcome(step);
             const icon = document.createElement("span");
             icon.className = "validation-step-icon";
-            icon.textContent = step.success ? "✅" : "❌";
+            icon.textContent = { pass: "✅", fail: "❌", not_run: "⚪", manual_input: "🔐" }[stepOutcome];
 
             const label = document.createElement("span");
             label.textContent = actionTypeLabel(step.action_type);
 
             row.appendChild(icon);
             row.appendChild(label);
+            row.className += " validation-step-row-" + stepOutcome.replace("_", "-");
 
             // plain-English locator resolution message (see
             // _describe_locator_resolution in script_generator.py) -
@@ -1209,7 +1209,7 @@ function renderValidationPanel(container, result) {
                 row.appendChild(locatorLine);
             }
 
-            if (!step.success && step.error) {
+            if (stepOutcome !== "pass" && step.error) {
                 const reason = document.createElement("div");
                 reason.className = "validation-step-reason";
                 reason.textContent = step.error;
@@ -1259,11 +1259,22 @@ function renderReplayProgress(container, data, elapsedMs) {
         " of " + (totalSteps || "?");
     container.appendChild(header);
 
+    // FIX 4: Passed/Failed/Not run/Manual-input as their own counts,
+    // recomputed from the steps actually reported so far via
+    // _stepOutcome() - a step_counts field on `data` server-side isn't
+    // guaranteed to exist yet mid-run (poll_replay() streams the raw,
+    // in-progress report; step_counts is only added by _finalize_result()
+    // once the run is fully done), so this stays accurate throughout.
+    const liveCounts = { pass: 0, fail: 0, not_run: 0, manual_input: 0 };
+    doneSteps.forEach(s => { liveCounts[_stepOutcome(s)]++; });
+
     const counts = document.createElement("div");
     counts.className = "replay-progress-counts";
     counts.innerHTML =
-        "<span class=\"count-passed\">Passed: " + (data.passed || 0) + "</span>" +
-        "<span class=\"count-failed\">Failed: " + (data.failed || 0) + "</span>" +
+        "<span class=\"count-passed\">Passed: " + liveCounts.pass + "</span>" +
+        "<span class=\"count-failed\">Failed: " + liveCounts.fail + "</span>" +
+        "<span class=\"count-not-run\">Not run: " + liveCounts.not_run + "</span>" +
+        "<span class=\"count-manual-input\">Manual-input: " + liveCounts.manual_input + "</span>" +
         "<span class=\"count-warnings\">Warnings: " + (data.warnings || 0) + "</span>" +
         "<span class=\"count-elapsed\">Elapsed: " + (elapsedMs / 1000).toFixed(1) + "s</span>";
     container.appendChild(counts);
@@ -1283,8 +1294,9 @@ function renderReplayProgress(container, data, elapsedMs) {
         const label = document.createElement("span");
 
         if (stepResult) {
-            icon.textContent = stepResult.success ? "✓" : "✗";
-            icon.classList.add(stepResult.success ? "step-pass" : "step-fail");
+            const outcome = _stepOutcome(stepResult);
+            icon.textContent = { pass: "✓", fail: "✗", not_run: "○", manual_input: "🔐" }[outcome];
+            icon.classList.add("step-" + outcome.replace("_", "-"));
             label.textContent = actionTypeLabel(stepResult.action_type);
         } else if (i === doneSteps.length + 1) {
             icon.textContent = "⏳";

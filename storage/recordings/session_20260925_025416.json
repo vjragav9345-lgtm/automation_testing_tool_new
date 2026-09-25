@@ -1,0 +1,167 @@
+{
+    "name": "session_20260925_025416",
+    "start_url": "https://www.amazon.in/s?k=t+shirts+men",
+    "actions": [
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.amazon.in/s?k=t+shirts+men",
+            "timestamp": "2026-09-24T21:24:16.236Z",
+            "page_id": 0
+        },
+        {
+            "action_type": "hover",
+            "value": null,
+            "locator_profile": {
+                "id": "#p_123-title",
+                "name": null,
+                "role": "heading",
+                "aria_label": null,
+                "accessible_name": "Brands",
+                "placeholder": null,
+                "title": null,
+                "href": null,
+                "product_id": null,
+                "css_path": "div#p_123-title",
+                "xpath": "//*[@id='p_123-title']",
+                "text": "Brands",
+                "element_text": "Brands",
+                "tag": "div",
+                "attributes": {
+                    "role": "heading"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "bounding_box": {
+                "x": 20.015625,
+                "y": 383.125,
+                "width": 230.390625,
+                "height": 20.015625
+            },
+            "page_url": "https://www.amazon.in/s?k=t+shirts+men",
+            "timestamp": "2026-09-24T21:24:17.097Z",
+            "expect": {
+                "type": "reveal",
+                "revealed_locator_profile": {
+                    "id": null,
+                    "name": null,
+                    "role": null,
+                    "aria_label": null,
+                    "accessible_name": "Allen Solly",
+                    "placeholder": null,
+                    "title": null,
+                    "href": "/s?k=t+shirts+men&rh=p_123%3A398346&dc&qid=1790285053&rnid=91049095031&ref=sr_nr_p_123_1&ds=v1%3AqrIGQt88cif5%2BW%2B8U5KWz%2BUM3wpmVfR0RR7Ia1S6wwg",
+                    "product_id": "398346",
+                    "css_path": "li#p_123/398346 > span > a > span",
+                    "xpath": "//a[@aria-label='Apply the filter Allen Solly to narrow results']/span",
+                    "text": "Allen Solly",
+                    "element_text": "Allen Solly",
+                    "tag": "span",
+                    "attributes": {},
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                }
+            },
+            "page_id": 0
+        },
+        {
+            "action_type": "click",
+            "value": null,
+            "locator_profile": {
+                "id": null,
+                "name": null,
+                "role": "link",
+                "aria_label": "Apply the filter Allen Solly to narrow results",
+                "accessible_name": "Apply the filter Allen Solly to narrow results",
+                "placeholder": null,
+                "title": null,
+                "href": "/s?k=t+shirts+men&rh=p_123%3A398346&dc&qid=1790285053&rnid=91049095031&ref=sr_nr_p_123_1&ds=v1%3AqrIGQt88cif5%2BW%2B8U5KWz%2BUM3wpmVfR0RR7Ia1S6wwg",
+                "product_id": "398346",
+                "css_path": "li#p_123/398346 > span > a",
+                "xpath": "//a[@aria-label='Apply the filter Allen Solly to narrow results']",
+                "text": "Apply the filter Allen Solly to narrow results",
+                "element_text": "Allen Solly",
+                "tag": "a",
+                "attributes": {
+                    "aria-label": "Apply the filter Allen Solly to narrow results",
+                    "href": "/s?k=t+shirts+men&rh=p_123%3A398346&dc&qid=1790285053&rnid=91049095031&ref=sr_nr_p_123_1&ds=v1%3AqrIGQt88cif5%2BW%2B8U5KWz%2BUM3wpmVfR0RR7Ia1S6wwg",
+                    "role": "link"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "act_target": {
+                "id": null,
+                "name": null,
+                "role": "link",
+                "aria_label": "Apply the filter Allen Solly to narrow results",
+                "accessible_name": "Apply the filter Allen Solly to narrow results",
+                "placeholder": null,
+                "title": null,
+                "href": "/s?k=t+shirts+men&rh=p_123%3A398346&dc&qid=1790285053&rnid=91049095031&ref=sr_nr_p_123_1&ds=v1%3AqrIGQt88cif5%2BW%2B8U5KWz%2BUM3wpmVfR0RR7Ia1S6wwg",
+                "product_id": "398346",
+                "css_path": "li#p_123/398346 > span > a",
+                "xpath": "//a[@aria-label='Apply the filter Allen Solly to narrow results']",
+                "text": "Apply the filter Allen Solly to narrow results",
+                "element_text": "Allen Solly",
+                "tag": "a",
+                "attributes": {
+                    "aria-label": "Apply the filter Allen Solly to narrow results",
+                    "href": "/s?k=t+shirts+men&rh=p_123%3A398346&dc&qid=1790285053&rnid=91049095031&ref=sr_nr_p_123_1&ds=v1%3AqrIGQt88cif5%2BW%2B8U5KWz%2BUM3wpmVfR0RR7Ia1S6wwg",
+                    "role": "link"
+                },
+                "cross_boundary": false,
+                "icon_class_hint": null
+            },
+            "state_target": null,
+            "bounding_box": {
+                "x": 41.015625,
+                "y": 413.140625,
+                "width": 65.375,
+                "height": 16
+            },
+            "scroll_x": 0,
+            "scroll_y": 0,
+            "click_strategy": "standard",
+            "page_url": "https://www.amazon.in/s?k=t+shirts+men",
+            "timestamp": "2026-09-24T21:24:17.099Z",
+            "hover_chain": [
+                {
+                    "id": "#p_123-title",
+                    "name": null,
+                    "role": "heading",
+                    "aria_label": null,
+                    "accessible_name": "Brands",
+                    "placeholder": null,
+                    "title": null,
+                    "href": null,
+                    "product_id": null,
+                    "css_path": "div#p_123-title",
+                    "xpath": "//*[@id='p_123-title']",
+                    "text": "Brands",
+                    "element_text": "Brands",
+                    "tag": "div",
+                    "attributes": {
+                        "role": "heading"
+                    },
+                    "cross_boundary": false,
+                    "icon_class_hint": null
+                }
+            ],
+            "page_id": 0
+        },
+        {
+            "action_type": "navigate",
+            "value": null,
+            "locator_profile": null,
+            "bounding_box": null,
+            "page_url": "https://www.amazon.in/s?k=t+shirts+men&rh=p_123%3A398346&dc&qid=1790285053&rnid=91049095031&ref=sr_nr_p_123_1&ds=v1%3AqrIGQt88cif5%2BW%2B8U5KWz%2BUM3wpmVfR0RR7Ia1S6wwg",
+            "timestamp": "2026-09-24T21:24:17.147Z",
+            "page_id": 0,
+            "caused_by_timestamp": null
+        }
+    ]
+}
